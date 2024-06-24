@@ -1,0 +1,33 @@
+require:
+  - rubocop-rails
+
+AllCops:
+  NewCops: disable
+  TargetRubyVersion: 3.2.2
+  Include:
+    - '**/Rakefile'
+    - '**/Gemfile'
+    - '**/config.ru'
+  Exclude:
+    - 'bin/**/*'
+    - 'vendor/**/*'
+    - 'db/**/*'
+    - 'config/**/*'
+    - 'script/**/*'
+    - 'spec/rails_helper.rb'
+  SuggestExtensions: false
+
+Style/Documentation:
+  Enabled: false
+
+Rails/I18nLocaleTexts:
+  Enabled: true
+
+Style/FrozenStringLiteralComment:
+  Enabled: false
+
+Metrics/BlockLength:
+  AllowedMethods: ['describe', 'context', 'feature', 'scenario', 'let', 'it']
+  Exclude:
+    - 'spec/factories/**/*'
+
