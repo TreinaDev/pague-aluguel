@@ -1,0 +1,2 @@
+class BaseFee < ApplicationRecord
+end
