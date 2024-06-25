@@ -3,15 +3,19 @@
   
   <% if @common_areas.present? %>
 
-    <% @common_areas.each do |area| %>
-      <div class="rounded-4 shadow p-4">
-        <div class="d-flex">
-          <p><%= area.name %></p>
-          <p><%= number_to_currency area.fee %></p>
-        </div>
-        <div>
-          <p><%= area.description %></p>
-        </div>
+    <% @common_areas.each_with_index do |area, index| %>
+      <div id="<%= "area-#{index}"%>">
+        <%= link_to area do %>
+          <div class="rounded-4 shadow p-4" >
+            <div class="d-flex">
+              <p><%= area.name %></p>
+              <p><%= number_to_currency area.fee %></p>
+            </div>
+            <div>
+              <p><%= area.description %></p>
+            </div>
+          </div>
+        <% end %>
       </div>
     <% end %>
     

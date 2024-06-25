@@ -1,0 +1,9 @@
+<div class="container text-center">
+  <%= form_with model: @common_area do |f| %>
+    <div>
+      <%= f.label :fee, class: "form-label" %>
+      <%= f.number_field :fee, class: "form-control" %>
+    </div>
+    <%= f.submit "Atualizar" %>
+  <% end %>
+</div>
