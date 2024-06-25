@@ -1,0 +1,14 @@
+pt-BR:
+  activerecord:
+    models:
+      admin:
+        one: 'Administrador'
+        other: 'Administradores'
+    attributes:
+      admin:
+        email: 'E-mail'
+        password: 'Senha'
+        first_name: 'Nome'
+        last_name: 'Sobrenome'
+        document_number: 'CPF'
+        password_confirmation: 'Confirme a senha'

@@ -1,0 +1,5 @@
+<%= link_to 'Registrar novo admin', new_admin_registration_path %>
+
+<% @admins.each do |admin| %>
+  <%= admin.first_name %> <%= admin.last_name %>
+<% end %>
