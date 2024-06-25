@@ -1,0 +1,28 @@
+Lançar nova conta
+<div>
+  <%= form_with model: @shared_fee do |f| %> 
+    <div>
+      <%= f.label :condo_id %>
+      <%= f.collection_select :condo_id, @condos, :id, :name %>
+    </div>
+
+    <div>
+      <%= f.label :description %>
+      <%= f.text_field :description %>
+    </div>
+
+    <div>
+      <%= f.label :total_value %>
+      <%= f.number_field :total_value %>
+    </div>
+
+    <div>
+      <%= f.label :issue_date %>
+      <%= f.date_field :issue_date %>
+    </div>
+
+    <div>
+      <%= f.submit 'Registrar' %>
+    </div>
+  <% end %>
+</div>

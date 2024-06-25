@@ -1,0 +1,12 @@
+pt-BR:
+  activerecord:
+    model:
+      shared_fee:
+        one: Taxa Compartilhada
+        other: Taxas Compartilhadas
+    attributes:
+      shared_fee:
+        condo_id: Condomínio
+        issue_date: Data de Emissão
+        total_value: Valor Total
+        description: Descrição
