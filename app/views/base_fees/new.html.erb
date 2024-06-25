@@ -1,0 +1,40 @@
+<form>
+  <%= form_with model: [@condo, @base_fee] do |f| %>
+    <div class="field">
+      <%= f.label :name, 'Nome' %>
+      <%= f.text_field :name %>
+    </div>
+
+    <div class="field">
+      <%= f.label :recurrence, 'Recorrência' %>
+      <%#= f.select :recurrence, options_for_select([ [“Mensal”, 1], [“Bimestral”, 2], [“Quinzenal”, 3], [“Semestral”, 4] ]) %>
+    </div>
+
+    <%= @condo.unit_types.each do |ut| %>
+      <div class="field">
+          <%= f.label ut.name %>
+          <%= f.number_field  %>
+      </div>
+    <% end %>
+
+    <div class="field">
+      <%= f.label :charge_day, 'Dia do Lançamento' %>
+      <%= f.text_field :charge_day %>
+    </div>
+
+    <div class="field">
+      <%= f.check_box :fixed, {}, "true", "false" %>
+      <%= f.label :fixed, 'Taxa fixa' %>
+    </div>
+
+    <div class="field">
+      <%= f.label :late_payment, 'Juros ao dia' %>
+      <%= f.number_field :late_payment %>
+    </div>
+
+    <div class="field">
+      <%= f.label :late_fee, 'Multa' %>
+      <%= f.number_field :late_fee %>
+    </div>
+  <% end %>
+</form>
