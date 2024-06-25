@@ -6,6 +6,7 @@ gem 'rails', '~> 7.1.2'
 
 gem 'bootsnap', require: false
 gem 'cssbundling-rails'
+gem 'devise'
 gem 'jbuilder'
 gem 'jsbundling-rails'
 gem 'puma', '~> 6.0'
@@ -13,7 +14,6 @@ gem 'sprockets-rails'
 gem 'sqlite3', '~> 1.4'
 gem 'turbo-rails'
 gem 'tzinfo-data', platforms: %i[mingw mswin x64_mingw jruby]
-gem 'devise'
 
 group :development, :test do
   gem 'cuprite'

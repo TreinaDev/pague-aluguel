@@ -1,0 +1,26 @@
+<div class="container text-center">
+  
+  
+  <% if @common_areas.present? %>
+
+    <% @common_areas.each do |area| %>
+      <div class="rounded-4 shadow p-4">
+        <div class="d-flex">
+          <p><%= area.name %></p>
+          <p><%= number_to_currency area.fee %></p>
+        </div>
+        <div>
+          <p><%= area.description %></p>
+        </div>
+      </div>
+    <% end %>
+    
+  <% else %>
+    
+    <div class="mt-4 container text-center">
+      <p>Nenhuma Área Comum cadastrada</p>
+    </div>
+
+  <% end %>
+
+</div>

@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema[7.1].define(version: 2024_06_25_175210) do
+ActiveRecord::Schema[7.1].define(version: 2024_06_25_191237) do
   create_table "admins", force: :cascade do |t|
     t.string "email", default: "", null: false
     t.string "encrypted_password", default: "", null: false
@@ -28,6 +28,18 @@ ActiveRecord::Schema[7.1].define(version: 2024_06_25_175210) do
     t.string "description"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
+  end
+
+  create_table "common_areas", force: :cascade do |t|
+    t.string "name"
+    t.string "description"
+    t.integer "max_capacity"
+    t.string "usage_rules"
+    t.decimal "fee"
+    t.integer "condo_id", null: false
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.index ["condo_id"], name: "index_common_areas_on_condo_id"
   end
 
   create_table "condos", force: :cascade do |t|
@@ -76,6 +88,7 @@ ActiveRecord::Schema[7.1].define(version: 2024_06_25_175210) do
     t.index ["unit_type_id"], name: "index_units_on_unit_type_id"
   end
 
+  add_foreign_key "common_areas", "condos"
   add_foreign_key "unit_types", "condos"
   add_foreign_key "units", "unit_types"
 end
