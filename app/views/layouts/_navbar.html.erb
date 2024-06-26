@@ -5,6 +5,6 @@
     <span class="mb-0 h1"><%= current_admin.first_name %> <%= current_admin.last_name %></span>
     <%= button_to 'Logout', destroy_admin_session_path, method: :delete, class: 'btn btn-primary' %>
   <% else %>
-    <%= link_to 'login', new_admin_session_path, class: 'btn btn-primary' %>
+    <%= link_to 'Login', new_admin_session_path, class: 'btn btn-primary' %>
   <% end %>
 </nav>

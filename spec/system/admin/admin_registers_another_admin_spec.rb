@@ -7,7 +7,7 @@ describe 'admin registra outro admin' do
       password: 'example123456',
       first_name: 'Fulano',
       last_name: 'Da Costa',
-      document_number: '53071490003'
+      document_number: CPF.generate
     )
 
     login_as admin, scope: :admin
@@ -21,7 +21,7 @@ describe 'admin registra outro admin' do
     fill_in 'Confirme a senha', with: 'password123'
     fill_in 'Nome', with: 'João'
     fill_in 'Sobrenome', with: 'Almeida'
-    fill_in 'CPF', with: '53071490022'
+    fill_in 'CPF', with: CPF.generate
     click_on 'Registrar'
 
     expect(current_path).to eq admins_path
@@ -35,7 +35,7 @@ describe 'admin registra outro admin' do
       password: 'example123456',
       first_name: 'Fulano',
       last_name: 'Da Costa',
-      document_number: '53071490003'
+      document_number: CPF.generate
     )
 
     login_as admin, scope: :admin
