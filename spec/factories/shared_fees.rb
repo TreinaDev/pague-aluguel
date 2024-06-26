@@ -1,8 +1,8 @@
 FactoryBot.define do
   factory :shared_fee do
-    description { "MyString" }
-    issue_date { "2024-06-25" }
-    total_value { 1 }
-    condo { nil }
+    description { 'Conta de Luz' }
+    issue_date { 10.days.from_now.to_date }
+    total_value { 1000 }
+    condo
   end
 end

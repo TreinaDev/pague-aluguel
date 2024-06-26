@@ -1,8 +1,8 @@
 FactoryBot.define do
   factory :unit do
-    area { 1 }
+    area { 100 }
     floor { 1 }
     number { 1 }
-    unit_type { nil}
+    unit_type
   end
 end

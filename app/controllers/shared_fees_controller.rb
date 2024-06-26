@@ -14,8 +14,9 @@ class SharedFeesController < ApplicationController
   def create
     @condos = Condo.all
     @shared_fee = SharedFee.new(shared_fee_params)
-    if @shared_fee.valid?
-      @shared_fee.save
+    @units = @shared_fee.condo.units
+    if @shared_fee.save
+      @shared_fee.calculate_fractions
       redirect_to @shared_fee, notice: 'Conta Compartilhada lançada com sucesso!'
     else
       flash.now[:alert] = 'Não foi possível lançar a conta compartilhada.'

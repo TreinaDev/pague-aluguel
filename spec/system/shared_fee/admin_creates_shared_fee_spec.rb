@@ -54,4 +54,32 @@ describe 'Admin tries to create a shared fee' do
     expect(page).to have_content('Data de Emissão não pode ficar em branco')
     expect(page).to have_content('Valor Total não pode ficar em branco')
   end
+
+  it 'and must release the shared fee to the units' do
+    admin = Admin.create!(email: 'admin@email.com', password: '123456')
+    condominio = Condo.create!(name: 'Condo Test', city: 'City Test')
+    unit_type_one = FactoryBot.create(:unit_type, condo: condominio, ideal_fraction: 0.04)
+    unit_type_two = FactoryBot.create(:unit_type, condo: condominio, ideal_fraction: 0.06)
+    FactoryBot.create_list(:unit, 9, unit_type: unit_type_one)
+    FactoryBot.create_list(:unit, 9, unit_type: unit_type_two)
+    unit_one = Unit.create!(area: 40, floor: 1, number: 101, unit_type: unit_type_one)
+    unit_two = Unit.create!(area: 60, floor: 2, number: 202, unit_type: unit_type_two)
+
+    login_as admin, scope: :admin
+    visit root_path
+    click_on 'Lançar Conta Compartilhada'
+    select 'Condo Test', from: 'Condomínio'
+    fill_in 'Descrição', with: 'Conta de Luz'
+    fill_in 'Data de Emissão', with: 10.days.from_now.to_date
+    fill_in 'Valor Total', with: 10_000
+    click_on 'Registrar'
+
+    shared_fee = SharedFee.last
+    shared_fee_fraction_one = unit_one.shared_fee_fractions.find_by(shared_fee:)
+    shared_fee_fraction_two = unit_two.shared_fee_fractions.find_by(shared_fee:)
+    expect(shared_fee_fraction_one.value).to eq(400)
+    expect(shared_fee_fraction_two.value).to eq(600)
+    expect(shared_fee.description).to eq('Conta de Luz')
+    expect(shared_fee.issue_date).to eq(10.days.from_now.to_date)
+  end
 end
