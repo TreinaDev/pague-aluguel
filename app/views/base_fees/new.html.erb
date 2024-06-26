@@ -10,11 +10,15 @@
       <%#= f.select :recurrence, options_for_select([ [“Mensal”, 1], [“Bimestral”, 2], [“Quinzenal”, 3], [“Semestral”, 4] ]) %>
     </div>
 
-    <%= @condo.unit_types.each do |ut| %>
-      <div class="field">
-          <%= f.label ut.name %>
-          <%= f.number_field  %>
-      </div>
+    <% @condo.unit_types.each do |ut| %>
+
+      <%= f.fields_for @value, index: ut.id do |values_form| %>
+        <div class="field">
+            <%= values_form.label :price, "Valor para #{ut.description}" %>
+            <%= values_form.number_field :price %>
+        </div>
+      <% end %>
+
     <% end %>
 
     <div class="field">

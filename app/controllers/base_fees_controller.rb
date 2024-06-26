@@ -5,6 +5,7 @@ class BaseFeesController < ApplicationController
     @condo = Condo.find(params[:condo_id])
     @base_fee = BaseFee.new
     @condos = Condo.all
+    @value = @base_fee.values.new
   end
 
   def create
