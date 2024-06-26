@@ -14,6 +14,7 @@ gem 'sqlite3', '~> 1.4'
 gem 'turbo-rails'
 gem 'tzinfo-data', platforms: %i[mingw mswin x64_mingw jruby]
 gem 'devise'
+gem 'cpf_cnpj'
 
 group :development, :test do
   gem 'cuprite'
@@ -27,4 +28,5 @@ end
 group :test do
   gem 'capybara', '>= 2.15'
   gem 'simplecov', require: false
+  gem 'shoulda-matchers', '~> 6.0'
 end
