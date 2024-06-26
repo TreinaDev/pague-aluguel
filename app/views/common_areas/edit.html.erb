@@ -1,3 +1,22 @@
+<div>
+  <h2 class="container text-center">Criar Taxa</h2>
+</div>
+
+
+<% if @common_area.errors.any? %>
+  <div class="container text-center">
+
+    <h3>Atente-se aos erros abaixo:</h3>
+    
+    <ul>
+      <% @common_area_errors.each do |error| %>
+        <li><%= error %></li>
+      <% end %>
+    </ul>
+    
+  </div>
+<% end %>
+
 <div class="container text-center">
   <%= form_with model: @common_area do |f| %>
     <div>

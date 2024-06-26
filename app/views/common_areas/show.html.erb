@@ -1,3 +1,18 @@
-<div class="container text-center">
+<div class="container text-center mt-4">
+
+  <div class="container shadow rounded-4 p-4">
+    <div class="d-flex">
+      <h3><%= @common_area.name%></h3>
+      <strong>Taxa de área comum: <%= number_to_currency @common_area.fee %></strong>
+    </div>
+    <div>
+      <p>Descrição: <%= @common_area.description %></p>
+      <p>Capacidade Máxima: <%= @common_area.max_capacity %></p>
+      <p>Regras de uso: <%= @common_area.usage_rules %></p>
+    </div>
+
+  </div>
+
   <%= link_to 'Registrar Taxa', edit_common_area_path(@common_area) %>
 </div>
+
