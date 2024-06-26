@@ -1,6 +1,18 @@
+<% if @shared_fee.errors.any? %>
+  <div class="alert alert-danger" role="alert">
+    <strong>Por favor, corrija os seguintes erros:</strong>
+    <ul>
+      <% @shared_fee.errors.full_messages.each do |msg| %>
+        <li><%= msg %></li>
+      <% end %>
+    </ul>
+  </div>
+<% end %>
+
 Lançar nova conta
+
 <div>
-  <%= form_with model: @shared_fee do |f| %> 
+  <%= form_with model: @shared_fee, local: true do |f| %> 
     <div>
       <%= f.label :condo_id %>
       <%= f.collection_select :condo_id, @condos, :id, :name %>
