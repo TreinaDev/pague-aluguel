@@ -14,7 +14,6 @@ class SharedFeesController < ApplicationController
   def create
     @condos = Condo.all
     @shared_fee = SharedFee.new(shared_fee_params)
-    @units = @shared_fee.condo.units
     if @shared_fee.save
       @shared_fee.calculate_fractions
       redirect_to @shared_fee, notice: 'Conta Compartilhada lançada com sucesso!'
