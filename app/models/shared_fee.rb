@@ -2,9 +2,9 @@ class SharedFee < ApplicationRecord
   after_create :calculate_fractions
 
   belongs_to :condo
-  has_many :shared_fee_fractions
+  has_many :shared_fee_fractions, dependent: :destroy
 
-  validates :description, :issue_date, :total_value, :condo_id, presence: true
+  validates :description, :issue_date, :total_value, presence: true
 
   def calculate_fractions
     condo.units.each do |unit|

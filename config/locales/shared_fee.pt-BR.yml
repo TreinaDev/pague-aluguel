@@ -1,4 +1,6 @@
 pt-BR:
+  success_notice_shared_fee: 'Conta Compartilhada lançada com sucesso!'
+  fail_notice_shared_fee: 'Não foi possível lançar a conta compartilhada.'
   activerecord:
     model:
       shared_fee:

@@ -1,17 +1,18 @@
 Conta Compartilhada #<%= @shared_fee.id %>
 
 <div>
-  Condomínio: <%= @condo.name %>
+  <%= SharedFee.human_attribute_name(:condo_id) %>: <%= @condo.name %>
 </div>
 
 <div>
-  Descrição: <%= @shared_fee.description %>
+  <%= SharedFee.human_attribute_name(:description) %>: <%= @shared_fee.description %>
 </div>
 
 <div>
-  Data de Emissão: <%= @shared_fee.issue_date %>
+  <%= SharedFee.human_attribute_name(:issue_date) %>: <%= @shared_fee.issue_date %>
 </div>
 
 <div>
-  Valor Total: R$ <%= @shared_fee.total_value %>
+  <%= SharedFee.human_attribute_name(:total_value) %>: R$ <%= @shared_fee.total_value %>
 </div>
+
