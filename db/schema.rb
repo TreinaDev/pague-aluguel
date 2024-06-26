@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema[7.1].define(version: 2024_06_25_175210) do
+ActiveRecord::Schema[7.1].define(version: 2024_06_26_200153) do
   create_table "admins", force: :cascade do |t|
     t.string "email", default: "", null: false
     t.string "encrypted_password", default: "", null: false
@@ -24,10 +24,14 @@ ActiveRecord::Schema[7.1].define(version: 2024_06_25_175210) do
   end
 
   create_table "base_fees", force: :cascade do |t|
-    t.decimal "value"
     t.string "description"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
+    t.string "name"
+    t.integer "late_payment"
+    t.integer "late_fee"
+    t.boolean "fixed"
+    t.date "charge_day"
   end
 
   create_table "condos", force: :cascade do |t|
@@ -76,6 +80,18 @@ ActiveRecord::Schema[7.1].define(version: 2024_06_25_175210) do
     t.index ["unit_type_id"], name: "index_units_on_unit_type_id"
   end
 
+  create_table "values", force: :cascade do |t|
+    t.integer "base_fee_id", null: false
+    t.integer "unit_type_id", null: false
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.integer "price"
+    t.index ["base_fee_id"], name: "index_values_on_base_fee_id"
+    t.index ["unit_type_id"], name: "index_values_on_unit_type_id"
+  end
+
   add_foreign_key "unit_types", "condos"
   add_foreign_key "units", "unit_types"
+  add_foreign_key "values", "base_fees"
+  add_foreign_key "values", "unit_types"
 end
