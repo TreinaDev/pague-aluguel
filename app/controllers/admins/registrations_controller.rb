@@ -1,11 +1,10 @@
 # frozen_string_literal: true
-
 class Admins::RegistrationsController < Devise::RegistrationsController
   # before_action :configure_account_update_params, only: [:update]
 
-  before_action :configure_sign_up_params, only: [:create]
-  before_action :redirect_if_not_logged_in, only: [:new, :create]
-  skip_before_action :require_no_authentication, only: [:new, :create]
+  before_action :configure_sign_up_params
+  before_action :redirect_if_not_logged_in
+  skip_before_action :require_no_authentication
 
   # GET /resource/sign_up
   # def new
@@ -43,12 +42,12 @@ class Admins::RegistrationsController < Devise::RegistrationsController
 
   protected
 
-  def sign_up(resource_name, resource)
+  def sign_up(*)
     true
   end
 
   def configure_sign_up_params
-    devise_parameter_sanitizer.permit(:sign_up, keys: [:first_name, :last_name, :document_number])
+    devise_parameter_sanitizer.permit(:sign_up, keys: %i[first_name last_name document_number])
   end
 
   # def configure_account_update_params
@@ -56,10 +55,10 @@ class Admins::RegistrationsController < Devise::RegistrationsController
   # end
 
   def redirect_if_not_logged_in
-    redirect_to new_admin_session_path, notice: 'Você precisa estar autenticado para continuar.' if !admin_signed_in?
+    redirect_to new_admin_session_path, notice: t('errors.messages.must_be_logged_in') unless admin_signed_in?
   end
 
-  def after_sign_up_path_for(resource)
+  def after_sign_up_path_for(*)
     admins_path
   end
 

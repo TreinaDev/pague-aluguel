@@ -7,6 +7,6 @@ Rails.application.routes.draw do
   root to: "home#index"
 
   authenticate :admin do
-    resources :admins, only: [:index]
+    resources :admins, only: %i[index]
   end
 end

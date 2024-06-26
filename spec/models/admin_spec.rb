@@ -25,7 +25,13 @@ RSpec.describe Admin, type: :model do
   describe '#uniqueness' do
     it 'de CPF' do
       @cpf = CPF.generate
-      Admin.create!(first_name: 'Harry', last_name: 'Potter', email: 'harryp@mail.com', document_number: @cpf, password: 'password123')
+      Admin.create!(
+        first_name: 'Harry',
+        last_name: 'Potter',
+        email: 'harryp@mail.com',
+        document_number: @cpf,
+        password: 'password123'
+      )
       admin = Admin.new(document_number: @cpf)
 
       admin.valid?
@@ -36,7 +42,13 @@ RSpec.describe Admin, type: :model do
     it 'de email' do
       @email = 'harryp@mail.com'
       @cpf = CPF.generate
-      Admin.create!(first_name: 'Harry', last_name: 'Potter', email: @email, document_number: @cpf, password: 'password123')
+      Admin.create!(
+        first_name: 'Harry',
+        last_name: 'Potter',
+        email: @email,
+        document_number: @cpf,
+        password: 'password123'
+      )
       admin = Admin.new(email: @email)
 
       admin.valid?
