@@ -2,12 +2,8 @@ require:
   - rubocop-rails
 
 AllCops:
-  NewCops: disable
+  NewCops: enable
   TargetRubyVersion: 3.2.2
-  Include:
-    - '**/Rakefile'
-    - '**/Gemfile'
-    - '**/config.ru'
   Exclude:
     - 'bin/**/*'
     - 'vendor/**/*'
