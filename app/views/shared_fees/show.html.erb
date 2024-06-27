@@ -13,6 +13,6 @@ Conta Compartilhada #<%= @shared_fee.id %>
 </div>
 
 <div>
-  <%= SharedFee.human_attribute_name(:total_value) %>: R$ <%= @shared_fee.total_value %>
+  <%= SharedFee.human_attribute_name(:total_value_cents) %>: <%= Money.new(@shared_fee.total_value_cents, "BRL").format %>
 </div>
 

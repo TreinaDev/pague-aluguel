@@ -10,5 +10,6 @@ pt-BR:
       shared_fee:
         condo_id: Condomínio
         issue_date: Data de Emissão
+        total_value_cents: Valor Total
         total_value: Valor Total
         description: Descrição

@@ -6,7 +6,7 @@ RSpec.describe SharedFee, type: :model do
       it 'false when description is empty' do
         condominio = Condo.create!(name: 'Condo Test', city: 'City Test')
         shared_fee = SharedFee.create(description: '', issue_date: 10.days.from_now.to_date,
-                                      total_value: 1000, condo: condominio)
+                                      total_value_cents: 1000, condo: condominio)
 
         expect(shared_fee.errors.include?(:description)).to be true
       end
@@ -14,7 +14,7 @@ RSpec.describe SharedFee, type: :model do
       it 'false when issue date is empty' do
         condominio = Condo.create!(name: 'Condo Test', city: 'City Test')
         shared_fee = SharedFee.create(description: 'Descrição', issue_date: '',
-                                      total_value: 1000, condo: condominio)
+                                      total_value_cents: 1000, condo: condominio)
 
         expect(shared_fee.errors.include?(:issue_date)).to be true
       end
@@ -22,16 +22,32 @@ RSpec.describe SharedFee, type: :model do
       it 'false when total value is empty' do
         condominio = Condo.create!(name: 'Condo Test', city: 'City Test')
         shared_fee = SharedFee.create(description: 'Descrição', issue_date: 10.days.from_now.to_date,
-                                      total_value: '', condo: condominio)
+                                      total_value_cents: '', condo: condominio)
 
-        expect(shared_fee.errors.include?(:total_value)).to be true
+        expect(shared_fee.errors.include?(:total_value_cents)).to be true
       end
 
       it 'false when there is no condo' do
         shared_fee = SharedFee.create(description: 'Descrição', issue_date: 10.days.from_now.to_date,
-                                      total_value: 1000)
+                                      total_value_cents: 1000)
 
         expect(shared_fee.errors.include?(:condo)).to be true
+      end
+
+      it 'false when total_value_cents is negative' do
+        condominio = Condo.create!(name: 'Condo Test', city: 'City Test')
+        shared_fee = SharedFee.create(description: 'Descrição', issue_date: 10.days.from_now.to_date,
+                                      total_value_cents: -100, condo: condominio)
+
+        expect(shared_fee.errors.include?(:total_value)).to be true
+      end
+
+      it 'false when total_value_cents is 0' do
+        condominio = Condo.create!(name: 'Condo Test', city: 'City Test')
+        shared_fee = SharedFee.create(description: 'Descrição', issue_date: 10.days.from_now.to_date,
+                                      total_value_cents: 0, condo: condominio)
+
+        expect(shared_fee.errors.include?(:total_value)).to be true
       end
     end
   end

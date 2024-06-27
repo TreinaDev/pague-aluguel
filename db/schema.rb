@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema[7.1].define(version: 2024_06_26_184020) do
+ActiveRecord::Schema[7.1].define(version: 2024_06_27_124008) do
   create_table "admins", force: :cascade do |t|
     t.string "email", default: "", null: false
     t.string "encrypted_password", default: "", null: false
@@ -57,7 +57,7 @@ ActiveRecord::Schema[7.1].define(version: 2024_06_26_184020) do
   end
 
   create_table "shared_fee_fractions", force: :cascade do |t|
-    t.integer "value"
+    t.integer "value_cents"
     t.integer "shared_fee_id", null: false
     t.integer "unit_id", null: false
     t.datetime "created_at", null: false
@@ -69,7 +69,7 @@ ActiveRecord::Schema[7.1].define(version: 2024_06_26_184020) do
   create_table "shared_fees", force: :cascade do |t|
     t.string "description"
     t.date "issue_date"
-    t.integer "total_value"
+    t.integer "total_value_cents"
     t.integer "condo_id", null: false
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false

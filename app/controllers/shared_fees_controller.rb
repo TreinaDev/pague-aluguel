@@ -27,7 +27,7 @@ class SharedFeesController < ApplicationController
 
   def shared_fee_params
     params.require(:shared_fee).permit(:description,
-                                       :total_value,
+                                       :total_value_cents,
                                        :issue_date,
                                        :condo_id)
   end

@@ -12,7 +12,7 @@ describe 'Admin creates a shared fee' do
     login_as admin, scope: :admin
     post(shared_fees_path, params: { shared_fee: { description: 'Descrição',
                                                    issue_date: 10.days.from_now.to_date,
-                                                   total_value: 1000,
+                                                   total_value_cents: 1000,
                                                    condo_id: condominio.id } })
 
     expect(SharedFee.count).to eq 1
@@ -20,7 +20,7 @@ describe 'Admin creates a shared fee' do
     expect(response).to redirect_to(shared_fee_path(SharedFee.last.id.to_s))
     expect(SharedFee.last.description).to eq 'Descrição'
     expect(SharedFee.last.issue_date).to eq 10.days.from_now.to_date
-    expect(SharedFee.last.total_value).to eq 1000
+    expect(SharedFee.last.total_value_cents).to eq 1000
   end
 
   it 'and is not authenticated' do
@@ -33,7 +33,7 @@ describe 'Admin creates a shared fee' do
 
     post(shared_fees_path, params: { shared_fee: { description: 'Descrição',
                                                    issue_date: 10.days.from_now.to_date,
-                                                   total_value: 1000,
+                                                   total_value_cents: 1000,
                                                    condo_id: condominio.id } })
 
     expect(SharedFee.count).to eq 0
