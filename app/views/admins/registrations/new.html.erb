@@ -36,6 +36,11 @@
     <%= f.label :document_number %>
   </div>
 
+  <div>
+    <%= f.label :photo %>
+    <%= f.file_field :photo %>
+  </div>
+
   <div class="actions">
     <%= f.submit "Registrar", class: "btn btn-secondary" %>
   </div>

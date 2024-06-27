@@ -2,13 +2,7 @@ require 'rails_helper'
 
 describe 'usuario loga como admin' do
   it 'com sucesso' do
-    Admin.create!(
-      email: 'example@mail.com',
-      password: 'example123456',
-      first_name: 'Fulano',
-      last_name: 'Da Costa',
-      document_number: CPF.generate
-    )
+    FactoryBot.create(:admin, first_name: 'Fulano', last_name: 'Da Costa')
 
     visit root_path
     within('nav') do
@@ -16,8 +10,8 @@ describe 'usuario loga como admin' do
     end
 
     within('form') do
-      fill_in 'E-mail', with: 'example@mail.com'
-      fill_in 'Senha', with: 'example123456'
+      fill_in 'E-mail', with: 'admin@mail.com'
+      fill_in 'Senha', with: '123456'
       click_on 'Log in'
     end
 
@@ -54,13 +48,7 @@ end
 
 describe 'admin faz logout' do
   it 'com sucesso' do
-    admin = Admin.create!(
-      email: 'example@mail.com',
-      password: 'example123456',
-      first_name: 'Fulano',
-      last_name: 'Da Costa',
-      document_number: CPF.generate
-    )
+    admin = FactoryBot.create(:admin, first_name: 'Fulano', last_name: 'Da Costa')
 
     login_as(admin, scope: :admin)
     visit root_path

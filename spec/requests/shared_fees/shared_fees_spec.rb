@@ -2,7 +2,13 @@ require 'rails_helper'
 
 describe 'Admin creates a shared fee' do
   it 'successfully' do
-    admin = Admin.create!(email: 'admin@email.com', password: '123456')
+    admin = Admin.create!(
+      email: 'admin@mail.com',
+      password: '123456',
+      first_name: 'Fulano',
+      last_name: 'Da Costa',
+      document_number: CPF.generate
+    )
     condominium = Condo.create!(name: 'Condo Test', city: 'City Test')
     unit_type_one = FactoryBot.create(:unit_type, condo: condominium, ideal_fraction: 0.04)
     unit_type_two = FactoryBot.create(:unit_type, condo: condominium, ideal_fraction: 0.06)
@@ -24,7 +30,13 @@ describe 'Admin creates a shared fee' do
   end
 
   it 'and is not authenticated' do
-    Admin.create!(email: 'admin@email.com', password: '123456')
+    Admin.create!(
+      email: 'admin@mail.com',
+      password: '123456',
+      first_name: 'Fulano',
+      last_name: 'Da Costa',
+      document_number: CPF.generate
+    )
     condominium = Condo.create!(name: 'Condo Test', city: 'City Test')
     unit_type_one = FactoryBot.create(:unit_type, condo: condominium, ideal_fraction: 0.04)
     unit_type_two = FactoryBot.create(:unit_type, condo: condominium, ideal_fraction: 0.06)

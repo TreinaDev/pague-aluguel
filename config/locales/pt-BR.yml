@@ -1,4 +1,3 @@
----
 pt-BR:
   activerecord:
     errors:
@@ -109,6 +108,7 @@ pt-BR:
   errors:
     format: "%{attribute} %{message}"
     messages:
+      must_be_logged_in: "Você precisa estar autenticado para continuar."
       accepted: deve ser aceito
       blank: não pode ficar em branco
       confirmation: não é igual a %{attribute}

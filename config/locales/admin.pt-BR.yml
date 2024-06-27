@@ -12,6 +12,4 @@ pt-BR:
         last_name: 'Sobrenome'
         document_number: 'CPF'
         password_confirmation: 'Confirme a senha'
-    errors: 
-      messages:
-        must_be_logged_in: "Você precisa estar autenticado para continuar."
+        photo: 'Foto'

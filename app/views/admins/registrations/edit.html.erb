@@ -31,8 +31,12 @@
     <%= f.label :last_name %>
   </div>
 
+  <div>
+    <%= f.label :photo %>
+    <%= f.file_field :photo %>
+  </div>
+
   <div class="">
     <%= f.submit "Salvar", class: "btn btn-secondary" %>
   </div>
 <% end %>
-

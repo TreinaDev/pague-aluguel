@@ -2,13 +2,7 @@ require 'rails_helper'
 
 describe 'admin registra outro admin' do
   it 'com sucesso' do
-    admin = Admin.create!(
-      email: 'example@mail.com',
-      password: 'example123456',
-      first_name: 'Fulano',
-      last_name: 'Da Costa',
-      document_number: CPF.generate
-    )
+    admin = FactoryBot.create(:admin, first_name: 'Fulano', last_name: 'Da Costa')
 
     login_as admin, scope: :admin
     visit root_path
@@ -30,13 +24,7 @@ describe 'admin registra outro admin' do
   end
 
   it 'falha quando faltam atributos' do
-    admin = Admin.create!(
-      email: 'example@mail.com',
-      password: 'example123456',
-      first_name: 'Fulano',
-      last_name: 'Da Costa',
-      document_number: CPF.generate
-    )
+    admin = FactoryBot.create(:admin)
 
     login_as admin, scope: :admin
     visit root_path
@@ -55,5 +43,30 @@ describe 'admin registra outro admin' do
     expect(page).to have_content 'CPF não pode ficar em branco'
     expect(page).to have_content 'Não foi possível salvar administrador'
     expect(page).not_to have_content 'Administrador registrado com sucesso'
+  end
+
+  it 'sucesso e com foto' do
+    admin = FactoryBot.create(:admin, first_name: 'Fulano', last_name: 'Da Costa')
+
+    login_as admin, scope: :admin
+    visit root_path
+
+    click_on 'Admins'
+    click_on 'Registrar novo admin'
+
+    fill_in 'E-mail', with: 'joaoalmeida@mail.com'
+    fill_in 'Senha', with: 'password123'
+    fill_in 'Confirme a senha', with: 'password123'
+    fill_in 'Nome', with: 'João'
+    fill_in 'Sobrenome', with: 'Almeida'
+    fill_in 'CPF', with: CPF.generate
+    attach_file 'Foto', Rails.root.join('spec/support/images/reuri.jpeg')
+    click_on 'Registrar'
+
+    within('div#admin_list') do
+      click_on 'João Almeida'
+    end
+
+    expect(page).to have_css("img[src*='reuri.jpeg']")
   end
 end

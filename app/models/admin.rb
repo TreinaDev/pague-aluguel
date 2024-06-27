@@ -6,8 +6,8 @@ class Admin < ApplicationRecord
 
   has_one_attached :photo
 
-  validates :document_number, :email, :password, presence: true, on: :create
   validates :first_name, :last_name, presence: true
+  validates :document_number, :email, :password, presence: true, on: :create
   validates :document_number, uniqueness: true
   validates :first_name, :last_name, length: { in: 3..20 }
   validates :document_number, length: { is: 11 }

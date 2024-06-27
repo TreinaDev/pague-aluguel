@@ -2,13 +2,7 @@ require 'rails_helper'
 
 describe 'admin edita sua propria conta' do
   it 'com sucesso' do
-    admin = Admin.create!(
-      email: 'admin@mail.com',
-      password: '123456',
-      first_name: 'Fulano',
-      last_name: 'Da Costa',
-      document_number: CPF.generate
-    )
+    admin = FactoryBot.create(:admin, first_name: 'Fulano', last_name: 'Da Costa')
 
     login_as(admin, scope: :admin)
     visit root_path
@@ -31,13 +25,7 @@ describe 'admin edita sua propria conta' do
     expect(page).not_to have_content('Fulano Da Costa')
   end
   it 'e falha por parametro incorreto' do
-    admin = Admin.create!(
-      email: 'admin@mail.com',
-      password: '123456',
-      first_name: 'Fulano',
-      last_name: 'Da Costa',
-      document_number: CPF.generate
-    )
+    admin = FactoryBot.create(:admin)
 
     login_as(admin, scope: :admin)
     visit edit_admin_registration_path(admin)
@@ -50,23 +38,28 @@ describe 'admin edita sua propria conta' do
     expect(page).to have_content('Nome não pode ficar em branco')
     expect(page).to have_content('Sobrenome não pode ficar em branco')
   end
+
+  it 'e adiciona uma foto' do
+    admin = FactoryBot.create(:admin)
+
+    login_as(admin, scope: :admin)
+    visit edit_admin_registration_path
+
+    attach_file 'Foto', Rails.root.join('spec/support/images/reuri.jpeg')
+    click_on 'Salvar'
+
+    expect(page).to have_css("img[src*='reuri.jpeg']")
+  end
 end
 describe 'admin tenta editar outra conta' do
   it 'e não encontra link para edição' do
-    admin = Admin.create!(
-      email: 'admin@mail.com',
-      password: '123456',
-      first_name: 'Fulano',
-      last_name: 'Da Costa',
-      document_number: CPF.generate
-    )
-    Admin.create!(
-      email: 'outroadmin@mail.com',
-      password: '123456',
-      first_name: 'Ciclano',
-      last_name: 'Da Silva',
-      document_number: CPF.generate
-    )
+    admin = FactoryBot.create(:admin)
+    FactoryBot.create(:admin,
+                      email: 'outroadmin@mail.com',
+                      password: '123456',
+                      first_name: 'Ciclano',
+                      last_name: 'Da Silva',
+                      document_number: CPF.generate)
 
     login_as(admin, scope: :admin)
     visit root_path

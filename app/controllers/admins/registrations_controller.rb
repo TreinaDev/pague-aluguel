@@ -53,11 +53,11 @@ class Admins::RegistrationsController < Devise::RegistrationsController
   end
 
   def configure_sign_up_params
-    devise_parameter_sanitizer.permit(:sign_up, keys: %i[first_name last_name document_number])
+    devise_parameter_sanitizer.permit(:sign_up, keys: %i[first_name last_name document_number photo])
   end
 
   def configure_account_update_params
-    devise_parameter_sanitizer.permit(:account_update, keys: %i[first_name last_name])
+    devise_parameter_sanitizer.permit(:account_update, keys: %i[first_name last_name photo])
   end
 
   def redirect_if_not_logged_in
@@ -69,7 +69,7 @@ class Admins::RegistrationsController < Devise::RegistrationsController
   end
 
   def after_update_path_for(*)
-    admins_path
+    admin_path(current_admin)
   end
 
   def set_admin
