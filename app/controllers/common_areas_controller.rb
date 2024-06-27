@@ -3,7 +3,8 @@ class CommonAreasController < ApplicationController
   before_action :find_common_area, only: %i[edit show update]
 
   def index
-    @common_areas = CommonArea.all
+    condo = Condo.find(params[:condo_id])
+    @common_areas = condo.common_areas
   end
 
   def show; end
@@ -12,7 +13,7 @@ class CommonAreasController < ApplicationController
 
   def update
     if @common_area.update(common_area_params)
-      redirect_to @common_area, notice: I18n.t('messages.registered_fee')
+      redirect_to condo_common_area_path(@common_area.condo, @common_area), notice: I18n.t('messages.registered_fee')
     else
       @common_area_errors = @common_area.errors.full_messages
       flash.now[:alert] = I18n.t 'messages.registration_error'

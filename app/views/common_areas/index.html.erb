@@ -5,7 +5,7 @@
 
     <% @common_areas.each_with_index do |area, index| %>
       <div id="<%= "area-#{index}"%>">
-        <%= link_to area do %>
+        <%= link_to condo_common_area_path(area.condo, area) do %>
           <div class="rounded-4 shadow p-4" >
             <div class="d-flex">
               <p><%= area.name %></p>

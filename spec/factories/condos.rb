@@ -1,6 +1,6 @@
 FactoryBot.define do
   factory :condo do
     name { "MyString" }
-    city { "MyString" }
+    city { "Rio de Janeiro" }
   end
 end

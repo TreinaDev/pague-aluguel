@@ -4,7 +4,7 @@ describe 'Admin registra uma taxa de área comum' do
   it 'com sucesso a partir da listagem de área comum' do
     admin = Admin.create!(email: 'ikki.phoenix@seiya.com', password: 'phoenix123')
 
-    condo = Condo.create!(name: 'Sai de baixo', city: 'Rio de Janeiro')
+    condo = FactoryBot.create(:condo)
 
     common_area = CommonArea.create!(name: 'TMNT', description: 'Teenage Mutant Ninja Turtles', max_capacity: 40,
                                      usage_rules: 'Não lutar no salão', condo:)
@@ -12,7 +12,7 @@ describe 'Admin registra uma taxa de área comum' do
                        usage_rules: 'Elevar o cosmos ao máximo.', condo:)
 
     login_as admin, scope: :admin
-    visit common_areas_path
+    visit condo_common_areas_path(condo)
     within 'div#area-0' do
       click_on 'TMNT'
     end
@@ -20,7 +20,7 @@ describe 'Admin registra uma taxa de área comum' do
     fill_in 'Taxa de área comum', with: '200'
     click_on 'Atualizar'
 
-    expect(current_path).to eq common_area_path(common_area)
+    expect(current_path).to eq condo_common_area_path(condo, common_area)
     expect(page).to have_content 'TMNT'
     expect(page).to have_content 'Descrição: Teenage Mutant Ninja Turtles'
     expect(page).to have_content 'Capacidade Máxima: 40'
@@ -30,12 +30,11 @@ describe 'Admin registra uma taxa de área comum' do
   end
 
   it 'se estiver autenticado' do
-    condo = Condo.create!(name: 'Sai de baixo', city: 'Rio de Janeiro')
+    condo = FactoryBot.create(:condo)
 
-    common_area = CommonArea.create!(name: 'TMNT', description: 'Teenage Mutant Ninja Turtles', max_capacity: 40,
-                                     usage_rules: 'Não lutar no salão', condo:)
+    common_area = FactoryBot.create(:common_area, condo:)
 
-    visit edit_common_area_path(common_area)
+    visit edit_condo_common_area_path(condo, common_area)
 
     expect(current_path).to eq new_admin_session_path
   end
@@ -43,13 +42,12 @@ describe 'Admin registra uma taxa de área comum' do
   it 'e a taxa é negativa' do
     admin = Admin.create!(email: 'ikki.phoenix@seiya.com', password: 'phoenix123')
 
-    condo = Condo.create!(name: 'Sai de baixo', city: 'Rio de Janeiro')
+    condo = FactoryBot.create(:condo)
 
-    CommonArea.create!(name: 'TMNT', description: 'Teenage Mutant Ninja Turtles', max_capacity: 40,
-                       usage_rules: 'Não lutar no salão', condo:)
+    FactoryBot.create(:common_area, name: 'TMNT', condo:)
 
     login_as admin, scope: :admin
-    visit common_areas_path
+    visit condo_common_areas_path(condo)
     within 'div#area-0' do
       click_on 'TMNT'
     end
