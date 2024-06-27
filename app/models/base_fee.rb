@@ -1,6 +1,9 @@
 class BaseFee < ApplicationRecord
+  belongs_to :condo
   has_many :values
   has_many :unit_type, through: :values
+
+  accepts_nested_attributes_for :values
 
   enum recurrence: {
     monthly: 0,
@@ -10,5 +13,4 @@ class BaseFee < ApplicationRecord
     yearly: 8
   }
 
-  # enum recurrence: [:monthly, :biweekly, :bimonthly, :semi_annual, :yearly]
 end

@@ -16,11 +16,11 @@ describe 'admin cria taxa fixa' do
     condo2 = create(:condo, name: 'Prédio legal', city: 'Cidade massa')
 
     unit_type1 = create(:unit_type, description: 'Apartamento 1 quarto', area: 30,
-                  condo: condo)
+                        condo: condo)
     unit_type2 = create(:unit_type, description: 'Apartamento 2 quartos', area: 45,
-                  condo: condo)
+                        condo: condo)
     unit_type3 = create(:unit_type, description: 'Apartamento 3 quartos', area: 60,
-                  condo: condo)
+                        condo: condo)
 
     login_as admin, scope: :admin
 
@@ -31,14 +31,15 @@ describe 'admin cria taxa fixa' do
       fill_in 'Valor para Apartamento 2 quartos', with: 300
       fill_in 'Valor para Apartamento 3 quartos', with: 500
       select 'Mensal', from: 'Recorrência'
-      fill_in 'Dia de lançamento', with: 1.day.from_now
+      fill_in 'Dia de Lançamento', with: 1.day.from_now
       check 'Taxa fixa'
       fill_in 'Juros ao dia', with: 1
       fill_in 'Multa por atraso', with: 30
       click_on 'Salvar'
     end
 
-    expect(current_path).to eq condo_path
+    base_fee = BaseFee.last
+    expect(current_path).to eq condo_base_fee_path(condo, base_fee)
     expect(page).to have_content 'Taxa cadastrada com sucesso!'
     expect(page).to have_content 'Taxa de Condomínio'
     expect(page).to have_content "Mensal no dia #{1.day.from_now}"

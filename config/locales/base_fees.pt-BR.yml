@@ -1,0 +1,28 @@
+pt-BR:
+  activerecord:
+    model:
+      base_fee:
+        one: Taxa Fixa
+        other: Taxas Fixas
+    attributes:
+      base_fee:
+        name: Nome
+        description: Descrição
+        late_payment: Juros ao dia
+        late_fee: Multa por atraso
+        fixed: Taxa fixa
+        charge_day: Dia de Lançamento
+        recurrence: Recorrência
+  base_fee:
+    monthly: Mensal
+    biweekly: Quinzenal
+    bimonthly: Bimestral
+    semi_annual: Semestral
+    yearly: Anual
+    # any_site: 'Salão de festas da empresa ou salão de terceiros'
+  base_fees:
+    # show:
+    #   error: Este tipo evento não está disponível no momento.
+  views:
+    new:
+      label_price: "Valor para %{name}"

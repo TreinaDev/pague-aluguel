@@ -1,44 +1,53 @@
-<form>
-  <%= form_with model: [@condo, @base_fee] do |f| %>
-    <div class="field">
-      <%= f.label :name, 'Nome' %>
-      <%= f.text_field :name %>
-    </div>
+<h2>Cadastro de Taxas do Condomínio</h2>
 
-    <div class="field">
-      <%= f.label :recurrence, 'Recorrência' %>
-      <%= f.select :recurrence, BaseFee.recurrences.keys.to_a %>
-    </div>
+<%= form_with model: [@condo, @base_fee], local: true do |f| %>
+  <%= hidden_field_tag :condo, @condo.id %>
 
-    <% @condo.unit_types.each do |ut| %>
+  <div class="field">
+    <%= f.label :name %>
+    <%= f.text_field :name %>
+  </div>
 
-      <%= f.fields_for @value, index: ut.id do |values_form| %>
-        <div class="field">
-            <%= values_form.label :price, "Valor para #{ut.description}" %>
-            <%= values_form.number_field :price %>
-        </div>
-      <% end %>
+  <div class="field">
+    <%= f.label :description %>
+    <%= f.text_field :description %>
+  </div>
 
+  <div class="field">
+    <%= f.label :recurrence %>
+    <%= f.select :recurrence, options_for_select(BaseFee.recurrences.map { |key, _| [I18n.t("base_fee.#{key}"), key] }, @base_fee.recurrence), {} %>
+  </div>
+
+  <% @condo.unit_types.each_with_index do |ut, index| %>
+    <%= f.fields_for :values, index: ut.id do |values_form| %>
+      <div class="field">
+        <%= values_form.label :price, t('views.new.label_price', name: ut.description) %>
+        <%= values_form.number_field :price %>
+      </div>
     <% end %>
-
-    <div class="field">
-      <%= f.label :charge_day, 'Dia do Lançamento' %>
-      <%= f.text_field :charge_day %>
-    </div>
-
-    <div class="field">
-      <%= f.check_box :fixed, {}, "true", "false" %>
-      <%= f.label :fixed, 'Taxa fixa' %>
-    </div>
-
-    <div class="field">
-      <%= f.label :late_payment, 'Juros ao dia' %>
-      <%= f.number_field :late_payment %>
-    </div>
-
-    <div class="field">
-      <%= f.label :late_fee, 'Multa' %>
-      <%= f.number_field :late_fee %>
-    </div>
   <% end %>
-</form>
+
+  <div class="field">
+    <%= f.label :charge_day %>
+    <%= f.text_field :charge_day %>
+  </div>
+
+  <div class="field">
+    <%= f.check_box :fixed, {}, "true", "false" %>
+    <%= f.label :fixed %>
+  </div>
+
+  <div class="field">
+    <%= f.label :late_payment %>
+    <%= f.number_field :late_payment %>
+  </div>
+
+  <div class="field">
+    <%= f.label :late_fee %>
+    <%= f.number_field :late_fee %>
+  </div>
+
+  <div class="actions">
+    <%= f.submit t('helpers.submit.submit') %>
+  </div>
+<% end %>
