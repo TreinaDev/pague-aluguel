@@ -15,7 +15,6 @@ class SharedFeesController < ApplicationController
     @condos = Condo.all
     @shared_fee = SharedFee.new(shared_fee_params)
     if @shared_fee.save
-      @shared_fee.calculate_fractions
       redirect_to @shared_fee, notice: t('success_notice_shared_fee')
     else
       flash.now[:alert] = t('fail_notice_shared_fee')

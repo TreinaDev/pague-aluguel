@@ -9,32 +9,36 @@
   </div>
 <% end %>
 
-Lançar nova conta
+<div class="container">
+  <h1>Lançar nova Conta Compartilhada</h1>
 
-<div>
-  <%= form_with model: @shared_fee, local: true do |f| %> 
-    <div>
-      <%= f.label :condo_id %>
-      <%= f.collection_select :condo_id, @condos, :id, :name %>
-    </div>
+  <div class="row">
+    <div class="col-md-6">
+      <%= form_with model: @shared_fee, local: true do |f| %> 
+        <div class="form-group">
+          <%= f.label :condo_id %>
+          <%= f.collection_select :condo_id, @condos, :id, :name, { prompt: "Selecione um condomínio" }, class: "form-control" %>
+        </div>
 
-    <div>
-      <%= f.label :description %>
-      <%= f.text_field :description %>
-    </div>
+        <div class="form-group">
+          <%= f.label :description %>
+          <%= f.text_field :description, class: "form-control" %>
+        </div>
 
-    <div>
-      <%= f.label :total_value_cents %>
-      <%= f.number_field :total_value_cents %>
-    </div>
+        <div class="form-group">
+          <%= f.label :total_value_cents %>
+          <%= f.number_field :total_value_cents, class: "form-control" %>
+        </div>
 
-    <div>
-      <%= f.label :issue_date %>
-      <%= f.date_field :issue_date %>
-    </div>
+        <div class="form-group">
+          <%= f.label :issue_date %>
+          <%= f.date_field :issue_date, class: "form-control" %>
+        </div>
 
-    <div>
-      <%= f.submit 'Registrar' %>
+        <div class="form-group">
+          <%= f.submit 'Registrar', class: "btn btn-primary" %>
+        </div>
+      <% end %>
     </div>
-  <% end %>
+  </div>
 </div>

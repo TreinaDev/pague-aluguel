@@ -23,8 +23,8 @@ class SharedFee < ApplicationRecord
   private
 
   def date_is_future
-    return unless issue_date.present? && issue_date <= Time.zone.today
+    return unless issue_date.present? && issue_date < Time.zone.today
 
-    errors.add(:issue_date, 'deve ser no futuro.')
+    errors.add(:issue_date, 'deve ser a partir de hoje.')
   end
 end
