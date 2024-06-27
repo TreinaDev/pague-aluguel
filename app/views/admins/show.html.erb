@@ -1,12 +1,13 @@
-<span><%= @admin.first_name %> <%= @admin.last_name %></span>
+<h3><%= @admin.first_name %> <%= @admin.last_name %></h3>
 
 <% if @admin.photo.attached? %>
-  <%= image_tag(@admin.photo) %>
+  <%= image_tag(@admin.photo, class: "img-thumbnail w-25") %>
 <% else %>
   Perfil sem foto
 <% end %>
-
-<% if admin_signed_in? && current_admin == @admin %>
-  <%= link_to 'Editar', edit_admin_registration_path %>
-<% end %>
-<%= link_to 'Voltar', admins_path %>
+<div>  
+  <% if admin_signed_in? && current_admin == @admin %>
+    <%= link_to 'Editar', edit_admin_registration_path %>
+  <% end %>
+  <%= link_to 'Voltar', admins_path %>
+</div>
