@@ -13,6 +13,7 @@ class CommonAreasController < ApplicationController
 
   def update
     if @common_area.update(common_area_params)
+      @common_area.common_area_fee_histories.last.update(user: current_admin.email)
       redirect_to condo_common_area_path(@common_area.condo, @common_area), notice: I18n.t('messages.registered_fee')
     else
       @common_area_errors = @common_area.errors.full_messages
