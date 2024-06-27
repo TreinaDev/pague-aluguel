@@ -4,6 +4,6 @@ FactoryBot.define do
     description { "some description" }
     max_capacity { 30 }
     usage_rules { "Some usage rules" }
-    fee { 1 }
+    fee { 0 }
   end
 end

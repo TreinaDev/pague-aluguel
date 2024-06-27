@@ -58,4 +58,26 @@ describe 'Admin vê a lista de áreas comuns' do
     expect(page).not_to have_content 'Naruto'
     expect(page).not_to have_content 'Jiraya'
   end
+
+  it 'e vê áreas comuns sem taxa cadastradas' do
+    admin = Admin.create!(email: 'ikki.phoenix@seiya.com', password: 'phoenix123')
+
+    condo = FactoryBot.create(:condo)
+    FactoryBot.create(:common_area, name: 'TMNT', fee: 0, condo:)
+    FactoryBot.create(:common_area, name: 'Saint Seiya', fee: 400, condo:)
+    FactoryBot.create(:common_area, name: 'Naruto Shippuden', fee: 0, condo:)
+
+    login_as admin, scope: :admin
+    visit condo_common_areas_path(condo)
+
+    within 'div#area-0' do
+      expect(page).to have_content 'Taxa não cadastrada'
+    end
+    within 'div#area-1' do
+      expect(page).not_to have_content 'Taxa não cadastrada'
+    end
+    within 'div#area-2' do
+      expect(page).to have_content 'Taxa não cadastrada'
+    end
+  end
 end

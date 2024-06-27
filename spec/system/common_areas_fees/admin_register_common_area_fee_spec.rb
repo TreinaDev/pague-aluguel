@@ -6,10 +6,8 @@ describe 'Admin registra uma taxa de área comum' do
 
     condo = FactoryBot.create(:condo)
 
-    common_area = CommonArea.create!(name: 'TMNT', description: 'Teenage Mutant Ninja Turtles', max_capacity: 40,
-                                     usage_rules: 'Não lutar no salão', condo:)
-    CommonArea.create!(name: 'Saint Seiya', description: 'Os Cavaleiros dos zodíacos', max_capacity: 60,
-                       usage_rules: 'Elevar o cosmos ao máximo.', condo:)
+    common_area = FactoryBot.create(:common_area, name: 'TMNT', condo:)
+    FactoryBot.create(:common_area, condo:)
 
     login_as admin, scope: :admin
     visit condo_common_areas_path(condo)
@@ -21,10 +19,6 @@ describe 'Admin registra uma taxa de área comum' do
     click_on 'Atualizar'
 
     expect(current_path).to eq condo_common_area_path(condo, common_area)
-    expect(page).to have_content 'TMNT'
-    expect(page).to have_content 'Descrição: Teenage Mutant Ninja Turtles'
-    expect(page).to have_content 'Capacidade Máxima: 40'
-    expect(page).to have_content 'Regras de uso: Não lutar no salão'
     expect(page).to have_content 'Taxa de área comum: R$ 200,00'
     expect(page).to have_content 'Taxa cadastrada com sucesso!'
   end

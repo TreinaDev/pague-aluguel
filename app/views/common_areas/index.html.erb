@@ -9,7 +9,7 @@
           <div class="rounded-4 shadow p-4" >
             <div class="d-flex">
               <p><%= area.name %></p>
-              <p><%= number_to_currency area.fee %></p>
+              <p><%= area.fee.zero? ? "Taxa não cadastrada" : number_to_currency(area.fee) %></p>
             </div>
             <div>
               <p><%= area.description %></p>

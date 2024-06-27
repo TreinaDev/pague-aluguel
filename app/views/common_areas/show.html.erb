@@ -3,11 +3,11 @@
   <div class="container shadow rounded-4 p-4">
     <div class="d-flex">
       <h3><%= @common_area.name%></h3>
-      <strong>Taxa de área comum: <%= number_to_currency @common_area.fee %></strong>
+      <strong>Taxa de área comum: <%= @common_area.fee.zero? ? 'Taxa não cadastrada' : number_to_currency(@common_area.fee) %></strong>
     </div>
     <div>
       <p>Descrição: <%= @common_area.description %></p>
-      <p>Capacidade Máxima: <%= @common_area.max_capacity %></p>
+      <p>Capacidade máxima: <%= @common_area.max_capacity %></p>
       <p>Regras de uso: <%= @common_area.usage_rules %></p>
     </div>
 
