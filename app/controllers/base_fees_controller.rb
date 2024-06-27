@@ -12,16 +12,20 @@ class BaseFeesController < ApplicationController
     @condo = Condo.find(params[:condo_id])
     @base_fee = @condo.base_fees.build(base_fee_params)
 
+    # @base_fee.save!
+
     if @base_fee.save
-      redirect_to @base_fee, notice: 'Taxa cadastrada com sucesso!'
+      # debugger
+      redirect_to condo_base_fee_path(@condo, @base_fee), notice: 'Taxa cadastrada com sucesso!'
     else
-      render :new
+      flash.now[:alert] = "Não foi possível cadastrar a taxa!"
+      render :new, status: 412
     end
   end
 
   def show
-    @condo = Condo.find(params[:condo_id])
     @base_fee = BaseFee.find(params[:id])
+    @condo = @base_fee.condo
   end
 
   private
@@ -29,8 +33,6 @@ class BaseFeesController < ApplicationController
   def base_fee_params
     params.require(:base_fee).permit(:name, :description, :late_payment, :late_fee,
                                     :fixed, :charge_day, :recurrence,
-                                    values_attributes: [])
+                                    values_attributes: [:price, :unit_type_id])
   end
 end
-
-

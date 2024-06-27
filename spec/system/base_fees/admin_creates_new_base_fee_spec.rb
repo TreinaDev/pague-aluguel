@@ -31,7 +31,7 @@ describe 'admin cria taxa fixa' do
       fill_in 'Valor para Apartamento 2 quartos', with: 300
       fill_in 'Valor para Apartamento 3 quartos', with: 500
       select 'Mensal', from: 'Recorrência'
-      fill_in 'Dia de Lançamento', with: 1.day.from_now
+      fill_in 'Data de Lançamento', with: 1.day.from_now
       check 'Taxa fixa'
       fill_in 'Juros ao dia', with: 1
       fill_in 'Multa por atraso', with: 30
@@ -42,10 +42,11 @@ describe 'admin cria taxa fixa' do
     expect(current_path).to eq condo_base_fee_path(condo, base_fee)
     expect(page).to have_content 'Taxa cadastrada com sucesso!'
     expect(page).to have_content 'Taxa de Condomínio'
-    expect(page).to have_content "Mensal no dia #{1.day.from_now}"
+    expect(page).to have_content 'Recorrência: Mensal'
+    formatted_date = I18n.localize(1.day.from_now.to_date)
+    expect(page).to have_content "Data de Lançamento: #{formatted_date}"
     expect(page).to have_content 'Taxa fixa'
     expect(page).to have_content 'Juros de 1% ao dia'
-    expect(page).to have_content 'Multa de R$30,00 por atraso'
-    expect(page).to have_button 'Ver detalhes'
+    expect(page).to have_content 'Multa de R$30 por atraso'
   end
 end

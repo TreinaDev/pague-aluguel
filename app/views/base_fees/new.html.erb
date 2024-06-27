@@ -19,10 +19,11 @@
   </div>
 
   <% @condo.unit_types.each_with_index do |ut, index| %>
-    <%= f.fields_for :values, index: ut.id do |values_form| %>
+    <%= f.fields_for :values do |values_form| %>
       <div class="field">
         <%= values_form.label :price, t('views.new.label_price', name: ut.description) %>
         <%= values_form.number_field :price %>
+        <%= values_form.hidden_field :unit_type_id, value: ut.id %>
       </div>
     <% end %>
   <% end %>

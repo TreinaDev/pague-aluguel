@@ -11,8 +11,15 @@ pt-BR:
         late_payment: Juros ao dia
         late_fee: Multa por atraso
         fixed: Taxa fixa
-        charge_day: Dia de Lançamento
+        charge_day: Data de Lançamento
         recurrence: Recorrência
+        enum_recurrence:
+          monthly: Mensal
+          biweekly: Quinzenal
+          bimonthly: Bimestral
+          semi_annual: Semestral
+          yearly: Anual
+
   base_fee:
     monthly: Mensal
     biweekly: Quinzenal
@@ -26,3 +33,11 @@ pt-BR:
   views:
     new:
       label_price: "Valor para %{name}"
+    show:
+      monthly: Mensal
+      biweekly: Quinzenal
+      bimonthly: Bimestral
+      semi_annual: Semestral
+      yearly: Anual
+      late_payment: "Juros de %{number}% ao dia"
+      late_fee: "Multa de R$%{number} por atraso"
