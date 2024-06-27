@@ -5,15 +5,17 @@ ruby '3.2.2'
 gem 'rails', '~> 7.1.2'
 
 gem 'bootsnap', require: false
+gem 'cpf_cnpj'
 gem 'cssbundling-rails'
+gem 'devise'
 gem 'jbuilder'
 gem 'jsbundling-rails'
+gem 'money-rails', '~> 1.12'
 gem 'puma', '~> 6.0'
 gem 'sprockets-rails'
 gem 'sqlite3', '~> 1.4'
 gem 'turbo-rails'
 gem 'tzinfo-data', platforms: %i[mingw mswin x64_mingw jruby]
-gem 'devise'
 
 group :development, :test do
   gem 'cuprite'
@@ -26,5 +28,6 @@ end
 
 group :test do
   gem 'capybara', '>= 2.15'
+  gem 'shoulda-matchers', '~> 6.0'
   gem 'simplecov', require: false
 end
