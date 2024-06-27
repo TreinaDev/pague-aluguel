@@ -88,6 +88,26 @@ ActiveRecord::Schema[7.1].define(version: 2024_06_27_182427) do
     t.index ["reset_password_token"], name: "index_property_owners_on_reset_password_token", unique: true
   end
 
+  create_table "shared_fee_fractions", force: :cascade do |t|
+    t.integer "value_cents"
+    t.integer "shared_fee_id", null: false
+    t.integer "unit_id", null: false
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.index ["shared_fee_id"], name: "index_shared_fee_fractions_on_shared_fee_id"
+    t.index ["unit_id"], name: "index_shared_fee_fractions_on_unit_id"
+  end
+
+  create_table "shared_fees", force: :cascade do |t|
+    t.string "description"
+    t.date "issue_date"
+    t.integer "total_value_cents"
+    t.integer "condo_id", null: false
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.index ["condo_id"], name: "index_shared_fees_on_condo_id"
+  end
+
   create_table "unit_types", force: :cascade do |t|
     t.string "description"
     t.integer "area"
@@ -110,6 +130,9 @@ ActiveRecord::Schema[7.1].define(version: 2024_06_27_182427) do
 
   add_foreign_key "active_storage_attachments", "active_storage_blobs", column: "blob_id"
   add_foreign_key "active_storage_variant_records", "active_storage_blobs", column: "blob_id"
+  add_foreign_key "shared_fee_fractions", "shared_fees"
+  add_foreign_key "shared_fee_fractions", "units"
+  add_foreign_key "shared_fees", "condos"
   add_foreign_key "unit_types", "condos"
   add_foreign_key "units", "unit_types"
 end

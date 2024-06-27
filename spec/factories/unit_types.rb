@@ -1,8 +1,8 @@
 FactoryBot.define do
   factory :unit_type do
-    description { "MyString" }
-    area { 1 }
-    ideal_fraction { 1.5 }
-    condo { nil }
+    description { 'Apartamento da Cobertura' }
+    area { 100 }
+    ideal_fraction { 0.5 }
+    condo
   end
 end

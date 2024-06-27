@@ -1,0 +1,27 @@
+<div class="container">
+  <h1>Conta Compartilhada #<%= @shared_fee.id %></h1>
+
+  <div class="row">
+    <div class="col-md-6">
+      <strong><%= SharedFee.human_attribute_name(:condo_id) %>:</strong> <%= @condo.name %>
+    </div>
+  </div>
+
+  <div class="row">
+    <div class="col-md-6">
+      <strong><%= SharedFee.human_attribute_name(:description) %>:</strong> <%= @shared_fee.description %>
+    </div>
+  </div>
+
+  <div class="row">
+    <div class="col-md-6">
+      <strong><%= SharedFee.human_attribute_name(:issue_date) %>:</strong> <%= @shared_fee.issue_date %>
+    </div>
+  </div>
+
+  <div class="row">
+    <div class="col-md-6">
+      <strong><%= SharedFee.human_attribute_name(:total_value_cents) %>:</strong> <%= Money.new(@shared_fee.total_value_cents, "BRL").format %>
+    </div>
+  </div>
+</div>
