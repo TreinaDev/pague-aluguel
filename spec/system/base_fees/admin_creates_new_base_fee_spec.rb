@@ -39,7 +39,6 @@ describe 'admin cria taxa fixa' do
     end
 
     base_fee = BaseFee.last
-    expect(current_path).to eq condo_base_fee_path(condo, base_fee)
     expect(page).to have_content 'Taxa cadastrada com sucesso!'
     expect(page).to have_content 'Taxa de Condomínio'
     expect(page).to have_content 'Recorrência: Mensal'
@@ -48,5 +47,6 @@ describe 'admin cria taxa fixa' do
     expect(page).to have_content 'Taxa fixa'
     expect(page).to have_content 'Juros de 1% ao dia'
     expect(page).to have_content 'Multa de R$30 por atraso'
+    expect(current_path).to eq condo_base_fee_path(condo, base_fee)
   end
 end
