@@ -1,8 +1,10 @@
 # frozen_string_literal: true
-class Admins::RegistrationsController < Devise::RegistrationsController
-  # before_action :configure_account_update_params, only: [:update]
 
-  before_action :configure_sign_up_params
+# rubocop:disable Rails/LexicallyScopedActionFilter
+
+class Admins::RegistrationsController < Devise::RegistrationsController
+  before_action :configure_sign_up_params, only: %i[new create]
+  before_action :configure_account_update_params, only: %i[edit update]
   before_action :redirect_if_not_logged_in
   skip_before_action :require_no_authentication
 
@@ -42,6 +44,10 @@ class Admins::RegistrationsController < Devise::RegistrationsController
 
   protected
 
+  def update_resource(resource, params)
+    resource.update_without_password(params)
+  end
+
   def sign_up(*)
     true
   end
@@ -50,9 +56,9 @@ class Admins::RegistrationsController < Devise::RegistrationsController
     devise_parameter_sanitizer.permit(:sign_up, keys: %i[first_name last_name document_number])
   end
 
-  # def configure_account_update_params
-  #   devise_parameter_sanitizer.permit(:account_update, keys: [:attribute])
-  # end
+  def configure_account_update_params
+    devise_parameter_sanitizer.permit(:account_update, keys: %i[first_name last_name])
+  end
 
   def redirect_if_not_logged_in
     redirect_to new_admin_session_path, notice: t('errors.messages.must_be_logged_in') unless admin_signed_in?
@@ -62,8 +68,17 @@ class Admins::RegistrationsController < Devise::RegistrationsController
     admins_path
   end
 
+  def after_update_path_for(*)
+    admins_path
+  end
+
+  def set_admin
+    @admin = Admin.find(params[:id])
+  end
+
   # The path used after sign up for inactive accounts.
   # def after_inactive_sign_up_path_for(resource)
   #   super(resource)
   # end
 end
+# rubocop:enable Rails/LexicallyScopedActionFilter

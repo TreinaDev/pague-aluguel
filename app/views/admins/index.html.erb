@@ -1,5 +1,9 @@
 <%= link_to 'Registrar novo admin', new_admin_registration_path %>
 
-<% @admins.each do |admin| %>
-  <%= admin.first_name %> <%= admin.last_name %>
-<% end %>
+<div class="list-group" id="admin_list">
+  <% @admins.each do |admin| %>
+    <%= link_to admin, class: "list-group-item list-group-item-action" do %>
+      <span><%= admin.first_name %> <%= admin.last_name %></span>
+    <% end %>
+  <% end %>
+</div>

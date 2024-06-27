@@ -1,0 +1,5 @@
+<span><%= @admin.first_name %> <%= @admin.last_name %></span>
+<% if admin_signed_in? && current_admin == @admin %>
+  <%= link_to 'Editar', edit_admin_registration_path %>
+<% end %>
+<%= link_to 'Voltar', admins_path %>
