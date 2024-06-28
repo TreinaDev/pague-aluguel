@@ -4,5 +4,7 @@ Rails.application.routes.draw do
 
   root to: "home#index"
 
+  resources :condos, only: [:index, :show]
+
   resources :shared_fees, only: [:show, :new, :create]
 end
