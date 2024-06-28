@@ -1,8 +1,8 @@
 require 'rails_helper'
 
-describe 'Admin lança conta compartilhada' do
+describe 'Admin lança uma conta compartilhada' do
   it 'com sucesso' do
-    admin = Admin.create!(email: 'admin@email.com', password: '123456')
+    admin = FactoryBot.create(:admin, first_name: 'Fulano', last_name: 'Da Costa')
     condominium = Condo.create!(name: 'Condo Test', city: 'City Test')
     unit_type_one = FactoryBot.create(:unit_type, condo: condominium, ideal_fraction: 0.04)
     unit_type_two = FactoryBot.create(:unit_type, condo: condominium, ideal_fraction: 0.06)
@@ -27,7 +27,7 @@ describe 'Admin lança conta compartilhada' do
   end
 
   it 'e não está autenticado' do
-    Admin.create!(email: 'admin@email.com', password: '123456')
+    FactoryBot.create(:admin, first_name: 'Fulano', last_name: 'Da Costa')
 
     visit new_shared_fee_path
 
@@ -36,7 +36,7 @@ describe 'Admin lança conta compartilhada' do
   end
 
   it 'e deve preencher todos os campos' do
-    admin = Admin.create!(email: 'admin@email.com', password: '123456')
+    admin = FactoryBot.create(:admin, first_name: 'Fulano', last_name: 'Da Costa')
     condominium = Condo.create!(name: 'Condo Test', city: 'City Test')
     unit_type_one = FactoryBot.create(:unit_type, condo: condominium, ideal_fraction: 0.04)
     unit_type_two = FactoryBot.create(:unit_type, condo: condominium, ideal_fraction: 0.06)
@@ -56,7 +56,7 @@ describe 'Admin lança conta compartilhada' do
   end
 
   it 'e lança mais de uma conta' do
-    admin = Admin.create!(email: 'admin@email.com', password: '123456')
+    admin = FactoryBot.create(:admin, first_name: 'Fulano', last_name: 'Da Costa')
     condominium = Condo.create!(name: 'Condo Test', city: 'City Test')
     unit_type_one = FactoryBot.create(:unit_type, condo: condominium, ideal_fraction: 0.04)
     unit_type_two = FactoryBot.create(:unit_type, condo: condominium, ideal_fraction: 0.06)

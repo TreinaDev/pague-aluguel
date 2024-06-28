@@ -1,8 +1,14 @@
 require 'rails_helper'
 
-describe 'Admin cria conta compartilhada' do
-  it 'com sucesso' do
-    admin = Admin.create!(email: 'admin@email.com', password: '123456')
+describe 'Admin cria uma nova conta compartilhada' do
+  it 'com sucess' do
+    admin = Admin.create!(
+      email: 'admin@mail.com',
+      password: '123456',
+      first_name: 'Fulano',
+      last_name: 'Da Costa',
+      document_number: CPF.generate
+    )
     condominium = Condo.create!(name: 'Condo Test', city: 'City Test')
     unit_type_one = FactoryBot.create(:unit_type, condo: condominium, ideal_fraction: 0.04)
     unit_type_two = FactoryBot.create(:unit_type, condo: condominium, ideal_fraction: 0.06)
@@ -24,7 +30,13 @@ describe 'Admin cria conta compartilhada' do
   end
 
   it 'e não está autenticado' do
-    Admin.create!(email: 'admin@email.com', password: '123456')
+    Admin.create!(
+      email: 'admin@mail.com',
+      password: '123456',
+      first_name: 'Fulano',
+      last_name: 'Da Costa',
+      document_number: CPF.generate
+    )
     condominium = Condo.create!(name: 'Condo Test', city: 'City Test')
     unit_type_one = FactoryBot.create(:unit_type, condo: condominium, ideal_fraction: 0.04)
     unit_type_two = FactoryBot.create(:unit_type, condo: condominium, ideal_fraction: 0.06)
