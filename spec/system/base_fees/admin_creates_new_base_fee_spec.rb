@@ -10,10 +10,9 @@ describe 'admin cria taxa fixa' do
   end
 
   it 'com sucesso' do
-    admin = create(:admin, email: 'admin@email.com', password: '123456')
+    create(:admin, email: 'admin@email.com', password: '123456')
 
     condo = create(:condo, name: 'Prédio lindo', city: 'Cidade maravilhosa')
-    condo2 = create(:condo, name: 'Prédio legal', city: 'Cidade massa')
 
     create(:unit_type, description: 'Apartamento 1 quarto', area: 30,
            condo: condo)
@@ -55,7 +54,6 @@ describe 'admin cria taxa fixa' do
     admin = create(:admin, email: 'admin@email.com', password: '123456')
 
     condo = create(:condo, name: 'Prédio lindo', city: 'Cidade maravilhosa')
-    condo2 = create(:condo, name: 'Prédio legal', city: 'Cidade massa')
 
     create(:unit_type, description: 'Apartamento 1 quarto', area: 30,
            condo: condo)
