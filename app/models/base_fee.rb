@@ -4,6 +4,7 @@ class BaseFee < ApplicationRecord
   has_many :unit_type, through: :values
 
   accepts_nested_attributes_for :values
+  validates :name, :description, :late_payment, :late_fee, :charge_day, presence: true
 
   enum recurrence: {
     monthly: 0,
@@ -13,4 +14,11 @@ class BaseFee < ApplicationRecord
     yearly: 8
   }
 
+  def value_builder
+    @values = []
+    self.condo.unit_types.each do |ut|
+      @values << self.values.build(unit_type: ut)
+    end
+    @values
+  end
 end

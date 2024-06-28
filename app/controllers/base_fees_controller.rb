@@ -3,22 +3,19 @@ class BaseFeesController < ApplicationController
 
   def new
     @condo = Condo.find(params[:condo_id])
-    @unit_types = @condo.unit_types
-    @base_fee = BaseFee.new
-    @value = @base_fee.values.build
+    # @unit_types = @condo.unit_types
+    @base_fee = BaseFee.new(condo: @condo)
+    @values = @base_fee.value_builder
   end
 
   def create
     @condo = Condo.find(params[:condo_id])
     @base_fee = @condo.base_fees.build(base_fee_params)
 
-    # @base_fee.save!
-
     if @base_fee.save
-      # debugger
       redirect_to condo_base_fee_path(@condo, @base_fee), notice: 'Taxa cadastrada com sucesso!'
     else
-      flash.now[:alert] = "Não foi possível cadastrar a taxa!"
+      flash.now[:alert] = 'Taxa não cadastrada.'
       render :new, status: 412
     end
   end

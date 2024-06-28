@@ -4,6 +4,7 @@ pt-BR:
       base_fee:
         one: Taxa Fixa
         other: Taxas Fixas
+      value: Valor
     attributes:
       base_fee:
         name: Nome
@@ -19,7 +20,8 @@ pt-BR:
           bimonthly: Bimestral
           semi_annual: Semestral
           yearly: Anual
-
+      value:
+        price: Preço
   base_fee:
     monthly: Mensal
     biweekly: Quinzenal

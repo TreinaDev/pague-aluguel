@@ -1,6 +1,36 @@
-<h2><%= @base_fee.name %></h2>
-<p><%= BaseFee.human_attribute_name(:recurrence) %>: <%= I18n.t("activerecord.attributes.base_fee.enum_recurrence.#{@base_fee.recurrence}") %></p>
-<p><%= BaseFee.human_attribute_name(:charge_day) %>: <%= I18n.localize(@base_fee.charge_day.to_date)%></p>
-<p><%= BaseFee.human_attribute_name(:fixed) if @base_fee.fixed %></p>
-<p><%= t('views.show.late_payment', number: @base_fee.late_payment) %></p>
-<p><%= t('views.show.late_fee', number: @base_fee.late_fee) %></p>
+<div class="container">
+  <h2><%= @base_fee.name %></h2>
+
+  <div class="row">
+    <div class="col-md-6">
+      <strong><%= BaseFee.human_attribute_name(:recurrence) %>:</strong>
+      <%= I18n.t("activerecord.attributes.base_fee.enum_recurrence.#{@base_fee.recurrence}") %>
+    </div>
+  </div>
+
+  <div class="row">
+    <div class="col-md-6">
+      <strong><%= BaseFee.human_attribute_name(:charge_day) %>:</strong>
+      <%= I18n.localize(@base_fee.charge_day.to_date)%>
+    </div>
+  </div>
+
+  <div class="row">
+    <div class="col-md-6">
+      <strong><%= BaseFee.human_attribute_name(:fixed) if @base_fee.fixed %></strong>
+    </div>
+  </div>
+
+  <div class="row">
+    <div class="col-md-6">
+      <strong><%= t('views.show.late_payment', number: @base_fee.late_payment) %></strong>
+    </div>
+  </div>
+
+  <div class="row">
+    <div class="col-md-6">
+      <strong><%= t('views.show.late_fee', number: @base_fee.late_fee) %></strong>
+    </div>
+  </div>
+</div>
+

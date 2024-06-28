@@ -5,6 +5,7 @@ pt-BR:
       Client: Cliente
     errors:
       messages:
+        verify_error: 'Verifique os erros:'
         record_invalid: 'A validação falhou: %{errors}'
         restrict_dependent_destroy:
           has_one: Não é possível excluir o registro pois existe um %{record} dependente

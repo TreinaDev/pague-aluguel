@@ -1,0 +1,11 @@
+pt-BR:
+  activerecord:
+    model:
+      value:
+        one: Valor
+        other: Valores
+    attributes:
+      value:
+        price: Preço
+    values:
+      values_price: 'Valor para %{unit_type}'

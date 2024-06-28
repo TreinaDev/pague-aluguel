@@ -1,54 +1,68 @@
 <h2>Cadastro de Taxas do Condomínio</h2>
 
-<%= form_with model: [@condo, @base_fee], local: true do |f| %>
-  <%= hidden_field_tag :condo, @condo.id %>
-
-  <div class="field">
-    <%= f.label :name %>
-    <%= f.text_field :name %>
-  </div>
-
-  <div class="field">
-    <%= f.label :description %>
-    <%= f.text_field :description %>
-  </div>
-
-  <div class="field">
-    <%= f.label :recurrence %>
-    <%= f.select :recurrence, options_for_select(BaseFee.recurrences.map { |key, _| [I18n.t("base_fee.#{key}"), key] }, @base_fee.recurrence), {} %>
-  </div>
-
-  <% @condo.unit_types.each_with_index do |ut, index| %>
-    <%= f.fields_for :values do |values_form| %>
-      <div class="field">
-        <%= values_form.label :price, t('views.new.label_price', name: ut.description) %>
-        <%= values_form.number_field :price %>
-        <%= values_form.hidden_field :unit_type_id, value: ut.id %>
-      </div>
-    <% end %>
-  <% end %>
-
-  <div class="field">
-    <%= f.label :charge_day %>
-    <%= f.text_field :charge_day %>
-  </div>
-
-  <div class="field">
-    <%= f.check_box :fixed, {}, "true", "false" %>
-    <%= f.label :fixed %>
-  </div>
-
-  <div class="field">
-    <%= f.label :late_payment %>
-    <%= f.number_field :late_payment %>
-  </div>
-
-  <div class="field">
-    <%= f.label :late_fee %>
-    <%= f.number_field :late_fee %>
-  </div>
-
-  <div class="actions">
-    <%= f.submit t('helpers.submit.submit') %>
+<% if @base_fee.errors.any? %>
+  <div class="alert alert-danger" role="alert">
+    <p><%= t('errors.messages.verify_error') %></p>
+    <ul>
+      <% @base_fee.errors.full_messages.each do |msg| %>
+        <li><%= msg %></li>
+      <% end %>
+    </ul>
   </div>
 <% end %>
+
+<div class="row">
+  <div class="col-md-6">
+    <%= form_with model: [@condo, @base_fee], local: true do |f| %>
+      <%= hidden_field_tag :condo, @condo.id %>
+
+    <div class="form-group">
+      <%= f.label :name %>
+      <%= f.text_field :name %>
+    </div>
+
+    <div class="form-group">
+      <%= f.label :description %>
+      <%= f.text_field :description %>
+    </div>
+
+    <div class="form-group">
+      <%= f.label :recurrence %>
+      <%= f.select :recurrence, options_for_select(BaseFee.recurrences.map { |key, _| [I18n.t("base_fee.#{key}"), key] }, @base_fee.recurrence), {} %>
+    </div>
+
+    <div class="form-group">
+      <%= f.fields_for :values do |values_form| %><br>
+
+        <%= values_form.label :price, t('activerecord.values.values_price', unit_type: values_form.object.unit_type.description ) %>
+        <%= values_form.number_field :price %>
+        <%= values_form.hidden_field :unit_type_id, value: values_form.object.unit_type.id %>
+      <% end %>
+    </div>
+
+    <div class="form-group">
+      <%= f.label :charge_day %>
+      <%= f.date_field :charge_day %>
+    </div>
+
+    <div class="form-group">
+      <%= f.check_box :fixed, {}, "true", "false" %>
+      <%= f.label :fixed %>
+    </div>
+
+    <div class="form-group">
+      <%= f.label :late_payment %>
+      <%= f.number_field :late_payment %>
+    </div>
+
+    <div class="form-group">
+      <%= f.label :late_fee %>
+      <%= f.number_field :late_fee %>
+    </div>
+
+    <div class="form-group">
+      <%= f.submit t('helpers.submit.submit'), class: 'btn btn-primary' %>
+    </div>
+    <% end %>
+  </div>
+</div>
