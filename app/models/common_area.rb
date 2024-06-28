@@ -3,7 +3,7 @@ class CommonArea < ApplicationRecord
   validate :fee_not_negative, on: :update
   validates :fee, numericality: { only_integer: true }
 
-  has_many :common_area_fee_histories
+  has_many :common_area_fee_histories, dependent: :destroy
 
   after_update :add_fee_to_history
 
