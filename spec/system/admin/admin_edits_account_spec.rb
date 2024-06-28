@@ -18,10 +18,12 @@ describe 'admin edita sua propria conta' do
 
     fill_in 'Nome', with: 'Ciclano'
     fill_in 'Sobrenome', with: 'Da Silva'
+    attach_file 'Foto', Rails.root.join('spec/support/images/reuri.jpeg')
     click_on 'Salvar'
 
     expect(page).to have_content('A sua conta foi atualizada com sucesso.')
     expect(page).to have_content('Ciclano Da Silva')
+    expect(page).to have_css("img[src*='reuri.jpeg']")
     expect(page).not_to have_content('Fulano Da Costa')
   end
   it 'e falha por parametro incorreto' do
@@ -37,18 +39,6 @@ describe 'admin edita sua propria conta' do
     expect(page).to have_content('Não foi possível salvar administrador')
     expect(page).to have_content('Nome não pode ficar em branco')
     expect(page).to have_content('Sobrenome não pode ficar em branco')
-  end
-
-  it 'e adiciona uma foto' do
-    admin = FactoryBot.create(:admin)
-
-    login_as(admin, scope: :admin)
-    visit edit_admin_registration_path
-
-    attach_file 'Foto', Rails.root.join('spec/support/images/reuri.jpeg')
-    click_on 'Salvar'
-
-    expect(page).to have_css("img[src*='reuri.jpeg']")
   end
 end
 describe 'admin tenta editar outra conta' do

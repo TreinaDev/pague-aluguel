@@ -18,8 +18,8 @@ describe 'usuario tenta criar conta de administrador' do
     expect(flash[:notice]).to eq I18n.t('devise.registrations.signed_up')
   end
   it 'e falha por não estar autenticado' do
-    post admins_path, params: { 
-      admin: { 
+    post admins_path, params: {
+      admin: {
         first_name: 'Beltrano',
         last_name: 'Da Silva',
         email: 'beltrano@mail.com',
