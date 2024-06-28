@@ -15,11 +15,11 @@ describe 'Admin registra uma taxa de área comum' do
       click_on 'TMNT'
     end
     click_on 'Registrar Taxa'
-    fill_in 'Taxa de área comum', with: '200'
+    fill_in 'Taxa de área comum', with: 200_50
     click_on 'Atualizar'
 
     expect(current_path).to eq condo_common_area_path(condo, common_area)
-    expect(page).to have_content 'Taxa de área comum: R$ 200,00'
+    expect(page).to have_content 'Taxa de área comum: R$200,50'
     expect(page).to have_content 'Taxa cadastrada com sucesso!'
   end
 

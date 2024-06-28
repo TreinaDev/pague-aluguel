@@ -2,7 +2,7 @@ require 'rails_helper'
 
 describe 'Admin vê a lista de áreas comuns' do
   it 'se estiver autenticado' do
-    condo = FactoryBot.create(:condo)
+    condo = create(:condo)
 
     visit condo_common_areas_path(condo)
 
@@ -14,9 +14,11 @@ describe 'Admin vê a lista de áreas comuns' do
   it 'com sucesso' do
     admin = Admin.create!(email: 'ikki.phoenix@seiya.com', password: 'phoenix123')
 
-    condo = FactoryBot.create(:condo, name: 'Teenage Mutant Ninja Turtles')
-    FactoryBot.create(:common_area, name: 'TMNT', description: 'Teenage Mutant Ninja Turtles', fee: 500, condo:)
-    FactoryBot.create(:common_area, name: 'Saint Seiya', description: 'Os Cavaleiros dos zodíacos', fee: 400, condo:)
+    condo = create(:condo, name: 'Teenage Mutant Ninja Turtles')
+    create(:common_area, name: 'TMNT', description: 'Teenage Mutant Ninja Turtles', fee_cents: 500_00,
+                         condo:)
+    create(:common_area, name: 'Saint Seiya', description: 'Os Cavaleiros dos zodíacos', fee_cents: 400_00,
+                         condo:)
 
     login_as admin, scope: :admin
     visit condo_common_areas_path(condo)
@@ -24,16 +26,16 @@ describe 'Admin vê a lista de áreas comuns' do
     expect(page).to have_content 'Áreas comuns do condomínio Teenage Mutant Ninja Turtles'
     expect(page).to have_content 'TMNT'
     expect(page).to have_content 'Teenage Mutant Ninja Turtles'
-    expect(page).to have_content 'R$ 400,00'
+    expect(page).to have_content 'R$400,00'
     expect(page).to have_content 'Saint Seiya'
     expect(page).to have_content 'Os Cavaleiros dos zodíacos'
-    expect(page).to have_content 'R$ 500,00'
+    expect(page).to have_content 'R$500,00'
     expect(page).not_to have_content 'Nenhuma Área Comum cadastrada'
   end
 
   it 'E não existem áreas comuns cadastradas' do
     admin = Admin.create!(email: 'matheus@gmail.com', password: 'admin12345')
-    condo = FactoryBot.create(:condo)
+    condo = create(:condo)
 
     login_as admin, scope: :admin
     visit condo_common_areas_path(condo)
@@ -44,12 +46,12 @@ describe 'Admin vê a lista de áreas comuns' do
   it 'e vê somente as áreas comuns do condomínio selecionado' do
     admin = Admin.create!(email: 'ikki.phoenix@seiya.com', password: 'phoenix123')
 
-    condo = FactoryBot.create(:condo)
-    second_condo = FactoryBot.create(:condo)
-    FactoryBot.create(:common_area, name: 'TMNT', condo:)
-    FactoryBot.create(:common_area, name: 'Saint Seiya', condo:)
-    FactoryBot.create(:common_area, name: 'Naruto', condo: second_condo)
-    FactoryBot.create(:common_area, name: 'Jiraya', condo: second_condo)
+    condo = create(:condo)
+    second_condo = create(:condo)
+    create(:common_area, name: 'TMNT', condo:)
+    create(:common_area, name: 'Saint Seiya', condo:)
+    create(:common_area, name: 'Naruto', condo: second_condo)
+    create(:common_area, name: 'Jiraya', condo: second_condo)
 
     login_as admin, scope: :admin
     visit condo_common_areas_path(condo)
@@ -64,9 +66,9 @@ describe 'Admin vê a lista de áreas comuns' do
     admin = Admin.create!(email: 'ikki.phoenix@seiya.com', password: 'phoenix123')
 
     condo = create(:condo)
-    create(:common_area, name: 'TMNT', fee: 0, condo:)
-    create(:common_area, name: 'Saint Seiya', fee: 400, condo:)
-    create(:common_area, name: 'Naruto Shippuden', fee: 0, condo:)
+    create(:common_area, name: 'TMNT', fee_cents: 0, condo:)
+    create(:common_area, name: 'Saint Seiya', fee_cents: 400, condo:)
+    create(:common_area, name: 'Naruto Shippuden', fee_cents: 0, condo:)
 
     login_as admin, scope: :admin
     visit condo_common_areas_path(condo)
@@ -86,8 +88,8 @@ describe 'Admin vê a lista de áreas comuns' do
     admin = Admin.create!(email: 'ikki.phoenix@seiya.com', password: 'phoenix123')
 
     condo = create(:condo)
-    create(:common_area, name: 'TMNT', fee: 400, condo:)
-    create(:common_area, name: 'Saint Seiya', fee: 500, condo:)
+    create(:common_area, name: 'TMNT', fee_cents: 400_00, condo:)
+    create(:common_area, name: 'Saint Seiya', fee_cents: 500_00, condo:)
 
     login_as admin, scope: :admin
     visit condo_common_areas_path(condo)
@@ -95,8 +97,8 @@ describe 'Admin vê a lista de áreas comuns' do
     click_on 'Voltar'
 
     expect(page).to have_content 'TMNT'
-    expect(page).to have_content 'R$ 400,00'
+    expect(page).to have_content 'R$400,00'
     expect(page).to have_content 'Saint Seiya'
-    expect(page).to have_content 'R$ 500,00'
+    expect(page).to have_content 'R$500,00'
   end
 end

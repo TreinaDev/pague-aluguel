@@ -8,7 +8,7 @@
     <h3><%= @common_area.name%></h3>
     <hr>
     <div class="d-flex justify-content-center align-items-center">
-      <strong class="me-2">Taxa de área comum: <%= @common_area.fee.zero? ? 'Taxa não cadastrada' : number_to_currency(@common_area.fee) %></strong>
+      <strong class="me-2">Taxa de área comum: <%= @common_area.fee_cents.zero? ? 'Taxa não cadastrada' : Money.new(@common_area.fee_cents, 'BRL').format %></strong>
       <%= link_to 'Registrar Taxa', edit_condo_common_area_path(@common_area.condo, @common_area), class:"btn btn-primary" %>
     </div>
     <hr>
@@ -28,7 +28,7 @@
         <div class="card card-body">
           <ul>
             <% @common_area.common_area_fee_histories.each do |history_fee| %>
-              <li>Email: <%= history_fee.user %> | Data: <%= history_fee.created_at.strftime('%d/%m/%Y') %> | Taxa: <%= number_to_currency history_fee.fee %></li>
+              <li>Email: <%= history_fee.user %> | Data: <%= history_fee.created_at.strftime('%d/%m/%Y') %> | Taxa: <%= Money.new(history_fee.fee_cents, 'BRL').format %></li>
             <% end %>
           </ul>
         </div>

@@ -2,7 +2,7 @@ pt-BR:
   activerecord:
     attributes:
       common_area:
-        fee: Taxa de área comum
+        fee_cents: Taxa de área comum
     models:
       common_area:
         one: Área Comum

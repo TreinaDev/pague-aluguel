@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema[7.1].define(version: 2024_06_27_214305) do
+ActiveRecord::Schema[7.1].define(version: 2024_06_28_202418) do
   create_table "admins", force: :cascade do |t|
     t.string "email", default: "", null: false
     t.string "encrypted_password", default: "", null: false
@@ -31,7 +31,7 @@ ActiveRecord::Schema[7.1].define(version: 2024_06_27_214305) do
   end
 
   create_table "common_area_fee_histories", force: :cascade do |t|
-    t.integer "fee"
+    t.integer "fee_cents"
     t.string "user"
     t.integer "common_area_id", null: false
     t.datetime "created_at", null: false
@@ -47,7 +47,7 @@ ActiveRecord::Schema[7.1].define(version: 2024_06_27_214305) do
     t.integer "condo_id", null: false
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
-    t.integer "fee", default: 0
+    t.integer "fee_cents", default: 0
     t.index ["condo_id"], name: "index_common_areas_on_condo_id"
   end
 

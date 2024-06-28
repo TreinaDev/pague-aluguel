@@ -8,17 +8,17 @@ RSpec.describe CommonArea, type: :model do
       common_area = CommonArea.create!(name: 'TMNT', description: 'Teenage Mutant Ninja Turtles', max_capacity: 40,
                                        usage_rules: 'Não lutar no salão', condo:)
 
-      common_area.update(fee: -20)
+      common_area.update(fee_cents: -20)
 
-      expect(common_area.errors[:fee]).to include(' não pode ser negativa.')
+      expect(common_area.errors[:fee_cents]).to include(' não pode ser negativa.')
     end
 
     it 'e deve ser um inteiro' do
-      common_area = CommonArea.new(fee: 0.2)
+      common_area = CommonArea.new(fee_cents: 0.2)
 
       common_area.valid?
 
-      expect(common_area.errors[:fee]).to include('não é um número inteiro')
+      expect(common_area.errors[:fee_cents]).to include('não é um número inteiro')
     end
   end
 end
