@@ -14,11 +14,11 @@ describe 'admin cria taxa fixa' do
 
     condo = create(:condo, name: 'Prédio lindo', city: 'Cidade maravilhosa')
 
-    create(:unit_type, description: 'Apartamento 1 quarto', area: 30,
+    unit_type1 = create(:unit_type, description: 'Apartamento 1 quarto', area: 30,
                        condo:)
-    create(:unit_type, description: 'Apartamento 2 quartos', area: 45,
+    unit_type2 = create(:unit_type, description: 'Apartamento 2 quartos', area: 45,
                        condo:)
-    create(:unit_type, description: 'Apartamento 3 quartos', area: 60,
+    unit_type3 = create(:unit_type, description: 'Apartamento 3 quartos', area: 60,
                        condo:)
 
     formatted_date = 10.days.from_now.to_date
@@ -28,9 +28,9 @@ describe 'admin cria taxa fixa' do
     within 'form' do
       fill_in 'Nome', with: 'Taxa de Condomínio'
       fill_in 'Descrição', with: 'Taxas mensais para manutenção do prédio.'
-      fill_in 'Valor para Apartamento 1 quarto', with: 200
-      fill_in 'Valor para Apartamento 2 quartos', with: 300
-      fill_in 'Valor para Apartamento 3 quartos', with: 500
+      fill_in 'Valor para Apartamento 1 quarto', with: 20000
+      fill_in 'Valor para Apartamento 2 quartos', with: 30000
+      fill_in 'Valor para Apartamento 3 quartos', with: 50000
       select 'Bimestral', from: 'Recorrência'
       fill_in 'Data de Lançamento', with: formatted_date.to_s
       check 'Taxa fixa'
@@ -44,6 +44,9 @@ describe 'admin cria taxa fixa' do
     expect(page).to have_content 'Taxa de Condomínio'
     expect(page).to have_content 'Recorrência: Bimestral'
     expect(page).to have_content "Data de Lançamento: #{I18n.l(formatted_date)}"
+    expect(page).to have_content "Valor para #{unit_type1.description}: R$ 200,00"
+    expect(page).to have_content "Valor para #{unit_type2.description}: R$ 300,00"
+    expect(page).to have_content "Valor para #{unit_type3.description}: R$ 500,00"
     expect(page).to have_content 'Taxa fixa'
     expect(page).to have_content 'Juros de 1% ao dia'
     expect(page).to have_content 'Multa de R$30 por atraso'
@@ -80,7 +83,7 @@ describe 'admin cria taxa fixa' do
     expect(page).to have_content 'Verifique os erros abaixo:'
     expect(page).to have_content 'Nome não pode ficar em branco'
     expect(page).to have_content 'Descrição não pode ficar em branco'
-    expect(page).to have_content 'Valor não pode ficar em branco'
+    expect(page).to have_content 'Valor não é um número'
     expect(page).to have_content 'Data de Lançamento não pode ficar em branco'
     expect(page).to have_content 'Juros ao dia não pode ficar em branco'
     expect(page).to have_content 'Multa por atraso não pode ficar em branco'
@@ -101,9 +104,9 @@ describe 'admin cria taxa fixa' do
     within 'form' do
       fill_in 'Nome', with: 'Taxa de Condomínio'
       fill_in 'Descrição', with: 'Taxas mensais para manutenção do prédio.'
-      fill_in 'Valor para Apartamento 1 quarto', with: 200
-      fill_in 'Valor para Apartamento 2 quartos', with: 300
-      fill_in 'Valor para Apartamento 3 quartos', with: 500
+      fill_in 'Valor para Apartamento 1 quarto', with: 20000
+      fill_in 'Valor para Apartamento 2 quartos', with: 30000
+      fill_in 'Valor para Apartamento 3 quartos', with: 50000
       select 'Semestral', from: 'Recorrência'
       fill_in 'Data de Lançamento', with: formatted_date.to_s
       check 'Taxa fixa'
@@ -116,9 +119,9 @@ describe 'admin cria taxa fixa' do
     expect(page).to have_content 'Data de Lançamento deve ser futura'
     expect(page).to have_field 'Nome', with: 'Taxa de Condomínio'
     expect(page).to have_field 'Descrição', with: 'Taxas mensais para manutenção do prédio.'
-    expect(page).to have_field 'Valor para Apartamento 1 quarto', with: 200
-    expect(page).to have_field 'Valor para Apartamento 2 quartos', with: 300
-    expect(page).to have_field 'Valor para Apartamento 3 quartos', with: 500
+    expect(page).to have_field 'Valor para Apartamento 1 quarto', with: 20000
+    expect(page).to have_field 'Valor para Apartamento 2 quartos', with: 30000
+    expect(page).to have_field 'Valor para Apartamento 3 quartos', with: 50000
     expect(page).to have_checked_field 'Taxa fixa'
     expect(page).to have_field 'Juros ao dia', with: 1
     expect(page).to have_field 'Multa por atraso', with: 30

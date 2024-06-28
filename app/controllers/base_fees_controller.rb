@@ -3,7 +3,6 @@ class BaseFeesController < ApplicationController
 
   def new
     @condo = Condo.find(params[:condo_id])
-    # @unit_types = @condo.unit_types
     @base_fee = BaseFee.new(condo: @condo)
     @values = @base_fee.value_builder
   end
@@ -23,6 +22,7 @@ class BaseFeesController < ApplicationController
   def show
     @base_fee = BaseFee.find(params[:id])
     @condo = @base_fee.condo
+    @values = Value.where(base_fee: @base_fee)
   end
 
   private
@@ -30,6 +30,6 @@ class BaseFeesController < ApplicationController
   def base_fee_params
     params.require(:base_fee).permit(:name, :description, :late_payment, :late_fee,
                                     :fixed, :charge_day, :recurrence,
-                                    values_attributes: [:price, :unit_type_id])
+                                    values_attributes: [:price_cents, :unit_type_id])
   end
 end

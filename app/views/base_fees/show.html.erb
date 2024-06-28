@@ -17,6 +17,15 @@
 
   <div class="row">
     <div class="col-md-6">
+      <% @values.each do |value| %>
+        <strong><%= t('activerecord.values.values_price', unit_type: value.unit_type.description ) %>:</strong>
+        <%= number_to_currency(value.price, locale: :'pt-BR')%><br>
+      <% end %>
+    </div>
+  </div>
+
+  <div class="row">
+    <div class="col-md-6">
       <strong><%= BaseFee.human_attribute_name(:fixed) if @base_fee.fixed %></strong>
     </div>
   </div>

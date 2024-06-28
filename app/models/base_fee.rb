@@ -8,12 +8,12 @@ class BaseFee < ApplicationRecord
   validate :date_is_future?
 
   enum recurrence: {
-    monthly: 0,
-    biweekly: 2,
-    bimonthly: 4,
-    semi_annual: 6,
-    yearly: 8
-  }
+                    monthly: 0,
+                    biweekly: 2,
+                    bimonthly: 4,
+                    semi_annual: 6,
+                    yearly: 8
+                  }
 
   def value_builder
     @values = []

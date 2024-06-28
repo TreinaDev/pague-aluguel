@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema[7.1].define(version: 2024_06_27_161441) do
+ActiveRecord::Schema[7.1].define(version: 2024_06_28_202602) do
   create_table "admins", force: :cascade do |t|
     t.string "email", default: "", null: false
     t.string "encrypted_password", default: "", null: false
@@ -109,6 +109,8 @@ ActiveRecord::Schema[7.1].define(version: 2024_06_27_161441) do
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
     t.integer "price"
+    t.integer "price_cents", default: 0, null: false
+    t.string "price_currency", default: "USD", null: false
     t.index ["base_fee_id"], name: "index_values_on_base_fee_id"
     t.index ["unit_type_id"], name: "index_values_on_unit_type_id"
   end

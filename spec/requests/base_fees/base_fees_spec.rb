@@ -16,10 +16,10 @@ describe 'Admin creates a base fee' do
                                                           condo_id: condo.id,
                                                           values_attributes: {
                                                             '0': {
-                                                              price: 100,
+                                                              price_cents: 100,
                                                               unit_type_id: unit_type_one.id},
                                                             '1': {
-                                                              price: 100,
+                                                              price_cents: 100,
                                                               unit_type_id: unit_type_two.id},
                                                             }}})
 
