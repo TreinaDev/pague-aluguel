@@ -12,7 +12,7 @@ describe 'Admin vê a lista de áreas comuns' do
   end
 
   it 'com sucesso' do
-    admin = Admin.create!(email: 'ikki.phoenix@seiya.com', password: 'phoenix123')
+    admin = create(:admin, email: 'ikki.phoenix@seiya.com', password: 'phoenix123')
 
     condo = create(:condo, name: 'Teenage Mutant Ninja Turtles')
     create(:common_area, name: 'TMNT', description: 'Teenage Mutant Ninja Turtles', fee_cents: 500_00,
@@ -34,7 +34,7 @@ describe 'Admin vê a lista de áreas comuns' do
   end
 
   it 'E não existem áreas comuns cadastradas' do
-    admin = Admin.create!(email: 'matheus@gmail.com', password: 'admin12345')
+    admin = create(:admin, email: 'matheus@gmail.com', password: 'admin12345')
     condo = create(:condo)
 
     login_as admin, scope: :admin
@@ -44,7 +44,7 @@ describe 'Admin vê a lista de áreas comuns' do
   end
 
   it 'e vê somente as áreas comuns do condomínio selecionado' do
-    admin = Admin.create!(email: 'ikki.phoenix@seiya.com', password: 'phoenix123')
+    admin = create(:admin)
 
     condo = create(:condo)
     second_condo = create(:condo)
@@ -63,7 +63,7 @@ describe 'Admin vê a lista de áreas comuns' do
   end
 
   it 'e vê áreas comuns sem taxa cadastradas' do
-    admin = Admin.create!(email: 'ikki.phoenix@seiya.com', password: 'phoenix123')
+    admin = create(:admin)
 
     condo = create(:condo)
     create(:common_area, name: 'TMNT', fee_cents: 0, condo:)
@@ -85,7 +85,7 @@ describe 'Admin vê a lista de áreas comuns' do
   end
 
   it 'e acessa uma área comum e volta para a lista' do
-    admin = Admin.create!(email: 'ikki.phoenix@seiya.com', password: 'phoenix123')
+    admin = create(:admin)
 
     condo = create(:condo)
     create(:common_area, name: 'TMNT', fee_cents: 400_00, condo:)

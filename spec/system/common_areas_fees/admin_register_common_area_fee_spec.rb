@@ -2,12 +2,12 @@ require 'rails_helper'
 
 describe 'Admin registra uma taxa de área comum' do
   it 'com sucesso a partir da listagem de área comum' do
-    admin = Admin.create!(email: 'ikki.phoenix@seiya.com', password: 'phoenix123')
+    admin = create(:admin)
 
-    condo = FactoryBot.create(:condo)
+    condo = create(:condo)
 
-    common_area = FactoryBot.create(:common_area, name: 'TMNT', condo:)
-    FactoryBot.create(:common_area, condo:)
+    common_area = create(:common_area, name: 'TMNT', condo:)
+    create(:common_area, condo:)
 
     login_as admin, scope: :admin
     visit condo_common_areas_path(condo)
@@ -17,6 +17,7 @@ describe 'Admin registra uma taxa de área comum' do
     click_on 'Registrar Taxa'
     fill_in 'Taxa de área comum', with: 200_50
     click_on 'Atualizar'
+    sleep 0.2
 
     expect(current_path).to eq condo_common_area_path(condo, common_area)
     expect(page).to have_content 'Taxa de área comum: R$200,50'
@@ -24,9 +25,9 @@ describe 'Admin registra uma taxa de área comum' do
   end
 
   it 'se estiver autenticado' do
-    condo = FactoryBot.create(:condo)
+    condo = create(:condo)
 
-    common_area = FactoryBot.create(:common_area, condo:)
+    common_area = create(:common_area, condo:)
 
     visit edit_condo_common_area_path(condo, common_area)
 
@@ -34,11 +35,11 @@ describe 'Admin registra uma taxa de área comum' do
   end
 
   it 'e a taxa é negativa' do
-    admin = Admin.create!(email: 'ikki.phoenix@seiya.com', password: 'phoenix123')
+    admin = create(:admin)
 
-    condo = FactoryBot.create(:condo)
+    condo = create(:condo)
 
-    FactoryBot.create(:common_area, name: 'TMNT', condo:)
+    create(:common_area, name: 'TMNT', condo:)
 
     login_as admin, scope: :admin
     visit condo_common_areas_path(condo)
@@ -55,7 +56,7 @@ describe 'Admin registra uma taxa de área comum' do
   end
 
   it 'e cancela o registro e volta para show' do
-    admin = Admin.create!(email: 'ikki.phoenix@seiya.com', password: 'phoenix123')
+    admin = create(:admin)
 
     condo = create(:condo)
 

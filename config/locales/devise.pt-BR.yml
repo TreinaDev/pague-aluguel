@@ -16,7 +16,7 @@ pt-BR:
         last_sign_in_ip: Último IP de acesso
         locked_at: Bloqueado em
         password: Senha
-        password_confirmation: Confirme sua senha
+        password_confirmation: Confirme a senha
         remember_created_at: Lembrar criado em
         remember_me: Lembre-se de mim
         reset_password_sent_at: Resetar senha enviado em

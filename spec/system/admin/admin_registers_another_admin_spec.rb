@@ -18,6 +18,7 @@ describe 'admin registra outro admin' do
     fill_in 'CPF', with: CPF.generate
     attach_file 'Foto', Rails.root.join('spec/support/images/reuri.jpeg')
     click_on 'Registrar'
+    sleep 0.2
 
     expect(current_path).to eq admins_path
     expect(page).to have_content 'Administrador registrado com sucesso'

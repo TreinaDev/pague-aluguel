@@ -2,7 +2,7 @@ require 'rails_helper'
 
 describe 'Admin vê área comum' do
   it 'com sucesso' do
-    admin = Admin.create!(email: 'ikki.phoenix@seiya.com', password: 'phoenix123')
+    admin = create(:admin, email: 'ikki.phoenix@seiya.com', password: 'phoenix123')
     condo = FactoryBot.create(:condo)
     CommonArea.create!(name: 'TMNT', description: 'Teenage Mutant Ninja Turtles', max_capacity: 40,
                        usage_rules: 'Não lutar no salão', fee_cents: 200_00, condo:)
@@ -21,7 +21,7 @@ describe 'Admin vê área comum' do
   end
 
   it 'e taxa não está cadastrada' do
-    admin = Admin.create!(email: 'ikki.phoenix@seiya.com', password: 'phoenix123')
+    admin = create(:admin, email: 'ikki.phoenix@seiya.com', password: 'phoenix123')
     condo = FactoryBot.create(:condo)
     common_area = FactoryBot.create(:common_area, fee_cents: 0, condo:)
 
@@ -32,7 +32,7 @@ describe 'Admin vê área comum' do
   end
 
   it 'e vê histórico de taxas' do
-    admin = Admin.create!(email: 'ikki.phoenix@seiya.com', password: 'phoenix123')
+    admin = create(:admin, email: 'ikki.phoenix@seiya.com', password: 'phoenix123')
     condo = FactoryBot.create(:condo)
     common_area = FactoryBot.create(:common_area, fee_cents: 0, condo:)
 
@@ -56,7 +56,7 @@ describe 'Admin vê área comum' do
   end
 
   it 'e o histórico de taxas não existe' do
-    admin = Admin.create!(email: 'ikki.phoenix@seiya.com', password: 'phoenix123')
+    admin = create(:admin, email: 'ikki.phoenix@seiya.com', password: 'phoenix123')
     condo = FactoryBot.create(:condo)
     common_area = FactoryBot.create(:common_area, fee_cents: 0, condo:)
 
