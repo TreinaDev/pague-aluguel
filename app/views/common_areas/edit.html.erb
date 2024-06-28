@@ -16,13 +16,14 @@
     
   </div>
 <% end %>
-
-<div class="container text-center">
-  <%= form_with model: [@common_area.condo, @common_area] do |f| %>
-    <div>
-      <%= f.label :fee, class: "form-label" %>
-      <%= f.number_field :fee, class: "form-control" %>
-    </div>
-    <%= f.submit "Atualizar" %>
-  <% end %>
+<div class="container text-center p-4 shadow rounded-4 col-4">
+  <div class="">
+    <%= form_with model: [@common_area.condo, @common_area] do |f| %>
+      <div>
+        <%= f.label :fee, class: "form-label" %>
+        <%= f.number_field :fee, class: "form-control" %>
+      </div>
+      <%= f.submit "Atualizar", class:"btn btn-primary mt-3" %>
+    <% end %>
+  </div>
 </div>
