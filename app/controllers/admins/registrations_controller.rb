@@ -61,7 +61,7 @@ class Admins::RegistrationsController < Devise::RegistrationsController
   end
 
   def redirect_if_not_logged_in
-    redirect_to new_admin_session_path, notice: t('errors.messages.must_be_logged_in') unless admin_signed_in?
+    redirect_to new_admin_session_path, notice: I18n.t('errors.messages.must_be_logged_in') unless admin_signed_in?
   end
 
   def after_sign_up_path_for(*)
@@ -70,10 +70,6 @@ class Admins::RegistrationsController < Devise::RegistrationsController
 
   def after_update_path_for(*)
     admin_path(current_admin)
-  end
-
-  def set_admin
-    @admin = Admin.find(params[:id])
   end
 
   # The path used after sign up for inactive accounts.
