@@ -2,7 +2,7 @@ require 'rails_helper'
 
 describe 'Admin tries to create a shared fee' do
   it 'successfully' do
-    admin = Admin.create!(email: 'admin@email.com', password: '123456')
+    admin = FactoryBot.create(:admin, first_name: 'Fulano', last_name: 'Da Costa')
     condominium = Condo.create!(name: 'Condo Test', city: 'City Test')
     unit_type_one = FactoryBot.create(:unit_type, condo: condominium, ideal_fraction: 0.04)
     unit_type_two = FactoryBot.create(:unit_type, condo: condominium, ideal_fraction: 0.06)
@@ -27,7 +27,7 @@ describe 'Admin tries to create a shared fee' do
   end
 
   it 'and is not authenticated' do
-    Admin.create!(email: 'admin@email.com', password: '123456')
+    FactoryBot.create(:admin, first_name: 'Fulano', last_name: 'Da Costa')
 
     visit new_shared_fee_path
 
@@ -36,7 +36,7 @@ describe 'Admin tries to create a shared fee' do
   end
 
   it 'and must fill in all form fields' do
-    admin = Admin.create!(email: 'admin@email.com', password: '123456')
+    admin = FactoryBot.create(:admin, first_name: 'Fulano', last_name: 'Da Costa')
     condominium = Condo.create!(name: 'Condo Test', city: 'City Test')
     unit_type_one = FactoryBot.create(:unit_type, condo: condominium, ideal_fraction: 0.04)
     unit_type_two = FactoryBot.create(:unit_type, condo: condominium, ideal_fraction: 0.06)
@@ -56,7 +56,7 @@ describe 'Admin tries to create a shared fee' do
   end
 
   it 'and release more than one shared fee' do
-    admin = Admin.create!(email: 'admin@email.com', password: '123456')
+    admin = FactoryBot.create(:admin, first_name: 'Fulano', last_name: 'Da Costa')
     condominium = Condo.create!(name: 'Condo Test', city: 'City Test')
     unit_type_one = FactoryBot.create(:unit_type, condo: condominium, ideal_fraction: 0.04)
     unit_type_two = FactoryBot.create(:unit_type, condo: condominium, ideal_fraction: 0.06)
