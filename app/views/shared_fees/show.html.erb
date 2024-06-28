@@ -15,7 +15,7 @@
 
   <div class="row">
     <div class="col-md-6">
-      <strong><%= SharedFee.human_attribute_name(:issue_date) %>:</strong> <%= @shared_fee.issue_date %>
+      <strong><%= SharedFee.human_attribute_name(:issue_date) %>:</strong> <%= I18n.l(@shared_fee.issue_date) %>
     </div>
   </div>
 

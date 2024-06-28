@@ -1,0 +1,25 @@
+<div class="container mt-4">
+  <h2>Shared Fees</h2>
+  <% if @shared_fees.any? %>
+    <table class="table">
+      <thead>
+        <tr>
+          <th scope="col"><%= SharedFee.human_attribute_name(:description) %></th>
+          <th scope="col"><%= SharedFee.human_attribute_name(:issue_date) %></th>
+          <th scope="col"><%= SharedFee.human_attribute_name(:total_value) %></th>
+        </tr>
+      </thead>
+      <tbody>
+        <% @shared_fees.each do |shared_fee| %>
+          <tr>
+            <td><%= link_to "#{shared_fee.description}", shared_fee_path(shared_fee) %></td>
+            <td><%= I18n.l(shared_fee.issue_date) %></td>
+            <td><%= shared_fee.total_value.format %></td>
+          </tr>
+        <% end %>
+      </tbody>
+    </table>
+  <% else %>
+    <p>No shared fees found.</p>
+  <% end %>
+</div>

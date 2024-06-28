@@ -1,7 +1,7 @@
 require 'rails_helper'
 
-describe 'Admin creates a shared fee' do
-  it 'successfully' do
+describe 'Admin cria conta compartilhada' do
+  it 'com sucesso' do
     admin = Admin.create!(email: 'admin@email.com', password: '123456')
     condominium = Condo.create!(name: 'Condo Test', city: 'City Test')
     unit_type_one = FactoryBot.create(:unit_type, condo: condominium, ideal_fraction: 0.04)
@@ -12,7 +12,7 @@ describe 'Admin creates a shared fee' do
     login_as admin, scope: :admin
     post(shared_fees_path, params: { shared_fee: { description: 'Descrição',
                                                    issue_date: 10.days.from_now.to_date,
-                                                   total_value_cents: 1000,
+                                                   total_value: 1000,
                                                    condo_id: condominium.id } })
 
     expect(SharedFee.count).to eq 1
@@ -20,10 +20,10 @@ describe 'Admin creates a shared fee' do
     expect(response).to redirect_to(shared_fee_path(SharedFee.last.id.to_s))
     expect(SharedFee.last.description).to eq 'Descrição'
     expect(SharedFee.last.issue_date).to eq 10.days.from_now.to_date
-    expect(SharedFee.last.total_value_cents).to eq 1000
+    expect(SharedFee.last.total_value_cents).to eq 100000
   end
 
-  it 'and is not authenticated' do
+  it 'e não está autenticado' do
     Admin.create!(email: 'admin@email.com', password: '123456')
     condominium = Condo.create!(name: 'Condo Test', city: 'City Test')
     unit_type_one = FactoryBot.create(:unit_type, condo: condominium, ideal_fraction: 0.04)

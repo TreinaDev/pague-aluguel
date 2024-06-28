@@ -1,7 +1,7 @@
 require 'rails_helper'
 
-describe 'Admin access a list of all registered condos' do
-  it 'successfully' do
+describe 'Admin accessa a lista de todos condos registrados' do
+  it 'com sucesso' do
     admin = create(:admin)
     Condo.create!(name: 'Condomínio Vila das Flores', city: 'São Paulo')
     Condo.create!(name: 'Residencial Jardim Europa', city: 'Maceió')
@@ -23,12 +23,12 @@ describe 'Admin access a list of all registered condos' do
     expect(current_path).to eq condos_path
   end
 
-  it 'and must be authenticated' do
+  it 'e deve estar autenticado' do
     create(:condo)
 
     visit condos_path
 
-    expect(page).to have_content('Para continuar, faça login ou registre-se.')
+    expect(page).to have_content 'Para continuar, faça login ou registre-se.'
     expect(current_path).to eq new_admin_session_path
   end
 end

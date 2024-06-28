@@ -1,7 +1,7 @@
 require 'rails_helper'
 
-describe 'Admin tries to create a shared fee' do
-  it 'successfully' do
+describe 'Admin lança conta compartilhada' do
+  it 'com sucesso' do
     admin = Admin.create!(email: 'admin@email.com', password: '123456')
     condominium = Condo.create!(name: 'Condo Test', city: 'City Test')
     unit_type_one = FactoryBot.create(:unit_type, condo: condominium, ideal_fraction: 0.04)
@@ -15,18 +15,18 @@ describe 'Admin tries to create a shared fee' do
     select 'Condo Test', from: 'Condomínio'
     fill_in 'Descrição', with: 'Conta de Luz'
     fill_in 'Data de Emissão', with: 10.days.from_now.to_date
-    fill_in 'Valor Total', with: 10_000_00
+    fill_in 'Valor Total', with: 10_000
     click_on 'Registrar'
 
     expect(page).to have_content('Conta Compartilhada lançada com sucesso!')
     expect(current_path).to eq(shared_fee_path(SharedFee.last))
     expect(page).to have_content('Condomínio: Condo Test')
     expect(page).to have_content('Descrição: Conta de Luz')
-    expect(page).to have_content("Data de Emissão: #{10.days.from_now.to_date}")
+    expect(page).to have_content("Data de Emissão: #{I18n.l(10.days.from_now.to_date)}")
     expect(page).to have_content('Valor Total: R$10.000,00')
   end
 
-  it 'and is not authenticated' do
+  it 'e não está autenticado' do
     Admin.create!(email: 'admin@email.com', password: '123456')
 
     visit new_shared_fee_path
@@ -35,7 +35,7 @@ describe 'Admin tries to create a shared fee' do
     expect(current_path).to eq new_admin_session_path
   end
 
-  it 'and must fill in all form fields' do
+  it 'e deve preencher todos os campos' do
     admin = Admin.create!(email: 'admin@email.com', password: '123456')
     condominium = Condo.create!(name: 'Condo Test', city: 'City Test')
     unit_type_one = FactoryBot.create(:unit_type, condo: condominium, ideal_fraction: 0.04)
@@ -52,10 +52,10 @@ describe 'Admin tries to create a shared fee' do
     expect(page).to have_content('Não foi possível lançar a conta compartilhada.')
     expect(page).to have_content('Descrição não pode ficar em branco')
     expect(page).to have_content('Data de Emissão não pode ficar em branco')
-    expect(page).to have_content('Valor Total não pode ficar em branco')
+    expect(page).to have_content('Valor Total não é um número')
   end
 
-  it 'and release more than one shared fee' do
+  it 'e lança mais de uma conta' do
     admin = Admin.create!(email: 'admin@email.com', password: '123456')
     condominium = Condo.create!(name: 'Condo Test', city: 'City Test')
     unit_type_one = FactoryBot.create(:unit_type, condo: condominium, ideal_fraction: 0.04)
@@ -65,7 +65,7 @@ describe 'Admin tries to create a shared fee' do
     unit_one = Unit.create!(area: 40, floor: 1, number: 101, unit_type: unit_type_one)
     unit_two = Unit.create!(area: 60, floor: 2, number: 202, unit_type: unit_type_two)
     conta_de_luz = SharedFee.create!(description: 'Conta de Luz', issue_date: 10.days.from_now.to_date,
-                                     total_value_cents: 10_000_00, condo: condominium)
+                                     total_value: 10_000, condo: condominium)
 
     login_as admin, scope: :admin
     visit root_path
@@ -73,7 +73,7 @@ describe 'Admin tries to create a shared fee' do
     select 'Condo Test', from: 'Condomínio'
     fill_in 'Descrição', with: 'Conta de Água'
     fill_in 'Data de Emissão', with: 10.days.from_now.to_date
-    fill_in 'Valor Total', with: 5_000_00
+    fill_in 'Valor Total', with: 5_000
     click_on 'Registrar'
 
     conta_de_luz_fraction_one = unit_one.shared_fee_fractions.find_by(shared_fee: conta_de_luz)

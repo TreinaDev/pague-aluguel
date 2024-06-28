@@ -6,5 +6,5 @@ Rails.application.routes.draw do
 
   resources :condos, only: [:index, :show]
 
-  resources :shared_fees, only: [:show, :new, :create]
+  resources :shared_fees, only: [:index, :show, :new, :create]
 end
