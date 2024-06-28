@@ -1,0 +1,44 @@
+<% if @shared_fee.errors.any? %>
+  <div class="alert alert-danger" role="alert">
+    <strong>Por favor, corrija os seguintes erros:</strong>
+    <ul>
+      <% @shared_fee.errors.full_messages.each do |msg| %>
+        <li><%= msg %></li>
+      <% end %>
+    </ul>
+  </div>
+<% end %>
+
+<div class="container">
+  <h1>Lançar nova Conta Compartilhada</h1>
+
+  <div class="row">
+    <div class="col-md-6">
+      <%= form_with model: @shared_fee, local: true do |f| %> 
+        <div class="form-group">
+          <%= f.label :condo_id %>
+          <%= f.collection_select :condo_id, @condos, :id, :name, { prompt: "Selecione um condomínio" }, class: "form-control" %>
+        </div>
+
+        <div class="form-group">
+          <%= f.label :description %>
+          <%= f.text_field :description, class: "form-control" %>
+        </div>
+
+        <div class="form-group">
+          <%= f.label :total_value_cents %>
+          <%= f.number_field :total_value_cents, class: "form-control" %>
+        </div>
+
+        <div class="form-group">
+          <%= f.label :issue_date %>
+          <%= f.date_field :issue_date, class: "form-control" %>
+        </div>
+
+        <div class="form-group">
+          <%= f.submit 'Registrar', class: "btn btn-primary" %>
+        </div>
+      <% end %>
+    </div>
+  </div>
+</div>
