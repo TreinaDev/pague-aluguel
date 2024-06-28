@@ -1,7 +1,7 @@
 class BaseFee < ApplicationRecord
   belongs_to :condo
   has_many :values
-  has_many :unit_type, through: :values
+  has_many :unit_types, through: :values
 
   accepts_nested_attributes_for :values
   validates :name, :description, :late_payment, :late_fee, :charge_day, presence: true

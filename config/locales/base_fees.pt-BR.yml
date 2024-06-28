@@ -1,6 +1,6 @@
 pt-BR:
   activerecord:
-    model:
+    models:
       base_fee:
         one: Taxa Fixa
         other: Taxas Fixas
@@ -20,18 +20,14 @@ pt-BR:
           bimonthly: Bimestral
           semi_annual: Semestral
           yearly: Anual
-      value:
-        price: Preço
+      values:
+        price: Valor
   base_fee:
     monthly: Mensal
     biweekly: Quinzenal
     bimonthly: Bimestral
     semi_annual: Semestral
     yearly: Anual
-    # any_site: 'Salão de festas da empresa ou salão de terceiros'
-  base_fees:
-    # show:
-    #   error: Este tipo evento não está disponível no momento.
   views:
     new:
       label_price: "Valor para %{name}"
@@ -43,3 +39,5 @@ pt-BR:
       yearly: Anual
       late_payment: "Juros de %{number}% ao dia"
       late_fee: "Multa de R$%{number} por atraso"
+
+
