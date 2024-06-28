@@ -53,4 +53,22 @@ describe 'Admin registra uma taxa de área comum' do
     expect(page).to have_content 'Atente-se aos erros abaixo:'
     expect(page).to have_content 'Taxa de área comum não pode ser negativa.'
   end
+
+  it 'e cancela o registro e volta para show' do
+    admin = Admin.create!(email: 'ikki.phoenix@seiya.com', password: 'phoenix123')
+
+    condo = create(:condo)
+
+    common_area = create(:common_area, name: 'TMNT', condo:)
+
+    login_as admin, scope: :admin
+    visit condo_common_areas_path(condo)
+    within 'div#area-0' do
+      click_on 'TMNT'
+    end
+    click_on 'Registrar Taxa'
+    click_on 'Cancelar'
+
+    expect(current_path).to eq condo_common_area_path(condo, common_area)
+  end
 end

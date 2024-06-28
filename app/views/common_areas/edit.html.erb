@@ -1,7 +1,6 @@
 <div>
-  <h2 class="container text-center">Criar Taxa</h2>
+  <h2 class="container text-center">Criar Taxa para <%= @common_area.name %></h2>
 </div>
-
 
 <% if @common_area.errors.any? %>
   <div class="container text-center">
@@ -23,7 +22,10 @@
         <%= f.label :fee, class: "form-label" %>
         <%= f.number_field :fee, class: "form-control" %>
       </div>
-      <%= f.submit "Atualizar", class:"btn btn-primary mt-3" %>
+      <div class="mt-3">
+        <%= f.submit "Atualizar", class:"btn btn-primary me-3" %>
+        <%= link_to 'Cancelar', condo_common_area_path(@common_area.condo, @common_area), class:"btn btn-danger" %>
+      </div>
     <% end %>
   </div>
 </div>

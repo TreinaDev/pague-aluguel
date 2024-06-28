@@ -14,13 +14,14 @@ describe 'Admin vê a lista de áreas comuns' do
   it 'com sucesso' do
     admin = Admin.create!(email: 'ikki.phoenix@seiya.com', password: 'phoenix123')
 
-    condo = FactoryBot.create(:condo)
+    condo = FactoryBot.create(:condo, name: 'Teenage Mutant Ninja Turtles')
     FactoryBot.create(:common_area, name: 'TMNT', description: 'Teenage Mutant Ninja Turtles', fee: 500, condo:)
     FactoryBot.create(:common_area, name: 'Saint Seiya', description: 'Os Cavaleiros dos zodíacos', fee: 400, condo:)
 
     login_as admin, scope: :admin
     visit condo_common_areas_path(condo)
 
+    expect(page).to have_content 'Áreas comuns do condomínio Teenage Mutant Ninja Turtles'
     expect(page).to have_content 'TMNT'
     expect(page).to have_content 'Teenage Mutant Ninja Turtles'
     expect(page).to have_content 'R$ 400,00'
@@ -62,10 +63,10 @@ describe 'Admin vê a lista de áreas comuns' do
   it 'e vê áreas comuns sem taxa cadastradas' do
     admin = Admin.create!(email: 'ikki.phoenix@seiya.com', password: 'phoenix123')
 
-    condo = FactoryBot.create(:condo)
-    FactoryBot.create(:common_area, name: 'TMNT', fee: 0, condo:)
-    FactoryBot.create(:common_area, name: 'Saint Seiya', fee: 400, condo:)
-    FactoryBot.create(:common_area, name: 'Naruto Shippuden', fee: 0, condo:)
+    condo = create(:condo)
+    create(:common_area, name: 'TMNT', fee: 0, condo:)
+    create(:common_area, name: 'Saint Seiya', fee: 400, condo:)
+    create(:common_area, name: 'Naruto Shippuden', fee: 0, condo:)
 
     login_as admin, scope: :admin
     visit condo_common_areas_path(condo)
@@ -79,5 +80,23 @@ describe 'Admin vê a lista de áreas comuns' do
     within 'div#area-2' do
       expect(page).to have_content 'Taxa não cadastrada'
     end
+  end
+
+  it 'e acessa uma área comum e volta para a lista' do
+    admin = Admin.create!(email: 'ikki.phoenix@seiya.com', password: 'phoenix123')
+
+    condo = create(:condo)
+    create(:common_area, name: 'TMNT', fee: 400, condo:)
+    create(:common_area, name: 'Saint Seiya', fee: 500, condo:)
+
+    login_as admin, scope: :admin
+    visit condo_common_areas_path(condo)
+    click_on 'TMNT'
+    click_on 'Voltar'
+
+    expect(page).to have_content 'TMNT'
+    expect(page).to have_content 'R$ 400,00'
+    expect(page).to have_content 'Saint Seiya'
+    expect(page).to have_content 'R$ 500,00'
   end
 end

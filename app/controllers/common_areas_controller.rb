@@ -3,8 +3,8 @@ class CommonAreasController < ApplicationController
   before_action :find_common_area, only: %i[edit show update]
 
   def index
-    condo = Condo.find(params[:condo_id])
-    @common_areas = condo.common_areas
+    @condo = Condo.find(params[:condo_id])
+    @common_areas = @condo.common_areas
   end
 
   def show; end

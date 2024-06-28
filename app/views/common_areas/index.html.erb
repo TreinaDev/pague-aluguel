@@ -1,25 +1,31 @@
 <div class="container d-flex justify-content-center">
   
-  <% if @common_areas.present? %>
-    <div class="container col-5 mt-5">
-      <% @common_areas.each_with_index do |area, index| %>
-        <div id="<%= "area-#{index}"%>" class="mb-4">
-          <%= link_to condo_common_area_path(area.condo, area), class: "link-container d-flex justify-content-center", style:"text-decoration:none;" do %>
-            <div class="rounded-4 shadow p-4 col-12"  >
-              <div class="d-flex justify-content-between mb-3">
-                <h3 class="align-self-center"><%= area.name %></h3>
-                <p class="align-self-center mb-0">Taxa de uso: <strong><%= area.fee.zero? ? "Taxa não cadastrada" : number_to_currency(area.fee) %></strong></p>
+  <div class="container text-center">
+    <h2>Áreas comuns do condomínio <%= @condo.name %></h2>
+
+    <% if @common_areas.present? %>
+      <div class="container col-7 mt-5">
+
+        <% @common_areas.each_with_index do |area, index| %>
+          <div id="<%= "area-#{index}"%>" class="mb-4">
+            <%= link_to condo_common_area_path(area.condo, area), class: "link-container d-flex justify-content-center", style:"text-decoration:none;" do %>
+              <div class="rounded-4 shadow p-4 col-12"  >
+                <div class="d-flex justify-content-between mb-3">
+                  <h3 class="align-self-center"><%= area.name %></h3>
+                  <p class="align-self-center mb-0">Taxa de uso: <strong><%= area.fee.zero? ? "Taxa não cadastrada" : number_to_currency(area.fee) %></strong></p>
+                </div>
+                <hr>
+                <div class="text-center">
+                  <span class="mb-0"><%= area.description %></span>
+                </div>
               </div>
-              <hr>
-              <div class="text-center">
-                <span class="mb-0"><%= area.description %></span>
-              </div>
-            </div>
-          <% end %>
-        </div>
-      <% end %>
-    </div>
-  <% else %>
+            <% end %>
+          </div>
+        <% end %>
+
+      </div>
+    <% else %>
+  </div>
     
     <div class="mt-4 container text-center">
       <p>Nenhuma Área Comum cadastrada</p>
