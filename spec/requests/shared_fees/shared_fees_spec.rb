@@ -26,7 +26,7 @@ describe 'Admin cria uma nova conta compartilhada' do
     expect(response).to redirect_to(shared_fee_path(SharedFee.last.id.to_s))
     expect(SharedFee.last.description).to eq 'Descrição'
     expect(SharedFee.last.issue_date).to eq 10.days.from_now.to_date
-    expect(SharedFee.last.total_value_cents).to eq 100000
+    expect(SharedFee.last.total_value_cents).to eq 100_000
   end
 
   it 'e não está autenticado' do

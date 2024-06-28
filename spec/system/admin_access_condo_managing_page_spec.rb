@@ -19,7 +19,7 @@ describe 'Administrador acessa página do condomninío' do
   end
 
   it 'e vê lista de contas compartilhadas' do
-    admin = Admin.create!(email: 'admin@email.com', password: '123456')
+    admin = FactoryBot.create(:admin, first_name: 'Fulano', last_name: 'Da Costa')
     condominium = Condo.create!(name: 'Edifício Monte Verde', city: 'Recife')
     condominium_two = Condo.create!(name: 'Condomínio Lagoa Serena', city: 'Caxias do Sul')
     unit_type = FactoryBot.create(:unit_type, condo: condominium, ideal_fraction: 0.1)
@@ -49,7 +49,7 @@ describe 'Administrador acessa página do condomninío' do
   end
 
   it 'e acessa a página de uma conta compartilhada na lista' do
-    admin = Admin.create!(email: 'admin@email.com', password: '123456')
+    admin = FactoryBot.create(:admin, first_name: 'Fulano', last_name: 'Da Costa')
     condominium = Condo.create!(name: 'Edifício Monte Verde', city: 'Recife')
     condominium_two = Condo.create!(name: 'Condomínio Lagoa Serena', city: 'Caxias do Sul')
     unit_type = FactoryBot.create(:unit_type, condo: condominium, ideal_fraction: 0.1)
