@@ -22,6 +22,12 @@ pt-BR:
           yearly: Anual
       values:
         price: Valor
+    errors:
+      models:
+        base_fee:
+          attributes:
+            charge_day:
+              future_date: deve ser futura
   base_fee:
     monthly: Mensal
     biweekly: Quinzenal
