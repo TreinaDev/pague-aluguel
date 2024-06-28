@@ -3,6 +3,7 @@
     <%= link_to "Home", root_path, class: "navbar-brand" %>
 
     <% if admin_signed_in? %>
+      <%= link_to 'Lançar Conta Compartilhada', new_shared_fee_path, class: "nav-link" %>
       <%= link_to "Admins", admins_path, class: "nav-link" %>
     <% end %>
 
