@@ -1,45 +1,44 @@
-<div class="container">
-  <h2><%= @base_fee.name %></h2>
+<div class="container text-center mt-4">
+  <div class="container shadow rounded-4 p-4 col-6">
+    <h2><%= @base_fee.name %></h2>
 
-  <div class="row">
-    <div class="col-md-6">
-      <strong><%= BaseFee.human_attribute_name(:recurrence) %>:</strong>
-      <%= I18n.t("activerecord.attributes.base_fee.enum_recurrence.#{@base_fee.recurrence}") %>
-    </div>
-  </div>
+    <div class="d-flex flex-column justify-content-center align-items-center">
+      <div class="row d-flex flex-column">
+        <strong><%= BaseFee.human_attribute_name(:recurrence) %>:</strong>
+        <%= I18n.t("activerecord.attributes.base_fee.enum_recurrence.#{@base_fee.recurrence}") %>
+      </div>
 
-  <div class="row">
-    <div class="col-md-6">
-      <strong><%= BaseFee.human_attribute_name(:charge_day) %>:</strong>
-      <%= I18n.localize(@base_fee.charge_day.to_date)%>
-    </div>
-  </div>
+            <div class="row d-flex flex-column">
+        <strong><%= BaseFee.human_attribute_name(:description) %>:</strong>
+        <%= @base_fee.description %>
+      </div>
 
-  <div class="row">
-    <div class="col-md-6">
+      <div class="row d-flex flex-column">
+        <strong><%= BaseFee.human_attribute_name(:charge_day) %>:</strong>
+        <%= I18n.localize(@base_fee.charge_day.to_date)%>
+      </div>
+
       <% @values.each do |value| %>
-        <strong><%= t('activerecord.values.values_price', unit_type: value.unit_type.description ) %>:</strong>
-        <%= number_to_currency(value.price, locale: :'pt-BR')%><br>
+        <div class="row d-flex flex-column">
+          <strong><%= t('activerecord.values.values_price', unit_type: value.unit_type.description ) %>:</strong>
+          <%= number_to_currency(value.price, locale: :'pt-BR')%>
+        </div>
       <% end %>
-    </div>
-  </div>
 
-  <div class="row">
-    <div class="col-md-6">
-      <strong><%= BaseFee.human_attribute_name(:fixed) if @base_fee.fixed %></strong>
-    </div>
-  </div>
+      <div class="row d-flex flex-column">
+        <strong><%= BaseFee.human_attribute_name(:fixed) if @base_fee.fixed %></strong>
+      </div>
 
-  <div class="row">
-    <div class="col-md-6">
-      <strong><%= t('views.show.late_payment', number: @base_fee.late_payment) %></strong>
-    </div>
-  </div>
+      <div class="row d-flex flex-column">
+        <strong><%= t('views.show.late_payment', number: @base_fee.late_payment) %></strong>
+      </div>
 
-  <div class="row">
-    <div class="col-md-6">
-      <strong><%= t('views.show.late_fee', number: @base_fee.late_fee) %></strong>
+      <div class="row d-flex flex-column">
+        <strong><%= t('views.show.late_fee', number: @base_fee.late_fee) %></strong>
+      </div>
     </div>
   </div>
+  <hr>
+  <%= link_to t('helpers.buttons.back'), root_path, class: "btn btn-secondary" %>
 </div>
 

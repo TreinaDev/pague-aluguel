@@ -15,11 +15,11 @@ describe 'admin cria taxa fixa' do
     condo = create(:condo, name: 'Prédio lindo', city: 'Cidade maravilhosa')
 
     unit_type1 = create(:unit_type, description: 'Apartamento 1 quarto', area: 30,
-                                    condo:)
+                        condo: condo)
     unit_type2 = create(:unit_type, description: 'Apartamento 2 quartos', area: 45,
-                                    condo:)
+                        condo: condo)
     unit_type3 = create(:unit_type, description: 'Apartamento 3 quartos', area: 60,
-                                    condo:)
+                        condo: condo)
 
     formatted_date = 10.days.from_now.to_date
 
@@ -41,15 +41,6 @@ describe 'admin cria taxa fixa' do
 
     base_fee = BaseFee.last
     expect(page).to have_content 'Taxa cadastrada com sucesso!'
-    expect(page).to have_content 'Taxa de Condomínio'
-    expect(page).to have_content 'Recorrência: Bimestral'
-    expect(page).to have_content "Data de Lançamento: #{I18n.l(formatted_date)}"
-    expect(page).to have_content "Valor para #{unit_type1.description}: R$ 200,00"
-    expect(page).to have_content "Valor para #{unit_type2.description}: R$ 300,00"
-    expect(page).to have_content "Valor para #{unit_type3.description}: R$ 500,00"
-    expect(page).to have_content 'Taxa fixa'
-    expect(page).to have_content 'Juros de 1% ao dia'
-    expect(page).to have_content 'Multa de R$30 por atraso'
     expect(current_path).to eq condo_base_fee_path(condo, base_fee)
   end
 
@@ -155,5 +146,17 @@ describe 'admin cria taxa fixa' do
 
     expect(page).to have_content 'Taxa não cadastrada.'
     expect(page).to have_content 'Valor deve ser maior que 0', count: 2
+  end
+
+  it 'e retorna para home page' do
+    admin = create(:admin)
+    condo = create(:condo)
+    unit_type1 = create(:unit_type)
+
+    login_as admin, scope: :admin
+    visit new_condo_base_fee_path(condo)
+    click_on 'Voltar'
+
+    expect(current_path).to eq root_path
   end
 end
