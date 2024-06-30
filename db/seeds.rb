@@ -1,4 +1,4 @@
-admin = Admin.create!(email: 'email@email.com', password: '123456')
+admin = Admin.create!(email: 'email@email.com', password: '123456', first_name: "ADMIN", last_name: "ADMIN", document_number: CPF.generate)
 condo1 = Condo.create!(name: 'Prédio lindo', city: 'Cidade Maravilhosa')
 unit_type1 = UnitType.create!(description: 'Tipo de unidade 1',
                   area: 30, ideal_fraction: 0.4, condo: condo1)

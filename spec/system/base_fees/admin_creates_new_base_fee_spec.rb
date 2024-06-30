@@ -15,22 +15,22 @@ describe 'admin cria taxa fixa' do
     condo = create(:condo, name: 'Prédio lindo', city: 'Cidade maravilhosa')
 
     unit_type1 = create(:unit_type, description: 'Apartamento 1 quarto', area: 30,
-                       condo:)
+                                    condo:)
     unit_type2 = create(:unit_type, description: 'Apartamento 2 quartos', area: 45,
-                       condo:)
+                                    condo:)
     unit_type3 = create(:unit_type, description: 'Apartamento 3 quartos', area: 60,
-                       condo:)
+                                    condo:)
 
     formatted_date = 10.days.from_now.to_date
 
     login_as admin, scope: :admin
     visit new_condo_base_fee_path(condo)
-    within 'form' do
+    within '.form-base-fees' do
       fill_in 'Nome', with: 'Taxa de Condomínio'
       fill_in 'Descrição', with: 'Taxas mensais para manutenção do prédio.'
-      fill_in 'Valor para Apartamento 1 quarto', with: 20000
-      fill_in 'Valor para Apartamento 2 quartos', with: 30000
-      fill_in 'Valor para Apartamento 3 quartos', with: 50000
+      fill_in 'Valor para Apartamento 1 quarto', with: 20_000
+      fill_in 'Valor para Apartamento 2 quartos', with: 30_000
+      fill_in 'Valor para Apartamento 3 quartos', with: 50_000
       select 'Bimestral', from: 'Recorrência'
       fill_in 'Data de Lançamento', with: formatted_date.to_s
       check 'Taxa fixa'
@@ -67,7 +67,7 @@ describe 'admin cria taxa fixa' do
 
     login_as admin, scope: :admin
     visit new_condo_base_fee_path(condo)
-    within 'form' do
+    within '.form-base-fees' do
       fill_in 'Nome', with: ''
       fill_in 'Descrição', with: ''
       fill_in 'Valor para Apartamento 1 quarto', with: ''
@@ -101,12 +101,12 @@ describe 'admin cria taxa fixa' do
 
     login_as admin, scope: :admin
     visit new_condo_base_fee_path(condo)
-    within 'form' do
+    within '.form-base-fees' do
       fill_in 'Nome', with: 'Taxa de Condomínio'
       fill_in 'Descrição', with: 'Taxas mensais para manutenção do prédio.'
-      fill_in 'Valor para Apartamento 1 quarto', with: 20000
-      fill_in 'Valor para Apartamento 2 quartos', with: 30000
-      fill_in 'Valor para Apartamento 3 quartos', with: 50000
+      fill_in 'Valor para Apartamento 1 quarto', with: 20_000
+      fill_in 'Valor para Apartamento 2 quartos', with: 30_000
+      fill_in 'Valor para Apartamento 3 quartos', with: 50_000
       select 'Semestral', from: 'Recorrência'
       fill_in 'Data de Lançamento', with: formatted_date.to_s
       check 'Taxa fixa'
@@ -119,9 +119,9 @@ describe 'admin cria taxa fixa' do
     expect(page).to have_content 'Data de Lançamento deve ser futura'
     expect(page).to have_field 'Nome', with: 'Taxa de Condomínio'
     expect(page).to have_field 'Descrição', with: 'Taxas mensais para manutenção do prédio.'
-    expect(page).to have_field 'Valor para Apartamento 1 quarto', with: 20000
-    expect(page).to have_field 'Valor para Apartamento 2 quartos', with: 30000
-    expect(page).to have_field 'Valor para Apartamento 3 quartos', with: 50000
+    expect(page).to have_field 'Valor para Apartamento 1 quarto', with: 20_000
+    expect(page).to have_field 'Valor para Apartamento 2 quartos', with: 30_000
+    expect(page).to have_field 'Valor para Apartamento 3 quartos', with: 50_000
     expect(page).to have_checked_field 'Taxa fixa'
     expect(page).to have_field 'Juros ao dia', with: 1
     expect(page).to have_field 'Multa por atraso', with: 30
