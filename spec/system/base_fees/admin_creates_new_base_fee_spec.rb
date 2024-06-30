@@ -126,4 +126,34 @@ describe 'admin cria taxa fixa' do
     expect(page).to have_field 'Juros ao dia', with: 1
     expect(page).to have_field 'Multa por atraso', with: 30
   end
+
+  it 'e valor deve ser maior que 0' do
+    admin = create(:admin, email: 'admin@email.com', password: '123456')
+    condo = create(:condo, name: 'Prédio lindo', city: 'Cidade maravilhosa')
+
+    create(:unit_type, description: 'Apartamento 1 quarto', area: 30, condo:)
+    create(:unit_type, description: 'Apartamento 2 quartos', area: 45, condo:)
+    create(:unit_type, description: 'Apartamento 3 quartos', area: 60, condo:)
+
+    formatted_date = 10.days.from_now.to_date
+
+    login_as admin, scope: :admin
+    visit new_condo_base_fee_path(condo)
+    within '.form-base-fees' do
+      fill_in 'Nome', with: 'Taxa de Condomínio'
+      fill_in 'Descrição', with: 'Taxas mensais para manutenção do prédio.'
+      fill_in 'Valor para Apartamento 1 quarto', with: 0
+      fill_in 'Valor para Apartamento 2 quartos', with: -20_000
+      fill_in 'Valor para Apartamento 3 quartos', with: 50_000
+      select 'Semestral', from: 'Recorrência'
+      fill_in 'Data de Lançamento', with: formatted_date.to_s
+      check 'Taxa fixa'
+      fill_in 'Juros ao dia', with: 1
+      fill_in 'Multa por atraso', with: 30
+      click_on 'Salvar'
+    end
+
+    expect(page).to have_content 'Taxa não cadastrada.'
+    expect(page).to have_content 'Valor deve ser maior que 0', count: 2
+  end
 end
