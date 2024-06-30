@@ -25,6 +25,5 @@ RSpec.describe BaseFee, type: :model do
         expect(base_fee.errors[:charge_day]).to include('deve ser futura')
       end
     end
-
   end
 end
