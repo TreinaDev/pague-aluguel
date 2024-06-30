@@ -2,6 +2,7 @@ pt-BR:
   activerecord:
     errors:
       messages:
+        verify_error: 'Verifique os erros:'
         record_invalid: 'A validação falhou: %{errors}'
         restrict_dependent_destroy:
           has_one: Não é possível excluir o registro pois existe um %{record} dependente
@@ -146,6 +147,8 @@ pt-BR:
         one: 'Não foi possível gravar %{model}: %{count} erro'
         other: 'Não foi possível gravar %{model}: %{count} erros'
   helpers:
+    buttons:
+      back: Voltar
     select:
       prompt: Por favor selecione
     submit:

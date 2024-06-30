@@ -1,4 +1,6 @@
 pt-BR:
+  success_notice_base_fee: 'Taxa cadastrada com sucesso!'
+  fail_notice_base_fee: 'Taxa não cadastrada.'
   activerecord:
     models:
       base_fee:

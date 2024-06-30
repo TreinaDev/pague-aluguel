@@ -12,10 +12,10 @@ class BaseFeesController < ApplicationController
     @base_fee = @condo.base_fees.build(base_fee_params)
 
     if @base_fee.save
-      redirect_to condo_base_fee_path(@condo, @base_fee), notice: 'Taxa cadastrada com sucesso!'
+      redirect_to condo_base_fee_path(@condo, @base_fee), notice: I18n.t('success_notice_base_fee')
     else
-      flash.now[:alert] = 'Taxa não cadastrada.'
-      render :new, status: 412
+      flash.now[:alert] = I18n.t 'fail_notice_base_fee'
+      render :new, status: :unprocessable_entity
     end
   end
 

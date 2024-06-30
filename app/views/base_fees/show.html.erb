@@ -20,7 +20,7 @@
 
       <% @values.each do |value| %>
         <div class="row d-flex flex-column">
-          <strong><%= t('activerecord.values.values_price', unit_type: value.unit_type.description ) %>:</strong>
+          <strong><%= I18n.t('activerecord.values.values_price', unit_type: value.unit_type.description ) %>:</strong>
           <%= number_to_currency(value.price, locale: :'pt-BR')%>
         </div>
       <% end %>
@@ -30,15 +30,15 @@
       </div>
 
       <div class="row d-flex flex-column">
-        <strong><%= t('views.show.late_payment', number: @base_fee.late_payment) %></strong>
+        <strong><%= I18n.t('views.show.late_payment', number: @base_fee.late_payment) %></strong>
       </div>
 
       <div class="row d-flex flex-column">
-        <strong><%= t('views.show.late_fee', number: @base_fee.late_fee) %></strong>
+        <strong><%= I18n.t('views.show.late_fee', number: @base_fee.late_fee) %></strong>
       </div>
     </div>
   </div>
   <hr>
-  <%= link_to t('helpers.buttons.back'), root_path, class: "btn btn-secondary" %>
+  <%= link_to I18n.t('helpers.buttons.back'), root_path, class: "btn btn-secondary" %>
 </div>
 

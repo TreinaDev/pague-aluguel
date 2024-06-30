@@ -3,7 +3,7 @@
 
   <% if @base_fee.errors.any? %>
     <div class="alert alert-danger" role="alert">
-      <p><%= t('errors.messages.verify_error') %></p>
+      <p><%= I18n.t('errors.messages.verify_error') %></p>
       <ul>
         <% @base_fee.errors.full_messages.each do |msg| %>
           <li><%= msg %></li>
@@ -35,7 +35,7 @@
       <div class="form-group">
         <%= f.fields_for :values do |values_form| %><br>
 
-          <%= values_form.label :price_cents, t('activerecord.values.values_price', unit_type: values_form.object.unit_type.description ) %>
+          <%= values_form.label :price_cents, I18n.t('activerecord.values.values_price', unit_type: values_form.object.unit_type.description ) %>
           <%= values_form.number_field :price_cents, class: "form-control" %>
           <%= values_form.hidden_field :unit_type_id, value: values_form.object.unit_type.id %>
         <% end %>
@@ -62,11 +62,11 @@
       </div>
 
       <div class="form-group">
-        <%= f.submit t('helpers.submit.submit'), class: 'btn btn-primary' %>
+        <%= f.submit I18n.t('helpers.submit.submit'), class: 'btn btn-primary' %>
       </div>
       <% end %>
     </div>
   </div>
   <hr>
-  <%= link_to t('helpers.buttons.back'), root_path, class: "btn btn-secondary" %>
+  <%= link_to I18n.t('helpers.buttons.back'), root_path, class: "btn btn-secondary" %>
 </div>
