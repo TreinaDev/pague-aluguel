@@ -20,5 +20,8 @@ RSpec.describe CommonArea, type: :model do
 
       expect(common_area.errors[:fee_cents]).to include('não é um número inteiro')
     end
+
+    it '' do
+    end
   end
 end

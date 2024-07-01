@@ -47,12 +47,12 @@ describe 'Admin registra uma taxa de área comum' do
       click_on 'TMNT'
     end
     click_on 'Registrar Taxa'
-    fill_in 'Taxa de área comum', with: -300
+    fill_in 'Taxa de área comum', with: ''
     click_on 'Atualizar'
 
     expect(page).to have_content 'Não foi possível registrar a taxa.'
     expect(page).to have_content 'Atente-se aos erros abaixo:'
-    expect(page).to have_content 'Taxa de área comum não pode ser negativa.'
+    expect(page).to have_content 'Taxa de área comum não pode ficar em branco'
   end
 
   it 'e cancela o registro e volta para show' do
