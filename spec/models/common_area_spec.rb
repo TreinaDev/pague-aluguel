@@ -1,7 +1,7 @@
 require 'rails_helper'
 
 RSpec.describe CommonArea, type: :model do
-  describe '#Valid?' do
+  describe '#valid?' do
     it 'e não pode ser negativo' do
       condo = Condo.create!(name: 'Sai de baixo', city: 'Rio de Janeiro')
 
@@ -19,9 +19,6 @@ RSpec.describe CommonArea, type: :model do
       common_area.valid?
 
       expect(common_area.errors[:fee_cents]).to include('não é um número inteiro')
-    end
-
-    it '' do
     end
   end
 end

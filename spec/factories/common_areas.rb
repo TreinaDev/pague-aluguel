@@ -1,9 +1,9 @@
 FactoryBot.define do
   factory :common_area do
-    name { 'MyString' }
-    description { 'some description' }
+    name { 'Churrasqueira' }
+    description { 'Área aberta perfeita para dias ensolarados' }
     max_capacity { 30 }
-    usage_rules { 'Some usage rules' }
+    usage_rules { '' }
     fee_cents { 0 }
   end
 end
