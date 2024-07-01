@@ -37,6 +37,8 @@
 
 ### Para Administradores: 🏢
 - [x]  **Nome da Funcionalidade:** Descrição.
+- [x]  **Registro de Administrador:** Um administrador pode cadastrar outro usuário como administrador, informando obrigatoriamente nome, sobrenome, CPF, email e senha. O upload de uma foto é opcional.
+- [x]  **Edição de conta de Administrador:** Um administrador pode editar seu nome, sobrenome e foto.
 
 ### Para Proprietários de Imóveis: 👨🏽
 - [x]  **Nome da Funcionalidade:** Descrição.
