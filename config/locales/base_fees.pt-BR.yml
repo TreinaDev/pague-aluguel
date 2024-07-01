@@ -1,0 +1,53 @@
+pt-BR:
+  success_notice_base_fee: 'Taxa cadastrada com sucesso!'
+  fail_notice_base_fee: 'Taxa não cadastrada.'
+  activerecord:
+    models:
+      base_fee:
+        one: Taxa Fixa
+        other: Taxas Fixas
+      value: Valor
+    attributes:
+      base_fee:
+        name: Nome
+        description: Descrição
+        late_payment: Juros ao dia
+        late_fee: Multa por atraso
+        fixed: Taxa fixa
+        charge_day: Data de Lançamento
+        recurrence: Recorrência
+        enum_recurrence:
+          monthly: Mensal
+          biweekly: Quinzenal
+          bimonthly: Bimestral
+          semi_annual: Semestral
+          yearly: Anual
+      values:
+        price: 'Valor'
+    errors:
+      models:
+        base_fee:
+          attributes:
+            charge_day:
+              future_date: deve ser futura
+
+  base_fee:
+    monthly: Mensal
+    biweekly: Quinzenal
+    bimonthly: Bimestral
+    semi_annual: Semestral
+    yearly: Anual
+  views:
+    new:
+      create_fee: "Cadastro de Taxa de %{condo}"
+      label_price: "Valor para %{name}"
+    show:
+      monthly: Mensal
+      biweekly: Quinzenal
+      bimonthly: Bimestral
+      semi_annual: Semestral
+      yearly: Anual
+      late_payment: "Juros de %{number}% ao dia"
+      late_fee: "Multa de R$%{number} por atraso"
+
+
