@@ -17,7 +17,7 @@
       <%= form_with model: @shared_fee, local: true do |f| %> 
         <div class="form-group">
           <%= f.label :condo_id %>
-          <%= f.collection_select :condo_id, @condos, :id, :name, { prompt: "Selecione um condomínio" }, class: "form-control" %>
+          <%= f.collection_select :condo_id, @condos, :id, :name, selected: @selected_condo_id, class: "form-control" %>
         </div>
 
         <div class="form-group">
@@ -26,8 +26,8 @@
         </div>
 
         <div class="form-group">
-          <%= f.label :total_value_cents %>
-          <%= f.number_field :total_value_cents, class: "form-control" %>
+          <%= f.label :total_value %>
+          <%= f.text_field :total_value, class: "form-control" %>
         </div>
 
         <div class="form-group">
