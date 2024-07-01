@@ -1,5 +1,6 @@
 class BaseFeesController < ApplicationController
   before_action :authenticate_admin!
+  before_action :set_condo, only: [:new, :create]
 
   def show
     @base_fee = BaseFee.find(params[:id])
@@ -8,13 +9,11 @@ class BaseFeesController < ApplicationController
   end
 
   def new
-    @condo = Condo.find(params[:condo_id])
     @base_fee = BaseFee.new(condo: @condo)
     @values = @base_fee.value_builder
   end
 
   def create
-    @condo = Condo.find(params[:condo_id])
     @base_fee = @condo.base_fees.build(base_fee_params)
 
     if @base_fee.save
@@ -31,5 +30,9 @@ class BaseFeesController < ApplicationController
     params.require(:base_fee).permit(:name, :description, :late_payment, :late_fee,
                                      :fixed, :charge_day, :recurrence,
                                      values_attributes: [:price_cents, :unit_type_id])
+  end
+
+  def set_condo
+    @condo = Condo.find(params[:condo_id])
   end
 end
