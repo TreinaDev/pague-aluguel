@@ -21,7 +21,10 @@ describe 'Admin vê a lista de áreas comuns' do
                          condo:)
 
     login_as admin, scope: :admin
-    visit condo_common_areas_path(condo)
+    visit root_path
+    click_on 'Lista de Condomínios'
+    click_on 'Teenage Mutant Ninja Turtles'
+    click_on 'Exibir Áreas Comuns'
 
     expect(page).to have_content 'Áreas comuns do condomínio Teenage Mutant Ninja Turtles'
     expect(page).to have_content 'TMNT'
@@ -100,5 +103,18 @@ describe 'Admin vê a lista de áreas comuns' do
     expect(page).to have_content 'R$400,00'
     expect(page).to have_content 'Saint Seiya'
     expect(page).to have_content 'R$500,00'
+  end
+
+  it 'e volta para show do condomínio' do
+    admin = create(:admin)
+
+    condo = create(:condo)
+    create(:common_area, name: 'TMNT', fee_cents: 400_00, condo:)
+
+    login_as admin, scope: :admin
+    visit condo_common_areas_path(condo)
+    click_on 'Voltar'
+
+    expect(current_path).to eq condo_path(condo)
   end
 end
