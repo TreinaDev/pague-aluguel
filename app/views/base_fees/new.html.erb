@@ -1,0 +1,72 @@
+<div class="container">
+  <h2><%= I18n.t('views.new.create_fee', condo: @condo.name) %></h2>
+
+  <% if @base_fee.errors.any? %>
+    <div class="alert alert-danger" role="alert">
+      <p><%= I18n.t('errors.messages.verify_error') %></p>
+      <ul>
+        <% @base_fee.errors.full_messages.each do |msg| %>
+          <li><%= msg %></li>
+        <% end %>
+      </ul>
+    </div>
+  <% end %>
+
+  <div class="row">
+    <div class="col-md-6 form-base-fees">
+      <%= form_with model: [@condo, @base_fee], local: true do |f| %>
+        <%= hidden_field_tag :condo, @condo.id %>
+
+      <div class="form-group">
+        <%= f.label :name %>
+        <%= f.text_field :name, class: "form-control" %>
+      </div>
+
+      <div class="form-group">
+        <%= f.label :description %>
+        <%= f.text_field :description, class: "form-control" %>
+      </div>
+
+      <div class="form-group">
+        <%= f.label :recurrence %>
+        <%= f.select :recurrence, options_for_select(BaseFee.recurrences.map { |key, _| [I18n.t("base_fee.#{key}"), key] }, @base_fee.recurrence), {}, class: "form-control" %>
+      </div>
+
+      <div class="form-group">
+        <%= f.fields_for :values do |values_form| %><br>
+
+          <%= values_form.label :price_cents, I18n.t('activerecord.values.values_price', unit_type: values_form.object.unit_type.description ) %>
+          <%= values_form.number_field :price_cents, class: "form-control" %>
+          <%= values_form.hidden_field :unit_type_id, value: values_form.object.unit_type.id %>
+        <% end %>
+      </div>
+
+      <div class="form-group">
+        <%= f.label :charge_day %>
+        <%= f.date_field :charge_day, class: "form-control" %>
+      </div>
+
+      <div class="form-group">
+        <%= f.check_box :fixed, {}, "true", "false" %>
+        <%= f.label :fixed %>
+      </div>
+
+      <div class="form-group">
+        <%= f.label :late_payment %>
+        <%= f.number_field :late_payment, class: "form-control" %>
+      </div>
+
+      <div class="form-group">
+        <%= f.label :late_fee %>
+        <%= f.number_field :late_fee, class: "form-control" %>
+      </div>
+
+      <div class="form-group">
+        <%= f.submit I18n.t('helpers.submit.submit'), class: 'btn btn-primary' %>
+      </div>
+      <% end %>
+    </div>
+  </div>
+  <hr>
+  <%= link_to I18n.t('helpers.buttons.back'), condo_path(@condo), class: "btn btn-secondary" %>
+</div>
