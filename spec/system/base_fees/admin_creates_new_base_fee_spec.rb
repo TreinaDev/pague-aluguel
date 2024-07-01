@@ -10,16 +10,11 @@ describe 'admin cria taxa fixa' do
   end
 
   it 'com sucesso' do
-    admin = create(:admin, email: 'admin@email.com', password: '123456')
-
+    admin = create(:admin)
     condo = create(:condo, name: 'Prédio lindo', city: 'Cidade maravilhosa')
-
-    unit_type1 = create(:unit_type, description: 'Apartamento 1 quarto', area: 30,
-                        condo: condo)
-    unit_type2 = create(:unit_type, description: 'Apartamento 2 quartos', area: 45,
-                        condo: condo)
-    unit_type3 = create(:unit_type, description: 'Apartamento 3 quartos', area: 60,
-                        condo: condo)
+    create(:unit_type, description: 'Apartamento 1 quarto', area: 30, condo:)
+    create(:unit_type, description: 'Apartamento 2 quartos', area: 45, condo:)
+    create(:unit_type, description: 'Apartamento 3 quartos', area: 60, condo:)
 
     formatted_date = 10.days.from_now.to_date
 
@@ -45,16 +40,12 @@ describe 'admin cria taxa fixa' do
   end
 
   it 'com dados incompletos' do
-    admin = create(:admin, email: 'admin@email.com', password: '123456')
-
+    admin = create(:admin)
     condo = create(:condo, name: 'Prédio lindo', city: 'Cidade maravilhosa')
 
-    create(:unit_type, description: 'Apartamento 1 quarto', area: 30,
-                       condo:)
-    create(:unit_type, description: 'Apartamento 2 quartos', area: 45,
-                       condo:)
-    create(:unit_type, description: 'Apartamento 3 quartos', area: 60,
-                       condo:)
+    create(:unit_type, description: 'Apartamento 1 quarto', area: 30, condo:)
+    create(:unit_type, description: 'Apartamento 2 quartos', area: 45, condo:)
+    create(:unit_type, description: 'Apartamento 3 quartos', area: 60, condo:)
 
     login_as admin, scope: :admin
     visit new_condo_base_fee_path(condo)
@@ -81,7 +72,7 @@ describe 'admin cria taxa fixa' do
   end
 
   it 'e data deve ser futura' do
-    admin = create(:admin, email: 'admin@email.com', password: '123456')
+    admin = create(:admin)
     condo = create(:condo, name: 'Prédio lindo', city: 'Cidade maravilhosa')
 
     create(:unit_type, description: 'Apartamento 1 quarto', area: 30, condo:)
@@ -151,7 +142,7 @@ describe 'admin cria taxa fixa' do
   it 'e retorna para home page' do
     admin = create(:admin)
     condo = create(:condo)
-    unit_type1 = create(:unit_type)
+    create(:unit_type)
 
     login_as admin, scope: :admin
     visit new_condo_base_fee_path(condo)
