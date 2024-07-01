@@ -12,6 +12,7 @@ RSpec.describe Admin, type: :model do
     it { should validate_length_of(:first_name) }
     it { should validate_length_of(:last_name) }
   end
+
   describe '#format' do
     it 'email - sem @' do
       admin = Admin.new(email: 'abcabc.com')
@@ -22,6 +23,7 @@ RSpec.describe Admin, type: :model do
       expect(result).to be true
     end
   end
+
   describe '#uniqueness' do
     it 'de CPF' do
       @cpf = CPF.generate
@@ -39,6 +41,7 @@ RSpec.describe Admin, type: :model do
 
       expect(result).to be true
     end
+
     it 'de email' do
       @email = 'harryp@mail.com'
       @cpf = CPF.generate
@@ -57,6 +60,7 @@ RSpec.describe Admin, type: :model do
       expect(result).to be true
     end
   end
+
   describe '#verify_document_number' do
     it 'quando valor não é válido' do
       admin = Admin.new(document_number: '66666666666')
@@ -67,6 +71,7 @@ RSpec.describe Admin, type: :model do
       expect(result).to be true
     end
   end
+
   describe '#length' do
     it 'de CPF - muito curto' do
       admin = Admin.new(document_number: '1234567')
@@ -76,6 +81,7 @@ RSpec.describe Admin, type: :model do
 
       expect(result).to be true
     end
+
     it 'de CPF - muito longo' do
       admin = Admin.new(document_number: '12345678901234')
 
@@ -84,6 +90,7 @@ RSpec.describe Admin, type: :model do
 
       expect(result).to be true
     end
+
     it 'de nome - muito curto' do
       admin = Admin.new(first_name: 'aa')
 
@@ -92,6 +99,7 @@ RSpec.describe Admin, type: :model do
 
       expect(result).to be true
     end
+
     it 'de nome - muito longo' do
       admin = Admin.new(first_name: 'otorinolaringologista')
 
@@ -100,6 +108,7 @@ RSpec.describe Admin, type: :model do
 
       expect(result).to be true
     end
+
     it 'de sobrenome - muito curto' do
       admin = Admin.new(first_name: 'aa')
 
@@ -108,6 +117,7 @@ RSpec.describe Admin, type: :model do
 
       expect(result).to be true
     end
+
     it 'de sobrenome - muito longo' do
       admin = Admin.new(first_name: 'otorinolaringologista')
 

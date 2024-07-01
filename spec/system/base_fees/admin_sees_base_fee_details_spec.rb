@@ -22,6 +22,7 @@ describe 'admin vê taxa fixa' do
     visit root_path
     click_on 'Lista de Condomínios'
     click_on 'Prédio lindo'
+    click_on 'Gerenciar Condomínio'
     click_on 'Exibir Taxas Cadastradas'
     click_on 'Taxa de Condomínio'
 

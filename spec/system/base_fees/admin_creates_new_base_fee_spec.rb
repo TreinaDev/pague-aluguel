@@ -17,6 +17,7 @@ describe 'admin cria taxa fixa' do
     visit root_path
     click_on 'Lista de Condomínios'
     click_on 'Prédio lindo'
+    click_on 'Gerenciar Condomínio'
     click_on 'Cadastrar Nova Taxa'
 
     expect(page).to have_content 'Cadastro de Taxa de Prédio lindo'

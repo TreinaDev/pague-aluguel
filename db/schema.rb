@@ -69,6 +69,27 @@ ActiveRecord::Schema[7.1].define(version: 2024_06_28_202602) do
     t.index ["condo_id"], name: "index_base_fees_on_condo_id"
   end
 
+  create_table "common_area_fee_histories", force: :cascade do |t|
+    t.integer "fee_cents"
+    t.string "user"
+    t.integer "common_area_id", null: false
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.index ["common_area_id"], name: "index_common_area_fee_histories_on_common_area_id"
+  end
+
+  create_table "common_areas", force: :cascade do |t|
+    t.string "name"
+    t.string "description"
+    t.integer "max_capacity"
+    t.string "usage_rules"
+    t.integer "condo_id", null: false
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.integer "fee_cents", default: 0
+    t.index ["condo_id"], name: "index_common_areas_on_condo_id"
+  end
+
   create_table "condos", force: :cascade do |t|
     t.string "name"
     t.string "city"
@@ -150,6 +171,8 @@ ActiveRecord::Schema[7.1].define(version: 2024_06_28_202602) do
   add_foreign_key "active_storage_attachments", "active_storage_blobs", column: "blob_id"
   add_foreign_key "active_storage_variant_records", "active_storage_blobs", column: "blob_id"
   add_foreign_key "base_fees", "condos"
+  add_foreign_key "common_area_fee_histories", "common_areas"
+  add_foreign_key "common_areas", "condos"
   add_foreign_key "shared_fee_fractions", "shared_fees"
   add_foreign_key "shared_fee_fractions", "units"
   add_foreign_key "shared_fees", "condos"
