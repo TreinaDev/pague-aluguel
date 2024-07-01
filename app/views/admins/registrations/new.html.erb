@@ -32,7 +32,8 @@
   </div>
 
   <div class="form-floating mb-2 w-50">
-    <%= f.text_field :document_number, autofocus: true, autocomplete: "document_number", class: "form-control" %>
+    <%# , "data-controller": "document-number" %>
+    <%= f.text_field :document_number, autofocus: true, autocomplete: "document_number", "data-controller": "document-number", class: "form-control" %>
     <%= f.label :document_number %>
   </div>
 

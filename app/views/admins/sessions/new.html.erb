@@ -1,5 +1,4 @@
-<h2>Login</h2>
-
+<h3>Login</h3>
 <%= form_for(resource, as: resource_name, url: session_path(resource_name)) do |f| %>
   <div class="form-floating mb-2 w-50">
     <%= f.email_field :email, autofocus: true, autocomplete: "email", class: "form-control" %>
@@ -19,6 +18,6 @@
   <% end %>
 
   <div class="actions">
-    <%= f.submit "Log in" %>
+    <%= f.submit "Log in", class: "btn btn-secondary" %>
   </div>
 <% end %>
