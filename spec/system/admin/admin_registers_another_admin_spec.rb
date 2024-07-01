@@ -19,6 +19,7 @@ describe 'admin registra outro admin' do
     cpf.each_char { |char| find(:css, "input[id$='admin_document_number']").send_keys(char) }
     attach_file 'Foto', Rails.root.join('spec/support/images/reuri.jpeg')
     click_on 'Registrar'
+    sleep 0.2
 
     expect(current_path).to eq admins_path
     expect(page).to have_content 'Administrador registrado com sucesso'

@@ -18,6 +18,7 @@ describe 'Admin tenta acessar lista de contas compartilhadas' do
     visit root_path
     click_on 'Lista de Condomínios'
     click_on 'Edifício Monte Verde'
+    click_on 'Gerenciar Condomínio'
     click_on 'Exibir Contas Compartilhadas'
 
     expect(page).to have_content('Conta de Luz')
@@ -48,6 +49,7 @@ describe 'Admin tenta acessar lista de contas compartilhadas' do
     visit root_path
     click_on 'Lista de Condomínios'
     click_on 'Edifício Monte Verde'
+    click_on 'Gerenciar Condomínio'
     click_on 'Exibir Contas Compartilhadas'
     click_on 'Conta de Água'
 
@@ -75,6 +77,7 @@ describe 'Admin tenta acessar lista de contas compartilhadas' do
     visit root_path
     click_on 'Lista de Condomínios'
     click_on 'Edifício Monte Verde'
+    click_on 'Gerenciar Condomínio'
     click_on 'Exibir Contas Compartilhadas'
 
     expect(page).to have_content('Não foram encontradas contas compartilhadas.')

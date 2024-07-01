@@ -1,0 +1,12 @@
+pt-BR:
+  activerecord:
+    attributes:
+      common_area:
+        fee_cents: Taxa de área comum
+    models:
+      common_area:
+        one: Área Comum
+        other: Áreas Comuns
+  messages:
+    registered_fee: Taxa cadastrada com sucesso!
+    registration_error: Não foi possível registrar a taxa.
