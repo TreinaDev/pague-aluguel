@@ -1,60 +1,60 @@
 require 'rails_helper'
 
 RSpec.describe SharedFee, type: :model do
-  describe 'valid?' do
-    context 'presence' do
-      it 'false when any field is empty is empty' do
+  describe 'valido?' do
+    context 'presente' do
+      it 'falso quando qualquer campo está vazio' do
         Condo.create!(name: 'Condo Test', city: 'City Test')
         shared_fee = SharedFee.create(description: '', issue_date: nil,
-                                      total_value_cents: '', condo: nil)
+                                      total_value: '', condo: nil)
 
         expect(shared_fee.errors.include?(:description)).to be true
         expect(shared_fee.errors.include?(:issue_date)).to be true
-        expect(shared_fee.errors.include?(:total_value_cents)).to be true
+        expect(shared_fee.errors.include?(:total_value)).to be true
         expect(shared_fee.errors.include?(:condo)).to be true
       end
 
-      it 'false when total_value_cents is 0' do
+      it 'falso quando o total_value é 0' do
         condominium = Condo.create!(name: 'Condo Test', city: 'City Test')
         shared_fee = SharedFee.create(description: 'Descrição', issue_date: 10.days.from_now.to_date,
-                                      total_value_cents: 0, condo: condominium)
+                                      total_value: 0, condo: condominium)
 
         expect(shared_fee.errors.include?(:total_value)).to be true
       end
 
-      it 'true when all fields are filled' do
+      it 'verdadeiro quando tudo está preenchido' do
         condominium = Condo.create!(name: 'Condo Test', city: 'City Test')
         shared_fee = SharedFee.create(description: 'Descrição', issue_date: 10.days.from_now.to_date,
-                                      total_value_cents: 10_000_00, condo: condominium)
+                                      total_value: 10_000, condo: condominium)
 
         expect(shared_fee.errors.include?(:description)).to be false
         expect(shared_fee.errors.include?(:issue_date)).to be false
-        expect(shared_fee.errors.include?(:total_value_cents)).to be false
+        expect(shared_fee.errors.include?(:total_value)).to be false
         expect(shared_fee.errors.include?(:condo)).to be false
       end
     end
 
-    context 'date' do
-      it 'false when date is in the past' do
+    context 'data' do
+      it 'falso quando a data está no passado' do
         condominium = Condo.create!(name: 'Condo Test', city: 'City Test')
         shared_fee = SharedFee.create(description: 'Descrição', issue_date: 10.days.ago.to_date,
-                                      total_value_cents: 10_000_00, condo: condominium)
+                                      total_value: 10_000, condo: condominium)
 
         expect(shared_fee.errors.full_messages).to include('Data de Emissão deve ser a partir de hoje.')
       end
 
-      it 'true when date is in the future' do
+      it 'verdadeiro quando a data está no futuro' do
         condominium = Condo.create!(name: 'Condo Test', city: 'City Test')
         shared_fee = SharedFee.create(description: 'Descrição', issue_date: 10.days.from_now.to_date,
-                                      total_value_cents: 10_000_00, condo: condominium)
+                                      total_value: 10_000, condo: condominium)
 
         expect(shared_fee.errors.include?(:issue_date)).to be false
       end
 
-      it 'true when date is today' do
+      it 'verdadeiro quando a data é hoje' do
         condominium = Condo.create!(name: 'Condo Test', city: 'City Test')
         shared_fee = SharedFee.create(description: 'Descrição', issue_date: Time.zone.today,
-                                      total_value_cents: 10_000_00, condo: condominium)
+                                      total_value: 10_000, condo: condominium)
 
         expect(shared_fee.errors.include?(:issue_date)).to be false
       end

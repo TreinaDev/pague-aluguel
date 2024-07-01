@@ -3,6 +3,7 @@ pt-BR:
     errors:
       messages:
         verify_error: 'Verifique os erros:'
+        invalid_currency: 'precisa estar no formato "0,00"'
         record_invalid: 'A validação falhou: %{errors}'
         restrict_dependent_destroy:
           has_one: Não é possível excluir o registro pois existe um %{record} dependente

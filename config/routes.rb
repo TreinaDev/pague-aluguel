@@ -7,9 +7,11 @@ Rails.application.routes.draw do
   resources :condos do
     resources :base_fees, only: [:new, :create, :show]
   end
+
+  resources :condos, only: [:index, :show]
+  resources :shared_fees, only: [:index, :show, :new, :create]
+  
   authenticate :admin do
     resources :admins, only: %i[ index show ]
   end
-
-  resources :shared_fees, only: [:show, :new, :create]
 end
