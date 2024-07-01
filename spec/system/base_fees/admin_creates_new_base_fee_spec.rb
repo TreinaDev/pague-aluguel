@@ -9,6 +9,20 @@ describe 'admin cria taxa fixa' do
     expect(current_path).to eq new_admin_session_path
   end
 
+  it 'a partir da home page' do
+    admin = create(:admin)
+    condo = create(:condo, name: 'Prédio lindo', city: 'Cidade maravilhosa')
+
+    login_as admin, scope: :admin
+    visit root_path
+    click_on 'Lista de Condomínios'
+    click_on 'Prédio lindo'
+    click_on 'Cadastrar Nova Taxa'
+
+    expect(page).to have_content 'Cadastro de Taxa de Prédio lindo'
+    expect(current_path).to eq new_condo_base_fee_path(condo)
+  end
+
   it 'com sucesso' do
     admin = create(:admin)
     condo = create(:condo, name: 'Prédio lindo', city: 'Cidade maravilhosa')
@@ -148,6 +162,6 @@ describe 'admin cria taxa fixa' do
     visit new_condo_base_fee_path(condo)
     click_on 'Voltar'
 
-    expect(current_path).to eq root_path
+    expect(current_path).to eq condo_path(condo)
   end
 end

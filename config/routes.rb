@@ -5,12 +5,12 @@ Rails.application.routes.draw do
   root to: "home#index"
 
   resources :condos do
-    resources :base_fees, only: [:new, :create, :show]
+    resources :base_fees, only: [:new, :create, :show, :index]
   end
 
   resources :condos, only: [:index, :show]
   resources :shared_fees, only: [:index, :show, :new, :create]
-  
+
   authenticate :admin do
     resources :admins, only: %i[ index show ]
   end

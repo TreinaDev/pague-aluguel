@@ -1,13 +1,15 @@
 class BaseFeesController < ApplicationController
   before_action :authenticate_admin!
-  before_action :set_condo, only: [:new, :create]
+  before_action :set_condo, only: [:new, :create, :index]
 
   def show
     @base_fee = BaseFee.find(params[:id])
     @condo = @base_fee.condo
     @values = Value.where(base_fee: @base_fee)
   end
-
+  def index
+    @base_fees = BaseFee.where(condo: @condo)
+  end
   def new
     @base_fee = BaseFee.new(condo: @condo)
     @values = @base_fee.value_builder

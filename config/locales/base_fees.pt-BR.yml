@@ -39,6 +39,7 @@ pt-BR:
     yearly: Anual
   views:
     new:
+      create_fee: "Cadastro de Taxa de %{condo}"
       label_price: "Valor para %{name}"
     show:
       monthly: Mensal

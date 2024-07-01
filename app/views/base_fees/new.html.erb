@@ -1,5 +1,5 @@
 <div class="container">
-  <h2>Cadastro de Taxas do Condomínio</h2>
+  <h2><%= I18n.t('views.new.create_fee', condo: @condo.name) %></h2>
 
   <% if @base_fee.errors.any? %>
     <div class="alert alert-danger" role="alert">
@@ -68,5 +68,5 @@
     </div>
   </div>
   <hr>
-  <%= link_to I18n.t('helpers.buttons.back'), root_path, class: "btn btn-secondary" %>
+  <%= link_to I18n.t('helpers.buttons.back'), condo_path(@condo), class: "btn btn-secondary" %>
 </div>

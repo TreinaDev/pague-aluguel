@@ -13,6 +13,22 @@ describe 'admin vê taxa fixa' do
     expect(current_path).to eq new_admin_session_path
   end
 
+  it 'a partir da home page' do
+    admin = create(:admin)
+    condo = create(:condo, name: 'Prédio lindo')
+    base_fee = create(:base_fee, name: 'Taxa de Condomínio', condo:)
+
+    login_as admin, scope: :admin
+    visit root_path
+    click_on 'Lista de Condomínios'
+    click_on 'Prédio lindo'
+    click_on 'Exibir Taxas Cadastradas'
+    click_on 'Taxa de Condomínio'
+
+    expect(page).to have_content 'Taxa de Condomínio'
+    expect(current_path).to eq condo_base_fee_path(condo, base_fee)
+  end
+
   it 'com sucesso' do
     admin = create(:admin)
     condo = create(:condo)
@@ -50,7 +66,7 @@ describe 'admin vê taxa fixa' do
     expect(page).to have_content 'Multa de R$10 por atraso'
   end
 
-  it 'e retorna para home page' do
+  it 'e retorna para lista de taxas cadastradas' do
     admin = create(:admin)
     condo = create(:condo)
     unit_type = create(:unit_type, condo:)
@@ -64,6 +80,6 @@ describe 'admin vê taxa fixa' do
     visit condo_base_fee_path(condo, base_fee)
     click_on 'Voltar'
 
-    expect(current_path).to eq root_path
+    expect(current_path).to eq condo_base_fees_path(condo)
   end
 end
