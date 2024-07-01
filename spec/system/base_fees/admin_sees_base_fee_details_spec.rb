@@ -1,6 +1,18 @@
 require 'rails_helper'
 
 describe 'admin vê taxa fixa' do
+  it 'e deve estar logado' do
+    condo = create(:condo, name: 'Prédio lindo', city: 'Cidade maravilhosa')
+    base_fee = create(:base_fee,
+                      name: 'Taxa de Condomínio', description: 'Manutenção.',
+                      late_payment: 2, late_fee: 10, fixed: true,
+                      charge_day: 25.days.from_now, recurrence: :bimonthly, condo:)
+
+    visit condo_base_fee_path(condo, base_fee)
+
+    expect(current_path).to eq new_admin_session_path
+  end
+
   it 'com sucesso' do
     admin = create(:admin)
     condo = create(:condo)
