@@ -12,6 +12,20 @@ RSpec.describe Admin, type: :model do
     it { should validate_length_of(:first_name) }
     it { should validate_length_of(:last_name) }
   end
+  describe '#downcase_name' do
+    it 'deve converter o nome para minúsculas' do
+      admin = Admin.create!(
+        first_name: 'Harry',
+        last_name: 'Potter',
+        email: 'harryp@mail.com',
+        document_number: CPF.generate,
+        password: 'password123'
+      )
+
+      expect(admin.first_name).to eq 'harry'
+      expect(admin.last_name).to eq 'potter'
+    end
+  end
   describe '#format' do
     it 'email - sem @' do
       admin = Admin.new(email: 'abcabc.com')
