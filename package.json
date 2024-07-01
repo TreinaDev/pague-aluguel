@@ -1,14 +1,15 @@
 {
-  "name":"pague_aluguel",
+  "name": "pague_aluguel",
   "private": "true",
   "dependencies": {
     "@hotwired/stimulus": "^3.2.2",
-    "@hotwired/turbo-rails": "^8.0.0-beta.2",
+    "@hotwired/turbo-rails": "^8.0.4",
     "@popperjs/core": "^2.11.8",
     "autoprefixer": "^10.4.16",
     "bootstrap": "^5.3.2",
     "bootstrap-icons": "^1.11.3",
     "esbuild": "^0.19.11",
+    "inputmask": "^5.0.9",
     "nodemon": "^3.0.2",
     "postcss": "^8.4.33",
     "postcss-cli": "^11.0.0",

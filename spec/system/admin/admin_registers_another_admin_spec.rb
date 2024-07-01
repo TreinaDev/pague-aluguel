@@ -3,6 +3,7 @@ require 'rails_helper'
 describe 'admin registra outro admin' do
   it 'com sucesso' do
     admin = FactoryBot.create(:admin, first_name: 'Fulano', last_name: 'Da Costa')
+    cpf = CPF.generate
 
     login_as admin, scope: :admin
     visit root_path
@@ -15,7 +16,7 @@ describe 'admin registra outro admin' do
     fill_in 'Confirme a senha', with: 'password123'
     fill_in 'Nome', with: 'João'
     fill_in 'Sobrenome', with: 'Almeida'
-    fill_in 'CPF', with: CPF.generate
+    cpf.each_char { |char| find(:css, "input[id$='admin_document_number']").send_keys(char) }
     attach_file 'Foto', Rails.root.join('spec/support/images/reuri.jpeg')
     click_on 'Registrar'
 

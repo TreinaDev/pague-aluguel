@@ -17,6 +17,6 @@ class Admin < ApplicationRecord
   private
 
   def verify_document_number
-    errors.add(:document_number, 'não é válido') unless CPF.valid?(document_number, strict: true)
+    errors.add(:document_number, 'não é válido') unless CPF.valid?(document_number)
   end
 end

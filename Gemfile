@@ -13,6 +13,7 @@ gem 'jsbundling-rails'
 gem 'money-rails', '~> 1.12'
 gem 'puma', '~> 6.0'
 gem 'sprockets-rails'
+gem 'stimulus-rails'
 gem 'sqlite3', '~> 1.4'
 gem 'turbo-rails'
 gem 'tzinfo-data', platforms: %i[mingw mswin x64_mingw jruby]
@@ -31,3 +32,6 @@ group :test do
   gem 'shoulda-matchers', '~> 6.0'
   gem 'simplecov', require: false
 end
+
+# Use Redis for Action Cable
+gem "redis", "~> 4.0"
