@@ -8,7 +8,7 @@ RSpec.describe SharedFeeFraction, type: :model do
     it { should validate_numericality_of(:value).is_greater_than(0) }
 
     context 'presence' do
-      it 'false when value_cents is empty' do
+      it 'falso quando value_cents é vazio' do
         condominium = Condo.create!(name: 'Condo Test', city: 'City Test')
         UnitType.create!(ideal_fraction: 0.04, condo: condominium)
         unit = Unit.create!(area: 100, number: 101, floor: 1, unit_type: UnitType.last)
