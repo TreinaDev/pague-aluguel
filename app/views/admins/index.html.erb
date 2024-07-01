@@ -5,11 +5,7 @@
     <div class="accordion-item w-50">
       <h2 class="accordion-header">
         <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#<%= dom_id(admin) %>" aria-expanded="false" aria-controls="<%= dom_id(admin) %>">
-          <% if admin.photo.attached? %>
-            <%= image_tag admin.photo, class: 'avatar me-3' %>
-          <% else %>
-            <%= image_tag 'psycho-user', class: 'avatar me-3' %>
-          <% end %>
+          <%= avatar(admin) %>
           <%= capitalized_name(admin) %>
         </button>
       </h2>
