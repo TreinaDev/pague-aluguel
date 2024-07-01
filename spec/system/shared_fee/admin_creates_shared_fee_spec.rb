@@ -11,7 +11,9 @@ describe 'Admin lança uma conta compartilhada' do
 
     login_as admin, scope: :admin
     visit root_path
-    click_on 'Lançar Conta Compartilhada'
+    within('nav') do
+      click_on 'Lançar Conta Compartilhada'
+    end
     select 'Condo Test', from: 'Condomínio'
     fill_in 'Descrição', with: 'Conta de Luz'
     fill_in 'Data de Emissão', with: 10.days.from_now.to_date
@@ -45,7 +47,9 @@ describe 'Admin lança uma conta compartilhada' do
 
     login_as admin, scope: :admin
     visit root_path
-    click_on 'Lançar Conta Compartilhada'
+    within('nav') do
+      click_on 'Lançar Conta Compartilhada'
+    end
     click_on 'Registrar'
 
     expect(current_path).to eq(new_shared_fee_path)
@@ -69,7 +73,9 @@ describe 'Admin lança uma conta compartilhada' do
 
     login_as admin, scope: :admin
     visit root_path
-    click_on 'Lançar Conta Compartilhada'
+    within('nav') do
+      click_on 'Lançar Conta Compartilhada'
+    end
     select 'Condo Test', from: 'Condomínio'
     fill_in 'Descrição', with: 'Conta de Água'
     fill_in 'Data de Emissão', with: 10.days.from_now.to_date

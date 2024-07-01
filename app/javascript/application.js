@@ -7,3 +7,9 @@ import { createApp } from 'vue/dist/vue.esm-bundler.js'
 import HelloComponent from './components/hello_vue.js'
 
 createApp(HelloComponent).mount('#vue-app')
+
+document.addEventListener("turbo:frame-missing", (event) => {
+  const { detail: { response, visit } } = event
+  event.preventDefault()
+  visit(response)
+})
