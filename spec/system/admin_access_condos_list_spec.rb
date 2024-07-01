@@ -31,4 +31,14 @@ describe 'Admin accessa a lista de todos condos registrados' do
     expect(page).to have_content 'Para continuar, faça login ou registre-se.'
     expect(current_path).to eq new_admin_session_path
   end
+
+  it 'e não existem condomínios registrados' do
+    admin = create(:admin)
+
+    login_as admin, scope: :admin
+    visit root_path
+    click_on 'Lista de Condomínios'
+
+    expect(page).to have_content 'Não existem condomínios registrados.'
+  end
 end

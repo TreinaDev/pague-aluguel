@@ -1,18 +1,22 @@
 <h1><strong>Listagem de Condomínios</strong></h1>
-
-<table class="table">
-  <thead>
-    <tr>
-      <th scope="col">Nome</th>
-      <th scope="col">Cidade</th>
-    </tr>
-  </thead>
-  <tbody>
-    <% @condos.each do |condo| %>
+ 
+<% if @condos.any? %>
+  <table class="table">
+    <thead>
       <tr>
-        <td><%= link_to condo.name, condo_path(condo) %></td>
-        <td><%= condo.city %></td>
+        <th scope="col">Nome</th>
+        <th scope="col">Cidade</th>
       </tr>
-    <% end %>
-  </tbody>
-</table>
+    </thead>
+    <tbody>
+      <% @condos.each do |condo| %>
+        <tr>
+          <td><%= link_to condo.name, condo_path(condo) %></td>
+          <td><%= condo.city %></td>
+        </tr>
+      <% end %>
+    </tbody>
+  </table>
+<% else %>
+  <strong>Não existem condomínios registrados.</strong>
+<% end %>
