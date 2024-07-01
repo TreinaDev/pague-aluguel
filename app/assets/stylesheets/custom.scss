@@ -1,0 +1,27 @@
+/*Required*/
+@import "../node_modules/bootstrap/scss/functions";
+
+/*COLORS*/
+$dark-red: #561C24;
+$red: #6D2932;
+$sand: #C7B7A3;
+$light-beige: #FFF6E9;
+$light-blue: #7E8A97;
+$dark-blue: #30475E;
+
+
+/*Variable overrides*/
+$primary: $light-blue;
+$secondary: $sand;
+// $success: $rosa;
+$danger: $red;
+// $link-color: $test;
+// $dropdown-link-hover-bg: $rosa;
+// $list-group-hover-bg: $rosa;
+// $list-group-action-active-bg: $darkerRosa;
+// $dropdown-link-active-bg: $darkerRosa;
+// $dropdown-link-active-color: black;
+// $list-group-action-hover-color: black;
+
+/*Required*/
+@import "../node_modules/bootstrap/scss/variables";
