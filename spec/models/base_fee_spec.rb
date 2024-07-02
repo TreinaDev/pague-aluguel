@@ -49,6 +49,14 @@ RSpec.describe BaseFee, type: :model do
         expect(base_fee.errors).not_to include(:late_fine)
         expect(base_fee.errors[:late_fine]).not_to include('deve ser maior ou igual a 0')
       end
+
+      it 'juros ao dia pode ser igual a zero' do
+        base_fee = build(:base_fee, interest_rate: 0)
+
+        expect(base_fee).to be_valid
+        expect(base_fee.errors).not_to include(:interest_rate)
+        expect(base_fee.errors[:interest_rate]).not_to include('deve ser maior ou igual a 0')
+      end
     end
   end
 

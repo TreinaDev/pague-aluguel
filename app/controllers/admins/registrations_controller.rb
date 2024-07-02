@@ -3,8 +3,8 @@
 # rubocop:disable Rails/LexicallyScopedActionFilter
 
 class Admins::RegistrationsController < Devise::RegistrationsController
-  before_action :configure_sign_up_params, only: %i[new create]
-  before_action :configure_account_update_params, only: %i[edit update]
+  before_action :configure_sign_up_params, only: [:new, :create]
+  before_action :configure_account_update_params, only: [:edit, :update]
   before_action :redirect_if_not_logged_in
   skip_before_action :require_no_authentication
 
@@ -53,11 +53,11 @@ class Admins::RegistrationsController < Devise::RegistrationsController
   end
 
   def configure_sign_up_params
-    devise_parameter_sanitizer.permit(:sign_up, keys: %i[first_name last_name document_number photo])
+    devise_parameter_sanitizer.permit(:sign_up, keys: [:first_name, :last_name, :document_number, :photo])
   end
 
   def configure_account_update_params
-    devise_parameter_sanitizer.permit(:account_update, keys: %i[first_name last_name photo])
+    devise_parameter_sanitizer.permit(:account_update, keys: [:first_name, :last_name, :photo])
   end
 
   def redirect_if_not_logged_in

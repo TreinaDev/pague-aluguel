@@ -82,7 +82,7 @@ describe 'admin cria taxa fixa' do
     expect(page).to have_content 'Descrição não pode ficar em branco'
     expect(page).to have_content 'Valor não é um número'
     expect(page).to have_content 'Data de Lançamento não pode ficar em branco'
-    expect(page).to have_content 'Juros ao dia não pode ficar em branco'
+    expect(page).to have_content 'Juros ao dia (%) não é um número'
     expect(page).to have_content 'Multa por atraso não é um número'
   end
 

@@ -11,7 +11,7 @@ pt-BR:
       base_fee:
         name: Nome
         description: Descrição
-        interest_rate: Juros ao dia
+        interest_rate: Juros ao dia (%)
         late_fine: Multa por atraso
         late_fine_cents: Multa por atraso
         fixed: Taxa fixa
