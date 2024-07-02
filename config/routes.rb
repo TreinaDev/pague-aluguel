@@ -14,4 +14,6 @@ Rails.application.routes.draw do
   authenticate :admin do
     resources :admins, only: [:index, :show]
   end
+
+  resources :owner_cpf_validations, only: [:new, :create]
 end
