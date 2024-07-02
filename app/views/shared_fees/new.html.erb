@@ -14,10 +14,11 @@
     <%= image_tag "arrow-left", size: "25" %>
   <% end %>
   <span class="fs-4 mx-auto mt-3">CONTA COMPARTILHADA</span>
+
   <%= form_with model: @shared_fee, local: true do |f| %>
-    <div class="form-floating mb-2 w-50 mx-auto mt-4">
+    <div class="form-floating mb-3 w-50 mx-auto mt-4">
       <%# <%= f.collection_select :condo_id, @condos, :id, :name, selected: @selected_condo_id, class: "form-select" %>
-      <%= f.select :condo_id, options_for_select(@condos), { include_blank: true }, class: "form-select" %>
+      <%= f.select :condo_id, options_for_select(@condos), { include_blank: true }, class: "form-select selectpicker" %>
       <%= f.label :condo_id %>
     </div>
 
@@ -41,3 +42,4 @@
     </div>
   <% end %>
 </div>
+

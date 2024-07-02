@@ -1,5 +1,3 @@
-<h1>Cola?Bora!</h1>
-
 <div>
   <%= link_to 'Lançar Conta Compartilhada', new_shared_fee_path %>
 </div>
@@ -7,14 +5,3 @@
   <%= link_to 'Lista de Condomínios', condos_path %>
 </div>
 
-<div id="vue-app" class="card">
-  <div class="card-body">
-    <label>Mensagem
-      <input type="text" v-model="insertText" placeholder="Coloque uma mensagem aqui" class="form-control">
-    </label>
-    <button v-on:click="insertMessage" class="btn btn-primary">Imprimir</button>
-  </div>
-  <div class="card-footer">
-    <p>{{ message }}</p>
-  </div>
-</div>
