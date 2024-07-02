@@ -39,4 +39,4 @@ jobs:
       - name: Security audit dependencies
         run: bundle-audit check --update
       - name: Lint Ruby files
-        run: bin/rubocop
+        run: bundle exec rubocop
