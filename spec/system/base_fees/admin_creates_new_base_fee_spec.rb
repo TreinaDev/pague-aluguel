@@ -2,7 +2,7 @@ require 'rails_helper'
 
 describe 'admin cria taxa fixa' do
   it 'e deve estar logado' do
-    condo = create(:condo, name: 'Prédio lindo', city: 'Cidade maravilhosa')
+    condo = Condo.new(id: 1, name: 'Prédio lindo', city: 'Cidade maravilhosa')
 
     visit new_condo_base_fee_path(condo)
 
@@ -11,7 +11,14 @@ describe 'admin cria taxa fixa' do
 
   it 'a partir da home page' do
     admin = create(:admin)
-    condo = create(:condo, name: 'Prédio lindo', city: 'Cidade maravilhosa')
+    condos = []
+    condos << Condo.new(id: 1, name: 'Prédio lindo', city: 'Cidade maravilhosa')
+    unit_types = []
+    unit_types << UnitType.new(id: 1, area: 1000, description: 'Unit Type', ideal_fraction: 222.2, condo_id: 1)
+    allow(Condo).to receive(:all).and_return(condos)
+    allow(Condo).to receive(:find).and_return(condos[0])
+    allow(UnitType).to receive(:find_all_by_condo).and_return(unit_types)
+    allow(UnitType).to receive(:find).and_return(unit_types)
 
     login_as admin, scope: :admin
     visit root_path
@@ -21,7 +28,7 @@ describe 'admin cria taxa fixa' do
     click_on 'Cadastrar Nova Taxa'
 
     expect(page).to have_content 'Cadastro de Taxa de Prédio lindo'
-    expect(current_path).to eq new_condo_base_fee_path(condo)
+    expect(current_path).to eq new_condo_base_fee_path(condos[0].id)
   end
 
   it 'com sucesso' do

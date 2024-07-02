@@ -17,8 +17,8 @@ class BaseFee < ApplicationRecord
 
   def value_builder
     @values = []
-    condo.unit_types.each do |ut|
-      @values << values.build(unit_type: ut)
+    UnitType.find_all_by_condo(condo_id).each do |ut|
+      @values << values.build(unit_type_id: ut.id)
     end
     @values
   end

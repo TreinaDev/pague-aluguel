@@ -4,14 +4,14 @@ class BaseFeesController < ApplicationController
 
   def show
     @base_fee = BaseFee.find(params[:id])
-    @condo = @base_fee.condo
+    @condo = Condo.find(@base_fee.condo_id)
     @values = Value.where(base_fee: @base_fee)
   end
   def index
-    @base_fees = BaseFee.where(condo: @condo)
+    @base_fees = BaseFee.where(condo_id: @condo.id)
   end
   def new
-    @base_fee = BaseFee.new(condo: @condo)
+    @base_fee = BaseFee.new(condo_id: @condo.id)
     @values = @base_fee.value_builder
   end
 
