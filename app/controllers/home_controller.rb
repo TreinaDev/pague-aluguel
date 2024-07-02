@@ -1,3 +1,6 @@
 class HomeController < ApplicationController
-  def index; end
+  def index
+    @admins = Admin.all
+    @condos = Condo.all
+  end
 end

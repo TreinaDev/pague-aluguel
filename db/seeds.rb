@@ -17,6 +17,7 @@ Admin.create!(
 )
 
 condo = Condo.create!(name: 'Sai de baixo', city: 'Rio de Janeiro')
+
 second_condo = Condo.create!(name: 'Segundo Condomínio', city: 'Rio de Janeiro')
 
 CommonArea.find_or_create_by!(name: 'Churrasqueira', description: 'Área de churrasqueira com piscina', max_capacity: 30,
