@@ -149,9 +149,10 @@ pt-BR:
     select:
       prompt: Por favor selecione
     submit:
-      create: Criar
-      submit: Salvar
-      update: Atualizar
+      create: CRIAR
+      submit: SALVAR
+      update: ATUALIZAR
+      register: REGISTRAR
   number:
     currency:
       format:

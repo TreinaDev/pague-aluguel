@@ -1,23 +1,33 @@
-<h3>Login</h3>
-<%= form_for(resource, as: resource_name, url: session_path(resource_name)) do |f| %>
-  <div class="form-floating mb-2 w-50">
-    <%= f.email_field :email, autofocus: true, autocomplete: "email", class: "form-control" %>
-    <%= f.label :email %>
-  </div>
-
-  <div class="form-floating mb-2 w-50">
-    <%= f.password_field :password, autocomplete: "current-password", class: "form-control" %>
-    <%= f.label :password %>
-  </div>
-
-  <% if devise_mapping.rememberable? %>
-    <div class="form-check form-switch mb-2">
-      <%= f.check_box :remember_me, class: "form-check-input" %>
-      <%= f.label :remember_me, class: "form-check-label" %>
-    </div>
+<div class="mt-3 card bg-off-white rounded-0 border-0">
+  <%= link_to :back, class: "ms-3 mt-3" do %>
+    <%= image_tag "arrow-left", size: "25" %>
   <% end %>
 
-  <div class="actions">
-    <%= f.submit "Log in", class: "btn btn-secondary" %>
-  </div>
-<% end %>
+  <span class="fs-4 mx-auto mt-3 text-uppercase">
+    <%= I18n.t('devise.sessions.new.sign_in_admin') %>
+  </span>
+
+  <%= form_for(resource, as: resource_name, url: session_path(resource_name)) do |f| %>
+
+    <div class="form-floating mb-3 w-50 mx-auto mt-4">
+      <%= f.email_field :email, autofocus: true, autocomplete: "email", class: "form-control" %>
+      <%= f.label :email %>
+    </div>
+
+    <div class="form-floating mb-3 w-50 mx-auto">
+      <%= f.password_field :password, autocomplete: "current-password", class: "form-control" %>
+      <%= f.label :password %>
+    </div>
+
+    <% if devise_mapping.rememberable? %>
+      <div class="form-check form-switch mb-3 w-50 mx-auto">
+        <%= f.check_box :remember_me, class: "form-check-input" %>
+        <%= f.label :remember_me, class: "form-check-label" %>
+      </div>
+    <% end %>
+
+    <div class="d-flex justify-content-center">
+      <%= f.submit I18n.t('devise.sessions.new.sign_in'), class: "btn btn-primary mb-5 mt-1" %>
+    </div>
+  <% end %>
+</div>

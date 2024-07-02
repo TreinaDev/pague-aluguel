@@ -14,11 +14,13 @@
     <%= image_tag "arrow-left", size: "25" %>
   <% end %>
 
-  <span class="fs-5 mx-auto mt-3">CONTA COMPARTILHADA</span>
+  <span class="fs-4 mx-auto mt-3 text-uppercase">
+    <%= I18n.t('views.new.create_shared_fee') %>
+  </span>
+
   <%= form_with model: @shared_fee, local: true do |f| %>
     <div class="form-floating mb-3 w-50 mx-auto mt-4">
-      <%# <%= f.collection_select :condo_id, @condos, :id, :name, selected: @selected_condo_id, class: "form-select" %>
-      <%= f.select :condo_id, options_for_select(@condos), { include_blank: true }, class: "form-select selectpicker" %>
+      <%= f.select :condo_id, options_for_select(@condos), { include_blank: true }, class: "form-select" %>
       <%= f.label :condo_id %>
     </div>
 
@@ -38,7 +40,7 @@
     </div>
 
     <div class="d-flex justify-content-center">
-      <%= f.submit 'REGISTRAR', class: "btn btn-primary mb-5 mt-1" %>
+      <%= f.submit I18n.t('helpers.submit.register'), class: "btn btn-primary mb-5 mt-1" %>
     </div>
   <% end %>
 </div>
