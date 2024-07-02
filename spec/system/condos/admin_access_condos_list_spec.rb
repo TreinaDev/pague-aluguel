@@ -3,10 +3,12 @@ require 'rails_helper'
 describe 'Admin accessa a lista de todos condos registrados' do
   it 'com sucesso' do
     admin = create(:admin)
-    Condo.create!(name: 'Condomínio Vila das Flores', city: 'São Paulo')
-    Condo.create!(name: 'Residencial Jardim Europa', city: 'Maceió')
-    Condo.create!(name: 'Edifício Monte Verde', city: 'Recife')
-    Condo.create!(name: 'Condomínio Lagoa Serena', city: 'Caxias do Sul')
+    condos = []
+    condos << Condo.new(id: 1, name: 'Condomínio Vila das Flores', city: 'São Paulo')
+    condos << Condo.new(id: 2, name: 'Residencial Jardim Europa', city: 'Maceió')
+    condos << Condo.new(id: 3, name: 'Edifício Monte Verde', city: 'Recife')
+    condos << Condo.new(id: 4, name: 'Condomínio Lagoa Serena', city: 'Caxias do Sul')
+    allow(Condo).to receive(:all).and_return(condos)
 
     login_as admin, scope: :admin
     visit root_path
@@ -24,8 +26,6 @@ describe 'Admin accessa a lista de todos condos registrados' do
   end
 
   it 'e deve estar autenticado' do
-    create(:condo)
-
     visit condos_path
 
     expect(page).to have_content 'Para continuar, faça login ou registre-se.'
@@ -34,6 +34,9 @@ describe 'Admin accessa a lista de todos condos registrados' do
 
   it 'e não existem condomínios registrados' do
     admin = create(:admin)
+
+    response = double('response', status: 200, body: "[]")
+    allow(Faraday).to receive(:get).with('http://127.0.0.1:3000/api/v1/condos').and_return(response)
 
     login_as admin, scope: :admin
     visit root_path
