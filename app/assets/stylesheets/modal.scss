@@ -1,1 +1,17 @@
+.dean-modal {
+  position: fixed;
+  z-index: 3;
+  padding: 20px;
+  
+  left: 50%;
+  top: 50%;
+  transform: translate(-50%, -50%);
 
+  overflow: auto;
+  background-color: white;
+  border-radius: 5px;
+  box-shadow: 0 0 10px 0 rgba(0,0,0,0.2), 0 5px 10px 0 rgba(0,0,0,0.19);
+
+  height: 600px;
+  width: 600px;
+}

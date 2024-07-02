@@ -12,6 +12,7 @@
 
   <body class="bg-light-beige">
     <%= render 'layouts/navbar' %>
+    <%= turbo_frame_tag "modal" %>
     <div class="container">
       <% if notice %>
         <div class="mt-3 alert alert-warning text-center" role="alert"><%= notice %></div>
