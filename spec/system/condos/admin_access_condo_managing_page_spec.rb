@@ -3,10 +3,13 @@ require 'rails_helper'
 describe 'Administrador acessa página do condomínio' do
   it 'com sucesso' do
     admin = create(:admin)
-    Condo.create!(name: 'Condomínio Vila das Flores', city: 'São Paulo')
-    Condo.create!(name: 'Residencial Jardim Europa', city: 'Maceió')
-    Condo.create!(name: 'Edifício Monte Verde', city: 'Recife')
-    Condo.create!(name: 'Condomínio Lagoa Serena', city: 'Caxias do Sul')
+    condos = []
+    condos << Condo.new(id: 1, name: 'Condomínio Vila das Flores', city: 'São Paulo')
+    condos << Condo.new(id: 2, name: 'Residencial Jardim Europa', city: 'Maceió')
+    condos << Condo.new(id: 3, name: 'Edifício Monte Verde', city: 'Recife')
+    condos << Condo.new(id: 4, name: 'Condomínio Lagoa Serena', city: 'Caxias do Sul')
+    allow(Condo).to receive(:all).and_return(condos)
+    allow(Condo).to receive(:find).and_return(condos[2])
 
     login_as admin, scope: :admin
     visit root_path
@@ -19,10 +22,13 @@ describe 'Administrador acessa página do condomínio' do
 
   it 'e clica em Gerenciar Condomínio' do
     admin = create(:admin)
-    Condo.create!(name: 'Condomínio Vila das Flores', city: 'São Paulo')
-    Condo.create!(name: 'Residencial Jardim Europa', city: 'Maceió')
-    Condo.create!(name: 'Edifício Monte Verde', city: 'Recife')
-    Condo.create!(name: 'Condomínio Lagoa Serena', city: 'Caxias do Sul')
+    condos = []
+    condos << Condo.new(id: 1, name: 'Condomínio Vila das Flores', city: 'São Paulo')
+    condos << Condo.new(id: 2, name: 'Residencial Jardim Europa', city: 'Maceió')
+    condos << Condo.new(id: 3, name: 'Edifício Monte Verde', city: 'Recife')
+    condos << Condo.new(id: 4, name: 'Condomínio Lagoa Serena', city: 'Caxias do Sul')
+    allow(Condo).to receive(:all).and_return(condos)
+    allow(Condo).to receive(:find).and_return(condos[2])
 
     login_as admin, scope: :admin
     visit root_path

@@ -19,6 +19,15 @@ class Condo
 
     condos
   end
+
+  def self.find(id)
+    response = Faraday.get("http://127.0.0.1:3000/api/v1/condos/#{id}")
+    if response.status == 200
+      data = JSON.parse(response.body)
+      condo = Condo.new(id: data['id'], name: data['name'], city: data['city'])
+    end
+    condo
+  end
   # has_many :unit_types, dependent: :destroy
   # has_many :units, through: :unit_types
   # has_many :common_areas, dependent: :destroy
