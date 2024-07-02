@@ -11,8 +11,9 @@ pt-BR:
       base_fee:
         name: Nome
         description: Descrição
-        late_payment: Juros ao dia
-        late_fee: Multa por atraso
+        interest_rate: Juros ao dia
+        late_fine: Multa por atraso
+        late_fine_cents: Multa por atraso
         fixed: Taxa fixa
         charge_day: Data de Lançamento
         recurrence: Recorrência
@@ -47,7 +48,8 @@ pt-BR:
       bimonthly: Bimestral
       semi_annual: Semestral
       yearly: Anual
-      late_payment: "Juros de %{number}% ao dia"
-      late_fee: "Multa de R$%{number} por atraso"
+      interest_rate: "Juros de %{number}% ao dia"
+      late_fine: "Multa de R$%{number} por atraso"
+      late_fine_cents: "Multa de R$%{number} por atraso"
 
 
