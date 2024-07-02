@@ -23,4 +23,14 @@
 
 .form-select {
   background-color: $off-white;
+
 }
+
+.form-floating > input + label:after {
+ background: $off-white !important;
+}
+
+.form-floating > select + label:after {
+  background: $off-white !important;
+ }
+
