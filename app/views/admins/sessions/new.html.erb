@@ -4,7 +4,9 @@
       <%= link_to "", :back, class: "btn btn-close btn-sm" %>
     </div>
 
-    <span class="fs-4 text-uppercase d-block text-center mb-3 mt-3">I18n.t('devise.sessions.new.sign_in_admin')</span>
+    <span class="fs-4 text-uppercase d-block text-center mb-3 mt-3">
+      <%= I18n.t('devise.sessions.new.sign_in_admin') %>
+    </span>
 
     <%= form_for(resource, as: resource_name, url: session_path(resource_name)) do |f| %>
       <div class="form-floating mb-2 w-75 mx-auto">
@@ -33,3 +35,5 @@
 
   </div>
 <% end %>
+
+

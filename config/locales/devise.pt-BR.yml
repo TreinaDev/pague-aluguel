@@ -25,6 +25,7 @@ pt-BR:
         unconfirmed_email: E-mail não confirmado
         unlock_token: Token de desbloqueio
         updated_at: Atualizado em
+        photo: Insira sua foto de perfil
       user:
         confirmation_sent_at: Confirmação enviada em
         confirmation_token: Token de confirmação
@@ -131,6 +132,7 @@ pt-BR:
         we_need_your_current_password_to_confirm_your_changes: precisamos da sua senha atual para confirmar suas mudanças
       new:
         sign_up: Inscrever-se
+        sign_up_admin: Registrar Administrador
       signed_up: Administrador registrado com sucesso.
       signed_up_but_inactive: Você se inscreveu com sucesso, porém nós não podemos autenticá-lo porque sua conta ainda não foi ativada.
       signed_up_but_locked: Você se inscreveu com sucesso. Porém nós não podemos autenticá-lo porque sua conta está bloqueada.
