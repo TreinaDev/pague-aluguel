@@ -18,7 +18,7 @@
           <span data-controller="document-number"><%= admin.document_number %></span>
           <% if admin_signed_in? && current_admin == admin %>
             <hr class="divider">
-            <%= link_to 'Editar', edit_admin_registration_path, class: 'btn btn-secondary' %>
+            <%= link_to 'Editar', edit_admin_registration_path, class: 'btn btn-secondary', data: { turbo_frame: "modal" } %>
           <% end %>
         </div>
       </div>
