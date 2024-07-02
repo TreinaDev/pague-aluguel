@@ -1,27 +1,28 @@
 <%= link_to 'Registrar novo admin', new_admin_registration_path %>
-
-<div class="accordion" id="admin-accordion">
-  <% @admins.each do |admin| %>
-    <div class="accordion-item w-50">
-      <h2 class="accordion-header">
-        <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#<%= dom_id(admin) %>" aria-expanded="false" aria-controls="<%= dom_id(admin) %>">
-          <%= avatar(admin) %>
-          <%= capitalized_name(admin) %>
-        </button>
-      </h2>
-      <div id="<%= dom_id(admin) %>" class="accordion-collapse collapse" data-bs-parent="#admin-accordion">
-        <div class="accordion-body">
-          <span class="fw-bold">Email:</span>
-          <span><%= admin.email %></span>
-          <hr class="divider">
-          <span class="fw-bold">CPF:</span>
-          <span data-controller="document-number"><%= admin.document_number %></span>
-          <% if admin_signed_in? && current_admin == admin %>
+<div class="d-flex justify-content-center">  
+  <div class="accordion w-50" id="admin-accordion">
+    <% @admins.each do |admin| %>
+      <div class="accordion-item">
+        <h2 class="accordion-header">
+          <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#<%= dom_id(admin) %>" aria-expanded="false" aria-controls="<%= dom_id(admin) %>">
+            <%= avatar(admin) %>
+            <%= capitalized_name(admin) %>
+          </button>
+        </h2>
+        <div id="<%= dom_id(admin) %>" class="accordion-collapse collapse" data-bs-parent="#admin-accordion">
+          <div class="accordion-body">
+            <span class="fw-bold">Email:</span>
+            <span><%= admin.email %></span>
             <hr class="divider">
-            <%= link_to 'Editar', edit_admin_registration_path, class: 'btn btn-secondary', data: { turbo_frame: "modal" } %>
-          <% end %>
+            <span class="fw-bold">CPF:</span>
+            <span data-controller="document-number"><%= admin.document_number %></span>
+            <% if admin_signed_in? && current_admin == admin %>
+              <hr class="divider">
+              <%= link_to 'Editar', edit_admin_registration_path, class: 'btn btn-secondary text-uppercase', data: { turbo_frame: "modal" } %>
+            <% end %>
+          </div>
         </div>
       </div>
-    </div>
-  <% end %>
+    <% end %>
+  </div>
 </div>

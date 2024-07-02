@@ -12,10 +12,12 @@
         <%= f.label :email %>
       </div>
 
+      <% if @minimum_password_length %>
+        <div class="w-75 mx-auto">
+          <span class="text-muted"><%= @minimum_password_length %> caractéres mínimos</span>
+        </div>
+      <% end %>
       <div class="form-floating mb-3 w-75 mx-auto">
-        <% if @minimum_password_length %>
-          <span class="text-muted mx-auto"><%= @minimum_password_length %> caractéres mínimos</span>
-        <% end %>
         <%= f.password_field :password, autocomplete: "new-password", class: "form-control" %>
         <%= f.label :password %> <i class="text-muted">(deixe em branco se não quiser mudar)</i>
       </div>
@@ -35,13 +37,13 @@
         <%= f.label :last_name %>
       </div>
 
-      <div class="mb-2 text-center">
+      <div class="form-floating mb-3 w-75 mx-auto">
+        <%= f.file_field :photo, multiple: true, accept:'image/*', class: "form-control" %>
         <%= f.label :photo %>
-        <%= f.file_field :photo %>
       </div>
 
-      <div class="text-center">
-        <%= f.submit "Salvar", class: "btn btn-secondary" %>
+      <div class="text-center mt-1">
+        <%= f.submit I18n.t('devise.registrations.edit.update'), class: "btn btn-primary text-uppercase" %>
       </div>
     <% end %>
   </div>
