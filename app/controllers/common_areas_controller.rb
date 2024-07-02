@@ -25,7 +25,7 @@ class CommonAreasController < ApplicationController
   private
 
   def common_area_params
-    params.require(:common_area).permit(:fee_cents)
+    params.require(:common_area).permit(:fee)
   end
 
   def find_common_area

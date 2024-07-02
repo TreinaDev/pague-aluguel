@@ -4,6 +4,6 @@ FactoryBot.define do
     description { 'Área aberta perfeita para dias ensolarados' }
     max_capacity { 30 }
     usage_rules { '' }
-    fee_cents { 0 }
+    fee { 0 }
   end
 end
