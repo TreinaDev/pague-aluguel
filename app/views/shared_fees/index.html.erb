@@ -22,4 +22,8 @@
   <% else %>
     <p>Não foram encontradas contas compartilhadas.</p>
   <% end %>
+
+  <%= link_to 'Lançar Conta Compartilhada', new_shared_fee_path(condo_id: @condo.id), class: 'btn btn-primary' %>
 </div>
+
+

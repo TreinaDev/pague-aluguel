@@ -1,4 +1,5 @@
 pt-BR:
+  delete-button: 'Deletar'
   activerecord:
     errors:
       messages:

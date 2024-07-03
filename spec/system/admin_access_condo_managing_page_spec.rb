@@ -29,6 +29,7 @@ describe 'Administrador acessa página do condomínio' do
     click_on 'Lista de Condomínios'
     click_on 'Edifício Monte Verde'
     click_on 'Gerenciar Condomínio'
+    click_on 'Contas Compartilhadas'
 
     expect(page).to have_link('Lançar Conta Compartilhada')
   end

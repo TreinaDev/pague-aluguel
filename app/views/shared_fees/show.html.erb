@@ -24,4 +24,10 @@
       <strong><%= SharedFee.human_attribute_name(:total_value_cents) %>:</strong> <%= Money.new(@shared_fee.total_value_cents, "BRL").format %>
     </div>
   </div>
+
+  <div class="row">
+    <div class="col-md-6">
+      <%= button_to I18n.t('delete-button'), shared_fee_path(@shared_fee), method: :delete %>
+    </div>
+  </div>
 </div>

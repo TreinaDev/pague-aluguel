@@ -19,7 +19,7 @@ describe 'Admin tenta acessar lista de contas compartilhadas' do
     click_on 'Lista de Condomínios'
     click_on 'Edifício Monte Verde'
     click_on 'Gerenciar Condomínio'
-    click_on 'Exibir Contas Compartilhadas'
+    click_on 'Contas Compartilhadas'
 
     expect(page).to have_content('Conta de Luz')
     expect(page).to have_content('R$10.000,00')
@@ -27,6 +27,7 @@ describe 'Admin tenta acessar lista de contas compartilhadas' do
     expect(page).to have_content('Conta de Água')
     expect(page).to have_content('R$5.000,00')
     expect(page).to have_content(I18n.l(15.days.from_now.to_date).to_s)
+    expect(page).to have_link('Lançar Conta Compartilhada')
     expect(page).not_to have_content('Conta de Carro Pipa')
     expect(page).not_to have_content('R$25.000,00')
     expect(page).not_to have_content(I18n.l(5.days.from_now.to_date).to_s)
@@ -50,7 +51,7 @@ describe 'Admin tenta acessar lista de contas compartilhadas' do
     click_on 'Lista de Condomínios'
     click_on 'Edifício Monte Verde'
     click_on 'Gerenciar Condomínio'
-    click_on 'Exibir Contas Compartilhadas'
+    click_on 'Contas Compartilhadas'
     click_on 'Conta de Água'
 
     expect(current_path).to eq shared_fee_path(conta_de_agua.id)
@@ -78,9 +79,10 @@ describe 'Admin tenta acessar lista de contas compartilhadas' do
     click_on 'Lista de Condomínios'
     click_on 'Edifício Monte Verde'
     click_on 'Gerenciar Condomínio'
-    click_on 'Exibir Contas Compartilhadas'
+    click_on 'Contas Compartilhadas'
 
     expect(page).to have_content('Não foram encontradas contas compartilhadas.')
+    expect(page).to have_link('Lançar Conta Compartilhada')
     expect(current_path).to eq shared_fees_path
   end
 end

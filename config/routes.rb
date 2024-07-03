@@ -9,7 +9,7 @@ Rails.application.routes.draw do
     resources :base_fees, only: [:new, :create, :show, :index]
   end
 
-  resources :shared_fees, only: [:index, :show, :new, :create]
+  resources :shared_fees, only: [:index, :show, :new, :create, :destroy, :delete]
 
   authenticate :admin do
     resources :admins, only: [:index, :show]
