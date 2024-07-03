@@ -4,63 +4,84 @@ RSpec.describe SharedFee, type: :model do
   describe 'valido?' do
     context 'presente' do
       it 'falso quando qualquer campo está vazio' do
-        Condo.create!(name: 'Condo Test', city: 'City Test')
+        condo = Condo.new(id: 1, name: 'Prédio lindo', city: 'Cidade maravilhosa')
         shared_fee = SharedFee.create(description: '', issue_date: nil,
-                                      total_value: '', condo: nil)
+                                      total_value: '', condo_id: nil)
+        allow(Condo).to receive(:find).and_return(condo)
 
         expect(shared_fee.errors.include?(:description)).to be true
         expect(shared_fee.errors.include?(:issue_date)).to be true
         expect(shared_fee.errors.include?(:total_value)).to be true
-        expect(shared_fee.errors.include?(:condo)).to be true
+        expect(shared_fee.errors.include?(:condo_id)).to be true
       end
 
       it 'falso quando o total_value é 0' do
-        condominium = Condo.create!(name: 'Condo Test', city: 'City Test')
+        condo = Condo.new(id: 1, name: 'Prédio lindo', city: 'Cidade maravilhosa')
+        unit_types = []
+        unit_types << UnitType.new(id: 1, area: 30, description: 'Apartamento 1 quarto', ideal_fraction: 222.2,
+                                   condo_id: 1)
+        units = []
+        units << Unit.new(id: 1, area: 100, floor: 1, number: 1, unit_type_id: 1)
         shared_fee = SharedFee.create(description: 'Descrição', issue_date: 10.days.from_now.to_date,
-                                      total_value: 0, condo: condominium)
+                                      total_value: 0, condo_id: condo.id)
+        allow(Condo).to receive(:find).and_return(condo)
+        allow(Unit).to receive(:find_all_by_condo).and_return(units)
+        allow(UnitType).to receive(:find_all_by_condo).and_return(unit_types)
 
         expect(shared_fee.errors.include?(:total_value)).to be true
       end
 
       it 'verdadeiro quando tudo está preenchido' do
-        condominium = Condo.create!(name: 'Condo Test', city: 'City Test')
+        condo = Condo.new(id: 1, name: 'Prédio lindo', city: 'Cidade maravilhosa')
+        unit_types = []
+        unit_types << UnitType.new(id: 1, area: 30, description: 'Apartamento 1 quarto', ideal_fraction: 222.2,
+                                   condo_id: 1)
+        units = []
+        units << Unit.new(id: 1, area: 100, floor: 1, number: 1, unit_type_id: 1)
         shared_fee = SharedFee.create(description: 'Descrição', issue_date: 10.days.from_now.to_date,
-                                      total_value: 10_000, condo: condominium)
+                                      total_value: 10_000, condo_id: condo.id)
+
+        allow(Condo).to receive(:find).and_return(condo)
+        allow(Unit).to receive(:find_all_by_condo).and_return(units)
+        allow(UnitType).to receive(:all).and_return(unit_types)
+        allow(UnitType).to receive(:find_all_by_condo).and_return(unit_types)
 
         expect(shared_fee.errors.include?(:description)).to be false
         expect(shared_fee.errors.include?(:issue_date)).to be false
         expect(shared_fee.errors.include?(:total_value)).to be false
-        expect(shared_fee.errors.include?(:condo)).to be false
+        expect(shared_fee.errors.include?(:condo_id)).to be false
       end
     end
 
     context 'data' do
       it 'falso quando a data está no passado' do
-        condominium = Condo.create!(name: 'Condo Test', city: 'City Test')
+        condo = Condo.new(id: 1, name: 'Prédio lindo', city: 'Cidade maravilhosa')
         shared_fee = SharedFee.create(description: 'Descrição', issue_date: 10.days.ago.to_date,
-                                      total_value: 10_000, condo: condominium)
+                                      total_value: 10_000, condo_id: condo.id)
+        allow(Condo).to receive(:find).and_return(condo)
 
         expect(shared_fee.errors.full_messages).to include('Data de Emissão deve ser a partir de hoje.')
       end
 
       it 'verdadeiro quando a data está no futuro' do
-        condominium = Condo.create!(name: 'Condo Test', city: 'City Test')
+        condo = Condo.new(id: 1, name: 'Prédio lindo', city: 'Cidade maravilhosa')
         shared_fee = SharedFee.create(description: 'Descrição', issue_date: 10.days.from_now.to_date,
-                                      total_value: 10_000, condo: condominium)
+                                      total_value: 10_000, condo_id: condo.id)
+        allow(Condo).to receive(:find).and_return(condo)
 
         expect(shared_fee.errors.include?(:issue_date)).to be false
       end
 
       it 'verdadeiro quando a data é hoje' do
-        condominium = Condo.create!(name: 'Condo Test', city: 'City Test')
+        condo = Condo.new(id: 1, name: 'Prédio lindo', city: 'Cidade maravilhosa')
         shared_fee = SharedFee.create(description: 'Descrição', issue_date: Time.zone.today,
-                                      total_value: 10_000, condo: condominium)
+                                      total_value: 10_000, condo_id: condo.id)
+        allow(Condo).to receive(:find).and_return(condo)
 
         expect(shared_fee.errors.include?(:issue_date)).to be false
       end
     end
 
-    it { should belong_to(:condo) }
     it { should have_many(:shared_fee_fractions) }
   end
 end

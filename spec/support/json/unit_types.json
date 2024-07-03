@@ -1,0 +1,23 @@
+[
+  {
+    "area": 1000,
+    "description": "something",
+    "ideal_fraction": 200.2,
+    "id": 1,
+    "condo_id": 1
+  },
+  {
+    "area": 2000,
+    "description": "another thing",
+    "ideal_fraction": 150.5,
+    "id": 2,
+    "condo_id": 1
+  },
+  {
+    "area": 3000,
+    "description": "yet another thing",
+    "ideal_fraction": 333.3,
+    "id": 3,
+    "condo_id": 1
+  }
+]

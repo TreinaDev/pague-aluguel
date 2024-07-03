@@ -1,5 +1,4 @@
 class BaseFee < ApplicationRecord
-  belongs_to :condo
   has_many :values, dependent: :destroy
   has_many :unit_types, through: :values
 
@@ -24,8 +23,8 @@ class BaseFee < ApplicationRecord
 
   def value_builder
     @values = []
-    condo.unit_types.each do |ut|
-      @values << values.build(unit_type: ut)
+    UnitType.find_all_by_condo(condo_id).each do |ut|
+      @values << values.build(unit_type_id: ut.id)
     end
     @values
   end

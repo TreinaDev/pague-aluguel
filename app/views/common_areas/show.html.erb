@@ -1,5 +1,5 @@
 <div>
-  <%= link_to 'Voltar', condo_common_areas_path(@common_area.condo), class:"btn btn-primary" %>
+  <%= link_to 'Voltar', condo_common_areas_path(@condo.id), class:"btn btn-primary" %>
 </div>
 
 <div class="container text-center mt-4">
@@ -9,7 +9,7 @@
     <hr>
     <div class="d-flex justify-content-center align-items-center">
       <strong class="me-2">Taxa de área comum: <%= @common_area.fee_cents.zero? ? 'Taxa não cadastrada' : Money.new(@common_area.fee_cents, 'BRL').format %></strong>
-      <%= link_to 'Registrar Taxa', edit_condo_common_area_path(@common_area.condo, @common_area), class:"btn btn-primary" %>
+      <%= link_to 'Registrar Taxa', edit_condo_common_area_path(@condo.id, @common_area), class:"btn btn-primary" %>
     </div>
     <hr>
     <div>

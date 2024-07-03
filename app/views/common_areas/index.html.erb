@@ -1,5 +1,5 @@
 <div>
-  <%= link_to 'Voltar', condo_path(@condo), class:"btn btn-primary" %>
+  <%= link_to 'Voltar', condo_path(@condo.id), class:"btn btn-primary" %>
 </div>
 
 <div class="container d-flex justify-content-center">
@@ -12,7 +12,7 @@
 
         <% @common_areas.each_with_index do |area, index| %>
           <div id="<%= "area-#{index}"%>" class="mb-4">
-            <%= link_to condo_common_area_path(area.condo, area), class: "link-container d-flex justify-content-center", style:"text-decoration:none;" do %>
+            <%= link_to condo_common_area_path(@condo.id, area), class: "link-container d-flex justify-content-center", style:"text-decoration:none;" do %>
               <div class="rounded-4 shadow p-4 col-12"  >
                 <div class="d-flex justify-content-between mb-3">
                   <h3 class="align-self-center"><%= area.name %></h3>
