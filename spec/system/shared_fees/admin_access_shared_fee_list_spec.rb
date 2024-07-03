@@ -1,18 +1,26 @@
+
+
 require 'rails_helper'
 
 describe 'Admin tenta acessar lista de contas compartilhadas' do
   it 'e vê lista de contas compartilhadas' do
     admin = FactoryBot.create(:admin, first_name: 'Fulano', last_name: 'Da Costa')
-    condominium = Condo.create!(name: 'Edifício Monte Verde', city: 'Recife')
-    condominium_two = Condo.create!(name: 'Condomínio Lagoa Serena', city: 'Caxias do Sul')
-    unit_type = FactoryBot.create(:unit_type, condo: condominium, ideal_fraction: 0.1)
-    FactoryBot.create_list(:unit, 10, unit_type:)
+    condos = []
+    condos << Condo.new(id: 1, name: 'Edifício Monte Verde', city: 'Recife')
+    condos << Condo.new(id: 2, name: 'Condomínio Lagoa Serena', city: 'Caxias do Sul')
+    unit_types = []
+    unit_types << UnitType.new(id: 1, area: 30, description: 'Apartamento 1 quarto', ideal_fraction: 0.1,
+                               condo_id: 1)
+    allow(Condo).to receive(:all).and_return(condos)
+    allow(Condo).to receive(:find).and_return(condos.first)
+    allow(UnitType).to receive(:find_all_by_condo).and_return(unit_types)
+
     SharedFee.create!(description: 'Conta de Luz', issue_date: 10.days.from_now.to_date,
-                      total_value: 10_000, condo: condominium)
+                      total_value: 10_000, condo_id: condos.first.id)
     SharedFee.create!(description: 'Conta de Água', issue_date: 15.days.from_now.to_date,
-                      total_value: 5_000, condo: condominium)
+                      total_value: 5_000, condo_id: condos.first.id)
     SharedFee.create!(description: 'Conta de Carro Pipa', issue_date: 5.days.from_now.to_date,
-                      total_value: 25_000, condo: condominium_two)
+                      total_value: 25_000, condo_id: condos.last.id)
 
     login_as admin, scope: :admin
     visit root_path
@@ -34,16 +42,23 @@ describe 'Admin tenta acessar lista de contas compartilhadas' do
 
   it 'e acessa a página de uma conta compartilhada na lista' do
     admin = FactoryBot.create(:admin, first_name: 'Fulano', last_name: 'Da Costa')
-    condominium = Condo.create!(name: 'Edifício Monte Verde', city: 'Recife')
-    condominium_two = Condo.create!(name: 'Condomínio Lagoa Serena', city: 'Caxias do Sul')
-    unit_type = FactoryBot.create(:unit_type, condo: condominium, ideal_fraction: 0.1)
-    FactoryBot.create_list(:unit, 10, unit_type:)
+
+    condos = []
+    condos << Condo.new(id: 1, name: 'Edifício Monte Verde', city: 'Recife')
+    condos << Condo.new(id: 2, name: 'Condomínio Lagoa Serena', city: 'Caxias do Sul')
+    unit_types = []
+    unit_types << UnitType.new(id: 1, area: 30, description: 'Apartamento 1 quarto', ideal_fraction: 0.1, condo_id: 1)
+
+    allow(Condo).to receive(:all).and_return(condos)
+    allow(Condo).to receive(:find).and_return(condos.first)
+    allow(UnitType).to receive(:find_all_by_condo).and_return(unit_types)
+
     SharedFee.create!(description: 'Conta de Luz', issue_date: 10.days.from_now.to_date,
-                      total_value: 10_000, condo: condominium)
+                      total_value: 10_000, condo_id: condos.first.id)
     conta_de_agua = SharedFee.create!(description: 'Conta de Água', issue_date: 15.days.from_now.to_date,
-                                      total_value: 5_000, condo: condominium)
+                                      total_value: 5_000, condo_id: condos.first.id)
     SharedFee.create!(description: 'Conta de Carro Pipa', issue_date: 5.days.from_now.to_date,
-                      total_value: 25_000, condo: condominium_two)
+                      total_value: 25_000, condo_id: condos.last.id)
 
     login_as admin, scope: :admin
     visit root_path
@@ -69,9 +84,13 @@ describe 'Admin tenta acessar lista de contas compartilhadas' do
 
   it 'e não possui contas compartilhadas registradas' do
     admin = FactoryBot.create(:admin, first_name: 'Fulano', last_name: 'Da Costa')
-    condominium = Condo.create!(name: 'Edifício Monte Verde', city: 'Recife')
-    unit_type = FactoryBot.create(:unit_type, condo: condominium, ideal_fraction: 0.1)
-    FactoryBot.create_list(:unit, 10, unit_type:)
+    condos = []
+    condos << Condo.new(id: 1, name: 'Edifício Monte Verde', city: 'Recife')
+    unit_types = []
+    unit_types << UnitType.new(id: 1, area: 30, description: 'Apartamento 1 quarto', ideal_fraction: 0.1, condo_id: 1)
+    allow(Condo).to receive(:all).and_return(condos)
+    allow(Condo).to receive(:find).and_return(condos.first)
+    allow(UnitType).to receive(:find_all_by_condo).and_return(unit_types)
 
     login_as admin, scope: :admin
     visit root_path

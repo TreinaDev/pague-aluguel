@@ -4,7 +4,7 @@ describe Condo do
   context '.all' do
     it 'retorna todos os condominios' do
       data = File.read(Rails.root.join('spec/support/json/condos.json'))
-      response = double('response', status: 200, body: data)
+      response = double('response', success?: true, body: data)
       allow(Faraday).to receive(:get).with('http://127.0.0.1:3000/api/v1/condos').and_return(response)
 
       result = Condo.all

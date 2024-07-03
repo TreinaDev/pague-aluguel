@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema[7.1].define(version: 2024_07_02_215116) do
+ActiveRecord::Schema[7.1].define(version: 2024_07_03_152014) do
   create_table "active_storage_attachments", force: :cascade do |t|
     t.string "name", null: false
     t.string "record_type", null: false
@@ -118,21 +118,19 @@ ActiveRecord::Schema[7.1].define(version: 2024_07_02_215116) do
   create_table "shared_fee_fractions", force: :cascade do |t|
     t.integer "value_cents"
     t.integer "shared_fee_id", null: false
-    t.integer "unit_id", null: false
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
+    t.integer "unit_id"
     t.index ["shared_fee_id"], name: "index_shared_fee_fractions_on_shared_fee_id"
-    t.index ["unit_id"], name: "index_shared_fee_fractions_on_unit_id"
   end
 
   create_table "shared_fees", force: :cascade do |t|
     t.string "description"
     t.date "issue_date"
     t.integer "total_value_cents"
-    t.integer "condo_id", null: false
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
-    t.index ["condo_id"], name: "index_shared_fees_on_condo_id"
+    t.integer "condo_id"
   end
 
   create_table "unit_types", force: :cascade do |t|
@@ -150,8 +148,7 @@ ActiveRecord::Schema[7.1].define(version: 2024_07_02_215116) do
     t.integer "number"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
-    t.integer "unit_type_id", null: false
-    t.index ["unit_type_id"], name: "index_units_on_unit_type_id"
+    t.integer "unit_type_id"
   end
 
   create_table "values", force: :cascade do |t|
@@ -170,8 +167,5 @@ ActiveRecord::Schema[7.1].define(version: 2024_07_02_215116) do
   add_foreign_key "common_area_fee_histories", "common_areas"
   add_foreign_key "common_areas", "condos"
   add_foreign_key "shared_fee_fractions", "shared_fees"
-  add_foreign_key "shared_fee_fractions", "units"
-  add_foreign_key "shared_fees", "condos"
-  add_foreign_key "units", "unit_types"
   add_foreign_key "values", "base_fees"
 end

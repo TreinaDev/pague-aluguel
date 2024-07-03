@@ -3,6 +3,6 @@ FactoryBot.define do
     area { 100 }
     floor { 1 }
     number { 1 }
-    unit_type
+    unit_type_id { nil }
   end
 end

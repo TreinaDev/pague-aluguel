@@ -46,12 +46,16 @@ describe 'admin vê taxa fixa' do
                                condo_id: 1)
     unit_types << UnitType.new(id: 3, area: 60, description: 'Apartamento 3 quartos', ideal_fraction: 222.2,
                                condo_id: 1)
+    units = []
+    units << Unit.new(id: 1, area: 100, floor: 1, number: 1, unit_type_id: 1)
     base_fee = create(:base_fee,
                       name: 'Taxa de Condomínio', description: 'Manutenção.',
                       late_payment: 2, late_fee: 10, fixed: true,
                       charge_day: 25.days.from_now, recurrence: :bimonthly, condo_id: condo.id)
     allow(Condo).to receive(:find).and_return(condo)
+    allow(UnitType).to receive(:all).and_return(unit_types)
     allow(UnitType).to receive(:find_all_by_condo).and_return(unit_types)
+    allow(Unit).to receive(:find_all_by_condo).and_return(units)
 
     create(:value, price: 200, unit_type_id: 1, base_fee:)
     create(:value, price: 300, unit_type_id: 2, base_fee:)

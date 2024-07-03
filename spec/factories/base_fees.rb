@@ -7,6 +7,6 @@ FactoryBot.define do
     fixed { true }
     charge_day { 10.days.from_now }
     recurrence { :monthly }
-    condo
+    condo_id { nil }
   end
 end

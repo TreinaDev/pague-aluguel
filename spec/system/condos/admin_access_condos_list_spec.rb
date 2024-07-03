@@ -35,7 +35,7 @@ describe 'Admin accessa a lista de todos condos registrados' do
   it 'e não existem condomínios registrados' do
     admin = create(:admin)
 
-    response = double('response', status: 200, body: "[]")
+    response = double('response', success?: true, body: '[]')
     allow(Faraday).to receive(:get).with('http://127.0.0.1:3000/api/v1/condos').and_return(response)
 
     login_as admin, scope: :admin
