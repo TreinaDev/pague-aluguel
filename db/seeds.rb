@@ -38,39 +38,17 @@ Admin.create!(
 )
 p "Created #{Admin.count} admins"
 
-condo = Condo.create!(name: 'Sai de baixo', city: 'Rio de Janeiro')
-
-second_condo = Condo.create!(name: 'Segundo Condomínio', city: 'Rio de Janeiro')
-
 CommonArea.find_or_create_by!(name: 'Churrasqueira', description: 'Área de churrasqueira com piscina', max_capacity: 30,
-                              usage_rules: 'Regras ainda não definidas', fee_cents: 250, condo:)
+                              usage_rules: 'Regras ainda não definidas', fee_cents: 250)
 CommonArea.find_or_create_by!(name: 'Play', description: 'Play para eventos', max_capacity: 60,
-                              usage_rules: 'Regras ainda não definidas', fee_cents: 300, condo:)
+                              usage_rules: 'Regras ainda não definidas', fee_cents: 300)
 
 CommonArea.find_or_create_by!(name: 'Salão de festa', description: 'Área feita para eventos casuais', max_capacity: 40,
-                              usage_rules: 'Proibido levar as mesas para fora do salão.', fee_cents: 400, condo: second_condo)
+                              usage_rules: 'Proibido levar as mesas para fora do salão.', fee_cents: 400)
 CommonArea.find_or_create_by!(name: 'Cinema', description: 'Guerreiros Saiajens', max_capacity: 60,
-                              usage_rules: 'Proibido fumar na sala', fee_cents: 500, condo: second_condo)
+                              usage_rules: 'Proibido fumar na sala', fee_cents: 500)
 
 p "Created #{Admin.count} admins"
-
-#Condomínios
-condo1 = Condo.create!(name: 'Prédio lindo', city: 'Cidade Maravilhosa')
-condo2 = Condo.create!(name: 'França', city: 'Cidade show')
-condo3 = Condo.create!(name: 'Canadá', city: 'Cidade massa')
-condo4 = Condo.create!(name: 'EUA', city: 'Cidade tudo')
-condo5 = Condo.create!(name: 'Somália', city: 'Cidade')
-
-p "Created #{Condo.count} condos"
-
-#Tipos de unidades
-unit_type1 = UnitType.create!(description: 'Tipo de unidade 1',
-                              area: 30, ideal_fraction: 0.4, condo: condo1)
-
-unit_type2 = UnitType.create!(description: 'Tipo de unidade 2',
-                              area: 60, ideal_fraction: 0.9, condo: condo1)
-
-p "Created #{UnitType.count} unit types"
 
 #Taxas Fixas
 

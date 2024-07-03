@@ -1,22 +1,18 @@
-<h1><strong>Listagem de Condomínios</strong></h1>
- 
-<% if @condos.any? %>
-  <table class="table">
-    <thead>
-      <tr>
-        <th scope="col">Nome</th>
-        <th scope="col">Cidade</th>
-      </tr>
-    </thead>
-    <tbody>
+<%= turbo_frame_tag "expand" do %> 
+  <% if @condos.any? %>
+    <div class="d-flex gap-3 flex-wrap justify-content-center">
       <% @condos.each do |condo| %>
-        <tr>
-          <td><%= link_to condo.name, condo_path(condo.id) %></td>
-          <td><%= condo.city %></td>
-        </tr>
+        <%= link_to condo_path(condo.id), class: "text-decoration-none" do %>
+          <div class="card hover-strong" style="width: 18rem; ">
+            <div class="card-body">
+              <span class="d-block"><%= condo.name %></span>
+              <span class="text-muted fs-8"><%= condo.city %></span>
+            </div>
+          </div>
+        <% end %>
       <% end %>
-    </tbody>
-  </table>
-<% else %>
-  <strong>Não existem condomínios registrados.</strong>
+    </div>
+  <% else %>
+    <strong>Não existem condomínios registrados.</strong>
+  <% end %>
 <% end %>

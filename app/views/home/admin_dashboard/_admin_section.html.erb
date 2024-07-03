@@ -32,16 +32,18 @@
       <% end %>
     </div>
   </div>
-  <div data-controller="change-button" class="text-center mt-3 mb-3">
-    <%= link_to admins_path, class: 'btn text-uppercase', data: { change_button_target: "allAdminsBtn", turbo_frame: "expand" } do %>
-      <%= image_tag "arrow-down", size: "20" %>
-      <span class="fs-8">Mostrar todos</span>
-    <% end %>
+  <% if @admins.length > 4 %>
+    <div data-controller="change-button" class="text-center mt-3 mb-3">
+      <%= link_to admins_path, class: 'btn text-uppercase', data: { change_button_target: "allAdminsBtn", turbo_frame: "expand" } do %>
+        <%= image_tag "arrow-down", size: "20" %>
+        <span class="fs-8">Mostrar todos</span>
+      <% end %>
 
-    <%= link_to root_path, class: 'btn text-uppercase', data: { change_button_target: "hideAdminsBtn", turbo_frame: "expand" } do %>
-      <%= image_tag "arrow-up", size: "20" %>
-      <span class="fs-8">Ocultar</span>
-    <% end %>
-    <%= turbo_frame_tag 'expand' %>
-  </div>
+      <%= link_to root_path, class: 'btn text-uppercase', data: { change_button_target: "hideAdminsBtn", turbo_frame: "expand" } do %>
+        <%= image_tag "arrow-up", size: "20" %>
+        <span class="fs-8">Ocultar</span>
+      <% end %>
+      <%= turbo_frame_tag 'expand' %>
+    </div>
+  <% end %>
 </div>

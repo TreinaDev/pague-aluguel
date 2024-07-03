@@ -4,6 +4,9 @@
 
 import { application } from "./application"
 
+import ChangeButtonCondoController from "./change_button_condo_controller"
+application.register("change-button-condo", ChangeButtonCondoController)
+
 import ChangeButtonController from "./change_button_controller"
 application.register("change-button", ChangeButtonController)
 

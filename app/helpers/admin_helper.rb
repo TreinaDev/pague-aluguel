@@ -19,5 +19,4 @@ module AdminHelper
       image_tag 'psycho-user', class: 'profile-avatar me-3'
     end
   end
-  
 end
