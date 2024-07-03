@@ -30,3 +30,5 @@ Metrics/BlockLength:
   Exclude:
     - 'spec/factories/**/*'
 
+Style/SymbolArray:
+  EnforcedStyle: brackets
