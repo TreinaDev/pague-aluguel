@@ -1,6 +1,6 @@
 class CommonAreasController < ApplicationController
   before_action :authenticate_admin!
-  before_action :find_common_area, only: %i[edit show update]
+  before_action :find_common_area, only: [:edit, :show, :update]
 
   def index
     @condo = Condo.find(params[:condo_id])
@@ -25,7 +25,7 @@ class CommonAreasController < ApplicationController
   private
 
   def common_area_params
-    params.require(:common_area).permit(:fee_cents)
+    params.require(:common_area).permit(:fee)
   end
 
   def find_common_area

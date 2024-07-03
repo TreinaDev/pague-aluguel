@@ -5,7 +5,7 @@ describe 'admin vê taxa fixa' do
     condo = create(:condo, name: 'Prédio lindo', city: 'Cidade maravilhosa')
     base_fee = create(:base_fee,
                       name: 'Taxa de Condomínio', description: 'Manutenção.',
-                      late_payment: 2, late_fee: 10, fixed: true,
+                      interest_rate: 2, late_fine: 10, fixed: true,
                       charge_day: 25.days.from_now, recurrence: :bimonthly, condo:)
 
     visit condo_base_fee_path(condo, base_fee)
@@ -38,7 +38,7 @@ describe 'admin vê taxa fixa' do
     unit_type3 = create(:unit_type, description: 'Apartamento 3 quartos', condo:)
     base_fee = create(:base_fee,
                       name: 'Taxa de Condomínio', description: 'Manutenção.',
-                      late_payment: 2, late_fee: 10, fixed: true,
+                      interest_rate: 2, late_fine: 10, fixed: true,
                       charge_day: 25.days.from_now, recurrence: :bimonthly, condo:)
     create(:value, price: 200, unit_type: unit_type1, base_fee:)
     create(:value, price: 300, unit_type: unit_type2, base_fee:)
@@ -64,7 +64,7 @@ describe 'admin vê taxa fixa' do
     expect(page).to have_content 'R$ 500,00'
     expect(page).to have_content 'Taxa fixa'
     expect(page).to have_content 'Juros de 2% ao dia'
-    expect(page).to have_content 'Multa de R$10 por atraso'
+    expect(page).to have_content 'Multa de R$10,00 por atraso'
   end
 
   it 'e retorna para lista de taxas cadastradas' do
@@ -73,7 +73,7 @@ describe 'admin vê taxa fixa' do
     unit_type = create(:unit_type, condo:)
     base_fee = create(:base_fee,
                       name: 'Taxa', description: 'Manutenção.',
-                      late_payment: 2, late_fee: 10, fixed: true,
+                      interest_rate: 2, late_fine: 10, fixed: true,
                       charge_day: 25.days.from_now, recurrence: :bimonthly, condo:)
     create(:value, price: 200, unit_type:, base_fee:)
 
