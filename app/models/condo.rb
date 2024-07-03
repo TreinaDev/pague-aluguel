@@ -28,9 +28,4 @@ class Condo
     end
     condo
   end
-  # has_many :unit_types, dependent: :destroy
-  # has_many :units, through: :unit_types
-  # has_many :common_areas, dependent: :destroy
-  # has_many :base_fees, dependent: :destroy
-  # has_many :shared_fees, dependent: :destroy
 end

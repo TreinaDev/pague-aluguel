@@ -15,11 +15,8 @@ class UnitType
     if response.success?
       data = JSON.parse(response.body)
       data.each do |ut|
-        unit_types << UnitType.new(id: ut['id'],
-                                   area: ut['area'],
-                                   description: ut['description'],
-                                   ideal_fraction: ut['ideal_fraction'],
-                                   condo_id: ut['condo_id'])
+        unit_types << UnitType.new(id: ut['id'], area: ut['area'], description: ut['description'],
+                                   ideal_fraction: ut['ideal_fraction'], condo_id: ut['condo_id'])
       end
     end
     unit_types
@@ -41,8 +38,4 @@ class UnitType
   def self.find_all_by_condo(id)
     UnitType.all.filter { |ut| ut.condo_id == id }
   end
-  # belongs_to :condo
-  # has_many :units, dependent: :destroy
-  # has_many :values, dependent: :destroy
-  # has_many :base_fees, through: :values
 end

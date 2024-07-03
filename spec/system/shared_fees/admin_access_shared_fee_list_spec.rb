@@ -1,5 +1,3 @@
-
-
 require 'rails_helper'
 
 describe 'Admin tenta acessar lista de contas compartilhadas' do

@@ -15,10 +15,7 @@ class Unit
     if response.success?
       data = JSON.parse(response.body)
       data.each do |unit|
-        units << Unit.new(id: unit['id'],
-                          area: unit['area'],
-                          floor: unit['floor'],
-                          number: unit['number'],
+        units << Unit.new(id: unit['id'], area: unit['area'], floor: unit['floor'], number: unit['number'],
                           unit_type_id: unit['unit_type_id'])
       end
     end
@@ -30,6 +27,4 @@ class Unit
     unit_type_ids = unit_types.map(&:id)
     Unit.all.select { |unit| unit_type_ids.include?(unit.unit_type_id) }
   end
-
-  # has_many :shared_fee_fractions, dependent: :destroy
 end
