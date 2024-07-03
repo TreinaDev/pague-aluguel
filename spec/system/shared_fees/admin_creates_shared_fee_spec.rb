@@ -3,11 +3,20 @@ require 'rails_helper'
 describe 'Admin lança uma conta compartilhada' do
   it 'com sucesso' do
     admin = FactoryBot.create(:admin, first_name: 'Fulano', last_name: 'Da Costa')
-    condominium = Condo.create!(name: 'Condo Test', city: 'City Test')
-    unit_type_one = FactoryBot.create(:unit_type, condo: condominium, ideal_fraction: 0.04)
-    unit_type_two = FactoryBot.create(:unit_type, condo: condominium, ideal_fraction: 0.06)
-    FactoryBot.create_list(:unit, 10, unit_type: unit_type_one)
-    FactoryBot.create_list(:unit, 10, unit_type: unit_type_two)
+    condos = []
+    condos << Condo.new(id: 1, name: 'Condo Test', city: 'City Test')
+    unit_types = []
+    unit_types << UnitType.new(id: 1, area: 30, description: 'Apartamento 1 quarto', ideal_fraction: 0.04,
+                               condo_id: 1)
+    unit_types << UnitType.new(id: 1, area: 30, description: 'Apartamento 1 quarto', ideal_fraction: 0.06,
+                               condo_id: 1)
+    units = []
+    units << Unit.new(id: 1, area: 100, floor: 1, number: 1, unit_type_id: 1)
+
+    allow(Condo).to receive(:all).and_return(condos)
+    allow(Condo).to receive(:find).and_return(condos.first)
+    allow(UnitType).to receive(:all).and_return(unit_types)
+    allow(Unit).to receive(:all).and_return(units)
 
     login_as admin, scope: :admin
     visit root_path
@@ -39,11 +48,20 @@ describe 'Admin lança uma conta compartilhada' do
 
   it 'e deve preencher todos os campos' do
     admin = FactoryBot.create(:admin, first_name: 'Fulano', last_name: 'Da Costa')
-    condominium = Condo.create!(name: 'Condo Test', city: 'City Test')
-    unit_type_one = FactoryBot.create(:unit_type, condo: condominium, ideal_fraction: 0.04)
-    unit_type_two = FactoryBot.create(:unit_type, condo: condominium, ideal_fraction: 0.06)
-    FactoryBot.create_list(:unit, 10, unit_type: unit_type_one)
-    FactoryBot.create_list(:unit, 10, unit_type: unit_type_two)
+    condos = []
+    condos << Condo.new(id: 1, name: 'Condo Test', city: 'City Test')
+    unit_types = []
+    unit_types << UnitType.new(id: 1, area: 30, description: 'Apartamento 1 quarto', ideal_fraction: 0.04,
+                               condo_id: 1)
+    unit_types << UnitType.new(id: 1, area: 30, description: 'Apartamento 1 quarto', ideal_fraction: 0.06,
+                               condo_id: 1)
+    units = []
+    units << Unit.new(id: 1, area: 100, floor: 1, number: 1, unit_type_id: 1)
+
+    allow(Condo).to receive(:all).and_return(condos)
+    allow(Condo).to receive(:find).and_return(condos.first)
+    allow(UnitType).to receive(:all).and_return(unit_types)
+    allow(Unit).to receive(:all).and_return(units)
 
     login_as admin, scope: :admin
     visit root_path
@@ -61,15 +79,26 @@ describe 'Admin lança uma conta compartilhada' do
 
   it 'e lança mais de uma conta' do
     admin = FactoryBot.create(:admin, first_name: 'Fulano', last_name: 'Da Costa')
-    condominium = Condo.create!(name: 'Condo Test', city: 'City Test')
-    unit_type_one = FactoryBot.create(:unit_type, condo: condominium, ideal_fraction: 0.04)
-    unit_type_two = FactoryBot.create(:unit_type, condo: condominium, ideal_fraction: 0.06)
-    FactoryBot.create_list(:unit, 9, unit_type: unit_type_one)
-    FactoryBot.create_list(:unit, 9, unit_type: unit_type_two)
-    unit_one = Unit.create!(area: 40, floor: 1, number: 101, unit_type: unit_type_one)
-    unit_two = Unit.create!(area: 60, floor: 2, number: 202, unit_type: unit_type_two)
+
+    condos = []
+    condos << Condo.new(id: 1, name: 'Condo Test', city: 'City Test')
+    unit_types = []
+    unit_types << UnitType.new(id: 1, area: 30, description: 'Apartamento 1 quarto', ideal_fraction: 0.04,
+                               condo_id: 1)
+    unit_types << UnitType.new(id: 2, area: 30, description: 'Apartamento 2 quarto', ideal_fraction: 0.06,
+                               condo_id: 1)
+    units = []
+    units << Unit.new(id: 1, area: 40, floor: 1, number: 101, unit_type_id: 1)
+    units << Unit.new(id: 2, area: 60, floor: 2, number: 202, unit_type_id: 2)
+
+    allow(Condo).to receive(:all).and_return(condos)
+    allow(Condo).to receive(:find).and_return(condos.first)
+    allow(UnitType).to receive(:all).and_return(unit_types)
+    allow(Unit).to receive(:all).and_return(units)
+
     conta_de_luz = SharedFee.create!(description: 'Conta de Luz', issue_date: 10.days.from_now.to_date,
-                                     total_value: 10_000, condo: condominium)
+                                     total_value: 10_000, condo_id: condos.first.id)
+    conta_de_luz.calculate_fractions
 
     login_as admin, scope: :admin
     visit root_path
@@ -82,11 +111,12 @@ describe 'Admin lança uma conta compartilhada' do
     fill_in 'Valor Total', with: 5_000
     click_on 'Registrar'
 
-    conta_de_luz_fraction_one = unit_one.shared_fee_fractions.find_by(shared_fee: conta_de_luz)
-    conta_de_luz_fraction_two = unit_two.shared_fee_fractions.find_by(shared_fee: conta_de_luz)
+    conta_de_luz_fraction_one = SharedFeeFraction.find_by(unit_id: units[0], shared_fee: conta_de_luz)
+    conta_de_luz_fraction_two = SharedFeeFraction.find_by(unit_id: units[1], shared_fee: conta_de_luz)
     conta_de_agua = SharedFee.last
-    conta_de_agua_fraction_one = unit_one.shared_fee_fractions.find_by(shared_fee: conta_de_agua)
-    conta_de_agua_fraction_two = unit_two.shared_fee_fractions.find_by(shared_fee: conta_de_agua)
+    conta_de_agua_fraction_one = SharedFeeFraction.find_by(unit_id: units[0], shared_fee: conta_de_agua)
+    conta_de_agua_fraction_two = SharedFeeFraction.find_by(unit_id: units[1], shared_fee: conta_de_agua)
+
     expect(conta_de_luz_fraction_one.value_cents).to eq(400_00)
     expect(conta_de_luz_fraction_two.value_cents).to eq(600_00)
     expect(Money.new(conta_de_luz_fraction_one.value_cents, 'BRL').format).to eq('R$400,00')

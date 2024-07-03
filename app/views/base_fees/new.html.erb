@@ -18,8 +18,8 @@
     <%= I18n.t('views.new.create_fee', condo: @condo.name) %>
   </span>
 
-  <%= form_with model: [@condo, @base_fee], local: true do |f| %>
-    <%= hidden_field_tag :condo, @condo.id %>
+  <%= form_with model: [@base_fee], url: condo_base_fees_path(@condo.id), local: true do |f| %>
+    <%= hidden_field_tag :condo_id, @condo.id %>
 
     <div class="form-floating mb-2 w-50 mx-auto mt-4">
       <%= f.text_field :name, class: "form-control" %>
@@ -38,9 +38,10 @@
 
     <%= f.fields_for :values do |values_form| %>
       <div class="form-floating mb-2 w-50 mx-auto">
-          <%= values_form.label :price, I18n.t('activerecord.values.values_price', unit_type: values_form.object.unit_type.description ) %>
-          <%= values_form.text_field :price, placeholder: '0,00', class: "form-control" %>
-          <%= values_form.hidden_field :unit_type_id, value: values_form.object.unit_type.id %>
+        <% unit_type = @unit_types.find { |ut| ut.id == values_form.object.unit_type_id } %>
+        <%= values_form.text_field :price, placeholder: '0,00', class: "form-control" %>
+        <%= values_form.label :price, I18n.t('activerecord.values.values_price', unit_type: unit_type.description ) %>
+        <%= values_form.hidden_field :unit_type_id, value: values_form.object.unit_type_id %>
       </div>
     <% end %>
 

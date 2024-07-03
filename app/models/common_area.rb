@@ -1,5 +1,4 @@
 class CommonArea < ApplicationRecord
-  belongs_to :condo
   validate :fee_not_negative, on: :update
   validates :fee_cents, presence: true
   validates :fee_cents, numericality: { only_integer: true }

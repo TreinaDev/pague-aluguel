@@ -3,10 +3,11 @@ require 'rails_helper'
 RSpec.describe CommonArea, type: :model do
   describe '#valid?' do
     it 'e não pode ser negativo' do
-      condo = Condo.create!(name: 'Sai de baixo', city: 'Rio de Janeiro')
+      condo = Condo.new(id: 1, name: 'Condomínio Vila das Flores', city: 'São Paulo')
+      allow(Condo).to receive(:find).and_return(condo)
 
       common_area = CommonArea.create!(name: 'TMNT', description: 'Teenage Mutant Ninja Turtles', max_capacity: 40,
-                                       usage_rules: 'Não lutar no salão', condo:)
+                                       usage_rules: 'Não lutar no salão', condo_id: condo.id)
 
       common_area.update(fee_cents: -20)
 

@@ -8,6 +8,7 @@ gem 'bootsnap', require: false
 gem 'cpf_cnpj'
 gem 'cssbundling-rails'
 gem 'devise'
+gem 'faraday'
 gem 'jbuilder'
 gem 'jsbundling-rails'
 gem 'money-rails', '~> 1.12'

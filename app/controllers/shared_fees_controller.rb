@@ -3,12 +3,12 @@ class SharedFeesController < ApplicationController
 
   def index
     @condo = Condo.find(params[:condo_id])
-    @shared_fees = @condo.shared_fees
+    @shared_fees = SharedFee.where(condo_id: @condo.id)
   end
 
   def show
     @shared_fee = SharedFee.find(params[:id])
-    @condo = @shared_fee.condo
+    @condo = Condo.find(params[:condo_id])
   end
 
   def new
@@ -21,6 +21,7 @@ class SharedFeesController < ApplicationController
     @condos = Condo.all
     @shared_fee = SharedFee.new(shared_fee_params)
     if @shared_fee.save
+      @shared_fee.calculate_fractions
       redirect_to @shared_fee, notice: I18n.t('success_notice_shared_fee')
     else
       flash.now[:alert] = I18n.t('fail_notice_shared_fee')

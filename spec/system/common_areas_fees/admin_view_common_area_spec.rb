@@ -3,12 +3,13 @@ require 'rails_helper'
 describe 'Admin vê área comum' do
   it 'com sucesso' do
     admin = create(:admin, email: 'ikki.phoenix@seiya.com', password: 'phoenix123')
-    condo = FactoryBot.create(:condo)
+    condo = Condo.new(id: 1, name: 'Condomínio Vila das Flores', city: 'São Paulo')
+    allow(Condo).to receive(:find).and_return(condo)
     CommonArea.create!(name: 'TMNT', description: 'Teenage Mutant Ninja Turtles', max_capacity: 40,
-                       usage_rules: 'Não lutar no salão', fee_cents: 200_00, condo:)
+                       usage_rules: 'Não lutar no salão', fee_cents: 200_00, condo_id: condo.id)
 
     login_as admin, scope: :admin
-    visit condo_common_areas_path(condo)
+    visit condo_common_areas_path(condo.id)
     within 'div#area-0' do
       click_on 'TMNT'
     end
@@ -22,23 +23,25 @@ describe 'Admin vê área comum' do
 
   it 'e taxa não está cadastrada' do
     admin = create(:admin, email: 'ikki.phoenix@seiya.com', password: 'phoenix123')
-    condo = FactoryBot.create(:condo)
-    common_area = FactoryBot.create(:common_area, fee_cents: 0, condo:)
+    condo = Condo.new(id: 1, name: 'Condomínio Vila das Flores', city: 'São Paulo')
+    allow(Condo).to receive(:find).and_return(condo)
+    common_area = FactoryBot.create(:common_area, fee_cents: 0, condo_id: condo.id)
 
     login_as admin, scope: :admin
-    visit condo_common_area_path(condo, common_area)
+    visit condo_common_area_path(condo.id, common_area)
 
     expect(page).to have_content 'Taxa não cadastrada'
   end
 
   it 'e vê histórico de taxas' do
     admin = create(:admin, email: 'ikki.phoenix@seiya.com', password: 'phoenix123')
-    condo = FactoryBot.create(:condo)
-    common_area = FactoryBot.create(:common_area, fee_cents: 0, condo:)
+    condo = Condo.new(id: 1, name: 'Condomínio Vila das Flores', city: 'São Paulo')
+    allow(Condo).to receive(:find).and_return(condo)
+    common_area = FactoryBot.create(:common_area, fee_cents: 0, condo_id: condo.id)
 
     login_as admin, scope: :admin
 
-    visit condo_common_area_path(condo, common_area)
+    visit condo_common_area_path(condo.id, common_area)
     click_on 'Registrar Taxa'
     fill_in 'Taxa de área comum', with: '200,00'
     click_on 'Atualizar'
@@ -57,11 +60,12 @@ describe 'Admin vê área comum' do
 
   it 'e o histórico de taxas não existe' do
     admin = create(:admin, email: 'ikki.phoenix@seiya.com', password: 'phoenix123')
-    condo = FactoryBot.create(:condo)
-    common_area = FactoryBot.create(:common_area, fee_cents: 0, condo:)
+    condo = Condo.new(id: 1, name: 'Condomínio Vila das Flores', city: 'São Paulo')
+    allow(Condo).to receive(:find).and_return(condo)
+    common_area = FactoryBot.create(:common_area, fee_cents: 0, condo_id: condo.id)
 
     login_as admin, scope: :admin
-    visit condo_common_area_path(condo, common_area)
+    visit condo_common_area_path(condo.id, common_area)
 
     expect(page).not_to have_link 'Mostrar histórico de taxas'
   end
