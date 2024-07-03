@@ -16,6 +16,30 @@ Admin.create!(
   document_number: CPF.generate
 )
 
+Admin.create!(
+  email: '1@mail.com',
+  password: '123456',
+  first_name: 'Bruna',
+  last_name: 'Alvares',
+  document_number: CPF.generate
+)
+
+Admin.create!(
+  email: '2@mail.com',
+  password: '123456',
+  first_name: 'Jair',
+  last_name: 'Nuno',
+  document_number: CPF.generate
+)
+
+Admin.create!(
+  email: '3@mail.com',
+  password: '123456',
+  first_name: 'Leandro',
+  last_name: 'Porta',
+  document_number: CPF.generate
+)
+
 condo = Condo.create!(name: 'Sai de baixo', city: 'Rio de Janeiro')
 
 second_condo = Condo.create!(name: 'Segundo Condomínio', city: 'Rio de Janeiro')
@@ -34,6 +58,10 @@ p "Created #{Admin.count} admins"
 
 #Condomínios
 condo1 = Condo.create!(name: 'Prédio lindo', city: 'Cidade Maravilhosa')
+condo2 = Condo.create!(name: 'França', city: 'Cidade show')
+condo3 = Condo.create!(name: 'Canadá', city: 'Cidade massa')
+condo4 = Condo.create!(name: 'EUA', city: 'Cidade tudo')
+condo5 = Condo.create!(name: 'Somália', city: 'Cidade')
 
 p "Created #{Condo.count} condos"
 

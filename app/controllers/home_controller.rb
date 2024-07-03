@@ -1,6 +1,6 @@
 class HomeController < ApplicationController
   def index
-    @admins = Admin.all
+    @recent_admins = Admin.last(3)
     @condos = Condo.all
   end
 end

@@ -10,8 +10,8 @@
   <% end %>
 
   <div class="d-flex justify-content-center">
-    <div class="accordion w-50" id="admin-accordion">
-      <% @admins.each do |admin| %>
+    <div class="accordion w-50" id="recent-admins">
+      <% @recent_admins.each do |admin| %>
         <div class="accordion-item">
           <h2 class="accordion-header">
             <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#<%= dom_id(admin) %>" aria-expanded="false" aria-controls="<%= dom_id(admin) %>">
@@ -35,5 +35,17 @@
         </div>
       <% end %>
     </div>
+  </div>
+  <div data-controller="change-button" class="text-center mt-3 mb-3">
+    <%= link_to admins_path, class: 'btn text-uppercase', data: { change_button_target: "allAdminsBtn", turbo_frame: "expand" } do %>
+      <%= image_tag "arrow-down", size: "20" %>
+      <span class="fs-8">Mostrar todos</span>
+    <% end %>
+
+    <%= link_to :back, class: 'btn text-uppercase', data: { change_button_target: "hideAdminsBtn", turbo_frame: "expand" } do %>
+      <%= image_tag "arrow-up", size: "20" %>
+      <span class="fs-8">Ocultar</span>
+    <% end %>
+    <%= turbo_frame_tag 'expand' %>
   </div>
 </div>
