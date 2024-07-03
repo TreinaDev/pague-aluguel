@@ -35,7 +35,7 @@
       <div class="form-group">
         <%= f.fields_for :values do |values_form| %><br>
 
-          <%= values_form.label :price_cents, I18n.t('activerecord.values.values_price', unit_type: UnitType.find(values_form.object.unit_type_id) ) %>
+          <%= values_form.label :price_cents, I18n.t('activerecord.values.values_price', unit_type: UnitType.find(values_form.object.unit_type_id).description ) %>
           <%= values_form.number_field :price_cents, class: "form-control" %>
           <%= values_form.hidden_field :unit_type_id, value: values_form.object.unit_type_id %>
         <% end %>

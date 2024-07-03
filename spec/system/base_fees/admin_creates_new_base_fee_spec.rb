@@ -18,7 +18,7 @@ describe 'admin cria taxa fixa' do
     allow(Condo).to receive(:all).and_return(condos)
     allow(Condo).to receive(:find).and_return(condos[0])
     allow(UnitType).to receive(:find_all_by_condo).and_return(unit_types)
-    allow(UnitType).to receive(:find).and_return(unit_types)
+    allow(UnitType).to receive(:find).and_return(unit_types[0])
 
     login_as admin, scope: :admin
     visit root_path
@@ -33,15 +33,21 @@ describe 'admin cria taxa fixa' do
 
   it 'com sucesso' do
     admin = create(:admin)
-    condo = create(:condo, name: 'Prédio lindo', city: 'Cidade maravilhosa')
-    create(:unit_type, description: 'Apartamento 1 quarto', area: 30, condo:)
-    create(:unit_type, description: 'Apartamento 2 quartos', area: 45, condo:)
-    create(:unit_type, description: 'Apartamento 3 quartos', area: 60, condo:)
+    condo = Condo.new(id: 1, name: 'Prédio lindo', city: 'Cidade maravilhosa')
+    unit_types = []
+    unit_types << UnitType.new(id: 1, area: 30, description: 'Apartamento 1 quarto', ideal_fraction: 222.2, condo_id: 1)
+    unit_types << UnitType.new(id: 2, area: 45, description: 'Apartamento 2 quartos', ideal_fraction: 222.2,
+                               condo_id: 1)
+    unit_types << UnitType.new(id: 3, area: 60, description: 'Apartamento 3 quartos', ideal_fraction: 222.2,
+                               condo_id: 1)
+    allow(Condo).to receive(:find).and_return(condo)
+    allow(UnitType).to receive(:find).and_return(unit_types[0], unit_types[1], unit_types[2])
+    allow(UnitType).to receive(:find_all_by_condo).and_return(unit_types)
 
     formatted_date = 10.days.from_now.to_date
 
     login_as admin, scope: :admin
-    visit new_condo_base_fee_path(condo)
+    visit new_condo_base_fee_path(condo.id)
     within '.form-base-fees' do
       fill_in 'Nome', with: 'Taxa de Condomínio'
       fill_in 'Descrição', with: 'Taxas mensais para manutenção do prédio.'
@@ -58,19 +64,24 @@ describe 'admin cria taxa fixa' do
 
     base_fee = BaseFee.last
     expect(page).to have_content 'Taxa cadastrada com sucesso!'
-    expect(current_path).to eq condo_base_fee_path(condo, base_fee)
+    expect(current_path).to eq condo_base_fee_path(condo.id, base_fee)
   end
 
   it 'com dados incompletos' do
     admin = create(:admin)
-    condo = create(:condo, name: 'Prédio lindo', city: 'Cidade maravilhosa')
-
-    create(:unit_type, description: 'Apartamento 1 quarto', area: 30, condo:)
-    create(:unit_type, description: 'Apartamento 2 quartos', area: 45, condo:)
-    create(:unit_type, description: 'Apartamento 3 quartos', area: 60, condo:)
+    condo = Condo.new(id: 1, name: 'Prédio lindo', city: 'Cidade maravilhosa')
+    unit_types = []
+    unit_types << UnitType.new(id: 1, area: 30, description: 'Apartamento 1 quarto', ideal_fraction: 222.2, condo_id: 1)
+    unit_types << UnitType.new(id: 2, area: 45, description: 'Apartamento 2 quartos', ideal_fraction: 222.2,
+                               condo_id: 1)
+    unit_types << UnitType.new(id: 3, area: 60, description: 'Apartamento 3 quartos', ideal_fraction: 222.2,
+                               condo_id: 1)
+    allow(Condo).to receive(:find).and_return(condo)
+    allow(UnitType).to receive(:find).and_return(unit_types[0], unit_types[1], unit_types[2])
+    allow(UnitType).to receive(:find_all_by_condo).and_return(unit_types)
 
     login_as admin, scope: :admin
-    visit new_condo_base_fee_path(condo)
+    visit new_condo_base_fee_path(condo.id)
     within '.form-base-fees' do
       fill_in 'Nome', with: ''
       fill_in 'Descrição', with: ''
@@ -95,16 +106,21 @@ describe 'admin cria taxa fixa' do
 
   it 'e data deve ser futura' do
     admin = create(:admin)
-    condo = create(:condo, name: 'Prédio lindo', city: 'Cidade maravilhosa')
-
-    create(:unit_type, description: 'Apartamento 1 quarto', area: 30, condo:)
-    create(:unit_type, description: 'Apartamento 2 quartos', area: 45, condo:)
-    create(:unit_type, description: 'Apartamento 3 quartos', area: 60, condo:)
+    condo = Condo.new(id: 1, name: 'Prédio lindo', city: 'Cidade maravilhosa')
+    unit_types = []
+    unit_types << UnitType.new(id: 1, area: 20, description: 'Apartamento 1 quarto', ideal_fraction: 222.2, condo_id: 1)
+    unit_types << UnitType.new(id: 2, area: 30, description: 'Apartamento 2 quartos', ideal_fraction: 222.2,
+                               condo_id: 1)
+    unit_types << UnitType.new(id: 3, area: 50, description: 'Apartamento 3 quartos', ideal_fraction: 222.2,
+                               condo_id: 1)
+    allow(Condo).to receive(:find).and_return(condo)
+    allow(UnitType).to receive(:find_all_by_condo).and_return(unit_types)
+    allow(UnitType).to receive(:find).and_return(unit_types[0], unit_types[1], unit_types[2])
 
     formatted_date = 10.days.ago.to_date
 
     login_as admin, scope: :admin
-    visit new_condo_base_fee_path(condo)
+    visit new_condo_base_fee_path(condo.id)
     within '.form-base-fees' do
       fill_in 'Nome', with: 'Taxa de Condomínio'
       fill_in 'Descrição', with: 'Taxas mensais para manutenção do prédio.'

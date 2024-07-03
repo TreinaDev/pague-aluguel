@@ -11,7 +11,7 @@
     <tbody>
       <% @condos.each do |condo| %>
         <tr>
-          <td><%= link_to condo.name, condo_path(condo) %></td>
+          <td><%= link_to condo.name, condo_path(condo.id) %></td>
           <td><%= condo.city %></td>
         </tr>
       <% end %>

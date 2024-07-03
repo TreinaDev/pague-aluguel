@@ -1,25 +1,27 @@
 class BaseFeesController < ApplicationController
   before_action :authenticate_admin!
-  before_action :set_condo, only: [:new, :create, :index]
+  before_action :set_condo, only: %i[new create index]
+
+  def index
+    @base_fees = BaseFee.where(condo_id: @condo.id)
+  end
 
   def show
     @base_fee = BaseFee.find(params[:id])
     @condo = Condo.find(@base_fee.condo_id)
     @values = Value.where(base_fee: @base_fee)
   end
-  def index
-    @base_fees = BaseFee.where(condo_id: @condo.id)
-  end
+
   def new
     @base_fee = BaseFee.new(condo_id: @condo.id)
     @values = @base_fee.value_builder
   end
 
   def create
-    @base_fee = @condo.base_fees.build(base_fee_params)
+    @base_fee = BaseFee.new(base_fee_params)
 
     if @base_fee.save
-      redirect_to condo_base_fee_path(@condo, @base_fee), notice: I18n.t('success_notice_base_fee')
+      redirect_to condo_base_fee_path(@condo.id, @base_fee), notice: I18n.t('success_notice_base_fee')
     else
       flash.now[:alert] = I18n.t 'fail_notice_base_fee'
       render :new, status: :unprocessable_entity
@@ -30,8 +32,8 @@ class BaseFeesController < ApplicationController
 
   def base_fee_params
     params.require(:base_fee).permit(:name, :description, :late_payment, :late_fee,
-                                     :fixed, :charge_day, :recurrence,
-                                     values_attributes: [:price_cents, :unit_type_id])
+                                     :fixed, :charge_day, :recurrence, :condo_id,
+                                     values_attributes: %i[price_cents unit_type_id])
   end
 
   def set_condo

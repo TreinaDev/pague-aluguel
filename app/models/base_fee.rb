@@ -1,5 +1,4 @@
 class BaseFee < ApplicationRecord
-  belongs_to :condo
   has_many :values, dependent: :destroy
   has_many :unit_types, through: :values
 

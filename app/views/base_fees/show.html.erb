@@ -20,7 +20,7 @@
 
       <% @values.each do |value| %>
         <div class="row d-flex flex-column">
-          <strong><%= I18n.t('activerecord.values.values_price', unit_type: value.unit_type.description ) %>:</strong>
+          <strong><%= I18n.t('activerecord.values.values_price', unit_type: UnitType.find(value.unit_type_id).description ) %>:</strong>
           <%= number_to_currency(value.price, locale: :'pt-BR')%>
         </div>
       <% end %>

@@ -10,7 +10,7 @@
     <tbody>
       <% @base_fees.each do |base_fee| %>
         <tr>
-          <td><%= link_to base_fee.name, condo_base_fee_path(@condo, base_fee) %></td>
+          <td><%= link_to base_fee.name, condo_base_fee_path(@condo.id, base_fee) %></td>
         </tr>
       <% end %>
     </tbody>
@@ -19,4 +19,4 @@
   <strong>Não existem Taxas Cadastradas.</strong>
 <% end %>
 <hr>
-<%= link_to I18n.t('helpers.buttons.back'), condo_path(@condo), class: "btn btn-secondary" %>
+<%= link_to I18n.t('helpers.buttons.back'), condo_path(@condo.id), class: "btn btn-secondary" %>
