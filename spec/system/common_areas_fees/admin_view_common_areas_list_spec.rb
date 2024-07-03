@@ -134,14 +134,3 @@ describe 'Admin vê a lista de áreas comuns' do
     expect(current_path).to eq condo_path(condo.id)
   end
 end
-
-# Nathan
-# rspec ./spec/system/admin_access_condo_managing_page_spec.rb:4
-# rspec ./spec/system/base_fees/admin_creates_new_base_fee_spec.rb:12
-# rspec ./spec/system/base_fees/admin_sees_base_fee_details_spec.rb:16
-
-# Matheus
-
-# rspec ./spec/system/shared_fee/admin_access_shared_fee_list_spec.rb:4
-# rspec ./spec/system/shared_fee/admin_access_shared_fee_list_spec.rb:34
-# rspec ./spec/system/shared_fee/admin_access_shared_fee_list_spec.rb:68

@@ -5,7 +5,7 @@ describe 'admin vê taxa fixa' do
     condo = Condo.new(id: 1, name: 'Prédio lindo', city: 'Cidade maravilhosa')
     base_fee = create(:base_fee,
                       name: 'Taxa de Condomínio', description: 'Manutenção.',
-                      late_payment: 2, late_fee: 10, fixed: true,
+                      interest_rate: 2, late_fine: 10, fixed: true,
                       charge_day: 25.days.from_now, recurrence: :bimonthly, condo_id: condo.id)
     allow(Condo).to receive(:find).and_return(condo)
 
@@ -50,7 +50,7 @@ describe 'admin vê taxa fixa' do
     units << Unit.new(id: 1, area: 100, floor: 1, number: 1, unit_type_id: 1)
     base_fee = create(:base_fee,
                       name: 'Taxa de Condomínio', description: 'Manutenção.',
-                      late_payment: 2, late_fee: 10, fixed: true,
+                      interest_rate: 2, late_fine: 10, fixed: true,
                       charge_day: 25.days.from_now, recurrence: :bimonthly, condo_id: condo.id)
     allow(Condo).to receive(:find).and_return(condo)
     allow(UnitType).to receive(:all).and_return(unit_types)
@@ -81,7 +81,7 @@ describe 'admin vê taxa fixa' do
     expect(page).to have_content 'R$ 500,00'
     expect(page).to have_content 'Taxa fixa'
     expect(page).to have_content 'Juros de 2% ao dia'
-    expect(page).to have_content 'Multa de R$10 por atraso'
+    expect(page).to have_content 'Multa de R$10,00 por atraso'
   end
 
   it 'e retorna para lista de taxas cadastradas' do
@@ -95,7 +95,7 @@ describe 'admin vê taxa fixa' do
                                condo_id: 1)
     base_fee = create(:base_fee,
                       name: 'Taxa', description: 'Manutenção.',
-                      late_payment: 2, late_fee: 10, fixed: true,
+                      interest_rate: 2, late_fine: 10, fixed: true,
                       charge_day: 25.days.from_now, recurrence: :bimonthly, condo_id: 1)
     allow(Condo).to receive(:find).and_return(condo)
     allow(UnitType).to receive(:find_all_by_condo).and_return(unit_types)

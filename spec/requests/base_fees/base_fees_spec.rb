@@ -14,17 +14,17 @@ describe 'Admin creates a base fee' do
     login_as admin, scope: :admin
     post(condo_base_fees_path(condo.id), params: { base_fee: { name: 'Nome',
                                                                description: 'Descrição',
-                                                               late_payment: 2,
-                                                               late_fee: 30,
+                                                               interest_rate: 2,
+                                                               late_fine: 30,
                                                                charge_day: 10.days.from_now,
                                                                condo_id: condo.id,
                                                                values_attributes: {
                                                                  '0': {
-                                                                   price_cents: 100,
+                                                                   price: 100,
                                                                    unit_type_id: unit_types.first.id
                                                                  },
                                                                  '1': {
-                                                                   price_cents: 100,
+                                                                   price: 100,
                                                                    unit_type_id: unit_types.last.id
                                                                  }
                                                                } } })

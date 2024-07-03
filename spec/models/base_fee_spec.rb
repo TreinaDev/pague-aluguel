@@ -4,14 +4,13 @@ RSpec.describe BaseFee, type: :model do
   describe 'válido?' do
     context 'presença' do
       it 'valida presença' do
-        base_fee = build(:base_fee, name: '', description: '', late_payment: '',
-                                    late_fee: '', charge_day: '')
+        base_fee = build(:base_fee, name: '', description: '', interest_rate: '', late_fine: '', charge_day: '')
 
         expect(base_fee).not_to be_valid
         expect(base_fee.errors).to include(:name)
         expect(base_fee.errors).to include(:description)
-        expect(base_fee.errors).to include(:late_payment)
-        expect(base_fee.errors).to include(:late_fee)
+        expect(base_fee.errors).to include(:interest_rate)
+        expect(base_fee.errors).to include(:late_fine)
         expect(base_fee.errors).to include(:charge_day)
       end
     end
@@ -23,6 +22,40 @@ RSpec.describe BaseFee, type: :model do
         expect(base_fee).not_to be_valid
         expect(base_fee.errors).to include(:charge_day)
         expect(base_fee.errors[:charge_day]).to include('deve ser futura')
+      end
+    end
+
+    context 'numericalidade' do
+      it 'multa deve ser um número' do
+        base_fee = build(:base_fee, late_fine: 'multinha')
+
+        expect(base_fee).not_to be_valid
+        expect(base_fee.errors).to include(:late_fine)
+        expect(base_fee.errors[:late_fine]).to include('não é um número')
+      end
+
+      it 'multa não deve ser negativa' do
+        base_fee = build(:base_fee, late_fine: -10)
+
+        expect(base_fee).not_to be_valid
+        expect(base_fee.errors).to include(:late_fine)
+        expect(base_fee.errors[:late_fine]).to include('deve ser maior ou igual a 0')
+      end
+
+      it 'multa pode ser igual a zero' do
+        base_fee = build(:base_fee, late_fine: 0)
+
+        expect(base_fee).to be_valid
+        expect(base_fee.errors).not_to include(:late_fine)
+        expect(base_fee.errors[:late_fine]).not_to include('deve ser maior ou igual a 0')
+      end
+
+      it 'juros ao dia pode ser igual a zero' do
+        base_fee = build(:base_fee, interest_rate: 0)
+
+        expect(base_fee).to be_valid
+        expect(base_fee.errors).not_to include(:interest_rate)
+        expect(base_fee.errors[:interest_rate]).not_to include('deve ser maior ou igual a 0')
       end
     end
   end

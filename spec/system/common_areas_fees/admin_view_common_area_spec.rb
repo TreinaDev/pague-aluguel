@@ -43,11 +43,11 @@ describe 'Admin vê área comum' do
 
     visit condo_common_area_path(condo.id, common_area)
     click_on 'Registrar Taxa'
-    fill_in 'Taxa de área comum', with: 200_00
+    fill_in 'Taxa de área comum', with: '200,00'
     click_on 'Atualizar'
     travel 1.month
     click_on 'Registrar Taxa'
-    fill_in 'Taxa de área comum', with: 300_00
+    fill_in 'Taxa de área comum', with: '300,00'
     click_on 'Atualizar'
     click_on 'Mostrar histórico de taxas'
 

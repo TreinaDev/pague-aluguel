@@ -3,8 +3,15 @@ class BaseFee < ApplicationRecord
   has_many :unit_types, through: :values
 
   accepts_nested_attributes_for :values
-  validates :name, :description, :late_payment, :late_fee, :charge_day, presence: true
+  validates :name, :description, :charge_day, presence: true
+  validates :interest_rate, numericality: { greater_than_or_equal_to: 0 }
   validate :date_is_future?
+
+  monetize :late_fine_cents,
+           allow_nil: false,
+           numericality: {
+             greater_than_or_equal_to: 0
+           }
 
   enum recurrence: {
     monthly: 0,
@@ -23,6 +30,6 @@ class BaseFee < ApplicationRecord
   end
 
   def date_is_future?
-    errors.add(:charge_day, :future_date) if charge_day.present? && charge_day <= Time.zone.today
+    errors.add(:charge_day, :future_date) if charge_day.present? && charge_day < Time.zone.today
   end
 end
