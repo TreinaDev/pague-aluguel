@@ -8,10 +8,10 @@ describe 'Admin deleta uma conta compartilhada' do
     unit_type_two = FactoryBot.create(:unit_type, condo: condominium, ideal_fraction: 0.06)
     FactoryBot.create_list(:unit, 9, unit_type: unit_type_one)
     FactoryBot.create_list(:unit, 9, unit_type: unit_type_two)
-    unit_one = Unit.create!(area: 40, floor: 1, number: 101, unit_type: unit_type_one)
-    unit_two = Unit.create!(area: 60, floor: 2, number: 202, unit_type: unit_type_two)
+    Unit.create!(area: 40, floor: 1, number: 101, unit_type: unit_type_one)
+    Unit.create!(area: 60, floor: 2, number: 202, unit_type: unit_type_two)
     bill = SharedFee.create!(description: 'Conta de Luz', issue_date: 10.days.from_now.to_date,
-                      total_value: 10_000, condo: condominium)
+                             total_value: 10_000, condo: condominium)
 
     login_as admin, scope: :admin
     visit condo_path(condominium.id)
