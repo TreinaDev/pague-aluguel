@@ -1,5 +1,5 @@
 Rails.application.routes.draw do
-  devise_for :property_owners
+  devise_for :property_owners, controllers: { registrations: "property_owners/registrations", sessions: "property_owners/sessions" }
   devise_for :admins, controllers: { registrations: "admins/registrations", sessions: "admins/sessions" }
 
   root to: "home#index"

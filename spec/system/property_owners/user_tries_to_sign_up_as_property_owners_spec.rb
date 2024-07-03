@@ -21,9 +21,8 @@ describe 'Proprietário tenta se cadastrar' do
     click_on 'Registrar-se como Proprietário'
     fill_in 'Validar CPF', with: cpf
     click_on 'Validar'
-    # sleep(2)
 
-    expect(page).to have_content 'Sign up'
+    expect(page).to have_content 'Cadastro de Proprietário'
     expect(current_path).to eq new_property_owner_registration_path
   end
 
@@ -39,8 +38,15 @@ describe 'Proprietário tenta se cadastrar' do
     fill_in 'E-mail', with: 'propertytest@mail.com'
     fill_in 'Senha', with: 'password'
     fill_in 'Confirme a senha', with: 'password'
-    click_on 'Sign up'
+    click_on 'Cadastrar-se'
 
-    expect(page).to have_content('Proprietário cadastrado com sucesso!')
+    expect(page).to have_content('Bem Vindo! Você se registrou com sucesso!')
+  end
+
+  it 'e tentou acessar a tela de registro sem validar o cpf' do
+    visit new_property_owner_registration_path
+
+    expect(page).to have_content 'Valide seu CPF primeiro'
+    expect(current_path).to eq new_owner_cpf_validation_path
   end
 end

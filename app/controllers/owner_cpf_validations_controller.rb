@@ -4,6 +4,7 @@ class OwnerCpfValidationsController < ApplicationController
   def create
     cpf = params[:cpf]
     if cpf_valid?(cpf)
+      session[:cpf_is_valid] = true
       redirect_to new_property_owner_registration_path
     else
       flash.now[:alert] = 'CPF inválido'
