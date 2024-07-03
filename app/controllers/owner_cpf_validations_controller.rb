@@ -5,9 +5,10 @@ class OwnerCpfValidationsController < ApplicationController
     cpf = params[:cpf]
     if cpf_valid?(cpf)
       session[:cpf_is_valid] = true
+      flash[:document_id] = cpf
       redirect_to new_property_owner_registration_path
     else
-      flash.now[:alert] = 'CPF inválido'
+      flash.now[:alert] = I18n.t 'devise.failure.invalid_document_id'
       render :new, status: :not_found
     end
   end

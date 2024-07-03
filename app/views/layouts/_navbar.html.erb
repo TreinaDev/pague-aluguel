@@ -13,6 +13,12 @@
           <span class="d-block lh-1"><%= current_admin.email %></span>
         </div>
         <%= button_to "Logout", destroy_admin_session_path, method: :delete, class: "btn btn-success" %>
+      <% elsif property_owner_signed_in?%>
+        <div class="me-4 mt-1">
+          <span class="d-block lh-1"><%= current_property_owner.email %></span>
+          <span class="d-block lh-1"><%= current_property_owner.document_id %></span>
+        </div>
+        <%= button_to "Logout", destroy_property_owner_session_path, method: :delete, class: "btn btn-success" %>
       <% else %>
         <%= link_to "Login", new_admin_session_path, class: "btn btn-success" %>
         <%= link_to "Login de Proprietário", new_property_owner_session_path, class: "btn btn-success" %>

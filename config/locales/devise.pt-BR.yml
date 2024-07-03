@@ -73,6 +73,8 @@ pt-BR:
       timeout: A sua sessão expirou, por favor, faça login novamente para continuar.
       unauthenticated: Para continuar, faça login ou registre-se.
       unconfirmed: Antes de continuar, confirme a sua conta.
+      document_id_not_valideted: Valide seu CPF primeiro
+      invalid_document_id: CPF inválido
     mailer:
       confirmation_instructions:
         action: Confirmar minha conta

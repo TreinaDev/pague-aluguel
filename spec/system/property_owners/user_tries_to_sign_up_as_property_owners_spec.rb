@@ -2,11 +2,13 @@ require 'rails_helper'
 
 describe 'Proprietário tenta se cadastrar' do
   it 'com CPF inválido' do
-
+    cpf = CPF.generate
+    fake_response = double('faraday_response', status: 404, body: 'CPF inválido')
+    allow(Faraday).to receive(:get).and_return(fake_response)
 
     visit root_path
     click_on 'Registrar-se como Proprietário'
-    fill_in 'Validar CPF', with: CPF.generate
+    fill_in 'Validar CPF', with: cpf
     click_on 'Validar'
 
     expect(page).to have_content 'CPF inválido'
@@ -41,6 +43,7 @@ describe 'Proprietário tenta se cadastrar' do
     click_on 'Cadastrar-se'
 
     expect(page).to have_content('Bem Vindo! Você se registrou com sucesso!')
+    expect(PropertyOwner.first.document_id).to eq cpf
   end
 
   it 'e tentou acessar a tela de registro sem validar o cpf' do

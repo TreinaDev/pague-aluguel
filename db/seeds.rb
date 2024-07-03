@@ -16,6 +16,12 @@ Admin.create!(
   document_number: CPF.generate
 )
 
+p "Created #{Admin.count} admins"
+
+PropertyOwner.create!(email: 'michelangelo.hamato@email.com', password: 'hamato123', document_id: CPF.generate)
+
+p "Created #{PropertyOwner.count} property owners"
+
 condo = Condo.create!(name: 'Sai de baixo', city: 'Rio de Janeiro')
 second_condo = Condo.create!(name: 'Segundo Condomínio', city: 'Rio de Janeiro')
 
@@ -29,7 +35,7 @@ CommonArea.find_or_create_by!(name: 'Salão de festa', description: 'Área feita
 CommonArea.find_or_create_by!(name: 'Cinema', description: 'Guerreiros Saiajens', max_capacity: 60,
                               usage_rules: 'Proibido fumar na sala', fee_cents: 500, condo: second_condo)
 
-p "Created #{Admin.count} admins"
+p "Created #{CommonArea.count} common areas"
 
 #Condomínios
 condo1 = Condo.create!(name: 'Prédio lindo', city: 'Cidade Maravilhosa')
