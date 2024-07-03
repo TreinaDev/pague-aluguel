@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema[7.1].define(version: 2024_07_03_192135) do
+ActiveRecord::Schema[7.1].define(version: 2024_07_03_203241) do
   create_table "active_storage_attachments", force: :cascade do |t|
     t.string "name", null: false
     t.string "record_type", null: false
@@ -88,13 +88,6 @@ ActiveRecord::Schema[7.1].define(version: 2024_07_03_192135) do
     t.integer "condo_id"
   end
 
-  create_table "condos", force: :cascade do |t|
-    t.string "name"
-    t.string "city"
-    t.datetime "created_at", null: false
-    t.datetime "updated_at", null: false
-  end
-
   create_table "custom_fees", force: :cascade do |t|
     t.decimal "value"
     t.string "description"
@@ -130,24 +123,6 @@ ActiveRecord::Schema[7.1].define(version: 2024_07_03_192135) do
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
     t.integer "condo_id"
-  end
-
-  create_table "unit_types", force: :cascade do |t|
-    t.string "description"
-    t.integer "area"
-    t.float "ideal_fraction"
-    t.datetime "created_at", null: false
-    t.datetime "updated_at", null: false
-    t.integer "condo_id"
-  end
-
-  create_table "units", force: :cascade do |t|
-    t.integer "area"
-    t.integer "floor"
-    t.integer "number"
-    t.datetime "created_at", null: false
-    t.datetime "updated_at", null: false
-    t.integer "unit_type_id"
   end
 
   create_table "values", force: :cascade do |t|
