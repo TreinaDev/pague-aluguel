@@ -1,8 +1,6 @@
-<div>
-  <%= link_to 'Lançar Conta Compartilhada', new_shared_fee_path %>
-</div>
-<div>
-  <%= link_to 'Lista de Condomínios', condos_path %>
-</div>
-<%= link_to "Admins", admins_path, class: "" %>
+<%= render 'header' %>
+
+<% if admin_signed_in? %>
+  <%= render 'home/admin_dashboard/admin_dashboard' %>
+<% end %>
 

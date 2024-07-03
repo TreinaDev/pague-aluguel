@@ -33,3 +33,19 @@
   background: $off-white !important;
 }
 
+.bg-dark {
+  background-color: $dark-red !important;
+}
+
+.fs-7 {
+  font-size: 0.875rem;
+}
+
+.fs-8 {
+  font-size: 0.75rem;
+}
+
+.hover-strong:hover {
+  background-color: #cfd2dc;
+  border-color: #d0d0d0;
+}

@@ -13,3 +13,7 @@ pt-BR:
         document_number: 'CPF'
         password_confirmation: 'Confirme a senha'
         photo: 'Foto'
+  views:
+    index:
+      condo: Condomínios
+      no_condos: Não existem condomínios registrados.

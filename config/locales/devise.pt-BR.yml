@@ -176,3 +176,4 @@ pt-BR:
         one: 'Não foi possível salvar %{resource}: 1 erro'
         other: 'Não foi possível salvar %{resource}: %{count} erros.'
       verify_error: 'Verifique os erros abaixo:'
+

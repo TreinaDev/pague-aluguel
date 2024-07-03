@@ -1,0 +1,22 @@
+<div class="card border-0 rounded-0 bg-off-white mt-4 py-3 px-3">
+  <div class="text-muted mb-3 fs-8">
+    <%= image_tag "buildings-icon", size: '18' %>
+    <span><%= I18n.t('views.index.condo') %></span>
+  </div>
+  <div class="d-flex justify-content-center gap-2 ">
+    <% if @condos.any? %>
+      <% @condos.each do |condo| %>
+        <%= link_to condo, class: "text-decoration-none" do %>
+          <div class="card hover-strong" style="width: 18rem; ">
+            <div class="card-body">
+              <span class="d-block"><%= condo.name %></span>
+              <span class="text-muted fs-8"><%= condo.city %></span>
+            </div>
+          </div>
+        <% end %>
+      <% end %>
+    <% else %>
+      <strong><%= I18n.t('views.index.no_condos') %></strong>
+    <% end %>
+  </div>
+</div>

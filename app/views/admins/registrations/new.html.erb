@@ -15,11 +15,11 @@
       <%= f.label :email %>
     </div>
 
-    <div class="form-floating w-50 mx-auto">
-      <% if @minimum_password_length %>
+    <% if @minimum_password_length %>
+      <div class="w-50 mx-auto">
         <em class="text-muted">(Mínimo <%= @minimum_password_length %> caracteres)</em>
-      <% end %>
-    </div>
+      </div>
+    <% end %>
 
     <div class="form-floating mb-3 w-50 mx-auto">
       <%= f.password_field :password, autocomplete: "new-password", class: "form-control" %>
