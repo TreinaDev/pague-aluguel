@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema[7.1].define(version: 2024_06_28_202602) do
+ActiveRecord::Schema[7.1].define(version: 2024_07_02_144503) do
   create_table "active_storage_attachments", force: :cascade do |t|
     t.string "name", null: false
     t.string "record_type", null: false
@@ -60,8 +60,8 @@ ActiveRecord::Schema[7.1].define(version: 2024_06_28_202602) do
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
     t.string "name"
-    t.integer "late_payment"
-    t.integer "late_fee"
+    t.integer "interest_rate"
+    t.integer "late_fine_cents"
     t.boolean "fixed"
     t.date "charge_day"
     t.integer "recurrence", default: 0
@@ -161,9 +161,8 @@ ActiveRecord::Schema[7.1].define(version: 2024_06_28_202602) do
     t.integer "unit_type_id", null: false
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
-    t.integer "price"
-    t.integer "price_cents", default: 0, null: false
     t.string "price_currency", default: "USD", null: false
+    t.integer "price_cents"
     t.index ["base_fee_id"], name: "index_values_on_base_fee_id"
     t.index ["unit_type_id"], name: "index_values_on_unit_type_id"
   end

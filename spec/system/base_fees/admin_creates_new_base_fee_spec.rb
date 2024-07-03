@@ -38,14 +38,14 @@ describe 'admin cria taxa fixa' do
     within '.form-base-fees' do
       fill_in 'Nome', with: 'Taxa de Condomínio'
       fill_in 'Descrição', with: 'Taxas mensais para manutenção do prédio.'
-      fill_in 'Valor para Apartamento 1 quarto', with: 20_000
-      fill_in 'Valor para Apartamento 2 quartos', with: 30_000
-      fill_in 'Valor para Apartamento 3 quartos', with: 50_000
+      fill_in 'Valor para Apartamento 1 quarto', with: '200,00'
+      fill_in 'Valor para Apartamento 2 quartos', with: '300,00'
+      fill_in 'Valor para Apartamento 3 quartos', with: '500,00'
       select 'Bimestral', from: 'Recorrência'
       fill_in 'Data de Lançamento', with: formatted_date.to_s
       check 'Taxa fixa'
       fill_in 'Juros ao dia', with: 1
-      fill_in 'Multa por atraso', with: 30
+      fill_in 'Multa por atraso', with: '30,00'
       click_on 'Salvar'
     end
 
@@ -82,8 +82,8 @@ describe 'admin cria taxa fixa' do
     expect(page).to have_content 'Descrição não pode ficar em branco'
     expect(page).to have_content 'Valor não é um número'
     expect(page).to have_content 'Data de Lançamento não pode ficar em branco'
-    expect(page).to have_content 'Juros ao dia não pode ficar em branco'
-    expect(page).to have_content 'Multa por atraso não pode ficar em branco'
+    expect(page).to have_content 'Juros ao dia (%) não é um número'
+    expect(page).to have_content 'Multa por atraso não é um número'
   end
 
   it 'e data deve ser futura' do
@@ -101,14 +101,14 @@ describe 'admin cria taxa fixa' do
     within '.form-base-fees' do
       fill_in 'Nome', with: 'Taxa de Condomínio'
       fill_in 'Descrição', with: 'Taxas mensais para manutenção do prédio.'
-      fill_in 'Valor para Apartamento 1 quarto', with: 20_000
-      fill_in 'Valor para Apartamento 2 quartos', with: 30_000
-      fill_in 'Valor para Apartamento 3 quartos', with: 50_000
+      fill_in 'Valor para Apartamento 1 quarto', with: '200,00'
+      fill_in 'Valor para Apartamento 2 quartos', with: '300,00'
+      fill_in 'Valor para Apartamento 3 quartos', with: '500,00'
       select 'Semestral', from: 'Recorrência'
       fill_in 'Data de Lançamento', with: formatted_date.to_s
       check 'Taxa fixa'
       fill_in 'Juros ao dia', with: 1
-      fill_in 'Multa por atraso', with: 30
+      fill_in 'Multa por atraso', with: '30,00'
       click_on 'Salvar'
     end
 
@@ -116,12 +116,12 @@ describe 'admin cria taxa fixa' do
     expect(page).to have_content 'Data de Lançamento deve ser futura'
     expect(page).to have_field 'Nome', with: 'Taxa de Condomínio'
     expect(page).to have_field 'Descrição', with: 'Taxas mensais para manutenção do prédio.'
-    expect(page).to have_field 'Valor para Apartamento 1 quarto', with: 20_000
-    expect(page).to have_field 'Valor para Apartamento 2 quartos', with: 30_000
-    expect(page).to have_field 'Valor para Apartamento 3 quartos', with: 50_000
+    expect(page).to have_field 'Valor para Apartamento 1 quarto', with: '200,00'
+    expect(page).to have_field 'Valor para Apartamento 2 quartos', with: '300,00'
+    expect(page).to have_field 'Valor para Apartamento 3 quartos', with: '500,00'
     expect(page).to have_checked_field 'Taxa fixa'
     expect(page).to have_field 'Juros ao dia', with: 1
-    expect(page).to have_field 'Multa por atraso', with: 30
+    expect(page).to have_field 'Multa por atraso', with: '30,00'
   end
 
   it 'e valor deve ser maior que 0' do
@@ -139,14 +139,14 @@ describe 'admin cria taxa fixa' do
     within '.form-base-fees' do
       fill_in 'Nome', with: 'Taxa de Condomínio'
       fill_in 'Descrição', with: 'Taxas mensais para manutenção do prédio.'
-      fill_in 'Valor para Apartamento 1 quarto', with: 0
-      fill_in 'Valor para Apartamento 2 quartos', with: -20_000
-      fill_in 'Valor para Apartamento 3 quartos', with: 50_000
+      fill_in 'Valor para Apartamento 1 quarto', with: '0'
+      fill_in 'Valor para Apartamento 2 quartos', with: '-200,00'
+      fill_in 'Valor para Apartamento 3 quartos', with: '500,00'
       select 'Semestral', from: 'Recorrência'
       fill_in 'Data de Lançamento', with: formatted_date.to_s
       check 'Taxa fixa'
       fill_in 'Juros ao dia', with: 1
-      fill_in 'Multa por atraso', with: 30
+      fill_in 'Multa por atraso', with: '30,00'
       click_on 'Salvar'
     end
 
