@@ -26,10 +26,6 @@
               <hr class="divider">
               <span class="fw-bold">CPF:</span>
               <span data-controller="document-number"><%= admin.document_number %></span>
-              <% if admin_signed_in? && current_admin == admin %>
-                <hr class="divider">
-                <%= link_to 'Editar', edit_admin_registration_path, class: 'btn btn-secondary text-uppercase', data: { turbo_frame: "modal" } %>
-              <% end %>
             </div>
           </div>
         </div>
@@ -42,7 +38,7 @@
       <span class="fs-8">Mostrar todos</span>
     <% end %>
 
-    <%= link_to :back, class: 'btn text-uppercase', data: { change_button_target: "hideAdminsBtn", turbo_frame: "expand" } do %>
+    <%= link_to root_path, class: 'btn text-uppercase', data: { change_button_target: "hideAdminsBtn", turbo_frame: "expand" } do %>
       <%= image_tag "arrow-up", size: "20" %>
       <span class="fs-8">Ocultar</span>
     <% end %>

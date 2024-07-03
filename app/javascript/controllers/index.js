@@ -9,6 +9,3 @@ application.register("change-button", ChangeButtonController)
 
 import DocumentNumberController from "./document_number_controller"
 application.register("document-number", DocumentNumberController)
-
-import HelloController from "./hello_controller"
-application.register("hello", HelloController)
