@@ -35,7 +35,8 @@
       <div class="form-group">
         <%= f.fields_for :values do |values_form| %><br>
 
-          <%= values_form.label :price_cents, I18n.t('activerecord.values.values_price', unit_type: UnitType.find(values_form.object.unit_type_id).description ) %>
+          <% unit_type = @unit_types.find { |ut| ut.id == values_form.object.unit_type_id } %>
+          <%= values_form.label :price_cents, I18n.t('activerecord.values.values_price', unit_type: unit_type.description ) %>
           <%= values_form.number_field :price_cents, class: "form-control" %>
           <%= values_form.hidden_field :unit_type_id, value: values_form.object.unit_type_id %>
         <% end %>
@@ -68,5 +69,5 @@
     </div>
   </div>
   <hr>
-  <%= link_to I18n.t('helpers.buttons.back'), condo_path(@condo), class: "btn btn-secondary" %>
+  <%= link_to I18n.t('helpers.buttons.back'), condo_path(@condo.id), class: "btn btn-secondary" %>
 </div>

@@ -18,7 +18,6 @@ describe 'admin cria taxa fixa' do
     allow(Condo).to receive(:all).and_return(condos)
     allow(Condo).to receive(:find).and_return(condos[0])
     allow(UnitType).to receive(:find_all_by_condo).and_return(unit_types)
-    allow(UnitType).to receive(:find).and_return(unit_types[0])
 
     login_as admin, scope: :admin
     visit root_path
@@ -41,7 +40,6 @@ describe 'admin cria taxa fixa' do
     unit_types << UnitType.new(id: 3, area: 60, description: 'Apartamento 3 quartos', ideal_fraction: 222.2,
                                condo_id: 1)
     allow(Condo).to receive(:find).and_return(condo)
-    allow(UnitType).to receive(:find).and_return(unit_types[0], unit_types[1], unit_types[2])
     allow(UnitType).to receive(:find_all_by_condo).and_return(unit_types)
 
     formatted_date = 10.days.from_now.to_date
@@ -77,7 +75,6 @@ describe 'admin cria taxa fixa' do
     unit_types << UnitType.new(id: 3, area: 60, description: 'Apartamento 3 quartos', ideal_fraction: 222.2,
                                condo_id: 1)
     allow(Condo).to receive(:find).and_return(condo)
-    allow(UnitType).to receive(:find).and_return(unit_types[0], unit_types[1], unit_types[2])
     allow(UnitType).to receive(:find_all_by_condo).and_return(unit_types)
 
     login_as admin, scope: :admin
@@ -115,7 +112,6 @@ describe 'admin cria taxa fixa' do
                                condo_id: 1)
     allow(Condo).to receive(:find).and_return(condo)
     allow(UnitType).to receive(:find_all_by_condo).and_return(unit_types)
-    allow(UnitType).to receive(:find).and_return(unit_types[0], unit_types[1], unit_types[2])
 
     formatted_date = 10.days.ago.to_date
 
@@ -149,11 +145,15 @@ describe 'admin cria taxa fixa' do
 
   it 'e valor deve ser maior que 0' do
     admin = create(:admin, email: 'admin@email.com', password: '123456')
-    condo = create(:condo, name: 'Prédio lindo', city: 'Cidade maravilhosa')
-
-    create(:unit_type, description: 'Apartamento 1 quarto', area: 30, condo:)
-    create(:unit_type, description: 'Apartamento 2 quartos', area: 45, condo:)
-    create(:unit_type, description: 'Apartamento 3 quartos', area: 60, condo:)
+    condo = Condo.new(id: 1, name: 'Prédio lindo', city: 'Cidade maravilhosa')
+    unit_types = []
+    unit_types << UnitType.new(id: 1, area: 30, description: 'Apartamento 1 quarto', ideal_fraction: 222.2, condo_id: 1)
+    unit_types << UnitType.new(id: 2, area: 45, description: 'Apartamento 2 quartos', ideal_fraction: 222.2,
+                               condo_id: 1)
+    unit_types << UnitType.new(id: 3, area: 60, description: 'Apartamento 3 quartos', ideal_fraction: 222.2,
+                               condo_id: 1)
+    allow(Condo).to receive(:find).and_return(condo)
+    allow(UnitType).to receive(:find_all_by_condo).and_return(unit_types)
 
     formatted_date = 10.days.from_now.to_date
 
@@ -179,13 +179,16 @@ describe 'admin cria taxa fixa' do
 
   it 'e retorna para home page' do
     admin = create(:admin)
-    condo = create(:condo)
-    create(:unit_type)
+    condo = Condo.new(id: 1, name: 'Prédio lindo', city: 'Cidade maravilhosa')
+    unit_types = []
+    unit_types << UnitType.new(id: 1, area: 30, description: 'Apartamento 1 quarto', ideal_fraction: 222.2, condo_id: 1)
+    allow(Condo).to receive(:find).and_return(condo)
+    allow(UnitType).to receive(:find_all_by_condo).and_return(unit_types)
 
     login_as admin, scope: :admin
-    visit new_condo_base_fee_path(condo)
+    visit new_condo_base_fee_path(condo.id)
     click_on 'Voltar'
 
-    expect(current_path).to eq condo_path(condo)
+    expect(current_path).to eq condo_path(condo.id)
   end
 end

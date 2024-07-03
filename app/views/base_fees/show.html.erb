@@ -20,7 +20,8 @@
 
       <% @values.each do |value| %>
         <div class="row d-flex flex-column">
-          <strong><%= I18n.t('activerecord.values.values_price', unit_type: UnitType.find(value.unit_type_id).description ) %>:</strong>
+          <% unit_type = @unit_types.find { |ut| ut.id == value.unit_type_id } %>
+          <strong><%= I18n.t('activerecord.values.values_price', unit_type: unit_type.description ) %>:</strong>
           <%= number_to_currency(value.price, locale: :'pt-BR')%>
         </div>
       <% end %>
@@ -39,6 +40,6 @@
     </div>
   </div>
   <hr>
-  <%= link_to I18n.t('helpers.buttons.back'), condo_base_fees_path(@condo), class: "btn btn-secondary" %>
+  <%= link_to I18n.t('helpers.buttons.back'), condo_base_fees_path(@condo.id), class: "btn btn-secondary" %>
 </div>
 
