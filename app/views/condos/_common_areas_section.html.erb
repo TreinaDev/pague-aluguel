@@ -1,7 +1,7 @@
 <div class="card border-0 rounded-0 bg-off-white mt-4 py-3 px-3">
   <div class="text-muted mb-3 fs-8">
     <%= image_tag "clipboard-icon", size: '18' %>
-    <span class="text-capitalize">áreas comuns</span>
+    <span class="text-capitalize"><%= CommonArea.model_name.human(count: 2) %></span>
   </div>
   <div class="d-flex justify-content-center gap-2">
     <% if @common_areas.any? %>
@@ -16,7 +16,7 @@
         <% end %>
       <% end %>
     <% else %>
-      <span class="text-muted fs-8 py-4">Não existem áreas comuns cadastradas para <%= @condo.name %></span>
+      <span class="text-muted fs-8 py-4"><%= I18n.t('views.index.no_common_area') %></span>
     <% end %>
   </div>
 </div>

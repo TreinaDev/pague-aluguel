@@ -7,3 +7,5 @@ pt-BR:
   views:
     show:
       condo: Condomínio
+      no_condo: Não existem condomínios registrados.
+

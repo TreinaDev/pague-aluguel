@@ -18,7 +18,7 @@ pt-BR:
       name: "Áreas comuns de %{name}"
       fee: Taxa de uso
       no_fee: Taxa não cadastrada
-      no_common_area: Nenhuma Área Comum cadastrada
+      no_common_area: Nenhuma área comum cadastrada.
     show:
       common_area_fee: Taxa de área comum
       description: Descrição

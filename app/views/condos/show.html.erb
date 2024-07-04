@@ -15,19 +15,19 @@
 <div class="card border-0 rounded-0 bg-off-white mt-4 py-3 px-3">
   <div class="text-muted mb-3 fs-8">
     <%= image_tag "open-folder-icon", size: '18' %>
-    <span>contas compartilhadas</span>
+    <span><%= SharedFee.model_name.human(count: 2) %></span>
   </div>
-  <%= link_to 'Lançar Conta Compartilhada', new_shared_fee_path(condo_id: @condo.id), class: 'dropdown-item' %>
-  <%= link_to 'Exibir Contas Compartilhadas', shared_fees_path(condo_id: @condo.id), class: 'dropdown-item' %>
+  <%= link_to I18n.t('helpers.submit.add'), new_shared_fee_path(condo_id: @condo.id), class: 'dropdown-item' %>
+  <%= link_to I18n.t('views.show.show_all'), shared_fees_path(condo_id: @condo.id), class: 'dropdown-item' %>
 </div>
 
 <div class="card border-0 rounded-0 bg-off-white mt-4 py-3 px-3">
   <div class="text-muted mb-3 fs-8">
     <%= image_tag "clipboard-icon", size: '18' %>
-    <span>taxas</span>
+    <span><%= BaseFee.model_name.human(count: 2) %></span>
   </div>
-  <%= link_to 'Cadastrar Nova Taxa', new_condo_base_fee_path(condo_id: @condo.id), class: 'dropdown-item' %>
-  <%= link_to 'Exibir Taxas Cadastradas', condo_base_fees_path(condo_id: @condo.id), class: 'dropdown-item' %>
+  <%= link_to I18n.t('helpers.submit.add'), new_condo_base_fee_path(condo_id: @condo.id), class: 'dropdown-item' %>
+  <%= link_to I18n.t('views.show.show_all'), condo_base_fees_path(condo_id: @condo.id), class: 'dropdown-item' %>
 </div>
 
 <%= render 'common_areas_section' %>

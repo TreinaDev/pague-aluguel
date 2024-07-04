@@ -69,3 +69,87 @@ base_fee2 = BaseFee.create!(name: 'Fundo de Reserva',
             Value.create!(price: 300, unit_type_id: 2, base_fee: base_fee2)
 
 p "Created #{BaseFee.count} base fees"
+
+# db/seeds.rb
+
+# Seed 1
+shared_fee1 = SharedFee.create!(description: 'Manutenção regular do prédio',
+  issue_date: 10.days.from_now,
+  total_value_cents: 20000,
+  condo_id: 20)
+SharedFeeFraction.create!(value_cents: 10000, unit_id: 1, shared_fee_id: shared_fee1.id)
+SharedFeeFraction.create!(value_cents: 10000, unit_id: 2, shared_fee_id: shared_fee1.id)
+
+# Seed 2
+shared_fee2 = SharedFee.create!(description: 'Fundo de Reserva para despesas imprevistas',
+  issue_date: 20.days.from_now,
+  total_value_cents: 30000,
+  condo_id: 20)
+SharedFeeFraction.create!(value_cents: 15000, unit_id: 1, shared_fee_id: shared_fee2.id)
+SharedFeeFraction.create!(value_cents: 15000, unit_id: 2, shared_fee_id: shared_fee2.id)
+
+# Seed 3
+shared_fee3 = SharedFee.create!(description: 'Taxa de Manutenção das áreas comuns',
+  issue_date: 20.days.from_now,
+  total_value_cents: 25000,
+  condo_id: 20)
+SharedFeeFraction.create!(value_cents: 12500, unit_id: 1, shared_fee_id: shared_fee3.id)
+SharedFeeFraction.create!(value_cents: 12500, unit_id: 2, shared_fee_id: shared_fee3.id)
+
+# Seed 4
+shared_fee4 = SharedFee.create!(description: 'Fundo Emergencial para reparos urgentes',
+  issue_date: 6.days.from_now,
+  total_value_cents: 50000,
+  condo_id: 20)
+SharedFeeFraction.create!(value_cents: 25000, unit_id: 1, shared_fee_id: shared_fee4.id)
+SharedFeeFraction.create!(value_cents: 25000, unit_id: 2, shared_fee_id: shared_fee4.id)
+
+# Seed 5
+shared_fee5 = SharedFee.create!(description: 'Taxa de Segurança do condomínio',
+  issue_date: 10.days.from_now,
+  total_value_cents: 15000,
+  condo_id: 20)
+SharedFeeFraction.create!(value_cents: 7500, unit_id: 1, shared_fee_id: shared_fee5.id)
+SharedFeeFraction.create!(value_cents: 7500, unit_id: 2, shared_fee_id: shared_fee5.id)
+
+# Seed 6
+shared_fee6 = SharedFee.create!(description: 'Taxa de Limpeza das áreas comuns',
+  issue_date: 18.days.from_now,
+  total_value_cents: 12000,
+  condo_id: 20)
+SharedFeeFraction.create!(value_cents: 6000, unit_id: 1, shared_fee_id: shared_fee6.id)
+SharedFeeFraction.create!(value_cents: 6000, unit_id: 2, shared_fee_id: shared_fee6.id)
+
+# Seed 7
+shared_fee7 = SharedFee.create!(description: 'Taxa de Jardinagem',
+  issue_date: 5.days.from_now,
+  total_value_cents: 18000,
+  condo_id: 20)
+SharedFeeFraction.create!(value_cents: 9000, unit_id: 1, shared_fee_id: shared_fee7.id)
+SharedFeeFraction.create!(value_cents: 9000, unit_id: 2, shared_fee_id: shared_fee7.id)
+
+# Seed 8
+shared_fee8 = SharedFee.create!(description: 'Taxa de Iluminação das áreas comuns',
+  issue_date: 1.day.from_now,
+  total_value_cents: 22000,
+  condo_id: 20)
+SharedFeeFraction.create!(value_cents: 11000, unit_id: 1, shared_fee_id: shared_fee8.id)
+SharedFeeFraction.create!(value_cents: 11000, unit_id: 2, shared_fee_id: shared_fee8.id)
+
+# Seed 9
+shared_fee9 = SharedFee.create!(description: 'Taxa de Água',
+  issue_date: 12.days.from_now,
+  total_value_cents: 25000,
+  condo_id: 20)
+SharedFeeFraction.create!(value_cents: 12500, unit_id: 1, shared_fee_id: shared_fee9.id)
+SharedFeeFraction.create!(value_cents: 12500, unit_id: 2, shared_fee_id: shared_fee9.id)
+
+# Seed 10
+shared_fee10 = SharedFee.create!(description: 'Taxa de Gás',
+   issue_date: 10.days.from_now,
+   total_value_cents: 20000,
+   condo_id: 20)
+SharedFeeFraction.create!(value_cents: 10000, unit_id: 1, shared_fee_id: shared_fee10.id)
+SharedFeeFraction.create!(value_cents: 10000, unit_id: 2, shared_fee_id: shared_fee10.id)
+
+p "Created #{SharedFee.count} shared fees"

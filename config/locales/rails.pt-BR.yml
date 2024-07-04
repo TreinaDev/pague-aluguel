@@ -154,6 +154,7 @@ pt-BR:
       update: ATUALIZAR
       register: REGISTRAR
       cancel: CANCELAR
+      add: ADICIONAR NOVA
   number:
     currency:
       format:
