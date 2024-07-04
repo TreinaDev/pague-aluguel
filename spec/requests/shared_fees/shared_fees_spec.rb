@@ -10,17 +10,23 @@ describe 'Admin gerencia contas compartilhadas' do
         last_name: 'Da Costa',
         document_number: CPF.generate
       )
-      condominium = Condo.create!(name: 'Condo Test', city: 'City Test')
-      unit_type_one = FactoryBot.create(:unit_type, condo: condominium, ideal_fraction: 0.04)
-      unit_type_two = FactoryBot.create(:unit_type, condo: condominium, ideal_fraction: 0.06)
-      FactoryBot.create_list(:unit, 10, unit_type: unit_type_one)
-      FactoryBot.create_list(:unit, 10, unit_type: unit_type_two)
+      condos = []
+      condos << Condo.new(id: 1, name: 'Condo Test', city: 'City Test')
+      unit_types = []
+      unit_types << UnitType.new(id: 1, area: 30, description: 'Apartamento 1 quarto', ideal_fraction: 0.4, condo_id: 1)
+      unit_types << UnitType.new(id: 2, area: 30, description: 'Apartamento 1 quarto', ideal_fraction: 0.6, condo_id: 1)
+      units = []
+      units << Unit.new(id: 1, area: 100, floor: 1, number: 1, unit_type_id: 1)
+      units << Unit.new(id: 2, area: 100, floor: 1, number: 1, unit_type_id: 2)
+      allow(Unit).to receive(:all).and_return(units)
+      allow(Condo).to receive(:all).and_return(condos)
+      allow(UnitType).to receive(:all).and_return(unit_types)
 
       login_as admin, scope: :admin
       post(shared_fees_path, params: { shared_fee: { description: 'Descrição',
                                                      issue_date: 10.days.from_now.to_date,
                                                      total_value: 1000,
-                                                     condo_id: condominium.id } })
+                                                     condo_id: condos.first.id } })
 
       expect(SharedFee.count).to eq 1
       expect(response).to have_http_status(302)
@@ -38,16 +44,22 @@ describe 'Admin gerencia contas compartilhadas' do
         last_name: 'Da Costa',
         document_number: CPF.generate
       )
-      condominium = Condo.create!(name: 'Condo Test', city: 'City Test')
-      unit_type_one = FactoryBot.create(:unit_type, condo: condominium, ideal_fraction: 0.04)
-      unit_type_two = FactoryBot.create(:unit_type, condo: condominium, ideal_fraction: 0.06)
-      FactoryBot.create_list(:unit, 10, unit_type: unit_type_one)
-      FactoryBot.create_list(:unit, 10, unit_type: unit_type_two)
+      condos = []
+      condos << Condo.new(id: 1, name: 'Condo Test', city: 'City Test')
+      unit_types = []
+      unit_types << UnitType.new(id: 1, area: 30, description: 'Apartamento 1 quarto', ideal_fraction: 0.4, condo_id: 1)
+      unit_types << UnitType.new(id: 2, area: 30, description: 'Apartamento 1 quarto', ideal_fraction: 0.6, condo_id: 1)
+      units = []
+      units << Unit.new(id: 1, area: 100, floor: 1, number: 1, unit_type_id: 1)
+      units << Unit.new(id: 2, area: 100, floor: 1, number: 1, unit_type_id: 2)
+      allow(Unit).to receive(:all).and_return(units)
+      allow(Condo).to receive(:all).and_return(condos)
+      allow(UnitType).to receive(:all).and_return(unit_types)
 
       post(shared_fees_path, params: { shared_fee: { description: 'Descrição',
                                                      issue_date: 10.days.from_now.to_date,
                                                      total_value_cents: 1000,
-                                                     condo_id: condominium.id } })
+                                                     condo_id: condos.first.id } })
 
       expect(SharedFee.count).to eq 0
       expect(response).to have_http_status(302)
@@ -64,21 +76,27 @@ describe 'Admin gerencia contas compartilhadas' do
         last_name: 'Da Costa',
         document_number: CPF.generate
       )
+      condos = []
+      condos << Condo.new(id: 1, name: 'Condo Test', city: 'City Test')
+      unit_types = []
+      unit_types << UnitType.new(id: 1, area: 30, description: 'Apartamento 1 quarto', ideal_fraction: 0.4, condo_id: 1)
+      unit_types << UnitType.new(id: 2, area: 30, description: 'Apartamento 1 quarto', ideal_fraction: 0.6, condo_id: 1)
+      units = []
+      units << Unit.new(id: 1, area: 100, floor: 1, number: 1, unit_type_id: 1)
+      units << Unit.new(id: 2, area: 100, floor: 1, number: 1, unit_type_id: 2)
+      allow(Unit).to receive(:all).and_return(units)
+      allow(Condo).to receive(:all).and_return(condos)
+      allow(UnitType).to receive(:all).and_return(unit_types)
 
-      condominium = Condo.create!(name: 'Condo Test', city: 'City Test')
-      unit_type_one = FactoryBot.create(:unit_type, condo: condominium, ideal_fraction: 0.04)
-      unit_type_two = FactoryBot.create(:unit_type, condo: condominium, ideal_fraction: 0.06)
-      FactoryBot.create_list(:unit, 10, unit_type: unit_type_one)
-      FactoryBot.create_list(:unit, 10, unit_type: unit_type_two)
       sf = SharedFee.create!(description: 'Conta de Luz', issue_date: 10.days.from_now.to_date,
-                             total_value: 10_000, condo: condominium)
+                             total_value: 10_000, condo: condos.first.id)
 
       login_as admin, scope: :admin
       delete(shared_fee_path(sf.id))
 
       expect(SharedFee.count).to eq 0
       expect(response).to have_http_status(302)
-      expect(response).to redirect_to(shared_fees_path(condo_id: condominium.id))
+      expect(response).to redirect_to(shared_fees_path(condo_id: condos.first.id))
     end
 
     it 'e não está autenticado' do
@@ -89,13 +107,20 @@ describe 'Admin gerencia contas compartilhadas' do
         last_name: 'Da Costa',
         document_number: CPF.generate
       )
-      condominium = Condo.create!(name: 'Condo Test', city: 'City Test')
-      unit_type_one = FactoryBot.create(:unit_type, condo: condominium, ideal_fraction: 0.04)
-      unit_type_two = FactoryBot.create(:unit_type, condo: condominium, ideal_fraction: 0.06)
-      FactoryBot.create_list(:unit, 10, unit_type: unit_type_one)
-      FactoryBot.create_list(:unit, 10, unit_type: unit_type_two)
+      condos = []
+      condos << Condo.new(id: 1, name: 'Condo Test', city: 'City Test')
+      unit_types = []
+      unit_types << UnitType.new(id: 1, area: 30, description: 'Apartamento 1 quarto', ideal_fraction: 0.4, condo_id: 1)
+      unit_types << UnitType.new(id: 2, area: 30, description: 'Apartamento 1 quarto', ideal_fraction: 0.6, condo_id: 1)
+      units = []
+      units << Unit.new(id: 1, area: 100, floor: 1, number: 1, unit_type_id: 1)
+      units << Unit.new(id: 2, area: 100, floor: 1, number: 1, unit_type_id: 2)
+      allow(Unit).to receive(:all).and_return(units)
+      allow(Condo).to receive(:all).and_return(condos)
+      allow(UnitType).to receive(:all).and_return(unit_types)
+
       sf = SharedFee.create!(description: 'Conta de Luz', issue_date: 10.days.from_now.to_date,
-                             total_value: 10_000, condo: condominium)
+                             total_value: 10_000, condo: condos.first.id)
 
       delete(shared_fee_path(sf.id))
 

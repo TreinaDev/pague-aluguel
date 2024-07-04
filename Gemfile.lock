@@ -122,6 +122,10 @@ GEM
     factory_bot_rails (6.4.3)
       factory_bot (~> 6.4)
       railties (>= 5.0.0)
+    faraday (2.9.2)
+      faraday-net_http (>= 2.0, < 3.2)
+    faraday-net_http (3.1.0)
+      net-http
     ferrum (0.15)
       addressable (~> 2.5)
       concurrent-ruby (~> 1.1)
@@ -165,6 +169,8 @@ GEM
       railties (>= 3.0)
     msgpack (1.7.2)
     mutex_m (0.2.0)
+    net-http (0.4.1)
+      uri
     net-imap (0.4.14)
       date
       net-protocol
@@ -175,8 +181,6 @@ GEM
     net-smtp (0.5.0)
       net-protocol
     nio4r (2.7.3)
-    nokogiri (1.16.6-arm64-darwin)
-      racc (~> 1.4)
     nokogiri (1.16.6-x86_64-linux)
       racc (~> 1.4)
     orm_adapter (0.5.0)
@@ -290,7 +294,6 @@ GEM
       actionpack (>= 6.1)
       activesupport (>= 6.1)
       sprockets (>= 3.0.0)
-    sqlite3 (1.7.3-arm64-darwin)
     sqlite3 (1.7.3-x86_64-linux)
     stringio (3.1.1)
     strscan (3.1.0)
@@ -303,6 +306,7 @@ GEM
     tzinfo (2.0.6)
       concurrent-ruby (~> 1.0)
     unicode-display_width (2.5.0)
+    uri (0.13.0)
     warden (1.2.9)
       rack (>= 2.0.9)
     webrick (1.8.1)
@@ -314,8 +318,6 @@ GEM
     zeitwerk (2.6.16)
 
 PLATFORMS
-  arm64-darwin-22
-  arm64-darwin-23
   x86_64-linux
 
 DEPENDENCIES
@@ -328,6 +330,7 @@ DEPENDENCIES
   debug
   devise
   factory_bot_rails
+  faraday
   jbuilder
   jsbundling-rails
   money-rails (~> 1.12)
