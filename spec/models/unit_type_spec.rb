@@ -15,4 +15,19 @@ describe UnitType do
       expect(result[2].description).to eq 'yet another thing'
     end
   end
+
+  context '.find' do
+    it 'retorna um tipo de unidade especifico' do
+      data = Rails.root.join('spec/support/json/unit_type.json').read
+      response = double('response', success?: true, body: data)
+      allow(Faraday).to receive(:get).with('http://127.0.0.1:3000/api/v1/unit_types/1').and_return(response)
+
+      result = UnitType.find(1)
+
+      expect(result.area).to eq 1000
+      expect(result.description).to eq 'something'
+      expect(result.ideal_fraction).to eq 200.2
+      expect(result.condo_id).to eq 1
+    end
+  end
 end
