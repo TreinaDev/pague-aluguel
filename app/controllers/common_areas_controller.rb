@@ -4,7 +4,7 @@ class CommonAreasController < ApplicationController
   before_action :find_condo, only: [:index, :show, :edit, :update]
 
   def index
-    @common_areas = CommonArea.where(condo_id: @condo.id)
+    @common_areas = CommonArea.find_by_condo_id(@condo.id)
   end
 
   def show; end

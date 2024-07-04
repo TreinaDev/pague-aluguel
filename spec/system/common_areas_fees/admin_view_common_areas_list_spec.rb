@@ -3,7 +3,6 @@ require 'rails_helper'
 describe 'Admin vê a lista de áreas comuns' do
   it 'se estiver autenticado' do
     condo = Condo.new(id: 1, name: 'Condomínio Vila das Flores', city: 'São Paulo')
-    # allow(Condo).to receive(:find).and_return(condo)
 
     visit condo_common_areas_path(condo.id)
 
@@ -13,32 +12,38 @@ describe 'Admin vê a lista de áreas comuns' do
   end
 
   it 'com sucesso' do
-    admin = create(:admin, email: 'ikki.phoenix@seiya.com', password: 'phoenix123')
+    admin = create(:admin, email: 'matheus@gmail.com', password: 'admin12345')
 
-    condos = []
-    condos << Condo.new(id: 1, name: 'Teenage Mutant Ninja Turtles', city: 'São Paulo')
-    allow(Condo).to receive(:all).and_return(condos)
-    allow(Condo).to receive(:find).and_return(condos.first)
+    condo = Condo.new(id: 1, name: 'Condo TMNT', city: 'Salvador')
+    allow(Condo).to receive(:find).and_return(condo)
 
-    create(:common_area, name: 'TMNT', description: 'Teenage Mutant Ninja Turtles', fee_cents: 500_00,
-                         condo_id: condos.first.id)
-    create(:common_area, name: 'Saint Seiya', description: 'Os Cavaleiros dos zodíacos', fee_cents: 400_00,
-                         condo_id: condos.first.id)
+    json_data = File.read(Rails.root.join('spec/support/json/common_areas.json'))
+    fake_response = double('faraday_response', status: 200, body: json_data, success?: true)
+    allow(Faraday).to receive(:get).with("http://127.0.0.1:3000/api/v1/condos/#{condo.id}/common_areas").and_return(fake_response)
+
+    # CommonAreaFee.create!(fee: 400, admin: admin)
+    # admin = create(:admin, email: 'ikki.phoenix@seiya.com', password: 'phoenix123')
+
+    # condos = []
+    # condos << Condo.new(id: 1, name: 'Teenage Mutant Ninja Turtles', city: 'São Paulo')
+    # allow(Condo).to receive(:all).and_return(condos)
+    # allow(Condo).to receive(:find).and_return(condos.first)
+
+    # create(:common_area, name: 'TMNT', description: 'Teenage Mutant Ninja Turtles', fee_cents: 500_00,
+    #                      condo_id: condos.first.id)
+    # create(:common_area, name: 'Saint Seiya', description: 'Os Cavaleiros dos zodíacos', fee_cents: 400_00,
+    #                      condo_id: condos.first.id)
 
     login_as admin, scope: :admin
-    visit root_path
-    click_on 'Lista de Condomínios'
-    click_on 'Teenage Mutant Ninja Turtles'
-    click_on 'Gerenciar Condomínio'
-    click_on 'Exibir Áreas Comuns'
+    visit condo_common_areas_path(condo.id)
 
-    expect(page).to have_content 'Áreas comuns do condomínio Teenage Mutant Ninja Turtles'
-    expect(page).to have_content 'TMNT'
-    expect(page).to have_content 'Teenage Mutant Ninja Turtles'
-    expect(page).to have_content 'R$400,00'
-    expect(page).to have_content 'Saint Seiya'
-    expect(page).to have_content 'Os Cavaleiros dos zodíacos'
-    expect(page).to have_content 'R$500,00'
+    expect(page).to have_content 'Áreas comuns do condomínio Condo TMNT'
+    expect(page).to have_content 'Academia'
+    expect(page).to have_content 'Uma academia raíz com ventilador apenas para os marombas'
+    # expect(page).to have_content 'R$400,00'
+    expect(page).to have_content 'Piscina'
+    expect(page).to have_content 'Piscina grande cabe até golfinhos.'
+    # expect(page).to have_content 'R$500,00'
     expect(page).not_to have_content 'Nenhuma Área Comum cadastrada'
   end
 
