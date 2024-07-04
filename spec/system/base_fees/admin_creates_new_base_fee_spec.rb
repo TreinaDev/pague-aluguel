@@ -1,6 +1,6 @@
 require 'rails_helper'
 
-describe 'admin cria taxa fixa' do
+describe 'Admin cria taxa fixa' do
   it 'e deve estar logado' do
     condo = Condo.new(id: 1, name: 'Prédio lindo', city: 'Cidade maravilhosa')
 
@@ -21,10 +21,10 @@ describe 'admin cria taxa fixa' do
 
     login_as admin, scope: :admin
     visit root_path
-    click_on 'Lista de Condomínios'
     click_on 'Prédio lindo'
-    click_on 'Gerenciar Condomínio'
-    click_on 'Cadastrar Nova Taxa'
+    within 'div#base-fee' do
+      expect(page).to have_link 'ADICIONAR NOVA'
+    end
 
     expect(page).to have_content 'Cadastro de Taxa de Prédio lindo'
     expect(current_path).to eq new_condo_base_fee_path(condos[0].id)

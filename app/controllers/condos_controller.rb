@@ -11,4 +11,10 @@ class CondosController < ApplicationController
     @condo = Condo.find(params[:id])
     @common_areas = CommonArea.where(condo_id: @condo.id)
   end
+
+  def search
+    @query = params[:query].downcase
+    @condos = Condo.all.select { |condo| condo.name.downcase.include?(@query) }
+    render 'index'
+  end
 end
