@@ -3,12 +3,14 @@
     <%= image_tag "buildings-icon", size: '18' %>
     <span><%= I18n.t('views.index.condo') %></span>
   </div>
+
+  <% if @condos.any? %>
+    <%= render 'home/admin_dashboard/search_condos' %>
+  <% end %>
+
   <div class="d-flex justify-content-center gap-2">
     <% if @condos.any? %>
-
-      <%= render 'home/admin_dashboard/search_condos' %>
-
-      <% @recent_condos.each do |condo| %>
+      <% @first_condos.each do |condo| %>
         <%= link_to condo_path(condo.id), class: "text-decoration-none" do %>
           <div class="card hover-strong shadow-sm" style="width: 18rem; height: 7rem;">
             <div class="card-body">
