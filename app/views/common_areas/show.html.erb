@@ -1,24 +1,31 @@
-<div>
-  <%= link_to 'Voltar', condo_common_areas_path(@condo.id), class:"btn btn-primary" %>
-</div>
-
-<div class="container text-center mt-4">
-
-  <div class="container shadow rounded-4 p-4 col-6">
-    <h3><%= @common_area.name%></h3>
+<%= turbo_frame_tag "modal" do %>
+  <div class="dean-modal modal-sm">
+    <%= link_to "", condo_path(@condo.id), class: "btn btn-close btn-sm" %>
+    
+    <span class="fs-8 text-center d-block">área comum</span>
+    <span class="fs-3 text-center d-block"><%= @common_area.name%></span>
+    <span class="fs-8 text-center d-block text-muted"><%= @common_area.description %></span>
     <hr>
+
     <div class="d-flex justify-content-center align-items-center">
-      <strong class="me-2">
+      <%= image_tag "dollar-icon", size: "20" %>
+      <span class="ms-1 me-2 fs-7 text-muted">
         <%= I18n.t('views.show.common_area_fee') %>
-        <%= @common_area.fee_cents.zero? ? I18n.t('views.index.no_fee') : Money.new(@common_area.fee_cents, 'BRL').format %>
-      </strong>
-      <%= link_to I18n.t('views.show.new_fee'), edit_condo_common_area_path(@condo.id, @common_area), class:"btn btn-primary" %>
+      </span>
+      <%= @common_area.fee_cents.zero? ? I18n.t('views.index.no_fee') : Money.new(@common_area.fee_cents, 'BRL').format %>
+      <%= link_to edit_condo_common_area_path(@condo.id, @common_area), class:"btn", data: { turbo_frame: "modal" } do %>
+        <%= image_tag "edit-icon", size: "22", class: "mb-1" %>
+      <% end %>
     </div>
+
     <hr>
-    <div>
-      <p><%= I18n.t('views.show.description') %><%= @common_area.description %></p>
-      <p><%= I18n.t('views.show.capacity') %><%= @common_area.max_capacity %></p>
-      <p><%= I18n.t('views.show.rules') %><%= @common_area.usage_rules %></p>
+
+    <div class="text-center">
+      <span class="text-muted text-lowercase fs-8"><%= I18n.t('views.show.capacity') %></span>
+      <span><%= @common_area.max_capacity %> pessoas</span>
+      <br>
+      <span class="text-muted text-lowercase fs-8"><%= I18n.t('views.show.rules') %></span>
+      <span class=""><%= @common_area.usage_rules %></span>
     </div>
 
     <% if @common_area.common_area_fee_histories.any? %>
@@ -37,6 +44,5 @@
         </div>
       </div>
     <% end %>
-
   </div>
-</div>
+<% end %>
