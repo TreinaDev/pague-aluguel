@@ -36,11 +36,14 @@
     </div>
   </div>
   
-  <% if @shared_fee.active? %>
-    <div class="row">
+  <div class="row">
+    <% if @shared_fee.active? %>
       <div class="col-md-6">
         <%= button_to I18n.t('cancel-button'), cancel_shared_fee_path(@shared_fee), class: 'btn btn-danger' %>
       </div>
+    <% end %>
+    <div class="col-md-6">
+      <%= link_to I18n.t('helpers.buttons.back'), shared_fees_path(condo_id: @condo.id), class: "btn btn-secondary" %>
     </div>
-  <% end %>
+  </div>
 </div>

@@ -74,6 +74,18 @@ describe 'Admin lança uma conta compartilhada' do
     expect(page).to have_content('Valor Total não é um número')
   end
 
+  it 'e clica em Voltar para a listagem' do
+    admin = FactoryBot.create(:admin, first_name: 'Fulano', last_name: 'Da Costa')
+    condo = Condo.new(id: 1, name: 'Prédio lindo', city: 'Cidade maravilhosa')
+
+    login_as admin, scope: :admin
+    visit shared_fees_path(condo_id: condo.id)
+    click_on 'Lançar Conta Compartilhada'
+    click_on 'Voltar'
+
+    expect(current_path).to eq shared_fees_path
+  end
+
   it 'e lança mais de uma conta' do
     admin = FactoryBot.create(:admin, first_name: 'Fulano', last_name: 'Da Costa')
 

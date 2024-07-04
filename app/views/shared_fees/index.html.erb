@@ -29,5 +29,12 @@
     <p>Não foram encontradas contas compartilhadas.</p>
   <% end %>
 
-  <%= link_to 'Lançar Conta Compartilhada', new_shared_fee_path(condo_id: @condo.id), class: 'btn btn-primary' %>
+  <div class="row">
+    <div class="col-md-6">
+      <%= link_to 'Lançar Conta Compartilhada', new_shared_fee_path(condo_id: @condo.id), class: 'btn btn-primary' %>
+    </div>
+    <div class="col-md-6">
+      <%= link_to I18n.t('helpers.buttons.back'), condo_path(@condo.id), class: "btn btn-secondary" %>
+    </div>
+  </div>
 </div>
