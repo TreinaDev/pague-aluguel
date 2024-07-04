@@ -7,6 +7,7 @@ Rails.application.routes.draw do
   resources :condos, only: [:index, :show] do
     resources :common_areas, only: [:index, :show, :edit, :update]
     resources :base_fees, only: [:new, :create, :show, :index]
+    get 'search', on: :collection
   end
 
   resources :shared_fees, only: [:index, :show, :new, :create] do 
