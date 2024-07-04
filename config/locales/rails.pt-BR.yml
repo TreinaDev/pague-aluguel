@@ -1,4 +1,5 @@
 pt-BR:
+  cancel-button: 'Cancelar'
   activerecord:
     errors:
       messages:

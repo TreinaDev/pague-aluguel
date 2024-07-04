@@ -13,3 +13,7 @@ pt-BR:
         total_value_cents: Valor Total
         total_value: Valor Total
         description: Descrição
+        status: Situação
+        enum_status:
+          active: Ativa
+          canceled: Cancelada

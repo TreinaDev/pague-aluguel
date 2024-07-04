@@ -10,7 +10,9 @@ Rails.application.routes.draw do
     get 'search', on: :collection
   end
 
-  resources :shared_fees, only: [:index, :show, :new, :create]
+  resources :shared_fees, only: [:index, :show, :new, :create] do 
+    post 'cancel', on: :member
+  end
 
   authenticate :admin do
     resources :admins, only: [:index, :show]

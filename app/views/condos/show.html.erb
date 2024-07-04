@@ -7,8 +7,7 @@
         Gerenciar Condomínio
       </a>
       <ul class="dropdown-menu">
-        <%= link_to 'Lançar Conta Compartilhada', new_shared_fee_path(condo_id: @condo.id), class: 'dropdown-item' %>
-        <%= link_to 'Exibir Contas Compartilhadas', shared_fees_path(condo_id: @condo.id), class: 'dropdown-item' %>
+        <%= link_to 'Contas Compartilhadas', shared_fees_path(condo_id: @condo.id), class: 'dropdown-item' %>
         <%= link_to 'Exibir Áreas Comuns', condo_common_areas_path(condo_id: @condo.id), class: 'dropdown-item' %>
         <%= link_to 'Cadastrar Nova Taxa', new_condo_base_fee_path(condo_id: @condo.id), class: 'dropdown-item' %>
         <%= link_to 'Exibir Taxas Cadastradas', condo_base_fees_path(condo_id: @condo.id), class: 'dropdown-item' %>
