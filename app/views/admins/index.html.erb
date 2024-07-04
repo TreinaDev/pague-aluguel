@@ -1,6 +1,6 @@
-<%= turbo_frame_tag 'expand' do %>
+<%= turbo_frame_tag 'expand-admins', data_autoscroll_behavior: "auto" do %>
   <div class="d-flex justify-content-center">
-    <div class="accordion w-50" id="all-admins">
+    <div class="accordion shadow-sm w-50" id="all-admins">
       <% @admins.each do |admin| %>
         <div class="accordion-item">
           <h2 class="accordion-header">

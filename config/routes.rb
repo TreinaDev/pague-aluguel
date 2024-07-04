@@ -12,6 +12,6 @@ Rails.application.routes.draw do
   resources :shared_fees, only: [:index, :show, :new, :create]
 
   authenticate :admin do
-    resources :admins, only: [:index, :show]
+    resources :admins, only: [:index]
   end
 end

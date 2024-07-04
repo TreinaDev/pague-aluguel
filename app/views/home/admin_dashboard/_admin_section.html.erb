@@ -4,13 +4,13 @@
     <span><%= Admin.model_name.human(count: 2) %></span>
   </div>
 
-  <%= link_to new_admin_registration_path, class: "btn btn-secondary mt-3 w-20 mx-auto mb-3" do %>
-    <%= image_tag "add-admin", size: "25" %>
-    <span class="text-uppercase"><%= Admin.model_name.human %></span>
+  <%= link_to new_admin_registration_path, class: "btn hover-strong mt-3 w-20 mx-auto mb-3" do %>
+    <%= image_tag "add-admin", size: "20" %>
+    <span class="text-uppercase fs-8">novo <%= Admin.model_name.human %></span>
   <% end %>
 
   <div class="d-flex justify-content-center">
-    <div class="accordion w-50" id="recent-admins">
+    <div class="accordion shadow-sm w-50" id="recent-admins">
       <% @recent_admins.each do |admin| %>
         <div class="accordion-item">
           <h2 class="accordion-header">
@@ -21,29 +21,32 @@
           </h2>
           <div id="<%= dom_id(admin) %>" class="accordion-collapse collapse" data-bs-parent="#admin-accordion">
             <div class="accordion-body">
-              <span class="fw-bold">Email:</span>
+              <span class="text-lowercase fs-8 text-muted">Email</span>
               <span><%= admin.email %></span>
               <hr class="divider">
-              <span class="fw-bold">CPF:</span>
+              <span class="text-lowercase fs-8 text-muted">CPF</span>
               <span data-controller="document-number"><%= admin.document_number %></span>
+              <hr class="divider">
+              <span class="text-lowercase fs-8 text-muted">Desde</span>
+              <span><%= admin.created_at.strftime("%d/%m/%Y") %></span>
             </div>
           </div>
         </div>
       <% end %>
     </div>
   </div>
-  <% if @admins.length > 4 %>
+  <% if array_length_greater_than?(@admins, 4) %>
     <div data-controller="change-button" class="text-center mt-3 mb-3">
-      <%= link_to admins_path, class: 'btn text-uppercase', data: { change_button_target: "allAdminsBtn", turbo_frame: "expand" } do %>
+      <%= link_to admins_path, class: 'btn text-uppercase', data: { change_button_target: "allAdminsBtn", turbo_frame: "expand-admins" } do %>
         <%= image_tag "arrow-down", size: "20" %>
         <span class="fs-8">Mostrar todos</span>
       <% end %>
 
-      <%= link_to root_path, class: 'btn text-uppercase', data: { change_button_target: "hideAdminsBtn", turbo_frame: "expand" } do %>
+      <%= link_to root_path, class: 'btn text-uppercase', data: { change_button_target: "hideAdminsBtn", turbo_frame: "expand-admins" } do %>
         <%= image_tag "arrow-up", size: "20" %>
         <span class="fs-8">Ocultar</span>
       <% end %>
-      <%= turbo_frame_tag 'expand' %>
+      <%= turbo_frame_tag 'expand-admins' %>
     </div>
   <% end %>
 </div>

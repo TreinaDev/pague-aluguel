@@ -1,4 +1,6 @@
+// images
 .avatar {
+  object-fit: cover;
   vertical-align: middle;
   width: 2.5rem;
   height: 2.5rem;
@@ -6,12 +8,13 @@
 }
 
 .profile-avatar {
+  object-fit: cover;
   vertical-align: middle;
   width: 10rem;
   height: 10rem;
   border-radius: 50%;
 }
-
+// backgrounds
 .bg-light-beige {
   background-color: $off-white;
 }
@@ -20,6 +23,11 @@
   background-color: $off-white;
 }
 
+.bg-dark {
+  background-color: $dark-red !important;
+}
+
+// form customizations
 .form-control {
   background-color: $off-white;
 }
@@ -39,11 +47,7 @@
 .form-floating > select + label:after {
   background: $off-white !important;
 }
-
-.bg-dark {
-  background-color: $dark-red !important;
-}
-
+// text customizations
 .fs-7 {
   font-size: 0.875rem;
 }
@@ -51,8 +55,32 @@
 .fs-8 {
   font-size: 0.75rem;
 }
-
+// hover
 .hover-strong:hover {
   background-color: #cfd2dc;
   border-color: #d0d0d0;
+}
+// width
+.w-18 {
+  width: 18%;  
+}
+
+.w-20 {
+  width: 20%;  
+}
+
+.w-35 {
+  width: 35%;
+}
+
+.w-40 {
+  width: 40%;
+}
+
+.w-45 {
+  width: 45%;
+}
+
+.w-49 {
+  width: 49%;
 }
