@@ -76,10 +76,13 @@ describe 'Admin lança uma conta compartilhada' do
 
   it 'e clica em Voltar para a listagem' do
     admin = FactoryBot.create(:admin, first_name: 'Fulano', last_name: 'Da Costa')
-    condo = Condo.new(id: 1, name: 'Prédio lindo', city: 'Cidade maravilhosa')
+    condos = []
+    condos << Condo.new(id: 1, name: 'Condo Test', city: 'City Test')
+    allow(Condo).to receive(:all).and_return(condos)
+    allow(Condo).to receive(:find).and_return(condos.first)
 
     login_as admin, scope: :admin
-    visit shared_fees_path(condo_id: condo.id)
+    visit shared_fees_path(condo_id: condos.first.id)
     click_on 'Lançar Conta Compartilhada'
     click_on 'Voltar'
 

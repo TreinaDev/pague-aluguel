@@ -41,24 +41,27 @@ describe 'Admin tenta acessar lista de contas compartilhadas' do
 
   it 'e retorna para a tela de condomínio' do
     admin = FactoryBot.create(:admin, first_name: 'Fulano', last_name: 'Da Costa')
-    condo = Condo.new(id: 1, name: 'Prédio lindo', city: 'Cidade maravilhosa')
+    condos = []
+    condos << Condo.new(id: 1, name: 'Condo Test', city: 'City Test')
     unit_types = []
     unit_types << UnitType.new(id: 1, area: 30, description: 'Apartamento 1 quarto', ideal_fraction: 0.1,
                                condo_id: 1)
     allow(UnitType).to receive(:find_all_by_condo).and_return(unit_types)
+    allow(Condo).to receive(:all).and_return(condos)
+    allow(Condo).to receive(:find).and_return(condos.first)
 
     SharedFee.create!(description: 'Conta de Luz', issue_date: 10.days.from_now.to_date,
-                      total_value: 10_000, condo_id: condo.id)
+                      total_value: 10_000, condo_id: condos.first.id)
     SharedFee.create!(description: 'Conta de Água', issue_date: 15.days.from_now.to_date,
-                      total_value: 5_000, condo_id: condo.id)
+                      total_value: 5_000, condo_id: condos.first.id)
     SharedFee.create!(description: 'Conta de Carro Pipa', issue_date: 5.days.from_now.to_date,
-                      total_value: 25_000, condo_id: condo.id)
+                      total_value: 25_000, condo_id: condos.first.id)
 
     login_as admin, scope: :admin
-    visit shared_fees_path(condo_id: condo.id)
+    visit shared_fees_path(condo_id: condos.first.id)
     click_on 'Voltar'
 
-    expect(current_path).to eq condo_path(condo.id)
+    expect(current_path).to eq condo_path(condos.first.id)
   end
 
   it 'e acessa a página de uma conta compartilhada na lista' do
