@@ -1,16 +1,21 @@
-<div class="card border-0 rounded-0 bg-off-white mt-4 py-3 px-3 w-49">
-  <div class="text-muted mb-3 fs-8 d-flex">
-    <%= image_tag "buildings-icon", size: '18' %>
-    <div class="breadcrumb w-50 ms-2" aria-label="breadcrumb">
-      <%= link_to "Condomínios", root_path, class: "breadcrumb-item" %>
-      <span class="breadcrumb-item active"><%= I18n.t('views.show.condo') %></span>
+<div class="d-flex justify-content-between">  
+  <div class="card border-0 rounded-0 bg-off-white mt-4 py-3 px-3 w-49">
+    <div class="text-muted mb-2 fs-8 d-flex">
+      <%= image_tag "buildings-icon", size: '18' %>
+      <div class="breadcrumb w-50 ms-2" aria-label="breadcrumb">
+        <%= link_to "Condomínios", root_path, class: "breadcrumb-item" %>
+        <span class="breadcrumb-item active"><%= I18n.t('views.show.condo') %></span>
+      </div>
+    </div>
+    <div class="card p-4 shadow-sm">
+      <span class="fs-4"><%= @condo.name %></span>
+      <%= @condo.city %>
     </div>
   </div>
-  <div class="card">
-    <span></span><%= @condo.name %>
-    <%= @condo.city %>
-  </div>
+  <%= render 'debt_clearance_certificate_section' %>
 </div>
+
+<%= render 'payment_slip_section' %>
 
 <div class="card border-0 rounded-0 bg-off-white mt-4 py-3 px-3">
   <div class="text-muted mb-3 fs-8">

@@ -28,21 +28,6 @@
       <span class=""><%= @common_area.usage_rules %></span>
     </div>
 
-    <% if @common_area.common_area_fee_histories.any? %>
-      <p class="d-inline-flex gap-1">
-        <a class="btn btn-primary" data-bs-toggle="collapse" href="#collapseExample" role="button" aria-expanded="false" aria-controls="collapseExample">
-          <%= I18n.t('views.show.show_history') %>
-        </a>
-      </p>
-      <div class="collapse" id="collapseExample">
-        <div class="card card-body">
-          <ul>
-            <% @common_area.common_area_fee_histories.each do |history_fee| %>
-              <li><%= I18n.t('views.show.email') %><%= history_fee.user %> | <%= I18n.t('views.show.description') %><%= history_fee.created_at.strftime('%d/%m/%Y') %> | <%= I18n.t('views.show.fee') %> <%= Money.new(history_fee.fee_cents, 'BRL').format %></li>
-            <% end %>
-          </ul>
-        </div>
-      </div>
-    <% end %>
+    <%= render "common_area_fee_histories" %>
   </div>
 <% end %>

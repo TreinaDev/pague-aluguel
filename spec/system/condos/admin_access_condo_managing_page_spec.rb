@@ -16,8 +16,8 @@ describe 'Administrador acessa página do condomínio' do
     click_on 'Lista de Condomínios'
     click_on 'Edifício Monte Verde'
 
-    expect(page).to have_content('Condomínio: Edifício Monte Verde')
-    expect(page).to have_content('Cidade: Recife')
+    expect(page).to have_content 'Condomínio: Edifício Monte Verde'
+    expect(page).to have_content 'Cidade: Recife'
   end
 
   it 'e clica em Gerenciar Condomínio' do
@@ -36,6 +36,6 @@ describe 'Administrador acessa página do condomínio' do
     click_on 'Edifício Monte Verde'
     click_on 'Gerenciar Condomínio'
 
-    expect(page).to have_link('Lançar Conta Compartilhada')
+    expect(page).to have_link 'Lançar Conta Compartilhada'
   end
 end

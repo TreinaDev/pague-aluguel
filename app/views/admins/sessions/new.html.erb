@@ -9,6 +9,7 @@
     </span>
 
     <%= form_for(resource, as: resource_name, url: session_path(resource_name)) do |f| %>
+      <%= render "admins/shared/error_messages", resource: resource %>
       <div class="form-floating mb-2 w-75 mx-auto">
         <%= f.email_field :email, autofocus: true, autocomplete: "email", class: "form-control" %>
         <%= f.label :email %>
