@@ -1,9 +1,9 @@
-<%= turbo_frame_tag "expand" do %> 
+<%= turbo_frame_tag "expand-condos" do %> 
   <% if @condos.any? %>
-    <div class="d-flex gap-3 flex-wrap justify-content-center">
+    <div class="d-flex gap-2 flex-wrap justify-content-center">
       <% @condos.each do |condo| %>
         <%= link_to condo_path(condo.id), class: "text-decoration-none" do %>
-          <div class="card hover-strong" style="width: 18rem; ">
+          <div class="card hover-strong shadow-sm" style="width: 18rem; height: 7rem;">
             <div class="card-body">
               <span class="d-block"><%= condo.name %></span>
               <span class="text-muted fs-8"><%= condo.city %></span>

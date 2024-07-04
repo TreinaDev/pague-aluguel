@@ -65,7 +65,7 @@ class Admins::RegistrationsController < Devise::RegistrationsController
   end
 
   def after_sign_up_path_for(*)
-    admins_path
+    root_path
   end
 
   def after_update_path_for(*)
