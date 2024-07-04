@@ -4,43 +4,38 @@ describe 'admin edita sua propria conta' do
   it 'com sucesso' do
     admin = FactoryBot.create(:admin, first_name: 'Fulano', last_name: 'Da Costa')
 
-    login_as(admin, scope: :admin)
+    login_as admin, scope: :admin
     visit root_path
 
-    within('nav') do
-      click_on 'Admins'
-    end
-
-    within('div#admin_list') do
-      click_on 'Fulano Da Costa'
-    end
-    click_on 'Editar'
+    find('#edit-profile').click
 
     fill_in 'Nome', with: 'Ciclano'
     fill_in 'Sobrenome', with: 'Da Silva'
-    attach_file 'Foto', Rails.root.join('spec/support/images/reuri.jpeg')
-    click_on 'Salvar'
+    attach_file 'Insira sua foto de perfil', Rails.root.join('spec/support/images/reuri.jpeg')
+    click_on 'Atualizar'
 
-    expect(page).to have_content('A sua conta foi atualizada com sucesso.')
-    expect(page).to have_content('Ciclano Da Silva')
-    expect(page).to have_css("img[src*='reuri.jpeg']")
-    expect(page).not_to have_content('Fulano Da Costa')
+    expect(page).to have_content 'A sua conta foi atualizada com sucesso.'
+    expect(page).to have_content 'Ciclano Da Silva'
+    expect(page).to have_css "img[src*='reuri.jpeg']"
+    expect(page).not_to have_content 'Fulano Da Costa'
   end
+
   it 'e falha por parametro incorreto' do
     admin = FactoryBot.create(:admin)
 
-    login_as(admin, scope: :admin)
+    login_as admin, scope: :admin
     visit edit_admin_registration_path(admin)
 
     fill_in 'Nome', with: ''
     fill_in 'Sobrenome', with: ''
-    click_on 'Salvar'
+    click_on 'Atualizar'
 
-    expect(page).to have_content('Não foi possível salvar administrador')
-    expect(page).to have_content('Nome não pode ficar em branco')
-    expect(page).to have_content('Sobrenome não pode ficar em branco')
+    expect(page).to have_content 'Não foi possível salvar administrador'
+    expect(page).to have_content 'Nome não pode ficar em branco'
+    expect(page).to have_content 'Sobrenome não pode ficar em branco'
   end
 end
+
 describe 'admin tenta editar outra conta' do
   it 'e não encontra link para edição' do
     admin = FactoryBot.create(:admin)
@@ -51,14 +46,10 @@ describe 'admin tenta editar outra conta' do
                       last_name: 'Da Silva',
                       document_number: CPF.generate)
 
-    login_as(admin, scope: :admin)
+    login_as admin, scope: :admin
     visit root_path
 
-    within('nav') do
-      click_on 'Admins'
-    end
-
-    within('div#admin_list') do
+    within('div#recent-admins') do
       click_on 'Ciclano Da Silva'
     end
 

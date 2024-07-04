@@ -1,3 +1,5 @@
+# spec/models/admin_spec.rb
+
 require 'rails_helper'
 
 RSpec.describe Admin, type: :model do
@@ -27,6 +29,7 @@ RSpec.describe Admin, type: :model do
       expect(admin.last_name).to eq 'potter'
     end
   end
+
   describe '#format' do
     it 'email - sem @' do
       admin = Admin.new(email: 'abcabc.com')
@@ -57,16 +60,15 @@ RSpec.describe Admin, type: :model do
     end
 
     it 'de email' do
-      @email = 'harryp@mail.com'
       @cpf = CPF.generate
       Admin.create!(
         first_name: 'Harry',
         last_name: 'Potter',
-        email: @email,
+        email: 'harryp@mail.com',
         document_number: @cpf,
         password: 'password123'
       )
-      admin = Admin.new(email: @email)
+      admin = Admin.new(email: 'harryp@mail.com')
 
       admin.valid?
       result = admin.errors.include?(:email)
@@ -124,19 +126,19 @@ RSpec.describe Admin, type: :model do
     end
 
     it 'de sobrenome - muito curto' do
-      admin = Admin.new(first_name: 'aa')
+      admin = Admin.new(last_name: 'aa')
 
       admin.valid?
-      result = admin.errors.include?(:first_name)
+      result = admin.errors.include?(:last_name)
 
       expect(result).to be true
     end
 
     it 'de sobrenome - muito longo' do
-      admin = Admin.new(first_name: 'otorinolaringologista')
+      admin = Admin.new(last_name: 'otorinolaringologista')
 
       admin.valid?
-      result = admin.errors.include?(:first_name)
+      result = admin.errors.include?(:last_name)
 
       expect(result).to be true
     end

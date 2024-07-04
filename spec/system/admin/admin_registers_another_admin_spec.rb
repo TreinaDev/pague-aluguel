@@ -8,8 +8,7 @@ describe 'admin registra outro admin' do
     login_as admin, scope: :admin
     visit root_path
 
-    click_on 'Admins'
-    click_on 'Registrar novo admin'
+    click_on 'novo administrador'
 
     fill_in 'E-mail', with: 'joaoalmeida@mail.com'
     fill_in 'Senha', with: 'password123'
@@ -17,13 +16,12 @@ describe 'admin registra outro admin' do
     fill_in 'Nome', with: 'João'
     fill_in 'Sobrenome', with: 'Almeida'
     cpf.each_char { |char| find(:css, "input[id$='admin_document_number']").send_keys(char) }
-    attach_file 'Foto', Rails.root.join('spec/support/images/reuri.jpeg')
-    click_on 'Registrar'
-    sleep 0.2
+    attach_file 'Insira sua foto de perfil', Rails.root.join('spec/support/images/reuri.jpeg')
+    click_on 'REGISTRAR'
 
-    expect(current_path).to eq admins_path
     expect(page).to have_content 'Administrador registrado com sucesso'
     expect(page).to have_content 'João Almeida'
+    expect(current_path).to eq root_path
   end
 
   it 'falha quando faltam atributos' do
@@ -32,15 +30,13 @@ describe 'admin registra outro admin' do
     login_as admin, scope: :admin
     visit root_path
 
-    click_on 'Admins'
-    click_on 'Registrar novo admin'
+    click_on 'novo administrador'
 
     fill_in 'E-mail', with: 'another@mail.com'
     fill_in 'Senha', with: 'example123456'
     fill_in 'Confirme a senha', with: 'example123456'
-    click_on 'Registrar'
+    click_on 'REGISTRAR'
 
-    expect(current_path).to eq new_admin_registration_path
     expect(page).to have_content 'Nome não pode ficar em branco'
     expect(page).to have_content 'Sobrenome não pode ficar em branco'
     expect(page).to have_content 'CPF não pode ficar em branco'

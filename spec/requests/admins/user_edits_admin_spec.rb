@@ -3,7 +3,7 @@ require 'rails_helper'
 describe 'usuario tenta editar conta de administrador' do
   it 'e sucede' do
     admin = FactoryBot.create(:admin, first_name: 'Fulano', last_name: 'Da Costa')
-    login_as(admin, scope: :admin)
+    login_as admin, scope: :admin
     patch admin_registration_path, params: {
       admin: {
         first_name: 'Beltrano',
@@ -14,7 +14,7 @@ describe 'usuario tenta editar conta de administrador' do
       }
     }
 
-    expect(response).to redirect_to admin
+    expect(response).to redirect_to root_path(admin.id)
     expect(flash[:notice]).to eq I18n.t('devise.registrations.updated')
   end
   it 'e falha por não estar autenticado' do

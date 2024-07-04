@@ -19,8 +19,8 @@ class Admin < ApplicationRecord
   private
 
   def downcase_name
-    self.first_name = first_name.downcase
-    self.last_name = last_name.downcase
+    self.first_name = first_name.downcase if first_name.present?
+    self.last_name = last_name.downcase if last_name.present?
   end
 
   def verify_document_number
