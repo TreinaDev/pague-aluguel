@@ -7,19 +7,25 @@
 
 <% if @query %>
   <div class="text-center text-muted mb-2 fs-7">
-    <%= @query == "" ? "Você precisa buscar por um nome de condomínio" : "Resultados para: #{@query}" %>
+    <% if @query.empty? %>
+      <span><%= I18n.t('views.query.empty_condo') %></span>
+    <% elsif  @query_results.empty? %>
+     <span><%= I18n.t('views.query.no_result') %></span>
+    <% else %>
+     <%= "Resultados para: #{@query}" %>
+      <div class="d-flex justify-content-center gap-2 mb-2">
+        <% @query_results.each do |condo| %>
+          <%= link_to condo_path(condo.id), class: "text-decoration-none" do %>
+            <div class="card hover-strong shadow-sm" style="width: 18rem; height: 7rem;">
+              <div class="card-body">
+                <span class="d-block"><%= condo.name %></span>
+                <span class="text-muted fs-8"><%= condo.city %></span>
+              </div>
+            </div>
+          <% end %>
+        <% end %>
+      </div>
+      <hr>
+    <% end %>
   </div>
-  <div class="d-flex justify-content-center gap-2 mb-2">
-    <% @query_results.each do |condo| %>
-      <%= link_to condo_path(condo.id), class: "text-decoration-none" do %>
-        <div class="card hover-strong shadow-sm" style="width: 18rem; height: 7rem;">
-          <div class="card-body">
-            <span class="d-block"><%= condo.name %></span>
-            <span class="text-muted fs-8"><%= condo.city %></span>
-          </div>
-        </div>
-      <% end %>
-    <% end %>  
-  </div>
-  <hr>
 <% end %>

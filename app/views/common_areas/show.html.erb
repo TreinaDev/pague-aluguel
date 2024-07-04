@@ -1,8 +1,8 @@
 <%= turbo_frame_tag "modal" do %>
   <div class="dean-modal modal-sm">
-    <%= link_to "", condo_path(@condo.id), class: "btn btn-close btn-sm" %>
-    
-    <span class="fs-8 text-center d-block">área comum</span>
+    <%= link_to "", condo_path(@condo.id), class: "btn btn-close btn-sm", id: 'close' %>
+
+    <span class="fs-8 text-center d-block"><%= CommonArea.model_name.human %></span>
     <span class="fs-3 text-center d-block"><%= @common_area.name%></span>
     <span class="fs-8 text-center d-block text-muted"><%= @common_area.description %></span>
     <hr>
@@ -12,8 +12,9 @@
       <span class="ms-1 me-2 fs-7 text-muted">
         <%= I18n.t('views.show.common_area_fee') %>
       </span>
+
       <%= @common_area.fee_cents.zero? ? I18n.t('views.index.no_fee') : Money.new(@common_area.fee_cents, 'BRL').format %>
-      <%= link_to edit_condo_common_area_path(@condo.id, @common_area), class:"btn", data: { turbo_frame: "modal" } do %>
+      <%= link_to edit_condo_common_area_path(@condo.id, @common_area), class:"btn", id: 'edit-common-area', data: { turbo_frame: "modal" } do %>
         <%= image_tag "edit-icon", size: "22", class: "mb-1" %>
       <% end %>
     </div>

@@ -27,3 +27,6 @@ pt-BR:
       hide: Ocultar
       show_all: Mostrar todos
       new_admin: novo administrador
+    query:
+      empty_condo: Você precisa buscar por um nome de condomínio.
+      no_result: Nenhum condomínio encontrado.

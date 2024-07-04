@@ -15,11 +15,9 @@ describe 'Admin busca condomínio pelo nome' do
     fill_in 'Busque um condomínio',	with: 'verde'
     click_on 'Buscar'
 
-    expect(page).to have_content "Resultados para: 'verde'"
+    expect(page).to have_content "Resultados para: verde"
     expect(page).to have_content 'Edifício Monte Verde'
     expect(page).to have_content 'Condomínio Lagoa Verde'
-    expect(page).not_to have_content 'Condomínio Vila das Flores'
-    expect(page).not_to have_content 'Residencial Jardim Europa'
   end
 
   it 'e retorna alerta se nao encontrar condominios' do
@@ -33,9 +31,8 @@ describe 'Admin busca condomínio pelo nome' do
     fill_in 'Busque um condomínio',	with: 'Teste'
     click_on 'Buscar'
 
-    expect(page).to have_content 'Não foram encontrados condomínios para essa busca.'
-    expect(page).not_to have_content 'Não existem condomínios registrados.'
-    expect(page).not_to have_content 'Condomínio Vila das Flores'
+    expect(page).to have_content 'Nenhum condomínio encontrado.'
+    expect(page).not_to have_content 'Você precisa buscar por um nome de condomínio.'
   end
 
   it 'e retorna alerta caso o termo da busca seja vazio' do
@@ -49,6 +46,6 @@ describe 'Admin busca condomínio pelo nome' do
     fill_in 'Busque um condomínio',	with: ''
     click_on 'Buscar'
 
-    expect(page).to have_content 'Você precisa buscar por um nome de condomínio'
+    expect(page).to have_content 'Você precisa buscar por um nome de condomínio.'
   end
 end

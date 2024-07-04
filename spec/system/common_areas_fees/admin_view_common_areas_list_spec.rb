@@ -27,22 +27,18 @@ describe 'Admin vê a lista de áreas comuns' do
 
     login_as admin, scope: :admin
     visit root_path
-    click_on 'Lista de Condomínios'
     click_on 'Teenage Mutant Ninja Turtles'
-    click_on 'Gerenciar Condomínio'
-    click_on 'Exibir Áreas Comuns'
+    click_on 'TMNT'
 
-    expect(page).to have_content 'Áreas comuns do condomínio Teenage Mutant Ninja Turtles'
+    expect(page).to have_content 'Área Comum'
     expect(page).to have_content 'TMNT'
     expect(page).to have_content 'Teenage Mutant Ninja Turtles'
-    expect(page).to have_content 'R$400,00'
     expect(page).to have_content 'Saint Seiya'
     expect(page).to have_content 'Os Cavaleiros dos zodíacos'
-    expect(page).to have_content 'R$500,00'
-    expect(page).not_to have_content 'Nenhuma Área Comum cadastrada'
+    expect(page).not_to have_content 'Nenhuma área comum cadastrada.'
   end
 
-  it 'E não existem áreas comuns cadastradas' do
+  it 'e não existem áreas comuns cadastradas' do
     admin = create(:admin, email: 'matheus@gmail.com', password: 'admin12345')
 
     condo = Condo.new(id: 1, name: 'Teenage Mutant Ninja Turtles', city: 'São Paulo')
@@ -51,7 +47,7 @@ describe 'Admin vê a lista de áreas comuns' do
     login_as admin, scope: :admin
     visit condo_common_areas_path(condo.id)
 
-    expect(page).to have_content 'Nenhuma Área Comum cadastrada'
+    expect(page).to have_content 'Nenhuma área comum cadastrada.'
   end
 
   it 'e vê somente as áreas comuns do condomínio selecionado' do

@@ -6,7 +6,7 @@ class HomeController < ApplicationController
 
   def search
     @query = params[:query].downcase
-    @query_results = Condo.all.select { |condo| condo.name.downcase.include?(@query) }
+    @query_results = Condo.all.select { |condo| condo.name.downcase.include?(@query) } unless @query.empty?
     recent_admins
     first_condos
     render 'index'

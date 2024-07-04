@@ -1,7 +1,7 @@
 <%= turbo_frame_tag "modal" do %>
   <div class="dean-modal modal-sm">
     <%= link_to "", :back, class: "btn btn-close btn-sm" %>
-    <span class="fs-8 text-center d-block">área comum</span>
+    <span class="fs-8 text-center d-block"><%= CommonArea.model_name.human %></span>
     <span class="fs-3 text-center d-block"><%= @common_area.name%></span>
     <hr>
     <% if @common_area.errors.any? %>
@@ -14,7 +14,7 @@
         </ul>
       </div>
     <% end %>
-    
+
     <%= form_with model: [@common_area], url: condo_common_area_path(@condo.id) do |f| %>
       <div class="form-floating mt-3">
         <%= f.text_field :fee, placeholder: '0,00', class: "form-control" %>
