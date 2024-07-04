@@ -67,7 +67,7 @@ describe 'Admin gerencia contas compartilhadas' do
     end
   end
 
-  context 'deletando ' do
+  context 'cancelando ' do
     it 'com sucesso' do
       admin = Admin.create!(
         email: 'admin@mail.com',
@@ -84,12 +84,14 @@ describe 'Admin gerencia contas compartilhadas' do
       units = []
       units << Unit.new(id: 1, area: 100, floor: 1, number: 1, unit_type_id: 1)
       units << Unit.new(id: 2, area: 100, floor: 1, number: 1, unit_type_id: 2)
+
       allow(Unit).to receive(:all).and_return(units)
       allow(Condo).to receive(:all).and_return(condos)
+      allow(Condo).to receive(:find).and_return(condos.first)
       allow(UnitType).to receive(:all).and_return(unit_types)
 
       sf = SharedFee.create!(description: 'Conta de Luz', issue_date: 10.days.from_now.to_date,
-                             total_value: 10_000, condo: condos.first.id)
+                             total_value: 10_000, condo_id: condos.first.id)
 
       login_as admin, scope: :admin
       delete(shared_fee_path(sf.id))
@@ -120,7 +122,7 @@ describe 'Admin gerencia contas compartilhadas' do
       allow(UnitType).to receive(:all).and_return(unit_types)
 
       sf = SharedFee.create!(description: 'Conta de Luz', issue_date: 10.days.from_now.to_date,
-                             total_value: 10_000, condo: condos.first.id)
+                             total_value: 10_000, condo_id: condos.first.id)
 
       delete(shared_fee_path(sf.id))
 

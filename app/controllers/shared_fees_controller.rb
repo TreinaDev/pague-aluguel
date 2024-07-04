@@ -31,7 +31,7 @@ class SharedFeesController < ApplicationController
 
   def destroy
     @shared_fee = SharedFee.find(params[:id])
-    @condo = @shared_fee.condo
+    @condo = Condo.find(@shared_fee.condo_id)
     @shared_fee.destroy
     redirect_to shared_fees_path(condo_id: @condo.id), notice: "#{@shared_fee.description} deletada com sucesso."
   end

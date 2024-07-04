@@ -130,8 +130,8 @@ ActiveRecord::Schema[7.1].define(version: 2024_07_03_203241) do
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
     t.string "price_currency", default: "USD", null: false
-    t.integer "unit_type_id"
     t.integer "price_cents"
+    t.integer "unit_type_id"
     t.index ["base_fee_id"], name: "index_values_on_base_fee_id"
   end
 
