@@ -8,7 +8,7 @@
         <%= I18n.t("activerecord.attributes.base_fee.enum_recurrence.#{@base_fee.recurrence}") %>
       </div>
 
-            <div class="row d-flex flex-column">
+      <div class="row d-flex flex-column">
         <strong><%= BaseFee.human_attribute_name(:description) %>:</strong>
         <%= @base_fee.description %>
       </div>
@@ -21,8 +21,10 @@
       <% @values.each do |value| %>
         <div class="row d-flex flex-column">
           <% unit_type = @unit_types.find { |ut| ut.id == value.unit_type_id } %>
-          <strong><%= I18n.t('activerecord.values.values_price', unit_type: unit_type.description ) %>:</strong>
-          <%= number_to_currency(value.price, locale: :'pt-BR')%>
+          <% if unit_type.present? %>
+            <strong><%= I18n.t('activerecord.values.values_price', unit_type: unit_type.description ) %>:</strong>
+            <%= number_to_currency(value.price, locale: :'pt-BR')%>
+          <% end %>
         </div>
       <% end %>
 

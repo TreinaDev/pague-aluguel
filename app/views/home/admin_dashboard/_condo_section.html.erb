@@ -24,6 +24,7 @@
       <span class="text-muted"><%= I18n.t('views.index.no_condos') %></span>
     <% end %>
   </div>
+  
   <% if array_length_greater_than?(@condos, 4) %>
     <div data-controller="change-button-condo" class="mt-3 mb-3">
       <div class="text-center">

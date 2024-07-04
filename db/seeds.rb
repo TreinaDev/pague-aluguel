@@ -47,6 +47,14 @@ CommonArea.find_or_create_by!(name: 'Salão de festa', description: 'Área feita
                               usage_rules: 'Proibido levar as mesas para fora do salão.', fee_cents: 400, condo_id: 20)
 CommonArea.find_or_create_by!(name: 'Cinema', description: 'Guerreiros Saiajens', max_capacity: 60,
                               usage_rules: 'Proibido fumar na sala', fee_cents: 500, condo_id: 20)
+CommonArea.find_or_create_by!(name: 'Sala de Jogos', description: 'Sala com mesa de ping pong, xadrez e sinuca.', max_capacity: 60,
+                              usage_rules: 'Proibido fumar e beber na sala', fee_cents: 500, condo_id: 20)
+CommonArea.find_or_create_by!(name: 'Área Gourmet', description: 'Salão para encontros, possui mesas e cadeiras', max_capacity: 60,
+                              usage_rules: 'Proibido fumar na sala', fee_cents: 500, condo_id: 20)
+CommonArea.find_or_create_by!(name: 'Salão com Piscina', description: 'Salão para festas com piscina privada para mais privacidade', max_capacity: 60,
+                              usage_rules: 'Proibido fumar na sala', fee_cents: 500, condo_id: 20)
+CommonArea.find_or_create_by!(name: 'Parquinho', description: 'Parquinho com balanço e castelo de plástico', max_capacity: 10,
+                              usage_rules: 'Proibido crianças com mais de 10 anos', fee_cents: 500, condo_id: 20)
 
 p "Created #{Admin.count} admins"
 

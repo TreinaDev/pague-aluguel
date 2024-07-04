@@ -50,9 +50,9 @@
       <%= f.label :charge_day %>
     </div>
 
-    <div class="form-floating mb-2 w-50 mx-auto">
-      <%= f.check_box :fixed, {}, "true", "false" %>
-      <%= f.label :fixed %>
+    <div class="form-check form-switch mb-2 w-50 mx-auto">
+      <%= f.check_box :fixed, class: "form-check-input" %>
+      <%= f.label :fixed, class: "form-check-label" %>
     </div>
 
     <div class="form-floating mb-2 w-50 mx-auto">
