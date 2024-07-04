@@ -8,7 +8,7 @@ class SharedFeesController < ApplicationController
 
   def show
     @shared_fee = SharedFee.find(params[:id])
-    @condo = Condo.find(params[:condo_id])
+    @condo = Condo.find(@shared_fee.condo_id)
   end
 
   def new

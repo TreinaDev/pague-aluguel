@@ -15,7 +15,7 @@
   <div class="row">
     <div class="col-md-6 form-base-fees">
       <%= form_with model: [@base_fee], url: condo_base_fees_path(@condo.id), local: true do |f| %>
-        <%= hidden_field_tag :condo_id, @condo.id %>
+        <%= f.hidden_field :condo_id, value: @condo.id %>
 
       <div class="form-group">
         <%= f.label :name %>

@@ -33,6 +33,7 @@ describe 'Admin lança uma conta compartilhada' do
     expect(page).to have_content('Descrição: Conta de Luz')
     expect(page).to have_content("Data de Emissão: #{I18n.l(10.days.from_now.to_date)}")
     expect(page).to have_content('Valor Total: R$10.000,00')
+    expect(page).to have_content('Situação: Ativa')
   end
 
   it 'e não está autenticado' do

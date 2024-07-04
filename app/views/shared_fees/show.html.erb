@@ -27,7 +27,20 @@
 
   <div class="row">
     <div class="col-md-6">
-      <%= button_to I18n.t('cancel-button'), cancel_shared_fee_path(@shared_fee), class: 'btn btn-danger' %>
+      <strong><%= SharedFee.human_attribute_name(:status) %>:</strong> 
+      <% if @shared_fee.active? %>
+        <strong class="text-success"><%= I18n.t("activerecord.attributes.shared_fee.enum_status.#{@shared_fee.status}") %></strong>
+      <% else %>
+        <strong class="text-danger"><%= I18n.t("activerecord.attributes.shared_fee.enum_status.#{@shared_fee.status}") %></strong>
+      <% end %>
     </div>
   </div>
+  
+  <% if @shared_fee.active? %>
+    <div class="row">
+      <div class="col-md-6">
+        <%= button_to I18n.t('cancel-button'), cancel_shared_fee_path(@shared_fee), class: 'btn btn-danger' %>
+      </div>
+    </div>
+  <% end %>
 </div>

@@ -8,4 +8,6 @@ class SharedFeeFraction < ApplicationRecord
            numericality: {
              greater_than: 0
            }
+
+  delegate :status, to: :shared_fee
 end

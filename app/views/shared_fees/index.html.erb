@@ -19,9 +19,8 @@
             <% if shared_fee.active? %>
               <td class="text-success"><%= I18n.t("activerecord.attributes.shared_fee.enum_status.#{shared_fee.status}") %></td>
             <% else %>
-              <td class="text-warning"><%= I18n.t("activerecord.attributes.shared_fee.enum_status.#{shared_fee.status}") %></td>
+              <td class="text-danger"><%= I18n.t("activerecord.attributes.shared_fee.enum_status.#{shared_fee.status}") %></td>
             <% end %>
-      </div>
           </tr>
         <% end %>
       </tbody>
@@ -32,5 +31,3 @@
 
   <%= link_to 'Lançar Conta Compartilhada', new_shared_fee_path(condo_id: @condo.id), class: 'btn btn-primary' %>
 </div>
-
-
