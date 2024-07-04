@@ -17,6 +17,8 @@ class PropertyOwner < ApplicationRecord
   end
 
   def cpf_valid?(cpf)
+    return false if cpf.blank?
+
     url = "http://localhost:3000/api/v1/property?cpf=#{cpf}"
     response = Faraday.get(url)
     return true if response.status == 200
