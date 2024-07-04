@@ -10,9 +10,7 @@ describe 'Admin vê área comum' do
 
     login_as admin, scope: :admin
     visit condo_common_areas_path(condo.id)
-    within 'div#area-0' do
-      click_on 'TMNT'
-    end
+    click_on 'TMNT'
 
     expect(page).to have_content 'TMNT'
     expect(page).to have_content 'Teenage Mutant Ninja Turtles'
