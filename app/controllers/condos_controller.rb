@@ -9,5 +9,6 @@ class CondosController < ApplicationController
 
   def show
     @condo = Condo.find(params[:id])
+    @common_areas = CommonArea.where(condo_id: @condo.id)
   end
 end

@@ -4,8 +4,8 @@
     <span><%= Admin.model_name.human(count: 2) %></span>
   </div>
 
-  <%= link_to new_admin_registration_path, class: "btn hover-strong mt-3 w-20 mx-auto mb-3" do %>
-    <%= image_tag "add-admin", size: "20" %>
+  <%= link_to new_admin_registration_path, class: "btn hover-strong mt-3 w-20 mx-auto mb-3", data: { turbo_frame: "modal" } do %>
+    <%= image_tag "add-admin", size: "20" %> 
     <span class="text-uppercase fs-8">novo <%= Admin.model_name.human %></span>
   <% end %>
 
@@ -46,7 +46,7 @@
         <%= image_tag "arrow-up", size: "20" %>
         <span class="fs-8">Ocultar</span>
       <% end %>
-      <%= turbo_frame_tag 'expand-admins' %>
     </div>
+    <%= turbo_frame_tag 'expand-admins' %>
   <% end %>
 </div>

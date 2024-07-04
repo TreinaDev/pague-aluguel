@@ -4,10 +4,14 @@
       <%= link_to "", :back, class: "btn btn-close btn-sm" %>
     </div>
 
+    <span class="d-block fs-4 mt-3 text-uppercase text-center">
+      <%= I18n.t('devise.registrations.edit.edit_admin') %>
+    </span>
+
     <%= form_for(resource, as: resource_name, url: registration_path(resource_name), html: { method: :put }) do |f| %>
       <%= render "admins/shared/error_messages", resource: resource %>
 
-      <div class="form-floating mb-3 w-75 mx-auto">
+      <div class="form-floating mb-3 w-75 mx-auto mt-4">
         <%= f.email_field :email, autofocus: true, autocomplete: "email", class: "form-control" %>
         <%= f.label :email %>
       </div>

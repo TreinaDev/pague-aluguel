@@ -1,0 +1,22 @@
+<div class="card border-0 rounded-0 bg-off-white mt-4 py-3 px-3">
+  <div class="text-muted mb-3 fs-8">
+    <%= image_tag "clipboard-icon", size: '18' %>
+    <span class="text-capitalize">áreas comuns</span>
+  </div>
+  <div class="d-flex justify-content-center gap-2">
+    <% if @common_areas.any? %>
+      <% @common_areas.each do |common_area| %>
+        <%= link_to condo_common_area_path(@condo.id, common_area.id), class: "text-decoration-none" do %>
+          <div class="card hover-strong shadow-sm" style="width: 18rem; height: 7rem;">
+            <div class="card-body">
+              <span class="d-block"><%= common_area.name %></span>
+              <span class="text-muted fs-8"><%= common_area.description %></span>
+            </div>
+          </div>
+        <% end %>
+      <% end %>
+    <% else %>
+      <span class="text-muted fs-8 py-4">Não existem áreas comuns cadastradas para <%= @condo.name %></span>
+    <% end %>
+  </div>
+</div>

@@ -19,3 +19,5 @@ pt-BR:
       no_condos: Não existem condomínios registrados.
       profile: Meu perfil
       edit: Editar
+    show:
+      condo: Condomínio
