@@ -31,6 +31,6 @@ describe 'Proprietário tenta se cadastrar' do
     click_on 'Cadastrar-se'
 
     expect(page).to have_content('Bem Vindo! Você se registrou com sucesso!')
-    expect(PropertyOwner.first.document_id).to eq cpf
+    expect(PropertyOwner.first.document_number).to eq cpf
   end
 end

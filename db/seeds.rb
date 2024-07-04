@@ -15,7 +15,7 @@ Admin.create!(
 
 p "Created #{Admin.count} admins"
 
-property_owner = PropertyOwner.new(email: 'raphael@email.com', password: 'raphael123', document_id: CPF.generate)
+property_owner = PropertyOwner.new(email: 'raphael@email.com', password: 'raphael123', document_number: CPF.generate)
 
 property_owner.save(validate: false)
 

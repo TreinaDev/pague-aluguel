@@ -4,16 +4,16 @@ class PropertyOwner < ApplicationRecord
   devise :database_authenticatable, :registerable,
          :recoverable, :rememberable, :validatable
 
-  validates :document_id, presence: true
-  validates :document_id, uniqueness: true
-  validate :document_id_must_be_valid
+  validates :document_number, presence: true
+  validates :document_number, uniqueness: true
+  validate :document_number_must_be_valid
 
   private
 
-  def document_id_must_be_valid
-    return if cpf_valid?(document_id)
+  def document_number_must_be_valid
+    return if cpf_valid?(document_number)
 
-    errors.add(:document_id, :invalid, message: I18n.t('devise.failure.invalid_document_id'))
+    errors.add(:document_number, :invalid, message: I18n.t('devise.failure.invalid_document_number'))
   end
 
   def cpf_valid?(cpf)
