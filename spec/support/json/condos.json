@@ -1,0 +1,17 @@
+[
+  {
+    "name": "Sai de Baixo",
+    "city": "Rio de Janeiro",
+    "id": "1"
+  },
+  {
+    "name": "Sai de Cima",
+    "city": "Sao Paulo",
+    "id": "2"
+  },
+  {
+    "name": "Sai do Meio",
+    "city": "Minas Gerais",
+    "id": "3"
+  }
+]

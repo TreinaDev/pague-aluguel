@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema[7.1].define(version: 2024_07_03_183614) do
+ActiveRecord::Schema[7.1].define(version: 2024_07_03_203241) do
   create_table "active_storage_attachments", force: :cascade do |t|
     t.string "name", null: false
     t.string "record_type", null: false
@@ -82,18 +82,10 @@ ActiveRecord::Schema[7.1].define(version: 2024_07_03_183614) do
     t.string "description"
     t.integer "max_capacity"
     t.string "usage_rules"
-    t.integer "condo_id", null: false
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
     t.integer "fee_cents", default: 0
-    t.index ["condo_id"], name: "index_common_areas_on_condo_id"
-  end
-
-  create_table "condos", force: :cascade do |t|
-    t.string "name"
-    t.string "city"
-    t.datetime "created_at", null: false
-    t.datetime "updated_at", null: false
+    t.integer "condo_id"
   end
 
   create_table "custom_fees", force: :cascade do |t|
@@ -120,40 +112,19 @@ ActiveRecord::Schema[7.1].define(version: 2024_07_03_183614) do
   create_table "shared_fee_fractions", force: :cascade do |t|
     t.integer "value_cents"
     t.integer "shared_fee_id", null: false
-    t.integer "unit_id", null: false
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
+    t.integer "unit_id"
     t.index ["shared_fee_id"], name: "index_shared_fee_fractions_on_shared_fee_id"
-    t.index ["unit_id"], name: "index_shared_fee_fractions_on_unit_id"
   end
 
   create_table "shared_fees", force: :cascade do |t|
     t.string "description"
     t.date "issue_date"
     t.integer "total_value_cents"
-    t.integer "condo_id", null: false
-    t.datetime "created_at", null: false
-    t.datetime "updated_at", null: false
-    t.index ["condo_id"], name: "index_shared_fees_on_condo_id"
-  end
-
-  create_table "unit_types", force: :cascade do |t|
-    t.string "description"
-    t.integer "area"
-    t.float "ideal_fraction"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
     t.integer "condo_id"
-  end
-
-  create_table "units", force: :cascade do |t|
-    t.integer "area"
-    t.integer "floor"
-    t.integer "number"
-    t.datetime "created_at", null: false
-    t.datetime "updated_at", null: false
-    t.integer "unit_type_id", null: false
-    t.index ["unit_type_id"], name: "index_units_on_unit_type_id"
   end
 
   create_table "values", force: :cascade do |t|
@@ -161,18 +132,14 @@ ActiveRecord::Schema[7.1].define(version: 2024_07_03_183614) do
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
     t.string "price_currency", default: "USD", null: false
-    t.integer "unit_type_id"
     t.integer "price_cents"
+    t.integer "unit_type_id"
     t.index ["base_fee_id"], name: "index_values_on_base_fee_id"
   end
 
   add_foreign_key "active_storage_attachments", "active_storage_blobs", column: "blob_id"
   add_foreign_key "active_storage_variant_records", "active_storage_blobs", column: "blob_id"
   add_foreign_key "common_area_fee_histories", "common_areas"
-  add_foreign_key "common_areas", "condos"
   add_foreign_key "shared_fee_fractions", "shared_fees"
-  add_foreign_key "shared_fee_fractions", "units"
-  add_foreign_key "shared_fees", "condos"
-  add_foreign_key "units", "unit_types"
   add_foreign_key "values", "base_fees"
 end
