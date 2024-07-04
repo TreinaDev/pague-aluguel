@@ -9,7 +9,9 @@ Rails.application.routes.draw do
     resources :base_fees, only: [:new, :create, :show, :index]
   end
 
-  resources :shared_fees, only: [:index, :show, :new, :create, :destroy, :delete]
+  resources :shared_fees, only: [:index, :show, :new, :create] do 
+    post 'cancel', on: :member
+  end
 
   authenticate :admin do
     resources :admins, only: [:index, :show]

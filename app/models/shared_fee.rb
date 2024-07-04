@@ -4,6 +4,11 @@ class SharedFee < ApplicationRecord
   validates :description, :issue_date, :total_value_cents, :condo_id, presence: true
   validate :date_is_future, on: :create
 
+  enum status: {
+    active: 0,
+    canceled: 5
+  }
+
   monetize :total_value_cents,
            allow_nil: false,
            numericality: {

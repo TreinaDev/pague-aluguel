@@ -29,11 +29,11 @@ class SharedFeesController < ApplicationController
     end
   end
 
-  def destroy
+  def cancel
     @shared_fee = SharedFee.find(params[:id])
     @condo = Condo.find(@shared_fee.condo_id)
-    @shared_fee.destroy
-    redirect_to shared_fees_path(condo_id: @condo.id), notice: "#{@shared_fee.description} deletada com sucesso."
+    @shared_fee.canceled!
+    redirect_to shared_fees_path(condo_id: @condo.id), notice: "#{@shared_fee.description} cancelada com sucesso."
   end
 
   private

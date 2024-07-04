@@ -94,9 +94,9 @@ describe 'Admin gerencia contas compartilhadas' do
                              total_value: 10_000, condo_id: condos.first.id)
 
       login_as admin, scope: :admin
-      delete(shared_fee_path(sf.id))
+      post(cancel_shared_fee_path(sf.id))
 
-      expect(SharedFee.count).to eq 0
+      expect(SharedFee.last.canceled?).to eq true
       expect(response).to have_http_status(302)
       expect(response).to redirect_to(shared_fees_path(condo_id: condos.first.id))
     end
@@ -124,9 +124,9 @@ describe 'Admin gerencia contas compartilhadas' do
       sf = SharedFee.create!(description: 'Conta de Luz', issue_date: 10.days.from_now.to_date,
                              total_value: 10_000, condo_id: condos.first.id)
 
-      delete(shared_fee_path(sf.id))
+      post(cancel_shared_fee_path(sf.id))
 
-      expect(SharedFee.count).to eq 1
+      expect(SharedFee.last.canceled?).to eq false
       expect(response).to have_http_status(302)
       expect(response).to redirect_to(new_admin_session_path)
     end

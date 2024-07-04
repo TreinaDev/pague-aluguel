@@ -7,6 +7,7 @@
           <th scope="col"><%= SharedFee.human_attribute_name(:description) %></th>
           <th scope="col"><%= SharedFee.human_attribute_name(:issue_date) %></th>
           <th scope="col"><%= SharedFee.human_attribute_name(:total_value) %></th>
+          <th scope="col"><%= SharedFee.human_attribute_name(:status) %></th>
         </tr>
       </thead>
       <tbody>
@@ -15,6 +16,12 @@
             <td><%= link_to "#{shared_fee.description}", shared_fee_path(shared_fee) %></td>
             <td><%= I18n.l(shared_fee.issue_date) %></td>
             <td><%= shared_fee.total_value.format %></td>
+            <% if shared_fee.active? %>
+              <td class="text-success"><%= I18n.t("activerecord.attributes.shared_fee.enum_status.#{shared_fee.status}") %></td>
+            <% else %>
+              <td class="text-warning"><%= I18n.t("activerecord.attributes.shared_fee.enum_status.#{shared_fee.status}") %></td>
+            <% end %>
+      </div>
           </tr>
         <% end %>
       </tbody>
