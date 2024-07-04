@@ -5,11 +5,10 @@
 <div class="container d-flex justify-content-center">
 
   <div class="container text-center">
-    <h2><%= I18n.t('views.index.name', name: @condo.name)</h2>
+    <h2><%= I18n.t('views.index.name', name: @condo.name) %></h2>
 
     <% if @common_areas.present? %>
       <div class="container col-7 mt-5">
-
         <% @common_areas.each_with_index do |area, index| %>
           <div id="<%= "area-#{index}"%>" class="mb-4">
             <%= link_to condo_common_area_path(@condo.id, area), class: "link-container d-flex justify-content-center", style:"text-decoration:none;" do %>
@@ -29,14 +28,11 @@
             <% end %>
           </div>
         <% end %>
-
       </div>
     <% else %>
   </div>
-
     <div class="mt-4 container text-center">
       <p><%= I18n.t('views.index.no_common_area') %></p>
     </div>
   <% end %>
-
 </div>

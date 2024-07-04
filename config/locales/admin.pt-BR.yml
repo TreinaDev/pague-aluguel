@@ -24,3 +24,6 @@ pt-BR:
       email: email
       document: CPF
       since: Desde
+      hide: Ocultar
+      show_all: Mostrar todos
+      new_admin: novo administrador

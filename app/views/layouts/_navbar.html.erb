@@ -3,7 +3,7 @@
     <%= link_to root_path, class: "navbar-brand" do %>
       <%= image_tag "logo-pa", class: "w-18" %>
     <% end %>
-    
+
     <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNavAltMarkup" aria-controls="navbarNavAltMarkup" aria-expanded="false" aria-label="Toggle navigation">
       <span class="navbar-toggler-icon"></span>
     </button>
@@ -19,9 +19,9 @@
           <span class="d-block lh-1"><%= capitalized_name(current_admin) %></span>
           <span class="d-block lh-1"><%= current_admin.email %></span>
         </div>
-        <%= button_to "Logout", destroy_admin_session_path, method: :delete, class: "btn btn-danger text-uppercase" %>
+        <%= button_to I18n.t('devise.shared.links.sign_out'), destroy_admin_session_path, method: :delete, class: "btn btn-danger text-uppercase" %>
       <% else %>
-        <%= link_to "Login", new_admin_session_path, class: "btn btn-success text-uppercase", data: { turbo_frame: "modal" } %>
+        <%= link_to I18n.t('devise.sessions.new.sign_in'), new_admin_session_path, class: "btn btn-success text-uppercase", data: { turbo_frame: "modal" } %>
       <% end %>
     </div>
   </div>

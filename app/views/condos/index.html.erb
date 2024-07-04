@@ -1,4 +1,4 @@
-<%= turbo_frame_tag "expand-condos" do %> 
+<%= turbo_frame_tag "expand-condos" do %>
   <% if @condos.any? %>
     <div class="d-flex gap-2 flex-wrap justify-content-center">
       <% @condos.each do |condo| %>
@@ -13,6 +13,6 @@
       <% end %>
     </div>
   <% else %>
-    <strong>Não existem condomínios registrados.</strong>
+    <strong><%= I18n.t('views.show.no_condo') %></strong>
   <% end %>
 <% end %>

@@ -4,8 +4,8 @@ pt-BR:
   activerecord:
     models:
       base_fee:
-        one: Taxa Fixa
-        other: Taxas Fixas
+        one: Taxa
+        other: Taxas
       value: Valor
     attributes:
       base_fee:

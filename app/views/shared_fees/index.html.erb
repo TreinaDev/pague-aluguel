@@ -1,5 +1,5 @@
 <div class="container mt-4">
-  <h2>Contas Compartilhadas</h2>
+  <h2><%= SharedFee.model_name.human(count: 2) %></h2>
   <% if @shared_fees.any? %>
     <table class="table">
       <thead>
@@ -20,6 +20,6 @@
       </tbody>
     </table>
   <% else %>
-    <p>Não foram encontradas contas compartilhadas.</p>
+    <p><%= I18n.t('views.index.no_fees') %></p>
   <% end %>
 </div>

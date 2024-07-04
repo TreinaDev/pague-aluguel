@@ -155,6 +155,7 @@ pt-BR:
         didn_t_receive_unlock_instructions: Não recebeu instruções de desbloqueio?
         forgot_your_password: Esqueceu sua senha?
         sign_in: Login
+        sign_out: Logout
         sign_in_with_provider: Entrar com %{provider}
         sign_up: Inscrever-se
       minimum_password_length:

@@ -24,11 +24,11 @@
       <div class="text-center">
         <%= link_to condos_path, class: 'btn text-uppercase', data: { change_button_condo_target: "allCondosBtn", turbo_frame: "expand-condos" } do %>
           <%= image_tag "arrow-down", size: "20" %>
-          <span class="fs-8">Mostrar todos</span>
+          <span class="fs-8"><%= I18n.t('views.show.show_all') %></span>
         <% end %>
         <%= link_to root_path, class: 'btn text-uppercase', data: { change_button_condo_target: "hideCondosBtn", turbo_frame: "expand-condos" } do %>
           <%= image_tag "arrow-up", size: "20" %>
-          <span class="fs-8">Ocultar</span>
+          <span class="fs-8"><%= I18n.t('views.show.hide') %></span>
         <% end %>
       </div>
       <%= turbo_frame_tag 'expand-condos' %>
