@@ -1,13 +1,16 @@
 require 'rails_helper'
 
 RSpec.describe PropertyOwner, type: :model do
-  it { should validate_presence_of(:email) }
-  it { should validate_presence_of(:password) }
-  it { should validate_presence_of(:document_id) }
-  it { should validate_uniqueness_of(:document_id) }
+  context 'shoulda_matchers' do
+    before do
+      allow_any_instance_of(PropertyOwner).to receive(:cpf_valid?).and_return(true)
+    end
+    it { should validate_presence_of(:email) }
+    it { should validate_presence_of(:password) }
+    it { should validate_presence_of(:document_id) }
+    it { should validate_uniqueness_of(:document_id) }
+  end
 
-  # Trasferiria esse teste para um teste de request
-  # Faria um teste unitário para validar (document_id.blank? || document_id.length < 11)
   it 'com CPF válido' do
     cpf = CPF.generate
     fake_response = double('faraday_response', status: 200, body: 'Proprietário')
