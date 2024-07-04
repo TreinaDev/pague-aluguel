@@ -11,15 +11,14 @@
           </h2>
           <div id="<%= dom_id(admin) %>" class="accordion-collapse collapse" data-bs-parent="#admin-accordion">
             <div class="accordion-body">
-              <span class="fw-bold">Email:</span>
+              <span class="text-lowercase fs-8 text-muted"><%= I18n.t('views.index.email') %></span>
               <span><%= admin.email %></span>
               <hr class="divider">
-              <span class="fw-bold">CPF:</span>
+              <span class="text-lowercase fs-8 text-muted"><%= I18n.t('views.index.document') %></span>
               <span data-controller="document-number"><%= admin.document_number %></span>
-              <% if admin_signed_in? && current_admin == admin %>
-                <hr class="divider">
-                <%= link_to 'Editar', edit_admin_registration_path, class: 'btn btn-secondary text-uppercase', data: { turbo_frame: "modal" } %>
-              <% end %>
+              <hr class="divider">
+              <span class="text-lowercase fs-8 text-muted"><%= I18n.t('views.index.since') %></span>
+              <span><%= admin.created_at.strftime("%d/%m/%Y") %></span>
             </div>
           </div>
         </div>

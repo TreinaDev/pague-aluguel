@@ -153,6 +153,7 @@ pt-BR:
       submit: SALVAR
       update: ATUALIZAR
       register: REGISTRAR
+      cancel: CANCELAR
   number:
     currency:
       format:

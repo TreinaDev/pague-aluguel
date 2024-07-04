@@ -1,0 +1,9 @@
+pt-BR:
+  activerecord:
+    model:
+      condo:
+        one: Condomínio
+        other: Condomínios
+  views:
+    show:
+      condo: Condomínio

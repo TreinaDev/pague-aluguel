@@ -52,5 +52,9 @@ pt-BR:
       interest_rate: "Juros de %{number}% ao dia"
       late_fine: "Multa de R$%{number} por atraso"
       late_fine_cents: "Multa de R$%{number} por atraso"
+    index:
+      base_fee_list: Listagem de Taxas Cadastradas
+      name: Nome
+      no_base_fees: Não existem taxas cadastradas.
 
 
