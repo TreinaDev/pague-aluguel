@@ -3,7 +3,7 @@ require 'rails_helper'
 describe 'Admin vê a lista de áreas comuns' do
   it 'se estiver autenticado' do
     condo = Condo.new(id: 1, name: 'Condomínio Vila das Flores', city: 'São Paulo')
-    allow(Condo).to receive(:find).and_return(condo)
+    # allow(Condo).to receive(:find).and_return(condo)
 
     visit condo_common_areas_path(condo.id)
 

@@ -42,3 +42,5 @@ coverage/
 /node_modules
 
 .byebug_history
+
+.rake_tasks~

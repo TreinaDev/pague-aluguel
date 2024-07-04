@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema[7.1].define(version: 2024_07_03_203241) do
+ActiveRecord::Schema[7.1].define(version: 2024_07_04_184254) do
   create_table "active_storage_attachments", force: :cascade do |t|
     t.string "name", null: false
     t.string "record_type", null: false
@@ -68,26 +68,6 @@ ActiveRecord::Schema[7.1].define(version: 2024_07_03_203241) do
     t.integer "condo_id"
   end
 
-  create_table "common_area_fee_histories", force: :cascade do |t|
-    t.integer "fee_cents"
-    t.string "user"
-    t.integer "common_area_id", null: false
-    t.datetime "created_at", null: false
-    t.datetime "updated_at", null: false
-    t.index ["common_area_id"], name: "index_common_area_fee_histories_on_common_area_id"
-  end
-
-  create_table "common_areas", force: :cascade do |t|
-    t.string "name"
-    t.string "description"
-    t.integer "max_capacity"
-    t.string "usage_rules"
-    t.datetime "created_at", null: false
-    t.datetime "updated_at", null: false
-    t.integer "fee_cents", default: 0
-    t.integer "condo_id"
-  end
-
   create_table "custom_fees", force: :cascade do |t|
     t.decimal "value"
     t.string "description"
@@ -103,6 +83,8 @@ ActiveRecord::Schema[7.1].define(version: 2024_07_03_203241) do
     t.datetime "remember_created_at"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
+    t.string "document_id"
+    t.index ["document_id"], name: "index_property_owners_on_document_id", unique: true
     t.index ["email"], name: "index_property_owners_on_email", unique: true
     t.index ["reset_password_token"], name: "index_property_owners_on_reset_password_token", unique: true
   end
@@ -130,14 +112,13 @@ ActiveRecord::Schema[7.1].define(version: 2024_07_03_203241) do
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
     t.string "price_currency", default: "USD", null: false
-    t.integer "unit_type_id"
     t.integer "price_cents"
+    t.integer "unit_type_id"
     t.index ["base_fee_id"], name: "index_values_on_base_fee_id"
   end
 
   add_foreign_key "active_storage_attachments", "active_storage_blobs", column: "blob_id"
   add_foreign_key "active_storage_variant_records", "active_storage_blobs", column: "blob_id"
-  add_foreign_key "common_area_fee_histories", "common_areas"
   add_foreign_key "shared_fee_fractions", "shared_fees"
   add_foreign_key "values", "base_fees"
 end
