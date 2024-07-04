@@ -1,5 +1,15 @@
 <h1><strong>Listagem de Condomínios</strong></h1>
- 
+<%= form_with url: search_condos_path, method: :get do |f| %>
+  <div class="d-flex">
+    <%= f.text_field :query, class: 'form-control', placeholder: 'Busque um condomínio' %>
+    <%= f.submit 'Buscar' %>
+  </div>
+<% end %>
+<% if @query  %>
+  <div>
+    <%= @query == "" ? "Você precisa buscar por um nome de condomínio" : "Resultados para: '#{@query}'" %>
+  </div>
+<% end %>
 <% if @condos.any? %>
   <table class="table">
     <thead>
@@ -18,5 +28,9 @@
     </tbody>
   </table>
 <% else %>
-  <strong>Não existem condomínios registrados.</strong>
+  <% if @query %>
+    <strong>Não foram encontrados condomínios para essa busca.</strong>
+  <% else %>
+    <strong>Não existem condomínios registrados.</strong>
+  <% end %>
 <% end %>
