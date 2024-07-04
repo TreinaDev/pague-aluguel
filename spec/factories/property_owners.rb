@@ -1,6 +1,7 @@
 FactoryBot.define do
   factory :property_owner do
-    email { 'owner@email.com' }
-    password { 'password' }
+    email { 'nakedsnake@mgs.com' }
+    password { 'bigboss' }
+    document_number { CPF.generate }
   end
 end
