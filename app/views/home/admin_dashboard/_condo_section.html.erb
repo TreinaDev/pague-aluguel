@@ -5,6 +5,9 @@
   </div>
   <div class="d-flex justify-content-center gap-2">
     <% if @condos.any? %>
+
+      <%= render 'home/admin_dashboard/search_condos' %>
+
       <% @recent_condos.each do |condo| %>
         <%= link_to condo_path(condo.id), class: "text-decoration-none" do %>
           <div class="card hover-strong shadow-sm" style="width: 18rem; height: 7rem;">

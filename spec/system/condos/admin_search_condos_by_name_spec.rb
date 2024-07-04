@@ -12,7 +12,6 @@ describe 'Admin busca condomínio pelo nome' do
 
     login_as admin, scope: :admin
     visit root_path
-    click_on 'Lista de Condomínios'
     fill_in 'Busque um condomínio',	with: 'verde'
     click_on 'Buscar'
 
@@ -31,7 +30,6 @@ describe 'Admin busca condomínio pelo nome' do
 
     login_as admin, scope: :admin
     visit root_path
-    click_on 'Lista de Condomínios'
     fill_in 'Busque um condomínio',	with: 'Teste'
     click_on 'Buscar'
 
@@ -48,7 +46,6 @@ describe 'Admin busca condomínio pelo nome' do
 
     login_as admin, scope: :admin
     visit root_path
-    click_on 'Lista de Condomínios'
     fill_in 'Busque um condomínio',	with: ''
     click_on 'Buscar'
 

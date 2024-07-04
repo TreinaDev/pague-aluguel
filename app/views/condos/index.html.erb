@@ -1,20 +1,6 @@
 <%= turbo_frame_tag "expand-condos" do %>
   <% if @condos.any? %>
     <div class="d-flex gap-2 flex-wrap justify-content-center">
-
-      <%= form_with url: search_condos_path, method: :get do |f| %>
-        <div class="d-flex">
-          <%= f.text_field :query, class: 'form-control', placeholder: 'Busque um condomínio' %>
-          <%= f.submit 'Buscar' %>
-        </div>
-      <% end %>
-
-      <% if @query %>
-        <div>
-          <%= @query == "" ? "Você precisa buscar por um nome de condomínio" : "Resultados para: '#{@query}'" %>
-        </div>
-      <% end %>
-
       <% @condos.each do |condo| %>
         <%= link_to condo_path(condo.id), class: "text-decoration-none" do %>
           <div class="card hover-strong shadow-sm" style="width: 18rem; height: 7rem;">
@@ -28,8 +14,5 @@
     </div>
   <% else %>
     <strong><%= I18n.t('views.show.no_condo') %></strong>
-  <% end %>
-  <% if @query %>
-    <strong>Não foram encontrados condomínios para essa busca.</strong>
   <% end %>
 <% end %>
