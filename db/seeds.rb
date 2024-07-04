@@ -15,6 +15,12 @@ Admin.create!(
 
 p "Created #{Admin.count} admins"
 
+property_owner = PropertyOwner.new(email: 'raphael@email.com', password: 'raphael123', document_id: CPF.generate)
+
+property_owner.save(validate: false)
+
+p "Created #{PropertyOwner.count} property owners"
+
 CommonArea.find_or_create_by!(name: 'Churrasqueira', description: 'Área de churrasqueira com piscina', max_capacity: 30,
                               usage_rules: 'Regras ainda não definidas', fee_cents: 250, condo_id: 1)
 CommonArea.find_or_create_by!(name: 'Play', description: 'Play para eventos', max_capacity: 60,
