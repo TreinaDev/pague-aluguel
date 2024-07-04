@@ -1,10 +1,16 @@
-<h1><strong>Listagem de Taxas Cadastradas</strong></h1>
+<span class="d-block fs-4 mx-auto mt-3 mb-3 text-uppercase text-center">
+  <%= I18n.t('views.index.base_fee_list') %>
+</span>
+
+<%= link_to :back, class: "ms-3 mt-3" do %>
+  <%= image_tag "arrow-left", size: "25" %>
+<% end %>
 
 <% if @base_fees.any? %>
   <table class="table">
     <thead>
       <tr>
-        <th scope="col">Nome</th>
+        <th scope="col"><%= I18n.t('views.index.name') %></th>
       </tr>
     </thead>
     <tbody>
@@ -16,7 +22,5 @@
     </tbody>
   </table>
 <% else %>
-  <strong>Não existem Taxas Cadastradas.</strong>
+  <strong><%= I18n.t('views.index.no_base_fees')%></strong>
 <% end %>
-<hr>
-<%= link_to I18n.t('helpers.buttons.back'), condo_path(@condo.id), class: "btn btn-secondary" %>

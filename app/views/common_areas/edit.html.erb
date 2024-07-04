@@ -1,20 +1,18 @@
 <div>
-  <h2 class="container text-center">Criar Taxa para <%= @common_area.name %></h2>
+  <h2 class="container text-center"><%= I18n.t('views.edit.edit_fee', name: @common_area.name) %></h2>
 </div>
 
 <% if @common_area.errors.any? %>
-  <div class="container text-center">
-
-    <h3>Atente-se aos erros abaixo:</h3>
-    
+  <div class="alert alert-danger" role="alert">
+    <p><%= I18n.t('errors.messages.verify_error') %></p>
     <ul>
-      <% @common_area_errors.each do |error| %>
-        <span class="text-danger"><%= error %></span><br>
+      <% @common_area.errors.full_messages.each do |msg| %>
+        <li><%= msg %></li>
       <% end %>
     </ul>
-    
   </div>
 <% end %>
+
 <div class="container text-center p-4 shadow rounded-4 col-4">
   <div class="">
     <%= form_with model: [@common_area], url: condo_common_area_path(@condo.id) do |f| %>
@@ -23,8 +21,8 @@
         <%= f.text_field :fee, placeholder: '0,00', class: "form-control" %>
       </div>
       <div class="mt-3">
-        <%= f.submit "Atualizar", class:"btn btn-primary me-3" %>
-        <%= link_to 'Cancelar', condo_common_area_path(@condo.id, @common_area), class:"btn btn-danger" %>
+        <%= f.submit I18n.t('helpers.submit.update'), class:"btn btn-primary me-3" %>
+        <%= link_to I18n.t('helpers.submit.cancel'), condo_common_area_path(@condo.id, @common_area), class:"btn btn-danger" %>
       </div>
     <% end %>
   </div>

@@ -8,32 +8,35 @@
     <h3><%= @common_area.name%></h3>
     <hr>
     <div class="d-flex justify-content-center align-items-center">
-      <strong class="me-2">Taxa de área comum: <%= @common_area.fee_cents.zero? ? 'Taxa não cadastrada' : Money.new(@common_area.fee_cents, 'BRL').format %></strong>
-      <%= link_to 'Registrar Taxa', edit_condo_common_area_path(@condo.id, @common_area), class:"btn btn-primary" %>
+      <strong class="me-2">
+        <%= I18n.t('views.show.common_area_fee') %>
+        <%= @common_area.fee_cents.zero? ? I18n.t('views.index.no_fee') : Money.new(@common_area.fee_cents, 'BRL').format %>
+      </strong>
+      <%= link_to I18n.t('views.show.new_fee'), edit_condo_common_area_path(@condo.id, @common_area), class:"btn btn-primary" %>
     </div>
     <hr>
     <div>
-      <p>Descrição: <%= @common_area.description %></p>
-      <p>Capacidade máxima: <%= @common_area.max_capacity %></p>
-      <p>Regras de uso: <%= @common_area.usage_rules %></p>
+      <p><%= I18n.t('views.show.description') %><%= @common_area.description %></p>
+      <p><%= I18n.t('views.show.capacity') %><%= @common_area.max_capacity %></p>
+      <p><%= I18n.t('views.show.rules') %><%= @common_area.usage_rules %></p>
     </div>
 
     <% if @common_area.common_area_fee_histories.any? %>
       <p class="d-inline-flex gap-1">
         <a class="btn btn-primary" data-bs-toggle="collapse" href="#collapseExample" role="button" aria-expanded="false" aria-controls="collapseExample">
-          Mostrar histórico de taxas
+          <%= I18n.t('views.show.show_history') %>
         </a>
       </p>
       <div class="collapse" id="collapseExample">
         <div class="card card-body">
           <ul>
             <% @common_area.common_area_fee_histories.each do |history_fee| %>
-              <li>Email: <%= history_fee.user %> | Data: <%= history_fee.created_at.strftime('%d/%m/%Y') %> | Taxa: <%= Money.new(history_fee.fee_cents, 'BRL').format %></li>
+              <li><%= I18n.t('views.show.email') %><%= history_fee.user %> | <%= I18n.t('views.show.description') %><%= history_fee.created_at.strftime('%d/%m/%Y') %> | <%= I18n.t('views.show.fee') %> <%= Money.new(history_fee.fee_cents, 'BRL').format %></li>
             <% end %>
           </ul>
         </div>
       </div>
     <% end %>
-    
+
   </div>
 </div>

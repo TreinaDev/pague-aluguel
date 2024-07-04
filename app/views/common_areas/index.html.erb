@@ -3,9 +3,9 @@
 </div>
 
 <div class="container d-flex justify-content-center">
-  
+
   <div class="container text-center">
-    <h2>Áreas comuns do condomínio <%= @condo.name %></h2>
+    <h2><%= I18n.t('views.index.name', name: @condo.name)</h2>
 
     <% if @common_areas.present? %>
       <div class="container col-7 mt-5">
@@ -16,7 +16,10 @@
               <div class="rounded-4 shadow p-4 col-12"  >
                 <div class="d-flex justify-content-between mb-3">
                   <h3 class="align-self-center"><%= area.name %></h3>
-                  <p class="align-self-center mb-0">Taxa de uso: <strong><%= area.fee_cents.zero? ? "Taxa não cadastrada" : Money.new(area.fee_cents, 'BRL').format %></strong></p>
+                  <p class="align-self-center mb-0">
+                    <%= I18n.t('views.index.fee') %>
+                    <strong><%= area.fee_cents.zero? ? I18n.t('views.index.no_fee') : Money.new(area.fee_cents, 'BRL').format %></strong>
+                  </p>
                 </div>
                 <hr>
                 <div class="text-center">
@@ -30,11 +33,10 @@
       </div>
     <% else %>
   </div>
-    
-    <div class="mt-4 container text-center">
-      <p>Nenhuma Área Comum cadastrada</p>
-    </div>
 
+    <div class="mt-4 container text-center">
+      <p><%= I18n.t('views.index.no_common_area') %></p>
+    </div>
   <% end %>
 
 </div>
