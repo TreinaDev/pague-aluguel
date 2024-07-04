@@ -49,6 +49,7 @@ pt-BR:
         unconfirmed_email: E-mail não confirmado
         unlock_token: Token de desbloqueio
         updated_at: Atualizado em
+        document_id: CPF
     models:
       admin:
         one: Administrador
@@ -73,8 +74,7 @@ pt-BR:
       timeout: A sua sessão expirou, por favor, faça login novamente para continuar.
       unauthenticated: Para continuar, faça login ou registre-se.
       unconfirmed: Antes de continuar, confirme a sua conta.
-      document_id_not_valideted: Valide seu CPF primeiro
-      invalid_document_id: CPF inválido
+      invalid_document_id: inválido
     mailer:
       confirmation_instructions:
         action: Confirmar minha conta

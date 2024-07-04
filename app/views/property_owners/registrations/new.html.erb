@@ -3,14 +3,14 @@
 <%= form_for(resource, as: resource_name, url: registration_path(resource_name)) do |f| %>
   <%= render "property_owners/shared/error_messages", resource: resource %>
 
-  
-  <div class="field">
-    <%= f.hidden_field :document_id, value: flash[:document_id] %>
-  </div>
-
   <div class="field">
     <%= f.label :email %><br />
     <%= f.email_field :email, autofocus: true, autocomplete: "email" %>
+  </div>
+  
+  <div class="field">
+    <%= f.label :document_id %><br />
+    <%= f.text_field :document_id, autocomplete: "document_id" %>
   </div>
 
   <div class="field">
