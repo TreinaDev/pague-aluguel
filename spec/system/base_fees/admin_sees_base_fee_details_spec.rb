@@ -67,17 +67,15 @@ describe 'admin vê taxa fixa' do
     formatted_date = 25.days.from_now.to_date
 
     expect(page).to have_content 'Taxa de Condomínio'
-    expect(page).to have_content 'Descrição:'
     expect(page).to have_content 'Manutenção.'
-    expect(page).to have_content 'Recorrência:'
-    expect(page).to have_content 'Bimestral'
-    expect(page).to have_content 'Data de Lançamento:'
+    expect(page).to have_content 'BIMESTRAL'
+    expect(page).to have_content 'data de emissão:'
     expect(page).to have_content I18n.l(formatted_date).to_s
-    expect(page).to have_content "Valor para #{unit_types[0].description}:"
+    expect(page).to have_content "valor para #{unit_types[0].description}:"
     expect(page).to have_content 'R$ 200,00'
-    expect(page).to have_content "Valor para #{unit_types[1].description}:"
+    expect(page).to have_content "valor para #{unit_types[1].description}:"
     expect(page).to have_content 'R$ 300,00'
-    expect(page).to have_content "Valor para #{unit_types[2].description}:"
+    expect(page).to have_content "valor para #{unit_types[2].description}:"
     expect(page).to have_content 'R$ 500,00'
     expect(page).to have_content 'Taxa fixa'
     expect(page).to have_content 'Juros de 2% ao dia'
@@ -109,7 +107,7 @@ describe 'admin vê taxa fixa' do
       click_on 'Ver todas'
     end
     click_on 'Taxa'
-    find('#arrow-left').click
+    find('#close').click
 
     expect(current_path).to eq condo_base_fees_path(condo.id)
   end

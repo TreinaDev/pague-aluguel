@@ -52,7 +52,7 @@ describe 'Admin cria taxa fixa' do
     fill_in 'Valor para Apartamento 2 quartos', with: '300,00'
     fill_in 'Valor para Apartamento 3 quartos', with: '500,00'
     select 'Bimestral', from: 'Recorrência'
-    fill_in 'Data de Lançamento', with: formatted_date.to_s
+    fill_in 'Data de Emissão', with: formatted_date.to_s
     check 'Taxa fixa'
     fill_in 'Juros ao dia', with: 1
     fill_in 'Multa por atraso', with: '30,00'
@@ -82,7 +82,7 @@ describe 'Admin cria taxa fixa' do
     fill_in 'Valor para Apartamento 1 quarto', with: ''
     fill_in 'Valor para Apartamento 2 quartos', with: ''
     fill_in 'Valor para Apartamento 3 quartos', with: ''
-    fill_in 'Data de Lançamento', with: ''
+    fill_in 'Data de Emissão', with: ''
     fill_in 'Juros ao dia', with: ''
     fill_in 'Multa por atraso', with: ''
     click_on 'Salvar'
@@ -92,7 +92,7 @@ describe 'Admin cria taxa fixa' do
     expect(page).to have_content 'Nome não pode ficar em branco'
     expect(page).to have_content 'Descrição não pode ficar em branco'
     expect(page).to have_content 'Valor não é um número'
-    expect(page).to have_content 'Data de Lançamento não pode ficar em branco'
+    expect(page).to have_content 'Data de Emissão não pode ficar em branco'
     expect(page).to have_content 'Juros ao dia (%) não é um número'
     expect(page).to have_content 'Multa por atraso não é um número'
   end
@@ -119,14 +119,14 @@ describe 'Admin cria taxa fixa' do
     fill_in 'Valor para Apartamento 2 quartos', with: '300,00'
     fill_in 'Valor para Apartamento 3 quartos', with: '500,00'
     select 'Semestral', from: 'Recorrência'
-    fill_in 'Data de Lançamento', with: formatted_date.to_s
+    fill_in 'Data de Emissão', with: formatted_date.to_s
     check 'Taxa fixa'
     fill_in 'Juros ao dia', with: 1
     fill_in 'Multa por atraso', with: '30,00'
     click_on 'Salvar'
 
     expect(page).to have_content 'Taxa não cadastrada.'
-    expect(page).to have_content 'Data de Lançamento deve ser futura'
+    expect(page).to have_content 'Data de Emissão deve ser futura'
     expect(page).to have_field 'Nome', with: 'Taxa de Condomínio'
     expect(page).to have_field 'Descrição', with: 'Taxas mensais para manutenção do prédio.'
     expect(page).to have_field 'Valor para Apartamento 1 quarto', with: '200,00'
@@ -159,7 +159,7 @@ describe 'Admin cria taxa fixa' do
     fill_in 'Valor para Apartamento 2 quartos', with: '-200,00'
     fill_in 'Valor para Apartamento 3 quartos', with: '500,00'
     select 'Semestral', from: 'Recorrência'
-    fill_in 'Data de Lançamento', with: formatted_date.to_s
+    fill_in 'Data de Emissão', with: formatted_date.to_s
     check 'Taxa fixa'
     fill_in 'Juros ao dia', with: 1
     fill_in 'Multa por atraso', with: '30,00'

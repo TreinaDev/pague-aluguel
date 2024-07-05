@@ -15,7 +15,7 @@ pt-BR:
         late_fine: Multa por atraso
         late_fine_cents: Multa por atraso
         fixed: Taxa fixa
-        charge_day: Data de Lançamento
+        charge_day: Data de Emissão
         recurrence: Recorrência
         enum_recurrence:
           monthly: Mensal
