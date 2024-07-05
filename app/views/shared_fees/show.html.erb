@@ -24,4 +24,26 @@
       <strong><%= SharedFee.human_attribute_name(:total_value_cents) %>:</strong> <%= Money.new(@shared_fee.total_value_cents, "BRL").format %>
     </div>
   </div>
+
+  <div class="row">
+    <div class="col-md-6">
+      <strong><%= SharedFee.human_attribute_name(:status) %>:</strong> 
+      <% if @shared_fee.active? %>
+        <strong class="text-success"><%= I18n.t("activerecord.attributes.shared_fee.enum_status.#{@shared_fee.status}") %></strong>
+      <% else %>
+        <strong class="text-danger"><%= I18n.t("activerecord.attributes.shared_fee.enum_status.#{@shared_fee.status}") %></strong>
+      <% end %>
+    </div>
+  </div>
+  
+  <div class="row">
+    <% if @shared_fee.active? %>
+      <div class="col-md-6">
+        <%= button_to I18n.t('cancel-button'), cancel_shared_fee_path(@shared_fee), class: 'btn btn-danger' %>
+      </div>
+    <% end %>
+    <div class="col-md-6">
+      <%= link_to I18n.t('helpers.buttons.back'), shared_fees_path(condo_id: @condo.id), class: "btn btn-secondary" %>
+    </div>
+  </div>
 </div>

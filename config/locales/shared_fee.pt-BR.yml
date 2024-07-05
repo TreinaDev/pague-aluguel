@@ -16,3 +16,7 @@ pt-BR:
   views:
     index:
       no_fees: Não foram encontradas contas compartilhadas.
+        status: Situação
+        enum_status:
+          active: Ativa
+          canceled: Cancelada
