@@ -137,6 +137,7 @@ pt-BR:
       new:
         sign_up: Criar conta
         sign_up_admin: Registrar Administrador
+        sign_up_property_owner: Registrar Administrador
       signed_up: Administrador registrado com sucesso.
       signed_up: Bem Vindo! Você se registrou com sucesso!
       signed_up_but_inactive: Você se inscreveu com sucesso, porém nós não podemos autenticá-lo porque sua conta ainda não foi ativada.
