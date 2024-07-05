@@ -8,11 +8,13 @@ Rails.application.routes.draw do
     resources :common_areas, only: [:index, :show, :edit, :update]
     resources :base_fees, only: [:new, :create, :show, :index]
     get 'search', on: :collection
+
+    resources :shared_fees, only: [:index, :show, :new, :create] do
+      post 'cancel', on: :member
+    end
   end
 
-  resources :shared_fees, only: [:index, :show, :new, :create] do 
-    post 'cancel', on: :member
-  end
+
 
   authenticate :admin do
     resources :admins, only: [:index, :show]
