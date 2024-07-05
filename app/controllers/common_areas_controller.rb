@@ -1,7 +1,7 @@
 class CommonAreasController < ApplicationController
   before_action :authenticate_admin!
-  before_action :find_common_area, only: [:edit, :show, :update]
   before_action :find_condo, only: [:index, :show, :edit, :update]
+  before_action :find_common_area, only: [:edit, :show, :update]
 
   def index
     @common_areas = CommonArea.find_by_condo_id(@condo.id)
@@ -33,7 +33,7 @@ class CommonAreasController < ApplicationController
   end
 
   def find_common_area
-    @common_area = CommonArea.find(params[:id])
+    @common_area = CommonArea.find_by_id(@condo.id, params[:id])
   end
 
   def update_common_area_history

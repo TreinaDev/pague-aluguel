@@ -12,10 +12,9 @@
 
         <% @common_areas.each_with_index do |area, index| %>
           <div id="<%= "area-#{index}"%>" class="mb-4">
-            <%= link_to condo_common_area_path(@condo.id, area), class: "link-container d-flex justify-content-center", style:"text-decoration:none;" do %>
+            <%= link_to condo_common_area_path(@condo.id, area.id), class: "link-container d-flex justify-content-center", style:"text-decoration:none;" do %>
               <div class="rounded-4 shadow p-4 col-12"  >
                 <div class="d-flex justify-content-between mb-3">
-                  <% byebug %>
                   <h3 class="align-self-center"><%= area.name %></h3>
                   <p class="align-self-center mb-0">Taxa de uso: <strong><%# area.fee_cents.zero? ? "Taxa não cadastrada" : Money.new(area.fee_cents, 'BRL').format %></strong></p>
                 </div>

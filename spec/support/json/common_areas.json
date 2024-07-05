@@ -1,5 +1,6 @@
 [
   {
+    "id": 1,
     "name": "Academia",
     "description": "Uma academia raíz com ventilador apenas para os marombas",
     "max_occupancy": 20,
@@ -7,10 +8,19 @@
     "condo_id": 1
   },
   {
+    "id": 2,
     "name": "Piscina",
     "description": "Piscina grande cabe até golfinhos.",
     "max_occupancy": 50,
     "rules": "Não pode comida aos arredores da área da piscina.",
+    "condo_id": 2
+  },
+  {
+    "id": 3,
+    "name": "Salão de festa",
+    "description": "Festa para toda a família.",
+    "max_occupancy": 80,
+    "rules": "Não é permitido a entrada de girafas, leões, zebras e hipopotamos, somente lêmures",
     "condo_id": 2
   }
 ]

@@ -1,11 +1,13 @@
 class CommonArea
-  def initialize(id:, condo_id:, name:, description:, max_occupancy:, rules:)
-    @id = id
-    @condo_id = condo_id
-    @name = name
-    @description = description
-    @max_occupancy = max_occupancy
-    @rules = rules
+  attr_accessor :id, :name, :description, :max_occupancy, :rules
+
+  def initialize(attribute = {}) # (id:, condo_id:, name:, description:, max_occupancy:, rules:)
+    @id = attribute[:id]
+    @condo_id = attribute[:condo_id]
+    @name = attribute[:name]
+    @description = attribute[:description]
+    @max_occupancy = attribute[:max_occupancy]
+    @rules = attribute[:rules]
   end
 
   def self.find_by_condo_id(condo_id)
@@ -21,15 +23,26 @@ class CommonArea
     common_areas
   end
 
+  def self.find_by_id(condo_id, id)
+    base_url = 'http://127.0.0.1:3000/api/v1'
+    response = Faraday.get("#{base_url}/condos/#{condo_id}/common_areas/#{id}")
+    if response.success?
+      data = JSON.parse(response.body)
+      return generate_common_area(data, condo_id)
+    else
+      raise response.status.to_s
+    end
+  end
+
   def self.generate_common_area(common_area, condo_id)
-    CommonArea.new(
+    CommonArea.new({
       id: common_area['id'],
       condo_id:,
       name: common_area['name'],
       description: common_area['description'],
       max_occupancy: common_area['max_occupancy'],
       rules: common_area['rules']
-    )
+    })
   end
   # belongs_to :condo
   # validate :fee_not_negative, on: :update

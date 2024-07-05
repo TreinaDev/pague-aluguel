@@ -8,17 +8,17 @@
     <h3><%= @common_area.name%></h3>
     <hr>
     <div class="d-flex justify-content-center align-items-center">
-      <strong class="me-2">Taxa de área comum: <%= @common_area.fee_cents.zero? ? 'Taxa não cadastrada' : Money.new(@common_area.fee_cents, 'BRL').format %></strong>
+      <strong class="me-2">Taxa de área comum: <%# @common_area.fee_cents.zero? ? 'Taxa não cadastrada' : Money.new(@common_area.fee_cents, 'BRL').format %></strong>
       <%= link_to 'Registrar Taxa', edit_condo_common_area_path(@condo.id, @common_area), class:"btn btn-primary" %>
     </div>
     <hr>
     <div>
       <p>Descrição: <%= @common_area.description %></p>
-      <p>Capacidade máxima: <%= @common_area.max_capacity %></p>
-      <p>Regras de uso: <%= @common_area.usage_rules %></p>
+      <p>Capacidade máxima: <%= @common_area.max_occupancy %></p>
+      <p>Regras de uso: <%= @common_area.rules %></p>
     </div>
 
-    <% if @common_area.common_area_fee_histories.any? %>
+     <%# if @common_area.common_area_fee_histories.any? %>
       <p class="d-inline-flex gap-1">
         <a class="btn btn-primary" data-bs-toggle="collapse" href="#collapseExample" role="button" aria-expanded="false" aria-controls="collapseExample">
           Mostrar histórico de taxas
@@ -27,13 +27,13 @@
       <div class="collapse" id="collapseExample">
         <div class="card card-body">
           <ul>
-            <% @common_area.common_area_fee_histories.each do |history_fee| %>
-              <li>Email: <%= history_fee.user %> | Data: <%= history_fee.created_at.strftime('%d/%m/%Y') %> | Taxa: <%= Money.new(history_fee.fee_cents, 'BRL').format %></li>
-            <% end %>
+            <%# @common_area.common_area_fee_histories.each do |history_fee| %>
+              <li>Email: <%# history_fee.user %> | Data: <%# history_fee.created_at.strftime('%d/%m/%Y') %> | Taxa: <%# Money.new(history_fee.fee_cents, 'BRL').format %></li>
+            <%# end %>
           </ul>
         </div>
       </div>
-    <% end %>
-    
+    <%# end %>
+
   </div>
 </div>
