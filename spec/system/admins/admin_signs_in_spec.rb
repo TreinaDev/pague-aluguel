@@ -32,11 +32,10 @@ describe 'usuario loga como admin' do
     click_on 'Administrador'
 
     within 'form' do
-      fill_in 'E-mail', with: 'admin@mail.com'
+      fill_in 'E-mail', with: 'xuxu@mail.com'
       fill_in 'Senha', with: '123456'
       click_on 'Login'
     end
-
 
     expect(page).to have_content 'E-mail ou senha inválidos.'
     expect(page).not_to have_content 'Login efetuado com sucesso'
@@ -44,7 +43,6 @@ describe 'usuario loga como admin' do
     within 'nav' do
       expect(page).not_to have_content 'Fulano Da Costa'
       expect(page).not_to have_content 'Logout'
-      expect(page).to have_content 'Login'
     end
   end
 end

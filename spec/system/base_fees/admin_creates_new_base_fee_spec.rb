@@ -27,7 +27,7 @@ describe 'Admin cria taxa fixa' do
     end
 
     expect(page).to have_content 'CADASTRO DE TAXA'
-    expect(page).to have_content 'Prédio Lindo'
+    expect(page).to have_content 'PRÉDIO LINDO'
     expect(current_path).to eq new_condo_base_fee_path(condos[0].id)
   end
 
