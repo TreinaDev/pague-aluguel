@@ -20,12 +20,15 @@
 
     <hr>
 
-    <div class="text-center">
-      <span class="text-muted text-lowercase fs-8"><%= I18n.t('views.show.capacity') %></span>
-      <span><%= @common_area.max_capacity %> pessoas</span>
-      <br>
-      <span class="text-muted text-lowercase fs-8"><%= I18n.t('views.show.rules') %></span>
-      <span class=""><%= @common_area.usage_rules %></span>
+    <div class="px-5">
+      <div class=" d-flex justify-content-between">
+        <span class="text-muted text-lowercase fs-8"><%= I18n.t('views.show.capacity') %></span>
+        <span><%= @common_area.max_capacity %> pessoas</span>
+      </div>
+      <div class=" d-flex justify-content-between">
+        <span class="text-muted text-lowercase fs-8"><%= I18n.t('views.show.rules') %></span>
+        <span class=""><%= @common_area.usage_rules %></span>
+      </div>
     </div>
 
     <%= render "common_area_fee_histories" %>

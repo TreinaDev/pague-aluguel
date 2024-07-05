@@ -18,7 +18,7 @@
         <span class="fs-3"><%= capitalized_name(current_admin) %></span>
         <span class="d-block"><%= current_admin.email %></span>
         <span class="d-block" data-controller="document-number"><%= current_admin.document_number %></span>
-        <span class="d-block fs-8 text-muted"><%= I18n.t('views.show.since') %><%= current_admin.created_at.strftime("%d/%m/%Y") %></span>
+        <span class="d-block fs-8 text-muted"><%= I18n.t('views.show.since') %>: <%= current_admin.created_at.strftime("%d/%m/%Y") %></span>
       </div>
     </div>
   </div>
