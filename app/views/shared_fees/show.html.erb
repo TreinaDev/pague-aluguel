@@ -1,6 +1,7 @@
-<%= link_to :back, class: "ms-3 mt-3" do %>
+<%= link_to shared_fees_path(condo_id: @condo.id), class: "ms-3 mt-3" do %>
   <%= image_tag "arrow-left", size: "25", id: 'arrow-left' %>
 <% end %>
+
 <div class="container">
   <h1><%= SharedFee.model_name.human %><%= @shared_fee.id %></h1>
 
@@ -45,8 +46,5 @@
         <%= button_to I18n.t('cancel-button'), cancel_shared_fee_path(@shared_fee), class: 'btn btn-danger' %>
       </div>
     <% end %>
-    <div class="col-md-6">
-      <%= link_to I18n.t('helpers.buttons.back'), shared_fees_path(condo_id: @condo.id), class: "btn btn-secondary" %>
-    </div>
   </div>
 </div>

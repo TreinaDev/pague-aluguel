@@ -135,11 +135,11 @@ pt-BR:
         update: Atualizar
         we_need_your_current_password_to_confirm_your_changes: precisamos da sua senha atual para confirmar suas mudanças
       new:
-        sign_up: Criar conta
+        sign_up: criar conta
         sign_up_admin: Registrar Administrador
-        sign_up_property_owner: Registrar Administrador
+        sign_up_property_owner: Registrar Proprietário
       signed_up: Administrador registrado com sucesso.
-      signed_up: Bem Vindo! Você se registrou com sucesso!
+      signed_up: Cadastro realizado com sucesso.
       signed_up_but_inactive: Você se inscreveu com sucesso, porém nós não podemos autenticá-lo porque sua conta ainda não foi ativada.
       signed_up_but_locked: Você se inscreveu com sucesso. Porém nós não podemos autenticá-lo porque sua conta está bloqueada.
       signed_up_but_unconfirmed: Uma mensagem com um link de confirmação foi enviada para o seu e-mail. Por favor, acesse o link para ativar sua conta.
@@ -148,6 +148,7 @@ pt-BR:
       updated_but_not_signed_in: Sua conta foi atualizada com sucesso, uma vez que sua senha foi alterada será necessário realizar o login novamente.
     sessions:
       already_signed_out: Logout efetuado com sucesso.
+      choose_profile: Escolha a forma de login
       new:
         sign_in_admin: Entrar como administrador
         sign_in_property_owner: Entrar como proprietário

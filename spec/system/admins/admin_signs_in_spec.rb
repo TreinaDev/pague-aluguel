@@ -8,6 +8,7 @@ describe 'usuario loga como admin' do
     within 'nav' do
       click_on 'Login'
     end
+    click_on 'Administrador'
 
     within 'form' do
       fill_in 'E-mail', with: 'admin@mail.com'
@@ -28,12 +29,14 @@ describe 'usuario loga como admin' do
     within 'nav' do
       click_on 'Login'
     end
+    click_on 'Administrador'
 
     within 'form' do
-      fill_in 'E-mail', with: 'example@mail.com'
-      fill_in 'Senha', with: 'errado456'
+      fill_in 'E-mail', with: 'admin@mail.com'
+      fill_in 'Senha', with: '123456'
       click_on 'Login'
     end
+
 
     expect(page).to have_content 'E-mail ou senha inválidos.'
     expect(page).not_to have_content 'Login efetuado com sucesso'

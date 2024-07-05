@@ -25,12 +25,9 @@
           <span class="d-block lh-1"><%= current_property_owner.email %></span>
           <span class="d-block lh-1"><%= current_property_owner.document_number %></span>
         </div>
-        <%= button_to "Logout", destroy_property_owner_session_path, method: :delete, class: "btn btn-success" %>
+        <%= button_to I18n.t('devise.shared.links.sign_out'), destroy_property_owner_session_path, method: :delete, class: "btn btn-success" %>
       <% else %>
-        <%= link_to I18n.t('devise.sessions.new.sign_in'), new_admin_session_path, class: "btn btn-success text-uppercase", data: { turbo_frame: "modal" } %>
-        <%= link_to "Login", new_admin_session_path, class: "btn btn-success" %>
-        <%= link_to "Login de Proprietário", new_property_owner_session_path, class: "btn btn-success" %>
-        <%= link_to "Registrar-se como Proprietário", new_property_owner_registration_path, class: "btn btn-primary" %>
+        <%= link_to I18n.t('devise.sessions.new.sign_in'), choose_profile_path, class: "btn btn-success", data: { turbo_frame: "modal" } %>
       <% end %>
     </div>
   </div>

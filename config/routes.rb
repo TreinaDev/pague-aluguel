@@ -4,13 +4,14 @@ Rails.application.routes.draw do
 
   root to: "home#index"
   get 'search', to: 'home#search'
+  get 'choose_profile', to: 'home#choose_profile'
 
   resources :condos, only: [:index, :show] do
     resources :common_areas, only: [:index, :show, :edit, :update]
     resources :base_fees, only: [:new, :create, :show, :index]
   end
 
-  resources :shared_fees, only: [:index, :show, :new, :create] do 
+  resources :shared_fees, only: [:index, :show, :new, :create] do
     post 'cancel', on: :member
   end
 

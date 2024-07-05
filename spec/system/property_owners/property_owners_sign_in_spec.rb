@@ -8,10 +8,16 @@ describe 'Proprietário tenta fazer login' do
                                              document_number: cpf)
 
     visit root_path
-    click_on 'Login de Proprietário'
-    fill_in 'E-mail', with: property_owner.email
-    fill_in 'Senha', with: '123456'
-    click_on 'Entrar'
+    within 'nav' do
+      click_on 'Login'
+    end
+    click_on 'Proprietário'
+
+    within 'form' do
+      fill_in 'E-mail', with: property_owner.email
+      fill_in 'Senha', with: '123456'
+      click_on 'Login'
+    end
 
     expect(page).to have_content 'Login efetuado com sucesso'
     expect(page).to have_content cpf

@@ -12,6 +12,8 @@ class HomeController < ApplicationController
     render 'index'
   end
 
+  def choose_profile; end
+
   private
 
   def recent_admins

@@ -4,7 +4,7 @@
       <%= link_to "", :back, class: "btn btn-close btn-sm" %>
     </div>
 
-    <span class="fs-4 text-uppercase d-block text-center mb-3 mt-3">
+    <span class="fs-4 text-uppercase d-block text-center mb-2">
       <%= I18n.t('devise.sessions.new.sign_in_property_owner') %>
     </span>
 
@@ -30,8 +30,10 @@
       <% end %>
 
       <div class="text-center">
-        <%= f.submit I18n.t('devise.sessions.new.sign_in'), class: "btn btn-secondary text-uppercase" %>
+        <%= f.submit I18n.t('devise.sessions.new.sign_in'), class: "btn btn-secondary text-uppercase mb-2" %><br>
+        <%= render "property_owners/shared/links" %>
       </div>
     <% end %>
   </div>
 <% end %>
+

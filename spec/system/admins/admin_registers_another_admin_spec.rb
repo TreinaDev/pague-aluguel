@@ -19,8 +19,7 @@ describe 'admin registra outro admin' do
     attach_file 'Insira sua foto de perfil', Rails.root.join('spec/support/images/reuri.jpeg')
     click_on 'Registrar'
 
-    # expect(page).to have_content 'Administrador registrado com sucesso'
-    expect(page).to have_content 'Bem Vindo! Você se registrou com sucesso!'
+    expect(page).to have_content 'Cadastro realizado com sucesso.'
     expect(page).to have_content 'João Almeida'
     expect(current_path).to eq root_path
   end
