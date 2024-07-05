@@ -15,8 +15,9 @@
   <% end %>
 
   <span class="fs-4 mx-auto mt-3 text-uppercase">
-    <%= I18n.t('views.new.create_fee', condo: @condo.name) %>
+    <%= I18n.t('views.new.create_fee') %>
   </span>
+  <span class="mx-auto text-uppercase fs-7 text-muted"><%= @condo.name %></span>
 
   <%= form_with model: [@base_fee], url: condo_base_fees_path(@condo.id), local: true do |f| %>
     <%= f.hidden_field :condo_id, value: @condo.id %>

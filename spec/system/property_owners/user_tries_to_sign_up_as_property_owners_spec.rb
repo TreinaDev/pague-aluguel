@@ -7,7 +7,11 @@ describe 'Proprietário tenta se cadastrar' do
     allow(Faraday).to receive(:get).and_return(fake_response)
 
     visit root_path
-    click_on 'Registrar-se como Proprietário'
+    within 'nav' do
+      click_on 'Login'
+    end
+    click_on 'Proprietário'
+    click_on 'criar conta'
     fill_in 'E-mail', with: 'propertytest@mail.com'
     fill_in 'CPF', with: cpf
     fill_in 'Senha', with: 'password'
@@ -23,14 +27,16 @@ describe 'Proprietário tenta se cadastrar' do
     allow(Faraday).to receive(:get).with("http://localhost:3000/api/v1/property?cpf=#{cpf}").and_return(fake_response)
 
     visit root_path
-    click_on 'Registrar-se como Proprietário'
+    click_on 'LOGIN'
+    click_on 'Proprietário'
+    click_on 'criar conta'
     fill_in 'E-mail', with: 'propertytest@mail.com'
     fill_in 'CPF', with: cpf
     fill_in 'Senha', with: 'password'
     fill_in 'Confirme a senha', with: 'password'
-    click_on 'Cadastrar-se'
+    click_on 'Cadastrar'
 
-    expect(page).to have_content('Bem Vindo! Você se registrou com sucesso!')
+    expect(page).to have_content('Cadastro realizado com sucesso.')
     expect(PropertyOwner.first.document_number).to eq cpf
   end
 end

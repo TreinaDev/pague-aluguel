@@ -138,7 +138,6 @@ pt-BR:
         sign_up: criar conta
         sign_up_admin: Registrar Administrador
         sign_up_property_owner: Registrar Proprietário
-      signed_up: Administrador registrado com sucesso.
       signed_up: Cadastro realizado com sucesso.
       signed_up_but_inactive: Você se inscreveu com sucesso, porém nós não podemos autenticá-lo porque sua conta ainda não foi ativada.
       signed_up_but_locked: Você se inscreveu com sucesso. Porém nós não podemos autenticá-lo porque sua conta está bloqueada.
