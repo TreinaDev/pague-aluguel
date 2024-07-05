@@ -138,7 +138,6 @@ pt-BR:
         sign_up: Criar conta
         sign_up_admin: Registrar Administrador
       signed_up: Administrador registrado com sucesso.
-        sign_up: Inscrever-se
       signed_up: Bem Vindo! Você se registrou com sucesso!
       signed_up_but_inactive: Você se inscreveu com sucesso, porém nós não podemos autenticá-lo porque sua conta ainda não foi ativada.
       signed_up_but_locked: Você se inscreveu com sucesso. Porém nós não podemos autenticá-lo porque sua conta está bloqueada.
@@ -162,7 +161,6 @@ pt-BR:
         sign_in: Login
         sign_out: Logout
         sign_in_with_provider: Entrar com %{provider}
-        sign_up: Inscrever-se
       minimum_password_length:
         one: "(Mínimo de %{count} caractere)"
         other: "(Mínimo de %{count} caracteres)"
