@@ -1,26 +1,37 @@
-<h2>Login de Proprietário</h2>
-
-<%= form_for(resource, as: resource_name, url: session_path(resource_name)) do |f| %>
-  <div class="field">
-    <%= f.label :email %><br />
-    <%= f.email_field :email, autofocus: true, autocomplete: "email" %>
-  </div>
-
-  <div class="field">
-    <%= f.label :password %><br />
-    <%= f.password_field :password, autocomplete: "current-password" %>
-  </div>
-
-  <% if devise_mapping.rememberable? %>
-    <div class="field">
-      <%= f.check_box :remember_me %>
-      <%= f.label :remember_me %>
+<%= turbo_frame_tag "modal" do %>
+  <div class="dean-modal modal-sm">
+    <div class="mb-3">
+      <%= link_to "", :back, class: "btn btn-close btn-sm" %>
     </div>
-  <% end %>
 
-  <div class="actions">
-    <%= f.submit "Entrar" %>
+    <span class="fs-4 text-uppercase d-block text-center mb-3 mt-3">
+      <%= I18n.t('devise.sessions.new.sign_in_property_owner') %>
+    </span>
+
+    <%= form_for(resource, as: resource_name, url: session_path(resource_name)) do |f| %>
+      <%= render "property_owners/shared/error_messages", resource: resource %>
+      <div class="form-floating mb-2 w-75 mx-auto">
+        <%= f.email_field :email, autofocus: true, autocomplete: "email", class: "form-control" %>
+        <%= f.label :email %>
+      </div>
+
+      <div class="form-floating mb-2 w-75 mx-auto">
+        <%= f.password_field :password, autocomplete: "current-password", class: "form-control" %>
+        <%= f.label :password %>
+      </div>
+
+      <% if devise_mapping.rememberable? %>
+        <div class="d-flex justify-content-center">
+          <div class="form-check form-switch mb-2">
+            <%= f.check_box :remember_me, class: "form-check-input" %>
+            <%= f.label :remember_me, class: "form-check-label" %>
+          </div>
+        </div>
+      <% end %>
+
+      <div class="text-center">
+        <%= f.submit I18n.t('devise.sessions.new.sign_in'), class: "btn btn-secondary text-uppercase" %>
+      </div>
+    <% end %>
   </div>
 <% end %>
-
-<%= render "property_owners/shared/links" %>

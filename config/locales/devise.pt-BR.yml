@@ -148,7 +148,8 @@ pt-BR:
     sessions:
       already_signed_out: Logout efetuado com sucesso.
       new:
-        sign_in_admin: Entrar como admin
+        sign_in_admin: Entrar como administrador
+        sign_in_property_owner: Entrar como proprietário
         sign_in: Login
       signed_in: Login efetuado com sucesso.
       signed_out: Logout efetuado com sucesso.
