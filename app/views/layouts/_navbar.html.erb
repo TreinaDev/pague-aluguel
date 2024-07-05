@@ -23,7 +23,7 @@
       <% elsif property_owner_signed_in?%>
         <div class="me-4 mt-1">
           <span class="d-block lh-1"><%= current_property_owner.email %></span>
-          <span class="d-block lh-1"><%= current_property_owner.document_number %></span>
+          <span class="d-block lh-1" data-controller="document-number"><%= current_property_owner.document_number %></span>
         </div>
         <%= button_to I18n.t('devise.shared.links.sign_out'), destroy_property_owner_session_path, method: :delete, class: "btn btn-success text-uppercase ls-3" %>
       <% else %>
