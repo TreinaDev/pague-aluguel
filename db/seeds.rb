@@ -15,6 +15,24 @@ Admin.create!(
 
 p "Created #{Admin.count} admins"
 
+property_owner = PropertyOwner.new(email: 'raphael@email.com', password: 'raphael123', document_number: CPF.generate)
+
+property_owner.save(validate: false)
+
+p "Created #{PropertyOwner.count} property owners"
+
+CommonArea.find_or_create_by!(name: 'Churrasqueira', description: 'Área de churrasqueira com piscina', max_capacity: 30,
+                              usage_rules: 'Regras ainda não definidas', fee_cents: 250, condo_id: 1)
+CommonArea.find_or_create_by!(name: 'Play', description: 'Play para eventos', max_capacity: 60,
+                              usage_rules: 'Regras ainda não definidas', fee_cents: 300, condo_id: 1)
+
+CommonArea.find_or_create_by!(name: 'Salão de festa', description: 'Área feita para eventos casuais', max_capacity: 40,
+                              usage_rules: 'Proibido levar as mesas para fora do salão.', fee_cents: 400, condo_id: 2)
+CommonArea.find_or_create_by!(name: 'Cinema', description: 'Guerreiros Saiajens', max_capacity: 60,
+                              usage_rules: 'Proibido fumar na sala', fee_cents: 500, condo_id: 2)
+
+p "Created #{CommonArea.count} common areas"
+
 base_fee1 = BaseFee.create!(name: 'Taxa de Condomínio',
                             description: 'Manutenção regular do prédio',
                             interest_rate: 2, late_fine: 10, fixed: true,

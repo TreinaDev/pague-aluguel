@@ -1,0 +1,10 @@
+<%= form_with url: owner_cpf_validations_path, local: true do |form| %>
+  <div>
+    <%= form.label :cpf, 'Validar CPF' %>
+    <%= form.text_field :cpf %>
+  </div>
+
+  <div>
+    <%= form.submit 'Validar' %>
+  </div>
+<% end %>

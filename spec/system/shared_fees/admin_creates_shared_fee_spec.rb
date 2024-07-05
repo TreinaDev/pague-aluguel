@@ -33,6 +33,7 @@ describe 'Admin lança uma conta compartilhada' do
     expect(page).to have_content('Descrição: Conta de Luz')
     expect(page).to have_content("Data de Emissão: #{I18n.l(10.days.from_now.to_date)}")
     expect(page).to have_content('Valor Total: R$10.000,00')
+    expect(page).to have_content('Situação: Ativa')
   end
 
   it 'e não está autenticado' do
@@ -71,6 +72,21 @@ describe 'Admin lança uma conta compartilhada' do
     expect(page).to have_content('Descrição não pode ficar em branco')
     expect(page).to have_content('Data de Emissão não pode ficar em branco')
     expect(page).to have_content('Valor Total não é um número')
+  end
+
+  it 'e clica em Voltar para a listagem' do
+    admin = FactoryBot.create(:admin, first_name: 'Fulano', last_name: 'Da Costa')
+    condos = []
+    condos << Condo.new(id: 1, name: 'Condo Test', city: 'City Test')
+    allow(Condo).to receive(:all).and_return(condos)
+    allow(Condo).to receive(:find).and_return(condos.first)
+
+    login_as admin, scope: :admin
+    visit shared_fees_path(condo_id: condos.first.id)
+    click_on 'Lançar Conta Compartilhada'
+    click_on 'Voltar'
+
+    expect(current_path).to eq shared_fees_path
   end
 
   it 'e lança mais de uma conta' do

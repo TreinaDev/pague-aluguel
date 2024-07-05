@@ -8,7 +8,7 @@ class SharedFeesController < ApplicationController
 
   def show
     @shared_fee = SharedFee.find(params[:id])
-    @condo = Condo.find(params[:condo_id])
+    @condo = Condo.find(@shared_fee.condo_id)
   end
 
   def new
@@ -27,6 +27,13 @@ class SharedFeesController < ApplicationController
       flash.now[:alert] = I18n.t('fail_notice_shared_fee')
       render :new, status: :unprocessable_entity
     end
+  end
+
+  def cancel
+    @shared_fee = SharedFee.find(params[:id])
+    @condo = Condo.find(@shared_fee.condo_id)
+    @shared_fee.canceled!
+    redirect_to shared_fees_path(condo_id: @condo.id), notice: "#{@shared_fee.description} cancelada com sucesso."
   end
 
   private

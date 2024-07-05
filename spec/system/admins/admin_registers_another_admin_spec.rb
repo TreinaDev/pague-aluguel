@@ -20,8 +20,8 @@ describe 'admin registra outro admin' do
     click_on 'Registrar'
     sleep 0.2
 
-    expect(page).to have_content 'Administrador registrado com sucesso'
     expect(current_path).to eq admins_path
+    expect(page).to have_content 'Bem Vindo! Você se registrou com sucesso!'
     expect(page).to have_content 'João Almeida'
   end
 
@@ -44,6 +44,6 @@ describe 'admin registra outro admin' do
     expect(page).to have_content 'Sobrenome não pode ficar em branco'
     expect(page).to have_content 'CPF não pode ficar em branco'
     expect(page).to have_content 'Não foi possível salvar administrador'
-    expect(page).not_to have_content 'Administrador registrado com sucesso'
+    expect(page).not_to have_content 'Bem Vindo! Você se registrou com sucesso!'
   end
 end

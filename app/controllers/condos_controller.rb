@@ -8,4 +8,10 @@ class CondosController < ApplicationController
   def show
     @condo = Condo.find(params[:id])
   end
+
+  def search
+    @query = params[:query].downcase
+    @condos = Condo.all.select { |condo| condo.name.downcase.include?(@query) }
+    render 'index'
+  end
 end

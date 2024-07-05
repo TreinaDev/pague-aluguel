@@ -17,5 +17,16 @@ describe Condo do
       expect(result[2].name).to eq 'Sai do Meio'
       expect(result[2].city).to eq 'Minas Gerais'
     end
+
+    it '.find' do
+      data = Rails.root.join('spec/support/json/condo.json').read
+      response = double('response', success?: true, body: data)
+      allow(Faraday).to receive(:get).with('http://127.0.0.1:3000/api/v1/condos/1').and_return(response)
+
+      result = Condo.find(1)
+
+      expect(result.name).to eq 'Sai de Baixo'
+      expect(result.city).to eq 'Rio de Janeiro'
+    end
   end
 end
