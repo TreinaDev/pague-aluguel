@@ -19,15 +19,15 @@
           <span class="d-block lh-1"><%= capitalized_name(current_admin) %></span>
           <span class="d-block lh-1"><%= current_admin.email %></span>
         </div>
-        <%= button_to I18n.t('devise.shared.links.sign_out'), destroy_admin_session_path, method: :delete, class: "btn btn-danger text-uppercase" %>
+        <%= button_to I18n.t('devise.shared.links.sign_out'), destroy_admin_session_path, method: :delete, class: "btn btn-danger text-uppercase ls-3" %>
       <% elsif property_owner_signed_in?%>
         <div class="me-4 mt-1">
           <span class="d-block lh-1"><%= current_property_owner.email %></span>
-          <span class="d-block lh-1"><%= current_property_owner.document_number %></span>
+          <span class="d-block lh-1" data-controller="document-number"><%= current_property_owner.document_number %></span>
         </div>
-        <%= button_to I18n.t('devise.shared.links.sign_out'), destroy_property_owner_session_path, method: :delete, class: "btn btn-success" %>
+        <%= button_to I18n.t('devise.shared.links.sign_out'), destroy_property_owner_session_path, method: :delete, class: "btn btn-success text-uppercase ls-3" %>
       <% else %>
-        <%= link_to I18n.t('devise.sessions.new.sign_in'), choose_profile_path, class: "btn btn-success", data: { turbo_frame: "modal" } %>
+        <%= link_to I18n.t('devise.sessions.new.sign_in'), choose_profile_path, class: "btn btn-success text-uppercase ls-3", data: { turbo_frame: "modal" } %>
       <% end %>
     </div>
   </div>
