@@ -10,7 +10,7 @@ class CommonArea
     @rules = attribute[:rules]
   end
 
-  def self.find_by_condo_id(condo_id)
+  def self.all(condo_id)
     common_areas = []
     base_url = 'http://127.0.0.1:3000/api/v1'
     response = Faraday.get("#{base_url}/condos/#{condo_id}/common_areas")
@@ -23,7 +23,7 @@ class CommonArea
     common_areas
   end
 
-  def self.find_by_id(condo_id, id)
+  def self.find(condo_id, id)
     base_url = 'http://127.0.0.1:3000/api/v1'
     response = Faraday.get("#{base_url}/condos/#{condo_id}/common_areas/#{id}")
     if response.success?

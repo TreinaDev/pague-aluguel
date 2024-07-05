@@ -4,10 +4,12 @@ class CommonAreasController < ApplicationController
   before_action :find_common_area, only: [:edit, :show, :update]
 
   def index
-    @common_areas = CommonArea.find_by_condo_id(@condo.id)
+    @common_areas = CommonArea.all(@condo.id)
   end
 
-  def show; end
+  def show
+    @common_area_fee = CommonAreaFee.where(common_area_id: @common_area.id).last
+  end
 
   def edit; end
 
@@ -33,7 +35,7 @@ class CommonAreasController < ApplicationController
   end
 
   def find_common_area
-    @common_area = CommonArea.find_by_id(@condo.id, params[:id])
+    @common_area = CommonArea.find(@condo.id, params[:id])
   end
 
   def update_common_area_history

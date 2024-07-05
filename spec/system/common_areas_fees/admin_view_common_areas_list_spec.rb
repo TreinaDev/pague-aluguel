@@ -13,10 +13,8 @@ describe 'Admin vê a lista de áreas comuns' do
 
   it 'com sucesso' do
     admin = create(:admin, email: 'matheus@gmail.com', password: 'admin12345')
-
     condo = Condo.new(id: 1, name: 'Condo TMNT', city: 'Salvador')
     allow(Condo).to receive(:find).and_return(condo)
-
     json_data = File.read('spec/support/json/common_areas.json')
     fake_response = double('faraday_response', status: 200, body: json_data, success?: true)
     allow(Faraday).to receive(:get).with("http://127.0.0.1:3000/api/v1/condos/#{condo.id}/common_areas").and_return(fake_response)
@@ -34,10 +32,8 @@ describe 'Admin vê a lista de áreas comuns' do
 
   it 'E não existem áreas comuns cadastradas' do
     admin = create(:admin, email: 'matheus@gmail.com', password: 'admin12345')
-
     condo = Condo.new(id: 1, name: 'Condo TMNT', city: 'São Paulo')
     allow(Condo).to receive(:find).and_return(condo)
-
     fake_response = double('faraday_response', status: 200, body: '[]', success?: true)
     allow(Faraday).to receive(:get).with("http://127.0.0.1:3000/api/v1/condos/#{condo.id}/common_areas").and_return(fake_response)
 
@@ -49,14 +45,11 @@ describe 'Admin vê a lista de áreas comuns' do
 
   it 'e acessa uma área comum e volta para a lista' do
     admin = create(:admin)
-
     condo = Condo.new(id: 1, name: 'Teenage Mutant Ninja Turtles', city: 'São Paulo')
     allow(Condo).to receive(:find).and_return(condo)
-
     json_data = File.read('spec/support/json/common_areas.json')
     fake_response = double('faraday_response', status: 200, body: json_data, success?: true)
     allow(Faraday).to receive(:get).with("http://127.0.0.1:3000/api/v1/condos/#{condo.id}/common_areas").and_return(fake_response)
-
     common_area = JSON.parse(json_data).first.to_json
     fake_response = double('faraday_response', status: 200, body: common_area, success?: true)
     allow(Faraday).to receive(:get).with("http://127.0.0.1:3000/api/v1/condos/#{condo.id}/common_areas/1").and_return(fake_response)
@@ -75,7 +68,6 @@ describe 'Admin vê a lista de áreas comuns' do
   # Só será possível se tivermos o show do condomínio
   xit 'e volta para show do condomínio' do
     admin = create(:admin)
-
     condo = Condo.new(id: 1, name: 'Teenage Mutant Ninja Turtles', city: 'São Paulo')
     allow(Condo).to receive(:find).and_return(condo)
 

@@ -8,8 +8,8 @@
     <h3><%= @common_area.name%></h3>
     <hr>
     <div class="d-flex justify-content-center align-items-center">
-      <strong class="me-2">Taxa de área comum: <%# @common_area.fee_cents.zero? ? 'Taxa não cadastrada' : Money.new(@common_area.fee_cents, 'BRL').format %></strong>
-      <%= link_to 'Registrar Taxa', edit_condo_common_area_path(@condo.id, @common_area), class:"btn btn-primary" %>
+      <strong class="me-2">Taxa de área comum: <%= @common_area_fee.nil? ? 'Taxa não cadastrada' : Money.new(@common_area_fee.value_cents, 'BRL').format %></strong>
+      <%= link_to 'Registrar Taxa', new_condo_common_area_common_area_fee_path(@condo.id, @common_area.id), class:"btn btn-primary" %>
     </div>
     <hr>
     <div>
