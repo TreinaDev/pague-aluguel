@@ -1,8 +1,8 @@
 class SharedFeesController < ApplicationController
   before_action :authenticate_admin!
-  before_action :set_condo, only: [:index, :new, :create]
 
   def index
+    @condo = Condo.find(params[:condo_id])
     @shared_fees = SharedFee.where(condo_id: @condo.id)
   end
 
@@ -12,11 +12,13 @@ class SharedFeesController < ApplicationController
   end
 
   def new
+    @condos = Condo.all
     @shared_fee = SharedFee.new
     @selected_condo_id = params[:condo_id] || nil
   end
 
   def create
+    @condos = Condo.all
     @shared_fee = SharedFee.new(shared_fee_params)
     if @shared_fee.save
       @shared_fee.calculate_fractions
@@ -41,9 +43,5 @@ class SharedFeesController < ApplicationController
                                        :total_value,
                                        :issue_date,
                                        :condo_id)
-  end
-
-  def set_condo
-    @condo = Condo.find(params[:condo_id])
   end
 end

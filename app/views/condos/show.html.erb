@@ -17,14 +17,24 @@
 
 <%= render 'payment_slip_section' %>
 
-<div class="d-flex justify-content-between">  
+<div class="d-flex justify-content-between" id="shared-fee">  
   <div class="card border-0 rounded-0 bg-off-white mt-4 py-3 px-3 w-49" id="shared-fee">
     <div class="text-muted mb-3 fs-8">
       <%= image_tag "open-folder-icon", size: '18' %>
       <span><%= SharedFee.model_name.human(count: 2) %></span>
     </div>
-    <%= link_to I18n.t('helpers.submit.add'), new_shared_fee_path(condo_id: @condo.id), class: 'dropdown-item' %>
-    <%= link_to I18n.t('views.show.show_all'), shared_fees_path(condo_id: @condo.id), class: 'dropdown-item' %>
+    <div class="d-flex align-items-center">
+      <%= link_to new_shared_fee_path(condo_id: @condo.id), class: "text-decoration-none btn hover-strong" do %>
+        <%= image_tag "plus-icon", size: "18" %>
+        <span class="text-muted fs-7 text-uppercase"><%= I18n.t('helpers.submit.add') %></span>
+      <% end %>
+    </div>
+    <div class="d-flex align-items-center">
+      <%= link_to shared_fees_path(condo_id: @condo.id), class: "text-decoration-none btn hover-strong" do %>
+        <%= image_tag "list-center-icon", size: "18" %>
+        <span class="text-muted fs-7 text-uppercase"><%= I18n.t('views.show.show_all') %></span>
+      <% end %>
+    </div>
   </div>
 
   <div class="card border-0 rounded-0 bg-off-white mt-4 py-3 px-3 w-49" id="base-fee">
@@ -32,8 +42,18 @@
       <%= image_tag "clipboard-icon", size: '18' %>
       <span><%= BaseFee.model_name.human(count: 2) %></span>
     </div>
-    <%= link_to I18n.t('helpers.submit.add'), new_condo_base_fee_path(condo_id: @condo.id), class: 'dropdown-item' %>
-    <%= link_to I18n.t('views.show.show_all'), condo_base_fees_path(condo_id: @condo.id), class: 'dropdown-item' %>
+    <div class="d-flex align-items-center">
+      <%= link_to new_condo_base_fee_path(condo_id: @condo.id), class: "text-decoration-none btn hover-strong" do %>
+        <%= image_tag "plus-icon", size: "18" %>
+        <span class="text-muted fs-7 text-uppercase"><%= I18n.t('helpers.submit.add') %></span>
+      <% end %>
+    </div>
+    <div class="d-flex align-items-center">
+      <%= link_to condo_base_fees_path(condo_id: @condo.id), class: "text-decoration-none btn hover-strong" do %>
+        <%= image_tag "list-center-icon", size: "18" %>
+        <span class="text-muted fs-7 text-uppercase"><%= I18n.t('views.show.show_all') %></span>
+      <% end %>
+    </div>
   </div>
 </div>
 
