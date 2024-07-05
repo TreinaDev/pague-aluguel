@@ -19,4 +19,5 @@
   <strong>Não existem Taxas Cadastradas.</strong>
 <% end %>
 <hr>
+<%= link_to 'Cadastrar Nova Taxa', new_condo_base_fee_path(condo_id: @condo.id), class: 'btn btn-primary' %>
 <%= link_to I18n.t('helpers.buttons.back'), condo_path(@condo.id), class: "btn btn-secondary" %>

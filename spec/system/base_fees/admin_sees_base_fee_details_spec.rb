@@ -27,7 +27,7 @@ describe 'admin vê taxa fixa' do
     click_on 'Lista de Condomínios'
     click_on 'Prédio lindo'
     click_on 'Gerenciar Condomínio'
-    click_on 'Exibir Taxas Cadastradas'
+    click_on 'Taxas Condominiais'
     click_on 'Taxa de Condomínio'
 
     expect(page).to have_content 'Taxa de Condomínio'

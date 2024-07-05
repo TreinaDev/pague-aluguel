@@ -24,6 +24,7 @@ describe 'admin cria taxa fixa' do
     click_on 'Lista de Condomínios'
     click_on 'Prédio lindo'
     click_on 'Gerenciar Condomínio'
+    click_on 'Taxas Condominiais'
     click_on 'Cadastrar Nova Taxa'
 
     expect(page).to have_content 'Cadastro de Taxa Condominial'
@@ -190,6 +191,6 @@ describe 'admin cria taxa fixa' do
     visit new_condo_base_fee_path(condo.id)
     click_on 'Voltar'
 
-    expect(current_path).to eq condo_path(condo.id)
+    expect(current_path).to eq condo_base_fees_path(condo_id: condo.id)
   end
 end
