@@ -20,42 +20,41 @@
     </div>
 
     <hr>
-    <div class="px-5">
+
+    <% @values.each do |value| %>
       <div class=" d-flex justify-content-center">
+          <% unit_type = @unit_types.find { |ut| ut.id == value.unit_type_id } %>
+          <% if unit_type.present? %>
+            <span class="text-muted text-lowercase fs-8">
+              <%= I18n.t('activerecord.values.values_price', unit_type: unit_type.description ) %>:
+            </span>
+            <span><%= number_to_currency(value.price, locale: :'pt-BR')%></span>
+          <% end %>
+      </div>
+    <% end %>
+
+    <div class=" d-flex justify-content-center">
+      <span class="text-center">
+        <%= I18n.t('views.show.interest_rate', number: @base_fee.interest_rate) %>
+      </span>
+    </div>
+
+    <div class=" d-flex justify-content-center">
+      <span class="text-center">
+        <%= I18n.t('views.show.late_fine', number: @base_fee.late_fine) %>
+      </span>
+    </div>
+
+    <div class="px-5">
+      <div class=" d-flex justify-content-center align-items-center">
         <span class="text-muted text-lowercase fs-8">
           <%= BaseFee.human_attribute_name(:charge_day) %>:
         </span>
-      </div>
-      <div class=" d-flex justify-content-center">
-        <span><%= I18n.localize(@base_fee.charge_day.to_date)%></span>
+        <span class="fs-7">
+          <%= I18n.localize(@base_fee.charge_day.to_date)%>
+        </span>
       </div>
     </div>
-
-      <% @values.each do |value| %>
-        <div class=" d-flex justify-content-center">
-            <% unit_type = @unit_types.find { |ut| ut.id == value.unit_type_id } %>
-            <% if unit_type.present? %>
-              <span class="text-muted text-lowercase fs-8">
-                <%= I18n.t('activerecord.values.values_price', unit_type: unit_type.description ) %>:
-              </span>
-              <span><%= number_to_currency(value.price, locale: :'pt-BR')%></span>
-            <% end %>
-        </div>
-      <% end %>
-
-
-
-      <div class=" d-flex justify-content-center">
-        <span class="fw-bolder text-center">
-          <%= I18n.t('views.show.interest_rate', number: @base_fee.interest_rate) %>
-        </span>
-      </div>
-
-      <div class=" d-flex justify-content-center">
-        <span class="fw-bolder text-center">
-          <%= I18n.t('views.show.late_fine', number: @base_fee.late_fine) %>
-        </span>
-      </div>
   </div>
 <% end %>
 
