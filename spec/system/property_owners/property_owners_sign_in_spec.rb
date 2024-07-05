@@ -26,11 +26,21 @@ describe 'Proprietário tenta fazer login' do
 
   it 'e preenche os campos de forma inválida' do
     visit root_path
-    click_on 'Login de Proprietário'
-    fill_in 'E-mail', with: 'teste'
-    fill_in 'Senha', with: '123'
-    click_on 'Entrar'
+    within 'nav' do
+      click_on 'Login'
+    end
+    click_on 'Proprietário'
 
-    expect(current_path).to eq new_property_owner_session_path
+    within 'form' do
+      fill_in 'E-mail', with: 'email@fake'
+      fill_in 'Senha', with: '123456'
+      click_on 'Login'
+    end
+
+    within 'nav' do
+      expect(page).not_to have_content 'email@fake'
+      expect(page).not_to have_button 'Logout'
+    end
+    expect(page).to have_button 'Login'
   end
 end
