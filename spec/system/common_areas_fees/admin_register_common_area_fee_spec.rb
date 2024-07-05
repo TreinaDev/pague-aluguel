@@ -17,7 +17,7 @@ describe 'Admin registra uma taxa de área comum' do
     end
     find('#edit-common-area').click
     fill_in 'Taxa de área comum', with: '200,50'
-    click_on 'ATUALIZAR'
+    click_on 'Atualizar'
 
     expect(page).to have_content 'Taxa de área comum'
     expect(page).to have_content 'R$200,50'
@@ -51,7 +51,7 @@ describe 'Admin registra uma taxa de área comum' do
     end
     find('#edit-common-area').click
     fill_in 'Taxa de área comum', with: ''
-    click_on 'ATUALIZAR'
+    click_on 'Atualizar'
 
     expect(page).to have_content 'Verifique os erros abaixo:'
     expect(page).to have_content 'Taxa de área comum não é um número'
@@ -72,7 +72,7 @@ describe 'Admin registra uma taxa de área comum' do
     end
     find('#edit-common-area').click
     fill_in 'Taxa de área comum', with: ''
-    click_on 'CANCELAR'
+    click_on 'Cancelar'
 
     expect(current_path).to eq condo_path(condo.id)
   end

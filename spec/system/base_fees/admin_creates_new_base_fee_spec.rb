@@ -23,10 +23,10 @@ describe 'Admin cria taxa fixa' do
     visit root_path
     click_on 'Prédio lindo'
     within 'div#base-fee' do
-      expect(page).to have_link 'ADICIONAR NOVA'
+      click_on 'Adicionar nova'
     end
 
-    expect(page).to have_content 'Cadastro de Taxa de Prédio lindo'
+    expect(page).to have_content 'CADASTRO DE TAXA DE PRÉDIO LINDO'
     expect(current_path).to eq new_condo_base_fee_path(condos[0].id)
   end
 
@@ -46,19 +46,17 @@ describe 'Admin cria taxa fixa' do
 
     login_as admin, scope: :admin
     visit new_condo_base_fee_path(condo.id)
-    within '.form-base-fees' do
-      fill_in 'Nome', with: 'Taxa de Condomínio'
-      fill_in 'Descrição', with: 'Taxas mensais para manutenção do prédio.'
-      fill_in 'Valor para Apartamento 1 quarto', with: '200,00'
-      fill_in 'Valor para Apartamento 2 quartos', with: '300,00'
-      fill_in 'Valor para Apartamento 3 quartos', with: '500,00'
-      select 'Bimestral', from: 'Recorrência'
-      fill_in 'Data de Lançamento', with: formatted_date.to_s
-      check 'Taxa fixa'
-      fill_in 'Juros ao dia', with: 1
-      fill_in 'Multa por atraso', with: '30,00'
-      click_on 'Salvar'
-    end
+    fill_in 'Nome', with: 'Taxa de Condomínio'
+    fill_in 'Descrição', with: 'Taxas mensais para manutenção do prédio.'
+    fill_in 'Valor para Apartamento 1 quarto', with: '200,00'
+    fill_in 'Valor para Apartamento 2 quartos', with: '300,00'
+    fill_in 'Valor para Apartamento 3 quartos', with: '500,00'
+    select 'Bimestral', from: 'Recorrência'
+    fill_in 'Data de Lançamento', with: formatted_date.to_s
+    check 'Taxa fixa'
+    fill_in 'Juros ao dia', with: 1
+    fill_in 'Multa por atraso', with: '30,00'
+    click_on 'Salvar'
 
     base_fee = BaseFee.last
     expect(page).to have_content 'Taxa cadastrada com sucesso!'
@@ -79,17 +77,15 @@ describe 'Admin cria taxa fixa' do
 
     login_as admin, scope: :admin
     visit new_condo_base_fee_path(condo.id)
-    within '.form-base-fees' do
-      fill_in 'Nome', with: ''
-      fill_in 'Descrição', with: ''
-      fill_in 'Valor para Apartamento 1 quarto', with: ''
-      fill_in 'Valor para Apartamento 2 quartos', with: ''
-      fill_in 'Valor para Apartamento 3 quartos', with: ''
-      fill_in 'Data de Lançamento', with: ''
-      fill_in 'Juros ao dia', with: ''
-      fill_in 'Multa por atraso', with: ''
-      click_on 'Salvar'
-    end
+    fill_in 'Nome', with: ''
+    fill_in 'Descrição', with: ''
+    fill_in 'Valor para Apartamento 1 quarto', with: ''
+    fill_in 'Valor para Apartamento 2 quartos', with: ''
+    fill_in 'Valor para Apartamento 3 quartos', with: ''
+    fill_in 'Data de Lançamento', with: ''
+    fill_in 'Juros ao dia', with: ''
+    fill_in 'Multa por atraso', with: ''
+    click_on 'Salvar'
 
     expect(page).to have_content 'Taxa não cadastrada.'
     expect(page).to have_content 'Verifique os erros abaixo:'
@@ -117,19 +113,17 @@ describe 'Admin cria taxa fixa' do
 
     login_as admin, scope: :admin
     visit new_condo_base_fee_path(condo.id)
-    within '.form-base-fees' do
-      fill_in 'Nome', with: 'Taxa de Condomínio'
-      fill_in 'Descrição', with: 'Taxas mensais para manutenção do prédio.'
-      fill_in 'Valor para Apartamento 1 quarto', with: '200,00'
-      fill_in 'Valor para Apartamento 2 quartos', with: '300,00'
-      fill_in 'Valor para Apartamento 3 quartos', with: '500,00'
-      select 'Semestral', from: 'Recorrência'
-      fill_in 'Data de Lançamento', with: formatted_date.to_s
-      check 'Taxa fixa'
-      fill_in 'Juros ao dia', with: 1
-      fill_in 'Multa por atraso', with: '30,00'
-      click_on 'Salvar'
-    end
+    fill_in 'Nome', with: 'Taxa de Condomínio'
+    fill_in 'Descrição', with: 'Taxas mensais para manutenção do prédio.'
+    fill_in 'Valor para Apartamento 1 quarto', with: '200,00'
+    fill_in 'Valor para Apartamento 2 quartos', with: '300,00'
+    fill_in 'Valor para Apartamento 3 quartos', with: '500,00'
+    select 'Semestral', from: 'Recorrência'
+    fill_in 'Data de Lançamento', with: formatted_date.to_s
+    check 'Taxa fixa'
+    fill_in 'Juros ao dia', with: 1
+    fill_in 'Multa por atraso', with: '30,00'
+    click_on 'Salvar'
 
     expect(page).to have_content 'Taxa não cadastrada.'
     expect(page).to have_content 'Data de Lançamento deve ser futura'
@@ -159,25 +153,23 @@ describe 'Admin cria taxa fixa' do
 
     login_as admin, scope: :admin
     visit new_condo_base_fee_path(condo)
-    within '.form-base-fees' do
-      fill_in 'Nome', with: 'Taxa de Condomínio'
-      fill_in 'Descrição', with: 'Taxas mensais para manutenção do prédio.'
-      fill_in 'Valor para Apartamento 1 quarto', with: '0'
-      fill_in 'Valor para Apartamento 2 quartos', with: '-200,00'
-      fill_in 'Valor para Apartamento 3 quartos', with: '500,00'
-      select 'Semestral', from: 'Recorrência'
-      fill_in 'Data de Lançamento', with: formatted_date.to_s
-      check 'Taxa fixa'
-      fill_in 'Juros ao dia', with: 1
-      fill_in 'Multa por atraso', with: '30,00'
-      click_on 'Salvar'
-    end
+    fill_in 'Nome', with: 'Taxa de Condomínio'
+    fill_in 'Descrição', with: 'Taxas mensais para manutenção do prédio.'
+    fill_in 'Valor para Apartamento 1 quarto', with: '0'
+    fill_in 'Valor para Apartamento 2 quartos', with: '-200,00'
+    fill_in 'Valor para Apartamento 3 quartos', with: '500,00'
+    select 'Semestral', from: 'Recorrência'
+    fill_in 'Data de Lançamento', with: formatted_date.to_s
+    check 'Taxa fixa'
+    fill_in 'Juros ao dia', with: 1
+    fill_in 'Multa por atraso', with: '30,00'
+    click_on 'Salvar'
 
     expect(page).to have_content 'Taxa não cadastrada.'
     expect(page).to have_content 'Valor deve ser maior que 0', count: 2
   end
 
-  it 'e retorna para home page' do
+  it 'e retorna para o dashboard do condominio' do
     admin = create(:admin)
     condo = Condo.new(id: 1, name: 'Prédio lindo', city: 'Cidade maravilhosa')
     unit_types = []
@@ -186,8 +178,11 @@ describe 'Admin cria taxa fixa' do
     allow(UnitType).to receive(:find_all_by_condo).and_return(unit_types)
 
     login_as admin, scope: :admin
-    visit new_condo_base_fee_path(condo.id)
-    click_on 'Voltar'
+    visit condo_path(condo.id)
+    within 'div#base-fee' do
+      click_on 'Adicionar nova'
+    end
+    find('#arrow-left').click
 
     expect(current_path).to eq condo_path(condo.id)
   end

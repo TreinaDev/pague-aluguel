@@ -27,10 +27,10 @@ describe 'admin vê taxa fixa' do
 
     login_as admin, scope: :admin
     visit root_path
-    click_on 'Lista de Condomínios'
     click_on 'Prédio lindo'
-    click_on 'Gerenciar Condomínio'
-    click_on 'Exibir Taxas Cadastradas'
+    within 'div#base-fee' do
+      click_on 'Mostrar todos'
+    end
     click_on 'Taxa de Condomínio'
 
     expect(page).to have_content 'Taxa de Condomínio'
@@ -103,8 +103,13 @@ describe 'admin vê taxa fixa' do
     create(:value, price: 200, unit_type_id: 1, base_fee:)
 
     login_as admin, scope: :admin
-    visit condo_base_fee_path(condo.id, base_fee)
-    click_on 'Voltar'
+
+    visit condo_path(condo.id)
+    within 'div#base-fee' do
+      click_on 'Mostrar todos'
+    end
+    click_on 'Taxa'
+    find('#arrow-left').click
 
     expect(current_path).to eq condo_base_fees_path(condo.id)
   end

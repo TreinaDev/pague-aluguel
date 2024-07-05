@@ -152,12 +152,12 @@ pt-BR:
     select:
       prompt: Por favor selecione
     submit:
-      create: CRIAR
-      submit: SALVAR
-      update: ATUALIZAR
-      register: REGISTRAR
-      cancel: CANCELAR
-      add: ADICIONAR NOVA
+      create: Criar
+      submit: Salvar
+      update: Atualizar
+      register: Registrar
+      cancel: Cancelar
+      add: Adicionar nova
   number:
     currency:
       format:

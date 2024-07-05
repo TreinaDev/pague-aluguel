@@ -14,8 +14,10 @@ describe 'Admin vê área comum' do
 
     expect(page).to have_content 'TMNT'
     expect(page).to have_content 'Teenage Mutant Ninja Turtles'
-    expect(page).to have_content 'capacidade máxima 40 pessoas'
-    expect(page).to have_content 'regras de uso Não lutar no salão'
+    expect(page).to have_content 'capacidade máxima'
+    expect(page).to have_content '40 pessoas'
+    expect(page).to have_content 'regras de uso'
+    expect(page).to have_content 'Não lutar no salão'
     expect(page).to have_content 'Taxa de área comum'
     expect(page).to have_content 'R$200,00'
   end
@@ -46,11 +48,11 @@ describe 'Admin vê área comum' do
     end
     find('#edit-common-area').click
     fill_in 'Taxa de área comum', with: '200,00'
-    click_on 'ATUALIZAR'
+    click_on 'Atualizar'
     travel 1.month
     find('#edit-common-area').click
     fill_in 'Taxa de área comum', with: '300,00'
-    click_on 'ATUALIZAR'
+    click_on 'Atualizar'
     click_on 'Mostrar histórico de taxas'
 
     expect(page).to have_content 'ikki.phoenix@seiya.com'

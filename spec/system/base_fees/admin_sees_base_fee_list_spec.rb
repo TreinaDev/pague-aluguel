@@ -30,7 +30,7 @@ describe 'Admin vê lista de taxas cadastradas' do
     expect(page).to have_link 'Taxa de Condomínio'
     expect(page).to have_link 'Taxa de Manutenção'
     expect(page).to have_link 'Taxa de Pintura'
-    expect(page).not_to have_content 'Não existem Taxas Cadastradas.'
+    expect(page).not_to have_content 'Não existem taxas cadastradas.'
   end
 
   it 'e não tem taxas cadastradas' do
@@ -42,7 +42,7 @@ describe 'Admin vê lista de taxas cadastradas' do
 
     visit condo_base_fees_path(condo.id)
 
-    expect(page).to have_content 'Não existem Taxas Cadastradas.'
+    expect(page).to have_content 'Não existem taxas cadastradas.'
   end
 
   it 'e retorna para a tela de condomínio' do
@@ -52,8 +52,11 @@ describe 'Admin vê lista de taxas cadastradas' do
 
     login_as admin, scope: :admin
 
-    visit condo_base_fees_path(condo.id)
-    click_on 'Voltar'
+    visit condo_path(condo.id)
+    within 'div#base-fee' do
+      click_on 'Mostrar todos'
+    end
+    find('#arrow-left').click
 
     expect(current_path).to eq condo_path(condo.id)
   end

@@ -17,7 +17,7 @@ describe 'admin registra outro admin' do
     fill_in 'Sobrenome', with: 'Almeida'
     cpf.each_char { |char| find(:css, "input[id$='admin_document_number']").send_keys(char) }
     attach_file 'Insira sua foto de perfil', Rails.root.join('spec/support/images/reuri.jpeg')
-    click_on 'REGISTRAR'
+    click_on 'Registrar'
 
     # expect(page).to have_content 'Administrador registrado com sucesso'
     expect(page).to have_content 'Bem Vindo! Você se registrou com sucesso!'
@@ -36,7 +36,7 @@ describe 'admin registra outro admin' do
     fill_in 'E-mail', with: 'another@mail.com'
     fill_in 'Senha', with: 'example123456'
     fill_in 'Confirme a senha', with: 'example123456'
-    click_on 'REGISTRAR'
+    click_on 'Registrar'
 
     expect(page).to have_content 'Nome não pode ficar em branco'
     expect(page).to have_content 'Sobrenome não pode ficar em branco'
