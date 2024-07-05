@@ -42,7 +42,7 @@ pt-BR:
     new:
       create_fee: "Cadastro de Taxa de %{condo}"
       label_price: "Valor para %{name}"
-      create_shared_fee: "Taxa Compartilhada"
+      create_shared_fee: "Conta Compartilhada"
     show:
       monthly: Mensal
       biweekly: Quinzenal
