@@ -1,6 +1,6 @@
 require 'rails_helper'
 
-describe 'admin cria taxa fixa' do
+describe 'admin cria taxa condominial' do
   it 'e deve estar logado' do
     condo = Condo.new(id: 1, name: 'Prédio lindo', city: 'Cidade maravilhosa')
 
@@ -32,7 +32,24 @@ describe 'admin cria taxa fixa' do
     expect(current_path).to eq new_condo_base_fee_path(condos[0].id)
   end
 
-  it 'com sucesso' do
+  it 'e campo de parcelas não aparece automaticamente' do
+    admin = create(:admin)
+    condos = []
+    condos << Condo.new(id: 1, name: 'Prédio lindo', city: 'Cidade maravilhosa')
+    unit_types = []
+    unit_types << UnitType.new(id: 1, area: 1000, description: 'Unit Type', ideal_fraction: 222.2, condo_id: 1)
+    allow(Condo).to receive(:all).and_return(condos)
+    allow(Condo).to receive(:find).and_return(condos[0])
+    allow(UnitType).to receive(:find_all_by_condo).and_return(unit_types)
+
+    login_as admin, scope: :admin
+    visit new_condo_base_fee_path(condos[0].id)
+
+    expect(page).to have_content 'Cadastro de Taxa Condominial'
+    expect(page).not_to have_field 'Número de Parcelas'
+  end
+
+  it 'fixa com sucesso' do
     admin = create(:admin)
     condo = Condo.new(id: 1, name: 'Prédio lindo', city: 'Cidade maravilhosa')
     unit_types = []
@@ -56,7 +73,42 @@ describe 'admin cria taxa fixa' do
       fill_in 'Valor para Apartamento 3 quartos', with: '500,00'
       select 'Bimestral', from: 'Recorrência'
       fill_in 'Data de Lançamento', with: formatted_date.to_s
-      # check 'Taxa limitada'
+      fill_in 'Juros ao dia', with: 1
+      fill_in 'Multa por atraso', with: '30,00'
+      click_on 'Salvar'
+    end
+
+    base_fee = BaseFee.last
+    expect(page).to have_content 'Taxa cadastrada com sucesso!'
+    expect(current_path).to eq condo_base_fee_path(condo.id, base_fee)
+  end
+
+  it 'limitada com sucesso' do
+    admin = create(:admin)
+    condo = Condo.new(id: 1, name: 'Prédio lindo', city: 'Cidade maravilhosa')
+    unit_types = []
+    unit_types << UnitType.new(id: 1, area: 30, description: 'Apartamento 1 quarto', ideal_fraction: 222.2, condo_id: 1)
+    unit_types << UnitType.new(id: 2, area: 45, description: 'Apartamento 2 quartos', ideal_fraction: 222.2,
+                               condo_id: 1)
+    unit_types << UnitType.new(id: 3, area: 60, description: 'Apartamento 3 quartos', ideal_fraction: 222.2,
+                               condo_id: 1)
+    allow(Condo).to receive(:find).and_return(condo)
+    allow(UnitType).to receive(:find_all_by_condo).and_return(unit_types)
+
+    formatted_date = 10.days.from_now.to_date
+
+    login_as admin, scope: :admin
+    visit new_condo_base_fee_path(condo.id)
+    within '.form-base-fees' do
+      fill_in 'Nome', with: 'Taxa de Condomínio'
+      fill_in 'Descrição', with: 'Taxas mensais para manutenção do prédio.'
+      fill_in 'Valor para Apartamento 1 quarto', with: '200,00'
+      fill_in 'Valor para Apartamento 2 quartos', with: '300,00'
+      fill_in 'Valor para Apartamento 3 quartos', with: '500,00'
+      select 'Bimestral', from: 'Recorrência'
+      fill_in 'Data de Lançamento', with: formatted_date.to_s
+      check 'Taxa limitada'
+      fill_in 'Número de Parcelas', with: 6
       fill_in 'Juros ao dia', with: 1
       fill_in 'Multa por atraso', with: '30,00'
       click_on 'Salvar'

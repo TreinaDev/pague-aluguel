@@ -18,8 +18,9 @@ pt-BR:
         late_fine: Multa por atraso
         late_fine_cents: Multa por atraso
         charge_day: Data de Lançamento
-        recurrence: Recorrência
         limited: Taxa limitada
+        installments: Número de Parcelas
+        recurrence: Recorrência
         enum_recurrence:
           monthly: Mensal
           biweekly: Quinzenal
@@ -55,6 +56,9 @@ pt-BR:
       semi_annual: Semestral
       yearly: Anual
       interest_rate: "Juros de %{number}% ao dia"
+      installments:
+        one: "%{count} x Parcela"
+        other: "%{count} x Parcelas"
       late_fine: "Multa de R$%{number} por atraso"
       late_fine_cents: "Multa de R$%{number} por atraso"
 

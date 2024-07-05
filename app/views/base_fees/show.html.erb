@@ -12,7 +12,7 @@
         <%= I18n.t("activerecord.attributes.base_fee.enum_recurrence.#{@base_fee.recurrence}") %>
       </div>
 
-            <div class="row d-flex flex-column">
+      <div class="row d-flex flex-column">
         <strong><%= BaseFee.human_attribute_name(:description) %>:</strong>
         <%= @base_fee.description %>
       </div>
@@ -30,6 +30,12 @@
         </div>
       <% end %>
 
+      <% if @base_fee.installments.present? %>
+        <div class="row d-flex flex-column">
+          <strong><%= I18n.t('views.show.installments', count: @base_fee.installments) %></strong>
+        </div>
+      <% end %>
+
       <div class="row d-flex flex-column">
         <strong><%= I18n.t('views.show.interest_rate', number: @base_fee.interest_rate) %></strong>
       </div>
@@ -42,4 +48,3 @@
   <hr>
   <%= link_to I18n.t('helpers.buttons.back'), condo_base_fees_path(@condo.id), class: "btn btn-secondary" %>
 </div>
-

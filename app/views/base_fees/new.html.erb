@@ -53,6 +53,11 @@
         <%= f.label :limited %>
       </div>
 
+      <div class="form-group" id="installments-field">
+        <%= f.number_field :installments %>
+        <%= f.label :installments %>
+      </div>
+
       <div class="form-group">
         <%= f.label :interest_rate %>
         <%= f.number_field :interest_rate, class: "form-control" %>
@@ -72,3 +77,21 @@
   <hr>
   <%= link_to I18n.t('helpers.buttons.back'), condo_base_fees_path(condo_id: @condo.id), class: "btn btn-secondary" %>
 </div>
+
+<script>
+  document.addEventListener('DOMContentLoaded', function() {
+    const limitedCheckbox = document.getElementById('base_fee_limited');
+    const installmentsField = document.getElementById('installments-field');
+
+    function toggleInstallmentsField() {
+        if (limitedCheckbox.checked) {
+          installmentsField.style.display = 'block';
+        } else {
+          installmentsField.style.display = 'none';
+        }
+      }
+
+    limitedCheckbox.addEventListener('change', toggleInstallmentsField);
+    toggleInstallmentsField();
+  });
+</script>
