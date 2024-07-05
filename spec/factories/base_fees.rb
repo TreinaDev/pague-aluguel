@@ -8,5 +8,6 @@ FactoryBot.define do
     charge_day { 10.days.from_now }
     recurrence { :monthly }
     condo_id { nil }
+    installments { nil }
   end
 end

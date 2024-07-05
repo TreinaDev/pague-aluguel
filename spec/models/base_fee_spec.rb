@@ -1,8 +1,8 @@
 require 'rails_helper'
 
 RSpec.describe BaseFee, type: :model do
-  describe 'válido?' do
-    context 'presença' do
+  describe '#valid?' do
+    context 'presence' do
       it 'valida presença' do
         base_fee = build(:base_fee, name: '', description: '', interest_rate: '', late_fine: '', charge_day: '')
 
@@ -25,7 +25,7 @@ RSpec.describe BaseFee, type: :model do
       end
     end
 
-    context 'numericalidade' do
+    context 'numericality' do
       it 'multa deve ser um número' do
         base_fee = build(:base_fee, late_fine: 'multinha')
 
@@ -56,6 +56,40 @@ RSpec.describe BaseFee, type: :model do
         expect(base_fee).to be_valid
         expect(base_fee.errors).not_to include(:interest_rate)
         expect(base_fee.errors[:interest_rate]).not_to include('deve ser maior ou igual a 0')
+      end
+    end
+
+    context 'installments' do
+      it 'deve ficar em branco para taxas fixas' do
+        base_fee = build(:base_fee, limited: false, installments: 10)
+
+        expect(base_fee).not_to be_valid
+        expect(base_fee.errors).to include(:installments)
+        expect(base_fee.errors[:installments]).to include('não se aplica a Taxas Fixas')
+      end
+
+      it 'não pode ficar em branco para taxas limitadas' do
+        base_fee = build(:base_fee, limited: true, installments: '')
+
+        expect(base_fee).not_to be_valid
+        expect(base_fee.errors).to include(:installments)
+        expect(base_fee.errors[:installments]).to include('devem estar presentes para Taxas Limitadas')
+      end
+
+      it 'deve ser maior que 0' do
+        base_fee = build(:base_fee, limited: true, installments: -10)
+
+        expect(base_fee).not_to be_valid
+        expect(base_fee.errors).to include(:installments)
+        expect(base_fee.errors[:installments]).to include('deve ser maior que 0')
+      end
+
+      it 'deve ser um número' do
+        base_fee = build(:base_fee, limited: true, installments: 'Dez parcelas')
+
+        expect(base_fee).not_to be_valid
+        expect(base_fee.errors).to include(:installments)
+        expect(base_fee.errors[:installments]).to include('não é um número')
       end
     end
   end

@@ -34,6 +34,9 @@ pt-BR:
           attributes:
             charge_day:
               future_date: deve ser futura
+            installments:
+              not_limited_fee: não se aplica a Taxas Fixas
+              is_limited_fee: devem estar presentes para Taxas Limitadas
 
   base_fee:
     monthly: Mensal

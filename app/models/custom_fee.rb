@@ -1,2 +1,0 @@
-class CustomFee < ApplicationRecord
-end

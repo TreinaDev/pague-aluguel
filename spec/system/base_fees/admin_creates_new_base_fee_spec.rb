@@ -56,7 +56,7 @@ describe 'admin cria taxa fixa' do
       fill_in 'Valor para Apartamento 3 quartos', with: '500,00'
       select 'Bimestral', from: 'Recorrência'
       fill_in 'Data de Lançamento', with: formatted_date.to_s
-      check 'Taxa limitada'
+      # check 'Taxa limitada'
       fill_in 'Juros ao dia', with: 1
       fill_in 'Multa por atraso', with: '30,00'
       click_on 'Salvar'
