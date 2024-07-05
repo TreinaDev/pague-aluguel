@@ -4,7 +4,7 @@
     <span class="text-capitalize"><%= CommonArea.model_name.human(count: 2) %></span>
   </div>
 
-  <div class="d-flex justify-content-center gap-2">
+  <div class="d-flex justify-content-center gap-2 flex-wrap">
     <% if @common_areas.any? %>
       <% @first_common_areas.each do |common_area| %>
         <%= link_to condo_common_area_path(@condo.id, common_area.id), class: "text-decoration-none", data: { turbo_frame: "modal" } do %>

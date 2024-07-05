@@ -14,7 +14,7 @@
         <%= profile_avatar(current_admin) %>
       </div>
 
-      <div>
+      <div class="overflow-x-hidden">
         <span class="fs-3"><%= capitalized_name(current_admin) %></span>
         <span class="d-block"><%= current_admin.email %></span>
         <span class="d-block" data-controller="document-number"><%= current_admin.document_number %></span>

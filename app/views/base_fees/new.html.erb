@@ -21,23 +21,23 @@
   <%= form_with model: [@base_fee], url: condo_base_fees_path(@condo.id), local: true do |f| %>
     <%= f.hidden_field :condo_id, value: @condo.id %>
 
-    <div class="form-floating mb-2 w-50 mx-auto mt-4">
+    <div class="form-floating mb-3 w-50 mx-auto mt-4">
       <%= f.text_field :name, class: "form-control" %>
       <%= f.label :name %>
     </div>
 
-    <div class="form-floating mb-2 w-50 mx-auto">
+    <div class="form-floating mb-3 w-50 mx-auto">
       <%= f.text_field :description, class: "form-control" %>
       <%= f.label :description %>
     </div>
 
-    <div class="form-floating mb-2 w-50 mx-auto">
+    <div class="form-floating mb-3 w-50 mx-auto">
       <%= f.select :recurrence, options_for_select(BaseFee.recurrences.map { |key, _| [I18n.t("base_fee.#{key}"), key] }, @base_fee.recurrence), {}, class: "form-control" %>
       <%= f.label :recurrence %>
     </div>
 
     <%= f.fields_for :values do |values_form| %>
-      <div class="form-floating mb-2 w-50 mx-auto">
+      <div class="form-floating mb-3 w-50 mx-auto">
         <% unit_type = @unit_types.find { |ut| ut.id == values_form.object.unit_type_id } %>
         <%= values_form.text_field :price, placeholder: '0,00', class: "form-control" %>
         <%= values_form.label :price, I18n.t('activerecord.values.values_price', unit_type: unit_type.description ) %>
@@ -45,22 +45,22 @@
       </div>
     <% end %>
 
-    <div class="form-floating mb-2 w-50 mx-auto">
+    <div class="form-floating mb-3 w-50 mx-auto">
       <%= f.date_field :charge_day, class: "form-control" %>
       <%= f.label :charge_day %>
     </div>
 
-    <div class="form-check form-switch mb-2 w-50 mx-auto">
+    <div class="form-check form-switch mb-3 w-50 mx-auto">
       <%= f.check_box :fixed, class: "form-check-input" %>
       <%= f.label :fixed, class: "form-check-label" %>
     </div>
 
-    <div class="form-floating mb-2 w-50 mx-auto">
+    <div class="form-floating mb-3 w-50 mx-auto">
       <%= f.number_field :interest_rate, class: "form-control" %>
       <%= f.label :interest_rate %>
     </div>
 
-    <div class="form-floating mb-2 w-50 mx-auto">
+    <div class="form-floating mb-3 w-50 mx-auto">
       <%= f.text_field :late_fine, placeholder: '0,00', class: "form-control" %>
       <%= f.label :late_fine %>
     </div>
