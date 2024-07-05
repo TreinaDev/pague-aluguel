@@ -1,7 +1,7 @@
 <%= form_with url: search_path, method: :get do |f| %>
   <div class="d-flex justify-content-center mb-4">
     <%= f.text_field :query, class: 'form-control w-40 me-3', placeholder: 'Busque um condomínio' %>
-    <%= f.submit 'Buscar', class: "btn btn-primary" %>
+    <%= f.submit 'Buscar', class: "btn btn-primary text-uppercase fs-7 ls-3" %>
   </div>
 <% end %>
 
@@ -12,8 +12,8 @@
     <% elsif  @query_results.empty? %>
      <span><%= I18n.t('views.query.no_result') %></span>
     <% else %>
-     <%= "Resultados para: #{@query}" %>
-      <div class="d-flex justify-content-center gap-2 mb-2">
+      <span><%= "Resultados para #{@query}" %></span>
+      <div class="d-flex justify-content-center mt-2 gap-2 mb-2 flex-wrap">
         <% @query_results.each do |condo| %>
           <%= link_to condo_path(condo.id), class: "text-decoration-none" do %>
             <div class="card hover-strong shadow-sm" style="width: 18rem; height: 7rem;">
