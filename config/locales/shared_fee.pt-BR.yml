@@ -22,3 +22,5 @@ pt-BR:
     index:
       no_fees: Não foram encontradas contas compartilhadas.
       status_shared_fee: Situação
+    new:
+      create_shared_fee: "Cadastro de Conta Compartilhada"
