@@ -19,12 +19,9 @@
   </span>
 
   <%= form_with model: @shared_fee, local: true do |f| %>
-    <div class="form-floating mb-3 w-50 mx-auto mt-4">
-      <%= f.select :condo_id, options_for_select(@condos), { include_blank: true }, class: "form-select" %>
-      <%= f.label :condo_id %>
-    </div>
+    <%= f.hidden_field :condo_id, value: @condo.id %>
 
-    <div class="form-floating mb-3 w-50 mx-auto">
+    <div class="form-floating mb-3 w-50 mx-auto mt-4">
       <%= f.text_field :description, class: "form-control" %>
       <%= f.label :description %>
     </div>
