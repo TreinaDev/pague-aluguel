@@ -40,10 +40,10 @@ describe 'Administrador acessa página do condomínio' do
     click_on 'Edifício Monte Verde'
 
     within 'div#shared-fee' do
-      expect(page).to have_link 'ADICIONAR NOVA'
+      expect(page).to have_link 'Adicionar nova'
     end
     within 'div#base-fee' do
-      expect(page).to have_link 'ADICIONAR NOVA'
+      expect(page).to have_link 'Adicionar nova'
     end
     within 'div#common-areas' do
       expect(page).to have_link 'Salão de Festas'

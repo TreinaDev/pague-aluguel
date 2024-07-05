@@ -20,8 +20,9 @@ describe 'Admin cancela uma conta compartilhada' do
 
     login_as admin, scope: :admin
     visit condo_path(condos.first.id)
-    click_on 'Gerenciar Condomínio'
-    click_on 'Contas Compartilhadas'
+    within 'div#shared-fee' do
+      click_on 'Ver todas'
+    end
     click_on 'Conta de Luz'
     click_on 'Cancelar'
     bill = SharedFee.last
@@ -52,8 +53,9 @@ describe 'Admin cancela uma conta compartilhada' do
 
     login_as admin, scope: :admin
     visit condo_path(condos.first.id)
-    click_on 'Gerenciar Condomínio'
-    click_on 'Contas Compartilhadas'
+    within 'div#shared-fee' do
+      click_on 'Ver todas'
+    end
     click_on 'Conta de Luz'
     click_on 'Cancelar'
     click_on 'Conta de Luz'
@@ -87,8 +89,9 @@ describe 'Admin cancela uma conta compartilhada' do
 
     login_as admin, scope: :admin
     visit condo_path(condos.first.id)
-    click_on 'Gerenciar Condomínio'
-    click_on 'Contas Compartilhadas'
+    within 'div#shared-fee' do
+      click_on 'Ver todas'
+    end
     click_on 'Conta de Luz'
     click_on 'Cancelar'
     electric_bill.reload

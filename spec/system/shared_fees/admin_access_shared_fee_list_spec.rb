@@ -22,21 +22,20 @@ describe 'Admin tenta acessar lista de contas compartilhadas' do
 
     login_as admin, scope: :admin
     visit root_path
-    click_on 'Lista de Condomínios'
     click_on 'Edifício Monte Verde'
-    click_on 'Gerenciar Condomínio'
-    click_on 'Contas Compartilhadas'
+    within 'div#shared-fee' do
+      click_on 'Ver todas'
+    end
 
-    expect(page).to have_content('Conta de Luz')
-    expect(page).to have_content('R$10.000,00')
-    expect(page).to have_content(I18n.l(10.days.from_now.to_date).to_s)
-    expect(page).to have_content('Conta de Água')
-    expect(page).to have_content('R$5.000,00')
-    expect(page).to have_content(I18n.l(15.days.from_now.to_date).to_s)
-    expect(page).to have_link('Lançar Conta Compartilhada')
-    expect(page).not_to have_content('Conta de Carro Pipa')
-    expect(page).not_to have_content('R$25.000,00')
-    expect(page).not_to have_content(I18n.l(5.days.from_now.to_date).to_s)
+    expect(page).to have_content 'Conta de Luz'
+    expect(page).to have_content 'R$10.000,00'
+    expect(page).to have_content I18n.l(10.days.from_now.to_date).to_s
+    expect(page).to have_content 'Conta de Água'
+    expect(page).to have_content 'R$5.000,00'
+    expect(page).to have_content I18n.l(15.days.from_now.to_date).to_s
+    expect(page).not_to have_content 'Conta de Carro Pipa'
+    expect(page).not_to have_content 'R$25.000,00'
+    expect(page).not_to have_content I18n.l(5.days.from_now.to_date).to_s
   end
 
   it 'e retorna para a tela de condomínio' do
@@ -58,8 +57,11 @@ describe 'Admin tenta acessar lista de contas compartilhadas' do
                       total_value: 25_000, condo_id: condos.first.id)
 
     login_as admin, scope: :admin
-    visit shared_fees_path(condo_id: condos.first.id)
-    click_on 'Voltar'
+    visit condo_path(condos.first.id)
+    within 'div#shared-fee' do
+      click_on 'Ver todas'
+    end
+    find('#arrow-left').click
 
     expect(current_path).to eq condo_path(condos.first.id)
   end
@@ -85,16 +87,15 @@ describe 'Admin tenta acessar lista de contas compartilhadas' do
                       total_value: 25_000, condo_id: condos.last.id)
 
     login_as admin, scope: :admin
-    visit root_path
-    click_on 'Lista de Condomínios'
-    click_on 'Edifício Monte Verde'
-    click_on 'Gerenciar Condomínio'
-    click_on 'Contas Compartilhadas'
+    visit condo_path(condos.first.id)
+    within 'div#shared-fee' do
+      click_on 'Ver todas'
+    end
     click_on 'Conta de Água'
 
-    expect(current_path).to eq shared_fee_path(conta_de_agua.id)
     expect(page).to have_content 'Conta de Água'
     expect(page).to have_content 'R$5.000,00'
+    expect(current_path).to eq shared_fee_path(conta_de_agua.id)
   end
 
   it 'e acessa a página de uma conta compartilhada e volta para listagem' do
@@ -140,14 +141,9 @@ describe 'Admin tenta acessar lista de contas compartilhadas' do
     allow(UnitType).to receive(:find_all_by_condo).and_return(unit_types)
 
     login_as admin, scope: :admin
-    visit root_path
-    click_on 'Lista de Condomínios'
-    click_on 'Edifício Monte Verde'
-    click_on 'Gerenciar Condomínio'
-    click_on 'Contas Compartilhadas'
+    visit shared_fees_path(condo_id: condos.first.id)
 
-    expect(page).to have_content('Não foram encontradas contas compartilhadas.')
-    expect(page).to have_link('Lançar Conta Compartilhada')
+    expect(page).to have_content 'Não foram encontradas contas compartilhadas.'
     expect(current_path).to eq shared_fees_path
   end
 end

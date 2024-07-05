@@ -20,8 +20,9 @@ describe 'Admin lança uma conta compartilhada' do
 
     login_as admin, scope: :admin
     visit root_path
-    within('nav') do
-      click_on 'Lançar Conta Compartilhada'
+    click_on 'Condo Test'
+    within 'div#shared-fee' do
+      click_on 'Adicionar nova'
     end
     select 'Condo Test', from: 'Condomínio'
     fill_in 'Descrição', with: 'Conta de Luz'
@@ -29,13 +30,13 @@ describe 'Admin lança uma conta compartilhada' do
     fill_in 'Valor Total', with: 10_000
     click_on 'Registrar'
 
-    expect(page).to have_content('Conta Compartilhada lançada com sucesso!')
-    expect(current_path).to eq(shared_fee_path(SharedFee.last))
-    expect(page).to have_content('Condomínio: Condo Test')
-    expect(page).to have_content('Descrição: Conta de Luz')
-    expect(page).to have_content("Data de Emissão: #{I18n.l(10.days.from_now.to_date)}")
-    expect(page).to have_content('Valor Total: R$10.000,00')
-    expect(page).to have_content('Situação: Ativa')
+    expect(page).to have_content 'Conta Compartilhada lançada com sucesso!'
+    expect(current_path).to eq shared_fee_path(SharedFee.last)
+    expect(page).to have_content 'Condomínio: Condo Test'
+    expect(page).to have_content 'Descrição: Conta de Luz'
+    expect(page).to have_content "Data de Emissão: #{I18n.l(10.days.from_now.to_date)}"
+    expect(page).to have_content 'Valor Total: R$10.000,00'
+    expect(page).to have_content 'Situação: Ativa'
   end
 
   it 'e não está autenticado' do
@@ -66,19 +67,20 @@ describe 'Admin lança uma conta compartilhada' do
 
     login_as admin, scope: :admin
     visit root_path
-    within('nav') do
-      click_on 'Lançar Conta Compartilhada'
+    click_on 'Condo Test'
+    within 'div#shared-fee' do
+      click_on 'Adicionar nova'
     end
     click_on 'Registrar'
 
-    expect(current_path).to eq(new_shared_fee_path)
-    expect(page).to have_content('Não foi possível lançar a conta compartilhada.')
-    expect(page).to have_content('Descrição não pode ficar em branco')
-    expect(page).to have_content('Data de Emissão não pode ficar em branco')
-    expect(page).to have_content('Valor Total não é um número')
+    expect(current_path).to eq new_shared_fee_path
+    expect(page).to have_content 'Não foi possível lançar a conta compartilhada.'
+    expect(page).to have_content 'Descrição não pode ficar em branco'
+    expect(page).to have_content 'Data de Emissão não pode ficar em branco'
+    expect(page).to have_content 'Valor Total não é um número'
   end
 
-  it 'e clica em Voltar para a listagem' do
+  it 'e retorna para a tela de condomínio' do
     admin = FactoryBot.create(:admin, first_name: 'Fulano', last_name: 'Da Costa')
     condos = []
     condos << Condo.new(id: 1, name: 'Condo Test', city: 'City Test')
@@ -86,11 +88,14 @@ describe 'Admin lança uma conta compartilhada' do
     allow(Condo).to receive(:find).and_return(condos.first)
 
     login_as admin, scope: :admin
-    visit shared_fees_path(condo_id: condos.first.id)
-    click_on 'Lançar Conta Compartilhada'
-    click_on 'Voltar'
+    visit root_path
+    click_on 'Condo Test'
+    within 'div#shared-fee' do
+      click_on 'Adicionar nova'
+    end
+    find('#arrow-left').click
 
-    expect(current_path).to eq shared_fees_path
+    expect(current_path).to eq condo_path(condos.first.id)
   end
 
   it 'e lança mais de uma conta' do
@@ -118,8 +123,9 @@ describe 'Admin lança uma conta compartilhada' do
 
     login_as admin, scope: :admin
     visit root_path
-    within('nav') do
-      click_on 'Lançar Conta Compartilhada'
+    click_on 'Condo Test'
+    within 'div#shared-fee' do
+      click_on 'Adicionar nova'
     end
     select 'Condo Test', from: 'Condomínio'
     fill_in 'Descrição', with: 'Conta de Água'

@@ -54,7 +54,7 @@ describe 'Admin vê lista de taxas cadastradas' do
 
     visit condo_path(condo.id)
     within 'div#base-fee' do
-      click_on 'Mostrar todos'
+      click_on 'Ver todas'
     end
     find('#arrow-left').click
 

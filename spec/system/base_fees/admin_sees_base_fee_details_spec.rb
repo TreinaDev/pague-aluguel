@@ -29,7 +29,7 @@ describe 'admin vê taxa fixa' do
     visit root_path
     click_on 'Prédio lindo'
     within 'div#base-fee' do
-      click_on 'Mostrar todos'
+      click_on 'Ver todas'
     end
     click_on 'Taxa de Condomínio'
 
@@ -106,7 +106,7 @@ describe 'admin vê taxa fixa' do
 
     visit condo_path(condo.id)
     within 'div#base-fee' do
-      click_on 'Mostrar todos'
+      click_on 'Ver todas'
     end
     click_on 'Taxa'
     find('#arrow-left').click

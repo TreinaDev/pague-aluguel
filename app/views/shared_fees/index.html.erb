@@ -1,6 +1,6 @@
 <div class="mt-3 card bg-off-white rounded-0 border-0 mb-4">
   <%= link_to :back, class: "ms-3 mt-3" do %>
-    <%= image_tag "arrow-left", size: "25" %>
+    <%= image_tag "arrow-left", size: "25", id: "arrow-left" %>
   <% end %>
   <span class="fs-4 mx-auto mt-3 text-uppercase">
     <%= SharedFee.model_name.human(count: 2) %>
@@ -22,9 +22,9 @@
             <span class="text-muted fs-7 text-lowercase"><%= SharedFee.human_attribute_name(:total_value) %></span>
             <span><%= shared_fee.total_value.format %></span>
             <% if shared_fee.active? %>
-              <span class="text-success"><%= I18n.t("activerecord.attributes.shared_fee.status.#{shared_fee.status}") %></span>
+              <span class="text-success"><%= I18n.t("shared_fee.statuses.#{shared_fee.status}") %></span>
             <% else %>
-              <span class="text-danger"><%= I18n.t("activerecord.attributes.shared_fee.status.#{shared_fee.status}") %></span>
+              <span class="text-danger"><%= I18n.t("shared_fee.statuses.#{shared_fee.status}") %></span>
             <% end %>
           <% end %>
         <% end %>

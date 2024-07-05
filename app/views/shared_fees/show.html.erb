@@ -1,3 +1,6 @@
+<%= link_to :back, class: "ms-3 mt-3" do %>
+  <%= image_tag "arrow-left", size: "25", id: 'arrow-left' %>
+<% end %>
 <div class="container">
   <h1><%= SharedFee.model_name.human %><%= @shared_fee.id %></h1>
 
@@ -27,15 +30,15 @@
 
   <div class="row">
     <div class="col-md-6">
-      <strong><%= SharedFee.human_attribute_name(:status) %>:</strong> 
+      <strong><%= SharedFee.human_attribute_name(:status) %>:</strong>
       <% if @shared_fee.active? %>
-        <strong class="text-success"><%= I18n.t("activerecord.attributes.shared_fee.enum_status.#{@shared_fee.status}") %></strong>
+        <strong class="text-success"><%= I18n.t("shared_fee.statuses.#{@shared_fee.status}") %></strong>
       <% else %>
-        <strong class="text-danger"><%= I18n.t("activerecord.attributes.shared_fee.enum_status.#{@shared_fee.status}") %></strong>
+        <strong class="text-danger"><%= I18n.t("shared_fee.statuses.#{@shared_fee.status}") %></strong>
       <% end %>
     </div>
   </div>
-  
+
   <div class="row">
     <% if @shared_fee.active? %>
       <div class="col-md-6">

@@ -13,9 +13,11 @@ pt-BR:
         total_value_cents: Valor Total
         total_value: Valor Total
         description: Descrição
-        status:
-          active: Ativa
-          canceled: Cancelada
+        status: Situação
+  shared_fee:
+    statuses:
+      active: Ativa
+      canceled: Cancelada
   views:
     index:
       no_fees: Não foram encontradas contas compartilhadas.
