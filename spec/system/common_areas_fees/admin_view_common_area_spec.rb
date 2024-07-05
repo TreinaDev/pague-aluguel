@@ -10,15 +10,14 @@ describe 'Admin vê área comum' do
 
     login_as admin, scope: :admin
     visit condo_common_areas_path(condo.id)
-    within 'div#area-0' do
-      click_on 'TMNT'
-    end
+    click_on 'TMNT'
 
     expect(page).to have_content 'TMNT'
-    expect(page).to have_content 'Descrição: Teenage Mutant Ninja Turtles'
-    expect(page).to have_content 'Capacidade máxima: 40'
-    expect(page).to have_content 'Regras de uso: Não lutar no salão'
-    expect(page).to have_content 'Taxa de área comum: R$200,00'
+    expect(page).to have_content 'Teenage Mutant Ninja Turtles'
+    expect(page).to have_content 'capacidade máxima 40 pessoas'
+    expect(page).to have_content 'regras de uso Não lutar no salão'
+    expect(page).to have_content 'Taxa de área comum'
+    expect(page).to have_content 'R$200,00'
   end
 
   it 'e taxa não está cadastrada' do
@@ -37,18 +36,21 @@ describe 'Admin vê área comum' do
     admin = create(:admin, email: 'ikki.phoenix@seiya.com', password: 'phoenix123')
     condo = Condo.new(id: 1, name: 'Condomínio Vila das Flores', city: 'São Paulo')
     allow(Condo).to receive(:find).and_return(condo)
-    common_area = FactoryBot.create(:common_area, fee_cents: 0, condo_id: condo.id)
+    FactoryBot.create(:common_area, name: 'Salão de Festas', fee_cents: 0, condo_id: condo.id)
 
     login_as admin, scope: :admin
 
-    visit condo_common_area_path(condo.id, common_area)
-    click_on 'Registrar Taxa'
+    visit condo_path(condo.id)
+    within 'div#common-areas' do
+      click_on 'Salão de Festas'
+    end
+    find('#edit-common-area').click
     fill_in 'Taxa de área comum', with: '200,00'
-    click_on 'Atualizar'
+    click_on 'ATUALIZAR'
     travel 1.month
-    click_on 'Registrar Taxa'
+    find('#edit-common-area').click
     fill_in 'Taxa de área comum', with: '300,00'
-    click_on 'Atualizar'
+    click_on 'ATUALIZAR'
     click_on 'Mostrar histórico de taxas'
 
     expect(page).to have_content 'ikki.phoenix@seiya.com'

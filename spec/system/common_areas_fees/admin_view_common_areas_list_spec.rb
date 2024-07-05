@@ -27,31 +27,27 @@ describe 'Admin vê a lista de áreas comuns' do
 
     login_as admin, scope: :admin
     visit root_path
-    click_on 'Lista de Condomínios'
     click_on 'Teenage Mutant Ninja Turtles'
-    click_on 'Gerenciar Condomínio'
-    click_on 'Exibir Áreas Comuns'
+    click_on 'TMNT'
 
-    expect(page).to have_content 'Áreas comuns do condomínio Teenage Mutant Ninja Turtles'
+    expect(page).to have_content 'Área Comum'
     expect(page).to have_content 'TMNT'
     expect(page).to have_content 'Teenage Mutant Ninja Turtles'
-    expect(page).to have_content 'R$400,00'
     expect(page).to have_content 'Saint Seiya'
     expect(page).to have_content 'Os Cavaleiros dos zodíacos'
-    expect(page).to have_content 'R$500,00'
-    expect(page).not_to have_content 'Nenhuma Área Comum cadastrada'
+    expect(page).not_to have_content 'Nenhuma área comum cadastrada.'
   end
 
-  it 'E não existem áreas comuns cadastradas' do
+  it 'e não existem áreas comuns cadastradas' do
     admin = create(:admin, email: 'matheus@gmail.com', password: 'admin12345')
 
     condo = Condo.new(id: 1, name: 'Teenage Mutant Ninja Turtles', city: 'São Paulo')
     allow(Condo).to receive(:find).and_return(condo)
 
     login_as admin, scope: :admin
-    visit condo_common_areas_path(condo.id)
+    visit condo_path(condo.id)
 
-    expect(page).to have_content 'Nenhuma Área Comum cadastrada'
+    expect(page).to have_content 'Nenhuma área comum cadastrada.'
   end
 
   it 'e vê somente as áreas comuns do condomínio selecionado' do
@@ -81,22 +77,12 @@ describe 'Admin vê a lista de áreas comuns' do
     condo = Condo.new(id: 1, name: 'Teenage Mutant Ninja Turtles', city: 'São Paulo')
     allow(Condo).to receive(:find).and_return(condo)
 
-    create(:common_area, name: 'TMNT', fee_cents: 0, condo_id: condo.id)
-    create(:common_area, name: 'Saint Seiya', fee_cents: 400, condo_id: condo.id)
-    create(:common_area, name: 'Naruto Shippuden', fee_cents: 0, condo_id: condo.id)
+    common_area = create(:common_area, name: 'TMNT', fee_cents: 0, condo_id: condo.id)
 
     login_as admin, scope: :admin
-    visit condo_common_areas_path(condo.id)
+    visit condo_common_area_path(condo.id, common_area.id)
 
-    within 'div#area-0' do
-      expect(page).to have_content 'Taxa não cadastrada'
-    end
-    within 'div#area-1' do
-      expect(page).not_to have_content 'Taxa não cadastrada'
-    end
-    within 'div#area-2' do
-      expect(page).to have_content 'Taxa não cadastrada'
-    end
+    expect(page).to have_content 'Taxa não cadastrada'
   end
 
   it 'e acessa uma área comum e volta para a lista' do
@@ -111,12 +97,10 @@ describe 'Admin vê a lista de áreas comuns' do
     login_as admin, scope: :admin
     visit condo_common_areas_path(condo.id)
     click_on 'TMNT'
-    click_on 'Voltar'
+    find('#close').click
 
     expect(page).to have_content 'TMNT'
-    expect(page).to have_content 'R$400,00'
     expect(page).to have_content 'Saint Seiya'
-    expect(page).to have_content 'R$500,00'
   end
 
   it 'e volta para show do condomínio' do
@@ -125,11 +109,11 @@ describe 'Admin vê a lista de áreas comuns' do
     condo = Condo.new(id: 1, name: 'Teenage Mutant Ninja Turtles', city: 'São Paulo')
     allow(Condo).to receive(:find).and_return(condo)
 
-    create(:common_area, name: 'TMNT', fee_cents: 400_00, condo_id: condo.id)
+    common_area = create(:common_area, name: 'TMNT', fee_cents: 400_00, condo_id: condo.id)
 
     login_as admin, scope: :admin
-    visit condo_common_areas_path(condo.id)
-    click_on 'Voltar'
+    visit condo_common_area_path(condo.id, common_area.id)
+    find('#close').click
 
     expect(current_path).to eq condo_path(condo.id)
   end
