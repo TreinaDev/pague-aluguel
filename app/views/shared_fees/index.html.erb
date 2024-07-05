@@ -13,7 +13,7 @@
       <tbody>
         <% @shared_fees.each do |shared_fee| %>
           <tr>
-            <td><%= link_to "#{shared_fee.description}", shared_fee_path(shared_fee) %></td>
+            <td><%= link_to "#{shared_fee.description}", condo_shared_fee_path(shared_fee.condo_id, shared_fee) %></td>
             <td><%= I18n.l(shared_fee.issue_date) %></td>
             <td><%= shared_fee.total_value.format %></td>
             <% if shared_fee.active? %>
@@ -31,7 +31,7 @@
 
   <div class="row">
     <div class="col-md-6">
-      <%= link_to 'Lançar Conta Compartilhada', new_shared_fee_path(condo_id: @condo.id), class: 'btn btn-primary' %>
+      <%= link_to 'Lançar Conta Compartilhada', new_condo_shared_fee_path(condo_id: @condo.id), class: 'btn btn-primary' %>
     </div>
     <div class="col-md-6">
       <%= link_to I18n.t('helpers.buttons.back'), condo_path(@condo.id), class: "btn btn-secondary" %>

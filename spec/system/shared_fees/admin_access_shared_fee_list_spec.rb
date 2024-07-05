@@ -58,7 +58,7 @@ describe 'Admin tenta acessar lista de contas compartilhadas' do
                       total_value: 25_000, condo_id: condos.first.id)
 
     login_as admin, scope: :admin
-    visit shared_fees_path(condo_id: condos.first.id)
+    visit condo_shared_fees_path(condo_id: condos.first.id)
     click_on 'Voltar'
 
     expect(current_path).to eq condo_path(condos.first.id)
@@ -92,7 +92,7 @@ describe 'Admin tenta acessar lista de contas compartilhadas' do
     click_on 'Contas Compartilhadas'
     click_on 'Conta de Água'
 
-    expect(current_path).to eq shared_fee_path(conta_de_agua.id)
+    expect(current_path).to eq condo_shared_fee_path(condos.first.id, conta_de_agua.id)
     expect(page).to have_content 'Conta de Água'
     expect(page).to have_content 'R$5.000,00'
   end
@@ -113,17 +113,20 @@ describe 'Admin tenta acessar lista de contas compartilhadas' do
                       total_value: 10_000, condo_id: condos.first.id)
 
     login_as admin, scope: :admin
-    visit shared_fees_path(condo_id: condos.first.id)
+    visit condo_shared_fees_path(condos.first.id)
     click_on 'Conta de Luz'
     click_on 'Voltar'
 
-    expect(current_path).to eq shared_fees_path
+    expect(current_path).to eq condo_shared_fees_path(condos.first.id)
   end
 
   it 'e não está autenticado' do
     FactoryBot.create(:admin, first_name: 'Fulano', last_name: 'Da Costa')
 
-    visit shared_fees_path
+    condo = Condo.new(id: 1, name: 'Edifício Monte Verde', city: 'Recife')
+    allow(Condo).to receive(:find).and_return(condo)
+
+    visit condo_shared_fees_path(condo.id)
 
     expect(page).to have_content 'Para continuar, faça login ou registre-se.'
     expect(current_path).to eq new_admin_session_path
@@ -148,6 +151,6 @@ describe 'Admin tenta acessar lista de contas compartilhadas' do
 
     expect(page).to have_content('Não foram encontradas contas compartilhadas.')
     expect(page).to have_link('Lançar Conta Compartilhada')
-    expect(current_path).to eq shared_fees_path
+    expect(current_path).to eq condo_shared_fees_path(condos.first.id)
   end
 end
