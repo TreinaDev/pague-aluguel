@@ -29,7 +29,7 @@ describe 'Admin cancela uma conta compartilhada' do
     expect(page).to have_content "#{bill.description} cancelada com sucesso"
     expect(bill.active?).to eq false
     expect(bill.canceled?).to eq true
-    expect(current_path).to eq shared_fees_path
+    expect(current_path).to eq condo_shared_fees_path(condos.first.id)
     expect(page).to have_content 'Cancelada'
   end
 
