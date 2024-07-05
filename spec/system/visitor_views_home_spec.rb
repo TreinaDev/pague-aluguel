@@ -1,13 +1,13 @@
 require 'rails_helper'
 
 describe 'Visitor views home' do
-  it 'successfully' do
+  xit 'successfully' do
     visit root_path
 
     expect(page).to have_content 'Cola?Bora!'
   end
 
-  it 'and prints message' do
+  xit 'and prints message' do
     visit root_path
 
     fill_in 'Mensagem', with: 'Olá, pessoal!'

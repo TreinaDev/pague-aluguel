@@ -5,3 +5,4 @@ import { createApp } from 'vue/dist/vue.esm-bundler.js'
 import HelloComponent from './components/hello_vue.js'
 
 createApp(HelloComponent).mount('#vue-app')
+import "./controllers"

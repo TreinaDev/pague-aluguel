@@ -43,7 +43,12 @@ describe 'admin cria taxa condominial' do
     allow(UnitType).to receive(:find_all_by_condo).and_return(unit_types)
 
     login_as admin, scope: :admin
-    visit new_condo_base_fee_path(condos[0].id)
+    visit root_path
+    click_on 'Lista de Condomínios'
+    click_on 'Prédio lindo'
+    click_on 'Gerenciar Condomínio'
+    click_on 'Taxas Condominiais'
+    click_on 'Cadastrar Nova Taxa'
 
     expect(page).to have_content 'Cadastro de Taxa Condominial'
     expect(page).not_to have_field 'Número de Parcelas'

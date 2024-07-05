@@ -15,6 +15,7 @@ gem 'money-rails', '~> 1.12'
 gem 'puma', '~> 6.0'
 gem 'sprockets-rails'
 gem 'sqlite3', '~> 1.4'
+gem 'stimulus-rails'
 gem 'turbo-rails'
 gem 'tzinfo-data', platforms: [:mingw, :mswin, :x64_mingw, :jruby]
 

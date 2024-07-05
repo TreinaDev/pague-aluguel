@@ -1,4 +1,4 @@
-<div class="container">
+<div class="container" data-controller="toggle-installments-field">
   <h2><%= I18n.t('views.new.create_fee') %></h2>
   <h4><%= @condo.name %></h4>
 
@@ -18,80 +18,62 @@
       <%= form_with model: [@base_fee], url: condo_base_fees_path(@condo.id), local: true do |f| %>
         <%= f.hidden_field :condo_id, value: @condo.id %>
 
-      <div class="form-group">
-        <%= f.label :name %>
-        <%= f.text_field :name, class: "form-control" %>
-      </div>
+        <div class="form-group">
+          <%= f.label :name %>
+          <%= f.text_field :name, class: "form-control" %>
+        </div>
 
-      <div class="form-group">
-        <%= f.label :description %>
-        <%= f.text_field :description, class: "form-control" %>
-      </div>
+        <div class="form-group">
+          <%= f.label :description %>
+          <%= f.text_field :description, class: "form-control" %>
+        </div>
 
-      <div class="form-group">
-        <%= f.label :recurrence %>
-        <%= f.select :recurrence, options_for_select(BaseFee.recurrences.map { |key, _| [I18n.t("base_fee.#{key}"), key] }, @base_fee.recurrence), {}, class: "form-control" %>
-      </div>
+        <div class="form-group">
+          <%= f.label :recurrence %>
+          <%= f.select :recurrence, options_for_select(BaseFee.recurrences.map { |key, _| [I18n.t("base_fee.#{key}"), key] }, @base_fee.recurrence), {}, class: "form-control" %>
+        </div>
 
-      <div class="form-group">
-        <%= f.fields_for :values do |values_form| %><br>
+        <div class="form-group">
+          <%= f.fields_for :values do |values_form| %><br>
 
-          <% unit_type = @unit_types.find { |ut| ut.id == values_form.object.unit_type_id } %>
-          <%= values_form.label :price, I18n.t('activerecord.values.values_price', unit_type: unit_type.description ) %>
-          <%= values_form.text_field :price, placeholder: '0,00', class: "form-control" %>
-          <%= values_form.hidden_field :unit_type_id, value: values_form.object.unit_type_id %>
-        <% end %>
-      </div>
+            <% unit_type = @unit_types.find { |ut| ut.id == values_form.object.unit_type_id } %>
+            <%= values_form.label :price, I18n.t('activerecord.values.values_price', unit_type: unit_type.description ) %>
+            <%= values_form.text_field :price, placeholder: '0,00', class: "form-control" %>
+            <%= values_form.hidden_field :unit_type_id, value: values_form.object.unit_type_id %>
+          <% end %>
+        </div>
 
-      <div class="form-group">
-        <%= f.label :charge_day %>
-        <%= f.date_field :charge_day, class: "form-control" %>
-      </div>
+        <div class="form-group">
+          <%= f.label :charge_day %>
+          <%= f.date_field :charge_day, class: "form-control" %>
+        </div>
 
-      <div class="form-group">
-        <%= f.check_box :limited, {}, "true", "false" %>
-        <%= f.label :limited %>
-      </div>
+        <div class="form-group">
+          <%= f.check_box :limited, { data: { action: "toggle-installments-field#toggle", toggle_installments_field_target: "limited" } }, "true", "false" %>
+          <%= f.label :limited %>
+        </div>
 
-      <div class="form-group" id="installments-field">
-        <%= f.number_field :installments %>
-        <%= f.label :installments %>
-      </div>
+        <div class="form-group" id="installments-field" data-toggle-installments-field-target="installments">
+          <%= f.number_field :installments %>
+          <%= f.label :installments %>
+        </div>
 
-      <div class="form-group">
-        <%= f.label :interest_rate %>
-        <%= f.number_field :interest_rate, class: "form-control" %>
-      </div>
+        <div class="form-group">
+          <%= f.label :interest_rate %>
+          <%= f.number_field :interest_rate, class: "form-control" %>
+        </div>
 
-      <div class="form-group">
-        <%= f.label :late_fine %>
-        <%= f.text_field :late_fine, placeholder: '0,00', class: "form-control" %>
-      </div>
+        <div class="form-group">
+          <%= f.label :late_fine %>
+          <%= f.text_field :late_fine, placeholder: '0,00', class: "form-control" %>
+        </div>
 
-      <div class="form-group">
-        <%= f.submit I18n.t('helpers.submit.submit'), class: 'btn btn-primary' %>
-      </div>
+        <div class="form-group">
+          <%= f.submit I18n.t('helpers.submit.submit'), class: 'btn btn-primary' %>
+        </div>
       <% end %>
     </div>
   </div>
   <hr>
   <%= link_to I18n.t('helpers.buttons.back'), condo_base_fees_path(condo_id: @condo.id), class: "btn btn-secondary" %>
 </div>
-
-<script>
-  document.addEventListener('DOMContentLoaded', function() {
-    const limitedCheckbox = document.getElementById('base_fee_limited');
-    const installmentsField = document.getElementById('installments-field');
-
-    function toggleInstallmentsField() {
-        if (limitedCheckbox.checked) {
-          installmentsField.style.display = 'block';
-        } else {
-          installmentsField.style.display = 'none';
-        }
-      }
-
-    limitedCheckbox.addEventListener('change', toggleInstallmentsField);
-    toggleInstallmentsField();
-  });
-</script>
