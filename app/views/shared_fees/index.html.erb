@@ -22,9 +22,9 @@
             <span class="text-muted fs-7 text-lowercase"><%= SharedFee.human_attribute_name(:total_value) %></span>
             <span><%= shared_fee.total_value.format %></span>
             <% if shared_fee.active? %>
-              <span class="text-success"><%= I18n.t("activerecord.attributes.shared_fee.enum_status.#{shared_fee.status}") %></span>
+              <span class="text-success"><%= I18n.t("activerecord.attributes.shared_fee.status.#{shared_fee.status}") %></span>
             <% else %>
-              <span class="text-danger"><%= I18n.t("activerecord.attributes.shared_fee.enum_status.#{shared_fee.status}") %></span>
+              <span class="text-danger"><%= I18n.t("activerecord.attributes.shared_fee.status.#{shared_fee.status}") %></span>
             <% end %>
           <% end %>
         <% end %>
