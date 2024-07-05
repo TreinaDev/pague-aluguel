@@ -26,7 +26,8 @@ describe 'Admin cria taxa fixa' do
       click_on 'Adicionar nova'
     end
 
-    expect(page).to have_content 'CADASTRO DE TAXA DE PRÉDIO LINDO'
+    expect(page).to have_content 'CADASTRO DE TAXA'
+    expect(page).to have_content 'Prédio Lindo'
     expect(current_path).to eq new_condo_base_fee_path(condos[0].id)
   end
 
@@ -56,7 +57,7 @@ describe 'Admin cria taxa fixa' do
     check 'Taxa fixa'
     fill_in 'Juros ao dia', with: 1
     fill_in 'Multa por atraso', with: '30,00'
-    click_on 'Salvar'
+    click_on 'Cadastrar'
 
     base_fee = BaseFee.last
     expect(page).to have_content 'Taxa cadastrada com sucesso!'
@@ -85,7 +86,7 @@ describe 'Admin cria taxa fixa' do
     fill_in 'Data de Emissão', with: ''
     fill_in 'Juros ao dia', with: ''
     fill_in 'Multa por atraso', with: ''
-    click_on 'Salvar'
+    click_on 'Cadastrar'
 
     expect(page).to have_content 'Taxa não cadastrada.'
     expect(page).to have_content 'Verifique os erros abaixo:'
@@ -123,7 +124,7 @@ describe 'Admin cria taxa fixa' do
     check 'Taxa fixa'
     fill_in 'Juros ao dia', with: 1
     fill_in 'Multa por atraso', with: '30,00'
-    click_on 'Salvar'
+    click_on 'Cadastrar'
 
     expect(page).to have_content 'Taxa não cadastrada.'
     expect(page).to have_content 'Data de Emissão deve ser futura'
@@ -163,7 +164,7 @@ describe 'Admin cria taxa fixa' do
     check 'Taxa fixa'
     fill_in 'Juros ao dia', with: 1
     fill_in 'Multa por atraso', with: '30,00'
-    click_on 'Salvar'
+    click_on 'Cadastrar'
 
     expect(page).to have_content 'Taxa não cadastrada.'
     expect(page).to have_content 'Valor deve ser maior que 0', count: 2
