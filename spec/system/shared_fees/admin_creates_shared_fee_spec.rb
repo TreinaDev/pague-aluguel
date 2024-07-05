@@ -28,15 +28,18 @@ describe 'Admin lança uma conta compartilhada' do
     fill_in 'Descrição', with: 'Conta de Luz'
     fill_in 'Data de Emissão', with: 10.days.from_now.to_date
     fill_in 'Valor Total', with: 10_000
-    click_on 'Registrar'
+    click_on 'Cadastrar'
 
     expect(page).to have_content 'Conta Compartilhada lançada com sucesso!'
     expect(current_path).to eq shared_fee_path(SharedFee.last)
-    expect(page).to have_content 'Condomínio: Condo Test'
-    expect(page).to have_content 'Descrição: Conta de Luz'
-    expect(page).to have_content "Data de Emissão: #{I18n.l(10.days.from_now.to_date)}"
-    expect(page).to have_content 'Valor Total: R$10.000,00'
-    expect(page).to have_content 'Situação: Ativa'
+    expect(page).to have_content 'Condo Test'
+    expect(page).to have_content 'Conta de Luz'
+    expect(page).to have_content "data de emissão"
+    expect(page).to have_content "#{I18n.l(10.days.from_now.to_date)}"
+    expect(page).to have_content 'valor total'
+    expect(page).to have_content 'R$10.000,00'
+    expect(page).to have_content 'ATIVA'
+    expect(page).to have_content 'CANCELAR'
   end
 
   it 'e não está autenticado' do
@@ -71,7 +74,7 @@ describe 'Admin lança uma conta compartilhada' do
     within 'div#shared-fee' do
       click_on 'Adicionar nova'
     end
-    click_on 'Registrar'
+    click_on 'Cadastrar'
 
     expect(current_path).to eq new_shared_fee_path
     expect(page).to have_content 'Não foi possível lançar a conta compartilhada.'
@@ -131,7 +134,7 @@ describe 'Admin lança uma conta compartilhada' do
     fill_in 'Descrição', with: 'Conta de Água'
     fill_in 'Data de Emissão', with: 10.days.from_now.to_date
     fill_in 'Valor Total', with: 5_000
-    click_on 'Registrar'
+    click_on 'Cadastrar'
 
     conta_de_luz_fraction_one = SharedFeeFraction.find_by(unit_id: units[0], shared_fee: conta_de_luz)
     conta_de_luz_fraction_two = SharedFeeFraction.find_by(unit_id: units[1], shared_fee: conta_de_luz)

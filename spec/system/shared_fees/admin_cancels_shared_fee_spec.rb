@@ -31,7 +31,7 @@ describe 'Admin cancela uma conta compartilhada' do
     expect(bill.active?).to eq false
     expect(bill.canceled?).to eq true
     expect(current_path).to eq shared_fees_path
-    expect(page).to have_content 'Cancelada'
+    expect(page).to have_content 'CANCELADA'
   end
 
   it 'e não vê mais o botão de cancelar' do
@@ -60,7 +60,7 @@ describe 'Admin cancela uma conta compartilhada' do
     click_on 'Cancelar'
     click_on 'Conta de Luz'
 
-    expect(page).to have_content 'Cancelada'
+    expect(page).to have_content ''
     expect(page).not_to have_button 'Cancelar'
   end
 

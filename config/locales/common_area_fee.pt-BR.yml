@@ -10,7 +10,7 @@ pt-BR:
         other: Áreas Comuns
   messages:
     registered_fee: Taxa cadastrada com sucesso!
-    registration_error: Não foi possível registrar a taxa.
+    registration_error: Não foi possível cadastrar a taxa.
   views:
     edit:
       edit_fee: "Atualizar Taxa de %{name}"
@@ -28,5 +28,5 @@ pt-BR:
       email: Email
       data: Data
       fee: Taxa
-      new_fee: Registrar Taxa
+      new_fee: Cadastrar Taxa
       update_date: Data de Alteração
