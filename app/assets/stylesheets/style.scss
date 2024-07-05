@@ -60,6 +60,12 @@
   background-color: #cfd2dc;
   border-color: #d0d0d0;
 }
+
+.hover-danger:hover {
+  color: $black !important;
+  background-color: $light-red;
+  border-color: $light-red;
+}
 // width
 .w-18 {
   width: 18%;  
@@ -83,4 +89,20 @@
 
 .w-49 {
   width: 49%;
+}
+// spacing letters
+.ls-1 {
+  letter-spacing: 0.025em;
+}
+
+.ls-2 {
+  letter-spacing: 0.5em;
+}
+
+.ls-3 {
+  letter-spacing: 0.1em;
+}
+
+.ls-4 {
+  letter-spacing: 0.15em;
 }

@@ -1,5 +1,5 @@
 <div class="mt-3 card bg-off-white rounded-0 border-0 mb-4">
-  <%= link_to :back, class: "ms-3 mt-3" do %>
+  <%= link_to condo_path(@condo.id), class: "ms-3 mt-3" do %>
     <%= image_tag "arrow-left", size: "25", id: "arrow-left" %>
   <% end %>
   <span class="fs-4 mx-auto mt-3 text-uppercase">
@@ -9,23 +9,25 @@
     <% if @shared_fees.any? %>
       <div class="list-group w-75">
         <% @shared_fees.each do |shared_fee| %>
-          <%= link_to shared_fee, class: "list-group-item p-3 list-group-item-action hover-strong" do %>
+          <%= link_to shared_fee, class: "list-group-item p-3 list-group-item-action hover-strong", data: { turbo_frame: "modal" } do %>
             <div class="d-flex w-100 justify-content-between">
               <span class="d-block mb-1 fs-5">
                 <%= shared_fee.description %>
               </span>
-              <small class="text-body-secondary">
-                <%= SharedFee.human_attribute_name(:issue_date) %>:
-                <%= I18n.l(shared_fee.issue_date) %>
-              </small>
+              <div class="d-flex flex-wrap text-end">
+                <small class="text-body-secondary w-100">
+                  <%= SharedFee.human_attribute_name(:issue_date) %>:
+                  <%= I18n.l(shared_fee.issue_date) %>
+                </small>
+                <% if shared_fee.active? %>
+                  <span class="mt-1 ms-auto badge text-bg-success text-uppercase"><%= I18n.t("shared_fee.statuses.#{shared_fee.status}") %></span>
+                <% else %>
+                  <span class="mt-1 ms-auto badge text-bg-danger text-uppercase"><%= I18n.t("shared_fee.statuses.#{shared_fee.status}") %></span>
+                <% end %>
+              </div>
             </div>
             <span class="text-muted fs-7 text-lowercase"><%= SharedFee.human_attribute_name(:total_value) %></span>
             <span><%= shared_fee.total_value.format %></span>
-            <% if shared_fee.active? %>
-              <span class="text-success"><%= I18n.t("shared_fee.statuses.#{shared_fee.status}") %></span>
-            <% else %>
-              <span class="text-danger"><%= I18n.t("shared_fee.statuses.#{shared_fee.status}") %></span>
-            <% end %>
           <% end %>
         <% end %>
       </div>
