@@ -20,6 +20,7 @@ describe 'Admin gerencia contas compartilhadas' do
       units << Unit.new(id: 2, area: 100, floor: 1, number: 1, unit_type_id: 2)
       allow(Unit).to receive(:all).and_return(units)
       allow(Condo).to receive(:all).and_return(condos)
+      allow(Condo).to receive(:find).and_return(condos.first)
       allow(UnitType).to receive(:all).and_return(unit_types)
 
       login_as admin, scope: :admin
