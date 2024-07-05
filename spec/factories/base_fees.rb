@@ -4,7 +4,7 @@ FactoryBot.define do
     description { 'Manutenção geral do condomínio.' }
     interest_rate { 2 }
     late_fine { 20 }
-    fixed { true }
+    limited { false }
     charge_day { 10.days.from_now }
     recurrence { :monthly }
     condo_id { nil }

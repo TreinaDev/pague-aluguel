@@ -1,5 +1,6 @@
 <div class="container">
-  <h2><%= I18n.t('views.new.create_fee', condo: @condo.name) %></h2>
+  <h2><%= I18n.t('views.new.create_fee') %></h2>
+  <h4><%= @condo.name %></h4>
 
   <% if @base_fee.errors.any? %>
     <div class="alert alert-danger" role="alert">
@@ -48,8 +49,8 @@
       </div>
 
       <div class="form-group">
-        <%= f.check_box :fixed, {}, "true", "false" %>
-        <%= f.label :fixed %>
+        <%= f.check_box :limited, {}, "true", "false" %>
+        <%= f.label :limited %>
       </div>
 
       <div class="form-group">

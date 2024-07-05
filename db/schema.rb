@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema[7.1].define(version: 2024_07_04_185220) do
+ActiveRecord::Schema[7.1].define(version: 2024_07_05_144327) do
   create_table "active_storage_attachments", force: :cascade do |t|
     t.string "name", null: false
     t.string "record_type", null: false
@@ -62,7 +62,7 @@ ActiveRecord::Schema[7.1].define(version: 2024_07_04_185220) do
     t.string "name"
     t.integer "interest_rate"
     t.integer "late_fine_cents"
-    t.boolean "fixed"
+    t.boolean "limited", default: false
     t.date "charge_day"
     t.integer "recurrence", default: 0
     t.integer "condo_id"

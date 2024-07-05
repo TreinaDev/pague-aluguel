@@ -35,7 +35,7 @@ class BaseFeesController < ApplicationController
 
   def base_fee_params
     params.require(:base_fee).permit(:name, :description, :interest_rate, :late_fine,
-                                     :fixed, :charge_day, :recurrence, :condo_id,
+                                     :limited, :charge_day, :recurrence, :condo_id,
                                      values_attributes: [:price, :unit_type_id])
   end
 

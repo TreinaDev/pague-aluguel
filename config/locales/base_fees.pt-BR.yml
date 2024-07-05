@@ -1,4 +1,7 @@
 pt-BR:
+  limited:
+    true: Taxa limitada
+    false: Taxa fixa
   success_notice_base_fee: 'Taxa cadastrada com sucesso!'
   fail_notice_base_fee: 'Taxa não cadastrada.'
   activerecord:
@@ -14,9 +17,9 @@ pt-BR:
         interest_rate: Juros ao dia (%)
         late_fine: Multa por atraso
         late_fine_cents: Multa por atraso
-        fixed: Taxa fixa
         charge_day: Data de Lançamento
         recurrence: Recorrência
+        limited: Taxa limitada
         enum_recurrence:
           monthly: Mensal
           biweekly: Quinzenal
@@ -40,7 +43,7 @@ pt-BR:
     yearly: Anual
   views:
     new:
-      create_fee: "Cadastro de Taxa de %{condo}"
+      create_fee: "Cadastro de Taxa Condominial"
       label_price: "Valor para %{name}"
     show:
       monthly: Mensal
