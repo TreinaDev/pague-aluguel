@@ -4,9 +4,11 @@
       <%= link_to "", :back, class: "btn btn-close btn-sm" %>
     </div>
 
-    <span class="fs-4 text-uppercase d-block text-center mb-2">
+    <span class="fs-4 text-uppercase d-block text-center mb-1">
       <%= I18n.t('devise.sessions.new.sign_in_property_owner') %>
     </span>
+
+    <%= render "property_owners/shared/links" %>
 
     <%= form_for(resource, as: resource_name, url: session_path(resource_name)) do |f| %>
       <%= render "property_owners/shared/error_messages", resource: resource %>
@@ -30,8 +32,7 @@
       <% end %>
 
       <div class="text-center">
-        <%= f.submit I18n.t('devise.sessions.new.sign_in'), class: "btn btn-secondary text-uppercase mb-2" %><br>
-        <%= render "property_owners/shared/links" %>
+        <%= f.submit I18n.t('devise.sessions.new.sign_in'), class: "btn btn-secondary text-uppercase mb-1" %>
       </div>
     <% end %>
   </div>
