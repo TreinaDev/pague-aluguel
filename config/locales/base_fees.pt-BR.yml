@@ -15,7 +15,7 @@ pt-BR:
         late_fine: Multa por atraso
         late_fine_cents: Multa por atraso
         fixed: Taxa fixa
-        charge_day: Data de Lançamento
+        charge_day: Data de Emissão
         recurrence: Recorrência
         enum_recurrence:
           monthly: Mensal
@@ -40,9 +40,8 @@ pt-BR:
     yearly: Anual
   views:
     new:
-      create_fee: "Cadastro de Taxa de %{condo}"
+      create_fee: "Cadastro de Taxa"
       label_price: "Valor para %{name}"
-      create_shared_fee: "Conta Compartilhada"
     show:
       monthly: Mensal
       biweekly: Quinzenal
