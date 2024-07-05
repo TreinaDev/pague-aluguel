@@ -14,7 +14,7 @@
     </div>
 
     <div class=" d-flex justify-content-center align-items-center">
-      <span class="badge text-bg-secondary fs-6 text-uppercase ls-4">
+      <span class="badge text-bg-info fs-6 text-uppercase ls-4">
         <%= BaseFee.human_attribute_name(:fixed) if @base_fee.fixed %>
       </span>
     </div>
@@ -47,8 +47,8 @@
 
     <div class="px-5">
       <div class=" d-flex justify-content-center align-items-center">
-        <span class="text-muted text-lowercase fs-8">
-          <%= BaseFee.human_attribute_name(:charge_day) %>:
+        <span class="text-muted text-lowercase fs-8 me-1">
+          <%= SharedFee.human_attribute_name(:issue_date) %>
         </span>
         <span class="fs-7">
           <%= I18n.localize(@base_fee.charge_day.to_date)%>
