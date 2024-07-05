@@ -17,6 +17,7 @@ describe 'usuario tenta criar conta de administrador' do
     expect(response).to redirect_to root_path
     expect(flash[:notice]).to eq I18n.t('devise.registrations.signed_up')
   end
+
   it 'e falha por não estar autenticado' do
     post admins_path, params: {
       admin: {

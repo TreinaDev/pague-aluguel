@@ -19,7 +19,8 @@ describe 'admin registra outro admin' do
     attach_file 'Insira sua foto de perfil', Rails.root.join('spec/support/images/reuri.jpeg')
     click_on 'REGISTRAR'
 
-    expect(page).to have_content 'Administrador registrado com sucesso'
+    # expect(page).to have_content 'Administrador registrado com sucesso'
+    expect(page).to have_content 'Bem Vindo! Você se registrou com sucesso!'
     expect(page).to have_content 'João Almeida'
     expect(current_path).to eq root_path
   end
@@ -41,6 +42,6 @@ describe 'admin registra outro admin' do
     expect(page).to have_content 'Sobrenome não pode ficar em branco'
     expect(page).to have_content 'CPF não pode ficar em branco'
     expect(page).to have_content 'Não foi possível salvar administrador'
-    expect(page).not_to have_content 'Administrador registrado com sucesso'
+    expect(page).not_to have_content 'Bem Vindo! Você se registrou com sucesso!'
   end
 end
