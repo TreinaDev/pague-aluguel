@@ -65,14 +65,13 @@ Admin.create!(
 )
 p "Created #{Admin.count} admins"
 # areas comuns
-CommonArea.find_or_create_by!(name: 'Churrasqueira', description: 'Área de churrasqueira com piscina', max_capacity: 30,
+churrasqueira = CommonArea.find_or_create_by!(name: 'Churrasqueira', description: 'Área de churrasqueira com piscina', max_capacity: 30,
                               usage_rules: 'Regras ainda não definidas', fee_cents: 250, condo_id: 20)
-CommonArea.find_or_create_by!(name: 'Play', description: 'Play para eventos', max_capacity: 60,
+play = CommonArea.find_or_create_by!(name: 'Play', description: 'Play para eventos', max_capacity: 60,
                               usage_rules: 'Regras ainda não definidas', fee_cents: 300, condo_id: 20)
-
-CommonArea.find_or_create_by!(name: 'Salão de festa', description: 'Área feita para eventos casuais', max_capacity: 40,
+salao_festa = CommonArea.find_or_create_by!(name: 'Salão de festa', description: 'Área feita para eventos casuais', max_capacity: 40,
                               usage_rules: 'Proibido levar as mesas para fora do salão.', fee_cents: 400, condo_id: 20)
-CommonArea.find_or_create_by!(name: 'Cinema', description: 'Guerreiros Saiajens', max_capacity: 60,
+cinema = CommonArea.find_or_create_by!(name: 'Cinema', description: 'Guerreiros Saiajens', max_capacity: 60,
                               usage_rules: 'Proibido fumar na sala', fee_cents: 500, condo_id: 20)
 CommonArea.find_or_create_by!(name: 'Sala de Jogos', description: 'Sala com mesa de ping pong, xadrez e sinuca.', max_capacity: 60,
                               usage_rules: 'Proibido fumar e beber na sala', fee_cents: 500, condo_id: 20)
@@ -83,6 +82,16 @@ CommonArea.find_or_create_by!(name: 'Salão com Piscina', description: 'Salão p
 CommonArea.find_or_create_by!(name: 'Parquinho', description: 'Parquinho com balanço e castelo de plástico', max_capacity: 10,
                               usage_rules: 'Proibido crianças com mais de 10 anos', fee_cents: 500, condo_id: 20)
 p "Created #{CommonArea.count} common areas"
+
+CommonAreaFeeHistory.find_or_create_by!(fee_cents: 250, user: 'user1@example.com', common_area: churrasqueira, created_at: '2024-01-01')
+CommonAreaFeeHistory.find_or_create_by!(fee_cents: 300, user: 'user2@example.com', common_area: play, created_at: '2024-02-01')
+CommonAreaFeeHistory.find_or_create_by!(fee_cents: 400, user: 'user3@example.com', common_area: salao_festa, created_at: '2024-03-01')
+CommonAreaFeeHistory.find_or_create_by!(fee_cents: 500, user: 'user4@example.com', common_area: cinema, created_at: '2024-04-01')
+CommonAreaFeeHistory.find_or_create_by!(fee_cents: 255, user: 'user5@example.com', common_area: churrasqueira, created_at: '2024-05-01')
+CommonAreaFeeHistory.find_or_create_by!(fee_cents: 305, user: 'user6@example.com', common_area: play, created_at: '2024-06-01')
+CommonAreaFeeHistory.find_or_create_by!(fee_cents: 405, user: 'user7@example.com', common_area: salao_festa, created_at: '2024-07-01')
+CommonAreaFeeHistory.find_or_create_by!(fee_cents: 505, user: 'user8@example.com', common_area: cinema, created_at: '2024-08-01')
+
 # taxas fixas
 base_fee1 = BaseFee.create!(name: 'Taxa de Condomínio',
                             description: 'Manutenção regular do prédio',

@@ -5,9 +5,13 @@ class CommonAreasController < ApplicationController
 
   def index
     @common_areas = CommonArea.where(condo_id: @condo.id)
+    @first_common_areas = @common_areas.take(4)
+    @last_common_areas = @common_areas.excluding(@first_common_areas)
   end
 
-  def show; end
+  def show
+    @common_area_fee_histories = @common_area.common_area_fee_histories.order(created_at: :desc)
+  end
 
   def edit; end
 
