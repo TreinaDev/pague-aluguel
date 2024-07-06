@@ -1,7 +1,7 @@
 <% if @common_area.common_area_fee_histories.any? %>
   <hr>
-  <div class="mt-3 d-flex justify-content-center">
-    <div class="accordion shadow-sm w-75" id="recent-admins">
+  <div class="mt-3 d-flex justify-content-center" id="recent-admins">
+    <div class="accordion shadow-sm w-75">
       <div class="accordion-item">
         <h2 class="accordion-header">
           <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#<%= dom_id(@common_area) %>" aria-expanded="false" aria-controls="<%= dom_id(@common_area) %>">
