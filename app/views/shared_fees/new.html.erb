@@ -17,9 +17,10 @@
   <span class="fs-4 mx-auto mt-3 text-uppercase">
     <%= I18n.t('views.new.create_shared_fee') %>
   </span>
+  <span class="mx-auto text-uppercase fs-7 text-muted"><%= @condo.name %></span>
 
   <%= form_with model: @shared_fee, url: condo_shared_fees_path, local: true do |f| %>
-    <div class="form-floating mb-3 w-50 mx-auto">
+    <div class="form-floating mb-3 w-50 mx-auto mt-4">
       <%= f.text_field :description, class: "form-control" %>
       <%= f.label :description %>
     </div>
