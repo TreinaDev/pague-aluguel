@@ -63,7 +63,7 @@ describe 'Admin vê a lista de áreas comuns' do
     create(:common_area, name: 'Jiraya', condo_id: second_condo.id)
 
     login_as admin, scope: :admin
-    visit condo_common_areas_path(condo.id)
+    visit condo_path(condo.id)
 
     expect(page).to have_content 'TMNT'
     expect(page).to have_content 'Saint Seiya'
@@ -95,7 +95,7 @@ describe 'Admin vê a lista de áreas comuns' do
     create(:common_area, name: 'Saint Seiya', fee_cents: 500_00, condo_id: condo.id)
 
     login_as admin, scope: :admin
-    visit condo_common_areas_path(condo.id)
+    visit condo_path(condo.id)
     click_on 'TMNT'
     find('#close').click
 

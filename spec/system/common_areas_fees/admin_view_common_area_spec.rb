@@ -5,11 +5,11 @@ describe 'Admin vê área comum' do
     admin = create(:admin, email: 'ikki.phoenix@seiya.com', password: 'phoenix123')
     condo = Condo.new(id: 1, name: 'Condomínio Vila das Flores', city: 'São Paulo')
     allow(Condo).to receive(:find).and_return(condo)
-    CommonArea.create!(name: 'TMNT', description: 'Teenage Mutant Ninja Turtles', max_capacity: 40,
+    create(:common_area, name: 'TMNT', description: 'Teenage Mutant Ninja Turtles', max_capacity: 40,
                        usage_rules: 'Não lutar no salão', fee_cents: 200_00, condo_id: condo.id)
 
     login_as admin, scope: :admin
-    visit condo_common_areas_path(condo.id)
+    visit condo_path(condo.id)
     click_on 'TMNT'
 
     expect(page).to have_content 'TMNT'

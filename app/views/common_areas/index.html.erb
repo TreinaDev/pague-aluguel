@@ -1,7 +1,7 @@
 <%= turbo_frame_tag 'expand-common-areas' do %>
-  <% if @last_common_areas.present? %>
+  <% if @common_areas.present? %>
     <div class="d-flex gap-2 flex-wrap justify-content-center">
-      <% @last_common_areas.each do |common_area| %>
+      <% @common_areas.each do |common_area| %>
         <%= link_to condo_common_area_path(@condo.id, common_area.id), class: "text-decoration-none", data: { turbo_frame: "modal" } do %>
           <div class="card hover-strong shadow-sm" style="width: 18rem; height: 7rem;">
             <div class="card-body">

@@ -15,7 +15,7 @@ describe 'Admin vê histórico de taxas da área comum' do
 
     login_as admin, scope: :admin
     visit condo_path(condo.id)
-    within 'div#first-common-areas' do
+    within 'div#common-areas' do
       click_on 'Salão de Festas'
     end
     click_on 'Mostrar histórico de taxas'
@@ -41,7 +41,7 @@ describe 'Admin vê histórico de taxas da área comum' do
 
     login_as admin, scope: :admin
     visit condo_path(condo.id)
-    within 'div#first-common-areas' do
+    within 'div#common-areas' do
       click_on 'Salão de Festas'
     end
     click_on 'Mostrar histórico de taxas'
