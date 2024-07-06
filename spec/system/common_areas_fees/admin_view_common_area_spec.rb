@@ -6,7 +6,7 @@ describe 'Admin vê área comum' do
     condo = Condo.new(id: 1, name: 'Condomínio Vila das Flores', city: 'São Paulo')
     allow(Condo).to receive(:find).and_return(condo)
     create(:common_area, name: 'TMNT', description: 'Teenage Mutant Ninja Turtles', max_capacity: 40,
-                       usage_rules: 'Não lutar no salão', fee_cents: 200_00, condo_id: condo.id)
+                         usage_rules: 'Não lutar no salão', fee_cents: 200_00, condo_id: condo.id)
 
     login_as admin, scope: :admin
     visit condo_path(condo.id)
