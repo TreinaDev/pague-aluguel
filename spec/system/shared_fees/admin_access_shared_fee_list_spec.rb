@@ -93,6 +93,7 @@ describe 'Admin tenta acessar lista de contas compartilhadas' do
     end
     click_on 'Conta de Água'
 
+    expect(current_path).to eq condo_shared_fees_path(condos.first.id)
     expect(page).to have_content 'Conta de Água'
     expect(page).to have_content 'R$5.000,00'
     expect(page).to have_content 15.days.from_now.strftime('%d/%m/%Y')
@@ -116,18 +117,22 @@ describe 'Admin tenta acessar lista de contas compartilhadas' do
                       total_value: 10_000, condo_id: condos.first.id)
 
     login_as admin, scope: :admin
-    visit shared_fees_path(condo_id: condos.first.id)
+    visit condo_shared_fees_path(condos.first.id)
     click_on 'Conta de Luz'
     find('#close').click
 
     expect(page).not_to have_content 15.days.from_now.to_date
     expect(page).not_to have_content 'CANCELAR'
+    expect(current_path).to eq condo_shared_fees_path(condos.first.id)
   end
 
   it 'e não está autenticado' do
     FactoryBot.create(:admin, first_name: 'Fulano', last_name: 'Da Costa')
 
-    visit shared_fees_path
+    condo = Condo.new(id: 1, name: 'Edifício Monte Verde', city: 'Recife')
+    allow(Condo).to receive(:find).and_return(condo)
+
+    visit condo_shared_fees_path(condo.id)
 
     expect(page).to have_content 'Para continuar, faça login ou registre-se.'
     expect(current_path).to eq new_admin_session_path
@@ -144,9 +149,9 @@ describe 'Admin tenta acessar lista de contas compartilhadas' do
     allow(UnitType).to receive(:find_all_by_condo).and_return(unit_types)
 
     login_as admin, scope: :admin
-    visit shared_fees_path(condo_id: condos.first.id)
+    visit condo_shared_fees_path(condos.first.id)
 
-    expect(page).to have_content 'Não foram encontradas contas compartilhadas.'
-    expect(current_path).to eq shared_fees_path
+    expect(page).to have_content('Não foram encontradas contas compartilhadas.')
+    expect(current_path).to eq condo_shared_fees_path(condos.first.id)
   end
 end

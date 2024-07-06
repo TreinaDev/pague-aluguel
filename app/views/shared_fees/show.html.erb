@@ -1,6 +1,6 @@
 <%= turbo_frame_tag "modal" do %>
   <div class="dean-modal modal-sm">
-    <%= link_to "", shared_fees_path(condo_id: @condo.id), id: 'close', class: "btn btn-sm btn-close" %>
+    <%= link_to "", condo_shared_fees_path(@condo.id), id: 'close', class: "btn btn-sm btn-close" %>
 
     <span class="fs-8 text-center d-block"><%= SharedFee.model_name.human %></span>
     <span class="fs-3 text-center d-block"><%= @condo.name%></span>
@@ -30,7 +30,7 @@
 
     <% if @shared_fee.active? %>
     <hr>
-      <%= button_to cancel_shared_fee_path(@shared_fee), class: "d-flex align-items-center btn hover-danger mx-auto", data: { turbo_confirm: "Tem certeza que deseja cancelar essa conta compartilhada? Essa ação não poderá ser desfeita." } do %>
+      <%= button_to cancel_condo_shared_fee_path(@condo.id, @shared_fee), class: "d-flex align-items-center btn hover-danger mx-auto", data: { turbo_confirm: "Tem certeza que deseja cancelar essa conta compartilhada? Essa ação não poderá ser desfeita." } do %>
         <%= image_tag "block-icon", size: "16" %>
         <span class="ms-1 fs-7 text-uppercase"><%= I18n.t('cancel-button') %></span>
       <% end %>

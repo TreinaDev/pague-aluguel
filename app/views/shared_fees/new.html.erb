@@ -18,12 +18,7 @@
     <%= I18n.t('views.new.create_shared_fee') %>
   </span>
 
-  <%= form_with model: @shared_fee, local: true do |f| %>
-    <div class="form-floating mb-3 w-50 mx-auto mt-4">
-      <%= f.select(:condo_id, Condo.all.collect { |c| [ c.name, c.id ] }, { :selected => @selected_condo_id }, class: "form-select") %>
-      <%= f.label :condo_id %>
-    </div>
-
+  <%= form_with model: @shared_fee, url: condo_shared_fees_path, local: true do |f| %>
     <div class="form-floating mb-3 w-50 mx-auto">
       <%= f.text_field :description, class: "form-control" %>
       <%= f.label :description %>
