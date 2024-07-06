@@ -16,7 +16,7 @@
               </span>
               <small class="d-block text-body-secondary">
                 <%= SharedFee.human_attribute_name(:issue_date) %>:
-                <%= I18n.localize(base_fee.charge_day.to_date)%>
+                <%= I18n.l(base_fee.charge_day.to_date)%>
               </small>
             </div>
             <span class="d-block">
