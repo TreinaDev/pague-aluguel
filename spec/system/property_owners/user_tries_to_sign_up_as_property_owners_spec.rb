@@ -20,7 +20,7 @@ describe 'Proprietário tenta se cadastrar' do
     fill_in 'Confirme a senha', with: 'password'
     click_on 'Cadastrar'
 
-    expect(page).to have_content 'CPF inválido'
+    expect(page).to have_content 'CPF não encontrado no sistema'
   end
 
   it 'e realiza o cadastro com sucesso' do
