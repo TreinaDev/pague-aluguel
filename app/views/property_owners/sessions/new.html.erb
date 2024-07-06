@@ -12,6 +12,9 @@
 
     <%= form_for(resource, as: resource_name, url: session_path(resource_name)) do |f| %>
       <%= render "property_owners/shared/error_messages", resource: resource %>
+      <% if alert %>
+        <span class="alert alert-danger d-block text-center"><%= alert %></span>
+      <% end %>
       <div class="form-floating mb-2 w-75 mx-auto">
         <%= f.email_field :email, autofocus: true, autocomplete: "email", class: "form-control" %>
         <%= f.label :email %>

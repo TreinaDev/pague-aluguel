@@ -49,6 +49,7 @@ describe 'Proprietário tenta fazer login' do
       expect(page).not_to have_content 'email@fake'
       expect(page).not_to have_button 'Logout'
     end
+    expect(page).to have_content 'E-mail ou senha inválidos.'
     expect(page).to have_button 'Login'
   end
 end
