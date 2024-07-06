@@ -3,6 +3,9 @@ require 'rails_helper'
 describe 'usuario loga como admin' do
   it 'com sucesso' do
     FactoryBot.create(:admin, first_name: 'Fulano', last_name: 'Da Costa')
+    condos = []
+    condos << Condo.new(id: 1, name: 'Condo Test', city: 'City Test')
+    allow(Condo).to receive(:all).and_return(condos)
 
     visit root_path
     within 'nav' do
@@ -25,6 +28,10 @@ describe 'usuario loga como admin' do
   end
 
   it 'falha quando login inexistente' do
+    condos = []
+    condos << Condo.new(id: 1, name: 'Condo Test', city: 'City Test')
+    allow(Condo).to receive(:all).and_return(condos)
+
     visit root_path
     within 'nav' do
       click_on 'Login'
@@ -50,6 +57,9 @@ end
 describe 'admin faz logout' do
   it 'com sucesso' do
     admin = FactoryBot.create(:admin, first_name: 'Fulano', last_name: 'Da Costa')
+    condos = []
+    condos << Condo.new(id: 1, name: 'Condo Test', city: 'City Test')
+    allow(Condo).to receive(:all).and_return(condos)
 
     login_as admin, scope: :admin
     visit root_path

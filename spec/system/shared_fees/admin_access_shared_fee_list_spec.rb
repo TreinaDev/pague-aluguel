@@ -82,7 +82,7 @@ describe 'Admin tenta acessar lista de contas compartilhadas' do
     SharedFee.create!(description: 'Conta de Luz', issue_date: 10.days.from_now.to_date,
                       total_value: 10_000, condo_id: condos.first.id)
     SharedFee.create!(description: 'Conta de Água', issue_date: 15.days.from_now.to_date,
-                                      total_value: 5_000, condo_id: condos.first.id)
+                      total_value: 5_000, condo_id: condos.first.id)
     SharedFee.create!(description: 'Conta de Carro Pipa', issue_date: 5.days.from_now.to_date,
                       total_value: 25_000, condo_id: condos.last.id)
 
@@ -95,7 +95,7 @@ describe 'Admin tenta acessar lista de contas compartilhadas' do
 
     expect(page).to have_content 'Conta de Água'
     expect(page).to have_content 'R$5.000,00'
-    expect(page).to have_content 15.days.from_now.strftime("%d/%m/%Y")
+    expect(page).to have_content 15.days.from_now.strftime('%d/%m/%Y')
     expect(page).to have_content 'valor total'
     expect(page).to have_content 'R$5.000,00'
   end

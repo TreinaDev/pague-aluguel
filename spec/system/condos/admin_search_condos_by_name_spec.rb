@@ -15,7 +15,7 @@ describe 'Admin busca condomínio pelo nome' do
     fill_in 'Busque um condomínio',	with: 'verde'
     click_on 'Buscar'
 
-    expect(page).to have_content "Resultados para verde"
+    expect(page).to have_content 'Resultados para verde'
     expect(page).to have_content 'Edifício Monte Verde'
     expect(page).to have_content 'Condomínio Lagoa Verde'
   end

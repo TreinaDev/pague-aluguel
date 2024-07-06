@@ -4,6 +4,9 @@ describe 'admin registra outro admin' do
   it 'com sucesso' do
     admin = FactoryBot.create(:admin, first_name: 'Fulano', last_name: 'Da Costa')
     cpf = CPF.generate
+    condos = []
+    condos << Condo.new(id: 1, name: 'Condo Test', city: 'City Test')
+    allow(Condo).to receive(:all).and_return(condos)
 
     login_as admin, scope: :admin
     visit root_path
@@ -26,6 +29,9 @@ describe 'admin registra outro admin' do
 
   it 'falha quando faltam atributos' do
     admin = FactoryBot.create(:admin)
+    condos = []
+    condos << Condo.new(id: 1, name: 'Condo Test', city: 'City Test')
+    allow(Condo).to receive(:all).and_return(condos)
 
     login_as admin, scope: :admin
     visit root_path

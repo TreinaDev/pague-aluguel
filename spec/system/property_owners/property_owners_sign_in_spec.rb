@@ -1,11 +1,15 @@
 require 'rails_helper'
 
 describe 'Proprietário tenta fazer login' do
-  xit 'com sucesso e visualiza seu cpf e email' do
-    allow(Faraday).to receive(:get).and_return(instance_double('Faraday::Response', status: 200))
+  it 'com sucesso e visualiza seu cpf e email' do
     cpf = CPF.generate
+    allow(Faraday).to receive(:get).and_return(instance_double('Faraday::Response', success?: true))
     property_owner = create(:property_owner, email: 'propertyownertest@mail.com', password: '123456',
                                              document_number: cpf)
+
+    condos = []
+    condos << Condo.new(id: 1, name: 'Condo Test', city: 'City Test')
+    allow(Condo).to receive(:all).and_return(condos)
 
     visit root_path
     within 'nav' do
@@ -20,11 +24,15 @@ describe 'Proprietário tenta fazer login' do
     end
 
     expect(page).to have_content 'Login efetuado com sucesso'
-    expect(page).to have_content cpf
+    expect(page).to have_content CPF.new(cpf).formatted
     expect(page).to have_content property_owner.email
   end
 
   it 'e preenche os campos de forma inválida' do
+    condos = []
+    condos << Condo.new(id: 1, name: 'Condo Test', city: 'City Test')
+    allow(Condo).to receive(:all).and_return(condos)
+
     visit root_path
     within 'nav' do
       click_on 'Login'

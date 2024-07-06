@@ -4,9 +4,9 @@ describe 'admin vê taxa fixa' do
   it 'e deve estar logado' do
     condo = Condo.new(id: 1, name: 'Prédio lindo', city: 'Cidade maravilhosa')
     base_fee = create(:base_fee,
-            name: 'Taxa de Condomínio', description: 'Manutenção.',
-            interest_rate: 2, late_fine: 10, fixed: true,
-            charge_day: 25.days.from_now, recurrence: :bimonthly, condo_id: condo.id)
+                      name: 'Taxa de Condomínio', description: 'Manutenção.',
+                      interest_rate: 2, late_fine: 10, fixed: true,
+                      charge_day: 25.days.from_now, recurrence: :bimonthly, condo_id: condo.id)
     allow(Condo).to receive(:find).and_return(condo)
 
     visit condo_base_fee_path(condo.id, base_fee)

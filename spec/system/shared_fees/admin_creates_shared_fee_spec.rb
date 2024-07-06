@@ -34,8 +34,8 @@ describe 'Admin lança uma conta compartilhada' do
     expect(current_path).to eq shared_fee_path(SharedFee.last)
     expect(page).to have_content 'Condo Test'
     expect(page).to have_content 'Conta de Luz'
-    expect(page).to have_content "data de emissão"
-    expect(page).to have_content "#{I18n.l(10.days.from_now.to_date)}"
+    expect(page).to have_content 'data de emissão'
+    expect(page).to have_content I18n.l(10.days.from_now.to_date).to_s
     expect(page).to have_content 'valor total'
     expect(page).to have_content 'R$10.000,00'
     expect(page).to have_content 'ATIVA'

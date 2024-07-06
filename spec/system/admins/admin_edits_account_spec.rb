@@ -3,6 +3,9 @@ require 'rails_helper'
 describe 'admin edita sua propria conta' do
   it 'com sucesso' do
     admin = FactoryBot.create(:admin, first_name: 'Fulano', last_name: 'Da Costa')
+    condos = []
+    condos << Condo.new(id: 1, name: 'Condo Test', city: 'City Test')
+    allow(Condo).to receive(:all).and_return(condos)
 
     login_as admin, scope: :admin
     visit root_path
@@ -45,6 +48,9 @@ describe 'admin tenta editar outra conta' do
                       first_name: 'Ciclano',
                       last_name: 'Da Silva',
                       document_number: CPF.generate)
+    condos = []
+    condos << Condo.new(id: 1, name: 'Condo Test', city: 'City Test')
+    allow(Condo).to receive(:all).and_return(condos)
 
     login_as admin, scope: :admin
     visit root_path
