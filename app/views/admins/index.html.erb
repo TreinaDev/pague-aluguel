@@ -11,13 +11,13 @@
           </h2>
           <div id="<%= dom_id(admin) %>" class="accordion-collapse collapse" data-bs-parent="#admin-accordion">
             <div class="accordion-body">
-              <span class="text-lowercase fs-8 text-muted"><%= I18n.t('views.index.email') %></span>
+              <span class="text-lowercase fs-8 text-muted"><%= I18n.t('views.show.email') %></span>
               <span><%= admin.email %></span>
               <hr class="divider">
-              <span class="text-lowercase fs-8 text-muted"><%= I18n.t('views.index.document') %></span>
+              <span class="text-lowercase fs-8 text-muted"><%= I18n.t('views.show.document') %></span>
               <span data-controller="document-number"><%= admin.document_number %></span>
               <hr class="divider">
-              <span class="text-lowercase fs-8 text-muted"><%= I18n.t('views.index.since') %></span>
+              <span class="text-lowercase fs-8 text-muted"><%= I18n.t('views.show.since') %></span>
               <span><%= admin.created_at.strftime("%d/%m/%Y") %></span>
             </div>
           </div>
