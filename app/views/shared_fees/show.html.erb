@@ -3,8 +3,8 @@
     <%= link_to "", condo_shared_fees_path(@condo.id), id: 'close', class: "btn btn-sm btn-close" %>
 
     <span class="fs-8 text-center d-block"><%= SharedFee.model_name.human %></span>
-    <span class="fs-3 text-center d-block"><%= @condo.name%></span>
-    <span class="fs-8 text-center d-block text-muted"><%= @shared_fee.description %></span>
+    <span class="fs-3 text-center d-block"><%= @shared_fee.description %></span>
+    <span class="fs-8 text-center d-block"><%= @condo.name%></span>
     <hr>
 
     <div class="d-flex justify-content-center align-items-center">
