@@ -14,7 +14,7 @@ class CommonAreasController < ApplicationController
   def update
     if @common_area.update(common_area_params)
       update_common_area_history
-      redirect_to condo_common_area_path(@condo.id, @common_area)
+      redirect_to condo_common_area_path(@condo.id, @common_area), notice: I18n.t('messages.registered_fee')
     else
       @common_area_errors = @common_area.errors.full_messages
       flash.now[:alert] = I18n.t('messages.registration_error')

@@ -2,6 +2,10 @@
   <div class="dean-modal modal-sm">
     <%= link_to "", condo_path(@condo.id), class: "btn btn-close btn-sm", id: 'close' %>
 
+    <% if notice %>
+      <div class="mt-3 alert alert-success text-center" role="alert"><%= notice %></div>
+    <% end %>
+
     <span class="fs-8 text-center d-block"><%= CommonArea.model_name.human %></span>
     <span class="fs-3 text-center d-block"><%= @common_area.name%></span>
     <span class="fs-8 text-center d-block text-muted"><%= @common_area.description %></span>

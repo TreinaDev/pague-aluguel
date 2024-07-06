@@ -20,6 +20,7 @@ describe 'Admin registra uma taxa de área comum' do
     click_on 'Atualizar'
 
     expect(page).to have_content 'Taxa de área comum'
+    expect(page).to have_content 'Taxa cadastrada com sucesso!'
     expect(page).to have_content 'R$200,50'
     expect(page).not_to have_content 'R$300,00'
     expect(current_path).to eq condo_path(condo.id)
