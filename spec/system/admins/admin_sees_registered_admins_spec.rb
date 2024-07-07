@@ -8,6 +8,9 @@ describe 'admin vê admins registrados' do
     create(:admin, first_name: 'Arthur', last_name: 'Scortegagna', email: 'arthur@mail.com')
     create(:admin, first_name: 'Julia', last_name: 'Kanzaki', email: 'julia@email.com')
     create(:admin, first_name: 'Lais', last_name: 'Almeida', email: 'lais@email.com')
+    condos = []
+    condos << Condo.new(id: 1, name: 'Condo Test', city: 'City Test')
+    allow(Condo).to receive(:all).and_return(condos)
 
     login_as admin, scope: :admin
     visit root_path
@@ -31,6 +34,10 @@ describe 'admin vê admins registrados' do
     create(:admin, first_name: 'Arthur', last_name: 'Scortegagna', email: 'arthur@mail.com')
     create(:admin, first_name: 'Julia', last_name: 'Kanzaki', email: 'julia@email.com')
     create(:admin, first_name: 'Lais', last_name: 'Almeida', email: 'lais@email.com')
+    condos = []
+    condos << Condo.new(id: 1, name: 'Condo Test', city: 'City Test')
+    allow(Condo).to receive(:all).and_return(condos)
+
 
     login_as admin, scope: :admin
     visit root_path

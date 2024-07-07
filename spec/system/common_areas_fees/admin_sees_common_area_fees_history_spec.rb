@@ -31,6 +31,9 @@ describe 'Admin vê histórico de taxas da área comum' do
     admin = create(:admin)
     condo = Condo.new(id: 1, name: 'Condomínio Vila das Flores', city: 'São Paulo')
     salao_festa = create(:common_area, name: 'Salão de Festas', condo_id: condo.id)
+    allow(Condo).to receive(:find).and_return(condo)
+
+    create(:common_area, fee: '300,00', condo_id: condo.id)
     fee_one = create(
       :common_area_fee_history,
       fee_cents: 250,
@@ -45,7 +48,6 @@ describe 'Admin vê histórico de taxas da área comum' do
       created_at: 30.days.ago
     )
 
-    create(:common_area, fee: '300,00', condo_id: condo.id)
 
     login_as admin, scope: :admin
     visit condo_path(condo.id)
