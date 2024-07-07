@@ -48,7 +48,6 @@ describe 'Admin vê histórico de taxas da área comum' do
       created_at: 30.days.ago
     )
 
-
     login_as admin, scope: :admin
     visit condo_path(condo.id)
     within 'div#common-areas' do

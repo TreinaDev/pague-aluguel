@@ -38,7 +38,6 @@ describe 'admin vê admins registrados' do
     condos << Condo.new(id: 1, name: 'Condo Test', city: 'City Test')
     allow(Condo).to receive(:all).and_return(condos)
 
-
     login_as admin, scope: :admin
     visit root_path
     within('div#admins') do
