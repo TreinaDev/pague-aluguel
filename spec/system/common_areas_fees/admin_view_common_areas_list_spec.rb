@@ -47,10 +47,16 @@ describe 'Admin vê a lista de áreas comuns' do
     admin = create(:admin)
     condo = Condo.new(id: 1, name: 'Teenage Mutant Ninja Turtles', city: 'São Paulo')
     allow(Condo).to receive(:find).and_return(condo)
-    json_data = File.read('spec/support/json/common_areas.json')
-    fake_response = double('faraday_response', status: 200, body: json_data, success?: true)
-    allow(Faraday).to receive(:get).with("http://127.0.0.1:3000/api/v1/condos/#{condo.id}/common_areas").and_return(fake_response)
-    common_area = JSON.parse(json_data).first.to_json
+    common_areas = []
+    common_areas << CommonArea.new(id: 1, name: 'Academia',
+                                   description: 'Uma academia raíz com ventilador apenas para os marombas',
+                                   max_occupancy: 20, rules: 'Não pode ser frango')
+    common_areas << CommonArea.new(id: 1, name: 'Piscina', description: 'Piscina grande cabe até golfinhos.',
+                                   max_occupancy: 50, rules: 'Não pode comida aos arredores da área da piscina.')
+    common_areas << CommonArea.new(id: 1, name: 'Salão de festa', description: 'Festa para toda a família.',
+                                   max_occupancy: 50, rules: 'Não é permitido a entrada de leões')
+    allow(CommonArea).to receive(:all).and_return(common_areas)
+    common_area = common_areas.first.to_json
     fake_response = double('faraday_response', status: 200, body: common_area, success?: true)
     allow(Faraday).to receive(:get).with("http://127.0.0.1:3000/api/v1/condos/#{condo.id}/common_areas/1").and_return(fake_response)
 
@@ -65,13 +71,11 @@ describe 'Admin vê a lista de áreas comuns' do
     expect(page).to have_content 'Piscina grande cabe até golfinhos.'
   end
 
-  # Só será possível se tivermos o show do condomínio
-  xit 'e volta para show do condomínio' do
+  it 'e volta para show do condomínio' do
     admin = create(:admin)
     condo = Condo.new(id: 1, name: 'Teenage Mutant Ninja Turtles', city: 'São Paulo')
     allow(Condo).to receive(:find).and_return(condo)
-
-    create(:common_area, name: 'TMNT', fee_cents: 400_00, condo_id: condo.id)
+    allow(CommonArea).to receive(:all).and_return([])
 
     login_as admin, scope: :admin
     visit condo_common_areas_path(condo.id)

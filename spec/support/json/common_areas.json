@@ -20,7 +20,7 @@
     "name": "Salão de festa",
     "description": "Festa para toda a família.",
     "max_occupancy": 80,
-    "rules": "Não é permitido a entrada de girafas, leões, zebras e hipopotamos, somente lêmures",
+    "rules": "Não é permitido a entrada de leões",
     "condo_id": 2
   }
 ]

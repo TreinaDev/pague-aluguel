@@ -1,5 +1,7 @@
 Admin.create!(email: 'ikki.phoenix@seiya.com', password: 'phoenix123', first_name: 'Ikki', last_name: 'Phoenix',
               document_number: CPF.generate)
+Admin.create!(email: 'leonardo@tmnt.com', password: 'leonardo123', first_name: 'Leonardo', last_name: 'Hamato',
+              document_number: CPF.generate)
 
 Value.destroy_all
 BaseFee.destroy_all
