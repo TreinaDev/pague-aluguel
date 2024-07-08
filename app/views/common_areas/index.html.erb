@@ -1,40 +1,21 @@
-<div>
-  <%= link_to 'Voltar', condo_path(@condo.id), class:"btn btn-primary" %>
-</div>
-
-<div class="container d-flex justify-content-center">
-  
-  <div class="container text-center">
-    <h2>Áreas comuns do condomínio <%= @condo.name %></h2>
-
-    <% if @common_areas.present? %>
-      <div class="container col-7 mt-5">
-
-        <% @common_areas.each_with_index do |area, index| %>
-          <div id="<%= "area-#{index}"%>" class="mb-4">
-            <%= link_to condo_common_area_path(@condo.id, area.id), class: "link-container d-flex justify-content-center", style:"text-decoration:none;" do %>
-              <div class="rounded-4 shadow p-4 col-12"  >
-                <div class="d-flex justify-content-between mb-3">
-                  <h3 class="align-self-center"><%= area.name %></h3>
-                  <p class="align-self-center mb-0">Taxa de uso: <strong><%# area.fee_cents.zero? ? "Taxa não cadastrada" : Money.new(area.fee_cents, 'BRL').format %></strong></p>
-                </div>
-                <hr>
-                <div class="text-center">
-                  <span class="mb-0"><%= area.description %></span>
-                </div>
-              </div>
-            <% end %>
+<%= turbo_frame_tag 'expand-common-areas' do %>
+  <% if @common_areas.present? %>
+    <div class="d-flex gap-2 flex-wrap justify-content-center">
+      <% @common_areas.each do |common_area| %>
+        <%= link_to condo_common_area_path(@condo.id, common_area.id), class: "text-decoration-none", data: { turbo_frame: "modal" } do %>
+          <div class="card hover-strong shadow-sm" style="width: 18rem; height: 7rem;">
+            <div class="card-body">
+              <span class="d-block"><%= common_area.name %></span>
+              <span class="text-muted fs-8"><%= common_area.description %></span>
+            </div>
           </div>
         <% end %>
-
-      </div>
-    <% else %>
-  </div>
-    
-    <div class="mt-4 container text-center">
-      <p>Nenhuma Área Comum cadastrada</p>
+      <% end %>
     </div>
-
   <% end %>
+<% end %>
 
-</div>
+<!-- Usar na Show
+<p class="align-self-center mb-0">Taxa de uso: <strong><%# area.fee_cents.zero? ? "Taxa não cadastrada" : Money.new(area.fee_cents, 'BRL').format %></strong></p>
+-->
+

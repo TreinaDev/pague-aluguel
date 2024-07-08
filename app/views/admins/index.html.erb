@@ -1,9 +1,28 @@
-<%= link_to 'Registrar novo admin', new_admin_registration_path %>
-
-<div class="list-group" id="admin_list">
-  <% @admins.each do |admin| %>
-    <%= link_to admin, class: "list-group-item list-group-item-action" do %>
-      <span><%= admin.first_name %> <%= admin.last_name %></span>
-    <% end %>
-  <% end %>
-</div>
+<%= turbo_frame_tag 'expand-admins', data_autoscroll_behavior: "auto" do %>
+  <div class="d-flex justify-content-center">
+    <div class="accordion shadow-sm w-50" id="all-admins">
+      <% @admins.each do |admin| %>
+        <div class="accordion-item">
+          <h2 class="accordion-header">
+            <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#<%= dom_id(admin) %>" aria-expanded="false" aria-controls="<%= dom_id(admin) %>">
+              <%= avatar(admin) %>
+              <%= capitalized_name(admin) %>
+            </button>
+          </h2>
+          <div id="<%= dom_id(admin) %>" class="accordion-collapse collapse" data-bs-parent="#admin-accordion">
+            <div class="accordion-body">
+              <span class="text-lowercase fs-8 text-muted"><%= I18n.t('views.show.email') %></span>
+              <span><%= admin.email %></span>
+              <hr class="divider">
+              <span class="text-lowercase fs-8 text-muted"><%= I18n.t('views.show.document') %></span>
+              <span data-controller="document-number"><%= admin.document_number %></span>
+              <hr class="divider">
+              <span class="text-lowercase fs-8 text-muted"><%= I18n.t('views.show.since') %></span>
+              <span><%= admin.created_at.strftime("%d/%m/%Y") %></span>
+            </div>
+          </div>
+        </div>
+      <% end %>
+    </div>
+  </div>
+<% end %>

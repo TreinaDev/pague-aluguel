@@ -25,6 +25,8 @@ pt-BR:
         unconfirmed_email: E-mail não confirmado
         unlock_token: Token de desbloqueio
         updated_at: Atualizado em
+        photo: Insira sua foto de perfil
+      user:
       property_owner:
         confirmation_sent_at: Confirmação enviada em
         confirmation_token: Token de confirmação
@@ -74,7 +76,7 @@ pt-BR:
       timeout: A sua sessão expirou, por favor, faça login novamente para continuar.
       unauthenticated: Para continuar, faça login ou registre-se.
       unconfirmed: Antes de continuar, confirme a sua conta.
-      invalid_document_number: inválido
+      invalid_document_number: não encontrado no sistema
     mailer:
       confirmation_instructions:
         action: Confirmar minha conta
@@ -123,6 +125,7 @@ pt-BR:
     registrations:
       destroyed: Adeus! A sua conta foi cancelada com sucesso. Esperamos vê-lo novamente em breve.
       edit:
+        edit_admin: Editar perfil
         are_you_sure: Você tem certeza?
         cancel_my_account: Cancelar minha conta
         currently_waiting_confirmation_for_email: 'No momento esperando por: %{email}'
@@ -132,8 +135,10 @@ pt-BR:
         update: Atualizar
         we_need_your_current_password_to_confirm_your_changes: precisamos da sua senha atual para confirmar suas mudanças
       new:
-        sign_up: Inscrever-se
-      signed_up: Bem Vindo! Você se registrou com sucesso!
+        sign_up: criar conta
+        sign_up_admin: Registrar Administrador
+        sign_up_property_owner: Registrar Proprietário
+      signed_up: Cadastro realizado com sucesso.
       signed_up_but_inactive: Você se inscreveu com sucesso, porém nós não podemos autenticá-lo porque sua conta ainda não foi ativada.
       signed_up_but_locked: Você se inscreveu com sucesso. Porém nós não podemos autenticá-lo porque sua conta está bloqueada.
       signed_up_but_unconfirmed: Uma mensagem com um link de confirmação foi enviada para o seu e-mail. Por favor, acesse o link para ativar sua conta.
@@ -142,7 +147,10 @@ pt-BR:
       updated_but_not_signed_in: Sua conta foi atualizada com sucesso, uma vez que sua senha foi alterada será necessário realizar o login novamente.
     sessions:
       already_signed_out: Logout efetuado com sucesso.
+      choose_profile: Escolha a forma de login
       new:
+        sign_in_admin: Entrar como administrador
+        sign_in_property_owner: Entrar como proprietário
         sign_in: Login
       signed_in: Login efetuado com sucesso.
       signed_out: Logout efetuado com sucesso.
@@ -153,8 +161,8 @@ pt-BR:
         didn_t_receive_unlock_instructions: Não recebeu instruções de desbloqueio?
         forgot_your_password: Esqueceu sua senha?
         sign_in: Login
+        sign_out: Logout
         sign_in_with_provider: Entrar com %{provider}
-        sign_up: Inscrever-se
       minimum_password_length:
         one: "(Mínimo de %{count} caractere)"
         other: "(Mínimo de %{count} caracteres)"
@@ -175,3 +183,4 @@ pt-BR:
         one: 'Não foi possível salvar %{resource}: 1 erro'
         other: 'Não foi possível salvar %{resource}: %{count} erros.'
       verify_error: 'Verifique os erros abaixo:'
+

@@ -3,6 +3,8 @@ Rails.application.routes.draw do
   devise_for :admins, controllers: { registrations: "admins/registrations", sessions: "admins/sessions" }
 
   root to: "home#index"
+  get 'search', to: 'home#search'
+  get 'choose_profile', to: 'home#choose_profile'
 
   resources :condos, only: [:index, :show] do
     resources :common_areas, only: [:index, :show, :edit, :update] do
@@ -18,6 +20,6 @@ Rails.application.routes.draw do
   end
 
   authenticate :admin do
-    resources :admins, only: [:index, :show]
+    resources :admins, only: [:index]
   end
 end

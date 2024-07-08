@@ -15,16 +15,20 @@ describe 'Admin registra uma taxa de área comum' do
 
     login_as admin, scope: :admin
     visit condo_common_areas_path(condo.id)
-    within 'div#area-0' do
+    # visit condo_path(condo.id)
+    within 'div#common-areas' do
       click_on 'Academia'
     end
-    click_on 'Registrar Taxa'
-    fill_in 'Taxa', with: '200,50'
+    find('#new-common-area').click
+    fill_in 'Taxa de área comum', with: '200,50'
     click_on 'Criar Taxa de Área Comum'
+    # click_on 'Atualizar'
 
+    expect(page).to have_content 'Taxa de área comum'
     expect(page).to have_content 'Taxa cadastrada com sucesso!'
-    expect(current_path).to eq condo_common_area_path(condo.id, common_area['id'])
     expect(page).to have_content 'Taxa de área comum: R$200,50'
+    expect(current_path).to eq condo_common_area_path(condo.id, common_area['id'])
+    # expect(current_path).to eq condo_path(condo.id)
   end
 
   it 'se estiver autenticado' do
@@ -43,8 +47,6 @@ describe 'Admin registra uma taxa de área comum' do
     expect(current_path).to eq new_admin_session_path
   end
 
-  #         TESTE UNITARIO DE TAXA NEGATIVA NO MODEL
-
   it 'e deixa em branco' do
     admin = create(:admin)
     condo = Condo.new(id: 1, name: 'Condomínio Vila das Flores', city: 'São Paulo')
@@ -59,15 +61,18 @@ describe 'Admin registra uma taxa de área comum' do
 
     login_as admin, scope: :admin
     visit condo_common_areas_path(condo.id)
-    within 'div#area-0' do
+    # visit condo_path(condo.id)
+    within 'div#common-areas' do
       click_on 'Academia'
     end
-    click_on 'Registrar Taxa'
-    fill_in 'Taxa', with: ''
+    find('#new-common-area').click
+    fill_in 'Taxa de área comum', with: ''
     click_on 'Criar Taxa de Área Comum'
 
+    expect(page).to have_content 'Verifique os erros abaixo:'
     expect(page).to have_content 'Não foi possível registrar a taxa.'
     expect(page).to have_content 'Por favor, corrija os seguintes erros:'
+    expect(page).to have_content 'Taxa de área comum não é um número'
     expect(page).to have_content 'Taxa não é um número'
   end
 
@@ -85,13 +90,14 @@ describe 'Admin registra uma taxa de área comum' do
 
     login_as admin, scope: :admin
     visit condo_common_areas_path(condo.id)
-    within 'div#area-0' do
+    within 'div#common-areas' do
       click_on 'Academia'
     end
-    click_on 'Registrar Taxa'
-    fill_in 'Taxa', with: '200,50'
+    find('#new-common-area').click
+    fill_in 'Taxa de área comum', with: ''
     click_on 'Cancelar'
 
     expect(current_path).to eq condo_common_area_path(condo.id, common_area['id'])
+    # expect(current_path).to eq condo_path(condo.id)
   end
 end

@@ -3,15 +3,13 @@ class CondosController < ApplicationController
 
   def index
     @condos = Condo.all
+    @recent_condos = @condos.sort_by(&:name).take(4)
+    @condos = @condos.excluding(@recent_condos)
   end
 
   def show
     @condo = Condo.find(params[:id])
-  end
-
-  def search
-    @query = params[:query].downcase
-    @condos = Condo.all.select { |condo| condo.name.downcase.include?(@query) }
-    render 'index'
+    @common_areas = CommonArea.where(condo_id: @condo.id)
+    @first_common_areas = @common_areas.take(4)
   end
 end

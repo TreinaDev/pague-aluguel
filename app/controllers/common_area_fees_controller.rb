@@ -16,7 +16,7 @@ class CommonAreaFeesController < ApplicationController
       @common_area_fee_errors = @common_area_fee.errors.full_messages
       @condo_id = params[:condo_id]
       @common_area_id = params[:common_area_id]
-      flash[:alert] = I18n.t 'messages.common_area_fee.registration_error'
+      flash[:alert] = I18n.t 'messages.common_area_fee.registration_fee_error'
       render :new, status: :unprocessable_entity
     end
   end

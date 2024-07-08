@@ -1,0 +1,108 @@
+// images
+.avatar {
+  object-fit: cover;
+  vertical-align: middle;
+  width: 2.5rem;
+  height: 2.5rem;
+  border-radius: 50%;
+}
+
+.profile-avatar {
+  object-fit: cover;
+  vertical-align: middle;
+  width: 10rem;
+  height: 10rem;
+  border-radius: 50%;
+}
+// backgrounds
+.bg-light-beige {
+  background-color: $off-white;
+}
+
+.bg-body-custom {
+  background-color: $off-white;
+}
+
+.bg-dark {
+  background-color: $dark-red !important;
+}
+
+// form customizations
+.form-control {
+  background-color: $off-white;
+}
+
+.form-control:focus {
+  background-color: $off-white;
+}
+
+.form-select {
+  background-color: $off-white;
+}
+
+.form-floating > input + label:after {
+ background: $off-white !important;
+}
+
+.form-floating > select + label:after {
+  background: $off-white !important;
+}
+// text customizations
+.fs-7 {
+  font-size: 0.875rem;
+}
+
+.fs-8 {
+  font-size: 0.75rem;
+}
+// hover
+.hover-strong:hover {
+  background-color: #cfd2dc;
+  border-color: #d0d0d0;
+}
+
+.hover-danger:hover {
+  color: $black !important;
+  background-color: $light-red;
+  border-color: $light-red;
+}
+// width
+.w-18 {
+  width: 18%;  
+}
+
+.w-20 {
+  width: 20%;  
+}
+
+.w-35 {
+  width: 35%;
+}
+
+.w-40 {
+  width: 40%;
+}
+
+.w-45 {
+  width: 45%;
+}
+
+.w-49 {
+  width: 49%;
+}
+// spacing letters
+.ls-1 {
+  letter-spacing: 0.025em;
+}
+
+.ls-2 {
+  letter-spacing: 0.5em;
+}
+
+.ls-3 {
+  letter-spacing: 0.1em;
+}
+
+.ls-4 {
+  letter-spacing: 0.15em;
+}

@@ -14,9 +14,16 @@ class Admin < ApplicationRecord
 
   validate :verify_document_number
 
+  before_save :downcase_name
+
   private
 
+  def downcase_name
+    self.first_name = first_name.downcase if first_name.present?
+    self.last_name = last_name.downcase if last_name.present?
+  end
+
   def verify_document_number
-    errors.add(:document_number, 'não é válido') unless CPF.valid?(document_number, strict: true)
+    errors.add(:document_number, 'não é válido') unless CPF.valid?(document_number)
   end
 end

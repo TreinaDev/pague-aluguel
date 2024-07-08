@@ -5,24 +5,27 @@ class CommonAreasController < ApplicationController
 
   def index
     @common_areas = CommonArea.all(@condo.id)
+    @first_common_areas = @common_areas.take(4)
+    @common_areas = @common_areas.excluding(@first_common_areas)
   end
 
   def show
     @common_area_fee = CommonAreaFee.where(common_area_id: @common_area.id).last
+    # @common_area_fee_histories = @common_area.common_area_fee_histories.order(created_at: :desc)
   end
 
-  def edit; end
+  # def edit; end
 
-  def update
-    if @common_area.update(common_area_params)
-      update_common_area_history
-      redirect_to condo_common_area_path(@condo.id, @common_area), notice: t('messages.registered_fee')
-    else
-      @common_area_errors = @common_area.errors.full_messages
-      flash.now[:alert] = t 'messages.registration_error'
-      render :edit, status: :conflict
-    end
-  end
+  # def update
+  #   if @common_area.update(common_area_params)
+  #     update_common_area_history
+  #     redirect_to condo_common_area_path(@condo.id, @common_area), notice: I18n.t('messages.registered_fee')
+  #   else
+  #     @common_area_errors = @common_area.errors.full_messages
+  #     flash.now[:alert] = I18n.t('messages.registration_fee_error)
+  #     render :edit, status: :conflict
+  #   end
+  # end
 
   private
 
