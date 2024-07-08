@@ -4,8 +4,8 @@ pt-BR:
   activerecord:
     models:
       base_fee:
-        one: Taxa Fixa
-        other: Taxas Fixas
+        one: Taxa
+        other: Taxas
       value: Valor
     attributes:
       base_fee:
@@ -15,7 +15,7 @@ pt-BR:
         late_fine: Multa por atraso
         late_fine_cents: Multa por atraso
         fixed: Taxa fixa
-        charge_day: Data de Lançamento
+        charge_day: Data de Emissão
         recurrence: Recorrência
         enum_recurrence:
           monthly: Mensal
@@ -40,7 +40,7 @@ pt-BR:
     yearly: Anual
   views:
     new:
-      create_fee: "Cadastro de Taxa de %{condo}"
+      create_fee: "Cadastro de Taxa"
       label_price: "Valor para %{name}"
     show:
       monthly: Mensal
@@ -51,5 +51,9 @@ pt-BR:
       interest_rate: "Juros de %{number}% ao dia"
       late_fine: "Multa de R$%{number} por atraso"
       late_fine_cents: "Multa de R$%{number} por atraso"
+    index:
+      base_fee_list: Listagem de Taxas Cadastradas
+      name: Nome
+      no_base_fees: Não existem taxas cadastradas.
 
 

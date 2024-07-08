@@ -14,7 +14,7 @@ describe 'usuario tenta criar conta de administrador' do
       }
     }
 
-    expect(response).to redirect_to admins_path
+    expect(response).to redirect_to root_path
     expect(flash[:notice]).to eq I18n.t('devise.registrations.signed_up')
   end
 

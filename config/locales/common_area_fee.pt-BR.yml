@@ -10,4 +10,23 @@ pt-BR:
         other: Áreas Comuns
   messages:
     registered_fee: Taxa cadastrada com sucesso!
-    registration_error: Não foi possível registrar a taxa.
+    registration_error: Não foi possível cadastrar a taxa.
+  views:
+    edit:
+      edit_fee: "Atualizar Taxa de %{name}"
+    index:
+      name: "Áreas comuns de %{name}"
+      fee: Taxa de uso
+      no_fee: Taxa não cadastrada
+      no_common_area: Nenhuma área comum cadastrada.
+    show:
+      common_area_fee: Taxa de área comum
+      description: Descrição
+      capacity: Capacidade Máxima
+      rules: Regras de uso
+      show_history: Mostrar histórico de taxas
+      email: Email
+      data: Data
+      fee: Taxa
+      new_fee: Cadastrar Taxa
+      update_date: Data de Alteração

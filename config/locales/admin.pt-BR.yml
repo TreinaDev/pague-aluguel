@@ -13,3 +13,20 @@ pt-BR:
         document_number: 'CPF'
         password_confirmation: 'Confirme a senha'
         photo: 'Foto'
+  views:
+    index:
+      condo: Condomínios
+      no_condos: Não existem condomínios registrados.
+      profile: Meu perfil
+      edit: Editar
+    show:
+      condo: Condomínio
+      email: email
+      document: CPF
+      since: Desde
+      hide: Ocultar
+      show_all: Mostrar todos
+      new_admin: novo administrador
+    query:
+      empty_condo: Você precisa buscar por um nome de condomínio.
+      no_result: Nenhum condomínio encontrado.
