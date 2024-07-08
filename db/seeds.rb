@@ -112,52 +112,52 @@ base_fee2 = BaseFee.create!(name: 'Fundo de Reserva',
 
 p "Created #{BaseFee.count} base fees"
 # taxas compartilhadas
-shared_fee1 = SharedFee.create!(description: 'Manutenção regular do prédio',
+SharedFee.create!(description: 'Manutenção regular do prédio',
   issue_date: 10.days.from_now,
   total_value_cents: 20000,
   condo_id: 20)
 
-shared_fee2 = SharedFee.create!(description: 'Fundo de Reserva para despesas imprevistas',
+SharedFee.create!(description: 'Fundo de Reserva para despesas imprevistas',
   issue_date: 20.days.from_now,
   total_value_cents: 30000,
   condo_id: 20)
 
-shared_fee3 = SharedFee.create!(description: 'Taxa de Manutenção das áreas comuns',
+SharedFee.create!(description: 'Taxa de Manutenção das áreas comuns',
   issue_date: 20.days.from_now,
   total_value_cents: 25000,
   condo_id: 20)
 
-shared_fee4 = SharedFee.create!(description: 'Fundo Emergencial para reparos urgentes',
+SharedFee.create!(description: 'Fundo Emergencial para reparos urgentes',
   issue_date: 6.days.from_now,
   total_value_cents: 50000,
   condo_id: 20)
 
-shared_fee5 = SharedFee.create!(description: 'Taxa de Segurança do condomínio',
+SharedFee.create!(description: 'Taxa de Segurança do condomínio',
   issue_date: 10.days.from_now,
   total_value_cents: 15000,
   condo_id: 20)
 
-shared_fee6 = SharedFee.create!(description: 'Taxa de Limpeza das áreas comuns',
+SharedFee.create!(description: 'Taxa de Limpeza das áreas comuns',
   issue_date: 18.days.from_now,
   total_value_cents: 12000,
   condo_id: 20)
 
-shared_fee7 = SharedFee.create!(description: 'Taxa de Jardinagem',
+SharedFee.create!(description: 'Taxa de Jardinagem',
   issue_date: 5.days.from_now,
   total_value_cents: 18000,
   condo_id: 20)
 
-shared_fee8 = SharedFee.create!(description: 'Taxa de Iluminação das áreas comuns',
+SharedFee.create!(description: 'Taxa de Iluminação das áreas comuns',
   issue_date: 1.day.from_now,
   total_value_cents: 22000,
   condo_id: 20)
 
-shared_fee9 = SharedFee.create!(description: 'Taxa de Água',
+SharedFee.create!(description: 'Taxa de Água',
   issue_date: 12.days.from_now,
   total_value_cents: 25000,
   condo_id: 20)
 
-shared_fee10 = SharedFee.create!(description: 'Taxa de Gás',
+SharedFee.create!(description: 'Taxa de Gás',
    issue_date: 10.days.from_now,
    total_value_cents: 20000,
    condo_id: 20)

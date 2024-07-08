@@ -17,6 +17,30 @@
   },
   {
     "id": 3,
+    "name": "Jardim Botânico Interno",
+    "description": "Jardim com árvores",
+    "max_occupancy": 50,
+    "rules": "Não pode piquenique.",
+    "condo_id": 2
+  },
+  {
+    "id": 4,
+    "name": "Piscina Pequena",
+    "description": "Piscina pequena que não cabe golfinhos.",
+    "max_occupancy": 5,
+    "rules": "Não pode comida aos arredores da área da piscina também.",
+    "condo_id": 2
+  },
+  {
+    "id": 5,
+    "name": "Salão de Jogos",
+    "description": "Tem jogos de mesa, pebolim e etc...",
+    "max_occupancy": 10,
+    "rules": "Não pode brigas muito violentas durante a partida de UNO.",
+    "condo_id": 2
+  },
+  {
+    "id": 6,
     "name": "Salão de festa",
     "description": "Festa para toda a família.",
     "max_occupancy": 80,

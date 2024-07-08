@@ -6,7 +6,7 @@
       <div class="mt-3 alert alert-success text-center" role="alert"><%= notice %></div>
     <% end %>
 
-    <span class="fs-8 text-center d-block"><%= CommonArea.model_name.human %></span>
+    <span class="fs-8 text-center d-block"><%= I18n.t('activemodel.models.common_area.other') %></span>
     <span class="fs-3 text-center d-block"><%= @common_area.name%></span>
     <span class="fs-8 text-center d-block text-muted"><%= @common_area.description %></span>
     <hr>
@@ -17,7 +17,7 @@
         <%= I18n.t('views.show.common_area_fee') %>
       </span>
 
-      <%= @common_area.fee_cents.zero? ? I18n.t('views.index.no_fee') : Money.new(@common_area.fee_cents, 'BRL').format %>
+      <%= @common_area_fee&.value.nil? ? I18n.t('views.index.no_fee') : Money.new(@common_area_fee.value, 'BRL').format %>
       <%= link_to new_condo_common_area_common_area_fee_path(@condo.id, @common_area.id), class:"btn", id: 'new-common-area', data: { turbo_frame: "modal" } do %>
         <%= image_tag "edit-icon", size: "22", class: "mb-1" %>
       <% end %>

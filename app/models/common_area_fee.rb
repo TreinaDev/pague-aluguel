@@ -1,6 +1,8 @@
 class CommonAreaFee < ApplicationRecord
   belongs_to :admin
 
+  validates :value_cents, :admin_id, presence: true
+
   monetize :value_cents,
            allow_nil: false,
            numericality: {

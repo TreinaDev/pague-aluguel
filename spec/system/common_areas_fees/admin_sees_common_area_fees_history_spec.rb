@@ -2,21 +2,23 @@ require 'rails_helper'
 
 describe 'Admin vê histórico de taxas da área comum' do
   it 'e vê todas as taxas' do
-    admin = create(:admin)
+    admin = create(:admin, email: 'user1@example.com')
     condo = Condo.new(id: 1, name: 'Condomínio Vila das Flores', city: 'São Paulo')
-    salao_festa = create(:common_area, name: 'Salão de Festas', condo_id: condo.id)
-    create(:common_area_fee_history, fee_cents: 250, user: 'user1@example.com', common_area: salao_festa,
-                                     created_at: 60.days.ago)
-    create(:common_area_fee_history, fee_cents: 300, user: 'user1@example.com', common_area: salao_festa,
-                                     created_at: 30.days.ago)
     allow(Condo).to receive(:find).and_return(condo)
+    common_areas = []
+    common_areas << CommonArea.new(id: 1, name: 'Salão de festa',
+                                   description: 'Festa para toda a família.',
+                                   max_occupancy: 20, rules: 'Não é permitido a entrada de leões')
+    allow(CommonArea).to receive(:all).and_return(common_areas)
+    allow(CommonArea).to receive(:find).and_return(common_areas.first)
 
-    create(:common_area, fee: '300,00', condo_id: condo.id)
+    create(:common_area_fee, value_cents: 250, admin:, common_area_id: 1, created_at: 60.days.ago)
+    create(:common_area_fee, value_cents: 300, admin:, common_area_id: 1, created_at: 30.days.ago)
 
     login_as admin, scope: :admin
     visit condo_path(condo.id)
     within 'div#common-areas' do
-      click_on 'Salão de Festas'
+      click_on 'Salão de festa'
     end
     click_on 'Mostrar histórico de taxas'
 
@@ -30,34 +32,47 @@ describe 'Admin vê histórico de taxas da área comum' do
   it 'em ordem descendente' do
     admin = create(:admin)
     condo = Condo.new(id: 1, name: 'Condomínio Vila das Flores', city: 'São Paulo')
-    salao_festa = create(:common_area, name: 'Salão de Festas', condo_id: condo.id)
     allow(Condo).to receive(:find).and_return(condo)
 
-    create(:common_area, fee: '300,00', condo_id: condo.id)
+    common_areas = []
+    common_areas << CommonArea.new(id: 1, name: 'Salão de festa',
+                                   description: 'Festa para toda a família.',
+                                   max_occupancy: 20, rules: 'Não é permitido a entrada de leões')
+    common_area = common_areas.first
+    allow(CommonArea).to receive(:all).and_return(common_areas)
+    allow(CommonArea).to receive(:find).and_return(common_area)
+
     fee_one = create(
-      :common_area_fee_history,
-      fee_cents: 250,
-      common_area: salao_festa,
+      :common_area_fee,
+      value_cents: 250,
+      admin:,
+      common_area_id: 1,
       created_at: 60.days.ago
     )
     fee_two = create(
-      :common_area_fee_history,
-      fee_cents: 300,
-      user: 'user1@example.com',
-      common_area: salao_festa,
+      :common_area_fee,
+      value_cents: 300,
+      admin:,
+      common_area_id: 1,
       created_at: 30.days.ago
+    )
+    fee_three = create(
+      :common_area_fee,
+      value_cents: 350,
+      admin:,
+      common_area_id: 1,
+      created_at: 5.days.ago
     )
 
     login_as admin, scope: :admin
     visit condo_path(condo.id)
     within 'div#common-areas' do
-      click_on 'Salão de Festas'
+      click_on 'Salão de festa'
     end
     click_on 'Mostrar histórico de taxas'
 
-    results = CommonAreaFeeHistory.where(common_area: salao_festa).order(created_at: :desc)
-    expected_results = [fee_two, fee_one]
-
+    results = CommonAreaFee.where(common_area_id: common_area.id).order(created_at: :desc)
+    expected_results = [fee_three, fee_two, fee_one]
     expect(results).to eq(expected_results)
   end
 end
