@@ -1,50 +1,60 @@
-<div class="container text-center mt-4">
-  <div class="container shadow rounded-4 p-4 col-6">
-    <h2><%= @base_fee.name %></h2>
+<%= turbo_frame_tag "modal" do %>
+  <div class="dean-modal modal-sm">
+    <%= link_to "", condo_base_fees_path(@base_fee, condo_id: @condo.id), id: 'close', class: "btn btn-sm btn-close" %>
 
-    <div class="row d-flex flex-column">
-      <h5><strong><%= I18n.t("limited.#{@base_fee.limited}") %></strong></h5>
+    <span class="fs-8 text-center d-block"><%= BaseFee.model_name.human %></span>
+    <span class="fs-3 text-center d-block"><%= @base_fee.name %></span>
+    <span class="fs-8 text-center d-block"><%= @base_fee.description %></span>
+    <hr>
+
+    <div class="d-flex justify-content-center align-items-center mb-2">
+      <span class="badge text-bg-secondary fs-6 text-uppercase ls-4">
+        <%= I18n.t("activerecord.attributes.base_fee.enum_recurrence.#{@base_fee.recurrence}") %>
+      </span>
     </div>
 
-    <div class="d-flex flex-column justify-content-center align-items-center">
-      <div class="row d-flex flex-column">
-        <strong><%= BaseFee.human_attribute_name(:recurrence) %>:</strong>
-        <%= I18n.t("activerecord.attributes.base_fee.enum_recurrence.#{@base_fee.recurrence}") %>
-      </div>
+    <div class=" d-flex justify-content-center align-items-center">
+      <span class="badge text-bg-info fs-6 text-uppercase ls-4">
+        <%= BaseFee.human_attribute_name(:fixed) if @base_fee.fixed %>
+      </span>
+    </div>
 
-      <div class="row d-flex flex-column">
-        <strong><%= BaseFee.human_attribute_name(:description) %>:</strong>
-        <%= @base_fee.description %>
-      </div>
+    <hr>
 
-      <div class="row d-flex flex-column">
-        <strong><%= BaseFee.human_attribute_name(:charge_day) %>:</strong>
-        <%= I18n.localize(@base_fee.charge_day.to_date)%>
-      </div>
-
-      <% @values.each do |value| %>
-        <div class="row d-flex flex-column">
+    <% @values.each do |value| %>
+      <div class=" d-flex justify-content-center">
           <% unit_type = @unit_types.find { |ut| ut.id == value.unit_type_id } %>
-          <strong><%= I18n.t('activerecord.values.values_price', unit_type: unit_type.description ) %>:</strong>
-          <%= number_to_currency(value.price, locale: :'pt-BR')%>
-        </div>
-      <% end %>
-
-      <% if @base_fee.installments.present? %>
-        <div class="row d-flex flex-column">
-          <strong><%= I18n.t('views.show.installments', count: @base_fee.installments) %></strong>
-        </div>
-      <% end %>
-
-      <div class="row d-flex flex-column">
-        <strong><%= I18n.t('views.show.interest_rate', number: @base_fee.interest_rate) %></strong>
+          <% if unit_type.present? %>
+            <span class="text-muted text-lowercase fs-8">
+              <%= I18n.t('activerecord.values.values_price', unit_type: unit_type.description ) %>:
+            </span>
+            <span><%= number_to_currency(value.price, locale: :'pt-BR')%></span>
+          <% end %>
       </div>
+    <% end %>
 
-      <div class="row d-flex flex-column">
-        <strong><%= I18n.t('views.show.late_fine', number: @base_fee.late_fine) %></strong>
+    <div class=" d-flex justify-content-center">
+      <span class="text-center">
+        <%= I18n.t('views.show.interest_rate', number: @base_fee.interest_rate) %>
+      </span>
+    </div>
+
+    <div class=" d-flex justify-content-center">
+      <span class="text-center">
+        <%= I18n.t('views.show.late_fine', number: @base_fee.late_fine) %>
+      </span>
+    </div>
+
+    <div class="px-5">
+      <div class=" d-flex justify-content-center align-items-center">
+        <span class="text-muted text-lowercase fs-8 me-1">
+          <%= SharedFee.human_attribute_name(:issue_date) %>
+        </span>
+        <span class="fs-7">
+          <%= I18n.l(@base_fee.charge_day.to_date)%>
+        </span>
       </div>
     </div>
   </div>
-  <hr>
-  <%= link_to I18n.t('helpers.buttons.back'), condo_base_fees_path(@condo.id), class: "btn btn-secondary" %>
-</div>
+<% end %>
+

@@ -1,39 +1,41 @@
-<div>
-  <%= link_to 'Voltar', condo_common_areas_path(@condo.id), class:"btn btn-primary" %>
-</div>
+<%= turbo_frame_tag "modal" do %>
+  <div class="dean-modal modal-sm">
+    <%= link_to "", condo_path(@condo.id), class: "btn btn-close btn-sm", id: 'close' %>
 
-<div class="container text-center mt-4">
-
-  <div class="container shadow rounded-4 p-4 col-6">
-    <h3><%= @common_area.name%></h3>
-    <hr>
-    <div class="d-flex justify-content-center align-items-center">
-      <strong class="me-2">Taxa de área comum: <%= @common_area.fee_cents.zero? ? 'Taxa não cadastrada' : Money.new(@common_area.fee_cents, 'BRL').format %></strong>
-      <%= link_to 'Registrar Taxa', edit_condo_common_area_path(@condo.id, @common_area), class:"btn btn-primary" %>
-    </div>
-    <hr>
-    <div>
-      <p>Descrição: <%= @common_area.description %></p>
-      <p>Capacidade máxima: <%= @common_area.max_capacity %></p>
-      <p>Regras de uso: <%= @common_area.usage_rules %></p>
-    </div>
-
-    <% if @common_area.common_area_fee_histories.any? %>
-      <p class="d-inline-flex gap-1">
-        <a class="btn btn-primary" data-bs-toggle="collapse" href="#collapseExample" role="button" aria-expanded="false" aria-controls="collapseExample">
-          Mostrar histórico de taxas
-        </a>
-      </p>
-      <div class="collapse" id="collapseExample">
-        <div class="card card-body">
-          <ul>
-            <% @common_area.common_area_fee_histories.each do |history_fee| %>
-              <li>Email: <%= history_fee.user %> | Data: <%= history_fee.created_at.strftime('%d/%m/%Y') %> | Taxa: <%= Money.new(history_fee.fee_cents, 'BRL').format %></li>
-            <% end %>
-          </ul>
-        </div>
-      </div>
+    <% if notice %>
+      <div class="mt-3 alert alert-success text-center" role="alert"><%= notice %></div>
     <% end %>
-    
+
+    <span class="fs-8 text-center d-block"><%= CommonArea.model_name.human %></span>
+    <span class="fs-3 text-center d-block"><%= @common_area.name%></span>
+    <span class="fs-8 text-center d-block text-muted"><%= @common_area.description %></span>
+    <hr>
+
+    <div class="d-flex justify-content-center align-items-center">
+      <%= image_tag "dollar-icon", size: "20" %>
+      <span class="ms-1 me-2 fs-7 text-muted">
+        <%= I18n.t('views.show.common_area_fee') %>
+      </span>
+
+      <%= @common_area.fee_cents.zero? ? I18n.t('views.index.no_fee') : Money.new(@common_area.fee_cents, 'BRL').format %>
+      <%= link_to edit_condo_common_area_path(@condo.id, @common_area), class:"btn", id: 'edit-common-area', data: { turbo_frame: "modal" } do %>
+        <%= image_tag "edit-icon", size: "22", class: "mb-1" %>
+      <% end %>
+    </div>
+
+    <hr>
+
+    <div class="px-5">
+      <div class=" d-flex justify-content-between">
+        <span class="text-muted text-lowercase fs-8"><%= I18n.t('views.show.capacity') %></span>
+        <span><%= @common_area.max_capacity %> pessoas</span>
+      </div>
+      <div class=" d-flex justify-content-between">
+        <span class="text-muted text-lowercase fs-8"><%= I18n.t('views.show.rules') %></span>
+        <span class=""><%= @common_area.usage_rules %></span>
+      </div>
+    </div>
+
+    <%= render "common_area_fee_histories" %>
   </div>
-</div>
+<% end %>

@@ -1,34 +1,45 @@
-<h2>Cadastro de Proprietário</h2>
+<%= turbo_frame_tag "modal" do %>
+  <div class="dean-modal">
+    <div class="mb-3">
+      <%= link_to "", :back, class: "btn btn-close btn-sm" %>
+    </div>
 
-<%= form_for(resource, as: resource_name, url: registration_path(resource_name)) do |f| %>
-  <%= render "property_owners/shared/error_messages", resource: resource %>
+    <span class="d-block fs-4 mt-3 text-uppercase text-center">
+      <%= I18n.t('devise.registrations.new.sign_up_property_owner') %>
+    </span>
 
-  <div class="field">
-    <%= f.label :email %><br />
-    <%= f.email_field :email, autofocus: true, autocomplete: "email" %>
-  </div>
-  
-  <div class="field">
-    <%= f.label :document_number %><br />
-    <%= f.text_field :document_number, autocomplete: "document_number" %>
-  </div>
+    <%= form_for(resource, as: resource_name, url: registration_path(resource_name)) do |f| %>
+      <%= render "property_owners/shared/error_messages", resource: resource %>
 
-  <div class="field">
-    <%= f.label :password %>
-    <% if @minimum_password_length %>
-    <em>(<%= @minimum_password_length %> characters minimum)</em>
-    <% end %><br />
-    <%= f.password_field :password, autocomplete: "new-password" %>
-  </div>
+      <div class="form-floating mb-3 w-75 mx-auto mt-4">
+        <%= f.email_field :email, autofocus: true, autocomplete: "email", class: "form-control"  %>
+        <%= f.label :email %>
+      </div>
 
-  <div class="field">
-    <%= f.label :password_confirmation %><br />
-    <%= f.password_field :password_confirmation, autocomplete: "new-password" %>
-  </div>
+      <div class="form-floating mb-3 w-75 mx-auto">
+        <%= f.text_field :document_number, autocomplete: "document_number", "data-controller": "document-number", class: "form-control"  %>
+        <%= f.label :document_number %>
+      </div>
 
-  <div class="actions">
-    <%= f.submit "Cadastrar-se" %>
+      <% if @minimum_password_length %>
+        <div class="w-75 mx-auto">
+          <em class="text-muted">(Mínimo <%= @minimum_password_length %> caracteres)</em>
+        </div>
+      <% end %>
+
+      <div class="form-floating mb-3 w-75 mx-auto">
+        <%= f.password_field :password, autocomplete: "new-password", class: "form-control"  %>
+        <%= f.label :password %>
+      </div>
+
+      <div class="form-floating mb-3 w-75 mx-auto">
+        <%= f.password_field :password_confirmation, autocomplete: "new-password", class: "form-control"  %>
+        <%= f.label :password_confirmation %><br />
+      </div>
+
+      <div class="text-center">
+        <%= f.submit I18n.t('helpers.submit.register'), class: "btn btn-primary fs-7 text-uppercase ls-3 mb-5 mt-1" %>
+      </div>
+    <% end %>
   </div>
 <% end %>
-
-<%= render "property_owners/shared/links" %>

@@ -1,0 +1,52 @@
+<div class="card border-0 rounded-0 bg-off-white mt-4 py-3 px-3" id="admins">
+  <div class="text-muted fs-8">
+    <%= image_tag "admin-icon", size: '18' %>
+    <span><%= Admin.model_name.human(count: 2) %></span>
+  </div>
+
+  <%= link_to new_admin_registration_path, class: "btn hover-strong mt-3 w-20 mx-auto mb-3", data: { turbo_frame: "modal" } do %>
+    <%= image_tag "add-admin", size: "20" %>
+    <span class="text-uppercase fs-8"><%= I18n.t('views.show.new_admin') %></span>
+  <% end %>
+
+  <div class="d-flex justify-content-center">
+    <div class="accordion shadow-sm w-50" id="recent-admins">
+      <% @recent_admins.each do |admin| %>
+        <div class="accordion-item">
+          <h2 class="accordion-header">
+            <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#<%= dom_id(admin) %>" aria-expanded="false" aria-controls="<%= dom_id(admin) %>">
+              <%= avatar(admin) %>
+              <%= capitalized_name(admin) %>
+            </button>
+          </h2>
+          <div id="<%= dom_id(admin) %>" class="accordion-collapse collapse" data-bs-parent="#admin-accordion">
+            <div class="accordion-body">
+              <span class="text-lowercase fs-8 text-muted"><%= I18n.t('views.show.email') %></span>
+              <span><%= admin.email %></span>
+              <hr class="divider">
+              <span class="text-lowercase fs-8 text-muted"><%= I18n.t('views.show.document') %></span>
+              <span data-controller="document-number"><%= admin.document_number %></span>
+              <hr class="divider">
+              <span class="text-lowercase fs-8 text-muted"><%= I18n.t('views.show.since') %></span>
+              <span><%= admin.created_at.strftime("%d/%m/%Y") %></span>
+            </div>
+          </div>
+        </div>
+      <% end %>
+    </div>
+  </div>
+  <% if array_length_greater_than?(@admins, 3) %>
+    <div data-controller="change-button" class="text-center mt-3 mb-3">
+      <%= link_to admins_path, class: 'btn text-uppercase', data: { change_button_target: "allAdminsBtn", turbo_frame: "expand-admins" } do %>
+        <%= image_tag "arrow-down", size: "20" %>
+        <span class="fs-8"><%= I18n.t('views.show.show_all') %></span>
+      <% end %>
+
+      <%= link_to root_path, class: 'btn text-uppercase', data: { change_button_target: "hideAdminsBtn", turbo_frame: "expand-admins" } do %>
+        <%= image_tag "arrow-up", size: "20" %>
+        <span class="fs-8"><%= I18n.t('views.show.hide') %></span>
+      <% end %>
+    </div>
+    <%= turbo_frame_tag 'expand-admins' %>
+  <% end %>
+</div>

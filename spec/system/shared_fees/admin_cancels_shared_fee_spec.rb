@@ -20,17 +20,20 @@ describe 'Admin cancela uma conta compartilhada' do
 
     login_as admin, scope: :admin
     visit condo_path(condos.first.id)
-    click_on 'Gerenciar Condomínio'
-    click_on 'Contas Compartilhadas'
+    within 'div#shared-fee' do
+      click_on 'Ver todas'
+    end
     click_on 'Conta de Luz'
-    click_on 'Cancelar'
+    accept_confirm 'Tem certeza que deseja cancelar essa conta compartilhada? Essa ação não poderá ser desfeita.' do
+      click_button 'Cancelar'
+    end
     bill = SharedFee.last
 
     expect(page).to have_content "#{bill.description} cancelada com sucesso"
     expect(bill.active?).to eq false
     expect(bill.canceled?).to eq true
-    expect(current_path).to eq shared_fees_path
-    expect(page).to have_content 'Cancelada'
+    expect(current_path).to eq condo_shared_fees_path(condos.first.id)
+    expect(page).to have_content 'CANCELADA'
   end
 
   it 'e não vê mais o botão de cancelar' do
@@ -52,13 +55,16 @@ describe 'Admin cancela uma conta compartilhada' do
 
     login_as admin, scope: :admin
     visit condo_path(condos.first.id)
-    click_on 'Gerenciar Condomínio'
-    click_on 'Contas Compartilhadas'
+    within 'div#shared-fee' do
+      click_on 'Ver todas'
+    end
     click_on 'Conta de Luz'
-    click_on 'Cancelar'
+    accept_confirm 'Tem certeza que deseja cancelar essa conta compartilhada? Essa ação não poderá ser desfeita.' do
+      click_button 'Cancelar'
+    end
     click_on 'Conta de Luz'
 
-    expect(page).to have_content 'Cancelada'
+    expect(page).to have_content ''
     expect(page).not_to have_button 'Cancelar'
   end
 
@@ -87,10 +93,13 @@ describe 'Admin cancela uma conta compartilhada' do
 
     login_as admin, scope: :admin
     visit condo_path(condos.first.id)
-    click_on 'Gerenciar Condomínio'
-    click_on 'Contas Compartilhadas'
+    within 'div#shared-fee' do
+      click_on 'Ver todas'
+    end
     click_on 'Conta de Luz'
-    click_on 'Cancelar'
+    accept_confirm 'Tem certeza que deseja cancelar essa conta compartilhada? Essa ação não poderá ser desfeita.' do
+      click_button 'Cancelar'
+    end
     electric_bill.reload
     water_bill.reload
 

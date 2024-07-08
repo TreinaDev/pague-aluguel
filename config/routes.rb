@@ -3,18 +3,22 @@ Rails.application.routes.draw do
   devise_for :admins, controllers: { registrations: "admins/registrations", sessions: "admins/sessions" }
 
   root to: "home#index"
+  get 'search', to: 'home#search'
+  get 'choose_profile', to: 'home#choose_profile'
 
   resources :condos, only: [:index, :show] do
     resources :common_areas, only: [:index, :show, :edit, :update]
     resources :base_fees, only: [:new, :create, :show, :index]
     get 'search', on: :collection
+
+    resources :shared_fees, only: [:index, :show, :new, :create] do
+      post 'cancel', on: :member
+    end
   end
 
-  resources :shared_fees, only: [:index, :show, :new, :create] do 
-    post 'cancel', on: :member
-  end
+
 
   authenticate :admin do
-    resources :admins, only: [:index, :show]
+    resources :admins, only: [:index]
   end
 end

@@ -3,7 +3,7 @@ require 'rails_helper'
 describe 'usuario tenta acessar dashboard de administradores' do
   it 'com sucesso' do
     admin = FactoryBot.create(:admin)
-    login_as(admin, scope: :admin)
+    login_as admin, scope: :admin
 
     get admins_path
 

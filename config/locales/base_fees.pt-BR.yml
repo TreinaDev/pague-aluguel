@@ -7,8 +7,8 @@ pt-BR:
   activerecord:
     models:
       base_fee:
-        one: Taxa Fixa
-        other: Taxas Fixas
+        one: Taxa
+        other: Taxas
       value: Valor
     attributes:
       base_fee:
@@ -17,7 +17,7 @@ pt-BR:
         interest_rate: Juros ao dia (%)
         late_fine: Multa por atraso
         late_fine_cents: Multa por atraso
-        charge_day: Data de Lançamento
+        charge_day: Data de Emissão
         limited: Taxa limitada
         installments: Número de Parcelas
         recurrence: Recorrência
@@ -61,5 +61,9 @@ pt-BR:
         other: "%{count} x Parcelas"
       late_fine: "Multa de R$%{number} por atraso"
       late_fine_cents: "Multa de R$%{number} por atraso"
+    index:
+      base_fee_list: Listagem de Taxas Cadastradas
+      name: Nome
+      no_base_fees: Não existem taxas cadastradas.
 
 

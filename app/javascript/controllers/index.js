@@ -4,8 +4,14 @@
 
 import { application } from "./application"
 
-import HelloController from "./hello_controller"
-application.register("hello", HelloController)
-
 import ToggleInstallmentsFieldController from "./toggle_installments_field_controller"
 application.register("toggle-installments-field", ToggleInstallmentsFieldController)
+
+import ChangeButtonCondoController from "./change_button_condo_controller"
+application.register("change-button-condo", ChangeButtonCondoController)
+
+import ChangeButtonController from "./change_button_controller"
+application.register("change-button", ChangeButtonController)
+
+import DocumentNumberController from "./document_number_controller"
+application.register("document-number", DocumentNumberController)

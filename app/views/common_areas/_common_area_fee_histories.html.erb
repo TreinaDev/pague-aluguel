@@ -1,0 +1,29 @@
+<% if @common_area.common_area_fee_histories.any? %>
+  <hr>
+  <div class="mt-3 d-flex justify-content-center">
+    <div class="accordion shadow-sm w-75">
+      <div class="accordion-item">
+        <h2 class="accordion-header">
+          <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#<%= dom_id(@common_area) %>" aria-expanded="false" aria-controls="<%= dom_id(@common_area) %>">
+            <%= I18n.t('views.show.show_history') %>
+          </button>
+        </h2>
+        <div id="<%= dom_id(@common_area) %>" class="accordion-collapse collapse" data-bs-parent="#admin-accordion">
+          <div class="accordion-body">
+            <% @common_area_fee_histories.each do |history_fee| %>
+              <span class="text-lowercase fs-8 text-muted"><%= I18n.t('views.show.email') %></span>
+              <span class="fs-7"><%= history_fee.user %></span><br>
+              <span class="text-lowercase fs-8 text-muted"><%= I18n.t('views.show.update_date') %></span>
+              <span class="fs-7"><%= history_fee.created_at.strftime('%d/%m/%Y') %></span>
+              <span class="text-lowercase fs-8 text-muted"><%= I18n.t('views.show.fee') %></span>
+              <span class="fs-7"><%= Money.new(history_fee.fee_cents, 'BRL').format %></span>
+              <% unless history_fee == @common_area_fee_histories.last %>
+                <hr class="divider">
+              <% end %>
+            <% end %>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+<% end %>

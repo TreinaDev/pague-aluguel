@@ -21,8 +21,6 @@ class PropertyOwner < ApplicationRecord
 
     url = "http://localhost:3000/api/v1/property?cpf=#{cpf}"
     response = Faraday.get(url)
-    return true if response.status == 200
-
-    false
+    response.success?
   end
 end

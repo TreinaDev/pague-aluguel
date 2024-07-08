@@ -1,3 +1,5 @@
+# spec/models/admin_spec.rb
+
 require 'rails_helper'
 
 RSpec.describe Admin, type: :model do
@@ -11,6 +13,21 @@ RSpec.describe Admin, type: :model do
     it { should validate_length_of(:document_number) }
     it { should validate_length_of(:first_name) }
     it { should validate_length_of(:last_name) }
+  end
+
+  describe '#downcase_name' do
+    it 'deve converter o nome para minúsculas' do
+      admin = Admin.create!(
+        first_name: 'Harry',
+        last_name: 'Potter',
+        email: 'harryp@mail.com',
+        document_number: CPF.generate,
+        password: 'password123'
+      )
+
+      expect(admin.first_name).to eq 'harry'
+      expect(admin.last_name).to eq 'potter'
+    end
   end
 
   describe '#format' do
@@ -43,16 +60,15 @@ RSpec.describe Admin, type: :model do
     end
 
     it 'de email' do
-      @email = 'harryp@mail.com'
       @cpf = CPF.generate
       Admin.create!(
         first_name: 'Harry',
         last_name: 'Potter',
-        email: @email,
+        email: 'harryp@mail.com',
         document_number: @cpf,
         password: 'password123'
       )
-      admin = Admin.new(email: @email)
+      admin = Admin.new(email: 'harryp@mail.com')
 
       admin.valid?
       result = admin.errors.include?(:email)
@@ -110,19 +126,19 @@ RSpec.describe Admin, type: :model do
     end
 
     it 'de sobrenome - muito curto' do
-      admin = Admin.new(first_name: 'aa')
+      admin = Admin.new(last_name: 'aa')
 
       admin.valid?
-      result = admin.errors.include?(:first_name)
+      result = admin.errors.include?(:last_name)
 
       expect(result).to be true
     end
 
     it 'de sobrenome - muito longo' do
-      admin = Admin.new(first_name: 'otorinolaringologista')
+      admin = Admin.new(last_name: 'otorinolaringologista')
 
       admin.valid?
-      result = admin.errors.include?(:first_name)
+      result = admin.errors.include?(:last_name)
 
       expect(result).to be true
     end

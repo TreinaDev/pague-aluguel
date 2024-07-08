@@ -1,5 +1,7 @@
 pt-BR:
   cancel-button: 'Cancelar'
+  admin_description: para gerenciamento de condomínios e pagamentos
+  property_description: para gerenciamento de seus imóveis
   activerecord:
     errors:
       messages:
@@ -152,9 +154,12 @@ pt-BR:
     select:
       prompt: Por favor selecione
     submit:
-      create: Criar %{model}
-      submit: Salvar %{model}
-      update: Atualizar %{model}
+      create: Criar
+      submit: Salvar
+      update: Atualizar
+      register: Cadastrar
+      cancel: Cancelar
+      add: Adicionar nova
   number:
     currency:
       format:
