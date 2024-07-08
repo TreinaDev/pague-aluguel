@@ -224,6 +224,39 @@ describe 'Admin cria taxa condominial' do
     expect(page).to have_content 'Valor deve ser maior que 0', count: 2
   end
 
+  it 'e valor deve ser no formato 0,00' do
+    admin = create(:admin, email: 'admin@email.com', password: '123456')
+    condo = Condo.new(id: 1, name: 'Prédio lindo', city: 'Cidade maravilhosa')
+    unit_types = []
+    unit_types << UnitType.new(id: 1, area: 30, description: 'Apartamento 1 quarto', ideal_fraction: 222.2, condo_id: 1)
+    unit_types << UnitType.new(id: 2, area: 45, description: 'Apartamento 2 quartos', ideal_fraction: 222.2,
+                               condo_id: 1)
+    unit_types << UnitType.new(id: 3, area: 60, description: 'Apartamento 3 quartos', ideal_fraction: 222.2,
+                               condo_id: 1)
+    allow(Condo).to receive(:find).and_return(condo)
+    allow(UnitType).to receive(:find_all_by_condo).and_return(unit_types)
+
+    formatted_date = 10.days.from_now.to_date
+
+    login_as admin, scope: :admin
+    visit new_condo_base_fee_path(condo)
+    fill_in 'Nome', with: 'Taxa de Condomínio'
+    fill_in 'Descrição', with: 'Taxas mensais para manutenção do prédio.'
+    fill_in 'Valor para Apartamento 1 quarto', with: '500quinhentos'
+    fill_in 'Valor para Apartamento 2 quartos', with: '200.00'
+    fill_in 'Valor para Apartamento 3 quartos', with: 'quinhentos'
+    select 'Semestral', from: 'Recorrência'
+    fill_in 'Data de Emissão', with: formatted_date.to_s
+    fill_in 'Juros ao dia', with: 1
+    fill_in 'Multa por atraso', with: '5.5'
+    click_on 'Cadastrar'
+
+    expect(page).to have_content 'Taxa não cadastrada.'
+    expect(page).to have_content 'Valor deve estar no formato 0,00'
+    expect(page).to have_content 'Valor não é um número', count: 2
+    expect(page).to have_content 'Multa por atraso deve estar no formato 0,00'
+  end
+
   it 'e retorna para o dashboard do condominio' do
     admin = create(:admin)
     condo = Condo.new(id: 1, name: 'Prédio lindo', city: 'Cidade maravilhosa')

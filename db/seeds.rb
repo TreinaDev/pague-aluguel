@@ -98,16 +98,16 @@ base_fee1 = BaseFee.create!(name: 'Taxa de Condomínio',
                             interest_rate: 2, late_fine: 10, limited: false,
                             charge_day: 25.days.from_now,
                             recurrence: :monthly, condo_id: 20)
-            Value.create!(price: 200, unit_type_id: 1, base_fee: base_fee1)
-            Value.create!(price: 200, unit_type_id: 2, base_fee: base_fee1)
+Value.create!(price: 200, unit_type_id: 1, base_fee: base_fee1)
+Value.create!(price: 200, unit_type_id: 2, base_fee: base_fee1)
 
 base_fee2 = BaseFee.create!(name: 'Fundo de Reserva',
                             description: 'Destinado a cobrir despesas imprevistas',
                             interest_rate: 1, late_fine: 5, limited: true,
                             charge_day: 5.days.from_now, installments: 10,
                             recurrence: :bimonthly, condo_id: 20)
-            Value.create!(price: 300, unit_type_id: 1, base_fee: base_fee2)
-            Value.create!(price: 300, unit_type_id: 2, base_fee: base_fee2)
+Value.create!(price: 300, unit_type_id: 1, base_fee: base_fee2)
+Value.create!(price: 300, unit_type_id: 2, base_fee: base_fee2)
 
 p "Created #{BaseFee.count} base fees"
 # taxas compartilhadas

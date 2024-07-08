@@ -55,12 +55,12 @@ pt-BR:
       bimonthly: Bimestral
       semi_annual: Semestral
       yearly: Anual
-      interest_rate: "Juros de %{number}% ao dia"
+      interest_rate: "Juros ao dia"
       installments:
         one: "%{count} x Parcela"
         other: "%{count} x Parcelas"
-      late_fine: "Multa de R$%{number} por atraso"
-      late_fine_cents: "Multa de R$%{number} por atraso"
+      late_fine: "Multa por atraso"
+      late_fine_cents: "Multa por atraso"
     index:
       base_fee_list: Listagem de Taxas Condominiais
       name: Nome

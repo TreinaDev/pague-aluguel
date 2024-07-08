@@ -67,16 +67,18 @@ describe 'admin vê taxa condominial' do
     expect(page).to have_content 'BIMESTRAL'
     expect(page).to have_content 'data de emissão'
     expect(page).to have_content I18n.l(formatted_date).to_s
-    expect(page).to have_content "valor para #{unit_types[0].description}:"
-    expect(page).to have_content 'R$ 200,00'
-    expect(page).to have_content "valor para #{unit_types[1].description}:"
-    expect(page).to have_content 'R$ 300,00'
-    expect(page).to have_content "valor para #{unit_types[2].description}:"
-    expect(page).to have_content 'R$ 500,00'
+    expect(page).to have_content "valor para #{unit_types[0].description}"
+    expect(page).to have_content 'R$200,00'
+    expect(page).to have_content "valor para #{unit_types[1].description}"
+    expect(page).to have_content 'R$300,00'
+    expect(page).to have_content "valor para #{unit_types[2].description}"
+    expect(page).to have_content 'R$500,00'
     expect(page).to have_content 'TAXA FIXA'
     expect(page).not_to have_content 'TAXA LIMITADA'
-    expect(page).to have_content 'Juros de 2% ao dia'
-    expect(page).to have_content 'Multa de R$10,00 por atraso'
+    expect(page).to have_content 'juros ao dia'
+    expect(page).to have_content '2%'
+    expect(page).to have_content 'multa por atraso'
+    expect(page).to have_content 'R$10,00'
   end
 
   it 'limitada com sucesso' do
@@ -113,15 +115,17 @@ describe 'admin vê taxa condominial' do
     expect(page).to have_content 'BIMESTRAL'
     expect(page).not_to have_content 'TAXA FIXA'
     expect(page).to have_content 'TAXA LIMITADA'
-    expect(page).to have_content "valor para #{unit_types[0].description.downcase}:"
-    expect(page).to have_content 'R$ 200,00'
-    expect(page).to have_content "valor para #{unit_types[1].description.downcase}:"
-    expect(page).to have_content 'R$ 300,00'
-    expect(page).to have_content "valor para #{unit_types[2].description.downcase}:"
-    expect(page).to have_content 'R$ 500,00'
+    expect(page).to have_content "valor para #{unit_types[0].description.downcase}"
+    expect(page).to have_content 'R$200,00'
+    expect(page).to have_content "valor para #{unit_types[1].description.downcase}"
+    expect(page).to have_content 'R$300,00'
+    expect(page).to have_content "valor para #{unit_types[2].description.downcase}"
+    expect(page).to have_content 'R$500,00'
     expect(page).to have_content '10 x Parcelas'
-    expect(page).to have_content 'Juros de 2% ao dia'
-    expect(page).to have_content 'Multa de R$10,00 por atraso'
+    expect(page).to have_content 'juros ao dia'
+    expect(page).to have_content '2%'
+    expect(page).to have_content 'multa por atraso'
+    expect(page).to have_content 'R$10,00'
     expect(page).to have_content 'data de emissão'
     expect(page).to have_content I18n.l(formatted_date).to_s
   end
@@ -151,7 +155,9 @@ describe 'admin vê taxa condominial' do
     find('#close').click
 
     expect(page).not_to have_content 'FIXA'
-    expect(page).not_to have_content 'Juros de 2% ao dia'
-    expect(page).not_to have_content 'Multa de R$10,00 por atraso'
+    expect(page).not_to have_content 'juros ao dia'
+    expect(page).not_to have_content '2%'
+    expect(page).not_to have_content 'multa por atraso'
+    expect(page).not_to have_content 'R$10,00'
   end
 end
