@@ -43,13 +43,12 @@ describe 'Admin cria taxa condominial' do
 
     login_as admin, scope: :admin
     visit root_path
-    click_on 'Lista de Condomínios'
     click_on 'Prédio lindo'
-    click_on 'Gerenciar Condomínio'
-    click_on 'Taxas Condominiais'
-    click_on 'Cadastrar Nova Taxa'
+    within 'div#base-fee' do
+      click_on 'Adicionar nova'
+    end
 
-    expect(page).to have_content 'Cadastro de Taxa Condominial'
+    expect(page).to have_content 'CADASTRO DE TAXA CONDOMINIAL'
     expect(page).not_to have_field 'Número de Parcelas'
   end
 
@@ -75,10 +74,10 @@ describe 'Admin cria taxa condominial' do
     fill_in 'Valor para Apartamento 2 quartos', with: '300,00'
     fill_in 'Valor para Apartamento 3 quartos', with: '500,00'
     select 'Bimestral', from: 'Recorrência'
-    fill_in 'Data de Lançamento', with: formatted_date.to_s
+    fill_in 'Data de Emissão', with: formatted_date.to_s
     fill_in 'Juros ao dia', with: 1
     fill_in 'Multa por atraso', with: '30,00'
-    click_on 'Salvar'
+    click_on 'Cadastrar'
 
     base_fee = BaseFee.last
     expect(page).to have_content 'Taxa cadastrada com sucesso!'
@@ -107,12 +106,12 @@ describe 'Admin cria taxa condominial' do
     fill_in 'Valor para Apartamento 2 quartos', with: '300,00'
     fill_in 'Valor para Apartamento 3 quartos', with: '500,00'
     select 'Bimestral', from: 'Recorrência'
-    fill_in 'Data de Lançamento', with: formatted_date.to_s
+    fill_in 'Data de Emissão', with: formatted_date.to_s
     check 'Taxa limitada'
     fill_in 'Número de Parcelas', with: 6
     fill_in 'Juros ao dia', with: 1
     fill_in 'Multa por atraso', with: '30,00'
-    click_on 'Salvar'
+    click_on 'Cadastrar'
 
     base_fee = BaseFee.last
     expect(page).to have_content 'Taxa cadastrada com sucesso!'
@@ -175,14 +174,15 @@ describe 'Admin cria taxa condominial' do
     fill_in 'Valor para Apartamento 2 quartos', with: '300,00'
     fill_in 'Valor para Apartamento 3 quartos', with: '500,00'
     select 'Semestral', from: 'Recorrência'
-    fill_in 'Data de Lançamento', with: formatted_date.to_s
+    fill_in 'Data de Emissão', with: formatted_date.to_s
     check 'Taxa limitada'
     fill_in 'Juros ao dia', with: 1
     fill_in 'Multa por atraso', with: '30,00'
-    click_on 'Salvar'
+    click_on 'Cadastrar'
 
     expect(page).to have_content 'Taxa não cadastrada.'
     expect(page).to have_content 'Data de Emissão deve ser futura'
+    expect(page).to have_content 'Número de Parcelas deve estar presente para Taxas Limitadas'
     expect(page).to have_field 'Nome', with: 'Taxa de Condomínio'
     expect(page).to have_field 'Descrição', with: 'Taxas mensais para manutenção do prédio.'
     expect(page).to have_field 'Valor para Apartamento 1 quarto', with: '200,00'
@@ -216,7 +216,6 @@ describe 'Admin cria taxa condominial' do
     fill_in 'Valor para Apartamento 3 quartos', with: '500,00'
     select 'Semestral', from: 'Recorrência'
     fill_in 'Data de Emissão', with: formatted_date.to_s
-    check 'Taxa fixa'
     fill_in 'Juros ao dia', with: 1
     fill_in 'Multa por atraso', with: '30,00'
     click_on 'Cadastrar'
@@ -240,6 +239,6 @@ describe 'Admin cria taxa condominial' do
     end
     find('#arrow-left').click
 
-    expect(current_path).to eq condo_base_fees_path(condo_id: condo.id)
+    expect(current_path).to eq condo_path(condo.id)
   end
 end

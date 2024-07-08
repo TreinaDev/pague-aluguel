@@ -15,14 +15,20 @@
 
     <div class=" d-flex justify-content-center align-items-center">
       <span class="badge text-bg-info fs-6 text-uppercase ls-4">
-        <%= BaseFee.human_attribute_name(:fixed) if @base_fee.fixed %>
+        <%=  I18n.t("limited.#{@base_fee.limited}") %>
       </span>
     </div>
 
     <hr>
 
+      <% if @base_fee.installments.present? %>
+        <div class="d-flex justify-content-center">
+          <strong><%= I18n.t('views.show.installments', count: @base_fee.installments) %></strong>
+        </div>
+      <% end %>
+
     <% @values.each do |value| %>
-      <div class=" d-flex justify-content-center">
+      <div class="d-flex justify-content-center">
           <% unit_type = @unit_types.find { |ut| ut.id == value.unit_type_id } %>
           <% if unit_type.present? %>
             <span class="text-muted text-lowercase fs-8">

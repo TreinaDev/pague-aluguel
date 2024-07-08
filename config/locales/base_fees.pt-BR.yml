@@ -7,8 +7,8 @@ pt-BR:
   activerecord:
     models:
       base_fee:
-        one: Taxa
-        other: Taxas
+        one: Taxa Condominial
+        other: Taxas Condominiais
       value: Valor
     attributes:
       base_fee:
@@ -37,7 +37,7 @@ pt-BR:
               future_date: deve ser futura
             installments:
               not_limited_fee: não se aplica a Taxas Fixas
-              is_limited_fee: devem estar presentes para Taxas Limitadas
+              is_limited_fee: deve estar presente para Taxas Limitadas
 
   base_fee:
     monthly: Mensal
@@ -62,8 +62,8 @@ pt-BR:
       late_fine: "Multa de R$%{number} por atraso"
       late_fine_cents: "Multa de R$%{number} por atraso"
     index:
-      base_fee_list: Listagem de Taxas Cadastradas
+      base_fee_list: Listagem de Taxas Condominiais
       name: Nome
-      no_base_fees: Não existem taxas cadastradas.
+      no_base_fees: Não existem taxas condominiais cadastradas.
 
 

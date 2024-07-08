@@ -73,13 +73,13 @@ describe 'admin vê taxa condominial' do
     expect(page).to have_content 'R$ 300,00'
     expect(page).to have_content "valor para #{unit_types[2].description}:"
     expect(page).to have_content 'R$ 500,00'
-    expect(page).to have_content 'Taxa fixa'
-    expect(page).not_to have_content 'Taxa limitada'
+    expect(page).to have_content 'TAXA FIXA'
+    expect(page).not_to have_content 'TAXA LIMITADA'
     expect(page).to have_content 'Juros de 2% ao dia'
     expect(page).to have_content 'Multa de R$10,00 por atraso'
   end
 
-  it 'customizada com sucesso' do
+  it 'limitada com sucesso' do
     admin = create(:admin)
     condo = Condo.new(id: 1, name: 'Prédio lindo', city: 'Cidade maravilhosa')
     unit_types = []
@@ -109,23 +109,21 @@ describe 'admin vê taxa condominial' do
     formatted_date = 25.days.from_now.to_date
 
     expect(page).to have_content 'Taxa de Condomínio'
-    expect(page).to have_content 'Descrição:'
     expect(page).to have_content 'Manutenção.'
-    expect(page).to have_content 'Recorrência:'
-    expect(page).to have_content 'Bimestral'
-    expect(page).to have_content 'Data de Lançamento:'
-    expect(page).to have_content I18n.l(formatted_date).to_s
-    expect(page).to have_content "Valor para #{unit_types[0].description}:"
+    expect(page).to have_content 'BIMESTRAL'
+    expect(page).not_to have_content 'TAXA FIXA'
+    expect(page).to have_content 'TAXA LIMITADA'
+    expect(page).to have_content "valor para #{unit_types[0].description.downcase}:"
     expect(page).to have_content 'R$ 200,00'
-    expect(page).to have_content "Valor para #{unit_types[1].description}:"
+    expect(page).to have_content "valor para #{unit_types[1].description.downcase}:"
     expect(page).to have_content 'R$ 300,00'
-    expect(page).to have_content "Valor para #{unit_types[2].description}:"
+    expect(page).to have_content "valor para #{unit_types[2].description.downcase}:"
     expect(page).to have_content 'R$ 500,00'
-    expect(page).not_to have_content 'Taxa fixa'
-    expect(page).to have_content 'Taxa limitada'
     expect(page).to have_content '10 x Parcelas'
     expect(page).to have_content 'Juros de 2% ao dia'
     expect(page).to have_content 'Multa de R$10,00 por atraso'
+    expect(page).to have_content 'data de emissão'
+    expect(page).to have_content I18n.l(formatted_date).to_s
   end
 
   it 'e retorna para lista de taxas cadastradas' do
@@ -137,7 +135,7 @@ describe 'admin vê taxa condominial' do
                                condo_id: 1)
     unit_types << UnitType.new(id: 3, area: 60, description: 'Apartamento 3 quartos', ideal_fraction: 222.2,
                                condo_id: 1)
-    base_fee = create(:base_fee)
+    base_fee = create(:base_fee, name: 'Taxa do Condo', condo_id: condo.id)
     allow(Condo).to receive(:find).and_return(condo)
     allow(UnitType).to receive(:find_all_by_condo).and_return(unit_types)
 
@@ -149,7 +147,7 @@ describe 'admin vê taxa condominial' do
     within 'div#base-fee' do
       click_on 'Ver todas'
     end
-    click_on 'Taxa'
+    click_on 'Taxa do Condo'
     find('#close').click
 
     expect(page).not_to have_content 'FIXA'

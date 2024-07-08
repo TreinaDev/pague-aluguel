@@ -73,7 +73,7 @@ RSpec.describe BaseFee, type: :model do
 
         expect(base_fee).not_to be_valid
         expect(base_fee.errors).to include(:installments)
-        expect(base_fee.errors[:installments]).to include('devem estar presentes para Taxas Limitadas')
+        expect(base_fee.errors[:installments]).to include('deve estar presente para Taxas Limitadas')
       end
 
       it 'deve ser maior que 0' do
