@@ -1,5 +1,7 @@
 class CommonArea
-  attr_accessor :id, :name, :description, :max_occupancy, :rules
+  attr_accessor :id, :condo_id, :name, :description, :max_occupancy, :rules
+
+  BASE_URL = 'http://127.0.0.1:3000/api/v1'.freeze
 
   def initialize(attribute = {})
     @id = attribute[:id]
@@ -12,34 +14,21 @@ class CommonArea
 
   def self.all(condo_id)
     common_areas = []
-    base_url = 'http://127.0.0.1:3000/api/v1'
-    response = Faraday.get("#{base_url}/condos/#{condo_id}/common_areas")
-    if response.success?
-      data = JSON.parse(response.body)
-      data.each do |common_area|
-        common_areas << generate_common_area(common_area, condo_id)
-      end
+    response = Faraday.get("#{BASE_URL}/condos/#{condo_id}/common_areas")
+    raise response.status.to_s unless response.success?
+
+    data = JSON.parse(response.body, symbolize_names: true)
+    data.map do |common_area|
+      common_areas << CommonArea.new(common_area)
     end
     common_areas
   end
 
   def self.find(condo_id, id)
-    base_url = 'http://127.0.0.1:3000/api/v1'
-    response = Faraday.get("#{base_url}/condos/#{condo_id}/common_areas/#{id}")
+    response = Faraday.get("#{BASE_URL}/condos/#{condo_id}/common_areas/#{id}")
     raise response.status.to_s unless response.success?
 
-    data = JSON.parse(response.body)
-    generate_common_area(data, condo_id)
-  end
-
-  def self.generate_common_area(common_area, condo_id)
-    CommonArea.new({
-                     id: common_area['id'],
-                     condo_id:,
-                     name: common_area['name'],
-                     description: common_area['description'],
-                     max_occupancy: common_area['max_occupancy'],
-                     rules: common_area['rules']
-                   })
+    data = JSON.parse(response.body, symbolize_names: true)
+    CommonArea.new(data)
   end
 end

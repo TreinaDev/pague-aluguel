@@ -49,6 +49,7 @@ describe 'Admin vê lista de taxas cadastradas' do
     admin = create(:admin)
     condo = Condo.new(id: 1, name: 'Prédio lindo', city: 'Cidade maravilhosa')
     allow(Condo).to receive(:find).and_return(condo)
+    allow(CommonArea).to receive(:all).and_return([])
 
     login_as admin, scope: :admin
 

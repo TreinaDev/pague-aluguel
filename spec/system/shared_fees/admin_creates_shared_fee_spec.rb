@@ -17,6 +17,7 @@ describe 'Admin lança uma conta compartilhada' do
     allow(Condo).to receive(:find).and_return(condos.first)
     allow(UnitType).to receive(:all).and_return(unit_types)
     allow(Unit).to receive(:all).and_return(units)
+    allow(CommonArea).to receive(:all).and_return([])
 
     login_as admin, scope: :admin
     visit root_path
@@ -43,9 +44,9 @@ describe 'Admin lança uma conta compartilhada' do
 
   it 'e não está autenticado' do
     FactoryBot.create(:admin, first_name: 'Fulano', last_name: 'Da Costa')
-
     condo = Condo.new(id: 1, name: 'Condo Test', city: 'City Test')
     allow(Condo).to receive(:find).and_return(condo)
+    allow(CommonArea).to receive(:all).and_return([])
 
     visit new_condo_shared_fee_path(condo.id)
 
@@ -69,6 +70,7 @@ describe 'Admin lança uma conta compartilhada' do
     allow(Condo).to receive(:find).and_return(condos.first)
     allow(UnitType).to receive(:all).and_return(unit_types)
     allow(Unit).to receive(:all).and_return(units)
+    allow(CommonArea).to receive(:all).and_return([])
 
     login_as admin, scope: :admin
     visit root_path
@@ -91,6 +93,7 @@ describe 'Admin lança uma conta compartilhada' do
     condos << Condo.new(id: 1, name: 'Condo Test', city: 'City Test')
     allow(Condo).to receive(:all).and_return(condos)
     allow(Condo).to receive(:find).and_return(condos.first)
+    allow(CommonArea).to receive(:all).and_return([])
 
     login_as admin, scope: :admin
     visit root_path
@@ -105,7 +108,6 @@ describe 'Admin lança uma conta compartilhada' do
 
   it 'e lança mais de uma conta' do
     admin = FactoryBot.create(:admin, first_name: 'Fulano', last_name: 'Da Costa')
-
     condos = []
     condos << Condo.new(id: 1, name: 'Condo Test', city: 'City Test')
     unit_types = []
@@ -121,6 +123,7 @@ describe 'Admin lança uma conta compartilhada' do
     allow(Condo).to receive(:find).and_return(condos.first)
     allow(UnitType).to receive(:all).and_return(unit_types)
     allow(Unit).to receive(:all).and_return(units)
+    allow(CommonArea).to receive(:all).and_return([])
 
     conta_de_luz = SharedFee.create!(description: 'Conta de Luz', issue_date: 10.days.from_now.to_date,
                                      total_value: 10_000, condo_id: condos.first.id)

@@ -12,6 +12,7 @@ describe 'Admin tenta acessar lista de contas compartilhadas' do
     allow(Condo).to receive(:all).and_return(condos)
     allow(Condo).to receive(:find).and_return(condos.first)
     allow(UnitType).to receive(:find_all_by_condo).and_return(unit_types)
+    allow(CommonArea).to receive(:all).and_return([])
 
     SharedFee.create!(description: 'Conta de Luz', issue_date: 10.days.from_now.to_date,
                       total_value: 10_000, condo_id: condos.first.id)
@@ -48,6 +49,7 @@ describe 'Admin tenta acessar lista de contas compartilhadas' do
     allow(UnitType).to receive(:find_all_by_condo).and_return(unit_types)
     allow(Condo).to receive(:all).and_return(condos)
     allow(Condo).to receive(:find).and_return(condos.first)
+    allow(CommonArea).to receive(:all).and_return([])
 
     SharedFee.create!(description: 'Conta de Luz', issue_date: 10.days.from_now.to_date,
                       total_value: 10_000, condo_id: condos.first.id)
@@ -78,6 +80,7 @@ describe 'Admin tenta acessar lista de contas compartilhadas' do
     allow(Condo).to receive(:all).and_return(condos)
     allow(Condo).to receive(:find).and_return(condos.first)
     allow(UnitType).to receive(:find_all_by_condo).and_return(unit_types)
+    allow(CommonArea).to receive(:all).and_return([])
 
     SharedFee.create!(description: 'Conta de Luz', issue_date: 10.days.from_now.to_date,
                       total_value: 10_000, condo_id: condos.first.id)

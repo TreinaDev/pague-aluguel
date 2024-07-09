@@ -17,6 +17,7 @@ describe 'Admin cancela uma conta compartilhada' do
     allow(Condo).to receive(:all).and_return(condos)
     allow(Condo).to receive(:find).and_return(condos.first)
     allow(UnitType).to receive(:all).and_return(unit_types)
+    allow(CommonArea).to receive(:all).and_return([])
 
     login_as admin, scope: :admin
     visit condo_path(condos.first.id)
@@ -52,6 +53,7 @@ describe 'Admin cancela uma conta compartilhada' do
     allow(Condo).to receive(:all).and_return(condos)
     allow(Condo).to receive(:find).and_return(condos.first)
     allow(UnitType).to receive(:all).and_return(unit_types)
+    allow(CommonArea).to receive(:all).and_return([])
 
     login_as admin, scope: :admin
     visit condo_path(condos.first.id)
@@ -84,6 +86,7 @@ describe 'Admin cancela uma conta compartilhada' do
     allow(Condo).to receive(:find).and_return(condos.first)
     allow(UnitType).to receive(:all).and_return(unit_types)
     allow(Unit).to receive(:all).and_return(units)
+    allow(CommonArea).to receive(:all).and_return([])
     electric_bill = SharedFee.create!(description: 'Conta de Luz', issue_date: 10.days.from_now.to_date,
                                       total_value: 10_000, condo_id: condos.first.id)
     electric_bill.calculate_fractions
