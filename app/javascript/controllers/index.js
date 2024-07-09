@@ -4,6 +4,9 @@
 
 import { application } from "./application"
 
+import ToggleInstallmentsFieldController from "./toggle_installments_field_controller"
+application.register("toggle-installments-field", ToggleInstallmentsFieldController)
+
 import ChangeButtonCondoController from "./change_button_condo_controller"
 application.register("change-button-condo", ChangeButtonCondoController)
 

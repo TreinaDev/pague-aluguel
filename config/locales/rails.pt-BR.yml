@@ -111,6 +111,7 @@ pt-BR:
   errors:
     format: "%{attribute} %{message}"
     messages:
+      invalid_currency: "deve estar no formato 0,00"
       must_be_logged_in: "Você precisa estar autenticado para continuar."
       accepted: deve ser aceito
       blank: não pode ficar em branco

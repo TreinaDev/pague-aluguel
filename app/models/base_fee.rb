@@ -6,6 +6,8 @@ class BaseFee < ApplicationRecord
   validates :name, :description, :charge_day, presence: true
   validates :interest_rate, numericality: { greater_than_or_equal_to: 0 }
   validate :date_is_future?
+  validate :installments_apply?
+  validates :installments, numericality: { greater_than: 0, allow_nil: true }
 
   monetize :late_fine_cents,
            allow_nil: false,
@@ -31,5 +33,10 @@ class BaseFee < ApplicationRecord
 
   def date_is_future?
     errors.add(:charge_day, :future_date) if charge_day.present? && charge_day < Time.zone.today
+  end
+
+  def installments_apply?
+    errors.add(:installments, :not_limited_fee) if installments.present? && limited? == false
+    errors.add(:installments, :is_limited_fee) if installments.blank? && limited?
   end
 end

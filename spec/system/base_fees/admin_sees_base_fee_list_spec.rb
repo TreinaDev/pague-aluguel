@@ -42,7 +42,7 @@ describe 'Admin vê lista de taxas cadastradas' do
 
     visit condo_base_fees_path(condo.id)
 
-    expect(page).to have_content 'Não existem taxas cadastradas.'
+    expect(page).to have_content 'Não existem taxas condominiais cadastradas.'
   end
 
   it 'e retorna para a tela de condomínio' do
