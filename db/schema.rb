@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema[7.1].define(version: 2024_07_05_182946) do
+ActiveRecord::Schema[7.1].define(version: 2024_07_05_195817) do
   create_table "active_storage_attachments", force: :cascade do |t|
     t.string "name", null: false
     t.string "record_type", null: false
@@ -69,24 +69,13 @@ ActiveRecord::Schema[7.1].define(version: 2024_07_05_182946) do
     t.integer "installments"
   end
 
-  create_table "common_area_fee_histories", force: :cascade do |t|
-    t.integer "fee_cents"
-    t.string "user"
-    t.integer "common_area_id", null: false
+  create_table "common_area_fees", force: :cascade do |t|
+    t.integer "value_cents"
+    t.integer "admin_id", null: false
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
-    t.index ["common_area_id"], name: "index_common_area_fee_histories_on_common_area_id"
-  end
-
-  create_table "common_areas", force: :cascade do |t|
-    t.string "name"
-    t.string "description"
-    t.integer "max_capacity"
-    t.string "usage_rules"
-    t.datetime "created_at", null: false
-    t.datetime "updated_at", null: false
-    t.integer "fee_cents", default: 0
-    t.integer "condo_id"
+    t.integer "common_area_id"
+    t.index ["admin_id"], name: "index_common_area_fees_on_admin_id"
   end
 
   create_table "property_owners", force: :cascade do |t|
@@ -132,7 +121,9 @@ ActiveRecord::Schema[7.1].define(version: 2024_07_05_182946) do
     t.index ["base_fee_id"], name: "index_values_on_base_fee_id"
   end
 
-  add_foreign_key "common_area_fee_histories", "common_areas"
+  add_foreign_key "active_storage_attachments", "active_storage_blobs", column: "blob_id"
+  add_foreign_key "active_storage_variant_records", "active_storage_blobs", column: "blob_id"
+  add_foreign_key "common_area_fees", "admins"
   add_foreign_key "shared_fee_fractions", "shared_fees"
   add_foreign_key "values", "base_fees"
 end

@@ -18,6 +18,7 @@ describe 'Admin cria taxa condominial' do
     allow(Condo).to receive(:all).and_return(condos)
     allow(Condo).to receive(:find).and_return(condos[0])
     allow(UnitType).to receive(:find_all_by_condo).and_return(unit_types)
+    allow(CommonArea).to receive(:all).and_return([])
 
     login_as admin, scope: :admin
     visit root_path
@@ -40,6 +41,7 @@ describe 'Admin cria taxa condominial' do
     allow(Condo).to receive(:all).and_return(condos)
     allow(Condo).to receive(:find).and_return(condos[0])
     allow(UnitType).to receive(:find_all_by_condo).and_return(unit_types)
+    allow(CommonArea).to receive(:all).and_return([])
 
     login_as admin, scope: :admin
     visit root_path
@@ -235,6 +237,7 @@ describe 'Admin cria taxa condominial' do
                                condo_id: 1)
     allow(Condo).to receive(:find).and_return(condo)
     allow(UnitType).to receive(:find_all_by_condo).and_return(unit_types)
+    allow(CommonArea).to receive(:all).and_return([])
 
     formatted_date = 10.days.from_now.to_date
 
@@ -264,6 +267,7 @@ describe 'Admin cria taxa condominial' do
     unit_types << UnitType.new(id: 1, area: 30, description: 'Apartamento 1 quarto', ideal_fraction: 222.2, condo_id: 1)
     allow(Condo).to receive(:find).and_return(condo)
     allow(UnitType).to receive(:find_all_by_condo).and_return(unit_types)
+    allow(CommonArea).to receive(:all).and_return([])
 
     login_as admin, scope: :admin
     visit condo_path(condo.id)

@@ -1,16 +1,24 @@
 pt-BR:
-  activerecord:
-    attributes:
-      common_area:
-        fee: Taxa de área comum
-        fee_cents: Taxa de área comum
+  activemodel:
     models:
       common_area:
         one: Área Comum
         other: Áreas Comuns
+  activerecord:
+    models:
+      common_area:
+        one: Área Comum
+        other: Áreas Comuns
+      common_area_fee:
+        one: Taxa de Área Comum
+        other: Taxas de Área Comum
+    attributes:
+      common_area_fee:
+        value: Taxa
+        value_cents: Taxa
   messages:
     registered_fee: Taxa cadastrada com sucesso!
-    registration_error: Não foi possível cadastrar a taxa.
+    registration_fee_error: Não foi possível cadastrar a taxa.
   views:
     edit:
       edit_fee: "Atualizar Taxa de %{name}"

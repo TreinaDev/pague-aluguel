@@ -1,21 +1,34 @@
-class CommonArea < ApplicationRecord
-  validate :fee_not_negative, on: :update
-  validates :fee_cents, presence: true
-  validates :fee_cents, numericality: { only_integer: true }
+class CommonArea
+  attr_accessor :id, :condo_id, :name, :description, :max_occupancy, :rules
 
-  has_many :common_area_fee_histories, dependent: :destroy
+  BASE_URL = 'http://127.0.0.1:3000/api/v1'.freeze
 
-  after_update :add_fee_to_history
-
-  monetize :fee_cents
-
-  private
-
-  def fee_not_negative
-    errors.add(:fee_cents, ' não pode ser negativa.') if fee_cents&.negative?
+  def initialize(attribute = {})
+    @id = attribute[:id]
+    @condo_id = attribute[:condo_id]
+    @name = attribute[:name]
+    @description = attribute[:description]
+    @max_occupancy = attribute[:max_occupancy]
+    @rules = attribute[:rules]
   end
 
-  def add_fee_to_history
-    CommonAreaFeeHistory.create!(fee_cents:, common_area: self)
+  def self.all(condo_id)
+    common_areas = []
+    response = Faraday.get("#{BASE_URL}/condos/#{condo_id}/common_areas")
+    raise response.status.to_s unless response.success?
+
+    data = JSON.parse(response.body, symbolize_names: true)
+    data.map do |common_area|
+      common_areas << CommonArea.new(common_area)
+    end
+    common_areas
+  end
+
+  def self.find(condo_id, id)
+    response = Faraday.get("#{BASE_URL}/condos/#{condo_id}/common_areas/#{id}")
+    raise response.status.to_s unless response.success?
+
+    data = JSON.parse(response.body, symbolize_names: true)
+    CommonArea.new(data)
   end
 end

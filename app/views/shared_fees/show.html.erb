@@ -24,7 +24,7 @@
       </div>
       <div class=" d-flex justify-content-between">
         <span class="text-muted text-lowercase fs-8"><%= SharedFee.human_attribute_name(:total_value_cents) %></span>
-        <span class=""><%= Money.new(@shared_fee.total_value_cents, "BRL").format %></span>
+        <span class=""><%= @shared_fee.total_value.format %></span>
       </div>
     </div>
 

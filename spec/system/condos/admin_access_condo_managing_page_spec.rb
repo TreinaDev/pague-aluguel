@@ -10,6 +10,7 @@ describe 'Administrador acessa página do condomínio' do
     condos << Condo.new(id: 4, name: 'Condomínio Lagoa Serena', city: 'Caxias do Sul')
     allow(Condo).to receive(:all).and_return(condos)
     allow(Condo).to receive(:find).and_return(condos[2])
+    allow(CommonArea).to receive(:all).and_return([])
 
     login_as admin, scope: :admin
     visit root_path
@@ -29,9 +30,15 @@ describe 'Administrador acessa página do condomínio' do
     condos = []
     condos << Condo.new(id: 1, name: 'Condomínio Vila das Flores', city: 'São Paulo')
     condos << Condo.new(id: 2, name: 'Residencial Jardim Europa', city: 'Maceió')
-    condos << condo = Condo.new(id: 3, name: 'Edifício Monte Verde', city: 'Recife')
+    condos << Condo.new(id: 3, name: 'Edifício Monte Verde', city: 'Recife')
     condos << Condo.new(id: 4, name: 'Condomínio Lagoa Serena', city: 'Caxias do Sul')
-    create(:common_area, name: 'Salão de Festas', condo_id: condo.id)
+
+    common_area = CommonArea.new(id: 1, name: 'Academia',
+                                 description: 'Uma academia raíz com ventilador apenas para os marombas',
+                                 max_occupancy: 20, rules: 'Não pode ser frango')
+    allow(CommonArea).to receive(:all).and_return([common_area])
+    allow(CommonArea).to receive(:find).and_return(common_area)
+
     allow(Condo).to receive(:all).and_return(condos)
     allow(Condo).to receive(:find).and_return(condos[2])
 
@@ -46,7 +53,7 @@ describe 'Administrador acessa página do condomínio' do
       expect(page).to have_link 'Adicionar nova'
     end
     within 'div#common-areas' do
-      expect(page).to have_link 'Salão de Festas'
+      expect(page).to have_link 'Academia'
     end
   end
 end
