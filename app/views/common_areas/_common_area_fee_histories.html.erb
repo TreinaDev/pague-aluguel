@@ -16,7 +16,7 @@
               <span class="text-lowercase fs-8 text-muted"><%= I18n.t('views.show.update_date') %></span>
               <span class="fs-7"><%= history_fee.created_at.strftime('%d/%m/%Y') %></span>
               <span class="text-lowercase fs-8 text-muted"><%= I18n.t('views.show.fee') %></span>
-              <span class="fs-7"><%= Money.new(history_fee.value_cents, 'BRL').format %></span>
+              <span class="fs-7"><%= history_fee.value.format %></span>
               <% unless history_fee == @common_area_fee_histories.last %>
                 <hr class="divider">
               <% end %>
