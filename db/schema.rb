@@ -62,10 +62,11 @@ ActiveRecord::Schema[7.1].define(version: 2024_07_05_195817) do
     t.string "name"
     t.integer "interest_rate"
     t.integer "late_fine_cents"
-    t.boolean "fixed"
+    t.boolean "limited", default: false
     t.date "charge_day"
     t.integer "recurrence", default: 0
     t.integer "condo_id"
+    t.integer "installments"
   end
 
   create_table "common_area_fees", force: :cascade do |t|
@@ -75,13 +76,6 @@ ActiveRecord::Schema[7.1].define(version: 2024_07_05_195817) do
     t.datetime "updated_at", null: false
     t.integer "common_area_id"
     t.index ["admin_id"], name: "index_common_area_fees_on_admin_id"
-  end
-
-  create_table "custom_fees", force: :cascade do |t|
-    t.decimal "value"
-    t.string "description"
-    t.datetime "created_at", null: false
-    t.datetime "updated_at", null: false
   end
 
   create_table "property_owners", force: :cascade do |t|

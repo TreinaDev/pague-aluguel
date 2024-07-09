@@ -1,5 +1,5 @@
 <%= turbo_frame_tag "modal" do %>
-  <div class="dean-modal modal-sm">
+  <div class="dean-modal modal-md">
     <%= link_to "", condo_base_fees_path(@base_fee, condo_id: @condo.id), id: 'close', class: "btn btn-sm btn-close" %>
 
     <span class="fs-8 text-center d-block"><%= BaseFee.model_name.human %></span>
@@ -15,45 +15,56 @@
 
     <div class=" d-flex justify-content-center align-items-center">
       <span class="badge text-bg-info fs-6 text-uppercase ls-4">
-        <%= BaseFee.human_attribute_name(:fixed) if @base_fee.fixed %>
+        <%=  I18n.t("limited.#{@base_fee.limited}") %>
       </span>
     </div>
 
     <hr>
 
+    <% if @base_fee.installments.present? %>
+      <div class="d-flex justify-content-center">
+        <strong><%= I18n.t('views.show.installments', count: @base_fee.installments) %></strong>
+      </div>
+    <% end %>
+
     <% @values.each do |value| %>
-      <div class=" d-flex justify-content-center">
+      <div class="d-flex justify-content-between">
           <% unit_type = @unit_types.find { |ut| ut.id == value.unit_type_id } %>
           <% if unit_type.present? %>
             <span class="text-muted text-lowercase fs-8">
-              <%= I18n.t('activerecord.values.values_price', unit_type: unit_type.description ) %>:
+              <%= I18n.t('activerecord.values.values_price', unit_type: unit_type.description ) %>
             </span>
-            <span><%= number_to_currency(value.price, locale: :'pt-BR')%></span>
+            <span><%= value.price.format %></span>
           <% end %>
       </div>
     <% end %>
 
-    <div class=" d-flex justify-content-center">
-      <span class="text-center">
-        <%= I18n.t('views.show.interest_rate', number: @base_fee.interest_rate) %>
+    <div class=" d-flex justify-content-between">
+      <span class="text-muted text-lowercase fs-8">
+        <%= I18n.t('views.show.interest_rate') %>
+      </span>
+      <span>
+        <%= @base_fee.interest_rate %>%
       </span>
     </div>
 
-    <div class=" d-flex justify-content-center">
-      <span class="text-center">
-        <%= I18n.t('views.show.late_fine', number: @base_fee.late_fine) %>
+    <div class=" d-flex justify-content-between">
+      <span class="text-muted text-lowercase fs-8">
+        <%= I18n.t('views.show.late_fine') %>
+      </span>
+      <span>
+        <%= @base_fee.late_fine.format %>
       </span>
     </div>
 
-    <div class="px-5">
-      <div class=" d-flex justify-content-center align-items-center">
-        <span class="text-muted text-lowercase fs-8 me-1">
-          <%= SharedFee.human_attribute_name(:issue_date) %>
-        </span>
-        <span class="fs-7">
-          <%= I18n.l(@base_fee.charge_day.to_date)%>
-        </span>
-      </div>
+
+    <div class=" d-flex justify-content-between">
+      <span class="text-muted text-lowercase fs-8">
+        <%= SharedFee.human_attribute_name(:issue_date) %>
+      </span>
+      <span>
+        <%= I18n.l(@base_fee.charge_day.to_date)%>
+      </span>
     </div>
   </div>
 <% end %>
