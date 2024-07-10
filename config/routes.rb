@@ -17,6 +17,8 @@ Rails.application.routes.draw do
     resources :shared_fees, only: [:index, :show, :new, :create] do
       post 'cancel', on: :member
     end
+
+    resources :single_charges, only: [:show, :new, :create]
   end
 
   authenticate :admin do

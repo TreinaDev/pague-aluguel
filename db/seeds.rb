@@ -22,7 +22,9 @@ lais = PropertyOwner.new(
   document_number: CPF.generate
 )
 lais.save(validate: false)
+
 p "Created #{PropertyOwner.count} property owners"
+
 # admins
 Admin.create!(
   email: 'kanzaki@myself.com',
@@ -34,7 +36,7 @@ Admin.create!(
 
 Admin.create!(
   email: 'matheus@mail.com',
-  password: '123456',
+  password: '123456', 
   first_name: 'Matheus',
   last_name: 'Bellucio',
   document_number: CPF.generate
