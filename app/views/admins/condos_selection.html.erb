@@ -1,6 +1,6 @@
-<%= form_with(model: @admins) do |f| %>
+<%= form_with(model: @admins, url: condos_selection_post_admin_path(@admin), method: :post) do |f| %>
   <div class="field">
-    <%= f.collection_check_boxes :condo_ids, Condo.all, :id, :name, { multiple: true }, { class: "form-check-input" } do |b| %>
+    <%= f.collection_check_boxes :condo_ids, Condo.all, :id, :name, { multiple: true, checked: @present_associations.map(&:condo_id) }, { class: "form-check-input" } do |b| %>
       <div class="form-check ms-4">
         <%= b.check_box %>
         <%= b.label class: "form-check-label" do %>
@@ -10,6 +10,7 @@
     <% end %>
   </div>
   <div class="actions">
-    <%= submit_tag "Salvar" %>
+    <%= f.submit "Salvar" %>
   </div>
 <% end %>
+<%= @admin.associated_condos.inspect %>

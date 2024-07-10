@@ -19,6 +19,17 @@
               <hr class="divider">
               <span class="text-lowercase fs-8 text-muted"><%= I18n.t('views.show.since') %></span>
               <span><%= admin.created_at.strftime("%d/%m/%Y") %></span>
+              <% if current_admin.super_admin? %>
+                <hr class="divider">
+                <%= link_to "Gerenciar Acesso aos Condomínios", new_admin_associated_condo_path(admin) %>
+                <%= link_to "Gerenciar Condomínios desse Admin", condos_selection_admin_path(admin) %>
+              <% end %>
+              <% if admin.associated_condos.any? %>
+                <hr class="divider">
+                <% admin.associated_condos.each do |condo| %>
+                  <%= condo.condo_id %>
+                <% end %>
+              <% end %>
             </div>
           </div>
         </div>

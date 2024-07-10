@@ -2,9 +2,8 @@ Rails.application.routes.draw do
   devise_for :property_owners, controllers: { registrations: "property_owners/registrations", sessions: "property_owners/sessions" }
   devise_for :admins, controllers: { registrations: "admins/registrations", sessions: "admins/sessions" }
   resources :admins do
-    resources :associated_condos
     get 'condos_selection', on: :member
-    post 'condos_selection', on: :member
+    post 'condos_selection_post', on: :member
   end
 
   root to: "home#index"
