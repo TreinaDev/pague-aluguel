@@ -1,0 +1,25 @@
+<div class="card border-0 rounded-0 bg-off-white mt-4 py-3 px-3 w-49">
+  <div class="text-muted mb-3 fs-8">
+    <%= image_tag "buildings-icon", size: '18' %>
+    <span><%= I18n.t('views.show.unit_section_title') %></span>
+  </div>
+
+   <div class="d-flex justify-content-center gap-2 flex-wrap"></div>
+    <% if @units.any? %>
+      <% @first_units.each do |unit| %>
+        <%= link_to root_path , class: "text-decoration-none" do %>
+          <div class="card hover-strong shadow-sm" style="width: 18rem; height: 7rem;">
+            <div class="card-body">
+              <span class="d-block">Unidade <%= unit.id  %></span>
+              <span class="d-block"><%= unit.floor %></span>
+              <span class="text-muted fs-8"><%= unit.number %></span>
+            </div>
+          </div>
+        <% end %>
+      <% end %>
+    <% else %>
+      <span class="text-muted"><%= I18n.t('views.show.no_units') %></span>
+    <% end %>
+  </div>
+
+</div>
