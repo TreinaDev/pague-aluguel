@@ -1,4 +1,6 @@
 class SingleCharge < ApplicationRecord
+  validates :unit_id, :issue_date, presence: true
+
   monetize :value_cents,
            allow_nil: false,
            numericality: {
@@ -6,8 +8,8 @@ class SingleCharge < ApplicationRecord
            }
 
   enum charge_type: {
-    common_area_fee: 0,
-    fine: 2,
+    fine: 0,
+    common_area_fee: 2,
     other: 5
   }
 end

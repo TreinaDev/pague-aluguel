@@ -7,6 +7,7 @@ class CreateSingleCharges < ActiveRecord::Migration[7.1]
       t.string :description
       t.integer :charge_type, default: 0
       t.integer :condo_id
+      t.integer :common_area_id
 
       t.timestamps
     end

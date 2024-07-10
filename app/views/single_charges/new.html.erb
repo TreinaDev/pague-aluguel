@@ -26,6 +26,11 @@
     </div>
 
     <div class="form-floating mb-3 w-50 mx-auto">
+      <%= f.select :common_area_id, options_for_select(@common_areas.map { |key, _| [key.name, key.id] }, @single_charge.common_area_id), {prompt: ''}, class: "form-control" %>
+      <%= f.label :common_area_id %>
+    </div>
+
+    <div class="form-floating mb-3 w-50 mx-auto">
       <%= f.text_field :unit_id, class: "form-control" %>
       <%= f.label :unit_id %>
     </div>

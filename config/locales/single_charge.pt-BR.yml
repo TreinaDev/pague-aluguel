@@ -15,6 +15,7 @@ pt-BR:
         value_cents: Valor Total
         description: Descrição
         charge_type: Tipo de Cobrança
+        common_area_id: Área Comum
   single_charge:
     common_area_fee: Taxa de Área Comum
     fine: Multa
@@ -27,4 +28,3 @@ pt-BR:
       create_single_charge: "Cadastro de Cobrança Avulsa"
     show:
       single_charge: Cobrança Avulsa
-

@@ -1,3 +1,40 @@
-Descrição: <%= @single_charge.description %>
-Valor: <%= @single_charge.value.format %>
-Data de Emissão: <%= I18n.l(@single_charge.issue_date.to_date) %>
+<%= turbo_frame_tag "modal" do %>
+  <div class="dean-modal modal-md">
+    <%= link_to "", condo_base_fees_path(@single_charge, condo_id: @condo.id), id: 'close', class: "btn btn-sm btn-close" %>
+
+    <span class="fs-8 text-center d-block"><%= SingleCharge.model_name.human %></span>
+    <hr>
+    <span class="fs-6 text-center d-block"><%= I18n.t 'activerecord.attributes.single_charge.charge_type' %>:</span>
+    <span class="fs-4 text-center d-block"><%= I18n.t "single_charge.#{@single_charge.charge_type}" %></span>
+    
+    <% if @single_charge.charge_type == 'common_area_fee' %>
+      <div class=" d-flex justify-content-center align-items-center">
+        <span class="badge text-bg-info fs-6 text-uppercase ls-4">
+          <%= @common_area.name %>
+        </span>
+      </div>
+    <% end %>
+
+    <span class="fs-6 text-center d-block"><%= @single_charge.description %></span>
+    <hr>
+
+    <div class="d-flex justify-content-between">
+      <span class="text-muted text-lowercase fs-8">
+        <%= I18n.t('activerecord.attributes.single_charge.value') %>
+      </span>
+      <span>
+        <%= @single_charge.value.format %>
+      </span>
+    </div>
+
+    <div class="d-flex justify-content-between">
+      <span class="text-muted text-lowercase fs-8">
+        <%= I18n.t('activerecord.attributes.single_charge.issue_date') %>
+      </span>
+      <span>
+        <%= I18n.l(@single_charge.issue_date.to_date) %>
+      </span>
+    </div>
+
+  </div>
+<% end %>
