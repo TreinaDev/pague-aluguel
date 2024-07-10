@@ -1,0 +1,15 @@
+<%= form_with(model: @admins) do |f| %>
+  <div class="field">
+    <%= f.collection_check_boxes :condo_ids, Condo.all, :id, :name, { multiple: true }, { class: "form-check-input" } do |b| %>
+      <div class="form-check ms-4">
+        <%= b.check_box %>
+        <%= b.label class: "form-check-label" do %>
+          <%= b.text %>
+        <% end %>
+      </div>
+    <% end %>
+  </div>
+  <div class="actions">
+    <%= submit_tag "Salvar" %>
+  </div>
+<% end %>
