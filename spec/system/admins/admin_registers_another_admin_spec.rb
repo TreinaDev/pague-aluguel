@@ -1,8 +1,8 @@
 require 'rails_helper'
 
-describe 'admin registra outro admin' do
+describe 'super admin registra outro admin' do
   it 'com sucesso' do
-    admin = FactoryBot.create(:admin, first_name: 'Fulano', last_name: 'Da Costa')
+    admin = FactoryBot.create(:admin, first_name: 'Fulano', last_name: 'Da Costa', super_admin: true)
     cpf = CPF.generate
     condos = []
     condos << Condo.new(id: 1, name: 'Condo Test', city: 'City Test')
@@ -28,7 +28,7 @@ describe 'admin registra outro admin' do
   end
 
   it 'falha quando faltam atributos' do
-    admin = FactoryBot.create(:admin)
+    admin = FactoryBot.create(:admin, super_admin: true)
     condos = []
     condos << Condo.new(id: 1, name: 'Condo Test', city: 'City Test')
     allow(Condo).to receive(:all).and_return(condos)
@@ -37,7 +37,6 @@ describe 'admin registra outro admin' do
     visit root_path
 
     click_on 'novo administrador'
-
     fill_in 'E-mail', with: 'another@mail.com'
     fill_in 'Senha', with: 'example123456'
     fill_in 'Confirme a senha', with: 'example123456'
@@ -48,5 +47,18 @@ describe 'admin registra outro admin' do
     expect(page).to have_content 'CPF não pode ficar em branco'
     expect(page).to have_content 'Não foi possível salvar administrador'
     expect(page).not_to have_content 'Bem Vindo! Você se registrou com sucesso!'
+  end
+
+  it 'não consegue ver o botão de registro caso não seja super admin' do
+    admin = FactoryBot.create(:admin, first_name: 'Fulano', last_name: 'Da Costa', super_admin: false)
+    cpf = CPF.generate
+    condos = []
+    condos << Condo.new(id: 1, name: 'Condo Test', city: 'City Test')
+    allow(Condo).to receive(:all).and_return(condos)
+
+    login_as admin, scope: :admin
+    visit root_path
+
+    expect(page).not_to have_link 'novo administrador'
   end
 end

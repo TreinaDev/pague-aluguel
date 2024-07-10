@@ -40,7 +40,7 @@ describe 'admin edita sua propria conta' do
 end
 
 describe 'admin tenta editar outra conta' do
-  it 'e não encontra link para edição' do
+  it 'e não encontra section de admins' do
     admin = FactoryBot.create(:admin)
     FactoryBot.create(:admin,
                       email: 'outroadmin@mail.com',
@@ -55,10 +55,7 @@ describe 'admin tenta editar outra conta' do
     login_as admin, scope: :admin
     visit root_path
 
-    within('div#recent-admins') do
-      click_on 'Ciclano Da Silva'
-    end
-
-    expect(page).not_to have_link 'Editar'
+    expect(page).not_to have_content 'Administradores'
+    expect(page).not_to have_content 'Ciclano Da Silva'
   end
 end

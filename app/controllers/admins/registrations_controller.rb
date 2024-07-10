@@ -6,6 +6,7 @@ class Admins::RegistrationsController < Devise::RegistrationsController
   before_action :configure_sign_up_params, only: [:new, :create]
   before_action :configure_account_update_params, only: [:edit, :update]
   before_action :redirect_if_not_logged_in
+  before_action :redirect_if_not_super_admin, only: [:new, :create]
   skip_before_action :require_no_authentication
 
   # GET /resource/sign_up
@@ -70,6 +71,10 @@ class Admins::RegistrationsController < Devise::RegistrationsController
 
   def after_update_path_for(*)
     root_path
+  end
+
+  def redirect_if_not_super_admin
+    redirect_to root_path, notice: I18n.t('errors.messages.must_be_super_admin') unless current_admin.super_admin?
   end
 
   # The path used after sign up for inactive accounts.

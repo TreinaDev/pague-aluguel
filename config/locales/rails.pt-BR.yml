@@ -113,6 +113,7 @@ pt-BR:
     messages:
       invalid_currency: "deve estar no formato 0,00"
       must_be_logged_in: "Você precisa estar autenticado para continuar."
+      must_be_super_admin: "Você não tem autorização para completar esta ação"
       accepted: deve ser aceito
       blank: não pode ficar em branco
       confirmation: não é igual a %{attribute}
