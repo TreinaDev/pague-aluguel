@@ -10,7 +10,7 @@
         <%= link_to root_path , class: "text-decoration-none" do %>
           <div class="card hover-strong shadow-sm" style="width: 18rem; height: 7rem;">
             <div class="card-body">
-              <span class="d-block">Unidade <%= unit.id  %></span>
+              <span class="d-block"> <%= I18n.t('views.show.unit') %> <%= unit.id  %></span>
               <span class="d-block"><%= unit.floor %></span>
               <span class="text-muted fs-8"><%= unit.number %></span>
             </div>
