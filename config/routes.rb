@@ -19,6 +19,12 @@ Rails.application.routes.draw do
     end
   end
 
+  namespace :api do
+    namespace :v1 do
+      resources :common_area_fees, only: [:index]
+    end
+  end
+
   authenticate :admin do
     resources :admins, only: [:index]
   end
