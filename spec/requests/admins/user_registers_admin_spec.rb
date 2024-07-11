@@ -1,7 +1,7 @@
 require 'rails_helper'
 
 describe 'usuario tenta criar conta de administrador' do
-  it 'e sucede' do
+  it 'como super admin e sucede' do
     admin = FactoryBot.create(:admin, first_name: 'Fulano', last_name: 'Da Costa', super_admin: true)
     login_as admin, scope: :admin
     post admins_path, params: {
