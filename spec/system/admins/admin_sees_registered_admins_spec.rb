@@ -2,6 +2,21 @@ require 'rails_helper'
 
 describe 'admin vê admins registrados' do
   context 'como super admin' do
+    it 'e vê outro super admin' do
+      admin = create(:admin, first_name: 'Matheus', last_name: 'Bellucio', super_admin: true)
+      create(:admin, first_name: 'Nathanael', last_name: 'Vieira', email: 'nathan@mail.com')
+      condos = []
+      condos << Condo.new(id: 1, name: 'Condo Test', city: 'City Test')
+      allow(Condo).to receive(:all).and_return(condos)
+
+      login_as admin, scope: :admin
+      visit root_path
+
+      click_on 'Nathanael'
+      within('div#admin_2') do
+        expect(page).to have_content 'ACESSO GERAL'
+      end
+    end
     it 'e vê admins recentes' do
       admin = create(:admin, first_name: 'Matheus', last_name: 'Bellucio', super_admin: true)
       create(:admin, first_name: 'Nathanael', last_name: 'Vieira', email: 'nathan@mail.com')

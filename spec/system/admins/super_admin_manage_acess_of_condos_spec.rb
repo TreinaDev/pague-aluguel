@@ -3,7 +3,7 @@ require 'rails_helper'
 describe 'Super admin gerencia o acesso de outros admins aos condomínios' do
   it 'com sucesso' do
     admin = create(:admin, super_admin: true)
-    nathan = create(:admin, first_name: 'Nathanael', last_name: 'Vieira', email: 'nathan@mail.com')
+    nathan = create(:admin, first_name: 'Nathanael', last_name: 'Vieira', email: 'nathan@mail.com', super_admin: false)
 
     condos = []
     condos << condo1 = Condo.new(id: 1, name: 'Condo Test', city: 'City Test')

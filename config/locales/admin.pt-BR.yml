@@ -11,6 +11,7 @@ pt-BR:
         first_name: 'Nome'
         last_name: 'Sobrenome'
         document_number: 'CPF'
+        super_admin: 'Acesso Geral'
         password_confirmation: 'Confirme a senha'
         photo: 'Foto'
   views:

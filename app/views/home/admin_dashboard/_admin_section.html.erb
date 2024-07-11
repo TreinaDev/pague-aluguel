@@ -29,6 +29,10 @@
               <hr class="divider">
               <span class="text-lowercase fs-8 text-muted"><%= I18n.t('views.show.since') %></span>
               <span><%= admin.created_at.strftime("%d/%m/%Y") %></span>
+              <% if admin.super_admin %>
+                <hr class="divider">
+                <span class="text-uppercase text-muted fs-7"><%= I18n.t('activerecord.attributes.admin.super_admin') %></span>
+              <% end %>
               <% if admin.associated_condos.any? %>
                 <hr class="divider">
                 <span class="text-lowercase fs-8 text-muted"><%= I18n.t('views.index.condo') %></span>
@@ -37,8 +41,10 @@
                 <% end %>
               <% end %>
               <% if current_admin.super_admin? %>
-                <hr class="divider">
-                <%= link_to I18n.t('views.index.manage_condos_access'), condos_selection_admin_path(admin), class: "fs-7 text-uppercase text-decoration-none btn hover-strong", data: { turbo_frame: "modal" } %>
+                <% unless admin.super_admin? %>
+                  <hr class="divider">
+                  <%= link_to I18n.t('views.index.manage_condos_access'), condos_selection_admin_path(admin), class: "fs-7 text-uppercase text-decoration-none btn hover-strong", data: { turbo_frame: "modal" } %>
+                <% end %>
               <% end %>
             </div>
           </div>

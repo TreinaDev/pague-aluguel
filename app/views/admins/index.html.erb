@@ -27,8 +27,10 @@
                 <% end %>
               <% end %>
               <% if current_admin.super_admin? %>
-                <hr class="divider">
-                <%= link_to I18n.t('views.index.manage_condos_access'), condos_selection_admin_path(admin), class: "fs-7 text-uppercase text-decoration-none btn hover-strong", data: { turbo_frame: "modal" } %>
+                <% unless admin.super_admin? %>
+                  <hr class="divider">
+                  <%= link_to I18n.t('views.index.manage_condos_access'), condos_selection_admin_path(admin), class: "fs-7 text-uppercase text-decoration-none btn hover-strong", data: { turbo_frame: "modal" } %>
+                <% end %>
               <% end %>
             </div>
           </div>

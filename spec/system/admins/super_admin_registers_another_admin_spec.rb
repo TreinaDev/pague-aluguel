@@ -61,4 +61,32 @@ describe 'super admin registra outro admin' do
 
     expect(page).not_to have_link 'novo administrador'
   end
+
+  it 'e este novo admin é um super' do
+    admin = FactoryBot.create(:admin, first_name: 'Fulano', last_name: 'Da Costa', super_admin: true)
+    cpf = CPF.generate
+    condos = []
+    condos << Condo.new(id: 1, name: 'Condo Test', city: 'City Test')
+    allow(Condo).to receive(:all).and_return(condos)
+
+    login_as admin, scope: :admin
+    visit root_path
+
+    click_on 'novo administrador'
+
+    fill_in 'E-mail', with: 'joaoalmeida@mail.com'
+    fill_in 'Senha', with: 'password123'
+    fill_in 'Confirme a senha', with: 'password123'
+    fill_in 'Nome', with: 'João'
+    fill_in 'Sobrenome', with: 'Almeida'
+    cpf.each_char { |char| find(:css, "input[id$='admin_document_number']").send_keys(char) }
+    check 'Acesso Geral'
+    attach_file 'Insira sua foto de perfil', Rails.root.join('spec/support/images/reuri.jpeg')
+    click_on 'Cadastrar'
+
+    expect(page).to have_content 'Cadastro realizado com sucesso.'
+    expect(page).to have_content 'João Almeida'
+    expect(current_path).to eq root_path
+    expect(Admin.last.super_admin).to eq true
+  end
 end
