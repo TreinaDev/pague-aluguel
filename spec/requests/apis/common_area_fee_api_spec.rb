@@ -1,7 +1,7 @@
 require 'rails_helper'
 
 describe 'API das Áreas Comuns' do
-  context'GET /api/v1/condos/:id/common_area_fees' do
+  context 'GET /api/v1/condos/:id/common_area_fees' do
     it 'sucesso' do
       admin = create(:admin)
       create(:common_area_fee, value_cents: 200_00, admin:, common_area_id: 1, condo_id: 1)
@@ -28,6 +28,18 @@ describe 'API das Áreas Comuns' do
       expect(json_response[2]['value_cents']).to eq 400_00
       expect(json_response[2]['common_area_id']).to eq 3
       expect(json_response[2]['condo_id']).to eq 1
+    end
+
+    it 'e não há taxas cadastradas' do
+      admin = create(:admin)
+      create(:common_area_fee, value_cents: 200_00, admin:, common_area_id: 1, condo_id: 2)
+
+      get api_v1_condo_common_area_fees_path(1)
+
+      expect(response.status).to eq 200
+      expect(response.content_type).to include 'application/json'
+      json_response = response.parsed_body
+      expect(json_response.length).to eq 0
     end
   end
 end
