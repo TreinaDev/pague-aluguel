@@ -21,23 +21,23 @@ class SingleCharge < ApplicationRecord
   private
 
   def common_area_restriction
-    self.common_area_id = nil if charge_type != 'common_area_fee'
+    self.common_area_id = nil unless common_area_fee?
   end
 
   def common_area_is_mandatory
-    return unless charge_type == 'common_area_fee' && common_area_id.blank?
+    return unless common_area_fee? && common_area_id.blank?
 
     errors.add(:common_area_id, 'deve ser selecionada.')
   end
 
   def date_is_future
-    return unless issue_date.present? && issue_date < Time.zone.today
+    return unless issue_date.present? && issue_date.past?
 
     errors.add(:issue_date, 'deve ser a partir de hoje.')
   end
 
   def description_is_mandatory
-    return unless charge_type != 'common_area_fee' && description.blank?
+    return unless !common_area_fee? && description.blank?
 
     errors.add(:description, 'não pode ficar em branco.')
   end

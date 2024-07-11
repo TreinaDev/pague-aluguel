@@ -18,7 +18,7 @@ Rails.application.routes.draw do
       post 'cancel', on: :member
     end
 
-    resources :single_charges, only: [:show, :new, :create]
+    resources :single_charges, only: [:show, :new, :create, :index]
   end
 
   authenticate :admin do
