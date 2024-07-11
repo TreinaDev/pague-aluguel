@@ -44,7 +44,7 @@ class Unit
       data = JSON.parse(response.body)
       units_ids = data['units']
       units_ids.each do |id|
-        units << Unit.find(id)
+        units << Unit.find(id.to_i)
       end
     end
     units

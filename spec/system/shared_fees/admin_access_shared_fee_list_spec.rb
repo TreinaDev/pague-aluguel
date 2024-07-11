@@ -148,7 +148,7 @@ describe 'Admin tenta acessar lista de contas compartilhadas' do
     unit_types = []
     unit_types << UnitType.new(id: 1, area: 30, description: 'Apartamento 1 quarto', ideal_fraction: 0.1, condo_id: 1)
     allow(Condo).to receive(:all).and_return(condos)
-    allow(Condo).to receive(:find).and_return(condos.first)
+    allow(Condo).to receive(:find).and_return()
     allow(UnitType).to receive(:find_all_by_condo).and_return(unit_types)
 
     login_as admin, scope: :admin
