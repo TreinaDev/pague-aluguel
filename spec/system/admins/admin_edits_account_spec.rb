@@ -41,7 +41,7 @@ end
 
 describe 'admin tenta editar outra conta' do
   it 'e não encontra section de admins' do
-    admin = FactoryBot.create(:admin)
+    admin = FactoryBot.create(:admin, super_admin: false)
     FactoryBot.create(:admin,
                       email: 'outroadmin@mail.com',
                       password: '123456',

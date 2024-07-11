@@ -57,7 +57,7 @@ describe 'admin vê admins registrados' do
   end
   context 'sem ser super admin' do
     it 'e tenta ver outros admins' do
-      admin = create(:admin, first_name: 'Matheus', last_name: 'Bellucio')
+      admin = create(:admin, first_name: 'Matheus', last_name: 'Bellucio', super_admin: false)
       create(:admin, first_name: 'Nathanael', last_name: 'Vieira', email: 'nathan@mail.com')
       create(:admin, first_name: 'Angelo', last_name: 'Maia', email: 'angelo@maia.com')
       create(:admin, first_name: 'Arthur', last_name: 'Scortegagna', email: 'arthur@mail.com')

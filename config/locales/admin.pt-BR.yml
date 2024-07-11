@@ -19,6 +19,7 @@ pt-BR:
       no_condos: Não existem condomínios registrados.
       profile: Meu perfil
       edit: Editar
+      manage_condos_access: gerenciar acesso aos condomínios
     show:
       condo: Condomínio
       email: email

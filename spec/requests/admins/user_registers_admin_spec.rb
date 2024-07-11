@@ -34,7 +34,7 @@ describe 'usuario tenta criar conta de administrador' do
   end
 
   it 'e falha por não ser super admin' do
-    admin = FactoryBot.create(:admin, first_name: 'Fulano', last_name: 'Da Costa')
+    admin = FactoryBot.create(:admin, first_name: 'Fulano', last_name: 'Da Costa', super_admin: false)
     login_as admin, scope: :admin
     post admins_path, params: {
       admin: {
@@ -51,7 +51,7 @@ describe 'usuario tenta criar conta de administrador' do
   end
 
   it 'acessando a pagina de registro e falha' do
-    admin = FactoryBot.create(:admin, first_name: 'Fulano', last_name: 'Da Costa')
+    admin = FactoryBot.create(:admin, first_name: 'Fulano', last_name: 'Da Costa', super_admin: false)
     login_as admin, scope: :admin
     get new_admin_registration_path
 
