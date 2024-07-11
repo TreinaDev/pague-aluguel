@@ -4,4 +4,6 @@
   <%= render 'home/admin_dashboard/admin_dashboard' %>
 <% end %>
 
-
+<% if property_owner_signed_in? %>
+  <%= render 'home/property_owner_dashboard/property_owner_dashboard' %>
+<% end %>

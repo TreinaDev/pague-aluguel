@@ -2,7 +2,7 @@ class HomeController < ApplicationController
   def index
     if property_owner_signed_in?
       first_units
-      return render '/home/property_owner_dashboard/_property_owner_dashboard'
+      render 'index'
     end
 
     recent_admins
