@@ -18,8 +18,8 @@ class AdminsController < ApplicationController
     admin = Admin.find(params[:id])
     admin.associated_condos.destroy_all
     params[:condo_ids].each do |condo_id|
-      admin.associated_condos.create(condo_id: condo_id)
+      admin.associated_condos.create(condo_id:)
     end
-    redirect_to root_path, notice: 'Acesso aos condomínios atualizado com sucesso'
+    redirect_to root_path, notice: I18n.t('errors.messages.condo_acess_updated')
   end
 end
