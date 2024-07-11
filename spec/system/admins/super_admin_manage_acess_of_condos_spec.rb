@@ -6,10 +6,11 @@ describe 'Super admin gerencia o acesso de outros admins aos condomínios' do
     nathan = create(:admin, first_name: 'Nathanael', last_name: 'Vieira', email: 'nathan@mail.com')
 
     condos = []
-    condos << Condo.new(id: 1, name: 'Condo Test', city: 'City Test')
+    condos << condo1 = Condo.new(id: 1, name: 'Condo Test', city: 'City Test')
     condos << Condo.new(id: 2, name: 'Condo Admin Test', city: 'ABC City')
     condos << Condo.new(id: 3, name: 'Condo Outro Test', city: 'Rio de Janeiro')
     allow(Condo).to receive(:all).and_return(condos)
+    allow(Condo).to receive(:find).and_return(condo1)
 
     login_as admin, scope: :admin
     visit root_path
