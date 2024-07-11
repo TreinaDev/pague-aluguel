@@ -22,7 +22,9 @@ RSpec.describe GenerateMonthlyBillJob, type: :job do
       allow(Unit).to receive(:find_all_by_condo).and_return(units)
 
       travel_to 35.days.from_now do
-        GenerateMonthlyBillJob.perform_now
+        units.each do |unit|
+          GenerateMonthlyBillJob.perform_now(unit)
+        end
 
         expect(Bill.count).to eq 1
         expect(Bill.last.issue_date).to eq Time.zone.today.beginning_of_month
@@ -74,7 +76,12 @@ RSpec.describe GenerateMonthlyBillJob, type: :job do
       allow(Unit).to receive(:find_all_by_condo).and_return(first_units, second_units)
 
       travel_to 35.days.from_now do
-        GenerateMonthlyBillJob.perform_now
+        first_units.each do |unit|
+          GenerateMonthlyBillJob.perform_now(unit)
+        end
+        second_units.each do |unit|
+          GenerateMonthlyBillJob.perform_now(unit)
+        end
 
         expect(Bill.count).to eq 4
         expect(Bill.last.issue_date).to eq Time.zone.today.beginning_of_month
@@ -110,7 +117,9 @@ RSpec.describe GenerateMonthlyBillJob, type: :job do
       allow(Unit).to receive(:find_all_by_condo).and_return(units)
 
       travel_to 35.days.from_now do
-        GenerateMonthlyBillJob.perform_now
+        units.each do |unit|
+          GenerateMonthlyBillJob.perform_now(unit)
+        end
 
         expect(Bill.count).to eq 1
         expect(Bill.first.issue_date).to eq Time.zone.today.beginning_of_month
@@ -144,7 +153,9 @@ RSpec.describe GenerateMonthlyBillJob, type: :job do
       allow(Unit).to receive(:find_all_by_condo).and_return(units)
 
       travel_to 65.days.from_now do
-        GenerateMonthlyBillJob.perform_now
+        units.each do |unit|
+          GenerateMonthlyBillJob.perform_now(unit)
+        end
 
         expect(Bill.count).to eq 1
         expect(Bill.first.issue_date).to eq Time.zone.today.beginning_of_month
