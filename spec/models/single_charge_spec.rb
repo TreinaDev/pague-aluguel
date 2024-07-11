@@ -7,7 +7,7 @@ RSpec.describe SingleCharge, type: :model do
     it { should validate_numericality_of(:value).is_greater_than(0) }
 
     it 'common_area_is_mandatory' do
-      single_charge = SingleCharge.new(charge_type: 'common_area_fee')
+      single_charge = build(:single_charge, charge_type: 'common_area_fee', common_area_id: '')
 
       single_charge.valid?
 
@@ -16,7 +16,7 @@ RSpec.describe SingleCharge, type: :model do
     end
 
     it 'date_is_future' do
-      single_charge = SingleCharge.new(issue_date: 5.days.ago.to_date)
+      single_charge = build(:single_charge, issue_date: 5.days.ago.to_date)
 
       single_charge.valid?
 
@@ -25,9 +25,9 @@ RSpec.describe SingleCharge, type: :model do
     end
 
     it 'description_is_mandatory' do
-      single_charge = SingleCharge.new(charge_type: 'other')
-      single_charge_two = SingleCharge.new(charge_type: 'fine')
-      single_charge_three = SingleCharge.new(charge_type: 'common_area_fee')
+      single_charge = build(:single_charge, charge_type: 'other', description: '')
+      single_charge_two = build(:single_charge, charge_type: 'fine', description: '')
+      single_charge_three = build(:single_charge, charge_type: 'common_area_fee', description: '')
 
       single_charge.valid?
       single_charge_two.valid?
@@ -41,6 +41,12 @@ RSpec.describe SingleCharge, type: :model do
       expect(single_charge_three.errors.full_messages).not_to include 'Descrição não pode ficar em branco.'
     end
 
-    it ''
+    it 'common_area_restriction' do
+      create(:single_charge, charge_type: 'fine', common_area_id: 1)
+
+      expect(SingleCharge.first).to be_valid
+      expect(SingleCharge.first.charge_type).to eq 'fine'
+      expect(SingleCharge.first.common_area_id).to be_nil
+    end
   end
 end

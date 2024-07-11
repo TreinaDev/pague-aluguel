@@ -23,7 +23,9 @@ describe 'Administrador cria uma cobrança avulsa' do
     login_as admin, scope: :admin
     visit root_path
     click_on 'Condo Test'
-    click_on 'Lançar Cobrança Avulsa'
+    within '#single-charge' do
+      click_on 'Adicionar nova'
+    end
     select 'Outros', from: 'Tipo de Cobrança'
     fill_in 'Descrição', with: 'Acordo entre proprietário e morador'
     fill_in 'Unidade', with: units.last.id
@@ -92,7 +94,9 @@ describe 'Administrador cria uma cobrança avulsa' do
     login_as admin, scope: :admin
     visit root_path
     click_on 'Condo Test'
-    click_on 'Lançar Cobrança Avulsa'
+    within '#single-charge' do
+      click_on 'Adicionar nova'
+    end
     select 'Taxa de Área Comum', from: 'Tipo de Cobrança'
     select 'Churrasqueira', from: 'Área Comum'
     fill_in 'Unidade', with: units.last.id
@@ -131,7 +135,9 @@ describe 'Administrador cria uma cobrança avulsa' do
     login_as admin, scope: :admin
     visit root_path
     click_on 'Condo Test'
-    click_on 'Lançar Cobrança Avulsa'
+    within '#single-charge' do
+      click_on 'Adicionar nova'
+    end
     find('#arrow-left').click
 
     expect(current_path).to eq condo_path(condo.id)
@@ -162,7 +168,10 @@ describe 'Administrador cria uma cobrança avulsa' do
     login_as admin, scope: :admin
     visit root_path
     click_on 'Condo Test'
-    click_on 'Lançar Cobrança Avulsa'
+    within '#single-charge' do
+      click_on 'Adicionar nova'
+    end
+    fill_in 'Descrição', with: ''
     fill_in 'Unidade', with: ''
     fill_in 'Valor', with: ''
     fill_in 'Data de Emissão', with: ''
@@ -171,13 +180,14 @@ describe 'Administrador cria uma cobrança avulsa' do
     expect(page).to have_content 'Não foi possível cadastrar a cobrança avulsa.'
     expect(page).to have_content 'Verifique os erros abaixo:'
     expect(page).to have_content 'Unidade não pode ficar em branco'
+    expect(page).to have_content 'Descrição não pode ficar em branco'
     expect(page).to have_content 'Valor Total não é um número'
     expect(page).to have_content 'Data de Emissão não pode ficar em branco'
     expect(page).not_to have_content 'Tipo de Cobrança não pode ficar em branco'
-    expect(page).not_to have_content 'Área Comum não pode ficar em branco'
+    expect(page).not_to have_content 'Área Comum deve ser selecionada'
   end
 
-  xit 'e deve selecionar área comum para taxa de área comum' do
+  it 'e deve selecionar área comum para taxa de área comum' do
     admin = create(:admin)
     condos = []
     condos << Condo.new(id: 1, name: 'Condo Test', city: 'City Test')
@@ -202,26 +212,49 @@ describe 'Administrador cria uma cobrança avulsa' do
     login_as admin, scope: :admin
     visit root_path
     click_on 'Condo Test'
-    click_on 'Lançar Cobrança Avulsa'
-    fill_in 'Unidade', with: ''
-    fill_in 'Valor', with: ''
-    fill_in 'Data de Emissão', with: ''
+    within '#single-charge' do
+      click_on 'Adicionar nova'
+    end
+    select 'Taxa de Área Comum', from: 'Tipo de Cobrança'
+    fill_in 'Unidade', with: units.last.id
+    fill_in 'Valor', with: '105,59'
+    fill_in 'Data de Emissão', with: 5.days.from_now.to_date
     click_on 'Cadastrar'
 
     expect(page).to have_content 'Não foi possível cadastrar a cobrança avulsa.'
     expect(page).to have_content 'Verifique os erros abaixo:'
-    expect(page).to have_content 'Unidade não pode ficar em branco'
-    expect(page).to have_content 'Valor Total não é um número'
-    expect(page).to have_content 'Data de Emissão não pode ficar em branco'
+    expect(page).to have_content 'Área Comum deve ser selecionada'
+    expect(page).not_to have_content 'Unidade não pode ficar em branco'
+    expect(page).not_to have_content 'Descrição não pode ficar em branco'
+    expect(page).not_to have_content 'Valor Total não é um número'
+    expect(page).not_to have_content 'Data de Emissão não pode ficar em branco'
     expect(page).not_to have_content 'Tipo de Cobrança não pode ficar em branco'
-    expect(page).not_to have_content 'Área Comum não pode ficar em branco'
   end
 
-  xit 'e não há área comum cadastrada' do
-    
-  end
+  it 'e não há área comum cadastrada' do
+    admin = create(:admin)
+    condos = []
+    condos << Condo.new(id: 1, name: 'Condo Test', city: 'City Test')
+    unit_types = []
+    unit_types << UnitType.new(id: 1, area: 40, description: 'Apartamento 1 quarto', ideal_fraction: 0.5, condo_id: 1)
+    units = []
+    units << Unit.new(id: 1, area: 40, floor: 1, number: 1, unit_type_id: 1)
+    units << Unit.new(id: 2, area: 40, floor: 1, number: 1, unit_type_id: 1)
+    condo = condos.first
+    allow(Condo).to receive(:all).and_return(condos)
+    allow(Condo).to receive(:find).and_return(condo)
+    allow(UnitType).to receive(:all).and_return(unit_types)
+    allow(Unit).to receive(:all).and_return(units)
+    allow(CommonArea).to receive(:all).and_return([])
 
-  xit 'Seleciona uma área comum e depois escolhe multa' do
-    
+    login_as admin, scope: :admin
+    visit root_path
+    click_on 'Condo Test'
+    within '#single-charge' do
+      click_on 'Adicionar nova'
+    end
+    select 'Taxa de Área Comum', from: 'Tipo de Cobrança'
+
+    expect(page).to have_select('Área Comum', options: [''])
   end
 end

@@ -4,6 +4,8 @@ class SingleCharge < ApplicationRecord
   validate :date_is_future
   validate :description_is_mandatory
 
+  before_create :common_area_restriction
+
   monetize :value_cents,
            allow_nil: false,
            numericality: {
@@ -18,8 +20,12 @@ class SingleCharge < ApplicationRecord
 
   private
 
+  def common_area_restriction
+    self.common_area_id = nil if charge_type != 'common_area_fee'
+  end
+
   def common_area_is_mandatory
-    return unless charge_type == 'common_area_fee' && common_area_id.nil?
+    return unless charge_type == 'common_area_fee' && common_area_id.blank?
 
     errors.add(:common_area_id, 'deve ser selecionada.')
   end
@@ -31,7 +37,7 @@ class SingleCharge < ApplicationRecord
   end
 
   def description_is_mandatory
-    return unless charge_type != 'common_area_fee' && description.nil?
+    return unless charge_type != 'common_area_fee' && description.blank?
 
     errors.add(:description, 'não pode ficar em branco.')
   end

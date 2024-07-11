@@ -15,7 +15,7 @@ export default class extends Controller {
     if (selectedValue === enableValue) {
       this.commonareasTarget.style.display = 'block'
     } else {
-      this.commonareasTarget.style.display = 'block'
+      this.commonareasTarget.style.display = 'none'
     }
   }
 }

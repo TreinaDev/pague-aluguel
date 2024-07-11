@@ -2,6 +2,11 @@
   <div class="text-muted mb-3 fs-8">
     <%= image_tag "payment-slip-icon", size: '18' %>
     <span><%= I18n.t('views.show.single_charge') %></span>
-    <%= link_to 'Lançar Cobrança Avulsa', new_condo_single_charge_path(@condo.id) %>
+  </div>
+  <div class="d-flex align-items-center" id="single-charge">
+    <%= link_to new_condo_single_charge_path(@condo.id), class: "text-decoration-none btn hover-strong" do %>
+      <%= image_tag "plus-icon", size: "18" %>
+      <span class="text-muted fs-7 text-uppercase"><%= I18n.t('helpers.submit.add') %></span>
+    <% end %>
   </div>
 </div>
