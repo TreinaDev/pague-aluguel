@@ -64,7 +64,6 @@ describe 'API das Áreas Comuns' do
     end
 
     it 'falha' do
-
       get api_v1_condo_common_area_fee_path(1, 2)
 
       expect(response.status).to eq 404
