@@ -10,15 +10,24 @@ describe 'API das Áreas Comuns' do
       create(:common_area_fee, value_cents: 500_00, admin:, common_area_id: 4, condo_id: 2)
       create(:common_area_fee, value_cents: 600_00, admin:, common_area_id: 5, condo_id: 3)
 
-      get banana_path(1)
+      get api_v1_condo_common_area_fees_path(1)
 
       expect(response.status).to eq 200
       expect(response.content_type).to include 'application/json'
       json_response = response.parsed_body
       expect(json_response.length).to eq 3
       expect(json_response[0]['value_cents']).to eq 200_00
+      expect(json_response[0]['common_area_id']).to eq 1
+      expect(json_response[0]['condo_id']).to eq 1
+      expect(json_response[0].keys).not_to include('updated_at')
+      expect(json_response[0].keys).not_to include('admin_id')
+      expect(json_response[0].keys).not_to include('id')
       expect(json_response[1]['value_cents']).to eq 300_00
+      expect(json_response[1]['common_area_id']).to eq 2
+      expect(json_response[1]['condo_id']).to eq 1
       expect(json_response[2]['value_cents']).to eq 400_00
+      expect(json_response[2]['common_area_id']).to eq 3
+      expect(json_response[2]['condo_id']).to eq 1
     end
   end
 end
