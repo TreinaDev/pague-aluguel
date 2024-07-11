@@ -14,7 +14,7 @@ describe 'Super admin gerencia o acesso de outros admins aos condomínios' do
     login_as admin, scope: :admin
     visit root_path
     click_on 'Nathanael'
-    click_on "gerenciar acesso aos condomínios"
+    click_on 'gerenciar acesso aos condomínios'
     check 'Condo Test'
     check 'Condo Admin Test'
     click_on 'Salvar'

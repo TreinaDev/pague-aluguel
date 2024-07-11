@@ -51,7 +51,7 @@ describe 'super admin registra outro admin' do
 
   it 'não consegue ver o botão de registro caso não seja super admin' do
     admin = FactoryBot.create(:admin, first_name: 'Fulano', last_name: 'Da Costa', super_admin: false)
-    cpf = CPF.generate
+    CPF.generate
     condos = []
     condos << Condo.new(id: 1, name: 'Condo Test', city: 'City Test')
     allow(Condo).to receive(:all).and_return(condos)

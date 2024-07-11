@@ -27,7 +27,7 @@ describe 'admin vê admins registrados' do
         expect(page).to have_link 'Mostrar todos'
       end
     end
-  
+
     it 'e vê todos os admins cadastrados' do
       admin = create(:admin, first_name: 'Matheus', last_name: 'Bellucio', super_admin: true)
       create(:admin, first_name: 'Nathanael', last_name: 'Vieira', email: 'nathan@mail.com')
