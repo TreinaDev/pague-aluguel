@@ -2,6 +2,11 @@ class HomeController < ApplicationController
   before_action :authenticate_admin!, only: [:search]
 
   def index
+    if property_owner_signed_in?
+      first_units
+      render 'index'
+    end
+
     recent_admins
     first_condos
   end
@@ -35,5 +40,10 @@ class HomeController < ApplicationController
     end
 
     @first_condos = @condos.sort_by(&:name).take(4)
+  end
+
+  def first_units
+    @units = Unit.find_all_by_owner(current_property_owner.document_number)
+    @first_units = @units.take(4)
   end
 end

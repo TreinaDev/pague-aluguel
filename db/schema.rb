@@ -93,6 +93,7 @@ ActiveRecord::Schema[7.1].define(version: 2024_07_11_200314) do
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
     t.integer "common_area_id"
+    t.integer "condo_id"
     t.index ["admin_id"], name: "index_common_area_fees_on_admin_id"
   end
 
