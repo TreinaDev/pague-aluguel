@@ -32,10 +32,6 @@ class Unit
     unit
   end
 
-  # def self.find(id)
-  #   Unit.all.select { |unit| unit.id == id }.first
-  # end
-
   def self.find_all_by_condo(id)
     unit_types = UnitType.find_all_by_condo(id)
     unit_type_ids = unit_types.map(&:id)

@@ -19,6 +19,7 @@ describe 'Usuário cria uma cobrança avulsa' do
     allow(UnitType).to receive(:all).and_return(unit_types)
     allow(UnitType).to receive(:find).with(1).and_return(unit_types.first)
     allow(Unit).to receive(:all).and_return(units)
+    allow(Unit).to receive(:find).and_return(units.first)
     allow(CommonArea).to receive(:all).and_return(common_areas)
 
     login_as admin, scope: :admin
@@ -65,6 +66,7 @@ describe 'Usuário cria uma cobrança avulsa' do
     allow(UnitType).to receive(:find).with(1).and_return(unit_types.first)
     allow(UnitType).to receive(:find).with(2).and_return(unit_types.last)
     allow(Unit).to receive(:all).and_return(units)
+    allow(Unit).to receive(:find).with(2).and_return(units.second)
     allow(CommonArea).to receive(:all).and_return([])
 
     login_as admin, scope: :admin

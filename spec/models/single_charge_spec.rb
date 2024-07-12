@@ -26,6 +26,7 @@ RSpec.describe SingleCharge, type: :model do
       units << Unit.new(id: 1, area: 40, floor: 1, number: 1, unit_type_id: 1)
       allow(UnitType).to receive(:find).and_return(unit_type)
       allow(Unit).to receive(:all).and_return(units)
+      allow(Unit).to receive(:find).and_return(units.first)
       single_charge = build(:single_charge, charge_type: 'fine', value: -1)
 
       single_charge.valid?
@@ -40,6 +41,7 @@ RSpec.describe SingleCharge, type: :model do
       units << Unit.new(id: 1, area: 40, floor: 1, number: 1, unit_type_id: 1)
       allow(UnitType).to receive(:find).and_return(unit_type)
       allow(Unit).to receive(:all).and_return(units)
+      allow(Unit).to receive(:find).and_return(units.first)
       single_charge = build(:single_charge, charge_type: 'common_area_fee', common_area_id: '')
 
       single_charge.valid?
@@ -54,6 +56,7 @@ RSpec.describe SingleCharge, type: :model do
       units << Unit.new(id: 1, area: 40, floor: 1, number: 1, unit_type_id: 1)
       allow(UnitType).to receive(:find).and_return(unit_type)
       allow(Unit).to receive(:all).and_return(units)
+      allow(Unit).to receive(:find).and_return(units.first)
       single_charge = build(:single_charge, issue_date: 5.days.ago.to_date)
 
       single_charge.valid?
@@ -68,6 +71,7 @@ RSpec.describe SingleCharge, type: :model do
       units << Unit.new(id: 1, area: 40, floor: 1, number: 1, unit_type_id: 1)
       allow(UnitType).to receive(:find).and_return(unit_type)
       allow(Unit).to receive(:all).and_return(units)
+      allow(Unit).to receive(:find).and_return(units.first)
       single_charge = build(:single_charge, charge_type: 'other', description: '')
       single_charge_two = build(:single_charge, charge_type: 'fine', description: '')
       single_charge_three = build(:single_charge, charge_type: 'common_area_fee', description: '')
@@ -90,6 +94,7 @@ RSpec.describe SingleCharge, type: :model do
       units << Unit.new(id: 1, area: 40, floor: 1, number: 1, unit_type_id: 1)
       allow(UnitType).to receive(:find).and_return(unit_type)
       allow(Unit).to receive(:all).and_return(units)
+      allow(Unit).to receive(:find).and_return(units.first)
       create(:single_charge, charge_type: 'fine', common_area_id: 1)
 
       expect(SingleCharge.first).to be_valid
