@@ -3,7 +3,8 @@
     <%= image_tag "clipboard-icon", size: '18' %>
     <span><%= BaseFee.model_name.human(count: 2) %></span>
   </div>
-  <% if @recent_base_fees %>
+  <% if @recent_base_fees.any? %>
+    <span class="text-muted text-uppercase fs-7 ms-3 mb-1">recentes</span>
     <div class="list-group w-75 mb-2">
       <% @recent_base_fees.each do |base_fee| %>
         <%= link_to condo_base_fee_path(@condo.id, base_fee), class: "list-group-item p-3 list-group-item-action hover-strong", data: { turbo_frame: "modal" } do %>

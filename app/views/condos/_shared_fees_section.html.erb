@@ -3,7 +3,8 @@
     <%= image_tag "open-folder-icon", size: '18', class: "mb-1" %>
     <span><%= SharedFee.model_name.human(count: 2) %></span>
   </div>
-  <% if @recent_shared_fees %>
+  <% if @recent_shared_fees.any? %>
+    <span class="text-muted text-uppercase fs-7 ms-3 mb-1">recentes</span>
     <div class="list-group w-75 mb-2">
       <% @recent_shared_fees.each do |shared_fee| %>
         <%= link_to condo_shared_fee_path(@condo.id, shared_fee), class: "list-group-item p-3 list-group-item-action hover-strong", data: { turbo_frame: "modal" } do %>
