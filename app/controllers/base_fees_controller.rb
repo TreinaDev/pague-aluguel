@@ -24,7 +24,7 @@ class BaseFeesController < ApplicationController
     @unit_types = UnitType.find_all_by_condo(@condo.id)
 
     if @base_fee.save
-      redirect_to condo_base_fee_path(@condo.id, @base_fee), notice: I18n.t('success_notice_base_fee')
+      redirect_to condo_path(@condo.id), notice: I18n.t('success_notice_base_fee')
     else
       flash.now[:alert] = I18n.t 'fail_notice_base_fee'
       render :new, status: :unprocessable_entity
