@@ -20,6 +20,7 @@ class CondosController < ApplicationController
   end
 
   def recent_shared_fees
-    @recent_shared_fees = SharedFee.where(condo_id: @condo.id).where.not(status: :canceled).order(created_at: :desc).take(2)
+    @recent_shared_fees = SharedFee.where(condo_id: @condo.id).where.not(status: :canceled)
+    @recent_shared_fees = @recent_shared_fees.order(created_at: :desc).take(2)
   end
 end

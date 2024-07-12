@@ -65,6 +65,11 @@ describe 'Admin vê lista de taxas cadastradas' do
   it 'e vê no dashboard de condo as mais recentes' do
     admin = create(:admin)
     condo = Condo.new(id: 1, name: 'Prédio lindo', city: 'Cidade maravilhosa')
+    common_areas = []
+    common_areas << CommonArea.new(id: 3, name: 'Salão de festa',
+                                   description: 'Festa para toda a família.',
+                                   max_occupancy: 80, rules: 'Não é permitido a entrada de leões')
+    allow(CommonArea).to receive(:all).and_return(common_areas)
     allow(Condo).to receive(:find).and_return(condo)
     create(:base_fee, name: 'Taxa de Condomínio', condo_id: 1)
     create(:base_fee, name: 'Taxa de Manutenção', condo_id: 1)

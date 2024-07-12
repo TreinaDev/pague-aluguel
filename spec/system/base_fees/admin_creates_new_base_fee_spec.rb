@@ -65,7 +65,11 @@ describe 'Admin cria taxa condominial' do
                                condo_id: 1)
     allow(Condo).to receive(:find).and_return(condo)
     allow(UnitType).to receive(:find_all_by_condo).and_return(unit_types)
-
+    common_areas = []
+    common_areas << CommonArea.new(id: 3, name: 'Salão de festa',
+                                   description: 'Festa para toda a família.',
+                                   max_occupancy: 80, rules: 'Não é permitido a entrada de leões')
+    allow(CommonArea).to receive(:all).and_return(common_areas)
     formatted_date = 10.days.from_now.to_date
 
     login_as admin, scope: :admin
@@ -81,7 +85,6 @@ describe 'Admin cria taxa condominial' do
     fill_in 'Multa por atraso', with: '30,00'
     click_on 'Cadastrar'
 
-    base_fee = BaseFee.last
     expect(page).to have_content 'Taxa cadastrada com sucesso!'
     expect(current_path).to eq condo_path(condo.id)
   end
@@ -97,7 +100,11 @@ describe 'Admin cria taxa condominial' do
                                condo_id: 1)
     allow(Condo).to receive(:find).and_return(condo)
     allow(UnitType).to receive(:find_all_by_condo).and_return(unit_types)
-
+    common_areas = []
+    common_areas << CommonArea.new(id: 3, name: 'Salão de festa',
+                                   description: 'Festa para toda a família.',
+                                   max_occupancy: 80, rules: 'Não é permitido a entrada de leões')
+    allow(CommonArea).to receive(:all).and_return(common_areas)
     formatted_date = 10.days.from_now.to_date
 
     login_as admin, scope: :admin
