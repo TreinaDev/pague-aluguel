@@ -56,7 +56,8 @@ Admin.create!(
   password: '123456',
   first_name: 'Angelo',
   last_name: 'Maia',
-  document_number: CPF.generate
+  document_number: CPF.generate,
+  super_admin: true,
 )
 
 Admin.create!(
