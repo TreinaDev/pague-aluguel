@@ -78,12 +78,22 @@ ActiveRecord::Schema[7.1].define(version: 2024_07_11_200314) do
     t.integer "installments"
   end
 
+  create_table "bills", force: :cascade do |t|
+    t.integer "unit_id"
+    t.date "issue_date"
+    t.date "due_date"
+    t.integer "total_value_cents"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+  end
+
   create_table "common_area_fees", force: :cascade do |t|
     t.integer "value_cents"
     t.integer "admin_id", null: false
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
     t.integer "common_area_id"
+    t.integer "condo_id"
     t.index ["admin_id"], name: "index_common_area_fees_on_admin_id"
   end
 

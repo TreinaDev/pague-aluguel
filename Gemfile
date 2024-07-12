@@ -18,6 +18,7 @@ gem 'sqlite3', '~> 1.4'
 gem 'stimulus-rails'
 gem 'turbo-rails'
 gem 'tzinfo-data', platforms: [:mingw, :mswin, :x64_mingw, :jruby]
+gem 'whenever', require: false
 
 group :development, :test do
   gem 'byebug'
