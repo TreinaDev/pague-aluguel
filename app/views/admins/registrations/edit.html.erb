@@ -1,10 +1,10 @@
 <%= turbo_frame_tag "modal" do %>
-  <div class="dean-modal">
+  <div class="dean-modal modal-md">
     <div class="mb-3">
       <%= link_to "", :back, class: "btn btn-close btn-sm" %>
     </div>
 
-    <span class="d-block fs-4 mx-auto mt-3 mb-3 text-uppercase text-center">
+    <span class="d-block fs-4 mx-auto mt-3 mb-2 text-uppercase text-center">
       <%= I18n.t('devise.registrations.edit.edit_admin') %>
     </span>
 
@@ -47,7 +47,7 @@
       </div>
 
       <div class="text-center mt-1">
-        <%= f.submit I18n.t('devise.registrations.edit.update'), class: "btn btn-primary text-uppercase fs-7 ls-3" %>
+        <%= f.submit I18n.t('devise.registrations.edit.update'), class: "btn btn-primary text-uppercase fs-7 mb-3 ls-3" %>
       </div>
     <% end %>
   </div>
