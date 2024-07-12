@@ -19,6 +19,9 @@ describe 'Admin visualiza listagem de cobranças avulsas' do
     allow(UnitType).to receive(:find).with(1).and_return(unit_types.first)
     allow(UnitType).to receive(:find).with(2).and_return(unit_types.last)
     allow(Unit).to receive(:all).and_return(units)
+    allow(Unit).to receive(:find).with(1).and_return(units.first)
+    allow(Unit).to receive(:find).with(2).and_return(units.second)
+    allow(Unit).to receive(:find).with(3).and_return(units.last)
     allow(CommonArea).to receive(:all).and_return([])
     create(:single_charge, charge_type: 'fine', unit_id: 1)
     create(:single_charge, charge_type: 'fine', unit_id: 3, condo_id: 2)
@@ -39,6 +42,7 @@ describe 'Admin visualiza listagem de cobranças avulsas' do
     expect(page).to have_link 'Outros', href: condo_single_charge_path(condos.first.id, SingleCharge.last.id)
     expect(page).to have_link 'Multa', href: condo_single_charge_path(condos.first.id, SingleCharge.first.id)
     expect(page).not_to have_link 'Multa', href: condo_single_charge_path(condos.last.id, SingleCharge.second.id)
+    expect(page).not_to have_content 'Unidade 13'
   end
 
   it 'e não há cobranças' do

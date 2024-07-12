@@ -20,7 +20,7 @@ class SharedFeesController < ApplicationController
     @shared_fee.condo_id = @condo.id
     if @shared_fee.save
       @shared_fee.calculate_fractions
-      redirect_to condo_shared_fee_path(@condo.id, @shared_fee), notice: I18n.t('success_notice_shared_fee')
+      redirect_to condo_path(@condo.id), notice: I18n.t('success_notice_shared_fee')
     else
       flash.now[:alert] = I18n.t('fail_notice_shared_fee')
       render :new, status: :unprocessable_entity

@@ -22,17 +22,40 @@ class Unit
     units
   end
 
+  def self.find(id)
+    response = Faraday.get("http://127.0.0.1:3000/api/v1/units/#{id}")
+    if response.success?
+      data = JSON.parse(response.body)
+      unit = Unit.new(id: data['id'], area: data['area'], floor: data['floor'], number: data['number'],
+                      unit_type_id: data['unit_type_id'])
+    end
+    unit
+  end
+
+  # def self.find(id)
+  #   Unit.all.select { |unit| unit.id == id }.first
+  # end
+
   def self.find_all_by_condo(id)
     unit_types = UnitType.find_all_by_condo(id)
     unit_type_ids = unit_types.map(&:id)
     Unit.all.select { |unit| unit_type_ids.include?(unit.unit_type_id) }
   end
 
-  def self.find(id)
-    Unit.all.select { |unit| unit.id == id }.first
-  end
-
   def identifier
     "#{floor}#{number}"
+  end
+
+  def self.find_all_by_owner(cpf)
+    response = Faraday.get("http://127.0.0.1:3000/api/v1/units/cpf=#{cpf}")
+    units = []
+    if response.success?
+      data = JSON.parse(response.body)
+      units_ids = data['units']
+      units_ids.each do |id|
+        units << Unit.find(id.to_i)
+      end
+    end
+    units
   end
 end

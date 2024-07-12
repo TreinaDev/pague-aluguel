@@ -31,15 +31,11 @@ describe 'Admin lança uma conta compartilhada' do
     click_on 'Cadastrar'
 
     expect(page).to have_content 'Conta Compartilhada lançada com sucesso!'
-    expect(current_path).to eq condo_shared_fee_path(condos.first.id, SharedFee.last)
+    expect(current_path).to eq condo_path(condos.first.id)
     expect(page).to have_content 'Condo Test'
     expect(page).to have_content 'Conta de Luz'
-    expect(page).to have_content 'data de emissão'
-    expect(page).to have_content I18n.l(10.days.from_now.to_date).to_s
     expect(page).to have_content 'valor total'
     expect(page).to have_content 'R$10.000,00'
-    expect(page).to have_content 'ATIVA'
-    expect(page).to have_content 'CANCELAR'
   end
 
   it 'e não está autenticado' do
