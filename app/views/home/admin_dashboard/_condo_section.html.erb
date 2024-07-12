@@ -4,7 +4,7 @@
     <span><%= I18n.t('views.index.condo') %></span>
   </div>
 
-  <% if @condos.any? %>
+  <% if @condos.any? && admin_signed_in? && current_admin.super_admin %>
     <%= render 'home/admin_dashboard/search_condos' %>
   <% end %>
 

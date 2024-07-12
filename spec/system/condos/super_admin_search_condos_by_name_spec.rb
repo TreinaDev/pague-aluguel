@@ -1,6 +1,6 @@
 require 'rails_helper'
 
-describe 'Admin busca condomínio pelo nome' do
+describe 'Super Admin busca condomínio pelo nome' do
   it 'com sucesso' do
     admin = create(:admin)
     condos = []
@@ -47,5 +47,18 @@ describe 'Admin busca condomínio pelo nome' do
     click_on 'Buscar'
 
     expect(page).to have_content 'Você precisa buscar por um nome de condomínio.'
+  end
+
+  it 'e ele não ve o campo de busa por não ter acesso de super admin' do
+    admin = create(:admin, super_admin: false)
+    condos = []
+    condos << Condo.new(id: 1, name: 'Condomínio Vila das Flores', city: 'São Paulo')
+    allow(Condo).to receive(:all).and_return(condos)
+
+    login_as admin, scope: :admin
+    visit root_path
+
+    expect(page).not_to have_field 'Busque um condomínio'
+    expect(page).not_to have_button 'Buscar'
   end
 end
