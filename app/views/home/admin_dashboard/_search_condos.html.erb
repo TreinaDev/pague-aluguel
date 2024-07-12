@@ -6,14 +6,14 @@
 <% end %>
 
 <% if @query %>
-  <div class="text-center text-muted mb-2 fs-7">
+  <div class="text-muted mb-2">
     <% if @query.empty? %>
-      <span><%= I18n.t('views.query.empty_condo') %></span>
+      <span class="d-block text-center fs-7"><%= I18n.t('views.query.empty_condo') %></span>
     <% elsif  @query_results.empty? %>
-     <span><%= I18n.t('views.query.no_result') %></span>
+     <span class="d-block text-center fs-7"><%= I18n.t('views.query.no_result') %></span>
     <% else %>
-      <span><%= "Resultados para #{@query}" %></span>
-      <div class="d-flex justify-content-center mt-2 gap-2 mb-2 flex-wrap">
+      <span class="d-block text-center fs-7"><%= "Resultados para #{@query}" %></span>
+      <div class="d-flex justify-content-center gap-2 flex-wrap mt-2 mb-2">
         <% @query_results.each do |condo| %>
           <%= link_to condo_path(condo.id), class: "text-decoration-none" do %>
             <div class="card hover-strong shadow-sm" style="width: 18rem; height: 7rem;">

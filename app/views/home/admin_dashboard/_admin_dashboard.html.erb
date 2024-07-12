@@ -4,5 +4,7 @@
     <%= render 'home/admin_dashboard/admin_profile' %>
     <%= render 'home/admin_dashboard/empty' %>
   </div>
-  <%= render 'home/admin_dashboard/admin_section' %>
+  <% if current_admin.super_admin? %>
+    <%= render 'home/admin_dashboard/admin_section' %>
+  <% end %>
 </div>

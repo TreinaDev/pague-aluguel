@@ -18,4 +18,9 @@ module AdminHelper
       image_tag 'psycho-user', class: 'profile-avatar me-3'
     end
   end
+
+  def associated_condos_names(admin)
+    valid_associations = admin.associated_condos.select { |ac| ac.condo_id.present? }
+    valid_associations.map { |association| Condo.find(association.condo_id).name }
+  end
 end
