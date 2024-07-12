@@ -31,7 +31,7 @@ describe 'Admin gerencia contas compartilhadas' do
       expect(SharedFee.count).to eq 1
       expect(SharedFee.last.shared_fee_fractions.length).to eq 2
       expect(response).to have_http_status(302)
-      expect(response).to redirect_to(condo_shared_fee_path(condos.first.id, SharedFee.last.id))
+      expect(response).to redirect_to(condo_path(condos.first.id))
       expect(SharedFee.last.description).to eq 'Descrição'
       expect(SharedFee.last.issue_date).to eq 10.days.from_now.to_date
       expect(SharedFee.last.total_value_cents).to eq 100_000

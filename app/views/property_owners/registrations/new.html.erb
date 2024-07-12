@@ -1,5 +1,5 @@
 <%= turbo_frame_tag "modal" do %>
-  <div class="dean-modal">
+  <div class="dean-modal modal-md">
     <div class="mb-3">
       <%= link_to "", :back, class: "btn btn-close btn-sm" %>
     </div>
@@ -32,13 +32,13 @@
         <%= f.label :password %>
       </div>
 
-      <div class="form-floating mb-3 w-75 mx-auto">
+      <div class="form-floating mb-1 w-75 mx-auto">
         <%= f.password_field :password_confirmation, autocomplete: "new-password", class: "form-control"  %>
         <%= f.label :password_confirmation %><br />
       </div>
 
       <div class="text-center">
-        <%= f.submit I18n.t('helpers.submit.register'), class: "btn btn-primary fs-7 text-uppercase ls-3 mb-5 mt-1" %>
+        <%= f.submit I18n.t('helpers.submit.register'), class: "btn btn-primary fs-7 text-uppercase ls-3 mb-3" %>
       </div>
     <% end %>
   </div>

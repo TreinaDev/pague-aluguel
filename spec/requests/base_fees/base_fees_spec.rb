@@ -31,7 +31,7 @@ describe 'Admin creates a base fee' do
 
     expect(BaseFee.count).to eq 1
     expect(response).to have_http_status(302)
-    expect(response).to redirect_to(condo_base_fee_path(condo.id, BaseFee.last.id.to_s))
+    expect(response).to redirect_to(condo_path(condo.id))
     expect(BaseFee.last.description).to eq 'Descrição'
     expect(BaseFee.last.charge_day).to eq 10.days.from_now.to_date
     expect(BaseFee.last.values.count).to eq 2
