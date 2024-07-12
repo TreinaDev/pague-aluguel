@@ -3,6 +3,10 @@
     <%= link_to "", condo_single_charges_path(@single_charge, condo_id: @condo.id), id: 'close', class: "btn btn-sm btn-close" %>
 
     <span class="fs-8 text-center d-block"><%= SingleCharge.model_name.human %></span>
+    <span class="fs-6 text-center d-block">
+                <%= I18n.t('activerecord.attributes.single_charge.unit_id') %> 
+                <%= Unit.find(@single_charge.unit_id).identifier %>
+     </span>
     <hr>
     <span class="fs-6 text-center d-block"><%= I18n.t 'activerecord.attributes.single_charge.charge_type' %>:</span>
     <span class="fs-4 text-center d-block"><%= I18n.t "single_charge.#{@single_charge.charge_type}" %></span>

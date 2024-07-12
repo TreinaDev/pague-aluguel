@@ -16,10 +16,12 @@ class SingleChargesController < ApplicationController
 
   def new
     @single_charge = SingleCharge.new
+    @units = Unit.find_all_by_condo(@condo.id)
   end
 
   def create
     @single_charge = SingleCharge.new(single_charge_params)
+    @units = Unit.find_all_by_condo(@condo.id)
     @single_charge.condo_id = @condo.id
     if @single_charge.save
       redirect_to condo_single_charge_path(@condo.id, @single_charge), notice: I18n.t('success_notice_single_charge')

@@ -27,4 +27,12 @@ class Unit
     unit_type_ids = unit_types.map(&:id)
     Unit.all.select { |unit| unit_type_ids.include?(unit.unit_type_id) }
   end
+
+  def self.find(id)
+    Unit.all.select { |unit| unit.id == id }.first
+  end
+
+  def identifier
+    "#{floor}#{number}"
+  end
 end

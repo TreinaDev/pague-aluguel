@@ -34,7 +34,8 @@
     </div>
 
     <div class="form-floating mb-3 w-50 mx-auto">
-      <%= f.text_field :unit_id, class: "form-control" %>
+      <%= f.select :unit_id, options_for_select(@units.map { |key, _| [key.identifier, key.id] }, 
+          @single_charge.unit_id), {prompt: ''}, class: "form-control" %>
       <%= f.label :unit_id %>
     </div>
 
