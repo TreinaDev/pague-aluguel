@@ -83,7 +83,7 @@ describe 'Admin cria taxa condominial' do
 
     base_fee = BaseFee.last
     expect(page).to have_content 'Taxa cadastrada com sucesso!'
-    expect(current_path).to eq condo_base_fee_path(condo.id, base_fee)
+    expect(current_path).to eq condo_path(condo.id)
   end
 
   it 'limitada com sucesso' do
@@ -115,9 +115,8 @@ describe 'Admin cria taxa condominial' do
     fill_in 'Multa por atraso', with: '30,00'
     click_on 'Cadastrar'
 
-    base_fee = BaseFee.last
     expect(page).to have_content 'Taxa cadastrada com sucesso!'
-    expect(current_path).to eq condo_base_fee_path(condo.id, base_fee)
+    expect(current_path).to eq condo_path(condo.id)
   end
 
   it 'com dados incompletos' do
