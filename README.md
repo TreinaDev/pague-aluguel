@@ -1,10 +1,10 @@
 # PagueAluguel - Sistema de Cobrança de Aluguéis e Taxas de Condomínio
 
 ![Static Badge](https://img.shields.io/badge/Ruby_3.2.2-CC342D?style=for-the-badge&logo=ruby&logoColor=white)
-![Static Badge](https://img.shields.io/badge/Ruby_on_Rails_7.1.2-CC0000?style=for-the-badge&logo=ruby-on-rails&logoColor=white)
+![Static Badge](https://img.shields.io/badge/Ruby_on_Rails_7.1.3.1-CC0000?style=for-the-badge&logo=ruby-on-rails&logoColor=white)
 ![Bootstrap](https://img.shields.io/badge/bootstrap-%238511FA.svg?style=for-the-badge&logo=bootstrap&logoColor=white)
 
-![Static Badge](https://img.shields.io/badge/COBERTURA_DE_TESTES-100%25-blue)
+![Static Badge](https://img.shields.io/badge/COBERTURA_DE_TESTES-97%25-blue)
 ![Static Badge](https://img.shields.io/badge/STATUS-EM_DESENVOLVIMENTO-green)
 
 ### Tópicos
@@ -15,11 +15,13 @@
 
 ▶️ [Gems utilizadas](#gems-utilizadas)
 
-▶️ [APIs](#apis)
+▶️ [Layout da aplicação](#layout-da-aplicacao)
 
 ▶️ [Pré-requisitos](#pré-requisitos)
 
 ▶️ [Como executar a aplicação](#como-executar-a-aplicação)
+
+▶️ [Integração com o CondoMinions](#integracao-com-condominions)
 
 ▶️ [Como executar os testes](#como-executar-os-testes)
 
@@ -31,51 +33,105 @@
 
 ## Descrição do Projeto
 
-📍 PagueAluguel é uma aplicação para o envio de cobranças de aluguel, taxas de condomínio e outras cobranças relacionadas aos imóveis de um condomínio. O sistema é utilizado por usuários proprietários de apartamentos do condomínio e usuários com perfil administrativo. A aplicação está totalmente integrada com a aplicação [CondoMinions](https://github.com/TreinaDev/condominions) para fazer a validação de dados de unidades e para garantir que os moradores recebam as cobranças mensais de suas unidades.
+📍 PagueAluguel é uma aplicação para o envio de cobranças de aluguel, taxas de condomínio e outras cobranças relacionadas aos imóveis de um condomínio. O sistema é utilizado por usuários proprietários de apartamentos do condomínio e usuários com perfil administrativo. A aplicação está integrada com a aplicação [CondoMinions](https://github.com/TreinaDev/condominions) para fazer a validação de dados de unidades e para garantir que os moradores recebam as cobranças mensais de suas unidades.
 
 ## Funcionalidades
 
-### Para Administradores: 🏢
-- [x]  **Nome da Funcionalidade:** Descrição.
-- [x]  **Registro de Administrador:** Um administrador pode cadastrar outro usuário como administrador, informando obrigatoriamente nome, sobrenome, CPF, email e senha. O upload de uma foto é opcional.
-- [x]  **Edição de conta de Administrador:** Um administrador pode editar seu nome, sobrenome e foto.
+### 1. Registro de Usuários
 
-### Para Proprietários de Imóveis: 👨🏽
-- [x]  **Nome da Funcionalidade:** Descrição.
+**- [x] Cadastro de Administradores:** Super Admins podem cadastrar novos administradores com nome completo, CPF, e-mail, foto e senha, mas com acessos limitados conforme definidos pelo Super Admin.
 
-### Para Inquilinos: 🗝️
-- [x]  **Nome da Funcionalidade:** Descrição.
+**- [x] Cadastro de Proprietários:** Proprietários podem se registrar na plataforma com validação do CPF pela aplicação CondoMinions.
+
+**- [x] Gestão de Múltiplos Imóveis:** Um usuário pode ser registrado como proprietário de múltiplos imóveis, com integração da App CondoMinions.
+
+### 2. Gestão de Taxas Condominiais
+
+**- [x] Cadastro de Taxas:** Administradores podem cadastrar taxas condominiais fixas, com nome, valor, recorrência (quinzenal, mensal, bimestral, semestral, anual) e dia de lançamento.
+
+**- [x] Juros e Multa:** Opção para adicionar juros e multa por atraso nas taxas.
+
+### 3. Rateio de Contas Compartilhadas
+
+**- [x] Lançamento de Contas:** Administradores podem lançar contas de serviços compartilhados (água, energia, etc.), com descrição, data e valor total.
+
+**- [x] Distribuição Automática:** O valor é distribuído automaticamente entre unidades conforme fração ideal cadastrada em CondoMinions.
+
+### 4. Taxas de Uso de Áreas Comuns
+
+**- [x] Cadastro de Taxas de Uso:** Administradores podem cadastrar taxas de utilização padrão para áreas comuns.
+
+**- [x] Modificação e Histórico:** Taxas de uso podem ser modificadas, mantendo o histórico de valores.
+
+### 5. Registro e Gerenciamento de Cobranças Avulsas
+
+**- [x] Registro de Cobranças Avulsas:** Administradores e proprietários podem registrar cobranças avulsas com unidade, valor, data de lançamento e descrição.
+
+**- [ ] Integração com CondoMinions:** Reservas de áreas comuns na aplicação CondoMinions geram automaticamente cobranças avulsas.
+
+### 6. Cobrança de Aluguel
+
+**- [ ] Configuração de Aluguel:** Proprietários podem configurar a cobrança de aluguel, com valor, dia de lançamento, juros e multa por atraso.
+
+**- [ ] Desativação de Cobrança:** Proprietários podem desativar a cobrança de aluguel automaticamente se o imóvel deixar de ser alugado.
+
+### 7. Emissão de Boletos de Condomínio
+
+**- [x] Geração de Boletos:** Todo dia 01 de cada mês, são gerados boletos contendo todas as cobranças da unidade.
+
+**- [ ] Detalhamento de Boletos:** Boletos contêm itens cobrados e registram pagador e recebedor com dados do CondoMinions.
+
+### 8. Acesso a Boletos
+
+**- [ ] Visualização de Boletos:** Inquilinos podem visualizar boletos de pagamento sem necessidade de login, informando apenas o CPF.
+
+**- [ ] Validação de CPF:** A aplicação valida o CPF com o CondoMinions para acesso aos boletos.
+
+### 9. Registro de Pagamento
+
+**- [ ] Gestão de Pagamentos:** Administradores podem visualizar, filtrar e confirmar pagamentos de boletos, registrando data de pagamento e código da transação.
+
+### 10. Emissão de Certidão Negativa de Débitos
+
+**- [ ] Emissão de Certidão:** Administradores, proprietários e moradores (sem autenticação) podem emitir certidões negativas de débito se não houver boletos vencidos e não pagos.
+
+**- [ ] Validação e Geração:** Certidão é gerada no momento da solicitação com data e hora da emissão.
 
 
-### Gems utilizadas
+## Gems utilizadas
 
-- [Devise](https://github.com/heartcombo/devise)
-- [Rspec](https://github.com/rspec/rspec-rails)
-- [Capybara](https://github.com/teamcapybara/capybara)
-- [Simplecov](https://github.com/simplecov-ruby/simplecov)
-- [CPF/CNPJ](https://github.com/fnando/cpf_cnpj)
-- [Validators](https://github.com/fnando/validators)
+- [Rspec](https://github.com/rspec/rspec-rails): Framework de testes para Ruby on Rails.
+- [Capybara](https://github.com/teamcapybara/capybara): Ferramenta de testes para simular navegação do usuário.
+- [Shoulda Matchers](https://github.com/thoughtbot/shoulda-matchers): Matchers para facilitar a escrita de testes em Rails.
+- [Factory Bot Rails](https://github.com/thoughtbot/factory_bot): Biblioteca para criar dados de teste.
+- [Simplecov](https://github.com/simplecov-ruby/simplecov): Ferramenta de cobertura de código para Ruby.
+- [Devise](https://github.com/heartcombo/devise): Gem para autenticação de usuários.
+- [CPF/CNPJ](https://github.com/fnando/cpf_cnpj): Biblioteca para validação e formatação de CPF e CNPJ.
+- [Faraday](https://github.com/lostisland/faraday): Biblioteca para requisições HTTP.
+- [Money Rails](https://github.com/RubyMoney/money-rails): Extensão para gerenciamento de valores monetários em Rails.
+- [Stimulus-Rails](https://stimulus.hotwired.dev/): Integração do Stimulus com Rails.
+- [Whenever](https://github.com/javan/whenever): Gem para agendamento de tarefas cron.
 
 ## Layout da Aplicação 🖼️
 
-Inserir aqui capturas de tela da aplicação ou gifs
+<p style="color:red;">Inserir aqui capturas de tela da aplicação ou gifs</p>
 
-### Pré-requisitos
+## Pré-requisitos
 
 🚨 [Ruby v3.2.2](https://www.ruby-lang.org/pt/)
 
-🚨 [Rails v7.1.2](https://guides.rubyonrails.org/)
+🚨 [Rails v7.1.3.1](https://guides.rubyonrails.org/)
 
-### Como executar a aplicação
+## Como executar a aplicação
 
 - Clone este repositório
 ```
-git clone https://github.com/sabinopa/rails-events
+git clone git@github.com:TreinaDev/pague-aluguel.git
 ```
 
 - Abra o diretório pelo terminal
 ```
-cd rails-events
+cd pague-aluguel
 ```
 
 - Instale o Bundle pelo terminal
@@ -91,53 +147,72 @@ rails db:seed
 
 - Execute a aplicação
 ```
-rails server
+bin/dev -p 4000
 ```
 
-- Acesse a aplicação no link http://localhost:3000/
+- Acesse a aplicação no link http://localhost:4000/
 
-### Como executar os testes
+## Integração com o CondoMinions
 
-Se o servidor Rails estiver rodando, será necessário pará-lo para evitar interferências durante a execução dos testes. Siga os passos detalhados abaixo:
+Para ver a aplicação funcionando por completo com as APIs integradas, você também precisará clonar e executar o projeto CondoMinions. Siga os passos abaixo para configurar e executar o CondoMinions:
 
-- Interrompa o servidor Rails:
+- Clone o repositório CondoMinions
+```
+git clone git@github.com:TreinaDev/condominions.git
+```
 
-Se o servidor estiver em execução, você pode interrompê-lo pressionando `Ctrl + C` no terminal onde o servidor está ativo. Isso irá parar o processo do servidor, liberando o terminal para outras tarefas.
+- Abra o diretório CondoMinions pelo terminal
+```
+cd condominions
+```
 
-- Instale as dependências:
-
-Certifique-se de que todas as dependências necessárias estão instaladas antes de iniciar os testes. Caso ainda não tenha feito isso, execute o comando:
+- Instale o Bundle pelo terminal
 ```
 bundle install
 ```
 
-Este comando irá instalar todas as gems listadas no Gemfile, garantindo que nada falte para a execução dos testes.
+- Crie e popule o banco de dados
+```
+rails db:migrate
+rails db:seed
+```
+
+- Execute a aplicação CondoMinions
+```
+bin/dev
+```
+
+- Acesse a aplicação no link: http://localhost:3000/
+
+**Visualização Completa:** Com ambas as aplicações rodando, você poderá ver o PagueAluguel funcionando plenamente, incluindo todas as funcionalidades dependentes da integração com o CondoMinions.
+
+## Como executar os testes
 
 - Execute os testes:
 
-Com as dependências instaladas e o servidor interrompido, execute o comando abaixo para iniciar os testes:
 ```
-rspec
+rake spec
 ```
 
 Este comando irá rodar todos os testes definidos nos seus arquivos de teste RSpec.
 
 - Verifique a cobertura de testes:
 
-Após a execução dos testes, você pode verificar a cobertura de testes do projeto. A plataforma Cadê Buffet? mantém uma cobertura de 100%, e o relatório detalhado pode ser visualizado executando:
+Após a execução dos testes, você pode verificar a cobertura de testes do projeto. O relatório detalhado pode ser visualizado executando:
 ```
 open coverage/index.html
 ```
 Este comando abrirá o relatório de cobertura no seu navegador padrão, permitindo visualizar quais linhas de código foram cobertas pelos testes.
 
-### Navegação
+## Navegação
 
 🧭 Para acessar páginas que requerem autenticação, utilize as contas abaixo:
 
-|     Usuário             |   E-mail   |   Senha    |
+|     Usuário             |     E-mail   |   Senha    |
 |-------------------------|------------|------------|
-|      Administrador      |    ??      |    ??      |
-| Proprietário de Imóvel  |    ??      |    ??      |
+|   Super Administrador   |  kanzaki@myself.com  |    password123    |
+|      Administrador      |   matheus@mail.com    |    123456     |
+| Proprietário de Imóvel  |    lais@email.com      |    lais123     |
 
 ### Criação de Contas Fictícias
 
@@ -150,20 +225,6 @@ Para testar a plataforma PagueAluguel como administrador ou proprietário de im�
 **Gerador de CPF/CNPJ:**
 
 Você pode usar sites como [4Devs](https://www.4devs.com.br/) para gerar números válidos que podem ser usados para cadastro na plataforma.
-
-## Casos de Uso
-
-Explicar com mais detalhes como a aplicação poderia ser utilizada. O uso de **gifs** aqui seria bem interessante.
-
-## Tarefas em aberto 📋
-
-Listar tarefas/funcionalidades que ainda precisam ser implementadas na aplicação
-
-▶️ Tarefa 1
-
-▶️ Tarefa 2
-
-▶️ Tarefa 3
 
 ## Desenvolvedores 🧑🏽‍💻🧑🏻‍💻🧑‍💻
 
