@@ -37,65 +37,55 @@
 
 ## Funcionalidades
 
-### 1. Registro de Usuários
+### Registro de Usuários
 
-**- [x] Cadastro de Administradores:** Super Admins podem cadastrar novos administradores com nome completo, CPF, e-mail, foto e senha, mas com acessos limitados conforme definidos pelo Super Admin.
+- [x] **Cadastro de Administradores:** Super Admins podem cadastrar novos administradores com nome completo, CPF, e-mail, foto e senha, mas com acessos limitados conforme definidos pelo Super Admin.
+- [x] **Cadastro de Proprietários:** Proprietários podem se registrar na plataforma com validação do CPF pela aplicação CondoMinions.
+- [x] **Gestão de Múltiplos Imóveis:** Um usuário pode ser registrado como proprietário de múltiplos imóveis, com integração da App CondoMinions.
 
-**- [x] Cadastro de Proprietários:** Proprietários podem se registrar na plataforma com validação do CPF pela aplicação CondoMinions.
+### Gestão de Taxas Condominiais
 
-**- [x] Gestão de Múltiplos Imóveis:** Um usuário pode ser registrado como proprietário de múltiplos imóveis, com integração da App CondoMinions.
+- [x] **Cadastro de Taxas:** Administradores podem cadastrar taxas condominiais fixas, com nome, valor, recorrência (quinzenal, mensal, bimestral, semestral, anual) e dia de lançamento.
+- [x] **Juros e Multa:** Opção para adicionar juros e multa por atraso nas taxas.
 
-### 2. Gestão de Taxas Condominiais
+### Rateio de Contas Compartilhadas
 
-**- [x] Cadastro de Taxas:** Administradores podem cadastrar taxas condominiais fixas, com nome, valor, recorrência (quinzenal, mensal, bimestral, semestral, anual) e dia de lançamento.
+- [x] **Lançamento de Contas:** Administradores podem lançar contas de serviços compartilhados (água, energia, etc.), com descrição, data e valor total.
+- [x] **Distribuição Automática:** O valor é distribuído automaticamente entre unidades conforme fração ideal cadastrada em CondoMinions.
 
-**- [x] Juros e Multa:** Opção para adicionar juros e multa por atraso nas taxas.
+### Taxas de Uso de Áreas Comuns
 
-### 3. Rateio de Contas Compartilhadas
+- [x] **Cadastro de Taxas de Uso:** Administradores podem cadastrar taxas de utilização padrão para áreas comuns.
+- [x] **Modificação e Histórico:** Taxas de uso podem ser modificadas, mantendo o histórico de valores.
 
-**- [x] Lançamento de Contas:** Administradores podem lançar contas de serviços compartilhados (água, energia, etc.), com descrição, data e valor total.
+### Registro e Gerenciamento de Cobranças Avulsas
 
-**- [x] Distribuição Automática:** O valor é distribuído automaticamente entre unidades conforme fração ideal cadastrada em CondoMinions.
+- [x] **Registro de Cobranças Avulsas:** Administradores e proprietários podem registrar cobranças avulsas com unidade, valor, data de lançamento e descrição.
+- [ ] **Integração com CondoMinions:** Reservas de áreas comuns na aplicação CondoMinions geram automaticamente cobranças avulsas.
 
-### 4. Taxas de Uso de Áreas Comuns
+### Cobrança de Aluguel
 
-**- [x] Cadastro de Taxas de Uso:** Administradores podem cadastrar taxas de utilização padrão para áreas comuns.
+- [ ] **Configuração de Aluguel:** Proprietários podem configurar a cobrança de aluguel, com valor, dia de lançamento, juros e multa por atraso.
+- [ ] **Desativação de Cobrança:** Proprietários podem desativar a cobrança de aluguel automaticamente se o imóvel deixar de ser alugado.
 
-**- [x] Modificação e Histórico:** Taxas de uso podem ser modificadas, mantendo o histórico de valores.
+### Emissão de Boletos de Condomínio
 
-### 5. Registro e Gerenciamento de Cobranças Avulsas
+- [x] **Geração de Boletos:** Todo dia 01 de cada mês, são gerados boletos contendo todas as cobranças da unidade.
+- [ ] **Detalhamento de Boletos:** Boletos contêm itens cobrados e registram pagador e recebedor com dados do CondoMinions.
 
-**- [x] Registro de Cobranças Avulsas:** Administradores e proprietários podem registrar cobranças avulsas com unidade, valor, data de lançamento e descrição.
+### Acesso a Boletos
 
-**- [ ] Integração com CondoMinions:** Reservas de áreas comuns na aplicação CondoMinions geram automaticamente cobranças avulsas.
+- [ ] **Visualização de Boletos:** Inquilinos podem visualizar boletos de pagamento sem necessidade de login, informando apenas o CPF.
+- [ ] **Validação de CPF:** A aplicação valida o CPF com o CondoMinions para acesso aos boletos.
 
-### 6. Cobrança de Aluguel
+### Registro de Pagamento
 
-**- [ ] Configuração de Aluguel:** Proprietários podem configurar a cobrança de aluguel, com valor, dia de lançamento, juros e multa por atraso.
+- [ ] **Gestão de Pagamentos:** Administradores podem visualizar, filtrar e confirmar pagamentos de boletos, registrando data de pagamento e código da transação.
 
-**- [ ] Desativação de Cobrança:** Proprietários podem desativar a cobrança de aluguel automaticamente se o imóvel deixar de ser alugado.
+### Emissão de Certidão Negativa de Débitos
 
-### 7. Emissão de Boletos de Condomínio
-
-**- [x] Geração de Boletos:** Todo dia 01 de cada mês, são gerados boletos contendo todas as cobranças da unidade.
-
-**- [ ] Detalhamento de Boletos:** Boletos contêm itens cobrados e registram pagador e recebedor com dados do CondoMinions.
-
-### 8. Acesso a Boletos
-
-**- [ ] Visualização de Boletos:** Inquilinos podem visualizar boletos de pagamento sem necessidade de login, informando apenas o CPF.
-
-**- [ ] Validação de CPF:** A aplicação valida o CPF com o CondoMinions para acesso aos boletos.
-
-### 9. Registro de Pagamento
-
-**- [ ] Gestão de Pagamentos:** Administradores podem visualizar, filtrar e confirmar pagamentos de boletos, registrando data de pagamento e código da transação.
-
-### 10. Emissão de Certidão Negativa de Débitos
-
-**- [ ] Emissão de Certidão:** Administradores, proprietários e moradores (sem autenticação) podem emitir certidões negativas de débito se não houver boletos vencidos e não pagos.
-
-**- [ ] Validação e Geração:** Certidão é gerada no momento da solicitação com data e hora da emissão.
+- [ ] **Emissão de Certidão:** Administradores, proprietários e moradores (sem autenticação) podem emitir certidões negativas de débito se não houver boletos vencidos e não pagos.
+- [ ] **Validação e Geração:** Certidão é gerada no momento da solicitação com data e hora da emissão.
 
 
 ## Gems utilizadas
