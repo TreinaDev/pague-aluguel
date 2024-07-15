@@ -1,5 +1,12 @@
 class HomeController < ApplicationController
+  before_action :authenticate_admin!, only: [:search]
+
   def index
+    if property_owner_signed_in?
+      first_units
+      render 'index'
+    end
+
     recent_admins
     first_condos
   end
@@ -19,11 +26,24 @@ class HomeController < ApplicationController
   def recent_admins
     @admins = Admin.all
     @admins = @admins.where.not(id: current_admin.id) if current_admin
-    @recent_admins = @admins.order(created_at: :desc).limit(3)
+    @recent_admins = @admins.order(created_at: :desc).limit(3) if admin_signed_in?
   end
 
   def first_condos
-    @condos = Condo.all.sort_by(&:name)
+    return unless admin_signed_in?
+
+    if current_admin.super_admin?
+      @condos = Condo.all.sort_by(&:name)
+    else
+      condo_ids = current_admin.associated_condos.map(&:condo_id)
+      @condos = Condo.all.select { |condo| condo_ids.include?(condo.id) }
+    end
+
     @first_condos = @condos.sort_by(&:name).take(4)
+  end
+
+  def first_units
+    @units = Unit.find_all_by_owner(current_property_owner.document_number)
+    @first_units = @units.take(4)
   end
 end

@@ -5,5 +5,6 @@ FactoryBot.define do
     first_name { 'João' }
     last_name { 'Almeida' }
     document_number { CPF.generate }
+    super_admin { true }
   end
 end

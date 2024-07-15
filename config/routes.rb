@@ -1,6 +1,10 @@
 Rails.application.routes.draw do
   devise_for :property_owners, controllers: { registrations: "property_owners/registrations", sessions: "property_owners/sessions" }
   devise_for :admins, controllers: { registrations: "admins/registrations", sessions: "admins/sessions" }
+  resources :admins do
+    get 'condos_selection', on: :member
+    post 'condos_selection_post', on: :member
+  end
 
   root to: "home#index"
   get 'search', to: 'home#search'
@@ -17,6 +21,8 @@ Rails.application.routes.draw do
     resources :shared_fees, only: [:index, :show, :new, :create] do
       post 'cancel', on: :member
     end
+
+    resources :single_charges, only: [:show, :new, :create, :index]
   end
 
   namespace :api do

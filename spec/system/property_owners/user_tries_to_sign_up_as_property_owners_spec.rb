@@ -30,6 +30,12 @@ describe 'Proprietário tenta se cadastrar' do
     condos << Condo.new(id: 1, name: 'Condo Test', city: 'City Test')
     allow(Condo).to receive(:all).and_return(condos)
 
+    units = []
+    units << Unit.new(id: 1, area: 100, floor: 2, number: 3, unit_type_id: 1)
+
+    allow(Unit).to receive(:find).and_return(units[0])
+    allow(Unit).to receive(:find_all_by_owner).and_return(units)
+
     visit root_path
     click_on 'Login'
     click_on 'Proprietário'
