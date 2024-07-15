@@ -19,7 +19,7 @@ class PropertyOwner < ApplicationRecord
   def cpf_valid?(cpf)
     return false if cpf.blank?
 
-    url = "http://localhost:3000/api/v1/property?cpf=#{cpf}"
+    url = "#{Rails.configuration.api['base_url']}/property?cpf=#{cpf}"
     response = Faraday.get(url)
     response.success?
   end

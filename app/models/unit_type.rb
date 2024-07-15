@@ -11,7 +11,7 @@ class UnitType
 
   def self.all
     unit_types = []
-    response = Faraday.get('http://127.0.0.1:3000/api/v1/unit_types')
+    response = Faraday.get("#{Rails.configuration.api['base_url']}/unit_types")
     if response.success?
       data = JSON.parse(response.body)
       data.each do |ut|
@@ -23,7 +23,7 @@ class UnitType
   end
 
   def self.find(id)
-    response = Faraday.get("http://127.0.0.1:3000/api/v1/unit_types/#{id}")
+    response = Faraday.get("#{Rails.configuration.api['base_url']}/unit_types/#{id}")
     if response.success?
       data = JSON.parse(response.body)
       unit_type = UnitType.new(id: data['id'],

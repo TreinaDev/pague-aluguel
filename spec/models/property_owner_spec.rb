@@ -14,7 +14,11 @@ RSpec.describe PropertyOwner, type: :model do
   it 'com CPF válido' do
     cpf = CPF.generate
     fake_response = double('faraday_response', success?: true, body: 'Proprietário')
-    allow(Faraday).to receive(:get).with("http://localhost:3000/api/v1/property?cpf=#{cpf}").and_return(fake_response)
+
+    allow(Faraday).to(
+      receive(:get).with("#{Rails.configuration.api['base_url']}/property?cpf=#{cpf}").and_return(fake_response)
+    )
+
     owner = PropertyOwner.new(email: 'solidsnake@mgs.com', password: 'password', document_number: cpf)
 
     expect(owner).to be_valid
@@ -23,7 +27,11 @@ RSpec.describe PropertyOwner, type: :model do
   it 'com CPF inválido' do
     cpf = CPF.generate
     fake_response = double('faraday_response', success?: false, body: 'Proprietário')
-    allow(Faraday).to receive(:get).with("http://localhost:3000/api/v1/property?cpf=#{cpf}").and_return(fake_response)
+
+    allow(Faraday).to(
+      receive(:get).with("#{Rails.configuration.api['base_url']}/property?cpf=#{cpf}").and_return(fake_response)
+    )
+
     owner = PropertyOwner.new(email: 'solidsnake@mgs.com', password: 'password', document_number: cpf)
 
     expect(owner).to_not be_valid
