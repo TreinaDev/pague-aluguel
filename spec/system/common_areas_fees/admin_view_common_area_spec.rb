@@ -17,7 +17,7 @@ describe 'Admin vê área comum' do
     fake_response = double('faraday_response', status: 200, body: common_area_json, success?: true)
     allow(Faraday).to receive(:get).with("http://127.0.0.1:3000/api/v1/condos/#{condo.id}/common_areas/#{common_area.id}").and_return(fake_response)
 
-    create(:common_area_fee, value_cents: 200_00, admin:, common_area_id: 3)
+    create(:common_area_fee, value_cents: 200_00, admin:, common_area_id: 3, condo_id: condo.id)
 
     login_as admin, scope: :admin
     visit condo_path(condo.id)

@@ -17,6 +17,7 @@
 
     <%= form_with model: @common_area_fee, url: condo_common_area_common_area_fees_path(@condo_id, @common_area_id) do |f| %>
       <%= f.hidden_field :common_area_id, value: @common_area_id %>
+      <%= f.hidden_field :condo_id, value: @condo_id %>
 
       <div class="form-floating mt-3">
         <%= f.text_field :value, placeholder: '0,00', class: "form-control" %>
