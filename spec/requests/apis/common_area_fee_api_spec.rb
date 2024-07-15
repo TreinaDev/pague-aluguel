@@ -66,13 +66,13 @@ describe 'API das Áreas Comuns' do
     end
   end
 
-  context 'GET /api/v1/condos/:condo_id/common_area_fees/:id' do
+  context 'GET /api/v1/common_area_fees/:id' do
     it 'sucesso' do
       admin = create(:admin)
       common_area_fee = create(:common_area_fee, value_cents: 200_00, admin:, common_area_id: 1, condo_id: 1)
       create(:common_area_fee, value_cents: 300_00, admin:, common_area_id: 2, condo_id: 1)
 
-      get api_v1_condo_common_area_fee_path(1, common_area_fee)
+      get api_v1_common_area_fee_path(common_area_fee)
 
       expect(response.status).to eq 200
       expect(response.content_type).to include 'application/json'
@@ -87,7 +87,7 @@ describe 'API das Áreas Comuns' do
     end
 
     it 'falha' do
-      get api_v1_condo_common_area_fee_path(1, 2)
+      get api_v1_common_area_fee_path(2)
 
       expect(response.status).to eq 404
     end

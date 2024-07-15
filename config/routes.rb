@@ -22,8 +22,9 @@ Rails.application.routes.draw do
   namespace :api do
     namespace :v1 do
       resources :condos, only: [] do
-        resources :common_area_fees, only: [:index, :show]
+        resources :common_area_fees, only: [:index]
       end
+      resources :common_area_fees, only: [:show]
     end
   end
 
