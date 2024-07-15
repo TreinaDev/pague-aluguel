@@ -41,6 +41,29 @@ describe 'API das Áreas Comuns' do
       json_response = response.parsed_body
       expect(json_response.length).to eq 0
     end
+
+    it 'e retorna a última taxa cadastrada para cada área comum' do
+      admin = create(:admin)
+      create(:common_area_fee, value_cents: 200_00, admin:, common_area_id: 1, condo_id: 1, created_at: 2.days)
+      create(:common_area_fee, value_cents: 300_00, admin:, common_area_id: 1, condo_id: 1, created_at: 1.day)
+      create(:common_area_fee, value_cents: 400_00, admin:, common_area_id: 2, condo_id: 1, created_at: 2.days)
+      create(:common_area_fee, value_cents: 500_00, admin:, common_area_id: 2, condo_id: 1, created_at: 1.day)
+
+      get api_v1_condo_common_area_fees_path(1)
+
+      expect(response.status).to eq 200
+      expect(response.content_type).to include 'application/json'
+      json_response = response.parsed_body
+      expect(json_response.length).to eq 2
+
+      expect(json_response[0]['value_cents']).to eq 300_00
+      expect(json_response[0]['common_area_id']).to eq 1
+      expect(json_response[0]['condo_id']).to eq 1
+
+      expect(json_response[1]['value_cents']).to eq 500_00
+      expect(json_response[1]['common_area_id']).to eq 2
+      expect(json_response[1]['condo_id']).to eq 1
+    end
   end
 
   context 'GET /api/v1/condos/:condo_id/common_area_fees/:id' do
