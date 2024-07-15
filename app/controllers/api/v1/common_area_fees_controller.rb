@@ -1,9 +1,9 @@
 class Api::V1::CommonAreaFeesController < Api::V1::ApiController
   def index
     condo_id = params[:condo_id]
-    common_area_fees = find_most_recent_fee(condo_id)
+    common_area_fees = find_most_recent_fees(condo_id)
 
-    render status: :ok, json: common_area_fees.as_json(except: [:updated_at, :admin_id, :id])
+    render status: :ok, json: common_area_fees.as_json(except: [:updated_at, :admin_id])
   end
 
   def show
@@ -15,7 +15,7 @@ class Api::V1::CommonAreaFeesController < Api::V1::ApiController
 
   private
 
-  def find_most_recent_fee(condo_id)
+  def find_most_recent_fees(condo_id)
     fees = CommonAreaFee.where(condo_id:)
     current_fees = []
     fees.each do |fee|

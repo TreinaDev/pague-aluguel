@@ -216,6 +216,57 @@ Para testar a plataforma PagueAluguel como administrador ou proprietário de im�
 
 Você pode usar sites como [4Devs](https://www.4devs.com.br/) para gerar números válidos que podem ser usados para cadastro na plataforma.
 
+#Pague Aluguel API
+
+## Taxas de Áreas Comuns 
+
+`GET /api/v1/condos/:id/common_area_fees`
+
+Recebe como parâmetro `:id` de um condomínio, e retorna uma lista com **a última taxa cadastrada para cada área comum desse condomínio**
+Retorna:
+Caso o condomínio não possua nenhuma taxa cadastrada: `status: 200, json: []`
+Caso o condomínio possua alguma taxa cadastrada: `status: 200, json:`
+``` 
+[ 
+  {
+    "id":1,
+    "value_cents":20000,
+    "created_at":"2024-07-11T21:09:13.019Z",
+    "common_area_id":1,
+    "condo_id":1,
+  },
+  {
+    "id":2,
+    "value_cents":30000,
+    "created_at":"2024-07-11T21:09:13.024Z",
+    "common_area_id":2,
+    "condo_id":1
+  },
+  {
+    "id":3,
+    "value_cents":40000,
+    "created_at":"2024-07-11T21:09:13.027Z",
+    "common_area_id":3,
+    "condo_id":1
+  }
+] 
+```
+
+`GET /api/v1/common_area_fees/:id`
+
+Recebe como parâmetro o `:id` de uma taxa cadastrada e retorna **os detalhes da taxa de área comum** desejada
+Retorna:
+Caso não exista taxa com o id informado: `status: 404, json: { "errors":"Não encontrado" } `
+Caso o condomínio possua alguma taxa cadastrada: `status: 200, json:`
+``` 
+{
+  "value_cents":20000,
+  "created_at":"2024-07-11T21:09:13.019Z",
+  "common_area_id":1,
+  "condo_id":1
+} 
+```
+
 ## Desenvolvedores 🧑🏽‍💻🧑🏻‍💻🧑‍💻
 
 <div align="center">
