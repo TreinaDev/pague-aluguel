@@ -19,7 +19,7 @@ class CommonAreaFeesController < ApplicationController
   private
 
   def common_area_fee_params
-    params.require(:common_area_fee).permit(:value, :common_area_id)
+    params.require(:common_area_fee).permit(:value, :common_area_id, :condo_id)
   end
 
   def set_common_area

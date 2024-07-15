@@ -12,8 +12,8 @@ describe 'Admin vê histórico de taxas da área comum' do
     allow(CommonArea).to receive(:all).and_return(common_areas)
     allow(CommonArea).to receive(:find).and_return(common_areas.first)
 
-    create(:common_area_fee, value_cents: 250, admin:, common_area_id: 1, created_at: 60.days.ago)
-    create(:common_area_fee, value_cents: 300, admin:, common_area_id: 1, created_at: 30.days.ago)
+    create(:common_area_fee, value_cents: 250, admin:, common_area_id: 1, condo_id: condo.id, created_at: 60.days.ago)
+    create(:common_area_fee, value_cents: 300, admin:, common_area_id: 1, condo_id: condo.id, created_at: 30.days.ago)
 
     login_as admin, scope: :admin
     visit condo_path(condo.id)
@@ -47,6 +47,7 @@ describe 'Admin vê histórico de taxas da área comum' do
       value_cents: 250,
       admin:,
       common_area_id: 1,
+      condo_id: condo.id,
       created_at: 60.days.ago
     )
     fee_two = create(
@@ -54,6 +55,7 @@ describe 'Admin vê histórico de taxas da área comum' do
       value_cents: 300,
       admin:,
       common_area_id: 1,
+      condo_id: condo.id,
       created_at: 30.days.ago
     )
     fee_three = create(
@@ -61,6 +63,7 @@ describe 'Admin vê histórico de taxas da área comum' do
       value_cents: 350,
       admin:,
       common_area_id: 1,
+      condo_id: condo.id,
       created_at: 5.days.ago
     )
 

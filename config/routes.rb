@@ -25,6 +25,15 @@ Rails.application.routes.draw do
     resources :single_charges, only: [:show, :new, :create, :index]
   end
 
+  namespace :api do
+    namespace :v1 do
+      resources :condos, only: [] do
+        resources :common_area_fees, only: [:index]
+      end
+      resources :common_area_fees, only: [:show]
+    end
+  end
+
   authenticate :admin do
     resources :admins, only: [:index]
   end
