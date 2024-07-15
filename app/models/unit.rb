@@ -11,7 +11,7 @@ class Unit
 
   def self.all
     units = []
-    response = Faraday.get('http://127.0.0.1:3000/api/v1/units')
+    response = Faraday.get("#{Rails.configuration.api['base_url']}/units")
     if response.success?
       data = JSON.parse(response.body)
       data.each do |unit|
@@ -23,7 +23,7 @@ class Unit
   end
 
   def self.find(id)
-    response = Faraday.get("http://127.0.0.1:3000/api/v1/units/#{id}")
+    response = Faraday.get("#{Rails.configuration.api['base_url']}/units/#{id}")
     if response.success?
       data = JSON.parse(response.body)
       unit = Unit.new(id: data['id'], area: data['area'], floor: data['floor'], number: data['number'],
@@ -43,7 +43,7 @@ class Unit
   end
 
   def self.find_all_by_owner(cpf)
-    response = Faraday.get("http://127.0.0.1:3000/api/v1/units/cpf=#{cpf}")
+    response = Faraday.get("#{Rails.configuration.api['base_url']}/units/cpf=#{cpf}")
     units = []
     if response.success?
       data = JSON.parse(response.body)

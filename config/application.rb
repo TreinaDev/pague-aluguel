@@ -21,6 +21,8 @@ Bundler.require(*Rails.groups)
 module PagueAluguel
   class Application < Rails::Application
     # Initialize configuration defaults for originally generated Rails version.
+    config.api = config_for(:api)
+
     config.load_defaults 7.1
 
     config.action_view.field_error_proc = Proc.new { |html_tag, instance| html_tag }

@@ -9,7 +9,7 @@ class Condo
 
   def self.all
     condos = []
-    response = Faraday.get('http://127.0.0.1:3000/api/v1/condos')
+    response = Faraday.get("#{Rails.configuration.api['base_url']}/condos")
     if response.success?
       data = JSON.parse(response.body)
       data.each do |condo|
@@ -21,7 +21,7 @@ class Condo
   end
 
   def self.find(id)
-    response = Faraday.get("http://127.0.0.1:3000/api/v1/condos/#{id}")
+    response = Faraday.get("#{Rails.configuration.api['base_url']}/condos/#{id}")
     if response.success?
       data = JSON.parse(response.body)
       condo = Condo.new(id: data['id'], name: data['name'], city: data['city'])
