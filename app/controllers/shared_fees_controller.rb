@@ -17,6 +17,9 @@ class SharedFeesController < ApplicationController
   def create
     @condos = Condo.all
     @shared_fee = SharedFee.new(shared_fee_params)
+    return unless @condo.id.nil?
+      @condo.id = params[:condo_id]
+
     @shared_fee.condo_id = @condo.id
     if @shared_fee.save
       @shared_fee.calculate_fractions

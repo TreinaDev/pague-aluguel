@@ -18,8 +18,9 @@ class CommonArea
     raise response.status.to_s unless response.success?
 
     data = JSON.parse(response.body, symbolize_names: true)
-    data.map do |common_area|
-      common_areas << CommonArea.new(common_area)
+    common_areas_data = data[:common_areas]
+    common_areas = common_areas_data.map do |common_area_attrs|
+      CommonArea.new(common_area_attrs)
     end
     common_areas
   end

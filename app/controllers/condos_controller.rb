@@ -16,7 +16,9 @@ class CondosController < ApplicationController
 
   def show
     @condo = Condo.find(params[:id])
-    @common_areas = CommonArea.all(@condo.id)
+    return unless @condo.id.nil?
+    @condo.id = params[:id]
+    @common_areas = CommonArea.all(params[:id])
     @first_common_areas = @common_areas.take(4)
     recent_base_fees
     recent_shared_fees
