@@ -38,6 +38,10 @@ class Unit
     Unit.all.select { |unit| unit_type_ids.include?(unit.unit_type_id) }
   end
 
+  def identifier
+    "#{floor}#{number}"
+  end
+
   def self.find_all_by_owner(cpf)
     response = Faraday.get("http://127.0.0.1:3000/api/v1/units/cpf=#{cpf}")
     units = []

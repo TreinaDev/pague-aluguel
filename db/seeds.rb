@@ -22,7 +22,9 @@ lais = PropertyOwner.new(
   document_number: CPF.generate
 )
 lais.save(validate: false)
+
 p "Created #{PropertyOwner.count} property owners"
+
 # admins
 Admin.create!(
   email: 'kanzaki@myself.com',
@@ -54,7 +56,8 @@ Admin.create!(
   password: '123456',
   first_name: 'Angelo',
   last_name: 'Maia',
-  document_number: CPF.generate
+  document_number: CPF.generate,
+  super_admin: true
 )
 
 Admin.create!(
@@ -85,54 +88,54 @@ Value.create!(price: 300, unit_type_id: 2, base_fee: base_fee2)
 
 p "Created #{BaseFee.count} base fees"
 # taxas compartilhadas
-shared_fee1 = SharedFee.create!(description: 'Manutenção regular do prédio',
-  issue_date: 10.days.from_now,
-  total_value_cents: 20000,
-  condo_id: 20)
+SharedFee.create!(description: 'Manutenção regular do prédio',
+                  issue_date: 10.days.from_now,
+                  total_value_cents: 20_000,
+                  condo_id: 20)
 
-shared_fee2 = SharedFee.create!(description: 'Fundo de Reserva para despesas imprevistas',
-  issue_date: 20.days.from_now,
-  total_value_cents: 30000,
-  condo_id: 20)
+SharedFee.create!(description: 'Fundo de Reserva para despesas imprevistas',
+                  issue_date: 20.days.from_now,
+                  total_value_cents: 30_000,
+                  condo_id: 20)
 
-shared_fee3 = SharedFee.create!(description: 'Taxa de Manutenção das áreas comuns',
-  issue_date: 20.days.from_now,
-  total_value_cents: 25000,
-  condo_id: 20)
+SharedFee.create!(description: 'Taxa de Manutenção das áreas comuns',
+                  issue_date: 20.days.from_now,
+                  total_value_cents: 25_000,
+                  condo_id: 20)
 
-shared_fee4 = SharedFee.create!(description: 'Fundo Emergencial para reparos urgentes',
-  issue_date: 6.days.from_now,
-  total_value_cents: 50000,
-  condo_id: 20)
+SharedFee.create!(description: 'Fundo Emergencial para reparos urgentes',
+                  issue_date: 6.days.from_now,
+                  total_value_cents: 50_000,
+                  condo_id: 20)
 
-shared_fee5 = SharedFee.create!(description: 'Taxa de Segurança do condomínio',
-  issue_date: 10.days.from_now,
-  total_value_cents: 15000,
-  condo_id: 20)
+SharedFee.create!(description: 'Taxa de Segurança do condomínio',
+                  issue_date: 10.days.from_now,
+                  total_value_cents: 15_000,
+                  condo_id: 20)
 
-shared_fee6 = SharedFee.create!(description: 'Taxa de Limpeza das áreas comuns',
-  issue_date: 18.days.from_now,
-  total_value_cents: 12000,
-  condo_id: 20)
+SharedFee.create!(description: 'Taxa de Limpeza das áreas comuns',
+                  issue_date: 18.days.from_now,
+                  total_value_cents: 12_000,
+                  condo_id: 20)
 
-shared_fee7 = SharedFee.create!(description: 'Taxa de Jardinagem',
-  issue_date: 5.days.from_now,
-  total_value_cents: 18000,
-  condo_id: 20)
+SharedFee.create!(description: 'Taxa de Jardinagem',
+                  issue_date: 5.days.from_now,
+                  total_value_cents: 18_000,
+                  condo_id: 20)
 
-shared_fee8 = SharedFee.create!(description: 'Taxa de Iluminação das áreas comuns',
-  issue_date: 1.day.from_now,
-  total_value_cents: 22000,
-  condo_id: 20)
+SharedFee.create!(description: 'Taxa de Iluminação das áreas comuns',
+                  issue_date: 1.day.from_now,
+                  total_value_cents: 22_000,
+                  condo_id: 20)
 
-shared_fee9 = SharedFee.create!(description: 'Taxa de Água',
-  issue_date: 12.days.from_now,
-  total_value_cents: 25000,
-  condo_id: 20)
+SharedFee.create!(description: 'Taxa de Água',
+                  issue_date: 12.days.from_now,
+                  total_value_cents: 25_000,
+                  condo_id: 20)
 
-shared_fee10 = SharedFee.create!(description: 'Taxa de Gás',
-   issue_date: 10.days.from_now,
-   total_value_cents: 20000,
-   condo_id: 20)
+SharedFee.create!(description: 'Taxa de Gás',
+                  issue_date: 10.days.from_now,
+                  total_value_cents: 20_000,
+                  condo_id: 20)
 
 p "Created #{SharedFee.count} shared fees"

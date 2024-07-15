@@ -22,6 +22,14 @@ describe Unit do
     end
   end
 
+  it '#identifier' do
+    unit1 = Unit.new(id: 1, area: 40, floor: 1, number: 1, unit_type_id: 1)
+    unit2 = Unit.new(id: 2, area: 40, floor: 2, number: 1, unit_type_id: 1)
+
+    expect(unit1.identifier).to eq '11'
+    expect(unit2.identifier).to eq '21'
+  end
+
   context '.find' do
     it 'retorna uma unidade' do
       data = Rails.root.join('spec/support/json/unit.json').read

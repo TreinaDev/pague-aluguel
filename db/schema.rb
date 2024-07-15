@@ -130,6 +130,18 @@ ActiveRecord::Schema[7.1].define(version: 2024_07_11_200314) do
     t.integer "status", default: 0
   end
 
+  create_table "single_charges", force: :cascade do |t|
+    t.integer "unit_id"
+    t.integer "value_cents"
+    t.date "issue_date"
+    t.string "description"
+    t.integer "charge_type", default: 0
+    t.integer "condo_id"
+    t.integer "common_area_id"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+  end
+
   create_table "values", force: :cascade do |t|
     t.integer "base_fee_id", null: false
     t.datetime "created_at", null: false

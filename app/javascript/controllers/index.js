@@ -4,9 +4,6 @@
 
 import { application } from "./application"
 
-import ToggleInstallmentsFieldController from "./toggle_installments_field_controller"
-application.register("toggle-installments-field", ToggleInstallmentsFieldController)
-
 import ChangeButtonCondoController from "./change_button_condo_controller"
 application.register("change-button-condo", ChangeButtonCondoController)
 
@@ -15,3 +12,12 @@ application.register("change-button", ChangeButtonController)
 
 import DocumentNumberController from "./document_number_controller"
 application.register("document-number", DocumentNumberController)
+
+import ModalNoticeController from "./modal_notice_controller"
+application.register("modal-notice", ModalNoticeController)
+
+import ToggleCommonAreaFieldController from "./toggle_common_area_field_controller"
+application.register("toggle-common-area-field", ToggleCommonAreaFieldController)
+
+import ToggleInstallmentsFieldController from "./toggle_installments_field_controller"
+application.register("toggle-installments-field", ToggleInstallmentsFieldController)

@@ -15,7 +15,11 @@
   <%= render 'debt_clearance_certificate_section' %>
 </div>
 
-<%= render 'payment_slip_section' %>
+<div class="d-flex justify-content-between">
+    <%= render 'payment_slip_section' %>
+
+    <%= render 'single_charge_section' %>
+</div>
 
 <div class="d-flex justify-content-between">
   <%= render 'shared_fees_section' %>
