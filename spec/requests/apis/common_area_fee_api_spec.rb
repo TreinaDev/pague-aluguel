@@ -77,8 +77,9 @@ describe 'API das Áreas Comuns' do
   context 'GET /api/v1/common_area_fees/:id' do
     it 'sucesso' do
       admin = create(:admin)
-      common_area_fee = create(:common_area_fee, value_cents: 200_00, admin:, common_area_id: 1, condo_id: 1)
+      create(:common_area_fee, value_cents: 200_00, admin:, common_area_id: 1, condo_id: 1)
       create(:common_area_fee, value_cents: 300_00, admin:, common_area_id: 2, condo_id: 1)
+      common_area_fee = create(:common_area_fee, value_cents: 400_00, admin:, common_area_id: 1, condo_id: 1)
 
       get api_v1_common_area_fee_path(common_area_fee)
 
@@ -86,7 +87,7 @@ describe 'API das Áreas Comuns' do
       expect(response.content_type).to include 'application/json'
       json_response = response.parsed_body
 
-      expect(json_response['value_cents']).to eq 200_00
+      expect(json_response['value_cents']).to eq 400_00
       expect(json_response['common_area_id']).to eq 1
       expect(json_response['condo_id']).to eq 1
       expect(json_response.keys).not_to include('updated_at')
