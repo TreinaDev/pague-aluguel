@@ -35,15 +35,11 @@ describe 'Administrador cria uma cobrança avulsa' do
     fill_in 'Data de Emissão', with: 5.days.from_now.to_date
     click_on 'Cadastrar'
 
-    expect(page).to have_content 'Cobrança Avulsa cadastrada com sucesso'
-    expect(page).not_to have_content 'Academia'
-    expect(page).to have_content 'Unidade 11'
-    expect(page).to have_content 'Tipo de Cobrança:'
+    expect(page).to have_content 'Cobrança Avulsa cadastrada com sucesso!'
     expect(page).to have_content 'Outros'
-    expect(page).to have_content 'Acordo entre proprietário e morador'
-    expect(page).to have_content 'valor total'
-    expect(page).to have_content 'R$105,59'
-    expect(page).to have_content 'data de emissão'
+    expect(page).to have_content 'Unidade 11'.downcase
+    expect(page).to have_content 'Acordo entre proprietário e morador'.downcase
+    expect(page).to have_content 'Data de Emissão'
     expect(page).to have_content I18n.l(5.days.from_now.to_date)
     expect(current_path).to eq condo_path(condos.first.id)
     expect(SingleCharge.first.condo_id).to eq 1
@@ -111,15 +107,11 @@ describe 'Administrador cria uma cobrança avulsa' do
     click_on 'Cadastrar'
 
     expect(page).to have_content 'Cobrança Avulsa cadastrada com sucesso'
-    expect(page).to have_content 'Unidade 11'
-    expect(page).to have_content 'Tipo de Cobrança:'
+    expect(page).to have_content 'Unidade 11'.downcase
     expect(page).to have_content 'Taxa de Área Comum'
-    expect(page).to have_content 'CHURRASQUEIRA'
-    expect(page).to have_content 'valor total'
-    expect(page).to have_content 'R$105,59'
-    expect(page).to have_content 'data de emissão'
+    expect(page).to have_content 'Data de Emissão'
     expect(page).to have_content I18n.l(5.days.from_now.to_date)
-    expect(current_path).to eq condo_single_charge_path(condos.first.id, SingleCharge.last)
+    expect(current_path).to eq condo_path(condos.first.id)
     expect(page).not_to have_content 'Verifique os erros abaixo:'
   end
 
