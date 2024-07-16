@@ -2,9 +2,38 @@
   <%= link_to condo_path(@condo.id), class: "ms-3 mt-3" do %>
     <%= image_tag "arrow-left", size: "25", id: "arrow-left" %>
   <% end %>
-  
+
   <span class="fs-4 mx-auto mt-3 text-uppercase">
     <%= Bill.model_name.human(count: 2) %>
   </span>
   <span class="mx-auto text-uppercase fs-7 text-muted"><%= @condo.name %></span>
+
+  <div class="d-flex justify-content-center mt-4 mb-4">
+    <% if @bills.any? %>
+      <div class="list-group w-75">
+        <% @bills.each do |bill| %>
+          <%= link_to condo_bill_path(@condo.id, bill), class: "list-group-item p-3 list-group-item-action hover-strong", data: { turbo_frame: "modal" } do %>
+            <div class="d-flex w-100 justify-content-between">
+              <span class="d-block mb-1 fs-5">
+                <%= unit_name(bill) %>
+              </span>
+              <div class="d-flex flex-wrap text-end">
+                <small class="text-body-secondary w-100">
+                  <%= Bill.human_attribute_name(:due_date) %>:
+                  <%= I18n.l(bill.due_date) %>
+                </small>
+              </div>
+            </div>
+            <span class="text-muted fs-7 text-lowercase"><%= Bill.human_attribute_name(:total_value) %></span>
+            <span><%= bill.total_value.format %></span>
+          <% end %>
+        <% end %>
+      </div>
+    <% else %>
+      <p><%= I18n.t('views.index.no_bills') %></p>
+    <% end %>
+  </div>
+
+
+
 </div>

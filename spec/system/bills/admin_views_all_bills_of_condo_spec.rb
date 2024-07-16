@@ -16,12 +16,11 @@ describe 'Admin vê todos os boletos de um condomínio' do
     allow(CommonArea).to receive(:all).and_return([])
     allow(UnitType).to receive(:all).and_return(unit_types)
     allow(UnitType).to receive(:find).and_return(unit_types.first)
-    allow(Unit).to receive(:all).and_return(units)
-    allow(Unit).to receive(:find).and_return(units.first)
+    allow(Unit).to receive(:find_all_by_condo).and_return(units)
 
     bills = []
-    bills << create(:bill, unit_id: units[0].id, due_date: 10.days.from_now, total_value_cents: 500)
-    bills << create(:bill, unit_id: units[1].id, due_date: 10.days.from_now, total_value_cents: 700)
+    bills << create(:bill, condo_id: 2, unit_id: units[0].id, due_date: 10.days.from_now, total_value_cents: 500_00)
+    bills << create(:bill, condo_id: 2, unit_id: units[1].id, due_date: 10.days.from_now, total_value_cents: 700_00)
 
     login_as admin, scope: :admin
     visit root_path
