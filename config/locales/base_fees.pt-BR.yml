@@ -38,8 +38,10 @@ pt-BR:
             installments:
               not_limited_fee: não se aplica a Taxas Fixas
               is_limited_fee: deve estar presente para Taxas Limitadas
-
   base_fee:
+    statuses:
+      active: Ativa
+      canceled: Cancelada
     monthly: Mensal
     biweekly: Quinzenal
     bimonthly: Bimestral

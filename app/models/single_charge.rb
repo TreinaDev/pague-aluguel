@@ -7,6 +7,11 @@ class SingleCharge < ApplicationRecord
 
   before_create :common_area_restriction
 
+  enum status: {
+    active: 0,
+    canceled: 5
+  }
+
   monetize :value_cents,
            allow_nil: false,
            numericality: {
