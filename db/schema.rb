@@ -85,7 +85,7 @@ ActiveRecord::Schema[7.1].define(version: 2024_07_16_001831) do
     t.integer "total_value_cents"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
-    t.integer "condo_id"
+    t.integer "condo_id", null: false
   end
 
   create_table "common_area_fees", force: :cascade do |t|
