@@ -22,6 +22,10 @@ class HomeController < ApplicationController
   def find_tenant_bill
     tenant_document_number = params[:get_tenant_bill]
     @tenant = Tenant.find(document_number: tenant_document_number)
+    if @tenant.nil?
+      flash[:alert] = 'Seu documento não foi encontrado. Faça seu registro em Condominions!'
+    end
+    render 'index'
   end
 
   def choose_profile; end
