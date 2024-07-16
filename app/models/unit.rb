@@ -32,7 +32,9 @@ class Unit
     if response.success?
       data = JSON.parse(response.body)
       unit = Unit.new(id: data['id'], area: data['area'], floor: data['floor'], number: data['number'],
-                      unit_type_id: data['unit_type_id'])
+                      unit_type_id: data['unit_type_id'], condo_name: data['condo_name'],
+                      tenant_id: data['tenant_id'], owner_id: ['owner_id'],
+                      description: data['description'])
     end
     unit
   end
