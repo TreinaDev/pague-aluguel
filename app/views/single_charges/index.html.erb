@@ -5,6 +5,7 @@
   <span class="fs-4 mx-auto mt-3 text-uppercase">
     <%= SingleCharge.model_name.human(count: 2) %>
   </span>
+  <span class="mx-auto text-uppercase fs-7 text-muted"><%= @condo.name %></span>
   <div class="d-flex justify-content-center mt-4 mb-4">
     <% if @single_charges.any? %>
       <div class="list-group w-75">
@@ -26,6 +27,11 @@
                   <%= SingleCharge.human_attribute_name(:issue_date) %>:
                   <%= I18n.l(single_charge.issue_date) %>
                 </small>
+                <% if single_charge.active? %>
+                  <span class="mt-1 ms-auto badge text-bg-success text-uppercase"><%= I18n.t("single_charge.statuses.#{single_charge.status}") %></span>
+                <% else %>
+                  <span class="mt-1 ms-auto badge text-bg-danger text-uppercase"><%= I18n.t("single_charge.statuses.#{single_charge.status}") %></span>
+                <% end %>
               </div>
             </div>
             <span class="text-muted fs-7 text-lowercase"><%= SingleCharge.human_attribute_name(:value) %></span>

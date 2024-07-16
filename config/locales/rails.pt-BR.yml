@@ -2,6 +2,7 @@ pt-BR:
   cancel-button: 'Cancelar'
   admin_description: para gerenciamento de condomínios e pagamentos
   property_description: para gerenciamento de seus imóveis
+  confirm-cancel: Tem certeza que deseja cancelar esse item? Essa ação não poderá ser desfeita.
   activerecord:
     errors:
       messages:
