@@ -17,6 +17,17 @@
     </div>
 
     <hr>
+    <div class="px-5">
+      <div class=" d-flex justify-content-between">
+        <span class="text-muted text-lowercase fs-8"><%= BaseFee.model_name.human %>:</span>
+        <span><%= BillCalculator.calculate_base_fees(@unit_type.id) %></span>
+      </div>
+      <div class=" d-flex justify-content-between">
+        <span class="text-muted text-lowercase fs-8"><%= SharedFee.model_name.human %>:</span>
+        <span class=""><%= BillCalculator.calculate_shared_fees(@unit_type.id) %></span>
+      </div>
+    </div>
+    <hr>
 
     <div class="px-5">
       <div class=" d-flex justify-content-between">

@@ -7,6 +7,7 @@ class BillsController < ApplicationController
   end
 
   def show
+    set_unit_type
   end
 
   private
@@ -17,5 +18,10 @@ class BillsController < ApplicationController
 
   def set_condo
     @condo = Condo.find(params[:condo_id])
+  end
+
+  def set_unit_type
+    unit = Unit.find(@bill.unit_id)
+    @unit_type = UnitType.find(unit.unit_type_id)
   end
 end
