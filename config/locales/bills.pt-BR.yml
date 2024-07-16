@@ -1,0 +1,11 @@
+pt-BR:
+  activerecord:
+    models:
+      bill:
+        one: Fatura
+        other: Faturas
+    attributes:
+      bill:
+        issue_date: Data de Emissão
+        due_date: Data de Vencimento
+        total_value_cents: Valor Total
