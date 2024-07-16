@@ -34,6 +34,7 @@ describe 'Admin vê detalhes de uma fatura' do
     formatted_due_date = I18n.l(10.days.from_now.to_date)
     expect(page).to have_content 'Fatura'
     expect(page).to have_content 'Unidade 12'
+    expect(page).to have_content 'Condomínio Vila das Flores'
     expect(page).to have_content 'data de emissão'
     expect(page).to have_content formatted_issue_date
     expect(page).to have_content 'data de vencimento'
