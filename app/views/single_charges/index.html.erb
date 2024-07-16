@@ -5,6 +5,7 @@
   <span class="fs-4 mx-auto mt-3 text-uppercase">
     <%= SingleCharge.model_name.human(count: 2) %>
   </span>
+  <span class="mx-auto text-uppercase fs-7 text-muted"><%= @condo.name %></span>
   <div class="d-flex justify-content-center mt-4 mb-4">
     <% if @single_charges.any? %>
       <div class="list-group w-75">
