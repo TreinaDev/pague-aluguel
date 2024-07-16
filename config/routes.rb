@@ -15,6 +15,7 @@ Rails.application.routes.draw do
       resources :common_area_fees, only: [:new, :create]
     end
     resources :base_fees, only: [:new, :create, :show, :index]
+    resources :bills, only: [:index]
 
     get 'search', on: :collection
 

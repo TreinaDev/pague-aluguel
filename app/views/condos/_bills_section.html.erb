@@ -3,4 +3,10 @@
     <%= image_tag "payment-slip-icon", size: '18' %>
     <span><%= I18n.t('views.show.bills') %></span>
   </div>
+  <div class="d-flex align-items-center">
+    <%= link_to condo_bills_path(@condo.id), class: "text-decoration-none btn hover-strong" do %>
+      <%= image_tag "list-center-icon", size: "18" %>
+      <span class="text-muted fs-7 text-uppercase"><%= I18n.t('views.show.see_all') %></span>
+    <% end %>
+  </div>
 </div>
