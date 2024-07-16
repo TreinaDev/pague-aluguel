@@ -19,6 +19,8 @@ describe 'Admin vê todos os faturas de um condomínio' do
     allow(UnitType).to receive(:all).and_return(unit_types)
     allow(UnitType).to receive(:find).and_return(unit_types.last)
     allow(Unit).to receive(:find_all_by_condo).and_return(units)
+    allow(Unit).to receive(:find).with(1).and_return(units.first)
+    allow(Unit).to receive(:find).with(2).and_return(units.second)
 
     bills = []
     bills << create(:bill, condo_id: 2, unit_id: units[0].id, due_date: 10.days.from_now, total_value_cents: 500_00)
