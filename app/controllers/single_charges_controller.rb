@@ -24,7 +24,7 @@ class SingleChargesController < ApplicationController
     @units = Unit.find_all_by_condo(@condo.id)
     @single_charge.condo_id = @condo.id
     if @single_charge.save
-      redirect_to condo_single_charge_path(@condo.id, @single_charge), notice: I18n.t('success_notice_single_charge')
+      redirect_to condo_path(@condo.id), notice: I18n.t('success_notice_single_charge')
     else
       flash.now[:alert] = I18n.t('fail_notice_single_charge')
       render :new, status: :unprocessable_entity

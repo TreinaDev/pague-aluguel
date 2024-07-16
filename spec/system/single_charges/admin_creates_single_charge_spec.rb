@@ -45,7 +45,7 @@ describe 'Administrador cria uma cobrança avulsa' do
     expect(page).to have_content 'R$105,59'
     expect(page).to have_content 'data de emissão'
     expect(page).to have_content I18n.l(5.days.from_now.to_date)
-    expect(current_path).to eq condo_single_charge_path(condos.first.id, SingleCharge.last)
+    expect(current_path).to eq condo_path(condos.first.id)
     expect(SingleCharge.first.condo_id).to eq 1
     expect(page).not_to have_content 'Verifique os erros abaixo:'
   end
