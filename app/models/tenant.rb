@@ -8,7 +8,7 @@ class Tenant
   end
 
   def self.find(document_number:)
-    query = "get_tenant_residence?registration_number={#{document_number}}"
+    query = "get_tenant_residence?registration_number=#{document_number}"
     response = Faraday.get("#{Rails.configuration.api['base_url']}/#{query}")
 
     if response.success?
