@@ -10,9 +10,13 @@
         <%= link_to root_path , class: "text-decoration-none" do %>
           <div class="card hover-strong shadow-sm" style="width: 18rem; height: 7rem;" id=<%= "unit-#{unit.id}"%>>
             <div class="card-body">
-              <span class="d-block"> <%= I18n.t('views.show.unit') %> <%= unit.id  %></span>
-              <span class="d-block"><%= unit.floor %></span>
-              <span class="text-muted fs-8"><%= unit.number %></span>
+              <span class="d-block"> <%= unit.condo_name %></span>
+              <span class="d-block"><%= unit.description %></span>
+              <span class="text-muted fs-8">Apartamento: <%= unit.identifier %></span>
+              <span class="d-block"><%= unit.set_status %></span>
+              <% if unit.unit_has_tenant? %>
+                <%= link_to 'Configurar aluguel', root_path %>
+              <% end %>
             </div>
           </div>
         <% end %>

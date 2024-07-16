@@ -1,5 +1,26 @@
 {
-  "id": 1,
-  "units": [1, 2]
-}
-
+  "resident": {"name": "fulano", "owner_id": 1}, 
+  "properties": [
+    {
+      "id": 1,
+      "area": 100,
+      "floor": 2,
+      "number": 3,
+      "unit_type_id": 2,
+      "condo_id": 1,
+      "condo_name": "Bela Jardins",
+      "tenant_id": 1, 
+      "description": "cobertura"
+    },
+    {
+      "id": 2,
+      "area": 80,
+      "floor": 3,
+      "number": 10,
+      "unit_type_id": 3,
+      "condo_id": 1,
+      "condo_name": "Sai de Baixo",
+      "tenant_id": 5, 
+      "description": "cobertura"
+    }
+  ]}

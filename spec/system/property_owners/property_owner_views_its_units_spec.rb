@@ -13,16 +13,12 @@ describe 'Proprietário vê suas unidades' do
     allow(Condo).to receive(:all).and_return(condos)
 
     units = []
-    units << Unit.new(id: 1, area: 100, floor: 2, number: 3, unit_type_id: 1, condo_id: condos[0].id,
-                      tenant_id: 1, owner_id: 1, description: 'Cobertura', condo_name: 'Condo Test',
-                      resident_name: 'Arthur')
-    units << Unit.new(id: 2, area: 120, floor: 3, number: 4, unit_type_id: 2, condo_id: condos[0].id,
-                      tenant_id: 2, owner_id: 1, description: 'Apartamento 2 quartos', condo_name: 'Condo Test',
-                      resident_name: 'Jules')
-    units << Unit.new(id: 3, area: 130, floor: 4, number: 5, unit_type_id: 3, condo_id: condos[1].id,
-                      tenant_id: nil, owner_id: 1, description: 'Apartamento 3 quartos', condo_name: 'Condo Test 2',
-                      resident_name: 'Matheus')
-    allow(Unit).to receive(:find).and_return(units[0], units[1], units[2])
+    units << Unit.new(id: 1, area: 100, floor: 2, number: 3, unit_type_id: 1, owner_name: 'Arthur',
+                      tenant_id: 1, owner_id: 1, description: 'Cobertura', condo_name: 'Condo Test')
+    units << Unit.new(id: 2, area: 120, floor: 3, number: 4, unit_type_id: 2, owner_name: 'Jules',
+                      tenant_id: 2, owner_id: 1, description: 'Apartamento 2 quartos', condo_name: 'Condo Test')
+    units << Unit.new(id: 3, area: 130, floor: 4, number: 5, unit_type_id: 3, resident_name: 'Matheus',
+                      tenant_id: nil, owner_id: 1, description: 'Apartamento 3 quartos', condo_name: 'Condo Test 2')
     allow(Unit).to receive(:find_all_by_owner).and_return(units)
 
     login_as property_owner, scope: :property_owner
@@ -38,14 +34,14 @@ describe 'Proprietário vê suas unidades' do
     within("div#unit-#{units[1].id}") do
       expect(page).to have_content 'Condo Test'
       expect(page).to have_content 'Apartamento 2 quartos'
-      expect(page).to have_content 'Alugado'
+      expect(page).to have_content 'Esta unidade está alugada'
       expect(page).to have_link 'Configurar aluguel'
     end
 
     within("div#unit-#{units[2].id}") do
       expect(page).to have_content 'Condo Test 2'
       expect(page).to have_content 'Apartamento 3 quartos'
-      expect(page).to have_content 'Unidade disponível para locação'
+      expect(page).to have_content 'Esta unidade está disponível para locação'
       expect(page).not_to have_link 'Configurar aluguel'
     end
   end
