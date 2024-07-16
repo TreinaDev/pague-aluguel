@@ -57,6 +57,6 @@ class HomeController < ApplicationController
   end
 
   def find_bills
-    @bills = Bill.find_all_by_tenant(current_tenant.document_number)
+    @bills = Bill.find_all_by_tenant(@tenant.residence.id)
   end
 end
