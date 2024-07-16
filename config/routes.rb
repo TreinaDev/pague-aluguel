@@ -34,6 +34,8 @@ Rails.application.routes.draw do
     end
   end
 
+  resources :units, only: [:show]
+
   authenticate :admin do
     resources :admins, only: [:index]
   end

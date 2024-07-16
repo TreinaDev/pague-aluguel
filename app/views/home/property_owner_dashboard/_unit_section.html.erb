@@ -7,16 +7,13 @@
    <div class="d-flex justify-content-center gap-2 flex-wrap"></div>
     <% if @units.any? %>
       <% @first_units.each do |unit| %>
-        <%= link_to root_path , class: "text-decoration-none" do %>
+       <%= link_to unit_path(unit.id), class: "text-decoration-none", data: { turbo_frame: "modal" } do %>
           <div class="card hover-strong shadow-sm" style="width: 18rem; height: 7rem;" id=<%= "unit-#{unit.id}"%>>
             <div class="card-body">
               <span class="d-block"> <%= unit.condo_name %></span>
               <span class="d-block"><%= unit.description %></span>
               <span class="text-muted fs-8">Apartamento: <%= unit.identifier %></span>
               <span class="d-block"><%= unit.set_status %></span>
-              <% if unit.unit_has_tenant? %>
-                <%= link_to 'Configurar aluguel', root_path %>
-              <% end %>
             </div>
           </div>
         <% end %>

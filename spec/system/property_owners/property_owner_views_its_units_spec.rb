@@ -28,21 +28,18 @@ describe 'Proprietário vê suas unidades' do
       expect(page).to have_content 'Condo Test'
       expect(page).to have_content 'Cobertura'
       expect(page).to have_content 'Você reside nesta unidade'
-      expect(page).not_to have_link 'Configurar aluguel'
     end
 
     within("div#unit-#{units[1].id}") do
       expect(page).to have_content 'Condo Test'
       expect(page).to have_content 'Apartamento 2 quartos'
       expect(page).to have_content 'Esta unidade está alugada'
-      expect(page).to have_link 'Configurar aluguel'
     end
 
     within("div#unit-#{units[2].id}") do
       expect(page).to have_content 'Condo Test 2'
       expect(page).to have_content 'Apartamento 3 quartos'
       expect(page).to have_content 'Esta unidade está disponível para locação'
-      expect(page).not_to have_link 'Configurar aluguel'
     end
   end
 

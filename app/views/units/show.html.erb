@@ -1,0 +1,27 @@
+<%= turbo_frame_tag "modal" do %>
+  <div class="dean-modal modal-md" id="unit-modal">
+    <%= link_to "", root_path, class: "btn btn-close btn-sm", id: 'close' %>
+
+    <% if notice %>
+      <div class="mt-3 alert alert-success text-center" role="alert"><%= notice %></div>
+    <% end %>
+
+    <span class="fs-3 text-center d-block"><%= @unit.description%></span>
+    
+    <hr>
+
+    <% if @unit.unit_has_tenant? %>
+      <%= link_to 'Configurar Aluguel', root_path %>
+      <hr>
+    <% end %>
+    
+    <div class="px-5">
+      <div class=" d-flex justify-content-between">
+        <span class="text-muted text-lowercase fs-8"><%= I18n.t('views.show.unit') %></span>
+        <span><%= @unit.identifier %></span>
+      </div>
+    </div>
+
+  </div>
+<% end %>
+

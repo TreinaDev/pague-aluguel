@@ -1,0 +1,15 @@
+pt-BR:
+  activemodel:
+    models:
+      unit:
+        one: Unidade
+        other: Unidades
+  messages:
+    registered_fee: Taxa cadastrada com sucesso!
+    registration_fee_error: Não foi possível cadastrar a taxa.
+  views:
+    show:
+      unit_section_title: Unidades
+      unit: Número da unidade
+      situation: Situação
+    
