@@ -18,8 +18,8 @@
                 <%= single_charge.description %>
               </span>
               <span class="d-block mb-1 fs-6">
-                <%= I18n.t('activerecord.attributes.single_charge.unit_id') %> 
-                <%= Unit.find(single_charge.unit_id).identifier %>
+                <%= I18n.t('activerecord.attributes.single_charge.unit_id') %>
+                <%= Unit.find(single_charge.unit_id).number %>
               </span>
               <div class="d-flex flex-wrap text-end">
                 <small class="text-body-secondary w-100">

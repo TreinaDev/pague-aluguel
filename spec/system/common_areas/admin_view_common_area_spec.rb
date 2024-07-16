@@ -105,6 +105,7 @@ describe 'Admin vê área comum' do
 
   it 'tenta acessar área em condomínio que não existe' do
     admin = create(:admin, email: 'ikki.phoenix@seiya.com', password: 'phoenix123')
+    allow(Condo).to receive(:all).and_return([])
     allow(Condo).to receive(:find).and_raise(StandardError)
 
     login_as admin, scope: :admin

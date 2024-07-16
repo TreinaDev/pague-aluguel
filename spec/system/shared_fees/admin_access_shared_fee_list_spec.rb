@@ -7,11 +7,11 @@ describe 'Admin tenta acessar lista de contas compartilhadas' do
     condos << Condo.new(id: 1, name: 'Edifício Monte Verde', city: 'Recife')
     condos << Condo.new(id: 2, name: 'Condomínio Lagoa Serena', city: 'Caxias do Sul')
     unit_types = []
-    unit_types << UnitType.new(id: 1, area: 30, description: 'Apartamento 1 quarto', ideal_fraction: 0.1,
-                               condo_id: 1)
+    unit_types << UnitType.new(id: 1, description: 'Apartamento 1 quarto', metreage: 100, fraction: 1.0,
+                               unit_ids: [])
     allow(Condo).to receive(:all).and_return(condos)
     allow(Condo).to receive(:find).and_return(condos.first)
-    allow(UnitType).to receive(:find_all_by_condo).and_return(unit_types)
+    allow(UnitType).to receive(:all).and_return(unit_types)
     allow(CommonArea).to receive(:all).and_return([])
 
     SharedFee.create!(description: 'Conta de Luz', issue_date: 10.days.from_now.to_date,
@@ -44,9 +44,9 @@ describe 'Admin tenta acessar lista de contas compartilhadas' do
     condos = []
     condos << Condo.new(id: 1, name: 'Condo Test', city: 'City Test')
     unit_types = []
-    unit_types << UnitType.new(id: 1, area: 30, description: 'Apartamento 1 quarto', ideal_fraction: 0.1,
-                               condo_id: 1)
-    allow(UnitType).to receive(:find_all_by_condo).and_return(unit_types)
+    unit_types << UnitType.new(id: 1, description: 'Apartamento 1 quarto', metreage: 100, fraction: 1.0,
+                               unit_ids: [])
+    allow(UnitType).to receive(:all).and_return(unit_types)
     allow(Condo).to receive(:all).and_return(condos)
     allow(Condo).to receive(:find).and_return(condos.first)
     allow(CommonArea).to receive(:all).and_return([])
@@ -75,11 +75,12 @@ describe 'Admin tenta acessar lista de contas compartilhadas' do
     condos << Condo.new(id: 1, name: 'Edifício Monte Verde', city: 'Recife')
     condos << Condo.new(id: 2, name: 'Condomínio Lagoa Serena', city: 'Caxias do Sul')
     unit_types = []
-    unit_types << UnitType.new(id: 1, area: 30, description: 'Apartamento 1 quarto', ideal_fraction: 0.1, condo_id: 1)
+    unit_types << UnitType.new(id: 1, description: 'Apartamento 1 quarto', metreage: 100, fraction: 1.0,
+                               unit_ids: [])
 
     allow(Condo).to receive(:all).and_return(condos)
     allow(Condo).to receive(:find).and_return(condos.first)
-    allow(UnitType).to receive(:find_all_by_condo).and_return(unit_types)
+    allow(UnitType).to receive(:all).and_return(unit_types)
     allow(CommonArea).to receive(:all).and_return([])
 
     SharedFee.create!(description: 'Conta de Luz', issue_date: 10.days.from_now.to_date,
@@ -110,11 +111,12 @@ describe 'Admin tenta acessar lista de contas compartilhadas' do
     condos = []
     condos << Condo.new(id: 1, name: 'Edifício Monte Verde', city: 'Recife')
     unit_types = []
-    unit_types << UnitType.new(id: 1, area: 30, description: 'Apartamento 1 quarto', ideal_fraction: 0.1, condo_id: 1)
+    unit_types << UnitType.new(id: 1, description: 'Apartamento 1 quarto', metreage: 100, fraction: 1.0,
+                               unit_ids: [])
 
     allow(Condo).to receive(:all).and_return(condos)
     allow(Condo).to receive(:find).and_return(condos.first)
-    allow(UnitType).to receive(:find_all_by_condo).and_return(unit_types)
+    allow(UnitType).to receive(:all).and_return(unit_types)
 
     SharedFee.create!(description: 'Conta de Luz', issue_date: 10.days.from_now.to_date,
                       total_value: 10_000, condo_id: condos.first.id)
@@ -146,10 +148,11 @@ describe 'Admin tenta acessar lista de contas compartilhadas' do
     condos = []
     condos << Condo.new(id: 1, name: 'Edifício Monte Verde', city: 'Recife')
     unit_types = []
-    unit_types << UnitType.new(id: 1, area: 30, description: 'Apartamento 1 quarto', ideal_fraction: 0.1, condo_id: 1)
+    unit_types << UnitType.new(id: 1, description: 'Apartamento 1 quarto', metreage: 100, fraction: 1.0,
+                               unit_ids: [])
     allow(Condo).to receive(:all).and_return(condos)
     allow(Condo).to receive(:find).and_return(condos.first)
-    allow(UnitType).to receive(:find_all_by_condo).and_return(unit_types)
+    allow(UnitType).to receive(:all).and_return(unit_types)
 
     login_as admin, scope: :admin
     visit condo_shared_fees_path(condos.first.id)
@@ -164,10 +167,11 @@ describe 'Admin tenta acessar lista de contas compartilhadas' do
     condos << Condo.new(id: 1, name: 'Edifício Monte Verde', city: 'Recife')
     condos << Condo.new(id: 2, name: 'Condomínio Lagoa Serena', city: 'Caxias do Sul')
     unit_types = []
-    unit_types << UnitType.new(id: 1, area: 30, description: 'Apartamento 1 quarto', ideal_fraction: 0.1, condo_id: 1)
+    unit_types << UnitType.new(id: 1, description: 'Apartamento 1 quarto', metreage: 100, fraction: 1.0,
+                               unit_ids: [])
     allow(Condo).to receive(:all).and_return(condos)
     allow(Condo).to receive(:find).and_return(condos.first)
-    allow(UnitType).to receive(:find_all_by_condo).and_return(unit_types)
+    allow(UnitType).to receive(:all).and_return(unit_types)
     allow(CommonArea).to receive(:all).and_return([])
     SharedFee.create!(description: 'Conta de Luz', issue_date: 10.days.from_now.to_date,
                       total_value: 10_000, condo_id: condos.first.id)

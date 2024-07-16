@@ -13,8 +13,10 @@ describe 'Admin gerencia contas compartilhadas' do
       condos = []
       condos << Condo.new(id: 1, name: 'Condo Test', city: 'City Test')
       unit_types = []
-      unit_types << UnitType.new(id: 1, area: 30, description: 'Apartamento 1 quarto', ideal_fraction: 0.4, condo_id: 1)
-      unit_types << UnitType.new(id: 2, area: 30, description: 'Apartamento 1 quarto', ideal_fraction: 0.6, condo_id: 1)
+      unit_types << UnitType.new(id: 1, description: 'Apartamento 1 quarto', metreage: 100, fraction: 1.0,
+                                 unit_ids: [1])
+      unit_types << UnitType.new(id: 2, description: 'Apartamento 2 quarto', metreage: 200, fraction: 2.0,
+                                 unit_ids: [2])
       units = []
       units << Unit.new(id: 1, area: 100, floor: 1, number: 1, unit_type_id: 1)
       units << Unit.new(id: 2, area: 100, floor: 1, number: 1, unit_type_id: 2)
@@ -48,8 +50,10 @@ describe 'Admin gerencia contas compartilhadas' do
       condos = []
       condos << Condo.new(id: 1, name: 'Condo Test', city: 'City Test')
       unit_types = []
-      unit_types << UnitType.new(id: 1, area: 30, description: 'Apartamento 1 quarto', ideal_fraction: 0.4, condo_id: 1)
-      unit_types << UnitType.new(id: 2, area: 30, description: 'Apartamento 1 quarto', ideal_fraction: 0.6, condo_id: 1)
+      unit_types << UnitType.new(id: 1, description: 'Apartamento 1 quarto', metreage: 100, fraction: 1.0,
+                                 unit_ids: [1])
+      unit_types << UnitType.new(id: 2, description: 'Apartamento 2 quarto', metreage: 200, fraction: 2.0,
+                                 unit_ids: [2])
       units = []
       units << Unit.new(id: 1, area: 100, floor: 1, number: 1, unit_type_id: 1)
       units << Unit.new(id: 2, area: 100, floor: 1, number: 1, unit_type_id: 2)
@@ -83,8 +87,10 @@ describe 'Admin gerencia contas compartilhadas' do
       condos = []
       condos << Condo.new(id: 1, name: 'Condo Test', city: 'City Test')
       unit_types = []
-      unit_types << UnitType.new(id: 1, area: 30, description: 'Apartamento 1 quarto', ideal_fraction: 0.4, condo_id: 1)
-      unit_types << UnitType.new(id: 2, area: 30, description: 'Apartamento 1 quarto', ideal_fraction: 0.6, condo_id: 1)
+      unit_types << UnitType.new(id: 1, description: 'Apartamento 1 quarto', metreage: 100, fraction: 1.0,
+                                 unit_ids: [1])
+      unit_types << UnitType.new(id: 2, description: 'Apartamento 2 quarto', metreage: 200, fraction: 2.0,
+                                 unit_ids: [2])
       units = []
       units << Unit.new(id: 1, area: 100, floor: 1, number: 1, unit_type_id: 1)
       units << Unit.new(id: 2, area: 100, floor: 1, number: 1, unit_type_id: 2)
@@ -113,8 +119,10 @@ describe 'Admin gerencia contas compartilhadas' do
       condos = []
       condos << Condo.new(id: 1, name: 'Condo Test', city: 'City Test')
       unit_types = []
-      unit_types << UnitType.new(id: 1, area: 30, description: 'Apartamento 1 quarto', ideal_fraction: 0.4, condo_id: 1)
-      unit_types << UnitType.new(id: 2, area: 30, description: 'Apartamento 1 quarto', ideal_fraction: 0.6, condo_id: 1)
+      unit_types << UnitType.new(id: 1, description: 'Apartamento 1 quarto', metreage: 100, fraction: 1.0,
+                                 unit_ids: [1])
+      unit_types << UnitType.new(id: 2, description: 'Apartamento 2 quarto', metreage: 200, fraction: 2.0,
+                                 unit_ids: [2])
       units = []
       units << Unit.new(id: 1, area: 100, floor: 1, number: 1, unit_type_id: 1)
       units << Unit.new(id: 2, area: 100, floor: 1, number: 1, unit_type_id: 2)

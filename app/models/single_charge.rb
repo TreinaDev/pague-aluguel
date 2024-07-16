@@ -3,7 +3,6 @@ class SingleCharge < ApplicationRecord
   validate :common_area_is_mandatory
   validate :date_is_future
   validate :description_is_mandatory
-  validate :unit_belongs_to_condo
 
   before_create :common_area_restriction
 
@@ -41,14 +40,5 @@ class SingleCharge < ApplicationRecord
     return unless !common_area_fee? && description.blank?
 
     errors.add(:description, 'não pode ficar em branco')
-  end
-
-  def unit_belongs_to_condo
-    return if unit_id.blank?
-
-    unit = Unit.find(unit_id)
-    return if condo_id == UnitType.find(unit.unit_type_id).condo_id
-
-    errors.add(:unit_id, 'deve pertencer ao condomínio')
   end
 end

@@ -10,18 +10,18 @@ class BaseFeesController < ApplicationController
     @base_fee = BaseFee.find(params[:id])
     @condo = Condo.find(@base_fee.condo_id)
     @values = Value.where(base_fee: @base_fee)
-    @unit_types = UnitType.find_all_by_condo(@condo.id)
+    @unit_types = UnitType.all(@condo.id)
   end
 
   def new
     @base_fee = BaseFee.new(condo_id: @condo.id)
     @values = @base_fee.value_builder
-    @unit_types = UnitType.find_all_by_condo(@condo.id)
+    @unit_types = UnitType.all(@condo.id)
   end
 
   def create
     @base_fee = BaseFee.new(base_fee_params)
-    @unit_types = UnitType.find_all_by_condo(@condo.id)
+    @unit_types = UnitType.all(@condo.id)
 
     if @base_fee.save
       redirect_to condo_path(@condo.id), notice: I18n.t('success_notice_base_fee')

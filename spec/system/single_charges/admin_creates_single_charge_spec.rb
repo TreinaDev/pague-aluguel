@@ -8,8 +8,8 @@ describe 'Administrador cria uma cobrança avulsa' do
     unit_types = []
     unit_types << UnitType.new(id: 1, area: 40, description: 'Apartamento 1 quarto', ideal_fraction: 0.5, condo_id: 1)
     units = []
-    units << Unit.new(id: 1, area: 40, floor: 1, number: 1, unit_type_id: 1)
-    units << Unit.new(id: 2, area: 40, floor: 1, number: 2, unit_type_id: 1)
+    units << Unit.new(id: 1, area: 40, floor: 1, number: '11', unit_type_id: 1, condo_id: 1,
+                      condo_name: 'Condo Test', tenant_id: 1, owner_id: 1, description: 'Com varanda')
     common_areas = []
     common_areas << CommonArea.new(id: 1, name: 'Academia',
                                    description: 'Uma academia raíz com ventilador apenas para os marombas',
@@ -17,7 +17,6 @@ describe 'Administrador cria uma cobrança avulsa' do
     allow(Condo).to receive(:all).and_return(condos)
     allow(Condo).to receive(:find).and_return(condos.first)
     allow(UnitType).to receive(:all).and_return(unit_types)
-    allow(UnitType).to receive(:find).and_return(unit_types.first)
     allow(Unit).to receive(:all).and_return(units)
     allow(Unit).to receive(:find).and_return(units.first)
     allow(CommonArea).to receive(:all).and_return(common_areas)
@@ -56,8 +55,10 @@ describe 'Administrador cria uma cobrança avulsa' do
     unit_types = []
     unit_types << UnitType.new(id: 1, area: 40, description: 'Apartamento 1 quarto', ideal_fraction: 0.5, condo_id: 1)
     units = []
-    units << Unit.new(id: 1, area: 40, floor: 1, number: 1, unit_type_id: 1)
-    units << Unit.new(id: 2, area: 40, floor: 1, number: 1, unit_type_id: 1)
+    units << Unit.new(id: 1, area: 40, floor: 1, number: '11', unit_type_id: 1, condo_id: 1,
+                      condo_name: 'Condo Test', tenant_id: 1, owner_id: 1, description: 'Com varanda')
+    units << Unit.new(id: 2, area: 40, floor: 2, number: '21', unit_type_id: 2, condo_id: 1,
+                      condo_name: 'Condo Test', tenant_id: 2, owner_id: 2, description: 'Com churrasqueira')
     allow(Condo).to receive(:all).and_return(condos)
     allow(Condo).to receive(:find).and_return(condos.first)
     allow(UnitType).to receive(:all).and_return(unit_types)
@@ -77,8 +78,10 @@ describe 'Administrador cria uma cobrança avulsa' do
     unit_types = []
     unit_types << UnitType.new(id: 1, area: 40, description: 'Apartamento 1 quarto', ideal_fraction: 0.5, condo_id: 1)
     units = []
-    units << Unit.new(id: 1, area: 40, floor: 1, number: 1, unit_type_id: 1)
-    units << Unit.new(id: 2, area: 40, floor: 1, number: 2, unit_type_id: 1)
+    units << Unit.new(id: 1, area: 40, floor: 1, number: '11', unit_type_id: 1, condo_id: 1,
+                      condo_name: 'Condo Test', tenant_id: 1, owner_id: 1, description: 'Com varanda')
+    units << Unit.new(id: 2, area: 40, floor: 2, number: '21', unit_type_id: 2, condo_id: 1,
+                      condo_name: 'Condo Test', tenant_id: 2, owner_id: 2, description: 'Com churrasqueira')
     common_areas = []
     common_areas << CommonArea.new(id: 1, name: 'Academia',
                                    description: 'Uma academia raíz com ventilador apenas para os marombas',
@@ -91,11 +94,10 @@ describe 'Administrador cria uma cobrança avulsa' do
     allow(Condo).to receive(:all).and_return(condos)
     allow(Condo).to receive(:find).and_return(condo)
     allow(UnitType).to receive(:all).and_return(unit_types)
-    allow(UnitType).to receive(:find).and_return(unit_types.first)
     allow(Unit).to receive(:all).and_return(units)
     allow(Unit).to receive(:find).and_return(units.first)
     allow(CommonArea).to receive(:all).and_return(common_areas)
-    allow(CommonArea).to receive(:find).with(condo.id, common_area.id).and_return(common_area)
+    allow(CommonArea).to receive(:find).with(common_area.id).and_return(common_area)
 
     login_as admin, scope: :admin
     visit root_path
@@ -130,8 +132,10 @@ describe 'Administrador cria uma cobrança avulsa' do
     unit_types = []
     unit_types << UnitType.new(id: 1, area: 40, description: 'Apartamento 1 quarto', ideal_fraction: 0.5, condo_id: 1)
     units = []
-    units << Unit.new(id: 1, area: 40, floor: 1, number: 1, unit_type_id: 1)
-    units << Unit.new(id: 2, area: 40, floor: 1, number: 1, unit_type_id: 1)
+    units << Unit.new(id: 1, area: 40, floor: 1, number: '11', unit_type_id: 1, condo_id: 1,
+                      condo_name: 'Condo Test', tenant_id: 1, owner_id: 1, description: 'Com varanda')
+    units << Unit.new(id: 2, area: 40, floor: 2, number: '21', unit_type_id: 2, condo_id: 1,
+                      condo_name: 'Condo Test', tenant_id: 2, owner_id: 2, description: 'Com churrasqueira')
     condo = condos.first
     allow(Condo).to receive(:all).and_return(condos)
     allow(Condo).to receive(:find).and_return(condo)
@@ -157,8 +161,10 @@ describe 'Administrador cria uma cobrança avulsa' do
     unit_types = []
     unit_types << UnitType.new(id: 1, area: 40, description: 'Apartamento 1 quarto', ideal_fraction: 0.5, condo_id: 1)
     units = []
-    units << Unit.new(id: 1, area: 40, floor: 1, number: 1, unit_type_id: 1)
-    units << Unit.new(id: 2, area: 40, floor: 1, number: 1, unit_type_id: 1)
+    units << Unit.new(id: 1, area: 40, floor: 1, number: '11', unit_type_id: 1, condo_id: 1,
+                      condo_name: 'Condo Test', tenant_id: 1, owner_id: 1, description: 'Com varanda')
+    units << Unit.new(id: 2, area: 40, floor: 2, number: '21', unit_type_id: 2, condo_id: 1,
+                      condo_name: 'Condo Test', tenant_id: 2, owner_id: 2, description: 'Com churrasqueira')
     common_areas = []
     common_areas << CommonArea.new(id: 1, name: 'Academia',
                                    description: 'Uma academia raíz com ventilador apenas para os marombas',
@@ -170,7 +176,7 @@ describe 'Administrador cria uma cobrança avulsa' do
     allow(UnitType).to receive(:all).and_return(unit_types)
     allow(Unit).to receive(:all).and_return(units)
     allow(CommonArea).to receive(:all).and_return(common_areas)
-    allow(CommonArea).to receive(:find).with(condo.id, common_area.id).and_return(common_area)
+    allow(CommonArea).to receive(:find).with(common_area.id).and_return(common_area)
 
     login_as admin, scope: :admin
     visit root_path
@@ -201,8 +207,10 @@ describe 'Administrador cria uma cobrança avulsa' do
     unit_types = []
     unit_types << UnitType.new(id: 1, area: 40, description: 'Apartamento 1 quarto', ideal_fraction: 0.5, condo_id: 1)
     units = []
-    units << Unit.new(id: 1, area: 40, floor: 1, number: 1, unit_type_id: 1)
-    units << Unit.new(id: 2, area: 40, floor: 1, number: 2, unit_type_id: 1)
+    units << Unit.new(id: 1, area: 40, floor: 1, number: '11', unit_type_id: 1, condo_id: 1,
+                      condo_name: 'Condo Test', tenant_id: 1, owner_id: 1, description: 'Com varanda')
+    units << Unit.new(id: 2, area: 40, floor: 1, number: '12', unit_type_id: 2, condo_id: 1,
+                      condo_name: 'Condo Test', tenant_id: 2, owner_id: 2, description: 'Com churrasqueira')
     common_areas = []
     common_areas << CommonArea.new(id: 1, name: 'Academia',
                                    description: 'Uma academia raíz com ventilador apenas para os marombas',
@@ -212,11 +220,10 @@ describe 'Administrador cria uma cobrança avulsa' do
     allow(Condo).to receive(:all).and_return(condos)
     allow(Condo).to receive(:find).and_return(condo)
     allow(UnitType).to receive(:all).and_return(unit_types)
-    allow(UnitType).to receive(:find).and_return(unit_types.first)
     allow(Unit).to receive(:all).and_return(units)
     allow(Unit).to receive(:find).and_return(units.first)
     allow(CommonArea).to receive(:all).and_return(common_areas)
-    allow(CommonArea).to receive(:find).with(condo.id, common_area.id).and_return(common_area)
+    allow(CommonArea).to receive(:find).with(common_area.id).and_return(common_area)
 
     login_as admin, scope: :admin
     visit root_path
@@ -247,8 +254,10 @@ describe 'Administrador cria uma cobrança avulsa' do
     unit_types = []
     unit_types << UnitType.new(id: 1, area: 40, description: 'Apartamento 1 quarto', ideal_fraction: 0.5, condo_id: 1)
     units = []
-    units << Unit.new(id: 1, area: 40, floor: 1, number: 1, unit_type_id: 1)
-    units << Unit.new(id: 2, area: 40, floor: 1, number: 1, unit_type_id: 1)
+    units << Unit.new(id: 1, area: 40, floor: 1, number: '11', unit_type_id: 1, condo_id: 1,
+                      condo_name: 'Condo Test', tenant_id: 1, owner_id: 1, description: 'Com varanda')
+    units << Unit.new(id: 2, area: 40, floor: 2, number: '21', unit_type_id: 2, condo_id: 1,
+                      condo_name: 'Condo Test', tenant_id: 2, owner_id: 2, description: 'Com churrasqueira')
     condo = condos.first
     allow(Condo).to receive(:all).and_return(condos)
     allow(Condo).to receive(:find).and_return(condo)
