@@ -263,7 +263,7 @@ describe 'Administrador cria uma cobrança avulsa' do
       click_on 'Adicionar nova'
     end
 
-    expect(page).to have_select('Tipo de Cobrança', options: ['Outros', 'Multa'])
+    expect(page).to have_select('Tipo de Cobrança', options: %w[Outros Multa])
     expect(page).not_to have_select('Tipo de Cobrança', options: ['Taxa de Área Comum'])
   end
 end
