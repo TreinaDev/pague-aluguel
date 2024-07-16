@@ -27,12 +27,12 @@ describe 'Admin vê todos os boletos de um condomínio' do
     visit root_path
     click_on 'Residencial Jardim Europa'
     within('div#bills_section') do
-      click_on 'VER TODOS'
+      click_on 'Ver todas'
     end
 
     formatted_date = I18n.l(10.days.from_now.to_date)
-    expect(page).to have_content 'Boletos'
-    expect(page).to have_content 'Residencial Jardim Europa'
+    expect(page).to have_content 'FATURAS'
+    expect(page).to have_content 'Residencial Jardim Europa'.upcase
     expect(page).to have_content 'Unidade 11'
     expect(page).to have_content 'valor total', count: 2
     expect(page).to have_content 'R$500,00'
