@@ -262,8 +262,8 @@ describe 'Administrador cria uma cobrança avulsa' do
     within '#single-charge' do
       click_on 'Adicionar nova'
     end
-    select 'Taxa de Área Comum', from: 'Tipo de Cobrança'
 
-    expect(page).to have_select('Área Comum', options: [''])
+    expect(page).to have_select('Tipo de Cobrança', options: ['Outros', 'Multa'])
+    expect(page).not_to have_select('Tipo de Cobrança', options: ['Taxa de Área Comum'])
   end
 end
