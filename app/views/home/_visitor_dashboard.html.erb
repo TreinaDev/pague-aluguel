@@ -1,4 +1,7 @@
 <%= form_with(url: root_path) do |f| %>
-  <%= f.label :get_tenant_bill %>
-  <%= f.text_field :get_tenant_bill %>
+  <div class="form-floating mt-4">
+    <%= f.text_field :get_tenant_bill, class: "form-control" %>
+    <%= f.label :get_tenant_bill, "buscar fatura" %>
+  </div>
+  <%= f.submit %>
 <% end %>
