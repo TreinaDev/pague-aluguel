@@ -7,3 +7,7 @@
 <% if property_owner_signed_in? %>
   <%= render 'home/property_owner_dashboard/property_owner_dashboard' %>
 <% end %>
+
+<% unless admin_signed_in? || property_owner_signed_in? %>
+  <%= render 'home/visitor_dashboard' %>
+<% end %>
