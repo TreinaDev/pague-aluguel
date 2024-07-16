@@ -23,8 +23,7 @@ describe 'Proprietário vee detalhes da sua unidade' do
 
     within('div#unit-modal') do
       expect(page).to have_content 'Apartamento 2 quartos'
-      expect(page).to have_content 'número da unidade'
-      expect(page).to have_content '34'
+      expect(page).to have_content 'Condo Test'
       expect(page).to have_link 'Configurar Aluguel'
     end
   end

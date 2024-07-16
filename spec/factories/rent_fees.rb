@@ -5,8 +5,8 @@ FactoryBot.define do
     condo_id { 1 }
     unit_id { 1 }
     value_cents { 1 }
-    issue_date { "2024-07-16" }
+    issue_date { '2024-07-16' }
     fine_cents { 1 }
-    fine_interest { "9.99" }
+    fine_interest { '9.99' }
   end
 end

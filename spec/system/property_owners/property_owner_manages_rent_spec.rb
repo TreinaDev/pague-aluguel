@@ -13,7 +13,8 @@ describe 'Proprietário configura aluguel' do
 
     units = []
     units << Unit.new(id: 2, area: 120, floor: 3, number: 4, unit_type_id: 2, owner_name: 'Jules',
-                      tenant_id: 2, owner_id: 1, condo_id: 1, description: 'Apartamento 2 quartos', condo_name: 'Condo Test')
+                      tenant_id: 2, owner_id: 1, condo_id: 1, description: 'Apartamento 2 quartos',
+                      condo_name: 'Condo Test')
     allow(Unit).to receive(:find_all_by_owner).and_return(units)
     allow(Unit).to receive(:find).and_return(units[0])
 
@@ -30,13 +31,13 @@ describe 'Proprietário configura aluguel' do
     expect(current_path).to eq unit_path(2)
     expect(RentFee.last.owner_id).to eq 1
     within 'div#unit-modal' do
-      expect(page).to have_content 'Aluguel:'
+      expect(page).to have_content 'Aluguel'
       expect(page).to have_content 'R$1.200,00'
-      expect(page).to have_content 'Data de Emissão:'
+      expect(page).to have_content 'data de emissão'
       expect(page).to have_content I18n.l(2.days.from_now.to_date)
-      expect(page).to have_content 'Multa por atraso:'
+      expect(page).to have_content 'multa por atraso'
       expect(page).to have_content 'R$50,00'
-      expect(page).to have_content 'Juros por atraso ao mês:'
+      expect(page).to have_content 'juros por atraso ao mês'
       expect(page).to have_content '10.0%'
     end
   end
@@ -53,7 +54,8 @@ describe 'Proprietário configura aluguel' do
 
     units = []
     units << Unit.new(id: 2, area: 120, floor: 3, number: 4, unit_type_id: 2, owner_name: 'Jules',
-                      tenant_id: 2, owner_id: 1, condo_id: 1, description: 'Apartamento 2 quartos', condo_name: 'Condo Test')
+                      tenant_id: 2, owner_id: 1, condo_id: 1, description: 'Apartamento 2 quartos',
+                      condo_name: 'Condo Test')
     allow(Unit).to receive(:find_all_by_owner).and_return(units)
     allow(Unit).to receive(:find).and_return(units[0])
     RentFee.create!(owner_id: 1, tenant_id: 2, unit_id: 2, value_cents: 120_000, issue_date: 2.days.from_now.to_date,
@@ -69,13 +71,13 @@ describe 'Proprietário configura aluguel' do
     expect(current_path).to eq unit_path(2)
     expect(RentFee.last.owner_id).to eq 1
     within 'div#unit-modal' do
-      expect(page).to have_content 'Aluguel:'
+      expect(page).to have_content 'Aluguel'
       expect(page).to have_content 'R$1.400,00'
-      expect(page).to have_content 'Data de Emissão:'
+      expect(page).to have_content 'data de emissão'
       expect(page).to have_content I18n.l(2.days.from_now.to_date)
-      expect(page).to have_content 'Multa por atraso:'
+      expect(page).to have_content 'multa por atraso'
       expect(page).to have_content 'R$50,00'
-      expect(page).to have_content 'Juros por atraso ao mês:'
+      expect(page).to have_content 'juros por atraso ao mês'
       expect(page).to have_content '10.0%'
     end
   end
@@ -92,7 +94,8 @@ describe 'Proprietário configura aluguel' do
 
     units = []
     units << Unit.new(id: 2, area: 120, floor: 3, number: 4, unit_type_id: 2, owner_name: 'Jules',
-                      tenant_id: 2, owner_id: 1, condo_id: 1, description: 'Apartamento 2 quartos', condo_name: 'Condo Test')
+                      tenant_id: 2, owner_id: 1, condo_id: 1, description: 'Apartamento 2 quartos',
+                      condo_name: 'Condo Test')
     allow(Unit).to receive(:find_all_by_owner).and_return(units)
     allow(Unit).to receive(:find).and_return(units[0])
 
@@ -129,13 +132,13 @@ describe 'Proprietário configura aluguel' do
     visit unit_path(2)
 
     within 'div#unit-modal' do
-      expect(page).to have_content 'Aluguel:'
+      expect(page).to have_content 'Aluguel'
       expect(page).to have_content 'R$1.200,00'
-      expect(page).to have_content 'Data de Emissão:'
+      expect(page).to have_content 'data de emissão'
       expect(page).to have_content I18n.l(2.days.from_now.to_date)
-      expect(page).to have_content 'Multa por atraso:'
+      expect(page).to have_content 'multa por atraso'
       expect(page).to have_content 'R$50,00'
-      expect(page).to have_content 'Juros por atraso ao mês:'
+      expect(page).to have_content 'juros por atraso ao mês'
       expect(page).to have_content '10.0%'
     end
   end

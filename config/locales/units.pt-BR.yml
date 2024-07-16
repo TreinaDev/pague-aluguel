@@ -12,4 +12,9 @@ pt-BR:
       unit_section_title: Unidades
       unit: Número da unidade
       situation: Situação
-    
+      rent_value: valor do aluguel
+      issue_date: data de emissão
+      fine: multa por atraso
+      fine_interest: juros por atraso ao mês
+      rent: Aluguel
+      

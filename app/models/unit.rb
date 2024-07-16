@@ -1,3 +1,5 @@
+# rubocop:disable Metrics/MethodLength, Metrics/AbcSize
+
 class Unit
   attr_accessor :id, :area, :floor, :number, :unit_type_id, :condo_id, :tenant_id, :owner_id, :description, :condo_name
 
@@ -34,7 +36,7 @@ class Unit
       data = JSON.parse(response.body)
       unit = Unit.new(id: data['id'], area: data['area'], floor: data['floor'], number: data['number'],
                       unit_type_id: data['unit_type_id'], condo_name: data['condo_name'],
-                      tenant_id: data['tenant_id'], owner_id: ['owner_id'],
+                      tenant_id: data['tenant_id'], owner_id: ['owner_id'], condo_id: data['condo_id'],
                       description: data['description'])
     end
     unit
@@ -73,7 +75,7 @@ class Unit
   def self.build_owner_units(data)
     data['properties'].map do |unit|
       Unit.new(id: unit['id'], area: unit['area'], floor: unit['floor'], number: unit['number'],
-               unit_type_id: unit['unit_type_id'], condo_name: unit['condo_name'],
+               unit_type_id: unit['unit_type_id'], condo_name: unit['condo_name'], condo_id: data['condo_id'],
                tenant_id: unit['tenant_id'], owner_id: data['resident']['owner_id'],
                owner_name: data['resident']['name'], description: unit['description'])
     end
@@ -83,3 +85,5 @@ class Unit
     RentFee.find_by(unit_id: id)
   end
 end
+
+# rubocop:enable Metrics/MethodLength, Metrics/AbcSize
