@@ -26,6 +26,11 @@
                   <%= SingleCharge.human_attribute_name(:issue_date) %>:
                   <%= I18n.l(single_charge.issue_date) %>
                 </small>
+                <% if single_charge.active? %>
+                  <span class="mt-1 ms-auto badge text-bg-success text-uppercase"><%= I18n.t("single_charge.statuses.#{single_charge.status}") %></span>
+                <% else %>
+                  <span class="mt-1 ms-auto badge text-bg-danger text-uppercase"><%= I18n.t("single_charge.statuses.#{single_charge.status}") %></span>
+                <% end %>
               </div>
             </div>
             <span class="text-muted fs-7 text-lowercase"><%= SingleCharge.human_attribute_name(:value) %></span>

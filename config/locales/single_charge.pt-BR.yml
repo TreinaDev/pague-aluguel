@@ -17,6 +17,9 @@ pt-BR:
         charge_type: Tipo de Cobrança
         common_area_id: Área Comum
   single_charge:
+    statuses:
+      active: Ativa
+      canceled: Cancelada
     common_area_fee: Taxa de Área Comum
     fine: Multa
     other: Outros

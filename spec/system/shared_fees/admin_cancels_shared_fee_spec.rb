@@ -66,7 +66,7 @@ describe 'Admin cancela uma conta compartilhada' do
     end
     click_on 'Conta de Luz'
 
-    expect(page).to have_content ''
+    expect(page).to have_content 'CANCELADA'
     expect(page).not_to have_button 'Cancelar'
   end
 

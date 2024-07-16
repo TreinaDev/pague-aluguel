@@ -24,7 +24,9 @@ Rails.application.routes.draw do
       post 'cancel', on: :member
     end
 
-    resources :single_charges, only: [:show, :new, :create, :index]
+    resources :single_charges, only: [:show, :new, :create, :index] do
+      post 'cancel', on: :member
+    end
   end
 
   namespace :api do
