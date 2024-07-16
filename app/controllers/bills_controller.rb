@@ -1,5 +1,5 @@
 class BillsController < ApplicationController
-  before_action :set_condo, only: [:index]
+  before_action :set_condo, only: [:index, :show]
   before_action :set_bill, only: [:show]
 
   def index
