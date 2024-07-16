@@ -42,7 +42,6 @@ describe 'API de Cobranças Avulsas' do
       unit_types << UnitType.new(id: 1, area: 40, description: 'Apartamento 1 quarto', ideal_fraction: 0.5, condo_id: 1)
       units = []
       units << Unit.new(id: 1, area: 40, floor: 1, number: 1, unit_type_id: 1)
-      common_areas = []
       allow(Condo).to receive(:all).and_return(condos)
       allow(Condo).to receive(:find).and_return(condos.first)
       allow(UnitType).to receive(:all).and_return(unit_types)
