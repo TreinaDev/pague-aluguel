@@ -10,7 +10,7 @@ Rails.application.routes.draw do
   get 'search', to: 'home#search'
   get 'choose_profile', to: 'home#choose_profile'
 
-  get 'find_tenant_bill', to: 'home#find_tenant_bill'
+  get 'find_tenant', to: 'home#find_tenant'
 
   resources :condos, only: [:index, :show] do
     resources :common_areas, only: [:index, :show] do

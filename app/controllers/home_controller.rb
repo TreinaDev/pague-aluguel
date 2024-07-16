@@ -19,13 +19,13 @@ class HomeController < ApplicationController
     render 'index'
   end
 
-  def find_tenant_bill
+  def find_tenant
     tenant_document_number = params[:get_tenant_bill]
     @tenant = Tenant.find(document_number: tenant_document_number)
     if @tenant.nil?
-      flash[:alert] = 'Seu documento não foi encontrado. Faça seu registro em Condominions!'
+      flash[:alert] = 'Seu CPF não foi encontrado.'
     end
-    render 'index'
+    render 'index', locals: { tenant: @tenant }
   end
 
   def choose_profile; end
@@ -54,5 +54,9 @@ class HomeController < ApplicationController
   def first_units
     @units = Unit.find_all_by_owner(current_property_owner.document_number)
     @first_units = @units.take(4)
+  end
+
+  def find_bills
+    @bills = Bill.find_all_by_tenant(current_tenant.document_number)
   end
 end
