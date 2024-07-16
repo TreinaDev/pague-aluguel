@@ -7,6 +7,16 @@
     <span class="fs-8 text-center d-block"><%= @base_fee.description %></span>
     <hr>
 
+    <div class="d-flex justify-content-center align-items-center">
+      <% if @base_fee.active? %>
+        <span class="badge text-bg-success fs-4 text-uppercase ls-4"><%= I18n.t("shared_fee.statuses.#{@base_fee.status}") %></span>
+      <% else %>
+        <span class="badge text-bg-danger fs-4 text-uppercase ls-4"><%= I18n.t("shared_fee.statuses.#{@base_fee.status}") %></span>
+      <% end %>
+    </div>
+
+    <hr>
+
     <div class="d-flex justify-content-center align-items-center mb-2">
       <span class="badge text-bg-secondary fs-6 text-uppercase ls-4">
         <%= I18n.t("activerecord.attributes.base_fee.enum_recurrence.#{@base_fee.recurrence}") %>
@@ -66,6 +76,14 @@
         <%= I18n.l(@base_fee.charge_day.to_date)%>
       </span>
     </div>
+
+    <% if @base_fee.active? %>
+    <hr>
+      <%= button_to cancel_condo_base_fee_path(@condo.id, @base_fee), class: "d-flex align-items-center btn hover-danger mx-auto", data: { turbo_confirm: I18n.t('confirm-cancel') } do %>
+        <%= image_tag "block-icon", size: "16" %>
+        <span class="ms-1 fs-7 text-uppercase"><%= I18n.t('cancel-button') %></span>
+      <% end %>
+    <% end %>
   </div>
 <% end %>
 
