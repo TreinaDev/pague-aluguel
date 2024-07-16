@@ -19,6 +19,13 @@ class HomeController < ApplicationController
     render 'index'
   end
 
+  def get_tenant_bill
+    tenant_document_number = params[:get_tenant_bill]
+    tenant = Tenant.find(document_number: tenant_document_number)
+    puts tenant.name
+    puts tenant.inspect
+  end
+
   def choose_profile; end
 
   private

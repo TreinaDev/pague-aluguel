@@ -41,5 +41,8 @@ describe 'Admin vê detalhes de uma fatura' do
     expect(page).to have_content formatted_due_date
     expect(page).to have_content 'valor total'
     expect(page).to have_content 'R$700,00'
+    expect(page).to have_content 'taxa condominial'
+    expect(page).to have_content '0', count: 2 # alterar quando mudar valor
+    expect(page).to have_content 'conta compartilhada'
   end
 end

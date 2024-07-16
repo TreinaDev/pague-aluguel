@@ -1,7 +1,7 @@
 {
   "resident": {
      "name": "fulano",
-    "tenant_id": 1,
+     "tenant_id": 1,
      "residence": {
          "id": 1,
          "area": 100,
