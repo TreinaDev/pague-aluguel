@@ -5,6 +5,8 @@ class BillsController < ApplicationController
     @bills = Bill.where(condo_id: @condo.id)
   end
 
+  private
+
   def set_condo
     @condo = Condo.find(params[:condo_id])
   end
