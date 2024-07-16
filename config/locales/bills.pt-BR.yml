@@ -1,0 +1,15 @@
+pt-BR:
+  views:
+    index:
+      no_bills: Nenhuma fatura encontrada
+  activerecord:
+    models:
+      bill:
+        one: Fatura
+        other: Faturas
+    attributes:
+      bill:
+        issue_date: data de emissão
+        due_date: data de vencimento
+        total_value_cents: valor total
+        total_value: valor total
