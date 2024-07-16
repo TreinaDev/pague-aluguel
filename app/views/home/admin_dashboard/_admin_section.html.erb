@@ -4,8 +4,8 @@
     <span class="text-muted"><%= Admin.model_name.human(count: 2) %></span>
   </div>
 
-  <%= link_to new_admin_registration_path, class: "btn hover-strong mt-3 w-20 mx-auto mb-3", data: { turbo_frame: "modal" } do %>
-    <%= image_tag "add-admin", size: "20" %>
+  <%= link_to new_admin_registration_path, class: "btn hover-strong mt-3 mx-auto mb-3", data: { turbo_frame: "modal" } do %>
+    <%= image_tag "add-admin", size: "18" %>
     <span class="text-uppercase fs-8"><%= I18n.t('views.show.new_admin') %></span>
   <% end %>
 
