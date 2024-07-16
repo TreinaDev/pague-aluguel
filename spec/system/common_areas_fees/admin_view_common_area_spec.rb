@@ -8,14 +8,12 @@ describe 'Admin vê área comum' do
 
     common_areas = []
     common_areas << CommonArea.new(id: 3, name: 'Salão de festa',
-                                   description: 'Festa para toda a família.',
-                                   max_occupancy: 80, rules: 'Não é permitido a entrada de leões')
-    allow(CommonArea).to receive(:all).and_return(common_areas)
-    common_area = common_areas.first
-
-    common_area_json = common_area.to_json
-    fake_response = double('faraday_response', status: 200, body: common_area_json, success?: true)
-    allow(Faraday).to receive(:get).with("http://127.0.0.1:3000/api/v1/condos/#{condo.id}/common_areas/#{common_area.id}").and_return(fake_response)
+                                   description: 'Salão preparado para grandes festas')
+    common_area = CommonArea.new(id: 3, name: 'Salão de festa',
+                                 description: 'Salão preparado para grandes festas',
+                                 max_occupancy: 80, rules: 'Som alto somente até as 22h')
+    allow(CommonArea).to receive(:all).with(1).and_return(common_areas)
+    allow(CommonArea).to receive(:find).with('3').and_return(common_area)
 
     create(:common_area_fee, value_cents: 200_00, admin:, common_area_id: 3, condo_id: condo.id)
 
@@ -26,8 +24,8 @@ describe 'Admin vê área comum' do
     end
 
     expect(page).to have_content 'Salão de festa'
-    expect(page).to have_content 'Festa para toda a família.'
-    expect(page).to have_content 'Não é permitido a entrada de leões'
+    expect(page).to have_content 'Salão preparado para grandes festas'
+    expect(page).to have_content 'Som alto somente até as 22h'
     expect(page).to have_content '80 pessoas'
     expect(page).to have_content 'regras de uso'
     expect(page).to have_content 'Taxa de área comum'
@@ -40,15 +38,13 @@ describe 'Admin vê área comum' do
     allow(Condo).to receive(:find).and_return(condo)
 
     common_areas = []
-    common_areas << CommonArea.new(id: 1, name: 'Academia',
-                                   description: 'Uma academia raíz com ventilador apenas para os marombas',
-                                   max_occupancy: 20, rules: 'Não pode ser frango')
-    allow(CommonArea).to receive(:all).and_return(common_areas)
-    common_area = common_areas.first
-
-    common_area_json = common_area.to_json
-    fake_response = double('faraday_response', status: 200, body: common_area_json, success?: true)
-    allow(Faraday).to receive(:get).with("http://127.0.0.1:3000/api/v1/condos/#{condo.id}/common_areas/#{common_area.id}").and_return(fake_response)
+    common_areas << CommonArea.new(id: 3, name: 'Academia',
+                                   description: 'Uma academia raíz com ventilador apenas para os marombas')
+    common_area = CommonArea.new(id: 3, name: 'Academia',
+                                 description: 'Uma academia raíz com ventilador apenas para os marombas',
+                                 max_occupancy: 20, rules: 'Não pode ser frango')
+    allow(CommonArea).to receive(:all).with(1).and_return(common_areas)
+    allow(CommonArea).to receive(:find).with('3').and_return(common_area)
 
     login_as admin, scope: :admin
     visit condo_common_area_path(condo.id, common_area.id)
@@ -64,14 +60,12 @@ describe 'Admin vê área comum' do
 
     common_areas = []
     common_areas << CommonArea.new(id: 3, name: 'Salão de festa',
-                                   description: 'Festa para toda a família.',
-                                   max_occupancy: 80, rules: 'Não é permitido a entrada de leões')
-    allow(CommonArea).to receive(:all).and_return(common_areas)
-    common_area = common_areas.first
-
-    common_area_json = common_area.to_json
-    fake_response = double('faraday_response', status: 200, body: common_area_json, success?: true)
-    allow(Faraday).to receive(:get).with("http://127.0.0.1:3000/api/v1/condos/#{condo.id}/common_areas/#{common_area.id}").and_return(fake_response)
+                                   description: 'Salão preparado para grandes festas')
+    common_area = CommonArea.new(id: 3, name: 'Salão de festa',
+                                 description: 'Salão preparado para grandes festas',
+                                 max_occupancy: 80, rules: 'Som alto somente até as 22h')
+    allow(CommonArea).to receive(:all).with(1).and_return(common_areas)
+    allow(CommonArea).to receive(:find).with('3').and_return(common_area)
 
     login_as admin, scope: :admin
 

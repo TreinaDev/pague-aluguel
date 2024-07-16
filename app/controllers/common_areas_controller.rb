@@ -21,6 +21,6 @@ class CommonAreasController < ApplicationController
   end
 
   def find_common_area
-    @common_area = CommonArea.find(@condo.id, params[:id])
+    @common_area = CommonArea.find(params[:id])
   end
 end

@@ -24,7 +24,7 @@ class Condo
     response = Faraday.get("#{Rails.configuration.api['base_url']}/condos/#{id}")
     if response.success?
       data = JSON.parse(response.body)
-      condo = Condo.new(id: data['id'], name: data['name'], city: data['city'])
+      condo = Condo.new(id:, name: data['name'], city: data['address']['city'])
     end
     condo
   end

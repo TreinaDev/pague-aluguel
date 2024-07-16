@@ -16,17 +16,18 @@ class CommonArea
     raise response.status.to_s unless response.success?
 
     data = JSON.parse(response.body, symbolize_names: true)
-    data.map do |common_area|
+    data[:common_areas].map do |common_area|
       common_areas << CommonArea.new(common_area)
     end
     common_areas
   end
 
-  def self.find(condo_id, id)
-    response = Faraday.get("#{Rails.configuration.api['base_url']}/condos/#{condo_id}/common_areas/#{id}")
+  def self.find(id)
+    response = Faraday.get("#{Rails.configuration.api['base_url']}/common_areas/#{id}")
     raise response.status.to_s unless response.success?
 
     data = JSON.parse(response.body, symbolize_names: true)
+    data[:id] = id
     CommonArea.new(data)
   end
 end
