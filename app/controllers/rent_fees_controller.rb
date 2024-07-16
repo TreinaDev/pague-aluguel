@@ -5,7 +5,11 @@ class RentFeesController < ApplicationController
     @rent_fee = RentFee.new
   end
 
-  def edit; end
+  def edit
+    @rent_fee = RentFee.find(params[:id])
+    @unit = Unit.find(params[:unit_id])
+    @unit_id = @unit.id
+  end
 
   def create
     @unit = Unit.find(params[:unit_id])
@@ -19,7 +23,17 @@ class RentFeesController < ApplicationController
     end
   end
 
-  def update; end
+  def update
+    @rent_fee = RentFee.find(params[:id])
+    @unit = Unit.find(params[:unit_id])
+    @unit_id = @unit.id
+    if @rent_fee.update(rent_fee_params)
+      redirect_to unit_path(@unit_id), notice: I18n.t('messages.updated_fee')
+    else
+      flash[:alert] = I18n.t 'messages.update_fee_error'
+      render :edit, status: :unprocessable_entity
+    end
+  end
 
   private
 

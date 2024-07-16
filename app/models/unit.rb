@@ -12,6 +12,7 @@ class Unit
     @owner_name = params[:owner_name]
     @description = params[:description]
     @condo_name = params[:condo_name]
+    @condo_id = params[:condo_id]
   end
 
   def self.all

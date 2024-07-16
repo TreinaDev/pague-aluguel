@@ -24,6 +24,7 @@ pt-BR:
   messages:
     registered_fee: Aluguel cadastrado com sucesso!
     registration_fee_error: Não foi possível cadastrar o aluguel.
+    updated_fee: Aluguel atualizado com sucesso!
   views:
     edit:
       edit_fee: "Atualizar Taxa de %{name}"
@@ -31,9 +32,9 @@ pt-BR:
       name: "Alugueis de %{name}"
       fee: Taxa de uso
       no_fee: Taxa não cadastrada
-      no_rent_fee: Nenhuma Aluguel cadastrada.
+      no_rent_fee: Nenhum Aluguel cadastrado.
     show:
-      rent_fee_fee: Taxa de Aluguel
+      rent_fee: Taxa de Aluguel
       description: Descrição
       capacity: Capacidade Máxima
       rules: Regras de uso
