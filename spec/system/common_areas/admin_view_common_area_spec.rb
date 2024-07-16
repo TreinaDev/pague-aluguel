@@ -88,4 +88,29 @@ describe 'Admin vê área comum' do
     expect(page).to have_content 'R$300,00'
     expect(page).to have_content Time.zone.today.strftime('%d/%m/%Y')
   end
+
+  it 'tenta acessar área comum que não existe' do
+    admin = create(:admin, email: 'ikki.phoenix@seiya.com', password: 'phoenix123')
+    condo = Condo.new(id: 1, name: 'Condomínio Vila das Flores', city: 'São Paulo')
+    allow(Condo).to receive(:find).and_return(condo)
+    allow(CommonArea).to receive(:all).with(1).and_return([])
+    allow(CommonArea).to receive(:find).and_raise(StandardError)
+
+    login_as admin, scope: :admin
+    visit condo_common_area_path(condo.id, 55)
+
+    expect(page).to have_content 'Área comum não cadastrada'
+    expect(current_path).to eq condo_path(condo.id)
+  end
+
+  it 'tenta acessar área em condomínio que não existe' do
+    admin = create(:admin, email: 'ikki.phoenix@seiya.com', password: 'phoenix123')
+    allow(Condo).to receive(:find).and_raise(StandardError)
+
+    login_as admin, scope: :admin
+    visit condo_common_area_path(55, 55)
+
+    expect(page).to have_content 'Condomínio não cadastrado.'
+    expect(current_path).to eq root_path
+  end
 end

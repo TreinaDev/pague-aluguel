@@ -22,10 +22,9 @@ class Condo
 
   def self.find(id)
     response = Faraday.get("#{Rails.configuration.api['base_url']}/condos/#{id}")
-    if response.success?
-      data = JSON.parse(response.body)
-      condo = Condo.new(id:, name: data['name'], city: data['address']['city'])
-    end
-    condo
+    raise response.status unless response.success?
+
+    data = JSON.parse(response.body)
+    Condo.new(id:, name: data['name'], city: data['address']['city'])
   end
 end

@@ -18,9 +18,13 @@ class CommonAreasController < ApplicationController
 
   def find_condo
     @condo = Condo.find(params[:condo_id])
+  rescue StandardError
+    redirect_to root_path, alert: I18n.t('views.index.no_condo')
   end
 
   def find_common_area
     @common_area = CommonArea.find(params[:id])
+  rescue StandardError
+    redirect_to condo_path(@condo.id), alert: I18n.t('views.show.no_common_area')
   end
 end
