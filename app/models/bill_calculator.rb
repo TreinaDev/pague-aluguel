@@ -2,7 +2,8 @@ class BillCalculator
   def self.calculate_total_fees(unit)
     base_fees = calculate_base_fees(unit.unit_type_id)
     shared_fees = calculate_shared_fees(unit.id)
-    base_fees + shared_fees
+    single_charges = calculate_single_charges(unit.id)
+    base_fees + shared_fees + single_charges
   end
 
   def self.calculate_base_fees(unit_type_id)
@@ -29,6 +30,15 @@ class BillCalculator
     total_value
   end
 
+  def self.calculate_single_charges(unit_id)
+    total_value = 0
+    charges = get_last_month_single_charges(unit_id)
+    charges.each do |charge|
+      total_value += charge.value_cents
+    end
+    total_value
+  end
+
   def self.get_last_month_fractions(unit_id)
     now = Time.zone.now
     last_month = now.last_month
@@ -49,6 +59,14 @@ class BillCalculator
          .joins(:base_fee)
          .where(base_fees: { charge_day: ...now })
          .where(base_fees: { charge_day: start_of_last_month..end_of_last_month })
+  end
+
+  def self.get_last_month_single_charges(unit_id)
+    now = Time.zone.now
+    last_month = now.last_month
+    start_of_last_month = last_month.beginning_of_month
+    end_of_last_month = last_month.end_of_month
+    SingleCharge.where(unit_id:, issue_date: start_of_last_month..end_of_last_month)
   end
 
   def self.check_recurrence(base_fee)
@@ -85,5 +103,5 @@ class BillCalculator
   end
 
   private_class_method :check_monthly_recurrence, :check_yearly_recurrence, :check_recurrence, :get_last_month_values,
-                       :get_last_month_fractions
+                       :get_last_month_fractions, :get_last_month_single_charges
 end
