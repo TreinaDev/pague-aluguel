@@ -75,9 +75,8 @@ class BillCalculator
     recurrence = base_fee.recurrence
 
     return check_monthly_recurrence(base_fee) if %w[bimonthly monthly biweekly].include?(recurrence)
-    return check_yearly_recurrence(base_fee) if %w[semiannual yearly].include?(recurrence)
 
-    false
+    check_yearly_recurrence(base_fee) if %w[semi_annual yearly].include?(recurrence)
   end
 
   def self.check_yearly_recurrence(base_fee)
@@ -85,10 +84,10 @@ class BillCalculator
     charge_day = base_fee.charge_day
     recurrence = base_fee.recurrence
 
-    return ((current_date.month - charge_day.month) % 6).zero? if recurrence == 'semiannual'
-    return current_date.year != charge_day.year if recurrence == 'yearly'
+    last_month = current_date.last_month
+    return ((last_month.month - charge_day.month) % 6).zero? if recurrence == 'semi_annual'
 
-    false
+    last_month != charge_day.month if recurrence == 'yearly'
   end
 
   def self.check_monthly_recurrence(base_fee)
@@ -97,8 +96,8 @@ class BillCalculator
     recurrence = base_fee.recurrence
 
     if recurrence == 'bimonthly'
-      return current_date.month.even? if charge_day.month.even?
-      return current_date.month.odd? if charge_day.month.odd?
+      return current_date.last_month.month.even? if charge_day.month.even?
+      return current_date.last_month.month.odd? if charge_day.month.odd?
     end
 
     true

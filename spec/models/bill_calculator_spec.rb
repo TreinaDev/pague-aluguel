@@ -99,6 +99,85 @@ describe BillCalculator do
     end
   end
 
+  context '.check_recurrence' do
+    it 'e confere recorrencia para gerar fatura' do
+      condo = Condo.new(id: 1, name: 'Prédio lindo', city: 'Cidade maravilhosa')
+      unit_types = []
+      unit_types << UnitType.new(id: 1, area: 30, description: 'Apartamento 1 quarto',
+                                 ideal_fraction: 0.1, condo_id: 1)
+      units = []
+      units << Unit.new(id: 1, area: 100, floor: 1, number: 1, unit_type_id: 1)
+      base_fee_yearly = create(:base_fee, condo_id: 1, charge_day: 10.days.from_now, recurrence: :yearly)
+      create(:value, price_cents: 100_33, base_fee_id: base_fee_yearly.id)
+      base_fee_semi_annual = create(:base_fee, condo_id: 1, charge_day: 10.days.from_now, recurrence: :semi_annual)
+      create(:value, price_cents: 100_15, base_fee_id: base_fee_semi_annual.id)
+      allow(Condo).to receive(:find).and_return(condo)
+      allow(UnitType).to receive(:find_all_by_condo).and_return(unit_types)
+      allow(Unit).to receive(:find).and_return(units.first)
+      allow(Unit).to receive(:find_all_by_condo).and_return(units)
+
+      travel_to 35.days.from_now do
+        fees = BillCalculator.calculate_base_fees(unit_types.first)
+
+        expect(fees).to eq 200_48
+      end
+    end
+
+    it 'e confere recorrencia quinzenal para gerar fatura' do
+      condo = Condo.new(id: 1, name: 'Prédio lindo', city: 'Cidade maravilhosa')
+      unit_types = []
+      unit_types << UnitType.new(id: 1, area: 30, description: 'Apartamento 1 quarto',
+                                 ideal_fraction: 0.1, condo_id: 1)
+      units = []
+      units << Unit.new(id: 1, area: 100, floor: 1, number: 1, unit_type_id: 1)
+      base_fee_biweekly = create(:base_fee, condo_id: 1, charge_day: 10.days.from_now, recurrence: :biweekly)
+      create(:value, price_cents: 100_33, base_fee_id: base_fee_biweekly.id)
+      allow(Condo).to receive(:find).and_return(condo)
+      allow(UnitType).to receive(:find_all_by_condo).and_return(unit_types)
+      allow(Unit).to receive(:find).and_return(units.first)
+      allow(Unit).to receive(:find_all_by_condo).and_return(units)
+
+      travel_to 35.days.from_now do
+        fees = BillCalculator.calculate_base_fees(unit_types.first)
+
+        expect(fees).to eq 200_66
+      end
+    end
+  end
+
+  it 'e confere recorrencia bimestral para gerar fatura' do
+    condo = Condo.new(id: 1, name: 'Prédio lindo', city: 'Cidade maravilhosa')
+    unit_types = []
+    unit_types << UnitType.new(id: 1, area: 30, description: 'Apartamento 1 quarto',
+                               ideal_fraction: 0.1, condo_id: 1)
+    units = []
+    units << Unit.new(id: 1, area: 100, floor: 1, number: 1, unit_type_id: 1)
+    base_fee_bimonthly = create(:base_fee, condo_id: 1, charge_day: 10.days.from_now, recurrence: :bimonthly)
+    create(:value, price_cents: 100_33, base_fee_id: base_fee_bimonthly.id)
+    allow(Condo).to receive(:find).and_return(condo)
+    allow(UnitType).to receive(:find_all_by_condo).and_return(unit_types)
+    allow(Unit).to receive(:find).and_return(units.first)
+    allow(Unit).to receive(:find_all_by_condo).and_return(units)
+
+    travel_to 35.days.from_now do
+      fees = BillCalculator.calculate_base_fees(unit_types.first)
+
+      expect(fees).to eq 100_33
+    end
+
+    travel_to 35.days.from_now do
+      fees = BillCalculator.calculate_base_fees(unit_types.first)
+
+      expect(fees).to eq 100_33
+    end
+
+    travel_to 35.days.from_now do
+      fees = BillCalculator.calculate_base_fees(unit_types.first)
+
+      expect(fees).to eq 100_33
+    end
+  end
+
   context '.calculate_shared_fees' do
     it 'e retorna valores de taxas compartilhadas da fatura' do
       condo = Condo.new(id: 1, name: 'Prédio lindo', city: 'Cidade maravilhosa')
