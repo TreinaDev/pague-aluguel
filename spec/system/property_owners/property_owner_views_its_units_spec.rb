@@ -45,4 +45,23 @@ describe 'Proprietário vê suas unidades' do
       expect(page).not_to have_link 'Configurar aluguel'
     end
   end
+
+  it 'e não possui unidades' do
+    cpf = CPF.generate
+    allow(Faraday).to receive(:get).and_return(instance_double('Faraday::Response', success?: true))
+    property_owner = create(:property_owner, email: 'propertyownertest@mail.com', password: '123456',
+                                             document_number: cpf)
+
+    condos = []
+    condos << Condo.new(id: 1, name: 'Condo Test', city: 'City Test')
+    condos << Condo.new(id: 1, name: 'Condo Test 2', city: 'City Test')
+    allow(Condo).to receive(:all).and_return(condos)
+    allow(Unit).to receive(:find_all_by_owner).and_return([])
+
+    login_as property_owner, scope: :property_owner
+    visit root_path
+
+    expect(page).to have_content 'Unidades'
+    expect(page).to have_content 'Não possui unidades associadas.'
+  end
 end

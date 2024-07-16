@@ -45,7 +45,7 @@ class Unit
 
   def self.find_all_by_owner(cpf)
     response = Faraday.get("#{Rails.configuration.api['base_url']}/get_owner_properties?registration_number=#{cpf}")
-    return unless response.success?
+    return [] unless response.success?
 
     data = JSON.parse(response.body)
     build_owner_units(data)
