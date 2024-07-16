@@ -10,6 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
+
 ActiveRecord::Schema[7.1].define(version: 2024_07_16_004427) do
   create_table "active_storage_attachments", force: :cascade do |t|
     t.string "name", null: false
@@ -86,6 +87,7 @@ ActiveRecord::Schema[7.1].define(version: 2024_07_16_004427) do
     t.integer "total_value_cents"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
+    t.integer "condo_id", null: false
   end
 
   create_table "common_area_fees", force: :cascade do |t|
