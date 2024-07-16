@@ -3,7 +3,7 @@
     <p class="text-uppercase text-center fs-5 mt-4 ls-3">acesse sua fatura</p>
     <div class="d-flex mt-3 w-50 mx-auto">
       <%= f.text_field :get_tenant_bill, placeholder: "informe seu cpf", class: "form-control me-2" %>
-      <%= f.submit 'Buscar', class: "btn btn-primary text-uppercase fs-7 ls-3" %>
+      <%= f.submit 'Buscar', class: "btn btn-primary text-uppercase fs-7 ls-3", data: { turbo_frame: "modal" } %>
     </div>
   <% end %>
 </div>
