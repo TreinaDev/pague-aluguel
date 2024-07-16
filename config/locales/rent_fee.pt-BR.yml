@@ -1,0 +1,45 @@
+pt-BR:
+  activemodel:
+    models:
+      rent_fee:
+        one: Aluguel
+        other: Alugueis
+  activerecord:
+    models:
+      rent_fee:
+        one: Aluguel
+        other: Alugueis
+      rent_fee:
+        one: Taxa de Aluguel
+        other: Taxas de Aluguel
+    attributes:
+      rent_fee:
+        value: Valor do aluguel
+        value_cents: Valor do aluguel
+        fine: Multa por atraso
+        fine_cents: Multa por atraso
+        fine_interest: Juros por atraso ao mês (em %)
+        fine_interest_cents: Juros por atraso ao mês (em %)
+        issue_date: Data de Emissão
+  messages:
+    registered_fee: Aluguel cadastrado com sucesso!
+    registration_fee_error: Não foi possível cadastrar o aluguel.
+  views:
+    edit:
+      edit_fee: "Atualizar Taxa de %{name}"
+    index:
+      name: "Alugueis de %{name}"
+      fee: Taxa de uso
+      no_fee: Taxa não cadastrada
+      no_rent_fee: Nenhuma Aluguel cadastrada.
+    show:
+      rent_fee_fee: Taxa de Aluguel
+      description: Descrição
+      capacity: Capacidade Máxima
+      rules: Regras de uso
+      show_history: Mostrar histórico de taxas
+      email: Email
+      data: Data
+      fee: Taxa
+      new_fee: Cadastrar Taxa
+      update_date: Data de Alteração

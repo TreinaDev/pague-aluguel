@@ -77,4 +77,8 @@ class Unit
                owner_name: data['resident']['name'], description: unit['description'])
     end
   end
+
+  def unit_rent_fee
+    RentFee.find_by(unit_id: id)
+  end
 end

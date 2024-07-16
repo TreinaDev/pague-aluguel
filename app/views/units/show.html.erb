@@ -11,10 +11,26 @@
     <hr>
 
     <% if @unit.unit_has_tenant? %>
-      <%= link_to 'Configurar Aluguel', root_path %>
+      <% if @unit.unit_rent_fee.present? %>
+      <% rent = @unit.unit_rent_fee%>
+        <div class="d-flex justify-content-center align-items-center">
+          <%= image_tag "dollar-icon", size: "20" %>
+          <span class="ms-1 me-2 fs-7 text-muted">
+            <%= I18n.t('views.show.common_area_fee') %>
+          </span>
+          <span class="fs-7">Valor do Aluguel: <%= rent.value.format %> </span>
+          <span class="fs-7">Data de Emissão: <%= I18n.l( rent.issue_date ) %> </span>
+          <span class="fs-7">Multa por atraso: <%= rent.fine.format %> </span>
+          <span class="fs-7">Juros por atraso ao mês:: <%= rent.fine_interest.round(1) %>% </span>
+
+          <%= link_to 'Configurar Aluguel', edit_unit_rent_fee_path(@unit.id, rent.id)%>
+        </div>
+      <% else %>
+        <%= link_to 'Configurar Aluguel', new_unit_rent_fee_path(@unit.id) %>
+      <% end %>
       <hr>
     <% end %>
-    
+
     <div class="px-5">
       <div class=" d-flex justify-content-between">
         <span class="text-muted text-lowercase fs-8"><%= I18n.t('views.show.unit') %></span>

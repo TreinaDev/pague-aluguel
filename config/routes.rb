@@ -34,7 +34,9 @@ Rails.application.routes.draw do
     end
   end
 
-  resources :units, only: [:show]
+  resources :units, only: [:show] do
+    resources :rent_fees, only: [:new, :create, :edit, :update]
+  end
 
   authenticate :admin do
     resources :admins, only: [:index]
