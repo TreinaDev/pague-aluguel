@@ -193,4 +193,50 @@ describe BillCalculator do
       end
     end
   end
+
+  context 'ignora taxas, contas e cobranças canceladas' do
+    it 'com sucesso' do
+      condos = []
+      condos << Condo.new(id: 1, name: 'Condo Test', city: 'City Test')
+      unit_types = []
+      unit_types << UnitType.new(id: 1, area: 30, description: 'Apartamento 1 quarto', ideal_fraction: 0.1,
+                                 condo_id: condos.first.id)
+      units = []
+      units << Unit.new(id: 1, area: 100, floor: 1, number: 1, unit_type_id: 1)
+      shared_fee_canceled = create(:shared_fee, description: 'Descrição', issue_date: 10.days.from_now.to_date,
+                                                total_value: 30_000_000_00, condo_id: condos.first.id)
+      create(:shared_fee_fraction, shared_fee: shared_fee_canceled, unit_id: 1, value_cents: 30_000_00)
+      shared_fee_canceled.canceled!
+      shared_fee = create(:shared_fee, description: 'Descrição', issue_date: 10.days.from_now.to_date,
+                                       total_value: 30_000_00, condo_id: condos.first.id)
+      create(:shared_fee_fraction, shared_fee:, unit_id: 1, value_cents: 300_00)
+      base_fee = create(:base_fee, condo_id: condos.first.id)
+      create(:value, price_cents: 100_00, base_fee_id: base_fee.id)
+      base_fee_canceled = create(:base_fee, condo_id: condos.first.id)
+      create(:value, price_cents: 333_00, base_fee_id: base_fee_canceled.id)
+      base_fee_canceled.canceled!
+      allow(UnitType).to receive(:find_all_by_condo).and_return(unit_types)
+      allow(Unit).to receive(:find_all_by_condo).and_return(units)
+      allow(Condo).to receive(:all).and_return(condos)
+      allow(Condo).to receive(:find).and_return(condos.first)
+      allow(UnitType).to receive(:all).and_return(unit_types)
+      allow(UnitType).to receive(:find).and_return(unit_types.first)
+      allow(Unit).to receive(:all).and_return(units)
+      allow(Unit).to receive(:find).and_return(units.first)
+      allow(CommonArea).to receive(:all).and_return([])
+      SingleCharge.create!(charge_type: :fine, value_cents: 100_11, description: 'Multa por barulho',
+                           issue_date: 5.days.from_now.to_date, unit_id: units.first.id, condo_id: condos.first.id)
+      single_charge_canceled = SingleCharge.create!(charge_type: :fine, value_cents: 555_55,
+                                                    description: 'Multa por barulho',
+                                                    issue_date: 5.days.from_now.to_date, unit_id: units.first.id,
+                                                    condo_id: condos.first.id)
+      single_charge_canceled.canceled!
+
+      travel_to 35.days.from_now do
+        fees = BillCalculator.calculate_total_fees(units.first)
+
+        expect(fees).to eq 500_11
+      end
+    end
+  end
 end

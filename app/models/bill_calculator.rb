@@ -48,6 +48,7 @@ class BillCalculator
                      .joins(:shared_fee)
                      .where(shared_fees: { issue_date: ...now })
                      .where(shared_fees: { issue_date: start_of_last_month..end_of_last_month })
+                     .where(shared_fees: { status: :active })
   end
 
   def self.get_last_month_values(unit_type_id)
@@ -59,6 +60,7 @@ class BillCalculator
          .joins(:base_fee)
          .where(base_fees: { charge_day: ...now })
          .where(base_fees: { charge_day: start_of_last_month..end_of_last_month })
+         .where(base_fees: { status: :active })
   end
 
   def self.get_last_month_single_charges(unit_id)
@@ -66,7 +68,7 @@ class BillCalculator
     last_month = now.last_month
     start_of_last_month = last_month.beginning_of_month
     end_of_last_month = last_month.end_of_month
-    SingleCharge.where(unit_id:, issue_date: start_of_last_month..end_of_last_month)
+    SingleCharge.where(unit_id:, issue_date: start_of_last_month..end_of_last_month, status: :active)
   end
 
   def self.check_recurrence(base_fee)
