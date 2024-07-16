@@ -1,1 +1,6 @@
-
+<%= turbo_frame_tag "modal" %>
+  <div class="dean-modal modal-md">
+    <%= link_to "", condo_bills_path(@condo.id), class: "btn btn-close btn-sm", id: 'close' %>
+    
+  </div>
+<% end %>
