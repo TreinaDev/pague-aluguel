@@ -12,7 +12,6 @@ describe 'Usuário acessa suas faturas' do
       resident = JSON.parse(response.body)['resident']
 
       condo_id = residence['condo_id']
-      condo_name = residence['condo_name']
       number = residence['number']
       unit_id = residence['id']
 
@@ -74,7 +73,6 @@ describe 'Usuário acessa suas faturas' do
 
       condo_id = residence['condo_id']
       condo_name = residence['condo_name']
-      floor = residence['floor']
       number = residence['number']
       unit_id = residence['id']
 
@@ -83,8 +81,8 @@ describe 'Usuário acessa suas faturas' do
 
       allow(Unit).to receive(:find).and_return(units.first)
 
-      bill = create(:bill, condo_id:, unit_id:, issue_date: Time.zone.today.beginning_of_month,
-                           due_date: 10.days.from_now, total_value_cents: 500_00)
+      create(:bill, condo_id:, unit_id:, issue_date: Time.zone.today.beginning_of_month,
+                    due_date: 10.days.from_now, total_value_cents: 500_00)
 
       visit root_path
       within 'form#get_tenant_bill' do
@@ -116,7 +114,6 @@ describe 'Usuário acessa suas faturas' do
 
       condo_id = residence['condo_id']
       condo_name = residence['condo_name']
-      floor = residence['floor']
       number = residence['number']
       unit_id = residence['id']
 
@@ -125,8 +122,8 @@ describe 'Usuário acessa suas faturas' do
 
       allow(Unit).to receive(:find).and_return(units.first)
 
-      bill = create(:bill, condo_id:, unit_id:, issue_date: Time.zone.today.beginning_of_month,
-                           due_date: 10.days.from_now, total_value_cents: 500_00)
+      create(:bill, condo_id:, unit_id:, issue_date: Time.zone.today.beginning_of_month,
+                    due_date: 10.days.from_now, total_value_cents: 500_00)
 
       visit root_path
       within 'form#get_tenant_bill' do
@@ -138,6 +135,7 @@ describe 'Usuário acessa suas faturas' do
       find('#back').click
 
       expect(page).not_to have_content CPF.new(cpf).formatted
+      expect(page).not_to have_content resident['name']
       expect(page).not_to have_content condo_name
       expect(page).not_to have_content 'Taxa Condominial'.downcase
       expect(page).not_to have_content 'Conta Compartilhada'.downcase
@@ -146,7 +144,7 @@ describe 'Usuário acessa suas faturas' do
   context 'e falha' do
     it 'quando o cpf é inválido' do
       cpf = '11111111111'
-      response = double('response', success?: false, status: 412)
+      double('response', success?: false, status: 412)
 
       visit root_path
       within 'form#get_tenant_bill' do
@@ -159,7 +157,7 @@ describe 'Usuário acessa suas faturas' do
 
     it 'quando o cpf válido não é encontrado no sistema' do
       cpf = CPF.generate
-      response = double('response', success?: false, status: 404)
+      double('response', success?: false, status: 404)
 
       visit root_path
       within 'form#get_tenant_bill' do
