@@ -27,7 +27,7 @@ describe Unit do
     it 'retorna uma unidade' do
       data = Rails.root.join('spec/support/json/unit.json').read
       response = double('response', success?: true, body: data)
-      allow(Faraday).to receive(:get).with("#{Rails.configuration.api['base_url']}/api/v1/units/1")
+      allow(Faraday).to receive(:get).with("#{Rails.configuration.api['base_url']}/units/1")
                                      .and_return(response)
 
       result = Unit.find(1)
