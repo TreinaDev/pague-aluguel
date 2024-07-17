@@ -40,5 +40,31 @@
       </div>
     </div>
 
+    <% unless @bill.pending? %>
+      <hr>
+      <%= button_to "", class: "d-flex align-items-center btn hover-strong mx-auto" do %>
+        <%= image_tag "document-search-icon", size: "16" %>
+        <span class="ms-1 fs-7 text-uppercase"><%= I18n.t('views.show.view_receipt') %></span>
+      <% end %>
+    <% end %>
+
+    <% if @bill.awaiting? %>
+    <hr>
+    <div>
+      <%= button_to accept_payment_condo_bill_path(@condo.id, @bill), class: "d-flex align-items-center btn hover-strong mx-auto", data: { turbo_confirm: I18n.t('views.show.accept_payment.confirm-accept') } do %>
+        <%= image_tag "document-search-icon", size: "16" %>
+        <span class="ms-1 fs-7 text-uppercase"><%= I18n.t('views.show.accept_payment') %></span>
+      <% end %>
+      <%= button_to reject_payment_condo_bill_path(@condo.id, @bill), class: "d-flex align-items-center btn hover-danger mx-auto", data: { turbo_confirm: I18n.t('views.show.accept_payment.confirm-reject') } do %>
+        <%= image_tag "block-icon", size: "16" %>
+        <span class="ms-1 fs-7 text-uppercase"><%= I18n.t('views.show.reject_payment') %></span>
+      <% end %>
+    </div>
+  <% end %>
+
   </div>
 <% end %>
+
+
+
+<!--    -->

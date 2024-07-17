@@ -10,6 +10,12 @@ class BillsController < ApplicationController
     set_unit_type
   end
 
+  def accept_payment
+  end
+
+  def reject_payment
+  end
+
   private
 
   def set_bill
