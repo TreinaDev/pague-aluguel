@@ -7,12 +7,17 @@ describe 'Admin vê todos os faturas de um condomínio' do
     condos << Condo.new(id: 1, name: 'Condomínio Vila das Flores', city: 'São Paulo')
     condos << Condo.new(id: 2, name: 'Residencial Jardim Europa', city: 'Maceió')
     unit_types = []
-    unit_types << UnitType.new(id: 1, metreage: 30, description: 'Apartamento 1 quarto', fraction: 222.2, condo_id: 1)
-    unit_types << UnitType.new(id: 2, metreage: 40, description: 'Apartamento 1 quarto', fraction: 0.5, condo_id: 2)
+    unit_types << UnitType.new(id: 1, description: 'Apartamento 1 quarto', metreage: 30, fraction: 1.0,
+                               unit_ids: [1, 2])
+    unit_types << UnitType.new(id: 2, description: 'Apartamento 1 quarto', metreage: 40, fraction: 1.0,
+                               unit_ids: [3])
     units = []
-    units << Unit.new(id: 1, area: 40, floor: 1, number: 1, unit_type_id: 1)
-    units << Unit.new(id: 2, area: 40, floor: 1, number: 2, unit_type_id: 1)
-    units << Unit.new(id: 3, area: 40, floor: 3, number: 1, unit_type_id: 2)
+    units << Unit.new(id: 1, area: 100, floor: 1, number: '11', unit_type_id: 1, condo_id: 1,
+                      condo_name: 'Prédio lindo', tenant_id: 1, owner_id: 1, description: 'Com varanda')
+    units << Unit.new(id: 2, area: 100, floor: 1, number: '12', unit_type_id: 1, condo_id: 1,
+                      condo_name: 'Prédio lindo', tenant_id: 1, owner_id: 1, description: 'Com varanda')
+    units << Unit.new(id: 3, area: 100, floor: 3, number: '31', unit_type_id: 2, condo_id: 2,
+                      condo_name: 'Prédio lindo', tenant_id: 1, owner_id: 1, description: 'Com churrasqueira')
     allow(Condo).to receive(:all).and_return(condos)
     allow(Condo).to receive(:find).and_return(condos[1])
     allow(CommonArea).to receive(:all).and_return([])

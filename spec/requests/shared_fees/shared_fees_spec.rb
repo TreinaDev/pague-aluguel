@@ -18,8 +18,10 @@ describe 'Admin gerencia contas compartilhadas' do
       unit_types << UnitType.new(id: 2, description: 'Apartamento 2 quarto', metreage: 200, fraction: 2.0,
                                  unit_ids: [2])
       units = []
-      units << Unit.new(id: 1, area: 100, floor: 1, number: 1, unit_type_id: 1)
-      units << Unit.new(id: 2, area: 100, floor: 1, number: 1, unit_type_id: 2)
+      units << Unit.new(id: 1, area: 100, floor: 1, number: '11', unit_type_id: 1, condo_id: 1,
+                        condo_name: 'Prédio lindo', tenant_id: 1, owner_id: 1, description: 'Com varanda')
+      units << Unit.new(id: 2, area: 100, floor: 1, number: '12', unit_type_id: 2, condo_id: 1,
+                        condo_name: 'Prédio lindo', tenant_id: 1, owner_id: 1, description: 'Com varanda')
       allow(Unit).to receive(:all).and_return(units)
       allow(Condo).to receive(:all).and_return(condos)
       allow(Condo).to receive(:find).and_return(condos.first)
