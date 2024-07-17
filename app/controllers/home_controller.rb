@@ -62,6 +62,6 @@ class HomeController < ApplicationController
   end
 
   def find_bills
-    @bills = Bill.where(unit_id: @tenant.residence[:id])
+    @bills = Bill.where(unit_id: @tenant.residence['id'])
   end
 end
