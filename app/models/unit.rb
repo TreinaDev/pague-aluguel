@@ -35,6 +35,14 @@ class Unit
     build_new_unit(data)
   end
 
+  def self.find_all_by_owner(cpf)
+    response = Faraday.get("#{Rails.configuration.api['base_url']}/get_owner_properties?registration_number=#{cpf}")
+    return [] unless response.success?
+
+    data = JSON.parse(response.body)
+    build_owner_units(data)
+  end
+
   def set_status
     return I18n.t('views.show.owner_tenant') if owner_id == tenant_id
 
@@ -49,6 +57,15 @@ class Unit
 
   def unit_rent_fee
     RentFee.find_by(unit_id: id)
+  end
+
+  def self.build_owner_units(data)
+    data['resident']['properties'].map do |unit|
+      Unit.new(id: unit['id'], area: unit['area'], floor: unit['floor'], number: unit['number'],
+               unit_type_id: unit['unit_type_id'], condo_name: unit['condo_name'], condo_id: data['condo_id'],
+               tenant_id: unit['tenant_id'], owner_id: data['resident']['owner_id'],
+               description: unit['description'])
+    end
   end
 
   def self.build_new_unit(data)
