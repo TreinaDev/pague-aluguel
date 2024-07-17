@@ -33,6 +33,7 @@ class RentFeesController < ApplicationController
   def update
     @rent_fee = RentFee.find(params[:id])
     if @rent_fee.update(rent_fee_params)
+      reactivate
       redirect_to unit_path(@unit_id), notice: I18n.t('messages.updated_fee')
     else
       flash[:alert] = I18n.t 'messages.update_fee_error'
@@ -50,6 +51,10 @@ class RentFeesController < ApplicationController
   def set_unit
     @unit = Unit.find(params[:unit_id])
     @unit_id = @unit.id
+  end
+
+  def reactivate
+    @rent_fee.active! if @rent_fee.canceled?
   end
 
   def verify_ownership
