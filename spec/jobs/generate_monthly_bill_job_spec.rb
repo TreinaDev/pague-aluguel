@@ -42,10 +42,10 @@ RSpec.describe GenerateMonthlyBillJob, type: :job do
       condos << Condo.new(id: 2, name: 'Outro prédio', city: 'Cidade legalzinha')
       first_unit_types = []
       first_unit_types << UnitType.new(id: 1, description: 'Apartamento 1 quarto', metreage: 100, fraction: 1.0,
-                                       unit_ids: [1, 2])
+                                       unit_ids: [1, 2], condo_id: 1)
       second_unit_types = []
       second_unit_types << UnitType.new(id: 2, description: 'Apartamento 2 quarto', metreage: 200, fraction: 2.0,
-                                        unit_ids: [3, 4])
+                                        unit_ids: [3, 4], condo_id: 2)
       first_units = []
       second_units = []
       first_units << Unit.new(id: 1, area: 100, floor: 1, number: '11', unit_type_id: 1, condo_id: 1,
@@ -106,7 +106,7 @@ RSpec.describe GenerateMonthlyBillJob, type: :job do
       condos << Condo.new(id: 1, name: 'Prédio lindo', city: 'Cidade maravilhosa')
       unit_types = []
       unit_types << UnitType.new(id: 1, description: 'Apartamento 1 quarto', metreage: 100, fraction: 1.0,
-                                 unit_ids: [1])
+                                 unit_ids: [1], condo_id: 1)
       units = []
       units << Unit.new(id: 1, area: 100, floor: 1, number: '11', unit_type_id: 1, condo_id: 1,
                         condo_name: 'Prédio lindo', tenant_id: 1, owner_id: 1, description: 'Com varanda')
@@ -143,7 +143,7 @@ RSpec.describe GenerateMonthlyBillJob, type: :job do
       condos << Condo.new(id: 1, name: 'Prédio lindo', city: 'Cidade maravilhosa')
       unit_types = []
       unit_types << UnitType.new(id: 1, description: 'Apartamento 1 quarto', metreage: 100, fraction: 1.0,
-                                 unit_ids: [1])
+                                 unit_ids: [1], condo_id: 1)
       units = []
       units << Unit.new(id: 1, area: 100, floor: 1, number: '11', unit_type_id: 1, condo_id: 1,
                         condo_name: 'Prédio lindo', tenant_id: 1, owner_id: 1, description: 'Com varanda')
@@ -181,7 +181,7 @@ RSpec.describe GenerateMonthlyBillJob, type: :job do
       condos << Condo.new(id: 1, name: 'Prédio lindo', city: 'Cidade maravilhosa')
       unit_types = []
       unit_types << UnitType.new(id: 1, description: 'Apartamento 1 quarto', metreage: 100, fraction: 1.0,
-                                 unit_ids: [1])
+                                 unit_ids: [1], condo_id: 1)
       units = []
       units << Unit.new(id: 1, area: 100, floor: 1, number: '11', unit_type_id: 1, condo_id: 1,
                         condo_name: 'Prédio lindo', tenant_id: 1, owner_id: 1, description: 'Com varanda')
