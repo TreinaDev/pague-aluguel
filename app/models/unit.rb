@@ -73,7 +73,7 @@ class Unit
   end
 
   def self.build_owner_units(data)
-    data['properties'].map do |unit|
+    data['resident']['properties'].map do |unit|
       Unit.new(id: unit['id'], area: unit['area'], floor: unit['floor'], number: unit['number'],
                unit_type_id: unit['unit_type_id'], condo_name: unit['condo_name'], condo_id: data['condo_id'],
                tenant_id: unit['tenant_id'], owner_id: data['resident']['owner_id'],

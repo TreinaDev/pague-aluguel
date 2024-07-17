@@ -1,8 +1,10 @@
 class UnitsController < ApplicationController
   before_action :verify_ownership
-  before_action :set_unit
+  # before_action :set_unit
 
-  def show; end
+  def show
+    @unit = Unit.find(params[:id])
+  end
 
   private
 
