@@ -35,17 +35,20 @@ class Unit
     build_new_unit(data)
   end
 
-  def self.find_all_by_owner(cpf)
-    response = Faraday.get("#{Rails.configuration.api['base_url']}/units/cpf=#{cpf}")
-    units = []
-    if response.success?
-      data = JSON.parse(response.body)
-      units_ids = data['units']
-      units_ids.each do |id|
-        units << Unit.find(id.to_i)
-      end
-    end
-    units
+  def set_status
+    return I18n.t('views.show.owner_tenant') if owner_id == tenant_id
+
+    return I18n.t('views.show.has_tenant') if tenant_id.present? && owner_id != tenant_id
+
+    I18n.t('views.show.no_tenant')
+  end
+
+  def unit_has_tenant?
+    tenant_id.present? && owner_id != tenant_id
+  end
+
+  def unit_rent_fee
+    RentFee.find_by(unit_id: id)
   end
 
   def self.build_new_unit(data)
