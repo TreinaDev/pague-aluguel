@@ -18,9 +18,13 @@ describe 'Admin vê a lista de áreas comuns' do
     condo = condos.first
     allow(Condo).to receive(:all).and_return(condos)
     allow(Condo).to receive(:find).and_return(condo)
-    json_data = File.read('spec/support/json/common_areas.json')
-    fake_response = double('faraday_response', status: 200, body: json_data, success?: true)
-    allow(Faraday).to receive(:get).with("http://127.0.0.1:3000/api/v1/condos/#{condo.id}/common_areas").and_return(fake_response)
+
+    common_areas = []
+    common_areas << CommonArea.new(id: 3, name: 'Academia',
+                                   description: 'Uma academia raíz com ventilador apenas para os marombas')
+    common_areas << CommonArea.new(id: 2, name: 'Piscina',
+                                   description: 'Piscina grande cabe até golfinhos.')
+    allow(CommonArea).to receive(:all).with(1).and_return(common_areas)
 
     login_as admin, scope: :admin
     visit root_path
@@ -32,10 +36,6 @@ describe 'Admin vê a lista de áreas comuns' do
     expect(page).to have_content 'Uma academia raíz com ventilador apenas para os marombas'
     expect(page).to have_content 'Piscina'
     expect(page).to have_content 'Piscina grande cabe até golfinhos.'
-    expect(page).to have_content 'Jardim Botânico Interno'
-    expect(page).to have_content 'Piscina Pequena'
-    expect(page).not_to have_content 'Salão de Jogos'
-    expect(page).not_to have_content 'Salão de festa'
     expect(page).not_to have_content 'Nenhuma Área Comum cadastrada'
   end
 
@@ -46,9 +46,21 @@ describe 'Admin vê a lista de áreas comuns' do
     condo = condos.first
     allow(Condo).to receive(:all).and_return(condos)
     allow(Condo).to receive(:find).and_return(condo)
-    json_data = File.read('spec/support/json/common_areas.json')
-    fake_response = double('faraday_response', status: 200, body: json_data, success?: true)
-    allow(Faraday).to receive(:get).with("http://127.0.0.1:3000/api/v1/condos/#{condo.id}/common_areas").and_return(fake_response)
+
+    common_areas = []
+    common_areas << CommonArea.new(id: 1, name: 'Piscina',
+                                   description: 'Piscina grande cabe até golfinhos.')
+    common_areas << CommonArea.new(id: 2, name: 'Academia',
+                                   description: 'Uma academia raíz com ventilador apenas para os marombas')
+    common_areas << CommonArea.new(id: 3, name: 'Salão de Festa',
+                                   description: 'Salão preparado para grandes festas')
+    common_areas << CommonArea.new(id: 4, name: 'Jardim Botânico Interno',
+                                   description: 'Hambiente relaxante')
+    common_areas << CommonArea.new(id: 5, name: 'Playground',
+                                   description: 'Habiente para toda família')
+    common_areas << CommonArea.new(id: 6, name: 'Salão de Jogos',
+                                   description: 'Jogos para toda família')
+    allow(CommonArea).to receive(:all).with(1).and_return(common_areas)
 
     login_as admin, scope: :admin
     visit root_path
@@ -62,9 +74,9 @@ describe 'Admin vê a lista de áreas comuns' do
     expect(page).to have_content 'Piscina'
     expect(page).to have_content 'Piscina grande cabe até golfinhos.'
     expect(page).to have_content 'Jardim Botânico Interno'
-    expect(page).to have_content 'Piscina Pequena'
+    expect(page).to have_content 'Playground'
     expect(page).to have_content 'Salão de Jogos'
-    expect(page).to have_content 'Salão de festa'
+    expect(page).to have_content 'Salão de Festa'
     expect(page).not_to have_content 'Nenhuma Área Comum cadastrada'
   end
 
@@ -72,8 +84,8 @@ describe 'Admin vê a lista de áreas comuns' do
     admin = create(:admin, email: 'matheus@gmail.com', password: 'admin12345')
     condo = Condo.new(id: 1, name: 'Condo TMNT', city: 'São Paulo')
     allow(Condo).to receive(:find).and_return(condo)
-    fake_response = double('faraday_response', status: 200, body: '[]', success?: true)
-    allow(Faraday).to receive(:get).with("http://127.0.0.1:3000/api/v1/condos/#{condo.id}/common_areas").and_return(fake_response)
+
+    allow(CommonArea).to receive(:all).with(1).and_return([])
 
     login_as admin, scope: :admin
     visit condo_path(condo.id)

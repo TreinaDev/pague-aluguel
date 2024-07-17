@@ -5,6 +5,6 @@ module ApplicationHelper
 
   def humanized_unit(unit_id)
     unit = Unit.find(unit_id)
-    "Unidade #{unit.floor}#{unit.number}"
+    "Unidade #{unit.number}"
   end
 end

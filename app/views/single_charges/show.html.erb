@@ -4,8 +4,8 @@
 
     <span class="fs-8 text-center d-block"><%= SingleCharge.model_name.human %></span>
     <span class="fs-6 text-center d-block">
-                <%= I18n.t('activerecord.attributes.single_charge.unit_id') %> 
-                <%= Unit.find(@single_charge.unit_id).identifier %>
+                <%= I18n.t('activerecord.attributes.single_charge.unit_id') %>
+                <%= Unit.find(@single_charge.unit_id).number %>
      </span>
     <hr>
 
@@ -20,7 +20,7 @@
     <hr>
     <span class="fs-6 text-center d-block"><%= I18n.t 'activerecord.attributes.single_charge.charge_type' %>:</span>
     <span class="fs-4 text-center d-block"><%= I18n.t "single_charge.#{@single_charge.charge_type}" %></span>
-    
+
     <% if @single_charge.common_area_fee? %>
       <div class=" d-flex justify-content-center align-items-center">
         <span class="badge text-bg-info fs-6 text-uppercase ls-4">

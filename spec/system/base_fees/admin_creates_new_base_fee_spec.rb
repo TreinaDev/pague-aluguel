@@ -14,10 +14,11 @@ describe 'Admin cria taxa condominial' do
     condos = []
     condos << Condo.new(id: 1, name: 'Prédio lindo', city: 'Cidade maravilhosa')
     unit_types = []
-    unit_types << UnitType.new(id: 1, area: 1000, description: 'Unit Type', ideal_fraction: 222.2, condo_id: 1)
+    unit_types << UnitType.new(id: 1, description: 'Apartamento 1 quarto', metreage: 100, fraction: 1.0,
+                               unit_ids: [])
     allow(Condo).to receive(:all).and_return(condos)
     allow(Condo).to receive(:find).and_return(condos[0])
-    allow(UnitType).to receive(:find_all_by_condo).and_return(unit_types)
+    allow(UnitType).to receive(:all).and_return(unit_types)
     allow(CommonArea).to receive(:all).and_return([])
 
     login_as admin, scope: :admin
@@ -37,10 +38,11 @@ describe 'Admin cria taxa condominial' do
     condos = []
     condos << Condo.new(id: 1, name: 'Prédio lindo', city: 'Cidade maravilhosa')
     unit_types = []
-    unit_types << UnitType.new(id: 1, area: 1000, description: 'Unit Type', ideal_fraction: 222.2, condo_id: 1)
+    unit_types << UnitType.new(id: 1, description: 'Apartamento 1 quarto', metreage: 100, fraction: 1.0,
+                               unit_ids: [])
     allow(Condo).to receive(:all).and_return(condos)
     allow(Condo).to receive(:find).and_return(condos[0])
-    allow(UnitType).to receive(:find_all_by_condo).and_return(unit_types)
+    allow(UnitType).to receive(:all).and_return(unit_types)
     allow(CommonArea).to receive(:all).and_return([])
 
     login_as admin, scope: :admin
@@ -58,13 +60,14 @@ describe 'Admin cria taxa condominial' do
     admin = create(:admin)
     condo = Condo.new(id: 1, name: 'Prédio lindo', city: 'Cidade maravilhosa')
     unit_types = []
-    unit_types << UnitType.new(id: 1, area: 30, description: 'Apartamento 1 quarto', ideal_fraction: 222.2, condo_id: 1)
-    unit_types << UnitType.new(id: 2, area: 45, description: 'Apartamento 2 quartos', ideal_fraction: 222.2,
-                               condo_id: 1)
-    unit_types << UnitType.new(id: 3, area: 60, description: 'Apartamento 3 quartos', ideal_fraction: 222.2,
-                               condo_id: 1)
+    unit_types << UnitType.new(id: 1, description: 'Apartamento 1 quarto', metreage: 100, fraction: 1.0,
+                               unit_ids: [])
+    unit_types << UnitType.new(id: 2, description: 'Apartamento 2 quartos', metreage: 200, fraction: 2.0,
+                               unit_ids: [])
+    unit_types << UnitType.new(id: 3, description: 'Apartamento 3 quartos', metreage: 300, fraction: 3.0,
+                               unit_ids: [])
     allow(Condo).to receive(:find).and_return(condo)
-    allow(UnitType).to receive(:find_all_by_condo).and_return(unit_types)
+    allow(UnitType).to receive(:all).and_return(unit_types)
     common_areas = []
     common_areas << CommonArea.new(id: 3, name: 'Salão de festa',
                                    description: 'Festa para toda a família.',
@@ -93,13 +96,14 @@ describe 'Admin cria taxa condominial' do
     admin = create(:admin)
     condo = Condo.new(id: 1, name: 'Prédio lindo', city: 'Cidade maravilhosa')
     unit_types = []
-    unit_types << UnitType.new(id: 1, area: 30, description: 'Apartamento 1 quarto', ideal_fraction: 0.2, condo_id: 1)
-    unit_types << UnitType.new(id: 2, area: 45, description: 'Apartamento 2 quartos', ideal_fraction: 0.3,
-                               condo_id: 1)
-    unit_types << UnitType.new(id: 3, area: 60, description: 'Apartamento 3 quartos', ideal_fraction: 0.5,
-                               condo_id: 1)
+    unit_types << UnitType.new(id: 1, description: 'Apartamento 1 quarto', metreage: 100, fraction: 1.0,
+                               unit_ids: [])
+    unit_types << UnitType.new(id: 2, description: 'Apartamento 2 quartos', metreage: 200, fraction: 2.0,
+                               unit_ids: [])
+    unit_types << UnitType.new(id: 3, description: 'Apartamento 3 quartos', metreage: 300, fraction: 3.0,
+                               unit_ids: [])
     allow(Condo).to receive(:find).and_return(condo)
-    allow(UnitType).to receive(:find_all_by_condo).and_return(unit_types)
+    allow(UnitType).to receive(:all).and_return(unit_types)
     common_areas = []
     common_areas << CommonArea.new(id: 3, name: 'Salão de festa',
                                    description: 'Festa para toda a família.',
@@ -130,13 +134,14 @@ describe 'Admin cria taxa condominial' do
     admin = create(:admin)
     condo = Condo.new(id: 1, name: 'Prédio lindo', city: 'Cidade maravilhosa')
     unit_types = []
-    unit_types << UnitType.new(id: 1, area: 30, description: 'Apartamento 1 quarto', ideal_fraction: 222.2, condo_id: 1)
-    unit_types << UnitType.new(id: 2, area: 45, description: 'Apartamento 2 quartos', ideal_fraction: 222.2,
-                               condo_id: 1)
-    unit_types << UnitType.new(id: 3, area: 60, description: 'Apartamento 3 quartos', ideal_fraction: 222.2,
-                               condo_id: 1)
+    unit_types << UnitType.new(id: 1, description: 'Apartamento 1 quarto', metreage: 100, fraction: 1.0,
+                               unit_ids: [])
+    unit_types << UnitType.new(id: 2, description: 'Apartamento 2 quartos', metreage: 200, fraction: 2.0,
+                               unit_ids: [])
+    unit_types << UnitType.new(id: 3, description: 'Apartamento 3 quartos', metreage: 300, fraction: 3.0,
+                               unit_ids: [])
     allow(Condo).to receive(:find).and_return(condo)
-    allow(UnitType).to receive(:find_all_by_condo).and_return(unit_types)
+    allow(UnitType).to receive(:all).and_return(unit_types)
 
     login_as admin, scope: :admin
     visit new_condo_base_fee_path(condo.id)
@@ -164,13 +169,14 @@ describe 'Admin cria taxa condominial' do
     admin = create(:admin)
     condo = Condo.new(id: 1, name: 'Prédio lindo', city: 'Cidade maravilhosa')
     unit_types = []
-    unit_types << UnitType.new(id: 1, area: 20, description: 'Apartamento 1 quarto', ideal_fraction: 222.2, condo_id: 1)
-    unit_types << UnitType.new(id: 2, area: 30, description: 'Apartamento 2 quartos', ideal_fraction: 222.2,
-                               condo_id: 1)
-    unit_types << UnitType.new(id: 3, area: 50, description: 'Apartamento 3 quartos', ideal_fraction: 222.2,
-                               condo_id: 1)
+    unit_types << UnitType.new(id: 1, description: 'Apartamento 1 quarto', metreage: 100, fraction: 1.0,
+                               unit_ids: [])
+    unit_types << UnitType.new(id: 2, description: 'Apartamento 2 quartos', metreage: 200, fraction: 2.0,
+                               unit_ids: [])
+    unit_types << UnitType.new(id: 3, description: 'Apartamento 3 quartos', metreage: 300, fraction: 3.0,
+                               unit_ids: [])
     allow(Condo).to receive(:find).and_return(condo)
-    allow(UnitType).to receive(:find_all_by_condo).and_return(unit_types)
+    allow(UnitType).to receive(:all).and_return(unit_types)
 
     formatted_date = 10.days.ago.to_date
 
@@ -205,13 +211,14 @@ describe 'Admin cria taxa condominial' do
     admin = create(:admin, email: 'admin@email.com', password: '123456')
     condo = Condo.new(id: 1, name: 'Prédio lindo', city: 'Cidade maravilhosa')
     unit_types = []
-    unit_types << UnitType.new(id: 1, area: 30, description: 'Apartamento 1 quarto', ideal_fraction: 222.2, condo_id: 1)
-    unit_types << UnitType.new(id: 2, area: 45, description: 'Apartamento 2 quartos', ideal_fraction: 222.2,
-                               condo_id: 1)
-    unit_types << UnitType.new(id: 3, area: 60, description: 'Apartamento 3 quartos', ideal_fraction: 222.2,
-                               condo_id: 1)
+    unit_types << UnitType.new(id: 1, description: 'Apartamento 1 quarto', metreage: 100, fraction: 1.0,
+                               unit_ids: [])
+    unit_types << UnitType.new(id: 2, description: 'Apartamento 2 quartos', metreage: 200, fraction: 2.0,
+                               unit_ids: [])
+    unit_types << UnitType.new(id: 3, description: 'Apartamento 3 quartos', metreage: 300, fraction: 3.0,
+                               unit_ids: [])
     allow(Condo).to receive(:find).and_return(condo)
-    allow(UnitType).to receive(:find_all_by_condo).and_return(unit_types)
+    allow(UnitType).to receive(:all).and_return(unit_types)
 
     formatted_date = 10.days.from_now.to_date
 
@@ -236,13 +243,14 @@ describe 'Admin cria taxa condominial' do
     admin = create(:admin, email: 'admin@email.com', password: '123456')
     condo = Condo.new(id: 1, name: 'Prédio lindo', city: 'Cidade maravilhosa')
     unit_types = []
-    unit_types << UnitType.new(id: 1, area: 30, description: 'Apartamento 1 quarto', ideal_fraction: 222.2, condo_id: 1)
-    unit_types << UnitType.new(id: 2, area: 45, description: 'Apartamento 2 quartos', ideal_fraction: 222.2,
-                               condo_id: 1)
-    unit_types << UnitType.new(id: 3, area: 60, description: 'Apartamento 3 quartos', ideal_fraction: 222.2,
-                               condo_id: 1)
+    unit_types << UnitType.new(id: 1, description: 'Apartamento 1 quarto', metreage: 100, fraction: 1.0,
+                               unit_ids: [])
+    unit_types << UnitType.new(id: 2, description: 'Apartamento 2 quartos', metreage: 200, fraction: 2.0,
+                               unit_ids: [])
+    unit_types << UnitType.new(id: 3, description: 'Apartamento 3 quartos', metreage: 300, fraction: 3.0,
+                               unit_ids: [])
     allow(Condo).to receive(:find).and_return(condo)
-    allow(UnitType).to receive(:find_all_by_condo).and_return(unit_types)
+    allow(UnitType).to receive(:all).and_return(unit_types)
     allow(CommonArea).to receive(:all).and_return([])
 
     formatted_date = 10.days.from_now.to_date
@@ -270,9 +278,10 @@ describe 'Admin cria taxa condominial' do
     admin = create(:admin)
     condo = Condo.new(id: 1, name: 'Prédio lindo', city: 'Cidade maravilhosa')
     unit_types = []
-    unit_types << UnitType.new(id: 1, area: 30, description: 'Apartamento 1 quarto', ideal_fraction: 222.2, condo_id: 1)
+    unit_types << UnitType.new(id: 1, description: 'Apartamento 1 quarto', metreage: 100, fraction: 1.0,
+                               unit_ids: [])
     allow(Condo).to receive(:find).and_return(condo)
-    allow(UnitType).to receive(:find_all_by_condo).and_return(unit_types)
+    allow(UnitType).to receive(:all).and_return(unit_types)
     allow(CommonArea).to receive(:all).and_return([])
 
     login_as admin, scope: :admin

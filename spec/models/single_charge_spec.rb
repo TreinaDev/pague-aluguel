@@ -3,10 +3,13 @@ require 'rails_helper'
 RSpec.describe SingleCharge, type: :model do
   describe '#valid?' do
     it ':unit_id, :issue_date, presence: true' do
-      unit_type = UnitType.new(id: 1, area: 40, description: 'Apartamento 1 quarto', ideal_fraction: 0.5, condo_id: 1)
+      unit_types = []
+      unit_types << UnitType.new(id: 1, description: 'Apartamento 1 quarto', metreage: 40, fraction: 0.5,
+                                 unit_ids: [1])
       units = []
-      units << Unit.new(id: 1, area: 40, floor: 1, number: 1, unit_type_id: 1)
-      allow(UnitType).to receive(:find).and_return(unit_type)
+      units << Unit.new(id: 1, area: 100, floor: 1, number: '11', unit_type_id: 1, condo_id: 1,
+                        condo_name: 'Prédio lindo', tenant_id: 1, owner_id: 1, description: 'Com varanda')
+      allow(UnitType).to receive(:all).and_return(unit_types)
       allow(Unit).to receive(:all).and_return(units)
       single_charge = build(:single_charge, charge_type: 'fine', unit_id: '', issue_date: '', value: '')
 
@@ -21,10 +24,13 @@ RSpec.describe SingleCharge, type: :model do
     end
 
     it ':value, numericality' do
-      unit_type = UnitType.new(id: 1, area: 40, description: 'Apartamento 1 quarto', ideal_fraction: 0.5, condo_id: 1)
+      unit_types = []
+      unit_types << UnitType.new(id: 1, description: 'Apartamento 1 quarto', metreage: 40, fraction: 0.5,
+                                 unit_ids: [1])
       units = []
-      units << Unit.new(id: 1, area: 40, floor: 1, number: 1, unit_type_id: 1)
-      allow(UnitType).to receive(:find).and_return(unit_type)
+      units << Unit.new(id: 1, area: 100, floor: 1, number: '11', unit_type_id: 1, condo_id: 1,
+                        condo_name: 'Prédio lindo', tenant_id: 1, owner_id: 1, description: 'Com varanda')
+      allow(UnitType).to receive(:all).and_return(unit_types)
       allow(Unit).to receive(:all).and_return(units)
       allow(Unit).to receive(:find).and_return(units.first)
       single_charge = build(:single_charge, charge_type: 'fine', value: -1)
@@ -36,10 +42,13 @@ RSpec.describe SingleCharge, type: :model do
     end
 
     it 'common_area_is_mandatory' do
-      unit_type = UnitType.new(id: 1, area: 40, description: 'Apartamento 1 quarto', ideal_fraction: 0.5, condo_id: 1)
+      unit_types = []
+      unit_types << UnitType.new(id: 1, description: 'Apartamento 1 quarto', metreage: 40, fraction: 0.5,
+                                 unit_ids: [1])
       units = []
-      units << Unit.new(id: 1, area: 40, floor: 1, number: 1, unit_type_id: 1)
-      allow(UnitType).to receive(:find).and_return(unit_type)
+      units << Unit.new(id: 1, area: 100, floor: 1, number: '11', unit_type_id: 1, condo_id: 1,
+                        condo_name: 'Prédio lindo', tenant_id: 1, owner_id: 1, description: 'Com varanda')
+      allow(UnitType).to receive(:all).and_return(unit_types)
       allow(Unit).to receive(:all).and_return(units)
       allow(Unit).to receive(:find).and_return(units.first)
       single_charge = build(:single_charge, charge_type: 'common_area_fee', common_area_id: '')
@@ -51,10 +60,13 @@ RSpec.describe SingleCharge, type: :model do
     end
 
     it 'date_is_future' do
-      unit_type = UnitType.new(id: 1, area: 40, description: 'Apartamento 1 quarto', ideal_fraction: 0.5, condo_id: 1)
+      unit_types = []
+      unit_types << UnitType.new(id: 1, description: 'Apartamento 1 quarto', metreage: 40, fraction: 0.5,
+                                 unit_ids: [1])
       units = []
-      units << Unit.new(id: 1, area: 40, floor: 1, number: 1, unit_type_id: 1)
-      allow(UnitType).to receive(:find).and_return(unit_type)
+      units << Unit.new(id: 1, area: 100, floor: 1, number: '11', unit_type_id: 1, condo_id: 1,
+                        condo_name: 'Prédio lindo', tenant_id: 1, owner_id: 1, description: 'Com varanda')
+      allow(UnitType).to receive(:all).and_return(unit_types)
       allow(Unit).to receive(:all).and_return(units)
       allow(Unit).to receive(:find).and_return(units.first)
       single_charge = build(:single_charge, issue_date: 5.days.ago.to_date)
@@ -66,10 +78,13 @@ RSpec.describe SingleCharge, type: :model do
     end
 
     it 'description_is_mandatory' do
-      unit_type = UnitType.new(id: 1, area: 40, description: 'Apartamento 1 quarto', ideal_fraction: 0.5, condo_id: 1)
+      unit_types = []
+      unit_types << UnitType.new(id: 1, description: 'Apartamento 1 quarto', metreage: 40, fraction: 0.5,
+                                 unit_ids: [1])
       units = []
-      units << Unit.new(id: 1, area: 40, floor: 1, number: 1, unit_type_id: 1)
-      allow(UnitType).to receive(:find).and_return(unit_type)
+      units << Unit.new(id: 1, area: 100, floor: 1, number: '11', unit_type_id: 1, condo_id: 1,
+                        condo_name: 'Prédio lindo', tenant_id: 1, owner_id: 1, description: 'Com varanda')
+      allow(UnitType).to receive(:all).and_return(unit_types)
       allow(Unit).to receive(:all).and_return(units)
       allow(Unit).to receive(:find).and_return(units.first)
       single_charge = build(:single_charge, charge_type: 'other', description: '')
@@ -89,10 +104,13 @@ RSpec.describe SingleCharge, type: :model do
     end
 
     it 'common_area_restriction' do
-      unit_type = UnitType.new(id: 1, area: 40, description: 'Apartamento 1 quarto', ideal_fraction: 0.5, condo_id: 1)
+      unit_types = []
+      unit_types << UnitType.new(id: 1, description: 'Apartamento 1 quarto', metreage: 40, fraction: 0.5,
+                                 unit_ids: [1])
       units = []
-      units << Unit.new(id: 1, area: 40, floor: 1, number: 1, unit_type_id: 1)
-      allow(UnitType).to receive(:find).and_return(unit_type)
+      units << Unit.new(id: 1, area: 100, floor: 1, number: '11', unit_type_id: 1, condo_id: 1,
+                        condo_name: 'Prédio lindo', tenant_id: 1, owner_id: 1, description: 'Com varanda')
+      allow(UnitType).to receive(:all).and_return(unit_types)
       allow(Unit).to receive(:all).and_return(units)
       allow(Unit).to receive(:find).and_return(units.first)
       create(:single_charge, charge_type: 'fine', common_area_id: 1)

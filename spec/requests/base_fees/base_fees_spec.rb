@@ -5,11 +5,13 @@ describe 'Admin creates a base fee' do
     admin = create(:admin, email: 'admin@email.com', password: '123456')
     condo = Condo.new(id: 1, name: 'Condo Test', city: 'City Test')
     unit_types = []
-    unit_types << UnitType.new(id: 1, area: 30, description: 'Apartamento 1 quarto', ideal_fraction: 0.04, condo_id: 1)
-    unit_types << UnitType.new(id: 2, area: 30, description: 'Apartamento 2 quarto', ideal_fraction: 0.06, condo_id: 1)
+    unit_types << UnitType.new(id: 1, description: 'Apartamento 1 quarto', metreage: 100, fraction: 1.0,
+                               unit_ids: [])
+    unit_types << UnitType.new(id: 2, description: 'Apartamento 2 quarto', metreage: 200, fraction: 2.0,
+                               unit_ids: [])
 
     allow(Condo).to receive(:find).and_return(condo)
-    allow(UnitType).to receive(:find_all_by_condo).and_return(unit_types)
+    allow(UnitType).to receive(:all).and_return(unit_types)
 
     login_as admin, scope: :admin
     post(condo_base_fees_path(condo.id), params: { base_fee: { name: 'Nome',
@@ -40,11 +42,13 @@ describe 'Admin creates a base fee' do
   it 'and is not authenticated' do
     condo = Condo.new(id: 1, name: 'Condo Test', city: 'City Test')
     unit_types = []
-    unit_types << UnitType.new(id: 1, area: 30, description: 'Apartamento 1 quarto', ideal_fraction: 0.04, condo_id: 1)
-    unit_types << UnitType.new(id: 2, area: 30, description: 'Apartamento 2 quarto', ideal_fraction: 0.06, condo_id: 1)
+    unit_types << UnitType.new(id: 1, description: 'Apartamento 1 quarto', metreage: 100, fraction: 1.0,
+                               unit_ids: [])
+    unit_types << UnitType.new(id: 2, description: 'Apartamento 2 quarto', metreage: 200, fraction: 2.0,
+                               unit_ids: [])
 
     allow(Condo).to receive(:find).and_return(condo)
-    allow(UnitType).to receive(:find_all_by_condo).and_return(unit_types)
+    allow(UnitType).to receive(:all).and_return(unit_types)
 
     post(condo_base_fees_path(condo.id), params: { base_fee: { name: 'Nome',
                                                                description: 'Descrição',
