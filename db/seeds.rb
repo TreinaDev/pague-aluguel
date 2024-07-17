@@ -86,7 +86,27 @@ base_fee2 = BaseFee.create!(name: 'Fundo de Reserva',
 Value.create!(price: 300, unit_type_id: 1, base_fee: base_fee2)
 Value.create!(price: 300, unit_type_id: 2, base_fee: base_fee2)
 
+base_fee3 = BaseFee.new(name: 'Taxa de Gás',
+                            description: 'Gás encanado do prédio',
+                            interest_rate: 2, late_fine: 10, limited: false,
+                            charge_day: 3.months.ago,
+                            recurrence: :monthly, condo_id: 20)
+                            base_fee3.save(validate: false)
+Value.create!(price: 200, unit_type_id: 1, base_fee: base_fee3)
+Value.create!(price: 200, unit_type_id: 2, base_fee: base_fee3)
+
+base_fee4 = BaseFee.new(name: 'Fundo de Pintura',
+                            description: 'Destinado a pintar as áreas comuns',
+                            interest_rate: 1, late_fine: 5, limited: true,
+                            charge_day: 5.months.ago, installments: 10,
+                            recurrence: :bimonthly, condo_id: 20,
+                            status: :canceled)
+                            base_fee4.save(validate: false)
+Value.create!(price: 300, unit_type_id: 1, base_fee: base_fee4)
+Value.create!(price: 300, unit_type_id: 2, base_fee: base_fee4)
+
 p "Created #{BaseFee.count} base fees"
+
 # taxas compartilhadas
 SharedFee.create!(description: 'Manutenção regular do prédio',
                   issue_date: 10.days.from_now,
