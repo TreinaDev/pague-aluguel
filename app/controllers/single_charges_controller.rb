@@ -11,17 +11,17 @@ class SingleChargesController < ApplicationController
     @single_charge = SingleCharge.find(params[:id])
     return unless @single_charge.common_area_fee?
 
-    @common_area = CommonArea.find(@condo.id, @single_charge.common_area_id)
+    @common_area = CommonArea.find(@single_charge.common_area_id)
   end
 
   def new
     @single_charge = SingleCharge.new
-    @units = Unit.find_all_by_condo(@condo.id)
+    @units = Unit.all(@condo.id)
   end
 
   def create
     @single_charge = SingleCharge.new(single_charge_params)
-    @units = Unit.find_all_by_condo(@condo.id)
+    @units = Unit.all(@condo.id)
     @single_charge.condo_id = @condo.id
     if @single_charge.save
       redirect_to condo_path(@condo.id), notice: I18n.t('success_notice_single_charge')

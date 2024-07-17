@@ -15,6 +15,13 @@
               <span class="d-block mb-1 fs-4">
                 <%= I18n.t "single_charge.#{single_charge.charge_type}" %>
               </span>
+              <span class="d-block mb-1 fs-6">
+                <%= single_charge.description %>
+              </span>
+              <span class="d-block mb-1 fs-6">
+                <%= I18n.t('activerecord.attributes.single_charge.unit_id') %>
+                <%= Unit.find(single_charge.unit_id).number %>
+              </span>
               <div class="d-flex flex-wrap text-end">
                 <small class="text-body-secondary w-100">
                   <%= SingleCharge.human_attribute_name(:issue_date) %>:
@@ -29,7 +36,7 @@
             </div>
             <span>
               <%= I18n.t('activerecord.attributes.single_charge.unit_id') %> 
-              <%= Unit.find(single_charge.unit_id).identifier %>
+              <%= humanized_unit(single_charge.unit_id) %>
             </span>
             <span class="d-block">
               <%= single_charge.description %>

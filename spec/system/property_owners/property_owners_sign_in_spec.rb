@@ -22,7 +22,7 @@ describe 'Proprietário tenta fazer login' do
     end
     click_on 'Proprietário'
 
-    within 'form' do
+    within 'form#new_property_owner' do
       fill_in 'E-mail', with: property_owner.email
       fill_in 'Senha', with: '123456'
       click_on 'Login'
@@ -44,7 +44,7 @@ describe 'Proprietário tenta fazer login' do
     end
     click_on 'Proprietário'
 
-    within 'form' do
+    within 'form#new_property_owner' do
       fill_in 'E-mail', with: 'email@fake'
       fill_in 'Senha', with: '123456'
       click_on 'Login'

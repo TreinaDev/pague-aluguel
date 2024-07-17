@@ -16,12 +16,13 @@ class SharedFee < ApplicationRecord
            }
 
   def calculate_fractions
-    units = Unit.find_all_by_condo(condo_id)
-    unit_types = UnitType.find_all_by_condo(condo_id)
-
-    units.each do |unit|
-      value_cents = unit_types.find { |ut| ut.id == unit.unit_type_id }.ideal_fraction * total_value_cents
-      shared_fee_fractions.create!(unit_id: unit.id, value_cents:)
+    unit_types = UnitType.all(condo_id)
+    unit_types.each do |unit_type|
+      unit_ids = unit_type.unit_ids
+      unit_ids.each do |unit_id|
+        value_cents = unit_type.fraction * total_value_cents
+        shared_fee_fractions.create!(unit_id:, value_cents:)
+      end
     end
   end
 

@@ -1,45 +1,38 @@
 class Unit
-  attr_accessor :id, :area, :floor, :number, :unit_type_id, :condo_id, :tenant_id, :owner_id, :description, :condo_name
+  attr_accessor :id, :area, :floor, :number, :unit_type_id, :condo_id, :condo_name, :tenant_id, :owner_id, :description
 
-  def initialize(params = {})
-    @id = params[:id]
-    @area = params[:area]
-    @floor = params[:floor]
-    @number = params[:number]
-    @unit_type_id = params[:unit_type_id]
-    @tenant_id = params[:tenant_id]
-    @owner_id = params[:owner_id]
-    @description = params[:description]
-    @condo_name = params[:condo_name]
-    @condo_id = params[:condo_id]
+  def initialize(attribute = {})
+    @id = attribute[:id]
+    @area = attribute[:area]
+    @floor = attribute[:floor]
+    @number = attribute[:number]
+    @unit_type_id = attribute[:unit_type_id]
+    @condo_id = attribute[:condo_id]
+    @condo_name = attribute[:condo_name]
+    @tenant_id = attribute[:tenant_id]
+    @owner_id = attribute[:owner_id]
+    @description = attribute[:description]
   end
 
-  def self.all
+  def self.all(condo_id)
     units = []
-    response = Faraday.get("#{Rails.configuration.api['base_url']}/units")
+    response = Faraday.get("#{Rails.configuration.api['base_url']}/condos/#{condo_id}/units")
+
     if response.success?
-      data = JSON.parse(response.body)
-      data.each do |unit|
-        units << Unit.new(id: unit['id'], area: unit['area'], floor: unit['floor'], number: unit['number'],
-                          unit_type_id: unit['unit_type_id'])
+      data = JSON.parse(response.body, symbolize_names: true)
+      data[:units].map do |unit|
+        units << Unit.new(unit)
       end
     end
     units
   end
 
-  def self.find(id)
-    response = Faraday.get("#{Rails.configuration.api['base_url']}/units/#{id}")
-    if response.success?
-      data = JSON.parse(response.body, symbolize_names: true)
-      unit = Unit.new(data)
-    end
-    unit
-  end
+  def self.find(unit_id)
+    response = Faraday.get("#{Rails.configuration.api['base_url']}/units/#{unit_id}")
+    return [] unless response.success?
 
-  def self.find_all_by_condo(id)
-    unit_types = UnitType.find_all_by_condo(id)
-    unit_type_ids = unit_types.map(&:id)
-    Unit.all.select { |unit| unit_type_ids.include?(unit.unit_type_id) }
+    data = JSON.parse(response.body)
+    build_new_unit(data)
   end
 
   def self.find_all_by_owner(cpf)
@@ -48,19 +41,6 @@ class Unit
 
     data = JSON.parse(response.body)
     build_owner_units(data)
-  end
-
-  def self.build_owner_units(data)
-    data['resident']['properties'].map do |unit|
-      Unit.new(id: unit['id'], area: unit['area'], floor: unit['floor'], number: unit['number'],
-               unit_type_id: unit['unit_type_id'], condo_name: unit['condo_name'], condo_id: data['condo_id'],
-               tenant_id: unit['tenant_id'], owner_id: data['resident']['owner_id'],
-               description: unit['description'])
-    end
-  end
-
-  def identifier
-    "#{floor}#{number}"
   end
 
   def set_status
@@ -77,5 +57,20 @@ class Unit
 
   def unit_rent_fee
     RentFee.find_by(unit_id: id)
+  end
+
+  def self.build_owner_units(data)
+    data['resident']['properties'].map do |unit|
+      Unit.new(id: unit['id'], area: unit['area'], floor: unit['floor'], number: unit['number'],
+               unit_type_id: unit['unit_type_id'], condo_name: unit['condo_name'], condo_id: data['condo_id'],
+               tenant_id: unit['tenant_id'], owner_id: data['resident']['owner_id'],
+               description: unit['description'])
+    end
+  end
+
+  def self.build_new_unit(data)
+    Unit.new(id: data['id'], area: data['area'], floor: data['floor'], number: data['number'],
+             unit_type_id: data['unit_type_id'], condo_id: data['condo_id'], condo_name: data['condo_name'],
+             tenant_id: data['tenant_id'], owner_id: data['owner_id'], description: data['description'])
   end
 end

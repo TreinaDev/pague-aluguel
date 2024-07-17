@@ -49,10 +49,13 @@ class SingleCharge < ApplicationRecord
   end
 
   def unit_belongs_to_condo
-    return if unit_id.blank?
+    return if unit_id.blank? || condo_id.blank?
 
-    unit = Unit.find(unit_id)
-    return if condo_id == UnitType.find(unit.unit_type_id).condo_id
+    units = Unit.all(condo_id)
+
+    return if units.nil?
+
+    return if units.any? { |unit| unit.id == unit_id }
 
     errors.add(:unit_id, 'deve pertencer ao condomínio')
   end

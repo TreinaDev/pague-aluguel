@@ -1,7 +1,12 @@
 {
   "id": 1,
-  "area": 100,
+  "area": 150.45,
   "floor": 1,
-  "number": 1,
-  "unit_type_id": 1
+  "number": "11",
+  "unit_type_id": 1,
+  "condo_id": 1,
+  "condo_name": "Residencial Paineiras",
+  "tenant_id": 1,
+  "owner_id": 1,
+  "description": "Duplex com varanda"
 }

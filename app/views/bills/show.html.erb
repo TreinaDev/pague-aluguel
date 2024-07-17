@@ -1,0 +1,44 @@
+<%= turbo_frame_tag "modal" do %>
+  <div class="dean-modal modal-md">
+    <%= link_to "", condo_bills_path(@condo.id), class: "btn btn-close btn-sm", id: 'close' %>
+
+    <span class="fs-8 text-center d-block"><%= Bill.model_name.human %></span>
+    <span class="fs-3 text-center d-block"><%= unit_name(@bill) %></span>
+    <span class="fs-8 text-center d-block text-muted"><%= @condo.name %></span>
+    <hr>
+
+    <div class="d-flex justify-content-center align-items-center">
+      <%= image_tag "dollar-icon", size: "20" %>
+      <span class="ms-1 me-2 fs-7 text-muted">
+        <%= Bill.human_attribute_name(:total_value) %>
+      </span>
+
+      <%= @bill.total_value.format %>
+    </div>
+
+    <hr>
+    <div class="px-5">
+      <div class=" d-flex justify-content-between">
+        <span class="text-muted text-lowercase fs-8"><%= BaseFee.model_name.human %>:</span>
+        <span><%= BaseFeeCalculator.total_value(@unit.unit_type_id) %></span>
+      </div>
+      <div class=" d-flex justify-content-between">
+        <span class="text-muted text-lowercase fs-8"><%= SharedFee.model_name.human %>:</span>
+        <span class=""><%= BillCalculator.calculate_shared_fees(@unit.unit_type_id) %></span>
+      </div>
+    </div>
+    <hr>
+
+    <div class="px-5">
+      <div class=" d-flex justify-content-between">
+        <span class="text-muted text-lowercase fs-8"><%= Bill.human_attribute_name(:due_date) %>:</span>
+        <span><%= I18n.l(@bill.due_date) %></span>
+      </div>
+      <div class=" d-flex justify-content-between">
+        <span class="text-muted text-lowercase fs-8"><%= Bill.human_attribute_name(:issue_date) %>:</span>
+        <span class=""><%= I18n.l(@bill.issue_date) %></span>
+      </div>
+    </div>
+
+  </div>
+<% end %>

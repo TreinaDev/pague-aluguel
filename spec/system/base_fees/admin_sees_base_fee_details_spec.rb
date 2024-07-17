@@ -17,10 +17,15 @@ describe 'admin vê taxa condominial' do
     condos << Condo.new(id: 1, name: 'Prédio lindo', city: 'Cidade maravilhosa')
     create(:base_fee, name: 'Taxa de Condomínio', condo_id: condos.first.id)
     unit_types = []
-    unit_types << UnitType.new(id: 1, area: 30, description: 'Apartamento 1 quarto', ideal_fraction: 222.2, condo_id: 1)
+    unit_types << UnitType.new(id: 1, description: 'Apartamento 1 quarto', metreage: 100, fraction: 1.0,
+                               unit_ids: [])
+    unit_types << UnitType.new(id: 2, description: 'Apartamento 2 quarto', metreage: 200, fraction: 2.0,
+                               unit_ids: [])
+    unit_types << UnitType.new(id: 3, description: 'Apartamento 3 quarto', metreage: 300, fraction: 3.0,
+                               unit_ids: [])
     allow(Condo).to receive(:all).and_return(condos)
     allow(Condo).to receive(:find).and_return(condos.first)
-    allow(UnitType).to receive(:find_all_by_condo).and_return(unit_types)
+    allow(UnitType).to receive(:all).and_return(unit_types)
     allow(CommonArea).to receive(:all).and_return([])
 
     login_as admin, scope: :admin
@@ -38,11 +43,12 @@ describe 'admin vê taxa condominial' do
     admin = create(:admin)
     condo = Condo.new(id: 1, name: 'Prédio lindo', city: 'Cidade maravilhosa')
     unit_types = []
-    unit_types << UnitType.new(id: 1, area: 30, description: 'apartamento 1 quarto', ideal_fraction: 222.2, condo_id: 1)
-    unit_types << UnitType.new(id: 2, area: 45, description: 'apartamento 2 quartos', ideal_fraction: 222.2,
-                               condo_id: 1)
-    unit_types << UnitType.new(id: 3, area: 60, description: 'apartamento 3 quartos', ideal_fraction: 222.2,
-                               condo_id: 1)
+    unit_types << UnitType.new(id: 1, description: 'Apartamento 1 quarto', metreage: 100, fraction: 1.0,
+                               unit_ids: [1])
+    unit_types << UnitType.new(id: 2, description: 'Apartamento 2 quartos', metreage: 200, fraction: 2.0,
+                               unit_ids: [])
+    unit_types << UnitType.new(id: 3, description: 'Apartamento 3 quartos', metreage: 300, fraction: 3.0,
+                               unit_ids: [])
     units = []
     units << Unit.new(id: 1, area: 100, floor: 1, number: 1, unit_type_id: 1)
     base_fee = create(:base_fee,
@@ -51,8 +57,7 @@ describe 'admin vê taxa condominial' do
                       charge_day: 25.days.from_now, recurrence: :bimonthly, condo_id: condo.id)
     allow(Condo).to receive(:find).and_return(condo)
     allow(UnitType).to receive(:all).and_return(unit_types)
-    allow(UnitType).to receive(:find_all_by_condo).and_return(unit_types)
-    allow(Unit).to receive(:find_all_by_condo).and_return(units)
+    allow(Unit).to receive(:all).and_return(units)
 
     create(:value, price: 200, unit_type_id: 1, base_fee:)
     create(:value, price: 300, unit_type_id: 2, base_fee:)
@@ -68,11 +73,11 @@ describe 'admin vê taxa condominial' do
     expect(page).to have_content 'BIMESTRAL'
     expect(page).to have_content 'data de emissão'
     expect(page).to have_content I18n.l(formatted_date).to_s
-    expect(page).to have_content "valor para #{unit_types[0].description}"
+    expect(page).to have_content "valor para #{unit_types[0].description.downcase}"
     expect(page).to have_content 'R$200,00'
-    expect(page).to have_content "valor para #{unit_types[1].description}"
+    expect(page).to have_content "valor para #{unit_types[1].description.downcase}"
     expect(page).to have_content 'R$300,00'
-    expect(page).to have_content "valor para #{unit_types[2].description}"
+    expect(page).to have_content "valor para #{unit_types[2].description.downcase}"
     expect(page).to have_content 'R$500,00'
     expect(page).to have_content 'TAXA FIXA'
     expect(page).not_to have_content 'TAXA LIMITADA'
@@ -86,11 +91,12 @@ describe 'admin vê taxa condominial' do
     admin = create(:admin)
     condo = Condo.new(id: 1, name: 'Prédio lindo', city: 'Cidade maravilhosa')
     unit_types = []
-    unit_types << UnitType.new(id: 1, area: 30, description: 'Apartamento 1 quarto', ideal_fraction: 222.2, condo_id: 1)
-    unit_types << UnitType.new(id: 2, area: 45, description: 'Apartamento 2 quartos', ideal_fraction: 222.2,
-                               condo_id: 1)
-    unit_types << UnitType.new(id: 3, area: 60, description: 'Apartamento 3 quartos', ideal_fraction: 222.2,
-                               condo_id: 1)
+    unit_types << UnitType.new(id: 1, description: 'Apartamento 1 quarto', metreage: 100, fraction: 1.0,
+                               unit_ids: [1])
+    unit_types << UnitType.new(id: 2, description: 'Apartamento 2 quartos', metreage: 200, fraction: 2.0,
+                               unit_ids: [])
+    unit_types << UnitType.new(id: 3, description: 'Apartamento 3 quartos', metreage: 300, fraction: 3.0,
+                               unit_ids: [])
     units = []
     units << Unit.new(id: 1, area: 100, floor: 1, number: 1, unit_type_id: 1)
     base_fee = create(:base_fee,
@@ -99,8 +105,8 @@ describe 'admin vê taxa condominial' do
                       charge_day: 25.days.from_now, recurrence: :bimonthly, condo_id: condo.id)
     allow(Condo).to receive(:find).and_return(condo)
     allow(UnitType).to receive(:all).and_return(unit_types)
-    allow(UnitType).to receive(:find_all_by_condo).and_return(unit_types)
-    allow(Unit).to receive(:find_all_by_condo).and_return(units)
+    allow(UnitType).to receive(:all).and_return(unit_types)
+    allow(Unit).to receive(:all).and_return(units)
 
     create(:value, price: 200, unit_type_id: 1, base_fee:)
     create(:value, price: 300, unit_type_id: 2, base_fee:)
@@ -135,14 +141,15 @@ describe 'admin vê taxa condominial' do
     admin = create(:admin)
     condo = Condo.new(id: 1, name: 'Prédio lindo', city: 'Cidade maravilhosa')
     unit_types = []
-    unit_types << UnitType.new(id: 1, area: 30, description: 'Apartamento 1 quarto', ideal_fraction: 222.2, condo_id: 1)
-    unit_types << UnitType.new(id: 2, area: 45, description: 'Apartamento 2 quartos', ideal_fraction: 222.2,
-                               condo_id: 1)
-    unit_types << UnitType.new(id: 3, area: 60, description: 'Apartamento 3 quartos', ideal_fraction: 222.2,
-                               condo_id: 1)
+    unit_types << UnitType.new(id: 1, description: 'Apartamento 1 quarto', metreage: 100, fraction: 1.0,
+                               unit_ids: [])
+    unit_types << UnitType.new(id: 2, description: 'Apartamento 2 quartos', metreage: 200, fraction: 2.0,
+                               unit_ids: [])
+    unit_types << UnitType.new(id: 3, description: 'Apartamento 3 quartos', metreage: 300, fraction: 3.0,
+                               unit_ids: [])
     base_fee = create(:base_fee, name: 'Taxa do Condo', condo_id: condo.id)
     allow(Condo).to receive(:find).and_return(condo)
-    allow(UnitType).to receive(:find_all_by_condo).and_return(unit_types)
+    allow(UnitType).to receive(:all).and_return(unit_types)
     allow(CommonArea).to receive(:all).and_return([])
 
     create(:value, price: 200, unit_type_id: 1, base_fee:)
