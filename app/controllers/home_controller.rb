@@ -29,6 +29,10 @@ class HomeController < ApplicationController
     end
   end
 
+  def tenant_bill
+    puts params
+  end
+
   def choose_profile; end
 
   private

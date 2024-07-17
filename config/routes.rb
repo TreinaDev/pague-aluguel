@@ -11,6 +11,7 @@ Rails.application.routes.draw do
   get 'choose_profile', to: 'home#choose_profile'
 
   get 'find_tenant', to: 'home#find_tenant'
+  get 'tenant_bill', to: 'home#tenant_bill'
 
   resources :condos, only: [:index, :show] do
     resources :common_areas, only: [:index, :show] do
