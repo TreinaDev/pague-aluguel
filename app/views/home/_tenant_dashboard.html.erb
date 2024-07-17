@@ -34,7 +34,7 @@
                     </small>
                   </div>
                 </div>
-                <span class="d-block"><%= unit_name(bill) %></span>
+                <span class="d-block">Unidade <%= @tenant.residence["number"] %></span>
                 <span class="text-muted fs-7 text-lowercase"><%= Bill.human_attribute_name(:total_value) %></span>
                 <span><%= bill.total_value.format %></span>
               <% end %>
