@@ -1,0 +1,43 @@
+<% if @single_charge.errors.any? %>
+  <div class="alert alert-danger" role="alert">
+    <p><%= I18n.t('errors.messages.verify_error') %></p>
+    <ul>
+      <% @single_charge.errors.full_messages.each do |msg| %>
+        <li><%= msg %></li>
+      <% end %>
+    </ul>
+  </div>
+<% end %>
+
+<%= form_with model: [@single_charge], url: owners_single_charges_path, local: true do |f| %>
+  <div class="form-floating mb-3 w-50 mx-auto mt-4">
+    <%= f.select :charge_type, options_for_select( owner_category_options ), {},  data: { target: "toggle-common-area-field.select", 
+        action: "change->toggle-common-area-field#toggleField" }, class: "form-control" %>
+    <%= f.label :charge_type %>
+  </div>
+
+  <div class="form-floating mb-3 w-50 mx-auto">
+    <%= f.select :unit_id, options_for_select(@units.map { |key, _| ["#{key.description} - #{key.number}", key.id] }, 
+        @single_charge.unit_id), {prompt: ''}, class: "form-control" %>
+    <%= f.label :unit_id %>
+  </div>
+
+  <div class="form-floating mb-3 w-50 mx-auto">
+    <%= f.text_field :description, class: "form-control" %>
+    <%= f.label :description %>
+  </div>
+
+  <div class="form-floating mb-3 w-50 mx-auto">
+    <%= f.text_field :value, class: "form-control" %>
+    <%= f.label :value %>
+  </div>
+
+  <div class="form-floating mb-3 w-50 mx-auto">
+    <%= f.date_field :issue_date, class: "form-control" %>
+    <%= f.label :issue_date %>
+  </div>
+
+  <div class="text-center">
+    <%= f.submit I18n.t('helpers.submit.register'), class: 'btn btn-primary mb-5 fs-7 text-uppercase ls-3' %>
+  </div>
+<% end %>

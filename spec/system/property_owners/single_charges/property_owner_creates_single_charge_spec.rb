@@ -28,6 +28,8 @@ describe 'Proprietario cria cobrança avulsa' do
     fill_in 'Valor', with: '105,59'
     fill_in 'Data de Emissão', with: 5.days.from_now.to_date
     click_on 'Cadastrar'
+    allow(Unit).to receive(:find).and_return(units[0])
+
 
     expect(page).to have_content 'Cobrança Avulsa cadastrada com sucesso!'
     expect(page).to have_content 'Outros'
