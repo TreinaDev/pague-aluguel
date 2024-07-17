@@ -9,5 +9,6 @@ FactoryBot.define do
     recurrence { :monthly }
     condo_id { nil }
     installments { nil }
+    counter { 0 }
   end
 end

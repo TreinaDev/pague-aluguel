@@ -1,23 +1,18 @@
 class BaseFeeCalculator
   def self.total_value(unit_type_id)
-    total_value = 0
+    get_last_month_values(unit_type_id).sum do |value|
+      next 0 unless check_recurrence(value.base_fee)
 
-    get_last_month_values(unit_type_id).each do |value|
-      next unless check_recurrence(value.base_fee)
-
-      total_value += if value.base_fee.biweekly?
-                       (value.price_cents * 2)
-                     else
-                       value.price_cents
-                     end
+      fee = value.base_fee
+      total = fee.biweekly? ? (value.price_cents * 2) : value.price_cents
+      update_base_fee_counter(fee) if fee.limited?
+      total
     end
-    total_value
   end
 
   def self.get_last_month_values(unit_type_id)
     now = Time.zone.now
     last_month = now.last_month
-    start_of_last_month = last_month.beginning_of_month
     end_of_last_month = last_month.end_of_month
     Value.where(unit_type_id:)
          .joins(:base_fee)
@@ -59,5 +54,16 @@ class BaseFeeCalculator
     true
   end
 
-  private_class_method :check_monthly_recurrence, :check_yearly_recurrence, :check_recurrence, :get_last_month_values
+  def self.update_base_fee_counter(base_fee)
+    count = base_fee.counter
+    count += 1
+    base_fee.counter = count
+
+    base_fee.paid! if base_fee.counter == base_fee.installments
+
+    base_fee.save
+  end
+
+  private_class_method :check_monthly_recurrence, :check_yearly_recurrence, :check_recurrence,
+                       :get_last_month_values, :update_base_fee_counter
 end

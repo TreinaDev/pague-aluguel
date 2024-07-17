@@ -54,9 +54,9 @@ describe BaseFeeCalculator do
                                  ideal_fraction: 0.1, condo_id: 1)
       units = []
       units << Unit.new(id: 1, area: 100, floor: 1, number: 1, unit_type_id: 1)
-      base_fee_yearly = create(:base_fee, condo_id: 1, charge_day: Date.today, recurrence: :yearly)
+      base_fee_yearly = create(:base_fee, condo_id: 1, charge_day: Time.zone.today, recurrence: :yearly)
       create(:value, price_cents: 100_33, base_fee_id: base_fee_yearly.id)
-      base_fee_semi_annual = create(:base_fee, condo_id: 1, charge_day: Date.today, recurrence: :semi_annual)
+      base_fee_semi_annual = create(:base_fee, condo_id: 1, charge_day: Time.zone.today, recurrence: :semi_annual)
       create(:value, price_cents: 100_15, base_fee_id: base_fee_semi_annual.id)
       allow(Condo).to receive(:find).and_return(condo)
       allow(UnitType).to receive(:find_all_by_condo).and_return(unit_types)
@@ -152,14 +152,14 @@ describe BaseFeeCalculator do
   end
 
   context '.check_limited_fees' do
-    xit 'retorna valores de uma taxa limitada' do
+    it 'retorna valores de uma taxa limitada mensal' do
       condo = Condo.new(id: 1, name: 'Prédio lindo', city: 'Cidade maravilhosa')
       unit_types = []
       unit_types << UnitType.new(id: 1, area: 30, description: 'Apartamento 1 quarto', ideal_fraction: 0.1,
                                  condo_id: 1)
       units = []
       units << Unit.new(id: 1, area: 100, floor: 1, number: 1, unit_type_id: 1)
-      base_fee = create(:base_fee, condo_id: 1, charge_day: Date.today, limited: true,
+      base_fee = create(:base_fee, condo_id: 1, charge_day: Time.zone.today, limited: true,
                                    installments: 10, recurrence: :monthly)
       create(:value, price_cents: 100_00, base_fee_id: base_fee.id)
       allow(Condo).to receive(:find).and_return(condo)
@@ -167,15 +167,44 @@ describe BaseFeeCalculator do
       allow(Unit).to receive(:find).and_return(units.first)
       allow(Unit).to receive(:find_all_by_condo).and_return(units)
 
-      travel_to 1.month.from_now do
-        fees = BaseFeeCalculator.total_value(unit_types.first)
-
-        expect(fees).to eq 100_00
+      10.times do |i|
+        travel_to Time.zone.today + (i + 1).months do
+          fees = BaseFeeCalculator.total_value(unit_types.first)
+          expect(fees).to eq 100_00
+        end
       end
 
-      travel_to 13.months.from_now do
+      travel_to Time.zone.today + 13.months do
         fees = BaseFeeCalculator.total_value(unit_types.first)
+        expect(fees).to eq 0
+      end
+    end
 
+    it 'retorna valores de uma taxa limitada bimestral' do
+      condo = Condo.new(id: 1, name: 'Prédio lindo', city: 'Cidade maravilhosa')
+      unit_types = []
+      unit_types << UnitType.new(id: 1, area: 30, description: 'Apartamento 1 quarto', ideal_fraction: 0.1,
+                                 condo_id: 1)
+      units = []
+      units << Unit.new(id: 1, area: 100, floor: 1, number: 1, unit_type_id: 1)
+      base_fee = create(:base_fee, condo_id: 1, charge_day: Time.zone.today, limited: true,
+                                   installments: 10, recurrence: :bimonthly)
+      create(:value, price_cents: 100_00, base_fee_id: base_fee.id)
+      allow(Condo).to receive(:find).and_return(condo)
+      allow(UnitType).to receive(:find_all_by_condo).and_return(unit_types)
+      allow(Unit).to receive(:find).and_return(units.first)
+      allow(Unit).to receive(:find_all_by_condo).and_return(units)
+
+      20.times do |i|
+        travel_to Time.zone.today + (i + 1).months do
+          fees = BaseFeeCalculator.total_value(unit_types.first)
+          expect(fees).to eq 0 if i.odd?
+          expect(fees).to eq 100_00 if i.even?
+        end
+      end
+
+      travel_to Time.zone.today + 13.months do
+        fees = BaseFeeCalculator.total_value(unit_types.first)
         expect(fees).to eq 0
       end
     end

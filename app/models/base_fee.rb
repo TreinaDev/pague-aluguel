@@ -5,12 +5,13 @@ class BaseFee < ApplicationRecord
   accepts_nested_attributes_for :values
   validates :name, :description, :charge_day, presence: true
   validates :interest_rate, numericality: { greater_than_or_equal_to: 0 }
-  validate :date_is_future?
+  validate :date_is_future?, on: :create
   validate :installments_apply?
   validates :installments, numericality: { greater_than: 0, allow_nil: true }
 
   enum status: {
     active: 0,
+    paid: 3,
     canceled: 5
   }
 
