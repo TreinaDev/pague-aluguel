@@ -53,6 +53,6 @@ class RentFeesController < ApplicationController
     owner_units = Unit.find_all_by_owner(current_property_owner.document_number)
     return if owner_units.any? { |unit| unit.id == @unit_id }
 
-    redirect_to(root_url, alert: 'Você não tem permissão para acessar essa página')
+    redirect_to(root_url, alert: I18n.t('messages.not_authorized'))
   end
 end

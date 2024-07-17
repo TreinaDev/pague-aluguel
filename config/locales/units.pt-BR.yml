@@ -17,4 +17,5 @@ pt-BR:
       fine: multa por atraso
       fine_interest: juros por atraso ao mês
       rent: Aluguel
-      
+      unit_not_found: Unidade não encontrada.
+      not_allowed: Você não tem permissão para acessar essa página
