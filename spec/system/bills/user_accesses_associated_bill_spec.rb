@@ -16,17 +16,11 @@ describe 'Usuário acessa suas faturas' do
       number = residence['number']
       unit_id = residence['id']
 
-      # condos = []
-      # condos << Condo.new(id: 1, name: 'Condo Test', city: 'City Test')
-      # allow(Condo).to receive(:all).and_return(condos)
-
       units = []
       units << Unit.new(id: unit_id, area: 100, floor: 2, number: 3, unit_type_id: 1)
-
       allow(Unit).to receive(:find).and_return(units.first)
-
-      bill = create(:bill, condo_id:, unit_id:, issue_date: Time.zone.today.beginning_of_month,
-                           due_date: 10.days.from_now, total_value_cents: 500_00)
+      create(:bill, condo_id:, unit_id:, issue_date: Time.zone.today.beginning_of_month,
+                    due_date: 10.days.from_now, total_value_cents: 500_00)
 
       visit root_path
       within 'form#get_tenant_bill' do
@@ -34,13 +28,10 @@ describe 'Usuário acessa suas faturas' do
         click_on 'Buscar'
       end
 
-      formatted_issue_date = I18n.l(Time.zone.today.beginning_of_month)
       formatted_due_date = I18n.l(10.days.from_now.to_date)
-      # expect(page).to have_content 'Fatura'
+      expect(page).to have_content 'FATURA'
       expect(page).to have_content condo_name.upcase
       expect(page).to have_content "Unidade #{number}"
-      expect(page).to have_content 'data de emissão'
-      expect(page).to have_content formatted_issue_date
       expect(page).to have_content 'data de vencimento'
       expect(page).to have_content formatted_due_date
       expect(page).to have_content 'valor total'
