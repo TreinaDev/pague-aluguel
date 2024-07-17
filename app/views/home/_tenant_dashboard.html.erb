@@ -12,10 +12,10 @@
 
   <% if @tenant %>
     <div>
-      <span class="d-block fs-4 mx-auto mt-3 text-uppercase">
+      <span class="d-block fs-4 text-center mt-3 text-uppercase">
         <%= Bill.model_name.human(count: 2) %>
       </span>
-      <span class="mx-auto text-uppercase fs-7 text-muted"><%= @tenant.residence["condo_name"] %></span>
+      <span class="d-block text-center text-uppercase fs-7 text-muted"><%= @tenant.name %></span>
 
       <div class="d-flex justify-content-center mt-4 mb-4">
         <% if @bills.any? %>

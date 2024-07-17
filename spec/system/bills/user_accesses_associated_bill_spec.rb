@@ -9,6 +9,7 @@ describe 'Usuário acessa suas faturas' do
       endpoint_route = "http://127.0.0.1:3000/api/v1/get_tenant_residence?registration_number=#{CPF.new(cpf).formatted}"
       allow(Faraday).to receive(:get).with(endpoint_route).and_return(response)
       residence = JSON.parse(response.body)['resident']['residence']
+      resident = JSON.parse(response.body)['resident']
 
       condo_id = residence['condo_id']
       condo_name = residence['condo_name']
@@ -46,7 +47,7 @@ describe 'Usuário acessa suas faturas' do
       formatted_due_date2 = due_date2.strftime("%d/%m/%Y")
       formatted_due_date3 = due_date3.strftime("%d/%m/%Y")
       expect(page).to have_content 'FATURA'
-      expect(page).to have_content condo_name.upcase
+      expect(page).to have_content resident['name'].upcase
       expect(page).to have_content "Unidade #{number}", count: 3
       expect(page).to have_content 'data de emissão', count: 3
       expect(page).to have_content formatted_issue_date1
