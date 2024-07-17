@@ -24,7 +24,7 @@ class RentFee < ApplicationRecord
   private
 
   def issue_date_is_future
-    return unless issue_date.present? && issue_date <= Time.zone.today
+    return if issue_date&.future?
 
     errors.add(:issue_date, ' deve ser futura.')
   end

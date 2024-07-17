@@ -30,17 +30,10 @@ class Unit
   def self.find(id)
     response = Faraday.get("#{Rails.configuration.api['base_url']}/units/#{id}")
     if response.success?
-      data = JSON.parse(response.body)
-      unit = build_unit(data)
+      data = JSON.parse(response.body, symbolize_names: true)
+      unit = Unit.new(data)
     end
     unit
-  end
-
-  def self.build_unit(data)
-    Unit.new(id: data['id'], area: data['area'], floor: data['floor'], number: data['number'],
-             unit_type_id: data['unit_type_id'], condo_name: data['condo_name'],
-             tenant_id: data['tenant_id'], owner_id: ['owner_id'], condo_id: data['condo_id'],
-             description: data['description'])
   end
 
   def self.find_all_by_condo(id)
