@@ -10,14 +10,15 @@ describe 'Admin visualiza listagem de cobranças avulsas' do
     unit_types << UnitType.new(id: 1, area: 40, description: 'Apartamento 1 quarto', ideal_fraction: 0.3, condo_id: 1)
     unit_types << UnitType.new(id: 2, area: 40, description: 'Apartamento 2 quarto', ideal_fraction: 0.7, condo_id: 2)
     units = []
-    units << Unit.new(id: 1, area: 40, floor: 1, number: 1, unit_type_id: 1)
-    units << Unit.new(id: 2, area: 40, floor: 1, number: 2, unit_type_id: 1)
-    units << Unit.new(id: 3, area: 40, floor: 1, number: 3, unit_type_id: 2)
+    units << Unit.new(id: 1, area: 100, floor: 1, number: '11', unit_type_id: 1, condo_id: 1,
+                      condo_name: 'Prédio lindo', tenant_id: 1, owner_id: 1, description: 'Com varanda')
+    units << Unit.new(id: 2, area: 200, floor: 1, number: '12', unit_type_id: 1, condo_id: 1,
+                      condo_name: 'Prédio lindo', tenant_id: 2, owner_id: 2, description: 'Com varanda')
+    units << Unit.new(id: 3, area: 300, floor: 1, number: '11', unit_type_id: 2, condo_id: 2,
+                      condo_name: 'Prédio lindo', tenant_id: 3, owner_id: 3, description: 'Com varanda')
     allow(Condo).to receive(:all).and_return(condos)
     allow(Condo).to receive(:find).and_return(condos.first)
     allow(UnitType).to receive(:all).and_return(unit_types)
-    allow(UnitType).to receive(:find).with(1).and_return(unit_types.first)
-    allow(UnitType).to receive(:find).with(2).and_return(unit_types.last)
     allow(Unit).to receive(:all).and_return(units)
     allow(Unit).to receive(:find).with(1).and_return(units.first)
     allow(Unit).to receive(:find).with(2).and_return(units.second)

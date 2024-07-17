@@ -6,9 +6,11 @@ describe 'API de Cobranças Avulsas' do
       condos = []
       condos << Condo.new(id: 1, name: 'Condo Test', city: 'City Test')
       unit_types = []
-      unit_types << UnitType.new(id: 1, area: 40, description: 'Apartamento 1 quarto', ideal_fraction: 0.5, condo_id: 1)
+      unit_types << UnitType.new(id: 1, description: 'Apartamento 1 quarto', metreage: 100, fraction: 1.0,
+                                 unit_ids: [1])
       units = []
-      units << Unit.new(id: 1, area: 40, floor: 1, number: 1, unit_type_id: 1)
+      units << Unit.new(id: 1, area: 100, floor: 1, number: '11', unit_type_id: 1, condo_id: 1,
+                        condo_name: 'Prédio lindo', tenant_id: 1, owner_id: 1, description: 'Com varanda')
       common_areas = []
       common_areas << CommonArea.new(id: 1, name: 'Academia',
                                      description: 'Uma academia raíz com ventilador apenas para os marombas',
@@ -16,7 +18,6 @@ describe 'API de Cobranças Avulsas' do
       allow(Condo).to receive(:all).and_return(condos)
       allow(Condo).to receive(:find).and_return(condos.first)
       allow(UnitType).to receive(:all).and_return(unit_types)
-      allow(UnitType).to receive(:find).and_return(unit_types.first)
       allow(Unit).to receive(:all).and_return(units)
       allow(Unit).to receive(:find).and_return(units.first)
       allow(CommonArea).to receive(:all).and_return(common_areas)
@@ -39,13 +40,14 @@ describe 'API de Cobranças Avulsas' do
       condos = []
       condos << Condo.new(id: 1, name: 'Condo Test', city: 'City Test')
       unit_types = []
-      unit_types << UnitType.new(id: 1, area: 40, description: 'Apartamento 1 quarto', ideal_fraction: 0.5, condo_id: 1)
+      unit_types << UnitType.new(id: 1, description: 'Apartamento 1 quarto', metreage: 100, fraction: 1.0,
+                                 unit_ids: [1])
       units = []
-      units << Unit.new(id: 1, area: 40, floor: 1, number: 1, unit_type_id: 1)
+      units << Unit.new(id: 1, area: 100, floor: 1, number: '11', unit_type_id: 1, condo_id: 1,
+                        condo_name: 'Prédio lindo', tenant_id: 1, owner_id: 1, description: 'Com varanda')
       allow(Condo).to receive(:all).and_return(condos)
       allow(Condo).to receive(:find).and_return(condos.first)
       allow(UnitType).to receive(:all).and_return(unit_types)
-      allow(UnitType).to receive(:find).and_return(unit_types.first)
       allow(Unit).to receive(:all).and_return(units)
       allow(Unit).to receive(:find).and_return(units.first)
       allow(CommonArea).to receive(:all).and_return([])
@@ -65,13 +67,14 @@ describe 'API de Cobranças Avulsas' do
       condos = []
       condos << Condo.new(id: 1, name: 'Condo Test', city: 'City Test')
       unit_types = []
-      unit_types << UnitType.new(id: 1, area: 40, description: 'Apartamento 1 quarto', ideal_fraction: 0.5, condo_id: 1)
+      unit_types << UnitType.new(id: 1, description: 'Apartamento 1 quarto', metreage: 100, fraction: 1.0,
+                                 unit_ids: [1])
       units = []
-      units << Unit.new(id: 1, area: 40, floor: 1, number: 1, unit_type_id: 1)
+      units << Unit.new(id: 1, area: 100, floor: 1, number: '11', unit_type_id: 1, condo_id: 1,
+                        condo_name: 'Prédio lindo', tenant_id: 1, owner_id: 1, description: 'Com varanda')
       allow(Condo).to receive(:all).and_return(condos)
       allow(Condo).to receive(:find).and_return(condos.first)
       allow(UnitType).to receive(:all).and_return(unit_types)
-      allow(UnitType).to receive(:find).and_return(unit_types.first)
       allow(Unit).to receive(:all).and_return(units)
       allow(Unit).to receive(:find).and_return(units.first)
       allow(CommonArea).to receive(:all).and_return([])
@@ -93,13 +96,14 @@ describe 'API de Cobranças Avulsas' do
       condos = []
       condos << Condo.new(id: 1, name: 'Condo Test', city: 'City Test')
       unit_types = []
-      unit_types << UnitType.new(id: 1, area: 40, description: 'Apartamento 1 quarto', ideal_fraction: 0.5, condo_id: 1)
+      unit_types << UnitType.new(id: 1, description: 'Apartamento 1 quarto', metreage: 100, fraction: 1.0,
+                                 unit_ids: [1])
       units = []
-      units << Unit.new(id: 1, area: 40, floor: 1, number: 1, unit_type_id: 1)
+      units << Unit.new(id: 1, area: 100, floor: 1, number: '11', unit_type_id: 1, condo_id: 1,
+                        condo_name: 'Prédio lindo', tenant_id: 1, owner_id: 1, description: 'Com varanda')
       allow(Condo).to receive(:all).and_return(condos)
       allow(Condo).to receive(:find).and_return(condos.first)
       allow(UnitType).to receive(:all).and_return(unit_types)
-      allow(UnitType).to receive(:find).and_return(unit_types.first)
       allow(Unit).to receive(:all).and_return(units)
       allow(Unit).to receive(:find).and_return(units.first)
       allow(CommonArea).to receive(:all).and_return([])
@@ -120,13 +124,14 @@ describe 'API de Cobranças Avulsas' do
       condos = []
       condos << Condo.new(id: 1, name: 'Condo Test', city: 'City Test')
       unit_types = []
-      unit_types << UnitType.new(id: 1, area: 40, description: 'Apartamento 1 quarto', ideal_fraction: 0.5, condo_id: 1)
+      unit_types << UnitType.new(id: 1, description: 'Apartamento 1 quarto', metreage: 100, fraction: 1.0,
+                                 unit_ids: [1])
       units = []
-      units << Unit.new(id: 1, area: 40, floor: 1, number: 1, unit_type_id: 1)
+      units << Unit.new(id: 1, area: 100, floor: 1, number: '11', unit_type_id: 1, condo_id: 1,
+                        condo_name: 'Prédio lindo', tenant_id: 1, owner_id: 1, description: 'Com varanda')
       allow(Condo).to receive(:all).and_return(condos)
       allow(Condo).to receive(:find).and_return(condos.first)
       allow(UnitType).to receive(:all).and_return(unit_types)
-      allow(UnitType).to receive(:find).and_return(unit_types.first)
       allow(Unit).to receive(:all).and_return(units)
       allow(Unit).to receive(:find).and_return(units.first)
       allow(CommonArea).to receive(:all).and_return([])
@@ -148,14 +153,15 @@ describe 'API de Cobranças Avulsas' do
       condos << Condo.new(id: 1, name: 'Condo Test', city: 'City Test')
       condos << Condo.new(id: 2, name: 'Condo Test 2', city: 'City Test 2')
       unit_types = []
-      unit_types << UnitType.new(id: 1, area: 40, description: 'Apartamento 1 quarto', ideal_fraction: 0.5, condo_id: 1)
+      unit_types << UnitType.new(id: 1, description: 'Apartamento 1 quarto', metreage: 100, fraction: 1.0,
+                                 unit_ids: [])
       units = []
-      units << Unit.new(id: 1, area: 40, floor: 1, number: 1, unit_type_id: 1)
+      units << Unit.new(id: 1, area: 100, floor: 1, number: '11', unit_type_id: 2, condo_id: 2,
+                        condo_name: 'Prédio lindo', tenant_id: 1, owner_id: 1, description: 'Com varanda')
       allow(Condo).to receive(:all).and_return(condos)
       allow(Condo).to receive(:find).and_return(condos.first)
       allow(UnitType).to receive(:all).and_return(unit_types)
-      allow(UnitType).to receive(:find).and_return(unit_types.first)
-      allow(Unit).to receive(:all).and_return(units)
+      allow(Unit).to receive(:all).and_return([])
       allow(Unit).to receive(:find).and_return(units.first)
       allow(CommonArea).to receive(:all).and_return([])
 
@@ -175,9 +181,11 @@ describe 'API de Cobranças Avulsas' do
       condos = []
       condos << Condo.new(id: 1, name: 'Condo Test', city: 'City Test')
       unit_types = []
-      unit_types << UnitType.new(id: 1, area: 40, description: 'Apartamento 1 quarto', ideal_fraction: 0.5, condo_id: 1)
+      unit_types << UnitType.new(id: 1, description: 'Apartamento 1 quarto', metreage: 100, fraction: 1.0,
+                                 unit_ids: [1])
       units = []
-      units << Unit.new(id: 1, area: 40, floor: 1, number: 1, unit_type_id: 1)
+      units << Unit.new(id: 1, area: 100, floor: 1, number: '11', unit_type_id: 1, condo_id: 1,
+                        condo_name: 'Prédio lindo', tenant_id: 1, owner_id: 1, description: 'Com varanda')
       common_areas = []
       common_areas << CommonArea.new(id: 1, name: 'Academia',
                                      description: 'Uma academia raíz com ventilador apenas para os marombas',
@@ -185,7 +193,6 @@ describe 'API de Cobranças Avulsas' do
       allow(Condo).to receive(:all).and_return(condos)
       allow(Condo).to receive(:find).and_return(condos.first)
       allow(UnitType).to receive(:all).and_return(unit_types)
-      allow(UnitType).to receive(:find).and_return(unit_types.first)
       allow(Unit).to receive(:all).and_return(units)
       allow(Unit).to receive(:find).and_return(units.first)
       allow(CommonArea).to receive(:all).and_return(common_areas)

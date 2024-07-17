@@ -98,15 +98,15 @@ RSpec.describe BaseFee, type: :model do
     it 'cria value para cada unit_type' do
       condo = Condo.new(id: 1, name: 'Prédio lindo', city: 'Cidade maravilhosa')
       unit_types = []
-      unit_types << UnitType.new(id: 1, area: 30, description: 'Apartamento 1 quarto', ideal_fraction: 222.2,
-                                 condo_id: 1)
-      unit_types << UnitType.new(id: 2, area: 45, description: 'Apartamento 2 quartos', ideal_fraction: 222.2,
-                                 condo_id: 1)
-      unit_types << UnitType.new(id: 3, area: 60, description: 'Apartamento 3 quartos', ideal_fraction: 222.2,
-                                 condo_id: 1)
+      unit_types << UnitType.new(id: 1, description: 'Apartamento 1 quarto', metreage: 100, fraction: 1.0,
+                                 unit_ids: [])
+      unit_types << UnitType.new(id: 2, description: 'Apartamento 2 quarto', metreage: 200, fraction: 2.0,
+                                 unit_ids: [])
+      unit_types << UnitType.new(id: 3, description: 'Apartamento 3 quarto', metreage: 300, fraction: 3.0,
+                                 unit_ids: [])
       base_fee = create(:base_fee, condo_id: 1)
       allow(Condo).to receive(:find).and_return(condo)
-      allow(UnitType).to receive(:find_all_by_condo).and_return(unit_types)
+      allow(UnitType).to receive(:all).and_return(unit_types)
 
       values = base_fee.value_builder
 

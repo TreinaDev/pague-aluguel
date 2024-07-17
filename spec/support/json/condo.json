@@ -1,5 +1,12 @@
 {
   "name": "Sai de Baixo",
-  "city": "Rio de Janeiro",
-  "id": "1"
+  "registration_number": "62.810.952/2718-22",
+  "address": {
+    "public_place": "Travessa João Edimar",
+    "number": "29",
+    "neighborhood": "João Eduardo II",
+    "city": "Rio Branco",
+    "state": "AC",
+    "zip": "69911-520"
+  }
 }

@@ -21,7 +21,6 @@ class BillsController < ApplicationController
   end
 
   def set_unit_type
-    unit = Unit.find(@bill.unit_id)
-    @unit_type = UnitType.find(unit.unit_type_id)
+    @unit = Unit.find(@bill.unit_id)
   end
 end
