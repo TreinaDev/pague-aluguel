@@ -20,10 +20,10 @@ describe 'Usuário acessa detalhes da fatura' do
       # condos << Condo.new(id: 1, name: 'Condo Test', city: 'City Test')
       # allow(Condo).to receive(:all).and_return(condos)
 
-      # units = []
-      # units << Unit.new(id: 1, area: 100, floor: 2, number: 3, unit_type_id: 1)
+      units = []
+      units << Unit.new(id: 1, area: 100, floor: 2, number: 3, unit_type_id: 1)
 
-      # allow(Unit).to receive(:find).and_return(units.first)
+      allow(Unit).to receive(:find).and_return(units.first)
 
       bill = create(:bill, condo_id:, unit_id:, issue_date: Time.zone.today.beginning_of_month,
                            due_date: 10.days.from_now, total_value_cents: 500_00)
