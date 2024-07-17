@@ -76,6 +76,7 @@ ActiveRecord::Schema[7.1].define(version: 2024_07_17_042832) do
     t.integer "recurrence", default: 0
     t.integer "condo_id"
     t.integer "installments"
+    t.integer "status", default: 0
   end
 
   create_table "bills", force: :cascade do |t|
@@ -85,6 +86,7 @@ ActiveRecord::Schema[7.1].define(version: 2024_07_17_042832) do
     t.integer "total_value_cents"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
+    t.integer "condo_id", null: false
   end
 
   create_table "common_area_fees", force: :cascade do |t|
@@ -154,6 +156,7 @@ ActiveRecord::Schema[7.1].define(version: 2024_07_17_042832) do
     t.integer "common_area_id"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
+    t.integer "status", default: 0
   end
 
   create_table "values", force: :cascade do |t|

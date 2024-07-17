@@ -216,9 +216,9 @@ Para testar a plataforma PagueAluguel como administrador ou proprietário de im�
 
 Você pode usar sites como [4Devs](https://www.4devs.com.br/) para gerar números válidos que podem ser usados para cadastro na plataforma.
 
-#Pague Aluguel API
+# APIs
 
-## Taxas de Áreas Comuns 
+### 1. Taxas de Áreas Comuns
 
 `GET /api/v1/condos/:id/common_area_fees`
 
@@ -226,8 +226,8 @@ Recebe como parâmetro `:id` de um condomínio, e retorna uma lista com **a últ
 Retorna:
 Caso o condomínio não possua nenhuma taxa cadastrada: `status: 200, json: []`
 Caso o condomínio possua alguma taxa cadastrada: `status: 200, json:`
-``` 
-[ 
+```
+[
   {
     "id":1,
     "value_cents":20000,
@@ -249,7 +249,7 @@ Caso o condomínio possua alguma taxa cadastrada: `status: 200, json:`
     "common_area_id":3,
     "condo_id":1
   }
-] 
+]
 ```
 
 `GET /api/v1/common_area_fees/:id`
@@ -258,13 +258,71 @@ Recebe como parâmetro o `:id` de uma taxa cadastrada e retorna **os detalhes da
 Retorna:
 Caso não exista taxa com o id informado: `status: 404, json: { "errors":"Não encontrado" } `
 Caso o condomínio possua alguma taxa cadastrada: `status: 200, json:`
-``` 
+```
 {
   "value_cents":20000,
   "created_at":"2024-07-11T21:09:13.019Z",
   "common_area_id":1,
   "condo_id":1
-} 
+}
+```
+
+### 2. Cobranças Avulsas
+
+`POST /api/v1/single_charges/?params`
+
+Expõe uma API endpoint de criação de model `single_charge`, válido para criação de Multas e Reservas de Áreas Comuns.
+
+Resposta para criação com sucesso: `status: 201` (:created)
+
+Resposta para falha na criação: `status: 422` (:unprocessable_entity)
+
+- São obrigatórios: `unit_id`, `condo_id`, `value_cents`, `issue_date`, `charge_type`
+- `issue_date` não pode estar no passado
+- se o `charge_type == common_area_fee`, a `common_area_id` é obrigatória
+- se o `charge_type == fine`, a `description` é obrigatória
+- a `unit_id` deve pertencer ao `condo_id` (unidade deve ser do condomínio)
+
+Recebe os seguintes parâmetros:
+```
+{ single_charge: {
+                  description: string,
+                  value_cents: integer,
+                  charge_type: enum (:fine ou :common_area_fee),
+                  issue_date: date,
+                  condo_id: integer,
+                  common_area_id: integer,
+                  unit_id: integer
+                  }
+}
+```
+
+Exemplo de cobrança avulsa (Multa):
+```
+{ single_charge: {
+                  description: 'Multa por barulho durante a madrugada',
+                  value_cents: 10000,
+                  charge_type: :fine,
+                  issue_date: 5.days.from_now.to_date,
+                  condo_id: 1,
+                  common_area_id: nil,
+                  unit_id: 1
+                  }
+}
+```
+
+Exemplo de cobrança avulsa (Reserva de Área Comum):
+```
+{ single_charge: {
+                  description: nil,
+                  value_cents: ~deve retornar do endpoint de taxas de áreas comuns~,
+                  charge_type: :common_area_fee,
+                  issue_date: 5.days.from_now.to_date,
+                  condo_id: 1,
+                  common_area_id: 2,
+                  unit_id: 1
+                  }
+}
 ```
 
 ## Desenvolvedores 🧑🏽‍💻🧑🏻‍💻🧑‍💻

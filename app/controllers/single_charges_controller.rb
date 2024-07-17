@@ -1,6 +1,6 @@
 class SingleChargesController < ApplicationController
   before_action :authenticate_admin!
-  before_action :set_condo, only: [:index, :show, :new, :create]
+  before_action :set_condo, only: [:index, :show, :new, :create, :cancel]
   before_action :set_common_areas, only: [:new, :create]
 
   def index
@@ -24,11 +24,17 @@ class SingleChargesController < ApplicationController
     @units = Unit.find_all_by_condo(@condo.id)
     @single_charge.condo_id = @condo.id
     if @single_charge.save
-      redirect_to condo_single_charge_path(@condo.id, @single_charge), notice: I18n.t('success_notice_single_charge')
+      redirect_to condo_path(@condo.id), notice: I18n.t('success_notice_single_charge')
     else
       flash.now[:alert] = I18n.t('fail_notice_single_charge')
       render :new, status: :unprocessable_entity
     end
+  end
+
+  def cancel
+    @single_charge = SingleCharge.find(params[:id])
+    @single_charge.canceled!
+    redirect_to condo_single_charges_path(@condo.id), notice: "#{@single_charge.charge_type} cancelada com sucesso."
   end
 
   private
