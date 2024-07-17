@@ -39,12 +39,12 @@ describe 'Usuário acessa suas faturas' do
         click_on 'Buscar'
       end
 
-      formatted_issue_date1 = I18n.l(issue_date1)
-      formatted_issue_date2 = I18n.l(issue_date2)
-      formatted_issue_date3 = I18n.l(issue_date3)
-      formatted_due_date1 = I18n.l(due_date1)
-      formatted_due_date2 = I18n.l(due_date2)
-      formatted_due_date3 = I18n.l(due_date3)
+      formatted_issue_date1 = issue_date1.strftime("%d/%m/%Y")
+      formatted_issue_date2 = issue_date2.strftime("%d/%m/%Y")
+      formatted_issue_date3 = issue_date3.strftime("%d/%m/%Y")
+      formatted_due_date1 = due_date1.strftime("%d/%m/%Y")
+      formatted_due_date2 = due_date2.strftime("%d/%m/%Y")
+      formatted_due_date3 = due_date3.strftime("%d/%m/%Y")
       expect(page).to have_content 'FATURA'
       expect(page).to have_content condo_name.upcase
       expect(page).to have_content "Unidade #{number}", count: 3
@@ -69,6 +69,7 @@ describe 'Usuário acessa suas faturas' do
       endpoint_route = "http://127.0.0.1:3000/api/v1/get_tenant_residence?registration_number=#{CPF.new(cpf).formatted}"
       allow(Faraday).to receive(:get).with(endpoint_route).and_return(response)
       residence = JSON.parse(response.body)['resident']['residence']
+      resident = JSON.parse(response.body)['resident']
 
       condo_id = residence['condo_id']
       condo_name = residence['condo_name']
@@ -91,6 +92,14 @@ describe 'Usuário acessa suas faturas' do
       end
 
       click_on number.to_s
+
+      expect(page).to have_content CPF.new(cpf).formatted
+      expect(page).to have_content resident['name']
+      expect(page).to have_content condo_name
+      expect(page).to have_content Time.zone.today.beginning_of_month.strftime("%d/%m/%Y")
+      expect(page).to have_content 10.days.from_now.strftime("%d/%m/%Y")
+      expect(page).to have_content number
+      expect(page).to have_content 'R$500,00'
     end
   end
 end

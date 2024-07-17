@@ -1,10 +1,11 @@
 class Tenant
-  attr_accessor :name, :tenant_id, :residence
+  attr_accessor :name, :tenant_id, :residence, :document_number
 
   def initialize(resident = {})
     @name = resident[:name]
     @tenant_id = resident[:tenant_id]
     @residence = resident[:residence]
+    @document_number = resident[:document_number]
   end
 
   def self.find(document_number:)
@@ -13,7 +14,7 @@ class Tenant
 
     if response.success?
       data = JSON.parse(response.body)['resident']
-      tenant = Tenant.new(name: data['name'], tenant_id: data['tenant_id'], residence: data['residence'])
+      tenant = Tenant.new(name: data['name'], tenant_id: data['tenant_id'], residence: data['residence'], document_number: document_number)
     end
     tenant
   end

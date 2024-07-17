@@ -30,7 +30,8 @@ class HomeController < ApplicationController
   end
 
   def tenant_bill
-    
+    @tenant = Tenant.find(document_number: params[:tenant_document_number])
+    set_bill(params[:bill_id])
   end
 
   def choose_profile; end
@@ -63,5 +64,9 @@ class HomeController < ApplicationController
 
   def find_bills
     @bills = Bill.where(unit_id: @tenant.residence['id'])
+  end
+
+  def set_bill(bill_id)
+    @bill = Bill.find(bill_id)
   end
 end
