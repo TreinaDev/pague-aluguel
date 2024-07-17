@@ -144,7 +144,9 @@ describe 'Usuário acessa suas faturas' do
   context 'e falha' do
     it 'quando o cpf é inválido' do
       cpf = '11111111111'
-      double('response', success?: false, status: 412)
+      response = double('response', success?: false, status: 412)
+      endpoint_route = "http://127.0.0.1:3000/api/v1/get_tenant_residence?registration_number=#{CPF.new(cpf).formatted}"
+      allow(Faraday).to receive(:get).with(endpoint_route).and_return(response)
 
       visit root_path
       within 'form#get_tenant_bill' do
@@ -157,7 +159,9 @@ describe 'Usuário acessa suas faturas' do
 
     it 'quando o cpf válido não é encontrado no sistema' do
       cpf = CPF.generate
-      double('response', success?: false, status: 404)
+      response = double('response', success?: false, status: 404)
+      endpoint_route = "http://127.0.0.1:3000/api/v1/get_tenant_residence?registration_number=#{CPF.new(cpf).formatted}"
+      allow(Faraday).to receive(:get).with(endpoint_route).and_return(response)
 
       visit root_path
       within 'form#get_tenant_bill' do
