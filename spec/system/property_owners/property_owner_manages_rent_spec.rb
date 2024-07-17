@@ -155,7 +155,8 @@ describe 'Proprietário configura aluguel' do
 
     units = []
     units << Unit.new(id: 3, area: 120, floor: 3, number: 4, unit_type_id: 2, owner_name: 'Jules',
-                      tenant_id: 2, owner_id: property_owner.id, description: 'Apartamento 2 quartos', condo_name: 'Condo Test')
+                      tenant_id: 2, owner_id: property_owner.id, description: 'Apartamento 2 quartos',
+                      condo_name: 'Condo Test')
     allow(Unit).to receive(:find_all_by_owner).with(cpf).and_return(units)
     allow(Unit).to receive(:find).with('3').and_return(units.first)
 

@@ -1,10 +1,8 @@
 class UnitsController < ApplicationController
-  before_action :verify_ownership
-  # before_action :set_unit
+  before_action :set_unit, only: [:show]
+  before_action :verify_ownership, only: [:show]
 
-  def show
-    @unit = Unit.find(params[:id])
-  end
+  def show; end
 
   private
 
@@ -12,7 +10,7 @@ class UnitsController < ApplicationController
     @unit = Unit.find(params[:id])
     return unless @unit.nil? || @unit.id.nil?
 
-    redirect_to(root_url, alert: 'Unidade não encontrada.')
+    redirect_to(root_url, alert: I18n.t('views.show.unit_not_found'))
   end
 
   def verify_ownership
@@ -21,6 +19,6 @@ class UnitsController < ApplicationController
     owner_units = Unit.find_all_by_owner(current_property_owner.document_number)
     return if owner_units.any? { |unit| unit.id == @unit.id }
 
-    redirect_to(root_url, alert: 'Você não tem permissão para acessar essa página')
+    redirect_to(root_url, alert: I18n.t('views.show.not_allowed'))
   end
 end

@@ -4,9 +4,9 @@
     <span><%= I18n.t('views.show.unit_section_title') %></span>
   </div>
 
-   <div class="d-flex gap-2 flex-wrap">
+   <div class="d-flex gap-2 flex-wrap justify-content-center">
     <% if @units.any? %>
-      <% @first_units.each do |unit| %>
+      <% @units.each do |unit| %>
        <%= link_to unit_path(unit.id), class: "text-decoration-none", data: { turbo_frame: "modal" } do %>
           <div class="card hover-strong shadow-sm" style="width: 18rem;" id=<%= "unit-#{unit.id}"%>>
             <div class="card-body">

@@ -25,6 +25,7 @@ pt-BR:
     registered_fee: Aluguel cadastrado com sucesso!
     registration_fee_error: Não foi possível cadastrar o aluguel.
     updated_fee: Aluguel atualizado com sucesso!
+    not_authorized: Você não tem permissão para acessar essa página
   views:
     edit:
       edit_fee: "Atualizar Taxa de %{name}"
