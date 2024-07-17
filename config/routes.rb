@@ -14,7 +14,12 @@ Rails.application.routes.draw do
     resources :common_areas, only: [:index, :show] do
       resources :common_area_fees, only: [:new, :create]
     end
-    resources :base_fees, only: [:new, :create, :show, :index]
+
+    resources :base_fees, only: [:new, :create, :show, :index] do
+      post 'cancel', on: :member
+    end
+    
+    resources :bills, only: [:show, :index]
 
     get 'search', on: :collection
 
@@ -22,7 +27,9 @@ Rails.application.routes.draw do
       post 'cancel', on: :member
     end
 
-    resources :single_charges, only: [:show, :new, :create, :index]
+    resources :single_charges, only: [:show, :new, :create, :index] do
+      post 'cancel', on: :member
+    end
   end
 
   namespace :api do
@@ -31,6 +38,7 @@ Rails.application.routes.draw do
         resources :common_area_fees, only: [:index]
       end
       resources :common_area_fees, only: [:show]
+      resources :single_charges, only: [:create]
     end
   end
 

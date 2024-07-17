@@ -3,8 +3,9 @@ require 'rails_helper'
 RSpec.describe GenerateMonthlyBillJob, type: :job do
   context 'gera faturas automaticamente' do
     it 'e envia fatura mensal pra um condominio' do
+      condo = Condo.new(id: 1, name: 'Prédio lindo', city: 'Cidade maravilhosa')
       condos = []
-      condos << Condo.new(id: 1, name: 'Prédio lindo', city: 'Cidade maravilhosa')
+      condos << condo
       unit_types = []
       unit_types << UnitType.new(id: 1, description: 'Apartamento 1 quarto', metreage: 100, fraction: 1.0,
                                  unit_ids: [1])
@@ -25,7 +26,7 @@ RSpec.describe GenerateMonthlyBillJob, type: :job do
 
       travel_to 35.days.from_now do
         units.each do |unit|
-          GenerateMonthlyBillJob.perform_now(unit)
+          GenerateMonthlyBillJob.perform_now(unit, condo.id)
         end
 
         expect(Bill.count).to eq 1
@@ -82,10 +83,12 @@ RSpec.describe GenerateMonthlyBillJob, type: :job do
 
       travel_to 35.days.from_now do
         first_units.each do |unit|
-          GenerateMonthlyBillJob.perform_now(unit)
+          condo_id = first_unit_types.first.condo_id
+          GenerateMonthlyBillJob.perform_now(unit, condo_id)
         end
         second_units.each do |unit|
-          GenerateMonthlyBillJob.perform_now(unit)
+          condo_id = second_unit_types.first.condo_id
+          GenerateMonthlyBillJob.perform_now(unit, condo_id)
         end
 
         expect(Bill.count).to eq 4
@@ -124,7 +127,8 @@ RSpec.describe GenerateMonthlyBillJob, type: :job do
 
       travel_to 35.days.from_now do
         units.each do |unit|
-          GenerateMonthlyBillJob.perform_now(unit)
+          condo_id = unit_types.first.condo_id
+          GenerateMonthlyBillJob.perform_now(unit, condo_id)
         end
 
         expect(Bill.count).to eq 1
@@ -161,7 +165,8 @@ RSpec.describe GenerateMonthlyBillJob, type: :job do
 
       travel_to 65.days.from_now do
         units.each do |unit|
-          GenerateMonthlyBillJob.perform_now(unit)
+          condo_id = unit_types.first.condo_id
+          GenerateMonthlyBillJob.perform_now(unit, condo_id)
         end
 
         expect(Bill.count).to eq 1
@@ -198,7 +203,8 @@ RSpec.describe GenerateMonthlyBillJob, type: :job do
 
       travel_to 10.days.from_now do
         units.each do |unit|
-          GenerateMonthlyBillJob.perform_now(unit)
+          condo_id = unit_types.first.condo_id
+          GenerateMonthlyBillJob.perform_now(unit, condo_id)
         end
 
         expect(Bill.count).to eq 1

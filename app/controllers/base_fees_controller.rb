@@ -1,6 +1,6 @@
 class BaseFeesController < ApplicationController
   before_action :authenticate_admin!
-  before_action :set_condo, only: [:new, :create, :index]
+  before_action :set_condo, only: [:new, :create, :index, :cancel]
 
   def index
     @base_fees = BaseFee.where(condo_id: @condo.id)
@@ -29,6 +29,12 @@ class BaseFeesController < ApplicationController
       flash.now[:alert] = I18n.t 'fail_notice_base_fee'
       render :new, status: :unprocessable_entity
     end
+  end
+
+  def cancel
+    @base_fee = BaseFee.find(params[:id])
+    @base_fee.canceled!
+    redirect_to condo_base_fees_path(@condo.id), notice: "#{@base_fee.name} cancelada com sucesso."
   end
 
   private

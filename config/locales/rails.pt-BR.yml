@@ -2,6 +2,9 @@ pt-BR:
   cancel-button: 'Cancelar'
   admin_description: para gerenciamento de condomínios e pagamentos
   property_description: para gerenciamento de seus imóveis
+  confirm-cancel: Tem certeza que deseja cancelar esse item? Essa ação não poderá ser desfeita.
+  common-area-fee-charge-success: Cobrança de Taxa de área comum criada com sucesso.
+  fine-charge-success: Cobrança de Multa criada com sucesso.
   activerecord:
     errors:
       messages:

@@ -21,6 +21,8 @@ Bundler.require(*Rails.groups)
 module PagueAluguel
   class Application < Rails::Application
     # Initialize configuration defaults for originally generated Rails version.
+    config.time_zone = 'America/Sao_Paulo'
+
     config.api = config_for(:api)
 
     config.load_defaults 7.1

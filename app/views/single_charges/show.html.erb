@@ -8,6 +8,16 @@
                 <%= Unit.find(@single_charge.unit_id).number %>
      </span>
     <hr>
+
+    <div class="d-flex justify-content-center align-items-center">
+      <% if @single_charge.active? %>
+        <span class="badge text-bg-success fs-4 text-uppercase ls-4"><%= I18n.t("single_charge.statuses.#{@single_charge.status}") %></span>
+      <% else %>
+        <span class="badge text-bg-danger fs-4 text-uppercase ls-4"><%= I18n.t("single_charge.statuses.#{@single_charge.status}") %></span>
+      <% end %>
+    </div>
+
+    <hr>
     <span class="fs-6 text-center d-block"><%= I18n.t 'activerecord.attributes.single_charge.charge_type' %>:</span>
     <span class="fs-4 text-center d-block"><%= I18n.t "single_charge.#{@single_charge.charge_type}" %></span>
 
@@ -39,6 +49,14 @@
         <%= I18n.l(@single_charge.issue_date.to_date) %>
       </span>
     </div>
+
+    <% if @single_charge.active? %>
+    <hr>
+      <%= button_to cancel_condo_single_charge_path(@condo.id, @single_charge), class: "d-flex align-items-center btn hover-danger mx-auto", data: { turbo_confirm: I18n.t('confirm-cancel') } do %>
+        <%= image_tag "block-icon", size: "16" %>
+        <span class="ms-1 fs-7 text-uppercase"><%= I18n.t('cancel-button') %></span>
+      <% end %>
+    <% end %>
 
   </div>
 <% end %>

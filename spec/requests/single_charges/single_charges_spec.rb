@@ -31,7 +31,7 @@ describe 'Usuário cria uma cobrança avulsa' do
                                     common_area_id: nil } })
 
     expect(SingleCharge.last).not_to eq nil
-    expect(response).to redirect_to condo_single_charge_path(condos.first.id, SingleCharge.last.id)
+    expect(response).to redirect_to condo_path(condos.first.id)
   end
 
   it 'sem autorização' do

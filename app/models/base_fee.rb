@@ -9,6 +9,11 @@ class BaseFee < ApplicationRecord
   validate :installments_apply?
   validates :installments, numericality: { greater_than: 0, allow_nil: true }
 
+  enum status: {
+    active: 0,
+    canceled: 5
+  }
+
   monetize :late_fine_cents,
            allow_nil: false,
            numericality: {
