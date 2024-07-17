@@ -13,7 +13,7 @@ describe 'usuario loga como admin' do
     end
     click_on 'Administrador'
 
-    within 'form' do
+    within 'form#new_admin' do
       fill_in 'E-mail', with: 'admin@mail.com'
       fill_in 'Senha', with: '123456'
       click_on 'Login'
@@ -38,7 +38,7 @@ describe 'usuario loga como admin' do
     end
     click_on 'Administrador'
 
-    within 'form' do
+    within 'form#new_admin' do
       fill_in 'E-mail', with: 'xuxu@mail.com'
       fill_in 'Senha', with: '123456'
       click_on 'Login'
