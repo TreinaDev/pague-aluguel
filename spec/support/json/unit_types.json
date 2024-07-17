@@ -3,18 +3,33 @@
     "id": 1,
     "metreage": 1000,
     "description": "something",
-    "fraction": 10.1
+    "fraction": 10.1,
+    "unit_ids": [
+      1,
+      3,
+      5
+    ]
   },
   {
     "id": 2,
     "metreage": 2000,
     "description": "another thing",
-    "fraction": 20.2
+    "fraction": 20.2,
+    "unit_ids": [
+      30,
+      32,
+      34
+    ]
   },
   {
     "id": 3,
     "metreage": 3000,
     "description": "yet another thing",
-    "fraction": 30.3
+    "fraction": 30.3,
+    "unit_ids": [
+      56,
+      58,
+      60
+    ]
   }
 ]
