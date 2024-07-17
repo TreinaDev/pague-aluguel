@@ -2,6 +2,8 @@ pt-BR:
   views:
     index:
       no_bills: Nenhuma fatura encontrada.
+      document_number_not_found: Seu CPF não foi encontrado.
+      document_number_not_valid: Esse CPF não é válido.
   activerecord:
     models:
       bill:

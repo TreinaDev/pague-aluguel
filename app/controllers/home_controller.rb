@@ -1,6 +1,11 @@
 class HomeController < ApplicationController
   before_action :authenticate_admin!, only: [:search]
 
+  rescue_from Tenant::DocumentNumberNotFoundError, Tenant::DocumentNumberNotValidError do |exception|
+    flash[:alert] = exception.message
+    redirect_to root_path
+  end
+
   def index
     if property_owner_signed_in?
       first_units
@@ -22,16 +27,12 @@ class HomeController < ApplicationController
   def find_tenant
     tenant_document_number = params[:get_tenant_bill]
     @tenant = Tenant.find(document_number: tenant_document_number)
-    if @tenant.nil?
-      redirect_to root_path, notice: 'Seu CPF não foi encontrado.'
-    else
-      render :index, locals: { tenant: @tenant, bills: find_bills }
-    end
+    render :index, locals: { tenant: @tenant, bills: find_bills }
   end
 
   def tenant_bill
     @tenant = Tenant.find(document_number: params[:tenant_document_number])
-    set_bill(params[:bill_id])
+    find_bill(params[:bill_id])
   end
 
   def choose_profile; end
@@ -66,7 +67,7 @@ class HomeController < ApplicationController
     @bills = Bill.where(unit_id: @tenant.residence['id'])
   end
 
-  def set_bill(bill_id)
+  def find_bill(bill_id)
     @bill = Bill.find(bill_id)
   end
 end

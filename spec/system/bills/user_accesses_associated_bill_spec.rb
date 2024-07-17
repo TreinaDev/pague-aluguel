@@ -40,12 +40,12 @@ describe 'Usuário acessa suas faturas' do
         click_on 'Buscar'
       end
 
-      formatted_issue_date1 = issue_date1.strftime("%d/%m/%Y")
-      formatted_issue_date2 = issue_date2.strftime("%d/%m/%Y")
-      formatted_issue_date3 = issue_date3.strftime("%d/%m/%Y")
-      formatted_due_date1 = due_date1.strftime("%d/%m/%Y")
-      formatted_due_date2 = due_date2.strftime("%d/%m/%Y")
-      formatted_due_date3 = due_date3.strftime("%d/%m/%Y")
+      formatted_issue_date1 = issue_date1.strftime('%d/%m/%Y')
+      formatted_issue_date2 = issue_date2.strftime('%d/%m/%Y')
+      formatted_issue_date3 = issue_date3.strftime('%d/%m/%Y')
+      formatted_due_date1 = due_date1.strftime('%d/%m/%Y')
+      formatted_due_date2 = due_date2.strftime('%d/%m/%Y')
+      formatted_due_date3 = due_date3.strftime('%d/%m/%Y')
       expect(page).to have_content 'FATURA'
       expect(page).to have_content resident['name'].upcase
       expect(page).to have_content "Unidade #{number}", count: 3
@@ -97,8 +97,8 @@ describe 'Usuário acessa suas faturas' do
       expect(page).to have_content CPF.new(cpf).formatted
       expect(page).to have_content resident['name']
       expect(page).to have_content condo_name
-      expect(page).to have_content Time.zone.today.beginning_of_month.strftime("%d/%m/%Y")
-      expect(page).to have_content 10.days.from_now.strftime("%d/%m/%Y")
+      expect(page).to have_content Time.zone.today.beginning_of_month.strftime('%d/%m/%Y')
+      expect(page).to have_content 10.days.from_now.strftime('%d/%m/%Y')
       expect(page).to have_content number
       expect(page).to have_content 'R$500,00'
       expect(page).to have_content 'Taxa Condominial'.downcase
@@ -141,6 +141,33 @@ describe 'Usuário acessa suas faturas' do
       expect(page).not_to have_content condo_name
       expect(page).not_to have_content 'Taxa Condominial'.downcase
       expect(page).not_to have_content 'Conta Compartilhada'.downcase
+    end
+  end
+  context 'e falha' do
+    it 'quando o cpf é inválido' do
+      cpf = '11111111111'
+      response = double('response', success?: false, status: 412)
+
+      visit root_path
+      within 'form#get_tenant_bill' do
+        cpf.each_char { |char| find(:css, "input[id$='get_tenant_bill']").send_keys(char) }
+        click_on 'Buscar'
+      end
+
+      expect(page).to have_content I18n.t('views.index.document_number_not_valid')
+    end
+
+    it 'quando o cpf válido não é encontrado no sistema' do
+      cpf = CPF.generate
+      response = double('response', success?: false, status: 404)
+
+      visit root_path
+      within 'form#get_tenant_bill' do
+        cpf.each_char { |char| find(:css, "input[id$='get_tenant_bill']").send_keys(char) }
+        click_on 'Buscar'
+      end
+
+      expect(page).to have_content I18n.t('views.index.document_number_not_found')
     end
   end
 end
