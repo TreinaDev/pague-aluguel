@@ -2,6 +2,7 @@ pt-BR:
   deactivate-rent-button: Desativar Cobrança
   cancel-rent-confim: Você tem certeza que deseja desativar a cobrança? Essa ação não poderá ser desfeita.
   canceled: Desativado
+  active: Ativo
   activemodel:
     models:
       rent_fee:

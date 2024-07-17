@@ -53,7 +53,7 @@
         </div>
 
       <% else %>
-        <%= link_to 'Configurar Aluguel', new_unit_rent_fee_path(@unit.id) %>
+        <%= link_to 'Configurar Aluguel', new_unit_rent_fee_path(@unit.id), class: "btn btn-primary mb-1 mt-2" %>
       <% end %>
     <% end %>
 

@@ -182,7 +182,9 @@ describe 'Proprietário configura aluguel' do
 
     login_as property_owner, scope: :property_owner
     visit unit_path(2)
-    click_on 'Desativar Cobrança'
+    accept_confirm do
+      click_on 'Desativar Cobrança'
+    end
 
     expect(page).to have_content 'Aluguel desativado com sucesso!'
     within 'div#unit-modal' do

@@ -5,8 +5,11 @@ class RentFeesController < ApplicationController
 
   def deactivate
     @rent_fee = RentFee.find(params[:id])
-    @rent_fee.update_column(:status, RentFee.statuses[:canceled])
-    redirect_to unit_path(@rent_fee.unit_id), notice: I18n.t('messages.deactivated_fee')
+    if @rent_fee.update(status: RentFee.statuses[:canceled])
+      redirect_to unit_path(@rent_fee.unit_id), notice: I18n.t('messages.deactivated_fee')
+    else
+      redirect_to unit_path(@rent_fee.unit_id), alert: @rent_fee.errors.full_messages.to_sentence
+    end
   end
 
   def new
