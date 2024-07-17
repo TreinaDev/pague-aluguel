@@ -6,11 +6,15 @@
       <div class="mt-3 alert alert-success text-center" role="alert"><%= notice %></div>
     <% end %>
 
+    
     <span class="fs-3 text-center d-block"><%= @unit.description %></span>
     <span class="fs-7 text-center d-block"><%= @unit.condo_name %></span>
     
     <hr>
 
+    <span class="d-block text-center"><%= @unit.set_status %></span>
+
+    <hr>
     <% if @unit.unit_has_tenant? %>
       <% if @unit.unit_rent_fee.present? %>
       <% rent = @unit.unit_rent_fee%>

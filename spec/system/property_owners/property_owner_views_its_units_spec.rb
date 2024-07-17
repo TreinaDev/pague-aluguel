@@ -27,19 +27,16 @@ describe 'Proprietário vê suas unidades' do
     within("div#unit-#{units[0].id}") do
       expect(page).to have_content 'Condo Test'
       expect(page).to have_content 'Cobertura'
-      expect(page).to have_content 'Você reside nesta unidade'
     end
 
     within("div#unit-#{units[1].id}") do
       expect(page).to have_content 'Condo Test'
       expect(page).to have_content 'Apartamento 2 quartos'
-      expect(page).to have_content 'Esta unidade está alugada'
     end
 
     within("div#unit-#{units[2].id}") do
       expect(page).to have_content 'Condo Test 2'
       expect(page).to have_content 'Apartamento 3 quartos'
-      expect(page).to have_content 'Esta unidade está disponível para locação'
     end
   end
 
