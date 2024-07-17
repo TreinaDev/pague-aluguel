@@ -143,6 +143,8 @@ p "Created #{SharedFee.count} shared fees"
 Bill.create!(
   unit_id: 97,
   condo_id: 2,
+  base_fee_value_cents: 250,
+  shared_fee_value_cents: 750,
   total_value_cents: 1000,
   issue_date: Time.zone.today.beginning_of_month,
   due_date: 10.days.from_now,
@@ -150,6 +152,8 @@ Bill.create!(
 Bill.create!(
   unit_id: 97,
   condo_id: 2,
+  base_fee_value_cents: 500,
+  shared_fee_value_cents: 1500,
   total_value_cents: 2000,
   issue_date: 30.days.ago.beginning_of_month,
   due_date: 20.days.ago,
@@ -157,6 +161,8 @@ Bill.create!(
 Bill.create!(
   unit_id: 97,
   condo_id: 2,
+  base_fee_value_cents: 750,
+  shared_fee_value_cents: 2250,
   total_value_cents: 3000,
   issue_date: 60.days.ago.beginning_of_month,
   due_date: 50.days.ago,
