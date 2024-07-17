@@ -10,7 +10,7 @@ pt-BR:
   views:
     show:
       unit_section_title: Unidades
-      unit: Número da unidade
+      unit: Unidade
       situation: Situação
       rent_value: valor do aluguel
       issue_date: data de emissão

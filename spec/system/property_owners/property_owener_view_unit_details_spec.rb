@@ -23,6 +23,7 @@ describe 'Proprietário vee detalhes da sua unidade' do
 
     within('div#unit-modal') do
       expect(page).to have_content 'Apartamento 2 quartos'
+      expect(page).to have_content 'Unidade 4'
       expect(page).to have_content 'Condo Test'
       expect(page).to have_link 'Configurar Aluguel'
       expect(page).to have_content 'Esta unidade está alugada'
@@ -51,6 +52,7 @@ describe 'Proprietário vee detalhes da sua unidade' do
 
     within('div#unit-modal') do
       expect(page).to have_content 'Apartamento 2 quartos'
+      expect(page).to have_content 'Unidade 4'
       expect(page).to have_content 'Condo Test'
       expect(page).not_to have_link 'Configurar Aluguel'
       expect(page).to have_content 'Esta unidade está disponível para locação'
@@ -79,6 +81,7 @@ describe 'Proprietário vee detalhes da sua unidade' do
 
     within('div#unit-modal') do
       expect(page).to have_content 'Apartamento 2 quartos'
+      expect(page).to have_content 'Unidade 4'
       expect(page).to have_content 'Condo Test'
       expect(page).not_to have_link 'Configurar Aluguel'
       expect(page).to have_content 'Você reside nesta unidade'
