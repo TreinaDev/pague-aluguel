@@ -1,10 +1,10 @@
-<div class="card border-0 rounded-0 bg-off-white mt-4 py-3 px-3">
+<div class="card border-0 rounded-0 bg-off-white mt-4 py-3 px-3 mb-5">
   <div class="mb-3">
     <%= image_tag "document-search-icon", size: '25', class: 'mb-1' %>
     <span class="text-muted">Acesso às faturas para moradores</span>
   </div>
   <%= form_with url: find_tenant_path, method: :get, id: "get_tenant_bill" do |f| %>
-    <div class="d-flex mt-3 w-50 mx-auto">
+    <div class="d-flex mt-3 w-50 mx-auto mb-3">
       <%= f.text_field :get_tenant_bill, placeholder: "informe seu cpf", class: "form-control me-2", data: { controller: 'masked-document-number' } %>
       <%= f.submit 'Buscar', class: "btn btn-primary text-uppercase fs-7 ls-3" %>
     </div>
@@ -12,7 +12,7 @@
 
   <% if @tenant %>
     <div>
-      <span class="d-block fs-4 text-center mt-3 text-uppercase">
+      <span class="d-block fs-4 text-center text-uppercase">
         <%= Bill.model_name.human(count: 2) %>
       </span>
       <span class="d-block text-center text-uppercase fs-7 text-muted"><%= @tenant.name %></span>
