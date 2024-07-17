@@ -39,7 +39,7 @@
             </div>
             <span>
               <%= I18n.t('activerecord.attributes.single_charge.unit_id') %> 
-              <%= Unit.find(single_charge.unit_id).identifier %>
+              <%= humanized_unit(single_charge.unit_id) %>
             </span>
             <span class="d-block">
               <%= single_charge.description %>

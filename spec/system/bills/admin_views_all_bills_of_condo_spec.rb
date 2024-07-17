@@ -17,8 +17,7 @@ describe 'Admin vê todos os faturas de um condomínio' do
     allow(Condo).to receive(:find).and_return(condos[1])
     allow(CommonArea).to receive(:all).and_return([])
     allow(UnitType).to receive(:all).and_return(unit_types)
-    # allow(UnitType).to receive(:find).and_return(unit_types.last)
-    allow(Unit).to receive(:find_all_by_condo).and_return(units)
+    allow(Unit).to receive(:all).and_return(units)
     allow(Unit).to receive(:find).with(1).and_return(units.first)
     allow(Unit).to receive(:find).with(2).and_return(units.second)
 
