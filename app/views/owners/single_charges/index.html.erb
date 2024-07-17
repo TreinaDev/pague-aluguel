@@ -1,0 +1,10 @@
+<div>
+  <% @single_charges.each do |charge| %>
+    <div>
+      <%= charge.description %>
+      <%= charge.value.format %>
+      Data de Emissão: <%= I18n.l(charge.issue_date) %>
+      <%= I18n.t "single_charge.#{charge.charge_type}"%>
+    </div>
+  <% end %>
+</div>

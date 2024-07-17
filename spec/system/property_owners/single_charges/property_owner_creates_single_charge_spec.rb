@@ -17,6 +17,7 @@ describe 'Proprietario cria cobrança avulsa' do
                       condo_name: 'Condo Test')
     allow(Unit).to receive(:find_all_by_owner).and_return(units)
     allow(Unit).to receive(:find).and_return(units[0])
+    allow(Unit).to receive(:all).and_return(units)
 
     login_as property_owner, scope: :property_owner
     visit root_path
@@ -28,12 +29,10 @@ describe 'Proprietario cria cobrança avulsa' do
     fill_in 'Valor', with: '105,59'
     fill_in 'Data de Emissão', with: 5.days.from_now.to_date
     click_on 'Cadastrar'
-    allow(Unit).to receive(:find).and_return(units[0])
-
 
     expect(page).to have_content 'Cobrança Avulsa cadastrada com sucesso!'
+    expect(current_path).to eq owners_single_charges_path
     expect(page).to have_content 'Outros'
-    expect(page).to have_content 'Unidade 44'
     expect(page).to have_content 'Acordo entre proprietário e morador'
     expect(page).to have_content 'Data de Emissão'
     expect(page).to have_content I18n.l(5.days.from_now.to_date)

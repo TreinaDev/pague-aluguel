@@ -44,7 +44,7 @@ Rails.application.routes.draw do
   end
 
   namespace :owners do
-    resources :single_charges, only: [:new, :create]
+    resources :single_charges, only: [:index, :new, :create]
   end
 
   resources :units, only: [:show] do
