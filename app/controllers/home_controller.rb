@@ -23,9 +23,10 @@ class HomeController < ApplicationController
     tenant_document_number = params[:get_tenant_bill]
     @tenant = Tenant.find(document_number: tenant_document_number)
     if @tenant.nil?
-      flash[:alert] = 'Seu CPF não foi encontrado.'
+      redirect_to root_path, notice: 'Seu CPF não foi encontrado.'
+    else
+      render :index, locals: { tenant: @tenant, bills: find_bills }
     end
-    render 'index', locals: { tenant: @tenant, bills: find_bills }
   end
 
   def choose_profile; end

@@ -1,7 +1,7 @@
 pt-BR:
   views:
     index:
-      no_bills: Nenhuma fatura encontrada
+      no_bills: Nenhuma fatura encontrada.
   activerecord:
     models:
       bill:
