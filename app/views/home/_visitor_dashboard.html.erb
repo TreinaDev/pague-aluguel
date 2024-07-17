@@ -11,12 +11,11 @@
   <% end %>
 
   <% if @tenant %>
-    <div class="">
-      <span>PAGOS</span>
-      <span class="fs-4 mx-auto mt-3 text-uppercase">
+    <div>
+      <span class="d-block fs-4 mx-auto mt-3 text-uppercase">
         <%= Bill.model_name.human(count: 2) %>
       </span>
-      <span class="mx-auto text-uppercase fs-7 text-muted"><%= @condo.name %></span>
+      <span class="mx-auto text-uppercase fs-7 text-muted"><%= @tenant.residence[:condo_name] %></span>
 
       <div class="d-flex justify-content-center mt-4 mb-4">
         <% if @bills.any? %>
@@ -43,9 +42,6 @@
           <p><%= I18n.t('views.index.no_bills') %></p>
         <% end %>
       </div>
-    </div>
-    <div class="">
-      <span>NÃO PAGOS</span>
     </div>
   <% end %>
 </div>

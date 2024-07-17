@@ -3,6 +3,4 @@ class Bill < ApplicationRecord
 
   monetize :total_value_cents
 
-  def self.find_all_by_tenant()
-  end
 end

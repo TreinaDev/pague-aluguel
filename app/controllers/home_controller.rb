@@ -25,7 +25,7 @@ class HomeController < ApplicationController
     if @tenant.nil?
       flash[:alert] = 'Seu CPF não foi encontrado.'
     end
-    render 'index', locals: { tenant: @tenant }
+    render 'index', locals: { tenant: @tenant, bills: find_bills }
   end
 
   def choose_profile; end
@@ -57,6 +57,6 @@ class HomeController < ApplicationController
   end
 
   def find_bills
-    @bills = Bill.find_all_by_tenant(@tenant.residence.id)
+    @bills = Bill.where(unit_id: @tenant.residence[:id])
   end
 end
