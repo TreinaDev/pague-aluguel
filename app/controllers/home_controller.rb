@@ -60,7 +60,6 @@ class HomeController < ApplicationController
 
   def first_units
     @units = Unit.find_all_by_owner(current_property_owner.document_number)
-    @first_units = @units.take(4)
   end
 
   def find_bills
