@@ -28,7 +28,7 @@ class Unit
   end
 
   def self.find(unit_id)
-    response = Faraday.get("#{Rails.configuration.api['base_url']}/api/v1/units/#{unit_id}")
+    response = Faraday.get("#{Rails.configuration.api['base_url']}/units/#{unit_id}")
     return [] unless response.success?
 
     data = JSON.parse(response.body)
