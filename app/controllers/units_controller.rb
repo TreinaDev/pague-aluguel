@@ -8,7 +8,7 @@ class UnitsController < ApplicationController
 
   def set_unit
     @unit = Unit.find(params[:id])
-    return unless @unit.nil? || @unit.id.nil?
+    return unless @unit.nil? && @unit.id.nil?
 
     redirect_to(root_url, alert: 'Unidade não encontrada.')
   end

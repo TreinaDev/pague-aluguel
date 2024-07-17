@@ -35,7 +35,9 @@ Rails.application.routes.draw do
   end
 
   resources :units, only: [:show] do
-    resources :rent_fees, only: [:new, :create, :edit, :update]
+    resources :rent_fees, only: [:new, :create, :edit, :update] do
+      post 'deactivate', on: :member
+    end
   end
 
   authenticate :admin do

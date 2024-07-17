@@ -148,11 +148,9 @@ describe 'Proprietário configura aluguel' do
     allow(Faraday).to receive(:get).and_return(instance_double('Faraday::Response', success?: true))
     property_owner = create(:property_owner, email: 'propertyownertest@mail.com', password: '123456',
                                              document_number: cpf)
-
     condos = []
     condos << Condo.new(id: 1, name: 'Condo Test', city: 'City Test')
     allow(Condo).to receive(:all).and_return(condos)
-
     units = []
     units << Unit.new(id: 3, area: 120, floor: 3, number: 4, unit_type_id: 2, owner_name: 'Jules',
                       tenant_id: 2, owner_id: property_owner.id, description: 'Apartamento 2 quartos', condo_name: 'Condo Test')
@@ -163,5 +161,34 @@ describe 'Proprietário configura aluguel' do
     visit unit_path(3)
 
     expect(page).not_to have_content('Você não tem permissão para acessar essa página')
+  end
+
+  it 'e desativa cobrança do aluguel da unidade' do
+    cpf = CPF.generate
+    allow(Faraday).to receive(:get).and_return(instance_double('Faraday::Response', success?: true))
+    property_owner = create(:property_owner, email: 'propertyownertest@mail.com', password: '123456',
+                                             document_number: cpf)
+    condos = []
+    condos << Condo.new(id: 1, name: 'Condo Test', city: 'City Test')
+    allow(Condo).to receive(:all).and_return(condos)
+    units = []
+    units << Unit.new(id: 2, area: 120, floor: 3, number: 4, unit_type_id: 2, owner_name: 'Jules',
+                      tenant_id: nil, owner_id: 1, description: 'Apartamento 2 quartos', condo_name: 'Condo Test')
+    allow(Unit).to receive(:find_all_by_owner).and_return(units)
+    allow(Unit).to receive(:find).and_return(units[0])
+    RentFee.create!(owner_id: 1, tenant_id: 2, unit_id: 2, value_cents: 120_000, issue_date: 2.days.from_now.to_date,
+                    fine_cents: 5000, fine_interest: 10, condo_id: 1)
+
+    login_as property_owner, scope: :property_owner
+    visit unit_path(2)
+    click_on 'Desativar Cobrança'
+
+    expect(page).to have_content 'Aluguel desativado com sucesso!'
+    within 'div#unit-modal' do
+      expect(page).to have_content 'Esta unidade está disponível para locação'
+      expect(page).to have_content 'status da cobrança'
+      expect(page).to have_content 'Desativado'
+      expect(page).not_to have_content 'DESATIVAR COBRANÇA'
+    end
   end
 end

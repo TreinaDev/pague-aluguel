@@ -3,6 +3,12 @@ class RentFeesController < ApplicationController
   before_action :set_unit, only: [:new, :create, :edit, :update]
   before_action :verify_ownership, only: [:new, :create, :edit, :update]
 
+  def deactivate
+    @rent_fee = RentFee.find(params[:id])
+    @rent_fee.update_column(:status, RentFee.statuses[:canceled])
+    redirect_to unit_path(@rent_fee.unit_id), notice: I18n.t('messages.deactivated_fee')
+  end
+
   def new
     @rent_fee = RentFee.new
   end

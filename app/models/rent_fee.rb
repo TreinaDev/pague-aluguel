@@ -13,4 +13,9 @@ class RentFee < ApplicationRecord
            numericality: {
              greater_than_or_equal_to: 0
            }
+
+  enum status: {
+    active: 0,
+    canceled: 5
+  }
 end

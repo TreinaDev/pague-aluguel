@@ -27,6 +27,10 @@
 
         <div class="px-5">
           <div class=" d-flex justify-content-between">
+            <span class="text-muted text-lowercase fs-8"><%= I18n.t('views.show.status') %></span>
+            <span><%= I18n.t( rent.status ) %></span>
+          </div>
+          <div class=" d-flex justify-content-between">
             <span class="text-muted text-lowercase fs-8"><%= I18n.t('views.show.rent_value') %></span>
             <span><%= rent.value.format %></span>
           </div>
@@ -48,12 +52,25 @@
         </div>
 
       <% else %>
-        <div class="text-center">
-          <%= link_to 'Configurar Aluguel', new_unit_rent_fee_path(@unit.id), class: "btn btn-primary mb-1 mt-2" %>
-        </div>
+        <%= link_to 'Configurar Aluguel', new_unit_rent_fee_path(@unit.id) %>
       <% end %>
     <% end %>
 
+    <% if @unit.unit_rent_fee.present? && !@unit.unit_has_tenant? %>
+      <% rent = @unit.unit_rent_fee %>
+      <div class="d-flex justify-content-between">
+        <div class=" d-flex justify-content-between">
+          <span class="text-muted text-lowercase fs-8"><%= I18n.t('views.show.status') %></span>
+          <span><%= I18n.t( rent.status ) %></span>
+        </div>
+        <% if rent.active? %>
+          <%= button_to deactivate_unit_rent_fee_path(@unit.id, rent.id), class: "d-flex align-items-center btn hover-danger mx-auto", data: { turbo_confirm: I18n.t('cancel-rent-confim') } do %>
+            <%= image_tag "block-icon", alt: "Deactivate", size: "16" %>
+            <span class="ms-1 fs-7 text-uppercase"><%= I18n.t('deactivate-rent-button') %></span>
+          <% end %>
+        <% end %>
+      </div>
+    <% end %>
   </div>
 <% end %>
 

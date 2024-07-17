@@ -1,4 +1,7 @@
 pt-BR:
+  deactivate-rent-button: Desativar Cobrança
+  cancel-rent-confim: Você tem certeza que deseja desativar a cobrança? Essa ação não poderá ser desfeita.
+  canceled: Desativado
   activemodel:
     models:
       rent_fee:
@@ -25,6 +28,7 @@ pt-BR:
     registered_fee: Aluguel cadastrado com sucesso!
     registration_fee_error: Não foi possível cadastrar o aluguel.
     updated_fee: Aluguel atualizado com sucesso!
+    deactivated_fee: Aluguel desativado com sucesso!
   views:
     edit:
       edit_fee: "Atualizar Taxa de %{name}"
@@ -34,6 +38,7 @@ pt-BR:
       no_fee: Taxa não cadastrada
       no_rent_fee: Nenhum Aluguel cadastrado.
     show:
+      status: Status da Cobrança
       rent_fee: Taxa de Aluguel
       description: Descrição
       capacity: Capacidade Máxima
@@ -44,3 +49,6 @@ pt-BR:
       fee: Taxa
       new_fee: Cadastrar Taxa
       update_date: Data de Alteração
+    deactivate_rent_fee: Desativar Cobrança
+    activate_rent_fee: Ativar Cobrança
+    manage_rent_fee: Configurar Aluguel
