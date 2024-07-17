@@ -9,5 +9,5 @@
 <% end %>
 
 <% unless admin_signed_in? || property_owner_signed_in? %>
-  <%= render 'home/visitor_dashboard' %>
+  <%= render 'home/tenant_dashboard' %>
 <% end %>

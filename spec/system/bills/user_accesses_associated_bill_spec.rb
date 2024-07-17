@@ -12,15 +12,26 @@ describe 'Usuário acessa suas faturas' do
 
       condo_id = residence['condo_id']
       condo_name = residence['condo_name']
-      floor = residence['floor']
       number = residence['number']
       unit_id = residence['id']
 
       units = []
       units << Unit.new(id: unit_id, area: 100, floor: 2, number: 3, unit_type_id: 1)
       allow(Unit).to receive(:find).and_return(units.first)
-      create(:bill, condo_id:, unit_id:, issue_date: Time.zone.today.beginning_of_month,
-                    due_date: 10.days.from_now, total_value_cents: 500_00)
+
+      issue_date1 = Time.zone.today.beginning_of_month
+      issue_date2 = 30.days.ago.beginning_of_month
+      issue_date3 = 60.days.ago.beginning_of_month
+      due_date1 = 10.days.from_now
+      due_date2 = 20.days.ago
+      due_date3 = 50.days.ago
+
+      create(:bill, condo_id:, unit_id:, issue_date: issue_date1,
+                    due_date: due_date1, total_value_cents: 500_00)
+      create(:bill, condo_id:, unit_id:, issue_date: issue_date2,
+                    due_date: due_date2, total_value_cents: 600_00)
+      create(:bill, condo_id:, unit_id:, issue_date: issue_date3,
+                    due_date: due_date3, total_value_cents: 700_00)
 
       visit root_path
       within 'form#get_tenant_bill' do
@@ -28,15 +39,29 @@ describe 'Usuário acessa suas faturas' do
         click_on 'Buscar'
       end
 
-      formatted_due_date = I18n.l(10.days.from_now.to_date)
+      formatted_issue_date1 = I18n.l(issue_date1)
+      formatted_issue_date2 = I18n.l(issue_date2)
+      formatted_issue_date3 = I18n.l(issue_date3)
+      formatted_due_date1 = I18n.l(due_date1)
+      formatted_due_date2 = I18n.l(due_date2)
+      formatted_due_date3 = I18n.l(due_date3)
       expect(page).to have_content 'FATURA'
       expect(page).to have_content condo_name.upcase
-      expect(page).to have_content "Unidade #{number}"
-      expect(page).to have_content 'data de vencimento'
-      expect(page).to have_content formatted_due_date
-      expect(page).to have_content 'valor total'
+      expect(page).to have_content "Unidade #{number}", count: 3
+      expect(page).to have_content 'data de emissão', count: 3
+      expect(page).to have_content formatted_issue_date1
+      expect(page).to have_content formatted_issue_date2
+      expect(page).to have_content formatted_issue_date3
+      expect(page).to have_content 'data de vencimento', count: 3
+      expect(page).to have_content formatted_due_date1
+      expect(page).to have_content formatted_due_date2
+      expect(page).to have_content formatted_due_date3
+      expect(page).to have_content 'valor total', count: 3
       expect(page).to have_content 'R$500,00'
+      expect(page).to have_content 'R$600,00'
+      expect(page).to have_content 'R$700,00'
     end
+
     it 'e clica em uma' do
       cpf = CPF.generate
       data = Rails.root.join('spec/support/json/tenant.json').read

@@ -30,7 +30,7 @@ class HomeController < ApplicationController
   end
 
   def tenant_bill
-    puts params
+    
   end
 
   def choose_profile; end
