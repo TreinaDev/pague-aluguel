@@ -1,0 +1,53 @@
+<%= turbo_frame_tag "modal" do %>
+  <div class="dean-modal modal-md">
+    <%= link_to "", :back, class: "btn btn-close btn-sm" %>
+    <span class="fs-5 text-center d-block"><%= I18n.t('activemodel.models.rent_fee.one') %></span>
+    <span class="fs-3 text-center d-block"><%= @unit.description %></span>
+    <span class="fs-5 text-center text-muted d-block"><%= I18n.t('views.show.unit')%> <%= @unit.number %></span>
+    <span class="fs-7 text-center d-block"><%= @unit.condo_name %></span>
+
+    <hr>
+    <% if @rent_fee.errors.any? %>
+      <div class="alert alert-danger" role="alert">
+        <p><%= I18n.t('errors.messages.verify_error') %></p>
+        <ul>
+          <% @rent_fee.errors.full_messages.each do |msg| %>
+            <li><%= msg %></li>
+          <% end %>
+        </ul>
+      </div>
+    <% end %>
+
+    <%= form_with model: @rent_fee, url: unit_rent_fee_path(@unit_id) do |f| %>
+      <%= f.hidden_field :unit_id, value: @unit.id %>
+      <%= f.hidden_field :owner_id, value: @unit.owner_id %>
+      <%= f.hidden_field :condo_id, value: @unit.condo_id %>
+      <%= f.hidden_field :tenant_id, value: @unit.tenant_id %>
+
+      <div class="form-floating mt-3">
+        <%= f.text_field :value, placeholder: '0,00', class: "form-control" %>
+        <%= f.label :value, class: "form-label" %>
+      </div>
+
+      <div class="form-floating mt-3">
+        <%= f.date_field :issue_date, class: "form-control" %>
+        <%= f.label :issue_date, class: "form-label" %>
+      </div>
+
+      <div class="form-floating mt-3">
+        <%= f.text_field :fine, placeholder: '0,00', class: "form-control" %>
+        <%= f.label :fine, class: "form-label" %>
+      </div>
+
+      <div class="form-floating mt-3">
+        <%= f.number_field :fine_interest, placeholder: '0,00', class: "form-control" %>
+        <%= f.label :fine_interest, class: "form-label" %>
+      </div>
+
+      <div class="mt-3 d-flex justify-content-end">
+        <%= f.submit I18n.t('helpers.submit.update'), class: "btn btn-primary fs-7 text-uppercase ls-3 me-1" %>
+        <%= link_to I18n.t('helpers.submit.cancel'), unit_path(@unit_id), class: "btn btn-danger fs-7 text-uppercase ls-3" %>
+      </div>
+    <% end %>
+  </div>
+<% end %>

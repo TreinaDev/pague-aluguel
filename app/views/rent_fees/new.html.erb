@@ -1,0 +1,23 @@
+<%= turbo_frame_tag "modal" do %>
+  <div class="dean-modal modal-md">
+    <%= link_to "", :back, class: "btn btn-close btn-sm" %>
+    <span class="fs-5 text-center d-block"><%= I18n.t('activemodel.models.rent_fee.one') %></span>
+    <span class="fs-3 text-center d-block"><%= @unit.description %></span>
+    <span class="fs-5 text-center text-muted d-block"><%= I18n.t('views.show.unit')%> <%= @unit.number %></span>
+    <span class="fs-7 text-center d-block"><%= @unit.condo_name %></span>
+   
+    <hr>
+    <% if @rent_fee.errors.any? %>
+      <div class="alert alert-danger" role="alert">
+        <p><%= I18n.t('errors.messages.verify_error') %></p>
+        <ul>
+          <% @rent_fee.errors.full_messages.each do |msg| %>
+            <li><%= msg %></li>
+          <% end %>
+        </ul>
+      </div>
+    <% end %>
+
+    <%= render "new_form" %>
+  </div>
+<% end %>

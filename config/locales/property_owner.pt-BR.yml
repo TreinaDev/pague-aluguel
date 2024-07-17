@@ -16,3 +16,6 @@ pt-BR:
       profile_section_title: Perfil
       no_units: Não possui unidades associadas.
       unit: Unidade
+      owner_tenant: Você reside nesta unidade
+      no_tenant: Esta unidade está disponível para locação
+      has_tenant: Esta unidade está alugada
