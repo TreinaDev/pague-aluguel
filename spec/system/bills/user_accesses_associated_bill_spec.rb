@@ -6,7 +6,7 @@ describe 'Usuário acessa detalhes da fatura' do
       cpf = CPF.generate
       data = Rails.root.join('spec/support/json/tenant.json').read
       response = double('response', success?: true, body: data)
-      endpoint_route = "http://127.0.0.1:3000/api/v1/get_tenant_residence?registration_number={#{cpf}}"
+      endpoint_route = "http://127.0.0.1:3000/api/v1/get_tenant_residence?registration_number=#{CPF.new(cpf).formatted}"
       allow(Faraday).to receive(:get).with(endpoint_route).and_return(response)
       residence = JSON.parse(response.body)['resident']['residence']
 
@@ -30,7 +30,7 @@ describe 'Usuário acessa detalhes da fatura' do
 
       visit root_path
       within 'form#get_tenant_bill' do
-        fill_in 'informe seu cpf', with: cpf
+        cpf.each_char { |char| find(:css, "input[id$='get_tenant_bill']").send_keys(char) }
         click_on 'Buscar'
       end
 
