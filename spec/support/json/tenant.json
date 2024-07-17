@@ -1,0 +1,17 @@
+{
+  "resident": {
+     "name": "fulano",
+     "tenant_id": 5,
+     "residence": {
+         "id": 4,
+         "area": 100,
+         "floor": 2,
+         "number": 23,
+         "unit_type_id": 2,
+         "description": "Apartamento de 1 quarto",
+         "condo_id": 3,
+         "condo_name": "Condomínio Residencial Silveira",
+         "owner_id": 3
+          }
+     }
+}

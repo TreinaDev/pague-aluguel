@@ -13,6 +13,9 @@ application.register("change-button", ChangeButtonController)
 import DocumentNumberController from "./document_number_controller"
 application.register("document-number", DocumentNumberController)
 
+import MaskedDocumentNumberController from "./masked_document_number_controller"
+application.register("masked-document-number", MaskedDocumentNumberController)
+
 import ModalNoticeController from "./modal_notice_controller"
 application.register("modal-notice", ModalNoticeController)
 
