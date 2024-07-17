@@ -1,5 +1,3 @@
-# rubocop:disable Metrics/MethodLength, Metrics/AbcSize
-
 class Unit
   attr_accessor :id, :area, :floor, :number, :unit_type_id, :condo_id, :tenant_id, :owner_id, :description, :condo_name
 
@@ -11,7 +9,6 @@ class Unit
     @unit_type_id = params[:unit_type_id]
     @tenant_id = params[:tenant_id]
     @owner_id = params[:owner_id]
-    @owner_name = params[:owner_name]
     @description = params[:description]
     @condo_name = params[:condo_name]
     @condo_id = params[:condo_id]
@@ -34,12 +31,16 @@ class Unit
     response = Faraday.get("#{Rails.configuration.api['base_url']}/units/#{id}")
     if response.success?
       data = JSON.parse(response.body)
-      unit = Unit.new(id: data['id'], area: data['area'], floor: data['floor'], number: data['number'],
-                      unit_type_id: data['unit_type_id'], condo_name: data['condo_name'],
-                      tenant_id: data['tenant_id'], owner_id: ['owner_id'], condo_id: data['condo_id'],
-                      description: data['description'])
+      unit = build_unit(data)
     end
     unit
+  end
+
+  def self.build_unit(data)
+    Unit.new(id: data['id'], area: data['area'], floor: data['floor'], number: data['number'],
+             unit_type_id: data['unit_type_id'], condo_name: data['condo_name'],
+             tenant_id: data['tenant_id'], owner_id: ['owner_id'], condo_id: data['condo_id'],
+             description: data['description'])
   end
 
   def self.find_all_by_condo(id)
@@ -54,6 +55,15 @@ class Unit
 
     data = JSON.parse(response.body)
     build_owner_units(data)
+  end
+
+  def self.build_owner_units(data)
+    data['resident']['properties'].map do |unit|
+      Unit.new(id: unit['id'], area: unit['area'], floor: unit['floor'], number: unit['number'],
+               unit_type_id: unit['unit_type_id'], condo_name: unit['condo_name'], condo_id: data['condo_id'],
+               tenant_id: unit['tenant_id'], owner_id: data['resident']['owner_id'],
+               description: unit['description'])
+    end
   end
 
   def identifier
@@ -72,18 +82,7 @@ class Unit
     tenant_id.present? && owner_id != tenant_id
   end
 
-  def self.build_owner_units(data)
-    data['resident']['properties'].map do |unit|
-      Unit.new(id: unit['id'], area: unit['area'], floor: unit['floor'], number: unit['number'],
-               unit_type_id: unit['unit_type_id'], condo_name: unit['condo_name'], condo_id: data['condo_id'],
-               tenant_id: unit['tenant_id'], owner_id: data['resident']['owner_id'],
-               owner_name: data['resident']['name'], description: unit['description'])
-    end
-  end
-
   def unit_rent_fee
     RentFee.find_by(unit_id: id)
   end
 end
-
-# rubocop:enable Metrics/MethodLength, Metrics/AbcSize
