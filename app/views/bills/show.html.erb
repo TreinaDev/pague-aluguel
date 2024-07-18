@@ -44,11 +44,11 @@
     <p class="text-center text-muted fs-7">Pagamento</p>
     <div class="d-flex justify-content-center gap-2 mb-2">
       <% if @bill.pending? %>
-        <span class="badge bg-warning text-dark fs-7"><%= I18n.t('views.show.pending') %></span>
+        <span class="badge text-bg-danger text-uppercase fs-7"><%= I18n.t('views.show.pending') %></span>
       <% elsif @bill.awaiting? %>
-        <span class="badge bg-info text-dark fs-7"><%= I18n.t('views.show.awaiting') %></span>
+        <span class="badge text-bg-warning text-uppercase fs-7"><%= I18n.t('views.show.awaiting') %></span>
       <% else %>
-        <span class="badge bg-success text-dark fs-7"><%= I18n.t('views.show.paid') %></span>
+        <span class="badge text-bg-success text-uppercase fs-7"><%= I18n.t('views.show.paid') %></span>
       <% end %>
     </div>
 
