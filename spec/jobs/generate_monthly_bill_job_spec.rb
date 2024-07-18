@@ -13,7 +13,7 @@ RSpec.describe GenerateMonthlyBillJob, type: :job do
       units << Unit.new(id: 1, area: 100, floor: 1, number: '11', unit_type_id: 1, condo_id: 1,
                         condo_name: 'Prédio lindo', tenant_id: 1, owner_id: 1, description: 'Com varanda')
 
-      shared_fee = create(:shared_fee, description: 'Descrição', issue_date: 10.days.from_now.to_date,
+      shared_fee = create(:shared_fee, description: 'Descrição', issue_date: Time.zone.now,
                                        total_value: 30_000_00, condo_id: condos.first.id)
       create(:shared_fee_fraction, shared_fee:, unit_id: 1, value_cents: 300_00)
       base_fee = create(:base_fee, condo_id: 1)
@@ -24,7 +24,7 @@ RSpec.describe GenerateMonthlyBillJob, type: :job do
       allow(Unit).to receive(:find).and_return(units.first)
       allow(Unit).to receive(:all).and_return(units)
 
-      travel_to 35.days.from_now do
+      travel_to 1.month.from_now do
         units.each do |unit|
           GenerateMonthlyBillJob.perform_now(unit, condo.id)
         end
@@ -58,9 +58,9 @@ RSpec.describe GenerateMonthlyBillJob, type: :job do
                                condo_name: 'Outro prédio', tenant_id: 2, owner_id: 3, description: 'Com varanda')
       second_units << Unit.new(id: 4, area: 400, floor: 4, number: '41', unit_type_id: 2, condo_id: 2,
                                condo_name: 'Outro prédio', tenant_id: 2, owner_id: 4, description: 'Com varanda')
-      first_shared_fee = create(:shared_fee, description: 'Conta de Luz', issue_date: 10.days.from_now.to_date,
+      first_shared_fee = create(:shared_fee, description: 'Conta de Luz', issue_date: Time.zone.now,
                                              total_value: 30_000_00, condo_id: condos.first.id)
-      second_shared_fee = create(:shared_fee, description: 'Conta de Agua', issue_date: 5.days.from_now.to_date,
+      second_shared_fee = create(:shared_fee, description: 'Conta de Agua', issue_date: Time.zone.now,
                                               total_value: 25_000_00, condo_id: condos.last.id)
       create(:shared_fee_fraction, shared_fee: first_shared_fee,
                                    unit_id: 1, value_cents: 111_00)
@@ -83,7 +83,7 @@ RSpec.describe GenerateMonthlyBillJob, type: :job do
                                                second_units.last)
       allow(Unit).to receive(:all).and_return(first_units, second_units)
 
-      travel_to 35.days.from_now do
+      travel_to 1.month.from_now do
         first_units.each do |unit|
           condo_id = first_unit_types.first.condo_id
           GenerateMonthlyBillJob.perform_now(unit, condo_id)
@@ -120,12 +120,12 @@ RSpec.describe GenerateMonthlyBillJob, type: :job do
       units = []
       units << Unit.new(id: 1, area: 100, floor: 1, number: '11', unit_type_id: 1, condo_id: 1,
                         condo_name: 'Prédio lindo', tenant_id: 1, owner_id: 1, description: 'Com varanda')
-      shared_fee = create(:shared_fee, description: 'Descrição', issue_date: 10.days.from_now.to_date,
+      shared_fee = create(:shared_fee, description: 'Descrição', issue_date: Time.zone.now,
                                        total_value: 30_000_00, condo_id: condos.first.id)
       create(:shared_fee_fraction, shared_fee:, unit_id: 1, value_cents: 300_00)
-      first_base_fee = create(:base_fee, condo_id: 1, recurrence: :monthly, charge_day: 10.days.from_now)
-      second_base_fee = create(:base_fee, condo_id: 1, recurrence: :biweekly, charge_day: 2.days.from_now)
-      third_base_fee = create(:base_fee, condo_id: 1, recurrence: :monthly, charge_day: 45.days.from_now)
+      first_base_fee = create(:base_fee, condo_id: 1, recurrence: :monthly, charge_day: Time.zone.now)
+      second_base_fee = create(:base_fee, condo_id: 1, recurrence: :biweekly, charge_day: Time.zone.now)
+      third_base_fee = create(:base_fee, condo_id: 1, recurrence: :monthly, charge_day: 2.months.from_now)
       create(:value, price_cents: 100_00, base_fee_id: first_base_fee.id)
       create(:value, price_cents: 200_00, base_fee_id: second_base_fee.id)
       create(:value, price_cents: 90_00, base_fee_id: third_base_fee.id)
@@ -135,7 +135,7 @@ RSpec.describe GenerateMonthlyBillJob, type: :job do
       allow(Unit).to receive(:find).and_return(units.first)
       allow(Unit).to receive(:all).and_return(units)
 
-      travel_to 35.days.from_now do
+      travel_to 1.month.from_now do
         units.each do |unit|
           condo_id = unit_types.first.condo_id
           GenerateMonthlyBillJob.perform_now(unit, condo_id)
@@ -165,11 +165,10 @@ RSpec.describe GenerateMonthlyBillJob, type: :job do
                                               total_value: 13_000_00, condo_id: condos.first.id)
       create(:shared_fee_fraction, shared_fee: first_shared_fee, unit_id: 1, value_cents: 200_00)
       create(:shared_fee_fraction, shared_fee: second_shared_fee, unit_id: 1, value_cents: 130_00)
-      first_base_fee = create(:base_fee, condo_id: 1, recurrence: :monthly, charge_day: Time.zone.now)
+      first_base_fee = create(:base_fee, condo_id: 1, recurrence: :yearly, charge_day: Time.zone.now)
       second_base_fee = create(:base_fee, condo_id: 1, recurrence: :monthly, charge_day: 1.month.from_now)
       create(:value, price_cents: 150_00, base_fee_id: first_base_fee.id)
       create(:value, price_cents: 111_11, base_fee_id: second_base_fee.id)
-      allow(Condo).to receive(:all).and_return(condos)
       allow(Condo).to receive(:find).and_return(condos.first)
       allow(UnitType).to receive(:all).and_return(unit_types)
       allow(Unit).to receive(:find).and_return(units.first)
@@ -187,6 +186,38 @@ RSpec.describe GenerateMonthlyBillJob, type: :job do
         expect(Bill.first.total_value_cents).to eq 241_11
         expect(Bill.first.base_fee_value_cents).to eq 111_11
         expect(Bill.first.shared_fee_value_cents).to eq 130_00
+      end
+    end
+
+    it 'e retorna os valores de todas as contas fixas mensais' do
+      condos = []
+      condos << Condo.new(id: 1, name: 'Prédio lindo', city: 'Cidade maravilhosa')
+      unit_types = []
+      unit_types << UnitType.new(id: 1, description: 'Apartamento 1 quarto', metreage: 100, fraction: 1.0,
+                                 unit_ids: [1])
+      units = []
+      units << Unit.new(id: 1, area: 100, floor: 1, number: 1, unit_type_id: 1)
+      first_base_fee = create(:base_fee, condo_id: 1, recurrence: :monthly, charge_day: Time.zone.now)
+      second_base_fee = create(:base_fee, condo_id: 1, recurrence: :monthly, charge_day: 1.month.from_now)
+      third_base_fee = create(:base_fee, condo_id: 1, recurrence: :monthly, charge_day: 2.months.from_now)
+      create(:value, price_cents: 100_00, base_fee_id: first_base_fee.id)
+      create(:value, price_cents: 111_11, base_fee_id: second_base_fee.id)
+      create(:value, price_cents: 333_33, base_fee_id: third_base_fee.id)
+      allow(Condo).to receive(:find).and_return(condos.first)
+      allow(UnitType).to receive(:all).and_return(unit_types)
+      allow(Unit).to receive(:find).and_return(units.first)
+      allow(Unit).to receive(:all).and_return(units)
+
+      travel_to 5.months.from_now do
+        units.each do |unit|
+          unit_types.first.condo_id
+          GenerateMonthlyBillJob.perform_now(unit, condos.first.id)
+        end
+
+        expect(Bill.count).to eq 1
+        expect(Bill.first.issue_date).to eq Time.zone.today.beginning_of_month
+        expect(Bill.first.due_date).to eq Time.zone.today.beginning_of_month + 9.days
+        expect(Bill.first.total_value_cents).to eq 544_44
       end
     end
 
