@@ -171,12 +171,14 @@ describe BaseFeeCalculator do
         travel_to Time.zone.today + (i + 1).months do
           fees = BaseFeeCalculator.total_value(unit_types.first)
           expect(fees).to eq 100_00
+          expect(BaseFee.find(base_fee.id).counter).to eq i + 1
         end
       end
 
       travel_to Time.zone.today + 13.months do
         fees = BaseFeeCalculator.total_value(unit_types.first)
         expect(fees).to eq 0
+        expect(BaseFee.find(base_fee.id).paid?).to eq true
       end
     end
 
