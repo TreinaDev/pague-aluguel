@@ -87,11 +87,6 @@
 - [ ] **Emissão de Certidão:** Administradores, proprietários e moradores (sem autenticação) podem emitir certidões negativas de débito se não houver boletos vencidos e não pagos.
 - [ ] **Validação e Geração:** Certidão é gerada no momento da solicitação com data e hora da emissão.
 
-### Endpoint de detalhes de uma fatura
-
-
-
-
 
 ## Gems utilizadas
 
@@ -228,8 +223,8 @@ Você pode usar sites como [4Devs](https://www.4devs.com.br/) para gerar número
 `GET /api/v1/condos/:id/common_area_fees`
 
 Recebe como parâmetro `:id` de um condomínio, e retorna uma lista com **a última taxa cadastrada para cada área comum desse condomínio**
-Retorna:
-Caso o condomínio não possua nenhuma taxa cadastrada: `status: 200, json: []`
+Retorna: <br>
+Caso o condomínio não possua nenhuma taxa cadastrada: `status: 200, json: []` <br>
 Caso o condomínio possua alguma taxa cadastrada: `status: 200, json:`
 ```json
 [
