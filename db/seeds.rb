@@ -5,7 +5,7 @@ SharedFee.destroy_all
 gian_lucca = PropertyOwner.new(
   email: 'gian@email.com',
   password: 'gian123',
-  document_number: '077.9797.020-08'
+  document_number: '077.497.020-08'
 )
 gian_lucca.save(validate: false)
 
@@ -37,7 +37,7 @@ Admin.create!(
 
 Admin.create!(
   email: 'matheus@mail.com',
-  password: '1239756',
+  password: '123456',
   first_name: 'Matheus',
   last_name: 'Bellucio',
   document_number: CPF.generate
@@ -45,7 +45,7 @@ Admin.create!(
 
 Admin.create!(
   email: 'priscila@mail.com',
-  password: '1239756',
+  password: '123456',
   first_name: 'Priscila',
   last_name: 'Sabino',
   document_number: CPF.generate
@@ -62,7 +62,7 @@ Admin.create!(
 
 Admin.create!(
   email: 'arthur@mail.com',
-  password: '1239756',
+  password: '123456',
   first_name: 'Arthur',
   last_name: 'Scortegagna',
   document_number: CPF.generate
@@ -219,4 +219,4 @@ Bill.create!(
   status: :paid
 )
 
-p "Created #{Bill.count} bills for 3197.787.200-93"
+p "Created #{Bill.count} bills for 314.787.200-93"
