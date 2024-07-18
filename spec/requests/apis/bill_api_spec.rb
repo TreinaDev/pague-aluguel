@@ -50,9 +50,9 @@ describe 'API de Faturas' do
   context 'GET /api/v1/units/:unit_id/bills' do
     it 'sucesso' do
       one_month_ago = 1.month.ago.beginning_of_month.to_date
-      two_month_ago = 2.months.ago.beginning_of_month.to_date
-      three_month_ago = 3.months.ago.beginning_of_month.to_date
-      four_month_ago = 4.months.ago.beginning_of_month.to_date
+      two_months_ago = 2.months.ago.beginning_of_month.to_date
+      three_months_ago = 3.months.ago.beginning_of_month.to_date
+      four_months_ago = 4.months.ago.beginning_of_month.to_date
 
       unit = Unit.new(id: 1, area: 100, floor: 1, number: '11', unit_type_id: 1, condo_id: 1,
                       condo_name: 'Prédio lindo', tenant_id: 1, owner_id: 1, description: 'Com varanda')
@@ -62,16 +62,16 @@ describe 'API de Faturas' do
       create(:bill, condo_id: 1, unit_id: unit.id, issue_date: one_month_ago, due_date: one_month_ago + 10.days,
                     shared_fee_value_cents: 100_00, base_fee_value_cents: 300_00, total_value_cents: 400_00,
                     status: 'pending')
-      create(:bill, condo_id: 1, unit_id: unit.id, issue_date: two_month_ago, due_date: two_month_ago + 10.days,
+      create(:bill, condo_id: 1, unit_id: unit.id, issue_date: two_months_ago, due_date: two_months_ago + 10.days,
                     shared_fee_value_cents: 200_00, base_fee_value_cents: 300_00, total_value_cents: 500_00,
                     status: 'pending')
-      create(:bill, condo_id: 1, unit_id: unit2.id, issue_date: two_month_ago, due_date: two_month_ago + 10.days,
+      create(:bill, condo_id: 1, unit_id: unit2.id, issue_date: two_months_ago, due_date: two_months_ago + 10.days,
                     shared_fee_value_cents: 100_00, base_fee_value_cents: 300_00, total_value_cents: 400_00,
                     status: 'pending')
-      create(:bill, condo_id: 1, unit_id: unit.id, issue_date: three_month_ago, due_date: three_month_ago + 10.days,
+      create(:bill, condo_id: 1, unit_id: unit.id, issue_date: three_months_ago, due_date: three_months_ago + 10.days,
                     shared_fee_value_cents: 100_00, base_fee_value_cents: 300_00, total_value_cents: 400_00,
                     status: 'awaiting')
-      create(:bill, condo_id: 1, unit_id: unit.id, issue_date: four_month_ago, due_date: four_month_ago + 10.days,
+      create(:bill, condo_id: 1, unit_id: unit.id, issue_date: four_months_ago, due_date: four_months_ago + 10.days,
                     shared_fee_value_cents: 100_00, base_fee_value_cents: 300_00, total_value_cents: 400_00,
                     status: 'paid')
 
@@ -86,8 +86,8 @@ describe 'API de Faturas' do
       expect(json_response['bills'].first['due_date']).to eq (one_month_ago + 10.days).strftime('%Y-%m-%d')
       expect(json_response['bills'].first['total_value_cents']).to eq 400_00
       expect(json_response['bills'].last['id']).to eq 2
-      expect(json_response['bills'].last['issue_date']).to eq two_month_ago.strftime('%Y-%m-%d')
-      expect(json_response['bills'].last['due_date']).to eq (two_month_ago + 10.days).strftime('%Y-%m-%d')
+      expect(json_response['bills'].last['issue_date']).to eq two_months_ago.strftime('%Y-%m-%d')
+      expect(json_response['bills'].last['due_date']).to eq (two_months_ago + 10.days).strftime('%Y-%m-%d')
       expect(json_response['bills'].last['total_value_cents']).to eq 500_00
     end
 
