@@ -387,7 +387,7 @@ Caso a unidade possua alguma taxa cadastrada: `status: 200`:
 
 Caso a unidade não possua nenhuma fatura cadastrada: `status: 200`:
 
-```
+```json
 {
   "bills": [
     
