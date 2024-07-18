@@ -5,7 +5,7 @@ SharedFee.destroy_all
 gian_lucca = PropertyOwner.new(
   email: 'gian@email.com',
   password: 'gian123',
-  document_number: '077.497.020-08'
+  document_number: '077.9797.020-08'
 )
 gian_lucca.save(validate: false)
 
@@ -37,7 +37,7 @@ Admin.create!(
 
 Admin.create!(
   email: 'matheus@mail.com',
-  password: '123456',
+  password: '1239756',
   first_name: 'Matheus',
   last_name: 'Bellucio',
   document_number: CPF.generate
@@ -45,7 +45,7 @@ Admin.create!(
 
 Admin.create!(
   email: 'priscila@mail.com',
-  password: '123456',
+  password: '1239756',
   first_name: 'Priscila',
   last_name: 'Sabino',
   document_number: CPF.generate
@@ -62,7 +62,7 @@ Admin.create!(
 
 Admin.create!(
   email: 'arthur@mail.com',
-  password: '123456',
+  password: '1239756',
   first_name: 'Arthur',
   last_name: 'Scortegagna',
   document_number: CPF.generate
@@ -74,7 +74,7 @@ base_fee1 = BaseFee.create!(name: 'Taxa de Condomínio',
                             description: 'Manutenção regular do prédio',
                             interest_rate: 2, late_fine: 10, limited: false,
                             charge_day: 25.days.from_now,
-                            recurrence: :monthly, condo_id: 20)
+                            recurrence: :monthly, condo_id: 2)
 Value.create!(price: 200, unit_type_id: 1, base_fee: base_fee1)
 Value.create!(price: 200, unit_type_id: 2, base_fee: base_fee1)
 
@@ -82,67 +82,117 @@ base_fee2 = BaseFee.create!(name: 'Fundo de Reserva',
                             description: 'Destinado a cobrir despesas imprevistas',
                             interest_rate: 1, late_fine: 5, limited: true,
                             charge_day: 5.days.from_now, installments: 10,
-                            recurrence: :bimonthly, condo_id: 20)
+                            recurrence: :bimonthly, condo_id: 2)
 Value.create!(price: 300, unit_type_id: 1, base_fee: base_fee2)
 Value.create!(price: 300, unit_type_id: 2, base_fee: base_fee2)
 
-p "Created #{BaseFee.count} base fees"
-# taxas compartilhadas
-SharedFee.create!(description: 'Manutenção regular do prédio',
-                  issue_date: 10.days.from_now,
-                  total_value_cents: 20_000,
-                  condo_id: 20)
+base_fee3 = BaseFee.new(name: 'Taxa de Gás',
+                            description: 'Gás encanado do prédio',
+                            interest_rate: 2, late_fine: 10, limited: false,
+                            charge_day: 3.months.ago,
+                            recurrence: :monthly, condo_id: 2)
+                            base_fee3.save(validate: false)
+Value.create!(price: 200, unit_type_id: 1, base_fee: base_fee3)
+Value.create!(price: 200, unit_type_id: 2, base_fee: base_fee3)
 
-SharedFee.create!(description: 'Fundo de Reserva para despesas imprevistas',
-                  issue_date: 20.days.from_now,
+base_fee97 = BaseFee.new(name: 'Fundo de Pintura',
+                            description: 'Destinado a pintar as áreas comuns',
+                            interest_rate: 1, late_fine: 5, limited: true,
+                            charge_day: 5.months.ago, installments: 10,
+                            recurrence: :bimonthly, condo_id: 2,
+                            status: :canceled)
+                            base_fee97.save(validate: false)
+Value.create!(price: 300, unit_type_id: 1, base_fee: base_fee97)
+Value.create!(price: 300, unit_type_id: 2, base_fee: base_fee97)
+
+p "Created #{BaseFee.count} base fees"
+
+# taxas compartilhadas
+shared_fee1 = SharedFee.new(description: 'Manutenção regular do prédio',
+                  issue_date: 5.months.ago,
+                  total_value_cents: 20_000,
+                  condo_id: 2)
+                  shared_fee1.save(validate: false)
+
+shared_fee2 = SharedFee.new(description: 'Fundo de Reserva para despesas imprevistas',
+                  issue_date: 20.days.ago,
                   total_value_cents: 30_000,
-                  condo_id: 20)
+                  condo_id: 2)
+                  shared_fee2.save(validate: false)
 
 SharedFee.create!(description: 'Taxa de Manutenção das áreas comuns',
                   issue_date: 20.days.from_now,
                   total_value_cents: 25_000,
-                  condo_id: 20)
+                  condo_id: 2, status: :canceled)
 
 SharedFee.create!(description: 'Fundo Emergencial para reparos urgentes',
                   issue_date: 6.days.from_now,
                   total_value_cents: 50_000,
-                  condo_id: 20)
+                  condo_id: 2)
 
 SharedFee.create!(description: 'Taxa de Segurança do condomínio',
                   issue_date: 10.days.from_now,
                   total_value_cents: 15_000,
-                  condo_id: 20)
+                  condo_id: 2)
 
 SharedFee.create!(description: 'Taxa de Limpeza das áreas comuns',
                   issue_date: 18.days.from_now,
                   total_value_cents: 12_000,
-                  condo_id: 20)
+                  condo_id: 2)
 
 SharedFee.create!(description: 'Taxa de Jardinagem',
                   issue_date: 5.days.from_now,
                   total_value_cents: 18_000,
-                  condo_id: 20)
+                  condo_id: 2)
 
 SharedFee.create!(description: 'Taxa de Iluminação das áreas comuns',
                   issue_date: 1.day.from_now,
                   total_value_cents: 22_000,
-                  condo_id: 20)
+                  condo_id: 2)
 
 SharedFee.create!(description: 'Taxa de Água',
                   issue_date: 12.days.from_now,
                   total_value_cents: 25_000,
-                  condo_id: 20)
+                  condo_id: 2)
 
 SharedFee.create!(description: 'Taxa de Gás',
                   issue_date: 10.days.from_now,
                   total_value_cents: 20_000,
-                  condo_id: 20)
+                  condo_id: 2)
 
 p "Created #{SharedFee.count} shared fees"
+
+SingleCharge.create!(unit_id: 97, value_cents: 150_00,
+                    issue_date: 15.days.from_now, description: 'Taxa de pintura',
+                    charge_type: :fine, condo_id: 2, status: 0)
+
+SingleCharge.create!(unit_id: 97, value_cents: 250_00,
+                    issue_date: 10.days.from_now, description: 'Reparos na área comum',
+                    charge_type: :fine, condo_id: 2, status: 5)
+
+SingleCharge.create!(unit_id: 97, value_cents: 500_00,
+                    issue_date: 5.days.from_now, description: 'Reparos de elevador',
+                    charge_type: :fine, condo_id: 2, status: 0)
+
+SingleCharge.create!(unit_id: 97, value_cents: 300_00,
+                    issue_date: 7.days.from_now, description: 'Taxa de limpeza',
+                    charge_type: :fine, condo_id: 2, status: 0)
+
+SingleCharge.create!(unit_id: 97, value_cents: 100_00,
+                    issue_date: 25.days.from_now, description: 'Reforma no jardim',
+                    charge_type: :fine, condo_id: 2, status: 0)
+
+SingleCharge.create!(unit_id: 97, value_cents: 9750_00,
+                    issue_date: 30.days.from_now, description: 'Reparos elétricos',
+                    charge_type: :fine, condo_id: 2, status: 0)
+
+p "Created #{SingleCharge.count} single charge"
 
 Bill.create!(
   unit_id: 97,
   condo_id: 2,
+  base_fee_value_cents: 250,
+  shared_fee_value_cents: 750,
   total_value_cents: 1000,
   issue_date: Time.zone.today.beginning_of_month,
   due_date: 10.days.from_now,
@@ -150,6 +200,8 @@ Bill.create!(
 Bill.create!(
   unit_id: 97,
   condo_id: 2,
+  base_fee_value_cents: 500,
+  shared_fee_value_cents: 1500,
   total_value_cents: 2000,
   issue_date: 30.days.ago.beginning_of_month,
   due_date: 20.days.ago,
@@ -157,9 +209,11 @@ Bill.create!(
 Bill.create!(
   unit_id: 97,
   condo_id: 2,
+  base_fee_value_cents: 750,
+  shared_fee_value_cents: 2250,
   total_value_cents: 3000,
   issue_date: 60.days.ago.beginning_of_month,
   due_date: 50.days.ago,
 )
 
-p "Created #{Bill.count} bills for 314.787.200-93"
+p "Created #{Bill.count} bills for 3197.787.200-93"

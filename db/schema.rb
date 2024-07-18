@@ -88,6 +88,8 @@ ActiveRecord::Schema[7.1].define(version: 2024_07_18_020443) do
     t.datetime "updated_at", null: false
     t.integer "condo_id", null: false
     t.integer "status", default: 0
+    t.integer "shared_fee_value_cents"
+    t.integer "base_fee_value_cents"
   end
 
   create_table "common_area_fees", force: :cascade do |t|
