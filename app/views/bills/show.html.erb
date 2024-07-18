@@ -61,11 +61,11 @@
 
     <% if @bill.awaiting? %>
       <div class="d-flex justify-content-center gap-2 mt-2">
-        <%= button_to accept_payment_condo_bill_path(@condo.id, @bill), class: "d-flex align-items-center btn hover-strong mx-auto", data: { turbo_confirm: I18n.t('views.show.accept_payment.confirm-accept') } do %>
+        <%= button_to accept_payment_condo_bill_path(@condo.id, @bill), class: "d-flex align-items-center btn hover-strong mx-auto", data: { turbo_confirm: I18n.t('views.show.confirm-accept') } do %>
           <%= image_tag "check-icon", size: "16" %>
           <span class="ms-1 fs-7 text-uppercase"><%= I18n.t('views.show.accept_payment') %></span>
         <% end %>
-        <%= button_to reject_payment_condo_bill_path(@condo.id, @bill), class: "d-flex align-items-center btn hover-danger mx-auto", data: { turbo_confirm: I18n.t('views.show.accept_payment.confirm-reject') } do %>
+        <%= button_to reject_payment_condo_bill_path(@condo.id, @bill), class: "d-flex align-items-center btn hover-danger mx-auto", data: { turbo_confirm: I18n.t('views.show.confirm-reject') } do %>
           <%= image_tag "block-icon", size: "14" %>
           <span class="ms-1 fs-7 text-uppercase"><%= I18n.t('views.show.reject_payment') %></span>
         <% end %>

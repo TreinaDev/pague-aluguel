@@ -25,7 +25,7 @@ describe 'Admin marca fatura como paga' do
 
       bills = []
       bills << create(:bill, condo_id: 1, unit_id: units[0].id, issue_date: Time.zone.today.beginning_of_month,
-                             due_date: 10.days.from_now, total_value_cents: 500_00, status:)
+                             due_date: 10.days.from_now, total_value_cents: 500_00)
       bills << create(:bill, condo_id: 1, unit_id: units[1].id, issue_date: Time.zone.today.beginning_of_month,
                              due_date: 10.days.from_now, total_value_cents: 700_00, status: :awaiting)
 
@@ -38,13 +38,13 @@ describe 'Admin marca fatura como paga' do
         click_on 'Aceitar pagamento'
       end
 
-      expect(page).to have_content 'Fatura paga com sucesso!'
+      expect(page).to have_content 'Pagamento efetivado!'
       expect(page).not_to have_content 'Marcar como paga'
-      within('a#bill_1') do
-        expect(page).to have_content 'pendente'
+      within("a#bill_1") do
+        expect(page).to have_content 'pendente'.upcase
       end
-      within('a#bill_2') do
-        expect(page).to have_content 'paga'
+      within("a#bill_2") do
+        expect(page).to have_content 'paga'.upcase
       end
     end
   end

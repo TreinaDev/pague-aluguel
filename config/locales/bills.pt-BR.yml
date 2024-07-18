@@ -4,6 +4,8 @@ pt-BR:
       no_bills: Nenhuma fatura encontrada.
       document_number_not_found: Seu CPF não foi encontrado.
       document_number_not_valid: Esse CPF não é válido.
+      payment_accepted: Pagamento efetivado!
+      payment_rejected: Pagamento recusado!
     show:
       view_receipt: Ver comprovante
       accept_payment: Aceitar pagamento
@@ -12,7 +14,7 @@ pt-BR:
       confirm-reject: Tem certeza que deseja rejeitar o pagamento? Essa ação não poderá ser desfeita.
       pending: Pendente
       awaiting: Aguardando
-      paid: Pago
+      paid: Paga
   activerecord:
     models:
       bill:
