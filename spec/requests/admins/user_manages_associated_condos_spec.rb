@@ -8,7 +8,6 @@ describe 'Admin gerencia associações de condomínios' do
       allow(Condo).to receive(:all).and_return([condo])
 
       login_as admin, scope: :admin
-
       get condos_selection_admin_path(admin)
 
       expect(response.body).to include('Condo Test')
@@ -20,7 +19,6 @@ describe 'Admin gerencia associações de condomínios' do
       allow(Condo).to receive(:all).and_return([condo])
 
       login_as admin, scope: :admin
-
       get condos_selection_admin_path(admin)
 
       expect(response).to redirect_to root_path
@@ -34,7 +32,6 @@ describe 'Admin gerencia associações de condomínios' do
       admin2 = create(:admin, email: 'bcdef@email.com', password: '654321', super_admin: false)
 
       login_as admin1, scope: :admin
-
       post condos_selection_post_admin_path(admin2), params: { condo_ids: [1, 2, 3] }
 
       expect(response).to redirect_to root_path
@@ -48,7 +45,6 @@ describe 'Admin gerencia associações de condomínios' do
       admin2 = create(:admin, email: 'bcdef@email.com', password: '654321', super_admin: false)
 
       login_as admin2, scope: :admin
-
       post condos_selection_post_admin_path(admin2), params: { condo_ids: [1, 2, 3] }
 
       expect(response).to redirect_to root_path
