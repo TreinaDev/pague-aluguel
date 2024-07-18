@@ -5,7 +5,7 @@ SharedFee.destroy_all
 gian_lucca = PropertyOwner.new(
   email: 'gian@email.com',
   password: 'gian123',
-  document_number: '077.9797.020-08'
+  document_number: '077.497.020-08'
 )
 gian_lucca.save(validate: false)
 
