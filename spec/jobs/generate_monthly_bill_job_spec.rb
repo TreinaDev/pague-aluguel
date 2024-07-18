@@ -32,6 +32,8 @@ RSpec.describe GenerateMonthlyBillJob, type: :job do
         expect(Bill.count).to eq 1
         expect(Bill.last.issue_date).to eq Time.zone.today.beginning_of_month
         expect(Bill.last.due_date).to eq Time.zone.today.beginning_of_month + 9.days
+        expect(Bill.last.base_fee_value_cents).to eq 100_00
+        expect(Bill.last.shared_fee_value_cents).to eq 300_00
         expect(Bill.last.total_value_cents).to eq 400_00
       end
     end
@@ -95,9 +97,17 @@ RSpec.describe GenerateMonthlyBillJob, type: :job do
         expect(Bill.last.issue_date).to eq Time.zone.today.beginning_of_month
         expect(Bill.last.due_date).to eq Time.zone.today.beginning_of_month + 9.days
         expect(Bill.find(1).total_value_cents).to eq 211_00
+        expect(Bill.find(1).base_fee_value_cents).to eq 100_00
+        expect(Bill.find(1).shared_fee_value_cents).to eq 111_00
         expect(Bill.find(2).total_value_cents).to eq 322_00
+        expect(Bill.find(2).base_fee_value_cents).to eq 100_00
+        expect(Bill.find(2).shared_fee_value_cents).to eq 222_00
         expect(Bill.find(3).total_value_cents).to eq 533_00
+        expect(Bill.find(3).base_fee_value_cents).to eq 200_00
+        expect(Bill.find(3).shared_fee_value_cents).to eq 333_00
         expect(Bill.find(4).total_value_cents).to eq 644_00
+        expect(Bill.find(4).base_fee_value_cents).to eq 200_00
+        expect(Bill.find(4).shared_fee_value_cents).to eq 444_00
       end
     end
 
@@ -135,6 +145,8 @@ RSpec.describe GenerateMonthlyBillJob, type: :job do
         expect(Bill.first.issue_date).to eq Time.zone.today.beginning_of_month
         expect(Bill.first.due_date).to eq Time.zone.today.beginning_of_month + 9.days
         expect(Bill.first.total_value_cents).to eq 800_00
+        expect(Bill.first.base_fee_value_cents).to eq 500_00
+        expect(Bill.first.shared_fee_value_cents).to eq 300_00
       end
     end
 
@@ -172,6 +184,8 @@ RSpec.describe GenerateMonthlyBillJob, type: :job do
         expect(Bill.first.issue_date).to eq Time.zone.today.beginning_of_month
         expect(Bill.first.due_date).to eq Time.zone.today.beginning_of_month + 9.days
         expect(Bill.first.total_value_cents).to eq 241_11
+        expect(Bill.first.base_fee_value_cents).to eq 111_11
+        expect(Bill.first.shared_fee_value_cents).to eq 130_00
       end
     end
 
@@ -242,6 +256,8 @@ RSpec.describe GenerateMonthlyBillJob, type: :job do
         expect(Bill.first.issue_date).to eq Time.zone.today.beginning_of_month
         expect(Bill.first.due_date).to eq Time.zone.today.beginning_of_month + 9.days
         expect(Bill.first.total_value_cents).to eq 0
+        expect(Bill.first.base_fee_value_cents).to eq 0
+        expect(Bill.first.shared_fee_value_cents).to eq 0
       end
     end
   end

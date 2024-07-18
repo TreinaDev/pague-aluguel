@@ -1,0 +1,18 @@
+<%= turbo_frame_tag "expand-condos" do %>
+  <div class="d-flex gap-2 flex-wrap justify-content-center" id="all-units">
+    <% if @units.any? %>
+      <% @units.each do |unit| %>
+       <%= link_to unit_path(unit.id), class: "text-decoration-none", data: { turbo_frame: "modal" } do %>
+          <div class="card hover-strong shadow-sm" style="width: 18rem;" id=<%= "unit-#{unit.id}"%>>
+            <div class="card-body">
+              <span class="d-block"><%= unit.description %></span>
+              <span class="text-muted fs-8"><%= I18n.t('activemodel.models.unit.one') %> <%= unit.number%> | <%= unit.condo_name %></span>
+            </div>
+          </div>
+        <% end %>
+      <% end %>
+    <% else %>
+      <span class="text-muted"><%= I18n.t('views.show.no_units') %></span>
+    <% end %>
+  </div>
+<% end %>
