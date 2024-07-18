@@ -30,6 +30,7 @@ pt-BR:
     registration_fee_error: Não foi possível cadastrar o aluguel.
     updated_fee: Aluguel atualizado com sucesso!
     deactivated_fee: Aluguel desativado com sucesso!
+    update_fee_error: Não foi possível atualizar o aluguel.
     not_authorized: Você não tem permissão para acessar essa página
   views:
     edit:

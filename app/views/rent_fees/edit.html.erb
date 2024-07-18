@@ -18,7 +18,7 @@
       </div>
     <% end %>
 
-    <%= form_with model: @rent_fee, url: unit_rent_fee_path(@unit_id) do |f| %>
+    <%= form_with(model: @rent_fee, url: unit_rent_fee_path(@unit.id, @rent_fee.id)) do |f| %>
       <%= f.hidden_field :unit_id, value: @unit.id %>
       <%= f.hidden_field :owner_id, value: @unit.owner_id %>
       <%= f.hidden_field :condo_id, value: @unit.condo_id %>

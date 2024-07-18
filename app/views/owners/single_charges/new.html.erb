@@ -1,0 +1,57 @@
+<%= turbo_frame_tag "modal" do %>
+  <div class="dean-modal modal-md" id="unit-modal">
+    <%= link_to "", root_path, class: "btn btn-close btn-sm", id: 'close' %>
+
+    <% if notice %>
+      <div class="mt-3 alert alert-success text-center" role="alert"><%= notice %></div>
+    <% end %>
+
+    <% if @single_charge.errors.any? %>
+      <div class="alert alert-danger" role="alert">
+        <p><%= I18n.t('errors.messages.verify_error') %></p>
+        <ul>
+          <% @single_charge.errors.full_messages.each do |msg| %>
+            <li><%= msg %></li>
+          <% end %>
+        </ul>
+      </div>
+    <% end %>
+
+    <span class="fs-5 text-center d-block"><%= I18n.t('activerecord.models.single_charge.one') %></span>
+    <hr>
+
+    <%= form_with model: [@single_charge], url: owners_single_charges_path, local: true do |f| %>
+      <div class="form-floating mb-3 mx-auto mt-4">
+        <%= f.select :charge_type, options_for_select( owner_category_options ), {},  data: { target: "toggle-common-area-field.select", 
+            action: "change->toggle-common-area-field#toggleField" }, class: "form-control" %>
+        <%= f.label :charge_type %>
+      </div>
+
+      <div class="form-floating mb-3 mx-auto">
+        <%= f.select :unit_id, options_for_select(@units.map { |key, _| ["#{key.description} - #{key.number}", key.id] }, 
+            @single_charge.unit_id), {prompt: ''}, class: "form-control" %>
+        <%= f.label :unit_id %>
+      </div>
+
+      <div class="form-floating mb-3 mx-auto">
+        <%= f.text_field :description, class: "form-control" %>
+        <%= f.label :description %>
+      </div>
+
+      <div class="form-floating mb-3 mx-auto">
+        <%= f.text_field :value, class: "form-control" %>
+        <%= f.label :value %>
+      </div>
+
+      <div class="form-floating mb-3 mx-auto">
+        <%= f.date_field :issue_date, class: "form-control" %>
+        <%= f.label :issue_date %>
+      </div>
+
+      <div class="text-center">
+        <%= f.submit I18n.t('helpers.submit.register'), class: 'btn btn-primary fs-7 text-uppercase ls-3' %>
+        <%= link_to I18n.t('helpers.submit.cancel'), root_path, class: "btn btn-danger fs-7 text-uppercase ls-3" %>
+      </div>
+    <% end %>
+  </div>
+<% end %>

@@ -47,7 +47,11 @@ Rails.application.routes.draw do
     end
   end
 
-  resources :units, only: [:show] do
+  namespace :owners do
+    resources :single_charges, only: [:index, :new, :create]
+  end
+
+  resources :units, only: [:show, :index] do
     resources :rent_fees, only: [:new, :create, :edit, :update] do
       post 'deactivate', on: :member
     end
