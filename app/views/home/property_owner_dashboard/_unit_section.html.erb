@@ -11,7 +11,7 @@
           <div class="card hover-strong shadow-sm" style="width: 18rem;" id=<%= "unit-#{unit.id}"%>>
             <div class="card-body">
               <span class="d-block"><%= unit.description %></span>
-              <span class="text-muted fs-8"><%= unit.condo_name %></span>
+              <span class="text-muted fs-8"><%= I18n.t('activemodel.models.unit.one') %> <%= unit.number%> | <%= unit.condo_name %></span>
             </div>
           </div>
         <% end %>

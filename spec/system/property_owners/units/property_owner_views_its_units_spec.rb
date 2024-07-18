@@ -30,17 +30,17 @@ describe 'Proprietário vê suas unidades' do
 
     within('div#all-units') do
       within("div#unit-#{units[0].id}") do
-        expect(page).to have_content 'Condo Test'
+        expect(page).to have_content 'Unidade 3 | Condo Test'
         expect(page).to have_content 'Cobertura'
       end
 
       within("div#unit-#{units[1].id}") do
-        expect(page).to have_content 'Condo Test'
+        expect(page).to have_content 'Unidade 4 | Condo Test'
         expect(page).to have_content 'Apartamento 2 quartos'
       end
 
       within("div#unit-#{units[2].id}") do
-        expect(page).to have_content 'Condo Test 2'
+        expect(page).to have_content 'Unidade 5 | Condo Test'
         expect(page).to have_content 'Apartamento 3 quartos'
       end
     end
