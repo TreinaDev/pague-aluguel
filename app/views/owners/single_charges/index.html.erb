@@ -12,7 +12,7 @@
       <div class="list-group w-75">
         <% @single_charges.each_with_index do |single_charge, idx| %>
 
-          <div class="list-group-item p-3">
+          <div class="list-group-item p-3" id=<%= "single-charge-#{idx}"%>>
             <div class="d-flex w-100 justify-content-between">
               <span class="d-block mb-1 fs-4">
                 <%= I18n.t "single_charge.#{single_charge.charge_type}" %>

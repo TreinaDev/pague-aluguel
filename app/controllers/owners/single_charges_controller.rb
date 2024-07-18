@@ -2,7 +2,7 @@ class Owners::SingleChargesController < ApplicationController
   def index
     @single_charges = SingleCharge.where(
       unit_id: Unit.find_all_by_owner(current_property_owner.document_number).map(&:id)
-    )
+    ).order(created_at: :desc)
   end
 
   def new
