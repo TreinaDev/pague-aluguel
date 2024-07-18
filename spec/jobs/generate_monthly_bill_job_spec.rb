@@ -147,14 +147,14 @@ RSpec.describe GenerateMonthlyBillJob, type: :job do
       units = []
       units << Unit.new(id: 1, area: 100, floor: 1, number: '11', unit_type_id: 1, condo_id: 1,
                         condo_name: 'Prédio lindo', tenant_id: 1, owner_id: 1, description: 'Com varanda')
-      first_shared_fee = create(:shared_fee, description: 'Descrição', issue_date: Time.zone.today,
+      first_shared_fee = create(:shared_fee, description: 'Descrição', issue_date: Time.zone.now,
                                              total_value: 20_000_00, condo_id: condos.first.id)
       second_shared_fee = create(:shared_fee, description: 'Descrição', issue_date: 1.month.from_now,
                                               total_value: 13_000_00, condo_id: condos.first.id)
       create(:shared_fee_fraction, shared_fee: first_shared_fee, unit_id: 1, value_cents: 200_00)
       create(:shared_fee_fraction, shared_fee: second_shared_fee, unit_id: 1, value_cents: 130_00)
-      first_base_fee = create(:base_fee, condo_id: 1, recurrence: :yearly, charge_day: Time.zone.today)
-      second_base_fee = create(:base_fee, condo_id: 1, recurrence: :yearly, charge_day: 1.month.from_now)
+      first_base_fee = create(:base_fee, condo_id: 1, recurrence: :monthly, charge_day: Time.zone.now)
+      second_base_fee = create(:base_fee, condo_id: 1, recurrence: :monthly, charge_day: 1.month.from_now)
       create(:value, price_cents: 150_00, base_fee_id: first_base_fee.id)
       create(:value, price_cents: 111_11, base_fee_id: second_base_fee.id)
       allow(Condo).to receive(:find).and_return(condos.first)
