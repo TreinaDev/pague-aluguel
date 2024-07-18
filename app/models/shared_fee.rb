@@ -38,8 +38,13 @@ class SharedFee < ApplicationRecord
     difference = total_value_cents - calculated_total
     return if difference.zero?
 
-    first_fraction = shared_fee_fractions.first
-    first_fraction.update(value_cents: first_fraction.value_cents + difference)
+    shared_fee_fractions_to_adjust = shared_fee_fractions.to_a.cycle
+    adjust_amount = difference.positive? ? 1 : -1
+
+    difference.abs.times do
+      adjust_fraction = shared_fee_fractions_to_adjust.next
+      adjust_fraction.update(value_cents: adjust_fraction.value_cents + adjust_amount)
+    end
   end
 
   def date_is_future
