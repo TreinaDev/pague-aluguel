@@ -2,6 +2,10 @@ class UnitsController < ApplicationController
   before_action :set_unit, only: [:show]
   before_action :verify_ownership, only: [:show]
 
+  def index
+    @units = Unit.find_all_by_owner(current_property_owner.document_number)
+  end
+
   def show; end
 
   private

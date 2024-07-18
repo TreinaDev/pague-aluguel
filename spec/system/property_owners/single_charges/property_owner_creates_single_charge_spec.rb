@@ -10,6 +10,7 @@ describe 'Proprietario cria cobrança avulsa' do
     condos = []
     condos << Condo.new(id: 1, name: 'Condo Test', city: 'City Test')
     allow(Condo).to receive(:all).and_return(condos)
+    allow(Condo).to receive(:find).and_return(condos[0])
 
     units = []
     units << Unit.new(id: 2, area: 120, floor: 3, number: 44, unit_type_id: 2, owner_name: 'Jules',
@@ -22,7 +23,7 @@ describe 'Proprietario cria cobrança avulsa' do
     login_as property_owner, scope: :property_owner
     visit root_path
 
-    click_on 'Lançar cobrança avulsa'
+    click_on 'Adicionar nova'
     select 'Apartamento 2 quartos - 44', from: 'Unidade'
     select 'Outros', from: 'Tipo de Cobrança'
     fill_in 'Descrição', with: 'Acordo entre proprietário e morador'

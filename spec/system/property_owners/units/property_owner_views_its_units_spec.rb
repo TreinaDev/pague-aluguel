@@ -24,19 +24,25 @@ describe 'Proprietário vê suas unidades' do
     login_as property_owner, scope: :property_owner
     visit root_path
 
-    within("div#unit-#{units[0].id}") do
-      expect(page).to have_content 'Condo Test'
-      expect(page).to have_content 'Cobertura'
+    within('div#units') do
+      click_on 'Mostrar todos'
     end
 
-    within("div#unit-#{units[1].id}") do
-      expect(page).to have_content 'Condo Test'
-      expect(page).to have_content 'Apartamento 2 quartos'
-    end
+    within('div#all-units') do
+      within("div#unit-#{units[0].id}") do
+        expect(page).to have_content 'Condo Test'
+        expect(page).to have_content 'Cobertura'
+      end
 
-    within("div#unit-#{units[2].id}") do
-      expect(page).to have_content 'Condo Test 2'
-      expect(page).to have_content 'Apartamento 3 quartos'
+      within("div#unit-#{units[1].id}") do
+        expect(page).to have_content 'Condo Test'
+        expect(page).to have_content 'Apartamento 2 quartos'
+      end
+
+      within("div#unit-#{units[2].id}") do
+        expect(page).to have_content 'Condo Test 2'
+        expect(page).to have_content 'Apartamento 3 quartos'
+      end
     end
   end
 

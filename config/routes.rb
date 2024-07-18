@@ -21,7 +21,7 @@ Rails.application.routes.draw do
     resources :base_fees, only: [:new, :create, :show, :index] do
       post 'cancel', on: :member
     end
-    
+
     resources :bills, only: [:show, :index]
 
     resources :shared_fees, only: [:index, :show, :new, :create] do
@@ -47,7 +47,7 @@ Rails.application.routes.draw do
     resources :single_charges, only: [:index, :new, :create]
   end
 
-  resources :units, only: [:show] do
+  resources :units, only: [:show, :index] do
     resources :rent_fees, only: [:new, :create, :edit, :update] do
       post 'deactivate', on: :member
     end
