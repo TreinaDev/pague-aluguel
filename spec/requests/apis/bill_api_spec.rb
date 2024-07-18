@@ -9,7 +9,7 @@ describe 'API de Faturas' do
 
       get api_v1_bill_path(1)
 
-      expect(response.status).to eq 200
+      expect(response).to have_http_status :ok
       expect(response.content_type).to include 'application/json'
       json_response = response.parsed_body
       expect(json_response['total_value_cents']).to eq 400_00
@@ -28,7 +28,7 @@ describe 'API de Faturas' do
 
       get api_v1_bill_path(1)
 
-      expect(response.status).to eq 200
+      expect(response).to have_http_status :ok
       expect(response.content_type).to include 'application/json'
       json_response = response.parsed_body
       expect(json_response['total_value_cents']).to eq 100_00
@@ -43,7 +43,7 @@ describe 'API de Faturas' do
     it 'falha quando fatura não encontrada' do
       get api_v1_bill_path(1)
 
-      expect(response.status).to eq 404
+      expect(response).to have_http_status :not_found
     end
   end
 end
