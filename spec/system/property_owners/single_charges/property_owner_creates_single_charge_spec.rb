@@ -72,4 +72,11 @@ describe 'Proprietario cria cobrança avulsa' do
     expect(page).to have_content 'Valor Total não é um número'
     expect(page).to have_content 'Descrição não pode ficar em branco'
   end
+
+  it 'e deve estar autenticado' do
+    visit new_owners_single_charge_path
+
+    expect(current_path).not_to eq new_owners_single_charge_path
+    expect(current_path).to eq new_property_owner_session_path
+  end
 end

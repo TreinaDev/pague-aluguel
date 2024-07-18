@@ -1,6 +1,7 @@
 pt-BR:
   success_notice_single_charge: 'Cobrança Avulsa cadastrada com sucesso!'
   fail_notice_single_charge: 'Não foi possível cadastrar a cobrança avulsa.'
+  not_authorized_notice_single_charge: 'Você não pode criar uma cobrança avulsa para uma unidade que não é sua.'
   activerecord:
     models:
       single_charge:
