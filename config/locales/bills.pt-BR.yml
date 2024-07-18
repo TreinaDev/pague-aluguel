@@ -9,9 +9,9 @@ pt-BR:
     show:
       view_receipt: Ver comprovante
       accept_payment: Aceitar pagamento
-      reject_payment: Rejeitar pagamento
+      reject_payment: Recusar pagamento
       confirm-accept: Tem certeza que deseja aceitar o pagamento? Essa ação não poderá ser desfeita.
-      confirm-reject: Tem certeza que deseja rejeitar o pagamento? Essa ação não poderá ser desfeita.
+      confirm-reject: Tem certeza que deseja recusar o pagamento? Essa ação não poderá ser desfeita.
       pending: Pendente
       awaiting: Aguardando
       paid: Paga
