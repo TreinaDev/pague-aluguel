@@ -1,5 +1,6 @@
 class AdminsController < ApplicationController
   before_action :authenticate_admin!
+  before_action :check_super_admin, only: [:condos_selection, :condos_selection_post]
 
   def index
     @admins = Admin.where.not(id: current_admin.id) if current_admin
@@ -21,5 +22,11 @@ class AdminsController < ApplicationController
       admin.associated_condos.create(condo_id:)
     end
     redirect_to root_path, notice: I18n.t('errors.messages.condo_acess_updated')
+  end
+
+  private
+
+  def check_super_admin
+    redirect_to root_path, alert: I18n.t('errors.messages.must_be_super_admin') unless current_admin.super_admin
   end
 end
