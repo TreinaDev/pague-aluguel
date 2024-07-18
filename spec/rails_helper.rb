@@ -1,4 +1,5 @@
 require 'simplecov'
+require 'active_storage_validations/matchers'
 SimpleCov.start 'rails' do
  add_filter 'channels'
  add_filter 'mailers'

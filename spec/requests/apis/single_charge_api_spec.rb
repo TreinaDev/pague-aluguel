@@ -211,6 +211,37 @@ describe 'API de Cobranças Avulsas' do
       expect(SingleCharge.count).to eq 1
       expect(SingleCharge.last.common_area_id).to eq nil
     end
+
+    it 'recebe multa com id de área comum ' do
+      condos = []
+      condos << Condo.new(id: 1, name: 'Condo Test', city: 'City Test')
+      unit_types = []
+      unit_types << UnitType.new(id: 1, description: 'Apartamento 1 quarto', metreage: 100, fraction: 1.0,
+                                 unit_ids: [1])
+      units = []
+      units << Unit.new(id: 1, area: 40, floor: 1, number: 1, unit_type_id: 1)
+      common_areas = []
+      common_areas << CommonArea.new(id: 1, name: 'Academia',
+                                     description: 'Uma academia raíz com ventilador apenas para os marombas',
+                                     max_occupancy: 20, rules: 'Não pode ser frango', condo_id: 1)
+      allow(Condo).to receive(:find).and_return(condos.first)
+      allow(UnitType).to receive(:all).and_return(unit_types)
+      allow(Unit).to receive(:find).and_return(units.first)
+      allow(Unit).to receive(:all).and_return(units)
+      allow(CommonArea).to receive(:all).and_return(common_areas)
+      allow(CommonArea).to receive(:find).and_return(common_areas.first)
+
+      single_charge_params = { single_charge: { condo_id: condos.first.id, unit_id: units.first.id,
+                                                value_cents: 300_00, issue_date: 5.days.from_now.to_date,
+                                                description: 'Multa por barulho após as 23h',
+                                                charge_type: :other } }
+
+      post api_v1_single_charges_path, params: single_charge_params
+
+      expect(response.status).to eq 422
+      expect(SingleCharge.count).to eq 0
+      expect(response.body).to include 'Tipo de Cobrança inválido'
+    end
   end
 
   context 'PATCH /api/v1/condos/:id/single_charges/:id' do

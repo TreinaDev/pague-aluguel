@@ -42,6 +42,7 @@ Rails.application.routes.draw do
       resources :single_charges, only: [:create] do
         patch 'cancel', on: :member
       end
+      resources :receipts, only: [:create]
       resources :bills, only: [:show]
       resources :units, only: [] do
         resources :bills, only: [:index]
