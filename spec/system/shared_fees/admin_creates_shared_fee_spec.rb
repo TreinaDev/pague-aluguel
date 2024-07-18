@@ -107,9 +107,9 @@ describe 'Admin lança uma conta compartilhada' do
     condos = []
     condos << Condo.new(id: 1, name: 'Condo Test', city: 'City Test')
     unit_types = []
-    unit_types << UnitType.new(id: 1, description: 'Apartamento 1 quarto', metreage: 100, fraction: 0.04,
+    unit_types << UnitType.new(id: 1, description: 'Apartamento 1 quarto', metreage: 100, fraction: 4.0,
                                unit_ids: [1])
-    unit_types << UnitType.new(id: 2, description: 'Apartamento 2 quartos', metreage: 200, fraction: 0.06,
+    unit_types << UnitType.new(id: 2, description: 'Apartamento 2 quartos', metreage: 200, fraction: 6.0,
                                unit_ids: [2])
     units = []
     units << Unit.new(id: 1, area: 40, floor: 1, number: 101, unit_type_id: 1)
@@ -122,7 +122,7 @@ describe 'Admin lança uma conta compartilhada' do
     allow(CommonArea).to receive(:all).and_return([])
 
     conta_de_luz = SharedFee.create!(description: 'Conta de Luz', issue_date: 10.days.from_now.to_date,
-                                     total_value: 10_000, condo_id: condos.first.id)
+                                     total_value: 1000, condo_id: condos.first.id)
     conta_de_luz.calculate_fractions
 
     login_as admin, scope: :admin
@@ -133,7 +133,7 @@ describe 'Admin lança uma conta compartilhada' do
     end
     fill_in 'Descrição', with: 'Conta de Água'
     fill_in 'Data de Emissão', with: 10.days.from_now.to_date
-    fill_in 'Valor Total', with: 5_000
+    fill_in 'Valor Total', with: 500
     click_on 'Cadastrar'
 
     conta_de_luz_fraction_one = SharedFeeFraction.find_by(unit_id: units[0], shared_fee: conta_de_luz)
