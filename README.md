@@ -223,10 +223,10 @@ Você pode usar sites como [4Devs](https://www.4devs.com.br/) para gerar número
 `GET /api/v1/condos/:id/common_area_fees`
 
 Recebe como parâmetro `:id` de um condomínio, e retorna uma lista com **a última taxa cadastrada para cada área comum desse condomínio**
-Retorna:
-Caso o condomínio não possua nenhuma taxa cadastrada: `status: 200, json: []`
+Retorna: <br>
+Caso o condomínio não possua nenhuma taxa cadastrada: `status: 200, json: []` <br>
 Caso o condomínio possua alguma taxa cadastrada: `status: 200, json:`
-```
+```json
 [
   {
     "id":1,
@@ -254,11 +254,16 @@ Caso o condomínio possua alguma taxa cadastrada: `status: 200, json:`
 
 `GET /api/v1/common_area_fees/:id`
 
-Recebe como parâmetro o `:id` de uma taxa cadastrada e retorna **os detalhes da taxa de área comum** desejada
-Retorna:
-Caso não exista taxa com o id informado: `status: 404, json: { "errors":"Não encontrado" } `
-Caso o condomínio possua alguma taxa cadastrada: `status: 200, json:`
+Recebe como parâmetro o `:id` de uma taxa cadastrada e retorna **os detalhes da taxa de área comum** desejada.
+**Retorna:** <br>
+Caso não exista taxa com o id informado: `status: 404` 
+```json
+{ 
+  "errors":"Não encontrado"
+}
 ```
+Caso o condomínio possua alguma taxa cadastrada: `status: 200, json:`
+```json
 {
   "value_cents":20000,
   "created_at":"2024-07-11T21:09:13.019Z",
@@ -286,13 +291,13 @@ Resposta para falha na criação: `status: 422` (:unprocessable_entity)
 Recebe os seguintes parâmetros:
 ```
 { single_charge: {
-                  description: string,
-                  value_cents: integer,
-                  charge_type: enum (:fine ou :common_area_fee),
-                  issue_date: date,
-                  condo_id: integer,
-                  common_area_id: integer,
-                  unit_id: integer
+                    description: string,
+                    value_cents: integer,
+                    charge_type: enum (:fine ou :common_area_fee),
+                    issue_date: date,
+                    condo_id: integer,
+                    common_area_id: integer,
+                    unit_id: integer
                   }
 }
 ```
@@ -300,13 +305,13 @@ Recebe os seguintes parâmetros:
 Exemplo de cobrança avulsa (Multa):
 ```
 { single_charge: {
-                  description: 'Multa por barulho durante a madrugada',
-                  value_cents: 10000,
-                  charge_type: :fine,
-                  issue_date: 5.days.from_now.to_date,
-                  condo_id: 1,
-                  common_area_id: nil,
-                  unit_id: 1
+                    description: 'Multa por barulho durante a madrugada',
+                    value_cents: 10000,
+                    charge_type: :fine,
+                    issue_date: 5.days.from_now.to_date,
+                    condo_id: 1,
+                    common_area_id: nil,
+                    unit_id: 1
                   }
 }
 ```
@@ -314,16 +319,45 @@ Exemplo de cobrança avulsa (Multa):
 Exemplo de cobrança avulsa (Reserva de Área Comum):
 ```
 { single_charge: {
-                  description: nil,
-                  value_cents: ~deve retornar do endpoint de taxas de áreas comuns~,
-                  charge_type: :common_area_fee,
-                  issue_date: 5.days.from_now.to_date,
-                  condo_id: 1,
-                  common_area_id: 2,
-                  unit_id: 1
+                    description: nil,
+                    value_cents: ~deve retornar do endpoint de taxas de áreas comuns~,
+                    charge_type: :common_area_fee,
+                    issue_date: 5.days.from_now.to_date,
+                    condo_id: 1,
+                    common_area_id: 2,
+                    unit_id: 1
                   }
 }
 ```
+
+### 3. Faturas
+
+`GET api/v1/bills/:id`
+
+Recebemos como parâmetro um `id` de uma fatura e retornamos **todos os detalhes da fatura** desejada. <br>
+**Retorna:** <br>
+Caso não exista taxa com o id informado: `status: 404`:
+```json
+{ 
+  "errors":"Não encontrado"
+}
+```
+Caso o condomínio possua alguma taxa cadastrada: `status: 200`:
+```json
+{
+  "unit_id": 1,
+  "condo_id": 2,
+  "issue_date": "2024-06-01",
+  "due_date": "2024-06-10",
+  "total_value_cents": 2000,
+  "status": "pending",
+  "values": {
+    "base_fee_value_cents": 500,
+    "shared_fee_value_cents": 1500
+  }
+}
+```
+
 
 ## Desenvolvedores 🧑🏽‍💻🧑🏻‍💻🧑‍💻
 

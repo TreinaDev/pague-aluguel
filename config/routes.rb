@@ -40,6 +40,7 @@ Rails.application.routes.draw do
       end
       resources :common_area_fees, only: [:show]
       resources :single_charges, only: [:create]
+      resources :bills, only: [:show]
     end
   end
 
