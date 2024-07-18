@@ -1,5 +1,6 @@
 class CommonAreaFeesController < ApplicationController
   before_action :authenticate_admin!
+  before_action :admin_authorized?, only: [:new, :create]
   before_action :set_common_area, only: [:new, :create]
 
   def new
@@ -17,6 +18,13 @@ class CommonAreaFeesController < ApplicationController
   end
 
   private
+
+  def admin_authorized?
+    current_admin_associated = current_admin.associated_condos.map(&:condo_id).include?(params[:condo_id].to_i)
+    return true if current_admin.super_admin? || current_admin_associated
+
+    redirect_to root_path, notice: I18n.t('errors.messages.must_be_super_admin')
+  end
 
   def common_area_fee_params
     params.require(:common_area_fee).permit(:value, :common_area_id, :condo_id)
