@@ -43,6 +43,13 @@ class Unit
     build_owner_units(data)
   end
 
+  def calculate_values(bill)
+    bill.base_fee_value_cents = BaseFeeCalculator.total_value(unit_type_id)
+    bill.shared_fee_value_cents = BillCalculator.calculate_shared_fees(id)
+    bill.total_value_cents = BillCalculator.calculate_total_fees(self)
+    bill
+  end
+
   def set_status
     return I18n.t('views.show.owner_tenant') if owner_id == tenant_id
 

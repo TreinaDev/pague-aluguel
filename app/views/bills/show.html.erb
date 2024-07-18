@@ -20,7 +20,7 @@
     <div class="px-5">
       <div class=" d-flex justify-content-between">
         <span class="text-muted text-lowercase fs-8"><%= BaseFee.model_name.human %>:</span>
-        <span><%= BillCalculator.calculate_base_fees(@unit.unit_type_id) %></span>
+        <span><%= BaseFeeCalculator.total_value(@unit.unit_type_id) %></span>
       </div>
       <div class=" d-flex justify-content-between">
         <span class="text-muted text-lowercase fs-8"><%= SharedFee.model_name.human %>:</span>

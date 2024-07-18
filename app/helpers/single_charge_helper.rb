@@ -10,4 +10,10 @@ module SingleChargeHelper
       end
     end
   end
+
+  def owner_category_options
+    SingleCharge.charge_types.except(:common_area_fee).map do |key, _|
+      [I18n.t("single_charge.#{key}"), key]
+    end
+  end
 end
