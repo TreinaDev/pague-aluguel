@@ -11,7 +11,7 @@ describe 'admin acessa condo específico' do
     login_as admin, scope: :admin
     get condo_path(condo.id)
 
-    expect(response).to have_http_status(200)
+    expect(response).to have_http_status :ok
     expect(response.body).to include 'Condo Test'
   end
 
@@ -24,7 +24,7 @@ describe 'admin acessa condo específico' do
     login_as admin, scope: :admin
     get condo_path(condo.id)
 
-    expect(response).to have_http_status(200)
+    expect(response).to have_http_status :ok
     expect(response.body).to include 'Condo Test'
   end
 
@@ -36,7 +36,7 @@ describe 'admin acessa condo específico' do
     login_as admin, scope: :admin
     get condo_path(condo.id)
 
-    expect(response).to have_http_status(302)
+    expect(response).to have_http_status :found
     expect(response).to redirect_to root_path
     expect(flash[:notice]).to eq I18n.t('errors.messages.must_be_super_admin')
   end
