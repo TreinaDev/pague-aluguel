@@ -8,8 +8,8 @@ describe 'Administrador cria uma cobrança avulsa' do
     unit_types = []
     unit_types << UnitType.new(id: 1, area: 40, description: 'Apartamento 1 quarto', ideal_fraction: 0.5, condo_id: 1)
     units = []
-    units << Unit.new(id: 1, area: 40, floor: 1, number: 1, unit_type_id: 1)
-    units << Unit.new(id: 2, area: 40, floor: 1, number: 2, unit_type_id: 1)
+    units << Unit.new(id: 1, area: 40, floor: 1, number: '11', unit_type_id: 1, condo_id: 1,
+                      condo_name: 'Condo Test', tenant_id: 1, owner_id: 1, description: 'Com varanda')
     common_areas = []
     common_areas << CommonArea.new(id: 1, name: 'Academia',
                                    description: 'Uma academia raíz com ventilador apenas para os marombas',
@@ -17,7 +17,6 @@ describe 'Administrador cria uma cobrança avulsa' do
     allow(Condo).to receive(:all).and_return(condos)
     allow(Condo).to receive(:find).and_return(condos.first)
     allow(UnitType).to receive(:all).and_return(unit_types)
-    allow(UnitType).to receive(:find).and_return(unit_types.first)
     allow(Unit).to receive(:all).and_return(units)
     allow(Unit).to receive(:find).and_return(units.first)
     allow(CommonArea).to receive(:all).and_return(common_areas)
@@ -35,17 +34,13 @@ describe 'Administrador cria uma cobrança avulsa' do
     fill_in 'Data de Emissão', with: 5.days.from_now.to_date
     click_on 'Cadastrar'
 
-    expect(page).to have_content 'Cobrança Avulsa cadastrada com sucesso'
-    expect(page).not_to have_content 'Academia'
-    expect(page).to have_content 'Unidade 11'
-    expect(page).to have_content 'Tipo de Cobrança:'
+    expect(page).to have_content 'Cobrança Avulsa cadastrada com sucesso!'
     expect(page).to have_content 'Outros'
-    expect(page).to have_content 'Acordo entre proprietário e morador'
-    expect(page).to have_content 'valor total'
-    expect(page).to have_content 'R$105,59'
-    expect(page).to have_content 'data de emissão'
+    expect(page).to have_content 'Unidade 11'.downcase
+    expect(page).to have_content 'Acordo entre proprietário e morador'.downcase
+    expect(page).to have_content 'Data de Emissão'
     expect(page).to have_content I18n.l(5.days.from_now.to_date)
-    expect(current_path).to eq condo_single_charge_path(condos.first.id, SingleCharge.last)
+    expect(current_path).to eq condo_path(condos.first.id)
     expect(SingleCharge.first.condo_id).to eq 1
     expect(page).not_to have_content 'Verifique os erros abaixo:'
   end
@@ -56,8 +51,10 @@ describe 'Administrador cria uma cobrança avulsa' do
     unit_types = []
     unit_types << UnitType.new(id: 1, area: 40, description: 'Apartamento 1 quarto', ideal_fraction: 0.5, condo_id: 1)
     units = []
-    units << Unit.new(id: 1, area: 40, floor: 1, number: 1, unit_type_id: 1)
-    units << Unit.new(id: 2, area: 40, floor: 1, number: 1, unit_type_id: 1)
+    units << Unit.new(id: 1, area: 40, floor: 1, number: '11', unit_type_id: 1, condo_id: 1,
+                      condo_name: 'Condo Test', tenant_id: 1, owner_id: 1, description: 'Com varanda')
+    units << Unit.new(id: 2, area: 40, floor: 2, number: '21', unit_type_id: 2, condo_id: 1,
+                      condo_name: 'Condo Test', tenant_id: 2, owner_id: 2, description: 'Com churrasqueira')
     allow(Condo).to receive(:all).and_return(condos)
     allow(Condo).to receive(:find).and_return(condos.first)
     allow(UnitType).to receive(:all).and_return(unit_types)
@@ -77,8 +74,10 @@ describe 'Administrador cria uma cobrança avulsa' do
     unit_types = []
     unit_types << UnitType.new(id: 1, area: 40, description: 'Apartamento 1 quarto', ideal_fraction: 0.5, condo_id: 1)
     units = []
-    units << Unit.new(id: 1, area: 40, floor: 1, number: 1, unit_type_id: 1)
-    units << Unit.new(id: 2, area: 40, floor: 1, number: 2, unit_type_id: 1)
+    units << Unit.new(id: 1, area: 40, floor: 1, number: '11', unit_type_id: 1, condo_id: 1,
+                      condo_name: 'Condo Test', tenant_id: 1, owner_id: 1, description: 'Com varanda')
+    units << Unit.new(id: 2, area: 40, floor: 2, number: '21', unit_type_id: 2, condo_id: 1,
+                      condo_name: 'Condo Test', tenant_id: 2, owner_id: 2, description: 'Com churrasqueira')
     common_areas = []
     common_areas << CommonArea.new(id: 1, name: 'Academia',
                                    description: 'Uma academia raíz com ventilador apenas para os marombas',
@@ -91,11 +90,10 @@ describe 'Administrador cria uma cobrança avulsa' do
     allow(Condo).to receive(:all).and_return(condos)
     allow(Condo).to receive(:find).and_return(condo)
     allow(UnitType).to receive(:all).and_return(unit_types)
-    allow(UnitType).to receive(:find).and_return(unit_types.first)
     allow(Unit).to receive(:all).and_return(units)
     allow(Unit).to receive(:find).and_return(units.first)
     allow(CommonArea).to receive(:all).and_return(common_areas)
-    allow(CommonArea).to receive(:find).with(condo.id, common_area.id).and_return(common_area)
+    allow(CommonArea).to receive(:find).with(common_area.id).and_return(common_area)
 
     login_as admin, scope: :admin
     visit root_path
@@ -111,15 +109,11 @@ describe 'Administrador cria uma cobrança avulsa' do
     click_on 'Cadastrar'
 
     expect(page).to have_content 'Cobrança Avulsa cadastrada com sucesso'
-    expect(page).to have_content 'Unidade 11'
-    expect(page).to have_content 'Tipo de Cobrança:'
+    expect(page).to have_content 'Unidade 11'.downcase
     expect(page).to have_content 'Taxa de Área Comum'
-    expect(page).to have_content 'CHURRASQUEIRA'
-    expect(page).to have_content 'valor total'
-    expect(page).to have_content 'R$105,59'
-    expect(page).to have_content 'data de emissão'
+    expect(page).to have_content 'Data de Emissão'
     expect(page).to have_content I18n.l(5.days.from_now.to_date)
-    expect(current_path).to eq condo_single_charge_path(condos.first.id, SingleCharge.last)
+    expect(current_path).to eq condo_path(condos.first.id)
     expect(page).not_to have_content 'Verifique os erros abaixo:'
   end
 
@@ -130,8 +124,10 @@ describe 'Administrador cria uma cobrança avulsa' do
     unit_types = []
     unit_types << UnitType.new(id: 1, area: 40, description: 'Apartamento 1 quarto', ideal_fraction: 0.5, condo_id: 1)
     units = []
-    units << Unit.new(id: 1, area: 40, floor: 1, number: 1, unit_type_id: 1)
-    units << Unit.new(id: 2, area: 40, floor: 1, number: 1, unit_type_id: 1)
+    units << Unit.new(id: 1, area: 40, floor: 1, number: '11', unit_type_id: 1, condo_id: 1,
+                      condo_name: 'Condo Test', tenant_id: 1, owner_id: 1, description: 'Com varanda')
+    units << Unit.new(id: 2, area: 40, floor: 2, number: '21', unit_type_id: 2, condo_id: 1,
+                      condo_name: 'Condo Test', tenant_id: 2, owner_id: 2, description: 'Com churrasqueira')
     condo = condos.first
     allow(Condo).to receive(:all).and_return(condos)
     allow(Condo).to receive(:find).and_return(condo)
@@ -157,8 +153,10 @@ describe 'Administrador cria uma cobrança avulsa' do
     unit_types = []
     unit_types << UnitType.new(id: 1, area: 40, description: 'Apartamento 1 quarto', ideal_fraction: 0.5, condo_id: 1)
     units = []
-    units << Unit.new(id: 1, area: 40, floor: 1, number: 1, unit_type_id: 1)
-    units << Unit.new(id: 2, area: 40, floor: 1, number: 1, unit_type_id: 1)
+    units << Unit.new(id: 1, area: 40, floor: 1, number: '11', unit_type_id: 1, condo_id: 1,
+                      condo_name: 'Condo Test', tenant_id: 1, owner_id: 1, description: 'Com varanda')
+    units << Unit.new(id: 2, area: 40, floor: 2, number: '21', unit_type_id: 2, condo_id: 1,
+                      condo_name: 'Condo Test', tenant_id: 2, owner_id: 2, description: 'Com churrasqueira')
     common_areas = []
     common_areas << CommonArea.new(id: 1, name: 'Academia',
                                    description: 'Uma academia raíz com ventilador apenas para os marombas',
@@ -170,7 +168,7 @@ describe 'Administrador cria uma cobrança avulsa' do
     allow(UnitType).to receive(:all).and_return(unit_types)
     allow(Unit).to receive(:all).and_return(units)
     allow(CommonArea).to receive(:all).and_return(common_areas)
-    allow(CommonArea).to receive(:find).with(condo.id, common_area.id).and_return(common_area)
+    allow(CommonArea).to receive(:find).with(common_area.id).and_return(common_area)
 
     login_as admin, scope: :admin
     visit root_path
@@ -201,8 +199,10 @@ describe 'Administrador cria uma cobrança avulsa' do
     unit_types = []
     unit_types << UnitType.new(id: 1, area: 40, description: 'Apartamento 1 quarto', ideal_fraction: 0.5, condo_id: 1)
     units = []
-    units << Unit.new(id: 1, area: 40, floor: 1, number: 1, unit_type_id: 1)
-    units << Unit.new(id: 2, area: 40, floor: 1, number: 2, unit_type_id: 1)
+    units << Unit.new(id: 1, area: 40, floor: 1, number: '11', unit_type_id: 1, condo_id: 1,
+                      condo_name: 'Condo Test', tenant_id: 1, owner_id: 1, description: 'Com varanda')
+    units << Unit.new(id: 2, area: 40, floor: 1, number: '12', unit_type_id: 2, condo_id: 1,
+                      condo_name: 'Condo Test', tenant_id: 2, owner_id: 2, description: 'Com churrasqueira')
     common_areas = []
     common_areas << CommonArea.new(id: 1, name: 'Academia',
                                    description: 'Uma academia raíz com ventilador apenas para os marombas',
@@ -212,11 +212,10 @@ describe 'Administrador cria uma cobrança avulsa' do
     allow(Condo).to receive(:all).and_return(condos)
     allow(Condo).to receive(:find).and_return(condo)
     allow(UnitType).to receive(:all).and_return(unit_types)
-    allow(UnitType).to receive(:find).and_return(unit_types.first)
     allow(Unit).to receive(:all).and_return(units)
     allow(Unit).to receive(:find).and_return(units.first)
     allow(CommonArea).to receive(:all).and_return(common_areas)
-    allow(CommonArea).to receive(:find).with(condo.id, common_area.id).and_return(common_area)
+    allow(CommonArea).to receive(:find).with(common_area.id).and_return(common_area)
 
     login_as admin, scope: :admin
     visit root_path
@@ -247,8 +246,10 @@ describe 'Administrador cria uma cobrança avulsa' do
     unit_types = []
     unit_types << UnitType.new(id: 1, area: 40, description: 'Apartamento 1 quarto', ideal_fraction: 0.5, condo_id: 1)
     units = []
-    units << Unit.new(id: 1, area: 40, floor: 1, number: 1, unit_type_id: 1)
-    units << Unit.new(id: 2, area: 40, floor: 1, number: 1, unit_type_id: 1)
+    units << Unit.new(id: 1, area: 40, floor: 1, number: '11', unit_type_id: 1, condo_id: 1,
+                      condo_name: 'Condo Test', tenant_id: 1, owner_id: 1, description: 'Com varanda')
+    units << Unit.new(id: 2, area: 40, floor: 2, number: '21', unit_type_id: 2, condo_id: 1,
+                      condo_name: 'Condo Test', tenant_id: 2, owner_id: 2, description: 'Com churrasqueira')
     condo = condos.first
     allow(Condo).to receive(:all).and_return(condos)
     allow(Condo).to receive(:find).and_return(condo)
@@ -262,8 +263,8 @@ describe 'Administrador cria uma cobrança avulsa' do
     within '#single-charge' do
       click_on 'Adicionar nova'
     end
-    select 'Taxa de Área Comum', from: 'Tipo de Cobrança'
 
-    expect(page).to have_select('Área Comum', options: [''])
+    expect(page).to have_select('Tipo de Cobrança', options: %w[Outros Multa])
+    expect(page).not_to have_select('Tipo de Cobrança', options: ['Taxa de Área Comum'])
   end
 end

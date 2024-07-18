@@ -25,6 +25,20 @@ describe 'Administrador acessa página do condomínio' do
     expect(page).to have_content 'Áreas Comuns'
   end
 
+  it 'condomínio não existe' do
+    admin = create(:admin)
+    condos = []
+    allow(Condo).to receive(:all).and_return(condos)
+    allow(Condo).to receive(:find).and_raise(StandardError)
+    allow(CommonArea).to receive(:all).and_return([])
+
+    login_as admin, scope: :admin
+    visit condo_path(23)
+
+    expect(page).to have_content 'Condomínio não cadastrado'
+    expect(current_path).to eq root_path
+  end
+
   it 'e vê dashboard do admin' do
     admin = create(:admin)
     condos = []

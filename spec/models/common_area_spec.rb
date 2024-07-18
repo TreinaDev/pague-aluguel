@@ -21,33 +21,58 @@ RSpec.describe CommonArea, type: :model do
     expect(common_area.rules).to eq(attributes[:rules])
   end
 
-  describe 'requests' do
-    it 'retorna uma lista de áreas comuns com sucesso (.all)' do
+  context '.all' do
+    it 'retorna uma lista de áreas comuns com sucesso' do
       condo_id = 1
       json_data = File.read('spec/support/json/common_areas.json')
       fake_response = double('faraday_response', status: 200, body: json_data, success?: true)
-      allow(Faraday).to receive(:get).with("http://127.0.0.1:3000/api/v1/condos/#{condo_id}/common_areas").and_return(fake_response)
+      allow(Faraday).to receive(:get).with("http://127.0.0.1:3000/api/v1/condos/#{condo_id}/common_areas")
+                                     .and_return(fake_response)
 
       common_areas = CommonArea.all(condo_id)
 
       expect(common_areas.length).to eq(6)
-      expect(common_areas.first.name).to eq 'Academia'
-      expect(common_areas.second.name).to eq 'Piscina'
+      expect(common_areas.first.id).to eq 1
+      expect(common_areas.first.name).to eq 'Piscina'
+      expect(common_areas.first.description).to eq 'Piscina grande, cabe até golfinhos'
+      expect(common_areas.second.id).to eq 2
+      expect(common_areas.second.name).to eq 'Academia'
+      expect(common_areas.second.description).to eq 'Uma academia raíz com ventilador apenas para os marombas'
+      expect(common_areas.last.id).to eq 6
+      expect(common_areas.last.name).to eq 'Salão de Jogos'
+      expect(common_areas.last.description).to eq 'Jogos para toda família'
     end
 
-    it 'retorna os detalhes de uma area comum com sucesso (.find)' do
+    it 'retorna uma lista vazia' do
       condo_id = 1
+      json_data = { common_areas: [] }.to_json
+      fake_response = double('faraday_response', status: 200, body: json_data, success?: true)
+      allow(Faraday).to receive(:get).with("http://127.0.0.1:3000/api/v1/condos/#{condo_id}/common_areas")
+                                     .and_return(fake_response)
+
+      common_areas = CommonArea.all(condo_id)
+
+      expect(common_areas).to eq []
+      expect(common_areas.length).to eq 0
+    end
+  end
+
+  context '.find' do
+    it 'retorna os detalhes de uma area comum com sucesso' do
       common_area_id = 1
-      json_data = File.read('spec/support/json/common_areas.json')
-      first_common_area_json = JSON.parse(json_data).first.to_json
-      fake_response = double('faraday_response', status: 200, body: first_common_area_json, success?: true)
-      allow(Faraday).to receive(:get).with("http://127.0.0.1:3000/api/v1/condos/#{condo_id}/common_areas/#{common_area_id}").and_return(fake_response)
+      json_data = File.read('spec/support/json/common_area.json')
+      fake_response = double('faraday_response', status: 200, body: json_data, success?: true)
+      allow(Faraday).to receive(:get).with("http://127.0.0.1:3000/api/v1/common_areas/#{common_area_id}")
+                                     .and_return(fake_response)
 
-      common_area = CommonArea.find(condo_id, common_area_id)
+      common_area = CommonArea.find(common_area_id)
 
-      expect(common_area).not_to be_nil
+      expect(common_area.id).to eq 1
       expect(common_area.name).to eq 'Academia'
       expect(common_area.description).to eq 'Uma academia raíz com ventilador apenas para os marombas'
+      expect(common_area.max_occupancy).to eq 20
+      expect(common_area.rules).to eq 'Não pode ser frango'
+      expect(common_area.condo_id).to eq 1
     end
   end
 end

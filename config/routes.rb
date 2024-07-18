@@ -10,6 +10,9 @@ Rails.application.routes.draw do
   get 'search', to: 'home#search'
   get 'choose_profile', to: 'home#choose_profile'
 
+  get 'find_tenant', to: 'home#find_tenant'
+  get 'tenant_bill', to: 'home#tenant_bill'
+
   resources :condos, only: [:index, :show] do
     resources :common_areas, only: [:index, :show] do
       resources :common_area_fees, only: [:new, :create]
@@ -20,8 +23,6 @@ Rails.application.routes.draw do
     end
     
     resources :bills, only: [:show, :index]
-
-    get 'search', on: :collection
 
     resources :shared_fees, only: [:index, :show, :new, :create] do
       post 'cancel', on: :member
@@ -39,6 +40,12 @@ Rails.application.routes.draw do
       end
       resources :common_area_fees, only: [:show]
       resources :single_charges, only: [:create]
+    end
+  end
+
+  resources :units, only: [:show] do
+    resources :rent_fees, only: [:new, :create, :edit, :update] do
+      post 'deactivate', on: :member
     end
   end
 

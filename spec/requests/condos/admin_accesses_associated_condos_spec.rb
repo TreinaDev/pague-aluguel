@@ -2,7 +2,7 @@ require 'rails_helper'
 
 describe 'admin acessa condo específico' do
   it 'com sucesso - já que está associado ao condo' do
-    admin = FactoryBot.create(:admin, super_admin: false)
+    admin = create(:admin, super_admin: false)
     condo = Condo.new(id: 1, name: 'Condo Test', city: 'City Test')
     allow(Condo).to receive(:find).and_return(condo)
     common_areas = []
@@ -24,7 +24,7 @@ describe 'admin acessa condo específico' do
   end
 
   it 'e falha por não estar associado a este condo' do
-    admin = FactoryBot.create(:admin, super_admin: false)
+    admin = create(:admin, super_admin: false)
     condo = Condo.new(id: 1, name: 'Condo Test', city: 'City Test')
     allow(Condo).to receive(:find).and_return(condo)
     login_as admin, scope: :admin

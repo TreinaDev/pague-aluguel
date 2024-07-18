@@ -5,7 +5,7 @@
     <span class="fs-8 text-center d-block"><%= SingleCharge.model_name.human %></span>
     <span class="fs-6 text-center d-block">
                 <%= I18n.t('activerecord.attributes.single_charge.unit_id') %>
-                <%= Unit.find(@single_charge.unit_id).identifier %>
+                <%= Unit.find(@single_charge.unit_id).number %>
      </span>
     <hr>
 

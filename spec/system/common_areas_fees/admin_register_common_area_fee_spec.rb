@@ -7,15 +7,13 @@ describe 'Admin registra uma taxa de área comum' do
     allow(Condo).to receive(:find).and_return(condo)
 
     common_areas = []
-    common_areas << CommonArea.new(id: 1, name: 'Academia',
-                                   description: 'Uma academia raíz com ventilador apenas para os marombas',
-                                   max_occupancy: 20, rules: 'Não pode ser frango')
-    allow(CommonArea).to receive(:all).and_return(common_areas)
-    common_area = common_areas.first
-
-    common_area_json = common_area.to_json
-    fake_response = double('faraday_response', status: 200, body: common_area_json, success?: true)
-    allow(Faraday).to receive(:get).with("http://127.0.0.1:3000/api/v1/condos/#{condo.id}/common_areas/#{common_area.id}").and_return(fake_response)
+    common_areas << CommonArea.new(id: 3, name: 'Academia',
+                                   description: 'Uma academia raíz com ventilador apenas para os marombas')
+    common_area = CommonArea.new(id: 3, name: 'Academia',
+                                 description: 'Uma academia raíz com ventilador apenas para os marombas',
+                                 max_occupancy: 20, rules: 'Não pode ser frango')
+    allow(CommonArea).to receive(:all).with(1).and_return(common_areas)
+    allow(CommonArea).to receive(:find).with('3').and_return(common_area)
 
     login_as admin, scope: :admin
     visit condo_path(condo.id)
@@ -37,15 +35,13 @@ describe 'Admin registra uma taxa de área comum' do
     allow(Condo).to receive(:find).and_return(condo)
 
     common_areas = []
-    common_areas << CommonArea.new(id: 1, name: 'Academia',
-                                   description: 'Uma academia raíz com ventilador apenas para os marombas',
-                                   max_occupancy: 20, rules: 'Não pode ser frango')
-    allow(CommonArea).to receive(:all).and_return(common_areas)
-    common_area = common_areas.first
-
-    common_area_json = common_area.to_json
-    fake_response = double('faraday_response', status: 200, body: common_area_json, success?: true)
-    allow(Faraday).to receive(:get).with("http://127.0.0.1:3000/api/v1/condos/#{condo.id}/common_areas/#{common_area.id}").and_return(fake_response)
+    common_areas << CommonArea.new(id: 3, name: 'Academia',
+                                   description: 'Uma academia raíz com ventilador apenas para os marombas')
+    common_area = CommonArea.new(id: 3, name: 'Academia',
+                                 description: 'Uma academia raíz com ventilador apenas para os marombas',
+                                 max_occupancy: 20, rules: 'Não pode ser frango')
+    allow(CommonArea).to receive(:all).with(1).and_return(common_areas)
+    allow(CommonArea).to receive(:find).with('3').and_return(common_area)
 
     visit new_condo_common_area_common_area_fee_path(condo.id, common_area.id)
 
@@ -58,15 +54,13 @@ describe 'Admin registra uma taxa de área comum' do
     allow(Condo).to receive(:find).and_return(condo)
 
     common_areas = []
-    common_areas << CommonArea.new(id: 1, name: 'Academia',
-                                   description: 'Uma academia raíz com ventilador apenas para os marombas',
-                                   max_occupancy: 20, rules: 'Não pode ser frango')
-    allow(CommonArea).to receive(:all).and_return(common_areas)
-    common_area = common_areas.first
-
-    common_area_json = common_area.to_json
-    fake_response = double('faraday_response', status: 200, body: common_area_json, success?: true)
-    allow(Faraday).to receive(:get).with("http://127.0.0.1:3000/api/v1/condos/#{condo.id}/common_areas/#{common_area.id}").and_return(fake_response)
+    common_areas << CommonArea.new(id: 3, name: 'Academia',
+                                   description: 'Uma academia raíz com ventilador apenas para os marombas')
+    common_area = CommonArea.new(id: 3, name: 'Academia',
+                                 description: 'Uma academia raíz com ventilador apenas para os marombas',
+                                 max_occupancy: 20, rules: 'Não pode ser frango')
+    allow(CommonArea).to receive(:all).with(1).and_return(common_areas)
+    allow(CommonArea).to receive(:find).with('3').and_return(common_area)
 
     login_as admin, scope: :admin
     visit condo_path(condo.id)
@@ -87,15 +81,13 @@ describe 'Admin registra uma taxa de área comum' do
     allow(Condo).to receive(:find).and_return(condo)
 
     common_areas = []
-    common_areas << CommonArea.new(id: 1, name: 'Academia',
-                                   description: 'Uma academia raíz com ventilador apenas para os marombas',
-                                   max_occupancy: 20, rules: 'Não pode ser frango')
-    allow(CommonArea).to receive(:all).and_return(common_areas)
-    common_area = common_areas.first
-
-    common_area_json = common_area.to_json
-    fake_response = double('faraday_response', status: 200, body: common_area_json, success?: true)
-    allow(Faraday).to receive(:get).with("http://127.0.0.1:3000/api/v1/condos/#{condo.id}/common_areas/#{common_area.id}").and_return(fake_response)
+    common_areas << CommonArea.new(id: 3, name: 'Academia',
+                                   description: 'Uma academia raíz com ventilador apenas para os marombas')
+    common_area = CommonArea.new(id: 3, name: 'Academia',
+                                 description: 'Uma academia raíz com ventilador apenas para os marombas',
+                                 max_occupancy: 20, rules: 'Não pode ser frango')
+    allow(CommonArea).to receive(:all).with(1).and_return(common_areas)
+    allow(CommonArea).to receive(:find).with('3').and_return(common_area)
 
     login_as admin, scope: :admin
     visit condo_path(condo.id)

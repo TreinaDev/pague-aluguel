@@ -1,6 +1,11 @@
 class HomeController < ApplicationController
   before_action :authenticate_admin!, only: [:search]
 
+  rescue_from Tenant::DocumentNumberNotFoundError, Tenant::DocumentNumberNotValidError do |exception|
+    flash[:alert] = exception.message
+    redirect_to root_path
+  end
+
   def index
     if property_owner_signed_in?
       first_units
@@ -17,6 +22,17 @@ class HomeController < ApplicationController
     recent_admins
     first_condos
     render 'index'
+  end
+
+  def find_tenant
+    tenant_document_number = params[:get_tenant_bill]
+    @tenant = Tenant.find(document_number: tenant_document_number)
+    render :index, locals: { tenant: @tenant, bills: find_bills }
+  end
+
+  def tenant_bill
+    @tenant = Tenant.find(document_number: params[:tenant_document_number])
+    find_bill(params[:bill_id])
   end
 
   def choose_profile; end
@@ -44,6 +60,13 @@ class HomeController < ApplicationController
 
   def first_units
     @units = Unit.find_all_by_owner(current_property_owner.document_number)
-    @first_units = @units.take(4)
+  end
+
+  def find_bills
+    @bills = Bill.where(unit_id: @tenant.residence['id'])
+  end
+
+  def find_bill(bill_id)
+    @bill = Bill.find(bill_id)
   end
 end

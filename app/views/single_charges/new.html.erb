@@ -20,8 +20,8 @@
   <span class="mx-auto text-uppercase fs-7 text-muted"><%= @condo.name %></span>
 
   <%= form_with model: [@single_charge], url: condo_single_charges_path(@condo.id), local: true do |f| %>
-    <div class="form-floating mb-3 w-50 mx-auto">
-      <%= f.select :charge_type, options_for_select(SingleCharge.charge_types.map { |key, _| [I18n.t("single_charge.#{key}"), key] }, 
+    <div class="form-floating mb-3 w-50 mx-auto mt-4">
+      <%= f.select :charge_type, options_for_select(category_options(@condo.id), 
           @single_charge.charge_type), {},  data: { target: "toggle-common-area-field.select", 
           action: "change->toggle-common-area-field#toggleField" }, class: "form-control" %>
       <%= f.label :charge_type %>
@@ -34,7 +34,7 @@
     </div>
 
     <div class="form-floating mb-3 w-50 mx-auto">
-      <%= f.select :unit_id, options_for_select(@units.map { |key, _| [key.identifier, key.id] }, 
+      <%= f.select :unit_id, options_for_select(@units.map { |key, _| [key.number, key.id] }, 
           @single_charge.unit_id), {prompt: ''}, class: "form-control" %>
       <%= f.label :unit_id %>
     </div>

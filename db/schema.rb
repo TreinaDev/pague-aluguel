@@ -10,8 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-
-ActiveRecord::Schema[7.1].define(version: 2024_07_16_004427) do
+ActiveRecord::Schema[7.1].define(version: 2024_07_17_193619) do
   create_table "active_storage_attachments", force: :cascade do |t|
     t.string "name", null: false
     t.string "record_type", null: false
@@ -88,6 +87,7 @@ ActiveRecord::Schema[7.1].define(version: 2024_07_16_004427) do
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
     t.integer "condo_id", null: false
+    t.integer "status", default: 0
   end
 
   create_table "common_area_fees", force: :cascade do |t|
@@ -112,6 +112,20 @@ ActiveRecord::Schema[7.1].define(version: 2024_07_16_004427) do
     t.index ["document_number"], name: "index_property_owners_on_document_number", unique: true
     t.index ["email"], name: "index_property_owners_on_email", unique: true
     t.index ["reset_password_token"], name: "index_property_owners_on_reset_password_token", unique: true
+  end
+
+  create_table "rent_fees", force: :cascade do |t|
+    t.integer "tenant_id"
+    t.integer "owner_id"
+    t.integer "condo_id"
+    t.integer "unit_id"
+    t.integer "value_cents"
+    t.date "issue_date"
+    t.integer "fine_cents"
+    t.decimal "fine_interest"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.integer "status", default: 0
   end
 
   create_table "shared_fee_fractions", force: :cascade do |t|

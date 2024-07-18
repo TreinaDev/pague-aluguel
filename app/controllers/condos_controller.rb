@@ -1,6 +1,7 @@
 class CondosController < ApplicationController
   before_action :authenticate_admin!
   before_action :admin_authorized?, only: [:show]
+  before_action :set_condo, only: [:show]
 
   def index
     if current_admin.super_admin?
@@ -15,11 +16,11 @@ class CondosController < ApplicationController
   end
 
   def show
-    @condo = Condo.find(params[:id])
     @common_areas = CommonArea.all(@condo.id)
     @first_common_areas = @common_areas.take(4)
     recent_base_fees
     recent_shared_fees
+    recent_single_charges
   end
 
   def recent_base_fees
@@ -31,7 +32,17 @@ class CondosController < ApplicationController
     @recent_shared_fees = @recent_shared_fees.order(created_at: :desc).take(2)
   end
 
+  def recent_single_charges
+    @recent_single_charges = SingleCharge.where(condo_id: @condo.id).order(created_at: :desc).take(2)
+  end
+
   private
+
+  def set_condo
+    @condo = Condo.find(params[:id])
+  rescue StandardError
+    redirect_to root_path, alert: I18n.t('views.index.no_condo')
+  end
 
   def admin_authorized?
     current_admin_associated = current_admin.associated_condos.map(&:condo_id).include?(params[:id].to_i)

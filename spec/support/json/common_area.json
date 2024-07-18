@@ -1,0 +1,7 @@
+{
+  "name": "Academia",
+  "description": "Uma academia raíz com ventilador apenas para os marombas",
+  "max_occupancy": 20,
+  "rules": "Não pode ser frango",
+  "condo_id": 1
+}

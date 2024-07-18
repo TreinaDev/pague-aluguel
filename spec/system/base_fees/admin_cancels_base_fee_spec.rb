@@ -7,10 +7,10 @@ describe 'Admin cancela uma taxa condominial' do
     condos << Condo.new(id: 1, name: 'Prédio lindo', city: 'Cidade maravilhosa')
     create(:base_fee, name: 'Taxa de Condomínio', condo_id: condos.first.id)
     unit_types = []
-    unit_types << UnitType.new(id: 1, area: 30, description: 'Apartamento 1 quarto', ideal_fraction: 222.2, condo_id: 1)
+    unit_types << UnitType.new(id: 1, metreage: 30, description: 'Apartamento 1 quarto', fraction: 222.2, condo_id: 1)
     allow(Condo).to receive(:all).and_return(condos)
     allow(Condo).to receive(:find).and_return(condos.first)
-    allow(UnitType).to receive(:find_all_by_condo).and_return(unit_types)
+    allow(UnitType).to receive(:all).and_return(unit_types)
     allow(CommonArea).to receive(:all).and_return([])
 
     login_as admin, scope: :admin
@@ -38,10 +38,10 @@ describe 'Admin cancela uma taxa condominial' do
     condos << Condo.new(id: 1, name: 'Prédio lindo', city: 'Cidade maravilhosa')
     create(:base_fee, name: 'Taxa de Condomínio', condo_id: condos.first.id)
     unit_types = []
-    unit_types << UnitType.new(id: 1, area: 30, description: 'Apartamento 1 quarto', ideal_fraction: 222.2, condo_id: 1)
+    unit_types << UnitType.new(id: 1, metreage: 30, description: 'Apartamento 1 quarto', fraction: 222.2, condo_id: 1)
     allow(Condo).to receive(:all).and_return(condos)
     allow(Condo).to receive(:find).and_return(condos.first)
-    allow(UnitType).to receive(:find_all_by_condo).and_return(unit_types)
+    allow(UnitType).to receive(:all).and_return(unit_types)
     allow(CommonArea).to receive(:all).and_return([])
 
     login_as admin, scope: :admin
