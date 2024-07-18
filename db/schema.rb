@@ -77,6 +77,7 @@ ActiveRecord::Schema[7.1].define(version: 2024_07_17_221617) do
     t.integer "condo_id"
     t.integer "installments"
     t.integer "status", default: 0
+    t.integer "counter", default: 0
   end
 
   create_table "bills", force: :cascade do |t|
