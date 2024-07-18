@@ -12,7 +12,9 @@ class Api::V1::SingleChargesController < Api::V1::ApiController
 
   def create_common_area_fee(single_charge)
     if single_charge.save
-      render json: { message: I18n.t('common-area-fee-charge-success') }, status: :created
+      render json: {
+        message: I18n.t('common-area-fee-charge-success'), single_charge_id: single_charge.id
+        }, status: :created
     else
       render json: { message: single_charge.errors.full_messages }, status: :unprocessable_entity
     end
