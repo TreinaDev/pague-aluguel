@@ -32,6 +32,13 @@
                       <%= Bill.human_attribute_name(:due_date) %>:
                       <%= I18n.l(bill.due_date) %>
                     </small>
+                    <% if bill.pending? %>
+                      <span class="mt-1 ms-auto badge text-bg-danger text-uppercase"><%= I18n.t('views.show.pending') %></span>
+                    <% elsif bill.awaiting? %>
+                      <span class="mt-1 ms-auto badge text-bg-warning text-uppercase"><%= I18n.t('views.show.awaiting') %></span>
+                    <% else %>
+                      <span class="mt-1 ms-auto badge text-bg-success text-uppercase"><%= I18n.t('views.show.paid') %></span>
+                    <% end %>
                   </div>
                 </div>
                 <span class="d-block">Unidade <%= @tenant.residence["number"] %></span>
