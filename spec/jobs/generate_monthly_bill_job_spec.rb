@@ -159,14 +159,14 @@ RSpec.describe GenerateMonthlyBillJob, type: :job do
       units = []
       units << Unit.new(id: 1, area: 100, floor: 1, number: '11', unit_type_id: 1, condo_id: 1,
                         condo_name: 'Prédio lindo', tenant_id: 1, owner_id: 1, description: 'Com varanda')
-      first_shared_fee = create(:shared_fee, description: 'Descrição', issue_date: 10.days.from_now.to_date,
+      first_shared_fee = create(:shared_fee, description: 'Descrição', issue_date: Time.zone.now,
                                              total_value: 20_000_00, condo_id: condos.first.id)
-      second_shared_fee = create(:shared_fee, description: 'Descrição', issue_date: 45.days.from_now.to_date,
+      second_shared_fee = create(:shared_fee, description: 'Descrição', issue_date: 1.month.from_now,
                                               total_value: 13_000_00, condo_id: condos.first.id)
       create(:shared_fee_fraction, shared_fee: first_shared_fee, unit_id: 1, value_cents: 200_00)
       create(:shared_fee_fraction, shared_fee: second_shared_fee, unit_id: 1, value_cents: 130_00)
-      first_base_fee = create(:base_fee, condo_id: 1, recurrence: :monthly, charge_day: 10.days.from_now)
-      second_base_fee = create(:base_fee, condo_id: 1, recurrence: :monthly, charge_day: 45.days.from_now)
+      first_base_fee = create(:base_fee, condo_id: 1, recurrence: :monthly, charge_day: Time.zone.now)
+      second_base_fee = create(:base_fee, condo_id: 1, recurrence: :monthly, charge_day: 1.month.from_now)
       create(:value, price_cents: 150_00, base_fee_id: first_base_fee.id)
       create(:value, price_cents: 111_11, base_fee_id: second_base_fee.id)
       allow(Condo).to receive(:all).and_return(condos)
@@ -175,7 +175,7 @@ RSpec.describe GenerateMonthlyBillJob, type: :job do
       allow(Unit).to receive(:find).and_return(units.first)
       allow(Unit).to receive(:all).and_return(units)
 
-      travel_to 65.days.from_now do
+      travel_to 2.months.from_now do
         units.each do |unit|
           condo_id = unit_types.first.condo_id
           GenerateMonthlyBillJob.perform_now(unit, condo_id)
