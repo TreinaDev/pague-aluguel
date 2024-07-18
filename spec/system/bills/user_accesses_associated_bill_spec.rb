@@ -12,7 +12,6 @@ describe 'Usuário acessa suas faturas' do
       resident = JSON.parse(response.body)['resident']
 
       condo_id = residence['condo_id']
-      number = residence['number']
       unit_id = residence['id']
 
       units = []
