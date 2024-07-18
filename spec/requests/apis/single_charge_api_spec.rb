@@ -212,4 +212,68 @@ describe 'API de Cobranças Avulsas' do
       expect(SingleCharge.last.common_area_id).to eq nil
     end
   end
+
+  context 'PATCH /api/v1/condos/:id/single_charges/:id' do
+    it 'recebe um cancelamento de reserva de area comum com sucesso' do
+      condos = []
+      condos << Condo.new(id: 1, name: 'Condo Test', city: 'City Test')
+      unit_types = []
+      unit_types << UnitType.new(id: 1, description: 'Apartamento 1 quarto', metreage: 100, fraction: 1.0,
+                                 unit_ids: [1])
+      units = []
+      units << Unit.new(id: 1, area: 100, floor: 1, number: '11', unit_type_id: 1, condo_id: 1,
+                        condo_name: 'Prédio lindo', tenant_id: 1, owner_id: 1, description: 'Com varanda')
+      common_areas = []
+      common_areas << CommonArea.new(id: 1, name: 'Academia',
+                                     description: 'Uma academia raíz com ventilador apenas para os marombas',
+                                     max_occupancy: 20, rules: 'Não pode ser frango', condo_id: 1)
+      allow(Condo).to receive(:all).and_return(condos)
+      allow(Condo).to receive(:find).and_return(condos.first)
+      allow(UnitType).to receive(:all).and_return(unit_types)
+      allow(Unit).to receive(:all).and_return(units)
+      allow(Unit).to receive(:find).and_return(units.first)
+      allow(CommonArea).to receive(:all).and_return(common_areas)
+      allow(CommonArea).to receive(:find).and_return(common_areas.first)
+      single_charge = create(:single_charge, id: 1, condo_id: condos.first.id, unit_id: units.first.id,
+                                             common_area_id: common_areas.first.id, charge_type: :common_area_fee)
+
+      patch cancel_api_v1_single_charge_path(single_charge.id)
+
+      data = response.parsed_body
+      expect(response.status).to eq 200
+      expect(data['message']).to include('Reserva cancelada com sucesso')
+      expect(SingleCharge.find(single_charge.id).canceled?).to eq true
+    end
+
+    it 'recebe um pedido de cancelamento e falha se o tipo nao for taxa de area comum' do
+      condos = []
+      condos << Condo.new(id: 1, name: 'Condo Test', city: 'City Test')
+      unit_types = []
+      unit_types << UnitType.new(id: 1, description: 'Apartamento 1 quarto', metreage: 100, fraction: 1.0,
+                                 unit_ids: [1])
+      units = []
+      units << Unit.new(id: 1, area: 100, floor: 1, number: '11', unit_type_id: 1, condo_id: 1,
+                        condo_name: 'Prédio lindo', tenant_id: 1, owner_id: 1, description: 'Com varanda')
+      common_areas = []
+      common_areas << CommonArea.new(id: 1, name: 'Academia',
+                                     description: 'Uma academia raíz com ventilador apenas para os marombas',
+                                     max_occupancy: 20, rules: 'Não pode ser frango', condo_id: 1)
+      allow(Condo).to receive(:all).and_return(condos)
+      allow(Condo).to receive(:find).and_return(condos.first)
+      allow(UnitType).to receive(:all).and_return(unit_types)
+      allow(Unit).to receive(:all).and_return(units)
+      allow(Unit).to receive(:find).and_return(units.first)
+      allow(CommonArea).to receive(:all).and_return(common_areas)
+      allow(CommonArea).to receive(:find).and_return(common_areas.first)
+      single_charge = create(:single_charge, id: 1, condo_id: condos.first.id, unit_id: units.first.id,
+                                             common_area_id: common_areas.first.id, charge_type: :fine)
+
+      patch cancel_api_v1_single_charge_path(single_charge.id)
+
+      data = response.parsed_body
+      expect(response.status).to eq 422
+      expect(data['message']).to include('Tipo de Cobrança inválido')
+      expect(SingleCharge.find(single_charge.id).canceled?).to eq false
+    end
+  end
 end

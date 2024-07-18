@@ -39,7 +39,9 @@ Rails.application.routes.draw do
         resources :common_area_fees, only: [:index]
       end
       resources :common_area_fees, only: [:show]
-      resources :single_charges, only: [:create]
+      resources :single_charges, only: [:create] do
+        patch 'cancel', on: :member
+      end
       resources :bills, only: [:show]
       resources :units, only: [] do
         resources :bills, only: [:index]
