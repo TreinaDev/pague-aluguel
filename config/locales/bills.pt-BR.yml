@@ -10,6 +10,9 @@ pt-BR:
       reject_payment: Rejeitar pagamento
       confirm-accept: Tem certeza que deseja aceitar o pagamento? Essa ação não poderá ser desfeita.
       confirm-reject: Tem certeza que deseja rejeitar o pagamento? Essa ação não poderá ser desfeita.
+      pending: Pendente
+      awaiting: Aguardando
+      accepted: Pago
   activerecord:
     models:
       bill:

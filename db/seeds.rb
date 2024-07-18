@@ -146,6 +146,7 @@ Bill.create!(
   total_value_cents: 1000,
   issue_date: Time.zone.today.beginning_of_month,
   due_date: 10.days.from_now,
+  status: :pending
 )
 Bill.create!(
   unit_id: 97,
@@ -153,6 +154,7 @@ Bill.create!(
   total_value_cents: 2000,
   issue_date: 30.days.ago.beginning_of_month,
   due_date: 20.days.ago,
+  status: :awaiting
 )
 Bill.create!(
   unit_id: 97,
@@ -160,6 +162,7 @@ Bill.create!(
   total_value_cents: 3000,
   issue_date: 60.days.ago.beginning_of_month,
   due_date: 50.days.ago,
+  status: :paid
 )
 
 p "Created #{Bill.count} bills for 314.787.200-93"
