@@ -325,6 +325,19 @@ Exemplo de cobrança avulsa (Reserva de Área Comum):
 }
 ```
 
+### 3. Comprovante
+
+URL: ` /api/v1/receipts`
+
+Método: POST
+
+Expõe um endpoint da API para a criação do modelo receipt, válido para o upload de comprovantes.
+
+Parâmetros do Corpo da Requisição
+
+- `receipt`: Arquivo anexado do comprovante. Obrigatório. ( Deve ser um arquivo em formato PDF, JPEG ou PNG )
+- `bill_id`: Id da fatura associada ao comprovante. Obrigatório.
+
 ## Desenvolvedores 🧑🏽‍💻🧑🏻‍💻🧑‍💻
 
 <div align="center">
