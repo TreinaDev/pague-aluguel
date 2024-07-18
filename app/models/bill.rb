@@ -5,6 +5,6 @@ class Bill < ApplicationRecord
   monetize :total_value_cents
   monetize :shared_fee_value_cents
   monetize :base_fee_value_cents
-  
+
   enum status: { pending: 0, awaiting: 5, paid: 10 }
 end
