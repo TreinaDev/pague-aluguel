@@ -46,10 +46,20 @@ RSpec.describe 'Comprovantes', type: :request do
     it 'retorna erro quando arquivo enviado não é um pdf, jpg ou png' do
       file = fixture_file_upload(Rails.root.join('spec/support/images/best_game_ever.webp'), 'image/webp')
 
-      post '/api/v1/receipts', params: { receipt: file }
+      post '/api/v1/receipts', params: { receipt: file, bill_id: '123456789' }
 
       expect(response).to have_http_status(:unprocessable_entity)
       expect(response.body).to include('O arquivo deve ser JPG, PNG ou PDF.')
+      expect(Receipt.count).to eq(0)
+    end
+
+    it 'retorna erro quando o ID da fatura é inválido ou não é passado' do
+      file = fixture_file_upload(Rails.root.join('spec/support/pdf/Comprovante-teste.pdf'), 'application/pdf')
+
+      post '/api/v1/receipts', params: { receipt: file, bill_id: nil }
+
+      expect(response).to have_http_status(:unprocessable_entity)
+      expect(response.body).to include('ID da fatura não informado.')
       expect(Receipt.count).to eq(0)
     end
   end

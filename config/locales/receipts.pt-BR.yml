@@ -3,3 +3,4 @@ pt-BR:
   file_must_be_png_jpg_or_pdf: 'O arquivo deve ser JPG, PNG ou PDF.'
   no_file_sent: 'Nenhum arquivo enviado.'
   receipt_received_success: 'Comprovante recebido com sucesso.'
+  missing_bill_id: 'ID da fatura não informado.'
