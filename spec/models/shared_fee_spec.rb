@@ -20,13 +20,9 @@ RSpec.describe SharedFee, type: :model do
         unit_types = []
         unit_types << UnitType.new(id: 1, description: 'Apartamento 1 quarto', metreage: 100, fraction: 1.0,
                                    unit_ids: [1])
-        units = []
-        units << Unit.new(id: 1, area: 100, floor: 1, number: '11', unit_type_id: 1, condo_id: 1,
-                          condo_name: 'Prédio lindo', tenant_id: 1, owner_id: 1, description: 'Com varanda')
         shared_fee = SharedFee.create(description: 'Descrição', issue_date: 10.days.from_now.to_date,
                                       total_value: 0, condo_id: condo.id)
         allow(Condo).to receive(:find).and_return(condo)
-        allow(Unit).to receive(:all).and_return(units)
         allow(UnitType).to receive(:all).and_return(unit_types)
 
         expect(shared_fee.errors.include?(:total_value)).to be true
@@ -37,14 +33,10 @@ RSpec.describe SharedFee, type: :model do
         unit_types = []
         unit_types << UnitType.new(id: 1, description: 'Apartamento 1 quarto', metreage: 100, fraction: 1.0,
                                    unit_ids: [1])
-        units = []
-        units << Unit.new(id: 1, area: 100, floor: 1, number: '11', unit_type_id: 1, condo_id: 1,
-                          condo_name: 'Prédio lindo', tenant_id: 1, owner_id: 1, description: 'Com varanda')
         shared_fee = SharedFee.create(description: 'Descrição', issue_date: 10.days.from_now.to_date,
                                       total_value: 10_000, condo_id: condo.id)
 
         allow(Condo).to receive(:find).and_return(condo)
-        allow(Unit).to receive(:all).and_return(units)
         allow(UnitType).to receive(:all).and_return(unit_types)
 
         expect(shared_fee.errors.include?(:description)).to be false
@@ -84,5 +76,31 @@ RSpec.describe SharedFee, type: :model do
     end
 
     it { should have_many(:shared_fee_fractions) }
+  end
+end
+
+describe '.calculate_fractions' do
+  it 'divide corretamente as frações' do
+    condo = Condo.new(id: 1, name: 'Prédio lindo', city: 'Cidade maravilhosa')
+    unit_types = []
+    unit_types << UnitType.new(id: 1, description: 'Apartamento 1 quarto', metreage: 100, fraction: 0.52,
+                               unit_ids: (1..50).to_a)
+    unit_types << UnitType.new(id: 2, description: 'Apartamento 2 quartos', metreage: 100, fraction: 1.34,
+                               unit_ids: (51..100).to_a)
+    unit_types << UnitType.new(id: 2, description: 'Apartamento duplex', metreage: 100, fraction: 4.0,
+                               unit_ids: (101..110).to_a)
+    unit_types << UnitType.new(id: 2, description: 'Apartamento com varanda', metreage: 100, fraction: 6.7,
+                               unit_ids: (111..120).to_a)
+    shared_fee = SharedFee.create(description: 'Descrição', issue_date: 10.days.from_now.to_date,
+                                  total_value: 10_000, condo_id: condo.id)
+    allow(Condo).to receive(:find).and_return(condo)
+    allow(UnitType).to receive(:all).and_return(unit_types)
+    shared_fee.calculate_fractions
+
+    expect(SharedFeeFraction.sum(:value_cents)).to eq SharedFee.last.total_value_cents
+    expect(SharedFeeFraction.find_by(unit_id: 1).value_cents).to eq 26_00
+    expect(SharedFeeFraction.find_by(unit_id: 51).value_cents).to eq 67_00
+    expect(SharedFeeFraction.find_by(unit_id: 101).value_cents).to eq 200_00
+    expect(SharedFeeFraction.find_by(unit_id: 111).value_cents).to eq 335_00
   end
 end

@@ -16,17 +16,31 @@ class SharedFee < ApplicationRecord
            }
 
   def calculate_fractions
-    unit_types = UnitType.all(condo_id)
-    unit_types.each do |unit_type|
-      unit_ids = unit_type.unit_ids
-      unit_ids.each do |unit_id|
-        value_cents = unit_type.fraction * total_value_cents
+    total_fraction = total_fraction_sum(condo_id)
+    calculated_cents = UnitType.all(condo_id).flat_map do |unit_type|
+      unit_type.unit_ids.map do |unit_id|
+        value_cents = ((unit_type.fraction / total_fraction) * total_value_cents).to_i
         shared_fee_fractions.create!(unit_id:, value_cents:)
+        value_cents
       end
     end
+    adjust_remaining_value_cents(calculated_cents.sum)
   end
 
   private
+
+  def total_fraction_sum(condo_id)
+    unit_types = UnitType.all(condo_id)
+    unit_types.sum { |unit_type| unit_type.fraction * unit_type.unit_ids.count }
+  end
+
+  def adjust_remaining_value_cents(calculated_total)
+    difference = total_value_cents - calculated_total
+    return if difference.zero?
+
+    first_fraction = shared_fee_fractions.first
+    first_fraction.update(value_cents: first_fraction.value_cents + difference)
+  end
 
   def date_is_future
     return unless issue_date.present? && issue_date < Time.zone.today
