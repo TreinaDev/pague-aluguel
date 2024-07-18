@@ -3,7 +3,7 @@ class SharedFeesController < ApplicationController
   before_action :find_condo, only: [:index, :show, :new, :create, :cancel]
 
   def index
-    @shared_fees = SharedFee.where(condo_id: @condo.id)
+    @shared_fees = SharedFee.where(condo_id: @condo.id).order(issue_date: :desc)
   end
 
   def show

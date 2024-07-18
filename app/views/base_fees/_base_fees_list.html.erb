@@ -1,0 +1,29 @@
+<% if base_fees.any? %>
+  <% base_fees.each do |base_fee| %>
+    <%= link_to condo_base_fee_path(@condo.id, base_fee), class: "list-group-item p-3 list-group-item-action hover-strong", data: { turbo_frame: "modal" } do %>
+      <div class="d-flex w-100 justify-content-between">
+        <span class="d-block mb-1 fs-5">
+          <%= base_fee.name %>
+        </span>
+        <div class="d-flex flex-wrap text-end">
+          <small class="d-block text-body-secondary w-100">
+            <%= SharedFee.human_attribute_name(:issue_date) %>:
+            <%= I18n.l(base_fee.charge_day.to_date)%>
+          </small>
+          <% if base_fee.active? %>
+            <span class="mt-1 ms-auto badge text-bg-success text-uppercase"><%= I18n.t("base_fee.statuses.#{base_fee.status}") %></span>
+          <% else %>
+            <span class="mt-1 ms-auto badge text-bg-danger text-uppercase"><%= I18n.t("base_fee.statuses.#{base_fee.status}") %></span>
+          <% end %>
+        </div>
+      </div>
+      <span class="d-block">
+        <%= base_fee.description %>
+      </span>
+      <span class="text-muted fs-7 text-lowercase"><%= BaseFee.human_attribute_name(:recurrence) %></span>
+      <span class="text-uppercase fs-7"><%= I18n.t("activerecord.attributes.base_fee.enum_recurrence.#{base_fee.recurrence}") %></span>
+    <% end %>
+  <% end %>
+<% else %>
+  <p><%= I18n.t('views.index.no_base_fees')%></p>
+<% end %>
