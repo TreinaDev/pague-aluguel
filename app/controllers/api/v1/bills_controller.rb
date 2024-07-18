@@ -1,4 +1,11 @@
 class Api::V1::BillsController < Api::V1::ApiController
+  def index
+    unit_id = params[:unit_id]
+
+    bills = Bill.where(unit_id:, status: 'pending')
+    render status: :ok, json: { bills: bills.as_json(only: [:id, :issue_date, :due_date, :total_value_cents]) }
+  end
+
   def show
     id = params[:id]
 

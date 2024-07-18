@@ -342,7 +342,9 @@ Caso não exista taxa com o id informado: `status: 404`:
   "errors":"Não encontrado"
 }
 ```
-Caso o condomínio possua alguma taxa cadastrada: `status: 200`:
+
+Caso exista taxa com o id informado: `status: 200`:
+
 ```json
 {
   "unit_id": 1,
@@ -358,6 +360,40 @@ Caso o condomínio possua alguma taxa cadastrada: `status: 200`:
 }
 ```
 
+`GET api/v1/units/:unit_id/bills`
+
+Recebemos como parâmetro um `id` de uma fatura e retornamos **todos os detalhes da fatura** desejada. <br>
+**Retorna:** <br>
+
+Caso a unidade possua alguma taxa cadastrada: `status: 200`:
+```json
+{
+  "bills": [
+    {
+      "id": 1,
+      "issue_date": "2024-07-01",
+      "due_date": "2024-07-10",
+      "total_value_cents": 1000
+    },
+    {
+      "id": 3,
+      "issue_date": "2024-05-01",
+      "due_date": "2024-05-10",
+      "total_value_cents": 3000
+    }
+  ]
+}
+```
+
+Caso a unidade não possua nenhuma fatura cadastrada: `status: 200`:
+
+```
+{
+  "bills": [
+    
+  ]
+}
+```
 
 ## Desenvolvedores 🧑🏽‍💻🧑🏻‍💻🧑‍💻
 
