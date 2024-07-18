@@ -22,6 +22,9 @@ describe 'Proprietário vê dashboard' do
 
     login_as property_owner, scope: :property_owner
     visit root_path
+    within('div#units') do
+      click_on 'Mostrar todos'
+    end
 
     within('div#property-owner-dashboard') do
       expect(page).to have_content 'Perfil'
