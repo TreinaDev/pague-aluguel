@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema[7.1].define(version: 2024_07_17_193619) do
+ActiveRecord::Schema[7.1].define(version: 2024_07_18_020443) do
   create_table "active_storage_attachments", force: :cascade do |t|
     t.string "name", null: false
     t.string "record_type", null: false
@@ -112,6 +112,12 @@ ActiveRecord::Schema[7.1].define(version: 2024_07_17_193619) do
     t.index ["document_number"], name: "index_property_owners_on_document_number", unique: true
     t.index ["email"], name: "index_property_owners_on_email", unique: true
     t.index ["reset_password_token"], name: "index_property_owners_on_reset_password_token", unique: true
+  end
+
+  create_table "receipts", force: :cascade do |t|
+    t.string "name"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
   end
 
   create_table "rent_fees", force: :cascade do |t|

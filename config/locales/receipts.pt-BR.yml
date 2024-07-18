@@ -1,0 +1,3 @@
+pt-BR:
+  file_too_large: 'O arquivo é muito grande. O tamanho máximo permitido é 5MB.'
+  file_must_be_jpg_or_pdf: 'O arquivo deve ser JPG ou PDF.'
