@@ -40,10 +40,10 @@ describe 'Admin altera status fatura' do
 
       expect(page).to have_content 'Pagamento efetivado!'
       expect(page).not_to have_content 'Aceitar pagamento'
-      within("a#bill_1") do
+      within('a#bill_1') do
         expect(page).to have_content 'pendente'.upcase
       end
-      within("a#bill_2") do
+      within('a#bill_2') do
         expect(page).to have_content 'paga'.upcase
       end
     end
@@ -86,10 +86,10 @@ describe 'Admin altera status fatura' do
 
       expect(page).to have_content 'Pagamento recusado!'
       expect(page).not_to have_content 'Recusar pagamento'
-      within("a#bill_1") do
+      within('a#bill_1') do
         expect(page).to have_content 'paga'.upcase
       end
-      within("a#bill_2") do
+      within('a#bill_2') do
         expect(page).to have_content 'pendente'.upcase
       end
     end
