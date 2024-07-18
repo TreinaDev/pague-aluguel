@@ -4,7 +4,7 @@ class SingleChargesController < ApplicationController
   before_action :set_common_areas, only: [:new, :create]
 
   def index
-    @single_charges = SingleCharge.where(condo_id: @condo.id)
+    @single_charges = SingleCharge.where(condo_id: @condo.id).order(issue_date: :desc)
   end
 
   def show

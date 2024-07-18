@@ -5,49 +5,83 @@
   <span class="fs-4 mx-auto mt-3 text-uppercase">
     <%= SingleCharge.model_name.human(count: 2) %>
   </span>
-  <span class="mx-auto text-uppercase fs-7 text-muted"><%= @condo.name %></span>
-  <div class="d-flex justify-content-center mt-4 mb-4">
-    <% if @single_charges.any? %>
-      <div class="list-group w-75">
-        <% @single_charges.each do |single_charge| %>
-          <%= link_to condo_single_charge_path(@condo.id, single_charge), class: "list-group-item p-3 list-group-item-action hover-strong", data: { turbo_frame: "modal" } do %>
-            <div class="d-flex w-100 justify-content-between">
-              <span class="d-block mb-1 fs-4">
-                <%= I18n.t "single_charge.#{single_charge.charge_type}" %>
-              </span>
-              <span class="d-block mb-1 fs-6">
-                <%= single_charge.description %>
-              </span>
-              <span class="d-block mb-1 fs-6">
-                <%= I18n.t('activerecord.attributes.single_charge.unit_id') %>
-                <%= Unit.find(single_charge.unit_id).number %>
-              </span>
-              <div class="d-flex flex-wrap text-end">
-                <small class="text-body-secondary w-100">
-                  <%= SingleCharge.human_attribute_name(:issue_date) %>:
-                  <%= I18n.l(single_charge.issue_date) %>
-                </small>
-                <% if single_charge.active? %>
-                  <span class="mt-1 ms-auto badge text-bg-success text-uppercase"><%= I18n.t("single_charge.statuses.#{single_charge.status}") %></span>
-                <% else %>
-                  <span class="mt-1 ms-auto badge text-bg-danger text-uppercase"><%= I18n.t("single_charge.statuses.#{single_charge.status}") %></span>
-                <% end %>
-              </div>
-            </div>
-            <span>
-              <%= I18n.t('activerecord.attributes.single_charge.unit_id') %> 
-              <%= humanized_unit(single_charge.unit_id) %>
-            </span>
-            <span class="d-block">
-              <%= single_charge.description %>
-            </span>
-            <span class="text-muted fs-7 text-lowercase"><%= SingleCharge.human_attribute_name(:value) %></span>
-            <span><%= single_charge.value.format %></span>
-          <% end %>
-        <% end %>
+
+  <span class="d-block text-uppercase fs-7 text-muted text-center"><%= @condo.name %></span>
+  <div class="d-flex justify-content-between mt-5 mb-2 w-75 mx-auto text-center">
+    <div class="d-flex justify-content-center">
+      <a class="fs-6 text-decoration-none btn hover-strong" data-bs-toggle="collapse" href="#allSingleCharges" role="button" aria-expanded="false" aria-controls="allSingleCharges">
+        <%= image_tag "arrow-down.png", size: "20" %>
+        <%= I18n.t('views.index.all_fees').upcase %>
+      </a>
+    </div>
+
+    <div class="d-flex justify-content-end align-items-center">
+      <%= image_tag "filter-icon.png", size: "18" %>
+      <a class="fs-8 text-decoration-none btn hover-strong" data-bs-toggle="collapse" href="#activeSingleCharges" role="button" aria-expanded="false" aria-controls="activeSingleCharges">
+        <%= I18n.t('views.index.active_fees').upcase %>
+      </a>
+      <a class="fs-8 text-decoration-none btn hover-strong" data-bs-toggle="collapse" href="#canceledSingleCharges" role="button" aria-expanded="false" aria-controls="canceledSingleCharges">
+        <%= I18n.t('views.index.canceled_fees').upcase %>
+      </a>
+      <a class="fs-8 text-decoration-none btn hover-strong" data-bs-toggle="collapse" href="#futureSingleCharges" role="button" aria-expanded="false" aria-controls="futureSingleCharges">
+        <%= I18n.t('views.index.future_fees').upcase %>
+      </a>
+      <a class="fs-8 text-decoration-none btn hover-strong" data-bs-toggle="collapse" href="#pastSingleCharges" role="button" aria-expanded="false" aria-controls="pastSingleCharges">
+        <%= I18n.t('views.index.past_fees').upcase %>
+      </a>
+    </div>
+  </div>
+
+  <div class="accordion mb-5 w-75 mx-auto" id="singleChargesAccordion">
+    <div class="d-flex justify-content-center">
+      <div class="collapse multi-collapse w-100" id="activeSingleCharges" data-bs-parent="#singleChargesAccordion">
+        <h4 class="text-center mt-4 mb-4">
+          <%= I18n.t('views.index.active_fees').upcase %>
+        </h4>
+        <div class="list-group w-100">
+          <%= render partial: "single_charges_list", locals: { single_charges: @single_charges.where(status: :active) } %>
+        </div>
       </div>
-    <% else %>
-      <p><%= I18n.t('views.index.no_single_charges') %></p>
-    <% end %>
+    </div>
+    <div class="d-flex justify-content-center">
+      <div class="collapse multi-collapse w-100" id="futureSingleCharges" data-bs-parent="#singleChargesAccordion">
+        <h4 class="text-center mt-4 mb-4">
+          <%= I18n.t('views.index.future_fees').upcase %>
+        </h4>
+        <div class="list-group w-100">
+          <%= render partial: "single_charges_list", locals: { single_charges: @single_charges.where(issue_date: (Time.zone.tomorrow..)) } %>
+        </div>
+      </div>
+    </div>
+    <div class="d-flex justify-content-center">
+      <div class="collapse multi-collapse w-100" id="canceledSingleCharges" data-bs-parent="#singleChargesAccordion">
+        <h4 class="text-center mt-4 mb-4">
+          <%= I18n.t('views.index.canceled_fees').upcase %>
+        </h4>
+        <div class="list-group w-100">
+          <%= render partial: "single_charges_list", locals: { single_charges: @single_charges.where(status: :canceled) } %>
+        </div>
+      </div>
+    </div>
+    <div class="d-flex justify-content-center">
+      <div class="collapse multi-collapse w-100" id="pastSingleCharges" data-bs-parent="#singleChargesAccordion">
+        <h4 class="text-center mt-4 mb-4">
+          <%= I18n.t('views.index.past_fees').upcase %>
+        </h4>
+        <div class="list-group w-100">
+          <%= render partial: "single_charges_list", locals: { single_charges: @single_charges.where(issue_date: ..Time.zone.today) } %>
+        </div>
+      </div>
+    </div>
+    <div class="d-flex justify-content-center">
+      <div class="collapse multi-collapse w-100 show" id="allSingleCharges" data-bs-parent="#singleChargesAccordion">
+        <h4 class="text-center mt-4 mb-4">
+          <%= I18n.t('views.index.all_fees').upcase %>
+        </h4>
+        <div class="list-group w-100">
+          <%= render partial: "single_charges_list", locals: { single_charges: @single_charges } %>
+        </div>
+      </div>
+    </div>
   </div>
 </div>

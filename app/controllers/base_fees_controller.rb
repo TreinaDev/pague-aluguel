@@ -3,7 +3,7 @@ class BaseFeesController < ApplicationController
   before_action :set_condo, only: [:new, :create, :index, :cancel]
 
   def index
-    @base_fees = BaseFee.where(condo_id: @condo.id)
+    @base_fees = BaseFee.where(condo_id: @condo.id).order(charge_day: :desc)
   end
 
   def show
