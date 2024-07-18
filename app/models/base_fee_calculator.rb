@@ -36,9 +36,7 @@ class BaseFeeCalculator
     last_month = current_date.last_month
     return ((last_month.month - charge_day.month) % 6).zero? if recurrence == 'semi_annual'
 
-    return last_month.month == charge_day.month if recurrence == 'yearly'
-
-    false
+    last_month.month == charge_day.month if recurrence == 'yearly'
   end
 
   def self.check_monthly_recurrence(base_fee)
