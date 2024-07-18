@@ -1,6 +1,6 @@
 <%= turbo_frame_tag "modal" do %>
   <div class="dean-modal modal-md">
-    <%= link_to "", condo_single_charges_path(@single_charge, condo_id: @condo.id), id: 'close', class: "btn btn-sm btn-close" %>
+    <%= link_to "", :back, id: 'close', class: "btn btn-sm btn-close" %>
 
     <span class="fs-8 text-center d-block"><%= SingleCharge.model_name.human %></span>
     <span class="fs-6 text-center d-block">
