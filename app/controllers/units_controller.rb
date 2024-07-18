@@ -12,9 +12,6 @@ class UnitsController < ApplicationController
 
   def set_unit
     @unit = Unit.find(params[:id])
-    return unless @unit.nil? && @unit.id.nil?
-
-    redirect_to(root_url, alert: I18n.t('views.show.unit_not_found'))
   end
 
   def verify_ownership

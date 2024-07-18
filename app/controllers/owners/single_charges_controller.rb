@@ -12,8 +12,8 @@ class Owners::SingleChargesController < ApplicationController
 
   def create
     @single_charge = SingleCharge.new(single_charge_params)
-    @single_charge.condo_id = Unit.find(@single_charge.unit_id).condo_id
     if @single_charge.save
+      @single_charge.update(condo_id: Unit.find(@single_charge.unit_id).condo_id)
       redirect_to owners_single_charges_path, notice: I18n.t('success_notice_single_charge')
     else
       @units = Unit.find_all_by_owner(current_property_owner.document_number)

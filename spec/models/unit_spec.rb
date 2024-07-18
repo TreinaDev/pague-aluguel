@@ -41,4 +41,26 @@ describe Unit do
       expect(result.description).to eq 'Duplex com varanda'
     end
   end
+
+  context '.find_all_by_owner' do
+    it 'retorna todas as unidades de um proprietario' do
+      cpf = CPF.generate
+      data = Rails.root.join('spec/support/json/owner_units.json').read
+      response = double('response', success?: true, body: data)
+      allow(Faraday).to(
+        receive(:get).with("#{Rails.configuration.api['base_url']}/get_owner_properties?registration_number=#{cpf}")
+        .and_return(response)
+      )
+
+      result = Unit.find_all_by_owner(cpf)
+
+      expect(result.length).to eq 2
+      expect(result[0].id).to eq 1
+      expect(result[0].floor).to eq 2
+      expect(result[0].number).to eq 10
+      expect(result[1].id).to eq 2
+      expect(result[1].floor).to eq 3
+      expect(result[1].number).to eq 20
+    end
+  end
 end
