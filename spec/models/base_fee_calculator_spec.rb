@@ -9,17 +9,17 @@ describe BaseFeeCalculator do
                                  unit_ids: [1])
       units = []
       units << Unit.new(id: 1, area: 100, floor: 1, number: 1, unit_type_id: 1)
-      shared_fee = create(:shared_fee, description: 'Descrição', issue_date: 10.days.from_now.to_date,
+      shared_fee = create(:shared_fee, description: 'Descrição', issue_date: Time.zone.now,
                                        total_value: 30_000_00, condo_id: condo.id)
       create(:shared_fee_fraction, shared_fee:, unit_id: 1, value_cents: 300_00)
-      base_fee = create(:base_fee, condo_id: 1, charge_day: 10.days.from_now)
+      base_fee = create(:base_fee, condo_id: 1, charge_day: Time.zone.now)
       create(:value, price_cents: 100_00, base_fee_id: base_fee.id)
       allow(Condo).to receive(:find).and_return(condo)
       allow(UnitType).to receive(:all).and_return(unit_types)
       allow(Unit).to receive(:find).and_return(units.first)
       allow(Unit).to receive(:all).and_return(units)
 
-      travel_to 35.days.from_now do
+      travel_to 1.month.from_now do
         fees = BaseFeeCalculator.total_value(unit_types.first)
 
         expect(fees).to eq 100_00
@@ -38,7 +38,7 @@ describe BaseFeeCalculator do
       allow(Unit).to receive(:find).and_return(units.first)
       allow(Unit).to receive(:all).and_return(units)
 
-      travel_to 35.days.from_now do
+      travel_to 1.month.from_now do
         fees = BaseFeeCalculator.total_value(unit_types.first)
 
         expect(fees).to eq 0
@@ -95,22 +95,22 @@ describe BaseFeeCalculator do
                                  unit_ids: [1])
       units = []
       units << Unit.new(id: 1, area: 100, floor: 1, number: 1, unit_type_id: 1)
-      base_fee_biweekly = create(:base_fee, condo_id: 1, charge_day: 10.days.from_now, recurrence: :biweekly)
+      base_fee_biweekly = create(:base_fee, condo_id: 1, charge_day: Time.zone.now, recurrence: :biweekly)
       create(:value, price_cents: 100_33, base_fee_id: base_fee_biweekly.id)
-      base_fee_monthly = create(:base_fee, condo_id: 1, charge_day: 10.days.from_now, recurrence: :monthly)
+      base_fee_monthly = create(:base_fee, condo_id: 1, charge_day: Time.zone.now, recurrence: :monthly)
       create(:value, price_cents: 50_12, base_fee_id: base_fee_monthly.id)
       allow(Condo).to receive(:find).and_return(condo)
       allow(UnitType).to receive(:all).and_return(unit_types)
       allow(Unit).to receive(:find).and_return(units.first)
       allow(Unit).to receive(:all).and_return(units)
 
-      travel_to 35.days.from_now do
+      travel_to 1.month.from_now do
         fees = BaseFeeCalculator.total_value(unit_types.first)
 
         expect(fees).to eq 250_78
       end
 
-      travel_to 35.days.from_now.next_month do
+      travel_to 2.months.from_now do
         fees = BaseFeeCalculator.total_value(unit_types.first)
 
         expect(fees).to eq 250_78
@@ -124,26 +124,26 @@ describe BaseFeeCalculator do
                                  unit_ids: [1])
       units = []
       units << Unit.new(id: 1, area: 100, floor: 1, number: 1, unit_type_id: 1)
-      base_fee_bimonthly = create(:base_fee, condo_id: 1, charge_day: 10.days.from_now, recurrence: :bimonthly)
+      base_fee_bimonthly = create(:base_fee, condo_id: 1, charge_day: Time.zone.now, recurrence: :bimonthly)
       create(:value, price_cents: 100_33, base_fee_id: base_fee_bimonthly.id)
       allow(Condo).to receive(:find).and_return(condo)
       allow(UnitType).to receive(:all).and_return(unit_types)
       allow(Unit).to receive(:find).and_return(units.first)
       allow(Unit).to receive(:all).and_return(units)
 
-      travel_to 35.days.from_now do
+      travel_to 1.month.from_now do
         fees = BaseFeeCalculator.total_value(unit_types.first)
 
         expect(fees).to eq 100_33
       end
 
-      travel_to 35.days.from_now.next_month do
+      travel_to 2.months.from_now do
         fees = BaseFeeCalculator.total_value(unit_types.first)
 
         expect(fees).to eq 0
       end
 
-      travel_to 35.days.from_now.next_month.next_month do
+      travel_to 3.months.from_now do
         fees = BaseFeeCalculator.total_value(unit_types.first)
 
         expect(fees).to eq 100_33

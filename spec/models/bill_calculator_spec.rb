@@ -3,6 +3,10 @@ require 'rails_helper'
 describe BillCalculator do
   context '.calculate_total_fees' do
     it 'e retorna valor total da fatura' do
+      cpf = CPF.generate
+      allow(Faraday).to receive(:get).and_return(instance_double('Faraday::Response', success?: true))
+      create(:property_owner, email: 'propertyownertest@mail.com', password: '123456',
+                              document_number: cpf)
       condos = []
       condos << Condo.new(id: 1, name: 'Condo Test', city: 'City Test')
       unit_types = []
@@ -11,22 +15,24 @@ describe BillCalculator do
       units = []
       units << Unit.new(id: 1, area: 100, floor: 1, number: '11', unit_type_id: 1, condo_id: 1,
                         condo_name: 'Prédio lindo', tenant_id: 1, owner_id: 1, description: 'Com varanda')
-      shared_fee = create(:shared_fee, description: 'Descrição', issue_date: 10.days.from_now.to_date,
+      shared_fee = create(:shared_fee, description: 'Descrição', issue_date: Time.zone.today,
                                        total_value: 30_000_00, condo_id: condos.first.id)
       create(:shared_fee_fraction, shared_fee:, unit_id: 1, value_cents: 300_00)
-      base_fee = create(:base_fee, condo_id: condos.first.id)
+      base_fee = create(:base_fee, condo_id: condos.first.id, charge_day: Time.zone.today)
       create(:value, price_cents: 100_00, base_fee_id: base_fee.id)
+      create(:rent_fee, owner_id: 1, tenant_id: 1, unit_id: 1, value_cents: 120_000,
+                        issue_date: 1.day.from_now, fine_cents: 5000, fine_interest: 10, condo_id: 1)
       allow(Condo).to receive(:find).and_return(condos.first)
       allow(UnitType).to receive(:all).and_return(unit_types)
       allow(Unit).to receive(:find).and_return(units.first)
       allow(Unit).to receive(:all).and_return(units)
       SingleCharge.create!(charge_type: :fine, value_cents: 100_11, description: 'Multa por barulho',
-                           issue_date: 5.days.from_now.to_date, unit_id: units.first.id, condo_id: condos.first.id)
+                           issue_date: 1.day.from_now, unit_id: units.first.id, condo_id: condos.first.id)
 
-      travel_to 35.days.from_now do
+      travel_to 1.month.from_now do
         fees = BillCalculator.calculate_total_fees(units.first)
 
-        expect(fees).to eq 500_11
+        expect(fees).to eq 170_011
       end
     end
 
@@ -43,7 +49,7 @@ describe BillCalculator do
       allow(Unit).to receive(:find).and_return(units.first)
       allow(Unit).to receive(:all).and_return(units)
 
-      travel_to 35.days.from_now do
+      travel_to 1.month.from_now do
         fees = BillCalculator.calculate_total_fees(units.first)
 
         expect(fees).to eq 0
@@ -60,17 +66,17 @@ describe BillCalculator do
       units = []
       units << Unit.new(id: 1, area: 100, floor: 1, number: '11', unit_type_id: 1, condo_id: 1,
                         condo_name: 'Prédio lindo', tenant_id: 1, owner_id: 1, description: 'Com varanda')
-      shared_fee = create(:shared_fee, description: 'Descrição', issue_date: 10.days.from_now.to_date,
+      shared_fee = create(:shared_fee, description: 'Descrição', issue_date: Time.zone.now,
                                        total_value: 30_000_00, condo_id: condo.id)
       create(:shared_fee_fraction, shared_fee:, unit_id: 1, value_cents: 300_00)
-      base_fee = create(:base_fee, condo_id: 1, charge_day: 10.days.from_now)
+      base_fee = create(:base_fee, condo_id: 1, charge_day: Time.zone.now)
       create(:value, price_cents: 100_00, base_fee_id: base_fee.id)
       allow(Condo).to receive(:find).and_return(condo)
       allow(UnitType).to receive(:all).and_return(unit_types)
       allow(Unit).to receive(:find).and_return(units.first)
       allow(Unit).to receive(:all).and_return(units)
 
-      travel_to 35.days.from_now do
+      travel_to 1.month.from_now do
         fees = BillCalculator.calculate_shared_fees(unit_types.first)
 
         expect(fees).to eq 300_00
@@ -90,7 +96,7 @@ describe BillCalculator do
       allow(Unit).to receive(:find).and_return(units.first)
       allow(Unit).to receive(:all).and_return(units)
 
-      travel_to 35.days.from_now do
+      travel_to 1.month.from_now do
         fees = BillCalculator.calculate_shared_fees(unit_types.first)
 
         expect(fees).to eq 0
@@ -121,7 +127,7 @@ describe BillCalculator do
       SingleCharge.create!(charge_type: :fine, value_cents: 100_11, description: 'Multa por barulho',
                            issue_date: 5.days.from_now.to_date, unit_id: units.first.id, condo_id: condos.first.id)
 
-      travel_to 35.days.from_now do
+      travel_to 1.month.from_now do
         fees = BillCalculator.calculate_single_charges(unit_types.first)
 
         expect(fees).to eq 100_11
@@ -141,7 +147,7 @@ describe BillCalculator do
       allow(Unit).to receive(:find).and_return(units.first)
       allow(Unit).to receive(:all).and_return(units)
 
-      travel_to 35.days.from_now do
+      travel_to 1.month.from_now do
         fees = BillCalculator.calculate_single_charges(unit_types.first)
 
         expect(fees).to eq 0
@@ -158,11 +164,11 @@ describe BillCalculator do
                                  condo_id: condos.first.id)
       units = []
       units << Unit.new(id: 1, area: 100, floor: 1, number: 1, unit_type_id: 1)
-      shared_fee_canceled = create(:shared_fee, description: 'Descrição', issue_date: 10.days.from_now.to_date,
+      shared_fee_canceled = create(:shared_fee, description: 'Descrição', issue_date: Time.zone.now,
                                                 total_value: 30_000_000_00, condo_id: condos.first.id)
       create(:shared_fee_fraction, shared_fee: shared_fee_canceled, unit_id: 1, value_cents: 30_000_00)
       shared_fee_canceled.canceled!
-      shared_fee = create(:shared_fee, description: 'Descrição', issue_date: 10.days.from_now.to_date,
+      shared_fee = create(:shared_fee, description: 'Descrição', issue_date: Time.zone.now,
                                        total_value: 30_000_00, condo_id: condos.first.id)
       create(:shared_fee_fraction, shared_fee:, unit_id: 1, value_cents: 300_00)
       base_fee = create(:base_fee, condo_id: condos.first.id)
@@ -177,14 +183,14 @@ describe BillCalculator do
       allow(Unit).to receive(:find).and_return(units.first)
       allow(CommonArea).to receive(:all).and_return([])
       SingleCharge.create!(charge_type: :fine, value_cents: 100_11, description: 'Multa por barulho',
-                           issue_date: 5.days.from_now.to_date, unit_id: units.first.id, condo_id: condos.first.id)
+                           issue_date: Time.zone.now, unit_id: units.first.id, condo_id: condos.first.id)
       single_charge_canceled = SingleCharge.create!(charge_type: :fine, value_cents: 555_55,
                                                     description: 'Multa por barulho',
-                                                    issue_date: 5.days.from_now.to_date, unit_id: units.first.id,
+                                                    issue_date: Time.zone.now, unit_id: units.first.id,
                                                     condo_id: condos.first.id)
       single_charge_canceled.canceled!
 
-      travel_to 35.days.from_now do
+      travel_to 1.month.from_now do
         fees = BillCalculator.calculate_total_fees(units.first)
 
         expect(fees).to eq 500_11

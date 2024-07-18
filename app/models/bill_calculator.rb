@@ -3,7 +3,8 @@ class BillCalculator
     base_fees = BaseFeeCalculator.total_value(unit.unit_type_id)
     shared_fees = calculate_shared_fees(unit.id)
     single_charges = calculate_single_charges(unit.id)
-    base_fees + shared_fees + single_charges
+    rent_fee = check_rent_fee(unit.id)
+    base_fees + shared_fees + single_charges + rent_fee
   end
 
   def self.calculate_shared_fees(unit_id)
@@ -44,5 +45,18 @@ class BillCalculator
     SingleCharge.where(unit_id:, issue_date: start_of_last_month..end_of_last_month, status: :active)
   end
 
-  private_class_method :get_last_month_fractions, :get_last_month_single_charges
+  def self.check_rent_fee(unit_id)
+    rent_fee = get_last_month_rent_fee(unit_id)
+    rent_fee&.value_cents || 0
+  end
+
+  def self.get_last_month_rent_fee(unit_id)
+    now = Time.zone.now
+    last_month = now.last_month
+    start_of_last_month = last_month.beginning_of_month
+    end_of_last_month = last_month.end_of_month
+    RentFee.find_by(unit_id:, issue_date: start_of_last_month..end_of_last_month, status: :active)
+  end
+
+  private_class_method :get_last_month_fractions, :get_last_month_single_charges, :get_last_month_rent_fee
 end

@@ -5,7 +5,7 @@ FactoryBot.define do
     interest_rate { 2 }
     late_fine { 20 }
     limited { false }
-    charge_day { 10.days.from_now }
+    charge_day { Time.zone.now }
     recurrence { :monthly }
     condo_id { nil }
     installments { nil }
