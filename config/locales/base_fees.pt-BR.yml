@@ -67,5 +67,11 @@ pt-BR:
       base_fee_list: Listagem de Taxas Condominiais
       name: Nome
       no_base_fees: Não existem taxas condominiais cadastradas.
+      see_active_fees: Ver taxas ativas
+      canceled_fees: canceladas
+      active_fees: ativas
+      future_fees: futuras
+      past_fees: passadas
+      all_fees: todas as taxas
 
 
