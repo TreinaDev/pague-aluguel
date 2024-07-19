@@ -26,7 +26,7 @@ class BaseFeesController < ApplicationController
     if @base_fee.save
       redirect_to condo_path(@condo.id), notice: I18n.t('success_notice_base_fee')
     else
-      flash.now[:alert] = I18n.t 'fail_notice_base_fee'
+      flash.now[:alert] = I18n.t('fail_notice_base_fee')
       render :new, status: :unprocessable_entity
     end
   end
@@ -34,7 +34,8 @@ class BaseFeesController < ApplicationController
   def cancel
     @base_fee = BaseFee.find(params[:id])
     @base_fee.canceled!
-    redirect_to condo_base_fees_path(@condo.id), notice: "#{@base_fee.name} cancelada com sucesso."
+    redirect_to condo_base_fees_path(@condo.id),
+                notice: I18n.t('cancel_notice_base_fee', base_fee: @base_fee.name)
   end
 
   private

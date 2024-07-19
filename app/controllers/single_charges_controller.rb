@@ -34,7 +34,8 @@ class SingleChargesController < ApplicationController
   def cancel
     @single_charge = SingleCharge.find(params[:id])
     @single_charge.canceled!
-    redirect_to condo_single_charges_path(@condo.id), notice: "#{@single_charge.charge_type} cancelada com sucesso."
+    redirect_to condo_single_charges_path(@condo.id),
+                notice: I18n.t('cancel_notice_single_charge', charge_type: @single_charge.charge_type)
   end
 
   private

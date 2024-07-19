@@ -30,7 +30,8 @@ class SharedFeesController < ApplicationController
   def cancel
     @shared_fee = SharedFee.find(params[:id])
     @shared_fee.canceled!
-    redirect_to condo_shared_fees_path(@condo.id), notice: "#{@shared_fee.description} cancelada com sucesso."
+    redirect_to condo_shared_fees_path(@condo.id),
+                notice: I18n.t('cancel_notice_shared_fee', shared_fee: @shared_fee.description)
   end
 
   private

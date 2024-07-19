@@ -126,6 +126,7 @@ pt-BR:
       destroyed: Adeus! A sua conta foi cancelada com sucesso. Esperamos vê-lo novamente em breve.
       edit:
         edit_admin: Editar perfil
+        edit_property_owner: Editar perfil
         are_you_sure: Você tem certeza?
         cancel_my_account: Cancelar minha conta
         currently_waiting_confirmation_for_email: 'No momento esperando por: %{email}'
