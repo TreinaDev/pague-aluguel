@@ -5,6 +5,7 @@ describe 'API de Faturas' do
     it 'sucesso' do
       create(:bill, condo_id: 1, unit_id: 1, issue_date: Time.zone.today.beginning_of_month,
                     due_date: 10.days.from_now, shared_fee_value_cents: 100_00, base_fee_value_cents: 300_00,
+                    single_charge_value_cents: 222_00, rent_fee_cents: 1000_00,
                     total_value_cents: 400_00, status: 'pending')
 
       get api_v1_bill_path(1)
@@ -15,6 +16,8 @@ describe 'API de Faturas' do
       expect(json_response['total_value_cents']).to eq 400_00
       expect(json_response['values']['base_fee_value_cents']).to eq 300_00
       expect(json_response['values']['shared_fee_value_cents']).to eq 100_00
+      expect(json_response['values']['single_charge_value_cents']).to eq 222_00
+      expect(json_response['values']['rent_fee_cents']).to eq 1000_00
       expect(json_response['issue_date']).to eq Time.zone.today.beginning_of_month.strftime('%Y-%m-%d')
       expect(json_response['due_date']).to eq 10.days.from_now.to_date.strftime('%Y-%m-%d')
       expect(json_response['status']).to eq 'pending'
