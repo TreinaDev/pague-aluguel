@@ -115,6 +115,13 @@ ActiveRecord::Schema[7.1].define(version: 2024_07_19_123650) do
     t.index ["admin_id"], name: "index_common_area_fees_on_admin_id"
   end
 
+  create_table "nd_certificates", force: :cascade do |t|
+    t.integer "unit_id"
+    t.datetime "issue_date"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+  end
+
   create_table "property_owners", force: :cascade do |t|
     t.string "email", default: "", null: false
     t.string "encrypted_password", default: "", null: false
