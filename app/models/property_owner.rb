@@ -5,7 +5,7 @@ class PropertyOwner < ApplicationRecord
          :recoverable, :rememberable, :validatable
 
   has_one_attached :photo
-  
+
   validates :document_number, :first_name, :last_name, presence: true
   validates :document_number, uniqueness: true
   validate :document_number_must_be_valid
