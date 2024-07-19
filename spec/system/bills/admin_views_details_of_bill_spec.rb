@@ -1,50 +1,152 @@
 require 'rails_helper'
 
 describe 'Admin vê detalhes de uma fatura' do
-  it 'a partir da tela de listagem de faturas' do
-    admin = create(:admin)
-    condos = []
-    condo = Condo.new(id: 1, name: 'Condomínio Vila das Flores', city: 'São Paulo')
-    condos << condo
-    unit_types = []
-    unit_types << UnitType.new(id: 1, description: 'Apartamento 1 quarto', metreage: 40, fraction: 0.5,
-                               unit_ids: [])
-    units = []
-    units << Unit.new(id: 1, area: 40, floor: 1, number: '11', unit_type_id: 1, condo_id: 1,
-                      condo_name: 'Condomínio Vila das Flores', tenant_id: 1, owner_id: 1, description: 'Com varanda')
-    units << Unit.new(id: 2, area: 40, floor: 1, number: '12', unit_type_id: 1, condo_id: 1,
-                      condo_name: 'Condomínio Vila das Flores', tenant_id: 1, owner_id: 1, description: 'Com varanda')
-    allow(Condo).to receive(:all).and_return(condos)
-    allow(Condo).to receive(:find).and_return(condo)
-    allow(CommonArea).to receive(:all).and_return([])
-    allow(UnitType).to receive(:all).and_return(unit_types)
-    allow(Unit).to receive(:all).and_return(units)
-    allow(Unit).to receive(:find).with(1).and_return(units.first)
-    allow(Unit).to receive(:find).with(2).and_return(units.second)
+  context 'a partir da tela de listagem de faturas' do
+    it 'com status pendente' do
+      admin = create(:admin)
+      condos = []
+      condo = Condo.new(id: 1, name: 'Condomínio Vila das Flores', city: 'São Paulo')
+      condos << condo
+      unit_types = []
+      unit_types << UnitType.new(id: 1, description: 'Apartamento 1 quarto', metreage: 40, fraction: 0.5,
+                                 unit_ids: [])
+      units = []
+      units << Unit.new(id: 1, area: 40, floor: 1, number: '11', unit_type_id: 1, condo_id: 1,
+                        condo_name: 'Condomínio Vila das Flores', tenant_id: 1, owner_id: 1, description: 'Com varanda')
+      units << Unit.new(id: 2, area: 40, floor: 1, number: '12', unit_type_id: 1, condo_id: 1,
+                        condo_name: 'Condomínio Vila das Flores', tenant_id: 1, owner_id: 1, description: 'Com varanda')
+      allow(Condo).to receive(:all).and_return(condos)
+      allow(Condo).to receive(:find).and_return(condo)
+      allow(CommonArea).to receive(:all).and_return([])
+      allow(UnitType).to receive(:all).and_return(unit_types)
+      allow(Unit).to receive(:all).and_return(units)
+      allow(Unit).to receive(:find).with(1).and_return(units.first)
+      allow(Unit).to receive(:find).with(2).and_return(units.second)
 
-    bills = []
-    bills << create(:bill, condo_id: 1, unit_id: units[0].id, issue_date: Time.zone.today.beginning_of_month,
-                           due_date: 10.days.from_now, total_value_cents: 500_00)
-    bills << create(:bill, condo_id: 1, unit_id: units[1].id, issue_date: Time.zone.today.beginning_of_month,
-                           due_date: 10.days.from_now, total_value_cents: 700_00)
+      bills = []
+      bills << create(:bill, condo_id: 1, unit_id: units[0].id, issue_date: Time.zone.today.beginning_of_month,
+                             due_date: 10.days.from_now, total_value_cents: 500_00)
+      bills << create(:bill, condo_id: 1, unit_id: units[1].id, issue_date: Time.zone.today.beginning_of_month,
+                             due_date: 10.days.from_now, total_value_cents: 700_00)
 
-    login_as admin, scope: :admin
-    visit condo_bills_path(condo_id: condo.id)
-    click_on 'Unidade 12'
+      login_as admin, scope: :admin
+      visit condo_bills_path(condo_id: condo.id)
+      click_on 'Unidade 12'
 
-    formatted_issue_date = I18n.l(Time.zone.today.beginning_of_month)
-    formatted_due_date = I18n.l(10.days.from_now.to_date)
-    expect(page).to have_content 'Fatura'
-    expect(page).to have_content 'Unidade 12'
-    expect(page).to have_content 'Condomínio Vila das Flores'
-    expect(page).to have_content 'data de emissão'
-    expect(page).to have_content formatted_issue_date
-    expect(page).to have_content 'data de vencimento'
-    expect(page).to have_content formatted_due_date
-    expect(page).to have_content 'valor total'
-    expect(page).to have_content 'R$700,00'
-    expect(page).to have_content 'taxa condominial'
-    expect(page).to have_content 'conta compartilhada'
+      formatted_issue_date = I18n.l(Time.zone.today.beginning_of_month)
+      formatted_due_date = I18n.l(10.days.from_now.to_date)
+      expect(page).to have_content 'Fatura'
+      expect(page).to have_content 'Unidade 12'
+      expect(page).to have_content 'Condomínio Vila das Flores'
+      expect(page).to have_content 'data de emissão'
+      expect(page).to have_content formatted_issue_date
+      expect(page).to have_content 'data de vencimento'
+      expect(page).to have_content formatted_due_date
+      expect(page).to have_content 'valor total'
+      expect(page).to have_content 'R$700,00'
+      expect(page).to have_content 'PENDENTE'
+      expect(page).not_to have_button 'Ver comprovante'
+      expect(page).not_to have_button 'Aceitar pagamento'
+      expect(page).not_to have_button 'Recusar pagamento'
+    end
+
+    it 'com status aguardando' do
+      admin = create(:admin)
+      condos = []
+      condo = Condo.new(id: 1, name: 'Condomínio Vila das Flores', city: 'São Paulo')
+      condos << condo
+      unit_types = []
+      unit_types << UnitType.new(id: 1, description: 'Apartamento 1 quarto', metreage: 40, fraction: 0.5,
+                                 unit_ids: [])
+      units = []
+      units << Unit.new(id: 1, area: 40, floor: 1, number: '11', unit_type_id: 1, condo_id: 1,
+                        condo_name: 'Condomínio Vila das Flores', tenant_id: 1, owner_id: 1, description: 'Com varanda')
+      units << Unit.new(id: 2, area: 40, floor: 1, number: '12', unit_type_id: 1, condo_id: 1,
+                        condo_name: 'Condomínio Vila das Flores', tenant_id: 1, owner_id: 1, description: 'Com varanda')
+      allow(Condo).to receive(:all).and_return(condos)
+      allow(Condo).to receive(:find).and_return(condo)
+      allow(CommonArea).to receive(:all).and_return([])
+      allow(UnitType).to receive(:all).and_return(unit_types)
+      allow(Unit).to receive(:all).and_return(units)
+      allow(Unit).to receive(:find).with(1).and_return(units.first)
+      allow(Unit).to receive(:find).with(2).and_return(units.second)
+
+      bills = []
+      bills << create(:bill, condo_id: 1, unit_id: units[0].id, issue_date: Time.zone.today.beginning_of_month,
+                             due_date: 10.days.from_now, total_value_cents: 500_00)
+      bills << create(:bill, condo_id: 1, unit_id: units[1].id, issue_date: Time.zone.today.beginning_of_month,
+                             due_date: 10.days.from_now, total_value_cents: 700_00, status: :awaiting)
+      create(:receipt, bill_id: Bill.last.id)
+
+      login_as admin, scope: :admin
+      visit condo_bills_path(condo_id: condo.id)
+      click_on 'Unidade 12'
+
+      formatted_issue_date = I18n.l(Time.zone.today.beginning_of_month)
+      formatted_due_date = I18n.l(10.days.from_now.to_date)
+      expect(page).to have_content 'Fatura'
+      expect(page).to have_content 'Unidade 12'
+      expect(page).to have_content 'Condomínio Vila das Flores'
+      expect(page).to have_content 'data de emissão'
+      expect(page).to have_content formatted_issue_date
+      expect(page).to have_content 'data de vencimento'
+      expect(page).to have_content formatted_due_date
+      expect(page).to have_content 'valor total'
+      expect(page).to have_content 'R$700,00'
+      expect(page).to have_content 'AGUARDANDO'
+      expect(page).to have_link 'Ver comprovante'
+      expect(page).to have_button 'Aceitar pagamento'
+      expect(page).to have_button 'Recusar pagamento'
+    end
+
+    it 'com status paga' do
+      admin = create(:admin)
+      condos = []
+      condo = Condo.new(id: 1, name: 'Condomínio Vila das Flores', city: 'São Paulo')
+      condos << condo
+      unit_types = []
+      unit_types << UnitType.new(id: 1, description: 'Apartamento 1 quarto', metreage: 40, fraction: 0.5,
+                                 unit_ids: [])
+      units = []
+      units << Unit.new(id: 1, area: 40, floor: 1, number: '11', unit_type_id: 1, condo_id: 1,
+                        condo_name: 'Condomínio Vila das Flores', tenant_id: 1, owner_id: 1, description: 'Com varanda')
+      units << Unit.new(id: 2, area: 40, floor: 1, number: '12', unit_type_id: 1, condo_id: 1,
+                        condo_name: 'Condomínio Vila das Flores', tenant_id: 1, owner_id: 1, description: 'Com varanda')
+      allow(Condo).to receive(:all).and_return(condos)
+      allow(Condo).to receive(:find).and_return(condo)
+      allow(CommonArea).to receive(:all).and_return([])
+      allow(UnitType).to receive(:all).and_return(unit_types)
+      allow(Unit).to receive(:all).and_return(units)
+      allow(Unit).to receive(:find).with(1).and_return(units.first)
+      allow(Unit).to receive(:find).with(2).and_return(units.second)
+
+      bills = []
+      bills << create(:bill, condo_id: 1, unit_id: units[0].id, issue_date: Time.zone.today.beginning_of_month,
+                             due_date: 10.days.from_now, total_value_cents: 500_00)
+      bills << create(:bill, condo_id: 1, unit_id: units[1].id, issue_date: Time.zone.today.beginning_of_month,
+                             due_date: 10.days.from_now, total_value_cents: 700_00, status: :paid)
+      create(:receipt, bill_id: Bill.last.id)
+
+      login_as admin, scope: :admin
+      visit condo_bills_path(condo_id: condo.id)
+      click_on 'Unidade 12'
+
+      formatted_issue_date = I18n.l(Time.zone.today.beginning_of_month)
+      formatted_due_date = I18n.l(10.days.from_now.to_date)
+      expect(page).to have_content 'Fatura'
+      expect(page).to have_content 'Unidade 12'
+      expect(page).to have_content 'Condomínio Vila das Flores'
+      expect(page).to have_content 'data de emissão'
+      expect(page).to have_content formatted_issue_date
+      expect(page).to have_content 'data de vencimento'
+      expect(page).to have_content formatted_due_date
+      expect(page).to have_content 'valor total'
+      expect(page).to have_content 'R$700,00'
+      expect(page).to have_content 'PAGA'
+      expect(page).to have_link 'Ver comprovante'
+      expect(page).not_to have_button 'Aceitar pagamento'
+      expect(page).not_to have_button 'Recusar pagamento'
+    end
   end
 
   it 'e vê detalhes de cada conta' do
@@ -71,7 +173,7 @@ describe 'Admin vê detalhes de uma fatura' do
     create(:value, price_cents: 100_00, base_fee_id: base_fee.id)
     base_fee2 = create(:base_fee, name: 'Taxa de Manutenção', condo_id: condos.first.id, charge_day: Time.zone.today)
     create(:value, price_cents: 111_00, base_fee_id: base_fee2.id)
-    create(:rent_fee, owner_id: 1, tenant_id: 1, unit_id: 1, value_cents: 120_000,
+    create(:rent_fee, owner_id: 1, tenant_id: 1, unit_id: 1, value_cents: 1_200_00,
                       issue_date: 1.day.from_now, fine_cents: 5000, fine_interest: 10, condo_id: 1)
     allow(Condo).to receive(:find).and_return(condos.first)
     allow(UnitType).to receive(:all).and_return(unit_types)
@@ -87,9 +189,17 @@ describe 'Admin vê detalhes de uma fatura' do
     formatted_due_date = I18n.l((1.month.from_now.beginning_of_month + 9.days).to_date)
 
     travel_to 1.month.from_now do
-      units.each do |unit|
-        GenerateMonthlyBillJob.perform_now(unit, condos.first.id)
-      end
+      bill = create(:bill, condo_id: 1, unit_id: units[0].id, issue_date: Time.zone.today.beginning_of_month,
+                           due_date: Time.zone.today.beginning_of_month + 9.days, total_value_cents: 2_061_34,
+                           base_fee_value_cents: 211_00,
+                           shared_fee_value_cents: 400_00, single_charge_value_cents: 250_34, rent_fee_cents: 1_200_00)
+      BillDetail.create!(bill_id: bill.id, description: 'Conta de Água', value_cents: 300_00, fee_type: :shared_fee)
+      BillDetail.create!(bill_id: bill.id, description: 'Conta de Luz', value_cents: 100_00, fee_type: :shared_fee)
+      BillDetail.create!(bill_id: bill.id, description: 'Taxa de Condomínio', value_cents: 100_00, fee_type: :base_fee)
+      BillDetail.create!(bill_id: bill.id, description: 'Taxa de Manutenção', value_cents: 111_00, fee_type: :base_fee)
+      BillDetail.create!(bill_id: bill.id, description: 'Multa por barulho', value_cents: 111_00, fee_type: :fine)
+      BillDetail.create!(bill_id: bill.id, description: 'Acordo entre proprietário e morador', value_cents: 150_23,
+                         fee_type: :other)
     end
 
     login_as admin, scope: :admin
@@ -106,16 +216,25 @@ describe 'Admin vê detalhes de uma fatura' do
     expect(page).to have_content 'valor total'
     expect(page).to have_content 'R$2.061,34'
     expect(page).to have_content 'total de taxas condominiais'
-    expect(page).to have_content 'R$ 211,00'
-    expect(page).to have_content 'Taxa de Condomínio'
-    expect(page).to have_content 'R$ 100,00'
-    expect(page).to have_content 'Taxa de Manutenção'
-    expect(page).to have_content 'R$ 111,00'
+    expect(page).to have_content 'R$211,00'
+    expect(page).to have_content 'taxa de condomínio'
+    expect(page).to have_content 'R$100,00'
+    expect(page).to have_content 'taxa de manutenção'
+    expect(page).to have_content 'R$111,00'
     expect(page).to have_content 'total de contas compartilhadas'
-    expect(page).to have_content 'R$ 400,00'
-    expect(page).to have_content 'Conta de Água'
-    expect(page).to have_content 'R$ 300,00'
-    expect(page).to have_content 'Conta de Luz'
-    expect(page).to have_content 'R$ 100,00'
+    expect(page).to have_content 'R$400,00'
+    expect(page).to have_content 'conta de água'
+    expect(page).to have_content 'R$300,00'
+    expect(page).to have_content 'conta de luz'
+    expect(page).to have_content 'R$100,00'
+    expect(page).to have_content 'total de cobranças avulsas'
+    expect(page).to have_content 'R$250,34'
+    expect(page).to have_content 'multa'
+    expect(page).to have_content 'multa por barulho'
+    expect(page).to have_content 'R$111,00'
+    expect(page).to have_content 'acordo entre proprietário e morador'
+    expect(page).to have_content 'R$150,23'
+    expect(page).to have_content 'taxa de aluguel'
+    expect(page).to have_content 'R$1.200,00'
   end
 end

@@ -4,6 +4,20 @@ pt-BR:
       no_bills: Nenhuma fatura encontrada.
       document_number_not_found: Seu CPF não foi encontrado.
       document_number_not_valid: Esse CPF não é válido.
+      payment_accepted: Pagamento efetivado!
+      payment_rejected: Pagamento recusado!
+    show:
+      view_receipt: Ver comprovante
+      accept_payment: Aceitar pagamento
+      reject_payment: Recusar pagamento
+      confirm-accept: Tem certeza que deseja aceitar o pagamento? Essa ação não poderá ser desfeita.
+      confirm-reject: Tem certeza que deseja recusar o pagamento? Essa ação não poderá ser desfeita.
+      pending: Pendente
+      awaiting: Aguardando
+      paid: Paga
+      all_base_fees: total de taxas condominiais
+      all_shared_fees: total de contas compartilhadas
+      all_single_charges: total de cobranças avulsas
   activerecord:
     models:
       bill:

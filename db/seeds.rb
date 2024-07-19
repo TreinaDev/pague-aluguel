@@ -5,7 +5,7 @@ SharedFee.destroy_all
 gian_lucca = PropertyOwner.new(
   email: 'gian@email.com',
   password: 'gian123',
-  document_number: '077.9797.020-08'
+  document_number: '077.497.020-08'
 )
 gian_lucca.save(validate: false)
 
@@ -37,7 +37,7 @@ Admin.create!(
 
 Admin.create!(
   email: 'matheus@mail.com',
-  password: '1239756',
+  password: '123456',
   first_name: 'Matheus',
   last_name: 'Bellucio',
   document_number: CPF.generate
@@ -45,7 +45,7 @@ Admin.create!(
 
 Admin.create!(
   email: 'priscila@mail.com',
-  password: '1239756',
+  password: '123456',
   first_name: 'Priscila',
   last_name: 'Sabino',
   document_number: CPF.generate
@@ -62,7 +62,7 @@ Admin.create!(
 
 Admin.create!(
   email: 'arthur@mail.com',
-  password: '1239756',
+  password: '123456',
   first_name: 'Arthur',
   last_name: 'Scortegagna',
   document_number: CPF.generate
@@ -188,32 +188,125 @@ SingleCharge.create!(unit_id: 97, value_cents: 9750_00,
 
 p "Created #{SingleCharge.count} single charge"
 
-Bill.create!(
+bill = Bill.create!(
   unit_id: 97,
   condo_id: 2,
-  base_fee_value_cents: 250,
-  shared_fee_value_cents: 750,
-  total_value_cents: 1000,
+  total_value_cents: 2255_00,
+  base_fee_value_cents: 211_00,
+  shared_fee_value_cents: 400_00,
+  single_charge_value_cents: 444_00,
+  rent_fee_cents: 1_200_00,
   issue_date: Time.zone.today.beginning_of_month,
   due_date: 10.days.from_now,
+  status: :pending
 )
+BillDetail.create!(bill_id: bill.id, description: 'Conta de Água', value_cents: 300_00, fee_type: :shared_fee)
+BillDetail.create!(bill_id: bill.id, description: 'Conta de Luz', value_cents: 100_00, fee_type: :shared_fee)
+BillDetail.create!(bill_id: bill.id, description: 'Taxa de Condomínio', value_cents: 100_00, fee_type: :base_fee)
+BillDetail.create!(bill_id: bill.id, description: 'Taxa de Manutenção', value_cents: 111_00, fee_type: :base_fee)
+BillDetail.create!(bill_id: bill.id, description: 'Multa por barulho', value_cents: 111_00, fee_type: :fine)
+BillDetail.create!(bill_id: bill.id, description: 'Acordo entre proprietário e morador', value_cents: 333_00,
+                   fee_type: :other)
+
 Bill.create!(
   unit_id: 97,
   condo_id: 2,
-  base_fee_value_cents: 500,
-  shared_fee_value_cents: 1500,
-  total_value_cents: 2000,
+  base_fee_value_cents: 1300_00,
+  shared_fee_value_cents: 2000_00,
+  total_value_cents: 3300_00,
+  single_charge_value_cents: 50_00,
+  rent_fee_cents: 1_200_00,
   issue_date: 30.days.ago.beginning_of_month,
   due_date: 20.days.ago,
+  status: :awaiting
 )
+
 Bill.create!(
   unit_id: 97,
   condo_id: 2,
-  base_fee_value_cents: 750,
-  shared_fee_value_cents: 2250,
-  total_value_cents: 3000,
+  base_fee_value_cents: 1000_00,
+  shared_fee_value_cents: 2000_00,
+  total_value_cents: 3000_00,
+  single_charge_value_cents: 50_00,
+  rent_fee_cents: 1_200_00,
   issue_date: 60.days.ago.beginning_of_month,
   due_date: 50.days.ago,
+  status: :paid
 )
 
-p "Created #{Bill.count} bills for 3197.787.200-93"
+Bill.create!(
+  unit_id: 1,
+  condo_id: 1,
+  base_fee_value_cents: 250_00,
+  shared_fee_value_cents: 750_00,
+  total_value_cents: 1000_00,
+  single_charge_value_cents: 50_00,
+  rent_fee_cents: 1_200_00,
+  issue_date: Time.zone.today.beginning_of_month,
+  due_date: 10.days.from_now,
+  status: :pending
+)
+
+Bill.create!(
+  unit_id: 1,
+  condo_id: 1,
+  base_fee_value_cents: 300_00,
+  shared_fee_value_cents: 1000_00,
+  total_value_cents: 1300_00,
+  single_charge_value_cents: 50_00,
+  rent_fee_cents: 1_200_00,
+  issue_date: 30.days.ago.beginning_of_month,
+  due_date: 20.days.ago,
+  status: :awaiting
+)
+
+Bill.create!(
+  unit_id: 1,
+  condo_id: 1,
+  base_fee_value_cents: 270_00,
+  shared_fee_value_cents: 1000_00,
+  total_value_cents: 1270_00,
+  single_charge_value_cents: 50_00,
+  rent_fee_cents: 1_200_00,
+  issue_date: 60.days.ago.beginning_of_month,
+  due_date: 50.days.ago,
+  status: :paid
+)
+
+Bill.create!(
+  unit_id: 1,
+  condo_id: 1,
+  base_fee_value_cents: 1000_00,
+  shared_fee_value_cents: 500_00,
+  total_value_cents: 1500_00,
+  single_charge_value_cents: 50_00,
+  rent_fee_cents: 1_200_00,
+  issue_date: 90.days.ago.beginning_of_month,
+  due_date: 80.days.ago,
+  status: :paid
+)
+
+Bill.create!(
+  unit_id: 1,
+  condo_id: 1,
+  base_fee_value_cents: 1000_00,
+  shared_fee_value_cents: 510_00,
+  total_value_cents: 1510_00,
+  single_charge_value_cents: 50_00,
+  rent_fee_cents: 1_200_00,
+  issue_date: 120.days.ago.beginning_of_month,
+  due_date: 110.days.ago,
+  status: :paid
+)
+
+p "Created 3 bills for 314.787.200-93"
+p "Created 5 bills for 458.456.480-92"
+
+Receipt.create!(bill_id: 2, file: Rails.root.join('app', 'assets', 'images', 'cupom-fiscal.jpg').open)
+Receipt.create!(bill_id: 3, file: Rails.root.join('app', 'assets', 'images', 'comprovante-pg.jpg').open)
+Receipt.create!(bill_id: 5, file: Rails.root.join('app', 'assets', 'images', 'cupom-fiscal.jpg').open)
+Receipt.create!(bill_id: 6, file: Rails.root.join('app', 'assets', 'images', 'cupom-fiscal.jpg').open)
+Receipt.create!(bill_id: 7, file: Rails.root.join('app', 'assets', 'images', 'cupom-fiscal.jpg').open)
+Receipt.create!(bill_id: 8, file: Rails.root.join('app', 'assets', 'images', 'cupom-fiscal.jpg').open)
+
+p "Created #{Receipt.count} receipts"

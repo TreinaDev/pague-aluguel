@@ -10,6 +10,15 @@ class BaseFeeCalculator
     end
   end
 
+  def self.generate_base_fee_details(bill, unit_type_id)
+    values = get_last_month_values(unit_type_id)
+
+    values.each do |value|
+      BillDetail.create!(bill_id: bill.id, description: value.base_fee.name,
+                         value_cents: value.price_cents, fee_type: :base_fee)
+    end
+  end
+
   def self.get_last_month_values(unit_type_id)
     now = Time.zone.now
     last_month = now.last_month

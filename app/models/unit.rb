@@ -46,7 +46,13 @@ class Unit
   def calculate_values(bill)
     bill.base_fee_value_cents = BaseFeeCalculator.total_value(unit_type_id)
     bill.shared_fee_value_cents = BillCalculator.calculate_shared_fees(id)
-    bill.total_value_cents = BillCalculator.calculate_total_fees(self)
+    bill.single_charge_value_cents = BillCalculator.calculate_single_charges(id)
+    bill.rent_fee_cents = BillCalculator.check_rent_fee(id)
+    bill.total_value_cents = [bill.base_fee_value_cents,
+                              bill.shared_fee_value_cents,
+                              bill.single_charge_value_cents,
+                              bill.rent_fee_cents].sum
+
     bill
   end
 

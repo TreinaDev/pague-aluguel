@@ -17,28 +17,8 @@
     </div>
 
     <hr>
-    <div class="px-5">
-      <div class=" d-flex justify-content-between">
-        <span class="text-muted text-lowercase fs-8"><%= BaseFee.model_name.human %>:</span>
-        <span><%= BaseFeeCalculator.total_value(@unit.unit_type_id) %></span>
-      </div>
-      <div class=" d-flex justify-content-between">
-        <span class="text-muted text-lowercase fs-8"><%= SharedFee.model_name.human %>:</span>
-        <span class=""><%= BillCalculator.calculate_shared_fees(@unit.unit_type_id) %></span>
-      </div>
-    </div>
+      <%= render partial: "bill_description" %>
     <hr>
-
-    <div class="px-5">
-      <div class=" d-flex justify-content-between">
-        <span class="text-muted text-lowercase fs-8"><%= Bill.human_attribute_name(:due_date) %>:</span>
-        <span><%= I18n.l(@bill.due_date) %></span>
-      </div>
-      <div class=" d-flex justify-content-between">
-        <span class="text-muted text-lowercase fs-8"><%= Bill.human_attribute_name(:issue_date) %>:</span>
-        <span class=""><%= I18n.l(@bill.issue_date) %></span>
-      </div>
-    </div>
-
+      <%= render partial: "bill_dates_and_status" %>
   </div>
 <% end %>

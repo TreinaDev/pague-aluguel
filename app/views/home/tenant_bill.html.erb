@@ -40,6 +40,27 @@
     </div>
 
     <hr>
+    <p class="text-center text-muted fs-7">Pagamento</p>
+    <div class="d-flex justify-content-center gap-2 mb-2">
+      <% if @bill.pending? %>
+        <span class="badge text-bg-danger text-uppercase fs-7"><%= I18n.t('views.show.pending') %></span>
+      <% elsif @bill.awaiting? %>
+        <span class="badge text-bg-warning text-uppercase fs-7"><%= I18n.t('views.show.awaiting') %></span>
+      <% else %>
+        <span class="badge text-bg-success text-uppercase fs-7"><%= I18n.t('views.show.paid') %></span>
+      <% end %>
+    </div>
+
+    <% unless @bill.pending? %>
+      <div class="text-center">
+        <%= link_to url_for(@bill.receipt.file), target: "_blank", class: "btn hover-strong" do %>
+          <%= image_tag "document-search-icon", size: "20" %>
+          <span class="ms-1 fs-7 text-uppercase"><%= I18n.t('views.show.view_receipt') %></span>
+        <% end %>
+      </div>
+    <% end %>
+
+    <hr>
     <span class="fs-8 text-center d-block text-muted"><%= @tenant.name %></span>
     <span class="fs-8 text-center d-block text-muted" data-controller="document-number"><%= @tenant.document_number %></span>
   </div>
