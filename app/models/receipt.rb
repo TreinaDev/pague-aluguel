@@ -1,7 +1,6 @@
 class Receipt < ApplicationRecord
+  belongs_to :bill
   has_one_attached :file
-
-  validates :bill_id, presence: true
 
   validates :file, attached: true,
                    content_type: { in: ['image/jpeg', 'image/png', 'application/pdf'],

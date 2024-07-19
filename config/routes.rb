@@ -1,17 +1,17 @@
 Rails.application.routes.draw do
   devise_for :property_owners, controllers: { registrations: "property_owners/registrations", sessions: "property_owners/sessions" }
   devise_for :admins, controllers: { registrations: "admins/registrations", sessions: "admins/sessions" }
-  resources :admins do
-    get 'condos_selection', on: :member
-    post 'condos_selection_post', on: :member
-  end
 
   root to: "home#index"
   get 'search', to: 'home#search'
   get 'choose_profile', to: 'home#choose_profile'
-
   get 'find_tenant', to: 'home#find_tenant'
   get 'tenant_bill', to: 'home#tenant_bill'
+
+  resources :admins do
+    get 'condos_selection', on: :member
+    post 'condos_selection_post', on: :member
+  end
 
   resources :condos, only: [:index, :show] do
     resources :common_areas, only: [:index, :show] do
@@ -22,7 +22,10 @@ Rails.application.routes.draw do
       post 'cancel', on: :member
     end
 
-    resources :bills, only: [:show, :index]
+    resources :bills, only: [:show, :index] do
+      post 'accept_payment', on: :member
+      post 'reject_payment', on: :member
+    end
 
     resources :nd_certificates, only: [:index, :show, :create] do
       get 'certificate', on: :member

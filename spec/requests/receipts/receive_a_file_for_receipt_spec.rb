@@ -5,7 +5,8 @@ RSpec.describe 'Comprovantes', type: :request do
     it 'cria um comprovante com um arquivo pdf anexado' do
       file = fixture_file_upload(Rails.root.join('spec/support/pdf/Comprovante-teste.pdf'), 'application/pdf')
 
-      post '/api/v1/receipts', params: { receipt: file, bill_id: '123456789' }
+      create(:bill, id: 1)
+      post '/api/v1/receipts', params: { receipt: file, bill_id: '1' }
 
       expect(response).to have_http_status(:ok)
       expect(response.body).to include('Comprovante recebido com sucesso.')
@@ -16,7 +17,8 @@ RSpec.describe 'Comprovantes', type: :request do
     it 'cria um comprovante com um arquivo jpg anexado' do
       file = fixture_file_upload(Rails.root.join('spec/support/images/reuri.jpeg'), 'image/jpeg')
 
-      post '/api/v1/receipts', params: { receipt: file, bill_id: '123456789' }
+      create(:bill, id: 1)
+      post '/api/v1/receipts', params: { receipt: file, bill_id: '1' }
 
       expect(response).to have_http_status(:ok)
       expect(response.body).to include('Comprovante recebido com sucesso.')
@@ -27,7 +29,8 @@ RSpec.describe 'Comprovantes', type: :request do
     it 'cria um comprovante com um arquivo png anexado' do
       file = fixture_file_upload(Rails.root.join('spec/support/images/foto-do-angelo.png'), 'image/png')
 
-      post '/api/v1/receipts', params: { receipt: file, bill_id: '123456789' }
+      create(:bill, id: 1)
+      post '/api/v1/receipts', params: { receipt: file, bill_id: '1' }
 
       expect(response).to have_http_status(:ok)
       expect(response.body).to include('Comprovante recebido com sucesso.')
@@ -36,7 +39,8 @@ RSpec.describe 'Comprovantes', type: :request do
     end
 
     it 'retorna erro quando nenhum arquivo é enviado' do
-      post '/api/v1/receipts'
+      create(:bill, id: 1)
+      post '/api/v1/receipts', params: { receipt: nil, bill_id: '1' }
 
       expect(response).to have_http_status(:bad_request)
       expect(response.body).to include('Nenhum arquivo enviado.')
@@ -46,7 +50,8 @@ RSpec.describe 'Comprovantes', type: :request do
     it 'retorna erro quando arquivo enviado não é um pdf, jpg ou png' do
       file = fixture_file_upload(Rails.root.join('spec/support/images/best_game_ever.webp'), 'image/webp')
 
-      post '/api/v1/receipts', params: { receipt: file, bill_id: '123456789' }
+      create(:bill, id: 1)
+      post '/api/v1/receipts', params: { receipt: file, bill_id: '1' }
 
       expect(response).to have_http_status(:unprocessable_entity)
       expect(response.body).to include('O arquivo deve ser JPG, PNG ou PDF.')
