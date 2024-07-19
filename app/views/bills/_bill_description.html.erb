@@ -33,13 +33,7 @@
       <span><%= @bill.single_charge_value.format %></span>
     </div>
     <% @bill.bill_details.each do |detail| %>
-      <% if detail.fine? %>
-        <div class=" d-flex justify-content-between">
-          <span class="text-muted text-lowercase fs-8"><%= detail.description %></span>
-          <span class="text-muted fs-8"><%= detail.value.format %></span>
-        </div>
-      <% end %>
-      <% if detail.other? %>
+      <% if detail.fine? || detail.other? %>
         <div class=" d-flex justify-content-between">
           <span class="text-muted text-lowercase fs-8"><%= detail.description %></span>
           <span class="text-muted fs-8"><%= detail.value.format %></span>
@@ -47,7 +41,7 @@
       <% end %>
       <% if detail.common_area_fee? %>
         <div class=" d-flex justify-content-between">
-          <span class="text-muted text-lowercase fs-8"><%= detail.description %></span>
+          <span class="text-muted text-lowercase fs-8"><%= I18n.t('views.show.booking', common_area: detail.description) %></span>
           <span class="text-muted fs-8"><%= detail.value.format %></span>
         </div>
       <% end %>
