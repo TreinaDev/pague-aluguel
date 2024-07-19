@@ -79,6 +79,7 @@ describe 'Admin vê detalhes de uma fatura' do
                              due_date: 10.days.from_now, total_value_cents: 500_00)
       bills << create(:bill, condo_id: 1, unit_id: units[1].id, issue_date: Time.zone.today.beginning_of_month,
                              due_date: 10.days.from_now, total_value_cents: 700_00, status: :awaiting)
+      create(:receipt, bill_id: Bill.last.id)
 
       login_as admin, scope: :admin
       visit condo_bills_path(condo_id: condo.id)
@@ -99,7 +100,7 @@ describe 'Admin vê detalhes de uma fatura' do
       # lembrar de adicionar expect com valor especifico de cada taxa
       expect(page).to have_content 'conta compartilhada'
       expect(page).to have_content 'AGUARDANDO'
-      expect(page).to have_button 'Ver comprovante'
+      expect(page).to have_link 'Ver comprovante'
       expect(page).to have_button 'Aceitar pagamento'
       expect(page).to have_button 'Recusar pagamento'
     end
@@ -130,6 +131,7 @@ describe 'Admin vê detalhes de uma fatura' do
                              due_date: 10.days.from_now, total_value_cents: 500_00)
       bills << create(:bill, condo_id: 1, unit_id: units[1].id, issue_date: Time.zone.today.beginning_of_month,
                              due_date: 10.days.from_now, total_value_cents: 700_00, status: :paid)
+      create(:receipt, bill_id: Bill.last.id)
 
       login_as admin, scope: :admin
       visit condo_bills_path(condo_id: condo.id)
@@ -150,7 +152,7 @@ describe 'Admin vê detalhes de uma fatura' do
       # lembrar de adicionar expect com valor especifico de cada taxa
       expect(page).to have_content 'conta compartilhada'
       expect(page).to have_content 'PAGA'
-      expect(page).to have_button 'Ver comprovante'
+      expect(page).to have_link 'Ver comprovante'
       expect(page).not_to have_button 'Aceitar pagamento'
       expect(page).not_to have_button 'Recusar pagamento'
     end

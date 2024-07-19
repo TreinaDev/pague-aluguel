@@ -18,6 +18,7 @@ class BillsController < ApplicationController
 
   def reject_payment
     @bill.pending!
+    @bill.receipt.destroy
     redirect_to condo_bills_path(@condo), notice: I18n.t('views.index.payment_rejected')
   end
 

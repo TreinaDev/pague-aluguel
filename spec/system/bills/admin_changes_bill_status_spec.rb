@@ -28,12 +28,13 @@ describe 'Admin altera status fatura' do
                              due_date: 10.days.from_now, total_value_cents: 500_00)
       bills << create(:bill, condo_id: 1, unit_id: units[1].id, issue_date: Time.zone.today.beginning_of_month,
                              due_date: 10.days.from_now, total_value_cents: 700_00, status: :awaiting)
+      create(:receipt, bill_id: Bill.last.id)
 
       login_as admin, scope: :admin
       visit condo_bills_path(condo_id: condo.id)
 
       click_on 'Unidade 12'
-      expect(page).to have_button 'Ver comprovante' ## por enquanto
+      expect(page).to have_link 'Ver comprovante'
       accept_confirm 'Tem certeza que deseja aceitar o pagamento? Essa ação não poderá ser desfeita.' do
         click_on 'Aceitar pagamento'
       end
@@ -48,7 +49,7 @@ describe 'Admin altera status fatura' do
       end
     end
 
-    it 'para pendente rejeitando o pagamento' do
+    it 'para pendente rejeitando o pagamento e exclui recibo antigo' do
       admin = create(:admin)
       condos = []
       condo = Condo.new(id: 1, name: 'Condomínio Vila das Flores', city: 'São Paulo')
@@ -74,12 +75,14 @@ describe 'Admin altera status fatura' do
                              due_date: 10.days.from_now, total_value_cents: 500_00, status: :paid)
       bills << create(:bill, condo_id: 1, unit_id: units[1].id, issue_date: Time.zone.today.beginning_of_month,
                              due_date: 10.days.from_now, total_value_cents: 700_00, status: :awaiting)
+      create(:receipt, bill_id: Bill.first.id)
+      create(:receipt, bill_id: Bill.last.id)
 
       login_as admin, scope: :admin
       visit condo_bills_path(condo_id: condo.id)
 
       click_on 'Unidade 12'
-      expect(page).to have_button 'Ver comprovante' ## por enquanto
+      expect(page).to have_link 'Ver comprovante'
       accept_confirm 'Tem certeza que deseja recusar o pagamento? Essa ação não poderá ser desfeita.' do
         click_on 'Recusar pagamento'
       end
@@ -92,6 +95,7 @@ describe 'Admin altera status fatura' do
       within('a#bill_2') do
         expect(page).to have_content 'pendente'.upcase
       end
+      expect(Receipt.count).to eq 1
     end
   end
 end

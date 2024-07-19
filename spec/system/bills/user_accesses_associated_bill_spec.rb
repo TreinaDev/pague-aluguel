@@ -215,6 +215,7 @@ describe 'Usuário acessa uma fatura' do
 
     create(:bill, condo_id:, unit_id:, issue_date: Time.zone.today.beginning_of_month,
                   due_date: 10.days.from_now, total_value_cents: 500_00, status: :awaiting)
+    create(:receipt, bill_id: Bill.last.id)
 
     visit root_path
     within 'form#get_tenant_bill' do
@@ -234,7 +235,7 @@ describe 'Usuário acessa uma fatura' do
     expect(page).to have_content 'Taxa Condominial'.downcase
     expect(page).to have_content 'Conta Compartilhada'.downcase
     expect(page).to have_content 'AGUARDANDO'
-    expect(page).to have_button 'Ver comprovante'
+    expect(page).to have_link 'Ver comprovante'
     expect(page).not_to have_button 'Aceitar pagamento'
     expect(page).not_to have_button 'Recusar pagamento'
   end
@@ -259,6 +260,7 @@ describe 'Usuário acessa uma fatura' do
 
     create(:bill, condo_id:, unit_id:, issue_date: Time.zone.today.beginning_of_month,
                   due_date: 10.days.from_now, total_value_cents: 500_00, status: :paid)
+    create(:receipt, bill_id: Bill.last.id)
 
     visit root_path
     within 'form#get_tenant_bill' do
@@ -278,7 +280,7 @@ describe 'Usuário acessa uma fatura' do
     expect(page).to have_content 'Taxa Condominial'.downcase
     expect(page).to have_content 'Conta Compartilhada'.downcase
     expect(page).to have_content 'PAGA'
-    expect(page).to have_button 'Ver comprovante'
+    expect(page).to have_link 'Ver comprovante'
     expect(page).not_to have_button 'Aceitar pagamento'
     expect(page).not_to have_button 'Recusar pagamento'
   end
