@@ -28,11 +28,4 @@ class CommonAreasController < ApplicationController
   rescue StandardError
     redirect_to condo_path(@condo.id), alert: I18n.t('views.show.no_common_area')
   end
-
-  def admin_authorized?
-    current_admin_associated = current_admin.associated_condos.map(&:condo_id).include?(params[:condo_id].to_i)
-    return true if current_admin.super_admin? || current_admin_associated
-
-    redirect_to root_path, notice: I18n.t('errors.messages.must_be_super_admin')
-  end
 end

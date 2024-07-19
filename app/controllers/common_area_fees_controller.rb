@@ -19,13 +19,6 @@ class CommonAreaFeesController < ApplicationController
 
   private
 
-  def admin_authorized?
-    current_admin_associated = current_admin.associated_condos.map(&:condo_id).include?(params[:condo_id].to_i)
-    return true if current_admin.super_admin? || current_admin_associated
-
-    redirect_to root_path, notice: I18n.t('errors.messages.must_be_super_admin')
-  end
-
   def common_area_fee_params
     params.require(:common_area_fee).permit(:value, :common_area_id, :condo_id)
   end
