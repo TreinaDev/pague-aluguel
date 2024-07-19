@@ -6,7 +6,10 @@
     <span class="fs-3 text-center d-block"><%= unit_name(@bill) %></span>
     <span class="fs-8 text-center d-block text-muted"><%= @condo.name %></span>
     <hr>
-
+      <%= render partial: "bill_dates" %>
+    <hr>
+      <%= render partial: "bill_description" %>
+    <hr>
     <div class="d-flex justify-content-center align-items-center">
       <%= image_tag "dollar-icon", size: "20" %>
       <span class="ms-1 me-2 fs-7 text-muted">
@@ -15,10 +18,7 @@
 
       <%= @bill.total_value.format %>
     </div>
-
     <hr>
-      <%= render partial: "bill_description" %>
-    <hr>
-      <%= render partial: "bill_dates_and_status" %>
+    <%= render partial: "bill_status" %>
   </div>
 <% end %>
