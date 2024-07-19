@@ -156,7 +156,7 @@ describe 'Proprietário configura aluguel' do
 
     units = []
     units << Unit.new(id: 2, area: 120, floor: 3, number: 4, unit_type_id: 2, owner_name: 'Jules',
-                      tenant_id: 2, owner_id: 1, description: 'Apartamento 2 quartos', condo_name: 'Condo Test')
+                      tenant_id: 2, owner_id: 1, description: 'Apartamento 2 quartos', condo_name: 'Condo Test', condo_id: 1)
     allow(Unit).to receive(:find_all_by_owner).and_return(units)
     allow(Unit).to receive(:find).and_return(units[0])
     RentFee.create!(owner_id: 1, tenant_id: 2, unit_id: 2, value_cents: 120_000, issue_date: 2.days.from_now.to_date,
@@ -188,7 +188,7 @@ describe 'Proprietário configura aluguel' do
     units = []
     units << Unit.new(id: 3, area: 120, floor: 3, number: 4, unit_type_id: 2, owner_name: 'Jules',
                       tenant_id: 2, owner_id: property_owner.id, description: 'Apartamento 2 quartos',
-                      condo_name: 'Condo Test')
+                      condo_name: 'Condo Test', condo_id: 1)
 
     unit = Unit.new(id: 20, area: 120, floor: 3, number: 4, unit_type_id: 2, owner_name: 'Jules',
                     tenant_id: 2, owner_id: 100, description: 'Apartamento 2 quartos',
@@ -215,7 +215,7 @@ describe 'Proprietário configura aluguel' do
     allow(Condo).to receive(:all).and_return(condos)
     units = []
     units << Unit.new(id: 2, area: 120, floor: 3, number: 4, unit_type_id: 2, owner_name: 'Jules',
-                      tenant_id: nil, owner_id: 1, description: 'Apartamento 2 quartos', condo_name: 'Condo Test')
+                      tenant_id: nil, owner_id: 1, description: 'Apartamento 2 quartos', condo_name: 'Condo Test', condo_id: 1)
     allow(Unit).to receive(:find_all_by_owner).and_return(units)
     allow(Unit).to receive(:find).and_return(units[0])
     RentFee.create!(owner_id: 1, tenant_id: 2, unit_id: 2, value_cents: 120_000, issue_date: 2.days.from_now.to_date,

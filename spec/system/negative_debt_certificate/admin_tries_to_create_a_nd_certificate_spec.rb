@@ -93,6 +93,7 @@ describe 'Admin tenta emitir certificado de debito negativo' do
     allow(Unit).to receive(:all).and_return(units)
     allow(Unit).to receive(:find).and_return(units.first)
     create(:bill, unit_id: 1, condo_id: 1, status: :pending)
+    create(:bill, unit_id: 1, condo_id: 1, status: :paid)
 
     login_as admin, scope: :admin
     visit condo_path(condo.id)
