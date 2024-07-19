@@ -90,7 +90,7 @@ describe 'Usuário acessa suas faturas' do
 
       condo_id = residence['condo_id']
       condo_name = residence['condo_name']
-      number = residence['number']
+      residence['number']
       unit_id = residence['id']
 
       units = []
