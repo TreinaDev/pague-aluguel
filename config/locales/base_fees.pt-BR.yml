@@ -64,7 +64,7 @@ pt-BR:
       late_fine: "Multa por atraso"
       late_fine_cents: "Multa por atraso"
     index:
-      base_fee_list: Listagem de Taxas Condominiais
+      base_fee_list: Taxas Condominiais
       name: Nome
       no_base_fees: Não existem taxas condominiais cadastradas.
       see_active_fees: Ver taxas ativas
