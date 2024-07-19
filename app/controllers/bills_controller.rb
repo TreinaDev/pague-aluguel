@@ -1,6 +1,7 @@
 class BillsController < ApplicationController
   before_action :set_condo, only: [:index, :show, :accept_payment, :reject_payment]
   before_action :set_bill, only: [:show, :accept_payment, :reject_payment]
+  before_action :admin_authorized?, only: [:accept_payment, :reject_payment]
 
   def index
     @bills = Bill.where(condo_id: @condo.id)
