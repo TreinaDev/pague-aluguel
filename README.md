@@ -300,6 +300,7 @@ Recebe os seguintes parâmetros:
                   }
 }
 ```
+Resposta para criação com sucesso: `status: 201, body: {message: :message}` (:created) 
 
 Exemplo de cobrança avulsa (Multa):
 ```
@@ -314,6 +315,7 @@ Exemplo de cobrança avulsa (Multa):
                   }
 }
 ```
+Resposta para criação com sucesso: `status: 201, body: {message: :message}` (:created) 
 
 Exemplo de cobrança avulsa (Reserva de Área Comum):
 ```
@@ -336,7 +338,7 @@ Expõe uma API endpoint de cancelamento do status do model `single_charge` para 
 
 `PATCH /api/v1/single_charges/:id/cancel`
 
-Resposta para cancelamento com sucesso: `status: 200, body: {message: :message}` (:created)
+Resposta para cancelamento com sucesso: `status: 201, body: {message: :message}` (:created)
 
 ## 3. Faturas
 
