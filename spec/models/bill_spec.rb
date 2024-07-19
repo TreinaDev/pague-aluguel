@@ -9,4 +9,12 @@ RSpec.describe Bill, type: :model do
     it { should validate_presence_of(:base_fee_value_cents) }
     it { should validate_presence_of(:condo_id) }
   end
+
+  describe 'status' do
+    it 'deve ser criado por padrão com o status pendente' do
+      bill = Bill.new
+
+      expect(bill.status).to eq 'pending'
+    end
+  end
 end
