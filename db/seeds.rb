@@ -5,6 +5,8 @@ SharedFee.destroy_all
 gian_lucca = PropertyOwner.new(
   email: 'gian@email.com',
   password: 'gian123',
+  first_name: 'Gian',
+  last_name: 'Lucca',
   document_number: '077.497.020-08'
 )
 gian_lucca.save(validate: false)
@@ -12,6 +14,8 @@ gian_lucca.save(validate: false)
 nathanael = PropertyOwner.new(
   email: 'nathanael@email.com',
   password: 'nathan123',
+  first_name: 'Nathaniel',
+  last_name: 'Vieira',
   document_number: CPF.generate
 )
 nathanael.save(validate: false)
@@ -19,6 +23,8 @@ nathanael.save(validate: false)
 lais = PropertyOwner.new(
   email: 'lais@email.com',
   password: 'lais123',
+  first_name: 'Lais',
+  last_name: 'Almeida',
   document_number: CPF.generate
 )
 lais.save(validate: false)
