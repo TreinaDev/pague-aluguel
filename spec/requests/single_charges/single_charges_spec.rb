@@ -1,8 +1,8 @@
 require 'rails_helper'
 
 describe 'Usuário cria uma cobrança avulsa' do
-  it 'com sucesso' do
-    admin = create(:admin)
+  it 'com sucesso - super admin' do
+    admin = create(:admin, super_admin: true)
     condos = []
     condos << Condo.new(id: 1, name: 'Condo Test', city: 'City Test')
     unit_types = []

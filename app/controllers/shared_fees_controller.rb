@@ -1,6 +1,7 @@
 class SharedFeesController < ApplicationController
   before_action :authenticate_admin!
-  before_action :find_condo, only: [:index, :show, :new, :create, :cancel]
+  before_action :find_condo
+  before_action :admin_authorized?
 
   def index
     @shared_fees = SharedFee.where(condo_id: @condo.id).order(issue_date: :desc)
