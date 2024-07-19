@@ -12,13 +12,23 @@
       <%= render "property_owners/shared/error_messages", resource: resource %>
 
       <div class="form-floating mb-3 w-75 mx-auto mt-4">
-        <%= f.email_field :email, autofocus: true, autocomplete: "email", class: "form-control"  %>
-        <%= f.label :email %>
+        <%= f.text_field :first_name, autofocus: true, autocomplete: "first_name", class: "form-control" %>
+        <%= f.label :first_name %>
+      </div>
+
+      <div class="form-floating mb-3 w-75 mx-auto">
+        <%= f.text_field :last_name, autocomplete: "last_name", class: "form-control" %>
+        <%= f.label :last_name %>
       </div>
 
       <div class="form-floating mb-3 w-75 mx-auto">
         <%= f.text_field :document_number, autocomplete: "document_number", "data-controller": "document-number", class: "form-control"  %>
         <%= f.label :document_number %>
+      </div>
+
+      <div class="form-floating mb-3 w-75 mx-auto">
+        <%= f.email_field :email, autocomplete: "email", class: "form-control"  %>
+        <%= f.label :email %>
       </div>
 
       <% if @minimum_password_length %>
@@ -32,13 +42,18 @@
         <%= f.label :password %>
       </div>
 
-      <div class="form-floating mb-1 w-75 mx-auto">
+      <div class="form-floating mb-3 w-75 mx-auto">
         <%= f.password_field :password_confirmation, autocomplete: "new-password", class: "form-control"  %>
-        <%= f.label :password_confirmation %><br />
+        <%= f.label :password_confirmation %>
+      </div>
+
+      <div class="form-floating mb-3 w-75 mx-auto">
+        <%= f.file_field :photo, class: "form-control" %>
+        <%= f.label :photo %>
       </div>
 
       <div class="text-center">
-        <%= f.submit I18n.t('helpers.submit.register'), class: "btn btn-primary fs-7 text-uppercase ls-3 mb-3" %>
+        <%= f.submit I18n.t('helpers.submit.register'), class: "btn btn-primary fs-7 text-uppercase ls-3 mb-3 mt-1" %>
       </div>
     <% end %>
   </div>

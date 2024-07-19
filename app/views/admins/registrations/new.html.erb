@@ -12,7 +12,22 @@
       <%= render "admins/shared/error_messages", resource: resource %>
 
       <div class="form-floating mb-3 w-75 mx-auto mt-4">
-        <%= f.email_field :email, autofocus: true, autocomplete: "email", class: "form-control" %>
+        <%= f.text_field :first_name, autofocus: true, autocomplete: "first_name", class: "form-control" %>
+        <%= f.label :first_name %>
+      </div>
+
+      <div class="form-floating mb-3 w-75 mx-auto">
+        <%= f.text_field :last_name, autocomplete: "last_name", class: "form-control" %>
+        <%= f.label :last_name %>
+      </div>
+
+      <div class="form-floating mb-3 w-75 mx-auto">
+        <%= f.text_field :document_number, autocomplete: "document_number", "data-controller": "document-number", class: "form-control" %>
+        <%= f.label :document_number %>
+      </div>
+
+      <div class="form-floating mb-3 w-75 mx-auto">
+        <%= f.email_field :email, autocomplete: "email", class: "form-control" %>
         <%= f.label :email %>
       </div>
 
@@ -30,21 +45,6 @@
       <div class="form-floating mb-3 w-75 mx-auto">
         <%= f.password_field :password_confirmation, autocomplete: "new-password", class: "form-control" %>
         <%= f.label :password_confirmation %>
-      </div>
-
-      <div class="form-floating mb-3 w-75 mx-auto">
-        <%= f.text_field :first_name, autocomplete: "first_name", class: "form-control" %>
-        <%= f.label :first_name %>
-      </div>
-
-      <div class="form-floating mb-3 w-75 mx-auto">
-        <%= f.text_field :last_name, autocomplete: "last_name", class: "form-control" %>
-        <%= f.label :last_name %>
-      </div>
-
-      <div class="form-floating mb-3 w-75 mx-auto">
-        <%= f.text_field :document_number, autocomplete: "document_number", "data-controller": "document-number", class: "form-control" %>
-        <%= f.label :document_number %>
       </div>
 
       <div class="d-flex justify-content-center">
