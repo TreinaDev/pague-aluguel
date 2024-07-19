@@ -1,4 +1,5 @@
 class Receipt < ApplicationRecord
+  belongs_to :bill
   has_one_attached :file
 
   validates :bill_id, presence: true

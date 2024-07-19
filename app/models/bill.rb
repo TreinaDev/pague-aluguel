@@ -1,4 +1,5 @@
 class Bill < ApplicationRecord
+  has_one :receipt
   validates :issue_date, :due_date, :total_value_cents, :condo_id, :shared_fee_value_cents, :base_fee_value_cents,
             presence: true
 
