@@ -1,2 +1,18 @@
-<h1>Certidão de Débito Negativo</h1>
-<p>Data e Hora de Emissão: <%= I18n.l(@nd_certificate.issue_date) %></p>
+<div class="container mt-5">
+  <div class="border p-5 bg-light">
+    <h1 class="display-4 text-center mb-4">Certidão de Débito Negativo</h1>
+    <p class="lead"><strong>Condomínio:</strong> <%= @condo.name %></p>
+    <p class="lead"><strong>Unidade:</strong> <%= @unit.number %></p>
+
+    <p class="text-justify mt-4">
+      Através deste certificado é declarado que, o PagueAluguel após minuciosa verificação nos registros financeiros e administrativos em seu banco de dados,
+      constatou-se que não há débitos pendentes relacionados a taxas de condomínio, fundo de reserva,
+      multas ou quaisquer outras obrigações financeiras de responsabilidade do proprietário da referida unidade.
+    </p>
+    <p class="text-justify">
+      Esta certidão é válida por 30 (trinta) dias a contar da data de sua emissão e pode ser utilizada para comprovar a regularidade financeira da unidade perante quaisquer instituições ou interessados.
+    </p>
+
+    <p class="lead mt-5"><strong>Data de emissão:</strong> <%= I18n.l(@nd_certificate.issue_date) %></p>
+  </div>
+</div>

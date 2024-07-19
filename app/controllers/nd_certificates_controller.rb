@@ -1,8 +1,11 @@
 class NdCertificatesController < ApplicationController
-  before_action :set_condo, only: [:index, :show]
+  before_action :authenticate_admin!, only: [:index, :show]
+  before_action :set_condo, only: [:index, :show, :create]
 
   def certificate
     @nd_certificate = NdCertificate.find(params[:id])
+    @unit = Unit.find(@nd_certificate.unit_id)
+    @condo = Condo.find(@unit.condo_id)
   end
 
   def index

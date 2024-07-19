@@ -6,6 +6,8 @@ pt-BR:
   pending_debt: Esta unidade possui débitos pendentes.
   views:
     index:
+      unit: Unidade
       no_units: Nenhuma unidade encontrada.
       floor: Andar
       number: Número
+    

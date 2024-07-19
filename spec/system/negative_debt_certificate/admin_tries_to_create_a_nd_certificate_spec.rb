@@ -30,9 +30,11 @@ describe 'Admin tenta emitir certificado de debito negativo' do
 
     expect(page).to have_content 'UNIDADES'
     expect(page).to have_content 'Condomínio Vila das Flores'.upcase
-    expect(page).to have_content 'Andar : 1'
-    expect(page).to have_content 'Número 11'
-    expect(page).to have_content 'Número 12'
+    expect(page).to have_content 'andar: 1'
+    expect(page).to have_content 'Unidade 11'
+    expect(page).to have_content 'Unidade 12'
+    expect(page).to have_content 'ID: 1'
+    expect(page).to have_content 'ID: 2'
   end
 
   it 'e gera com sucesso' do
@@ -61,12 +63,14 @@ describe 'Admin tenta emitir certificado de debito negativo' do
     within('div#nd_certificate_section') do
       click_on 'Ver todas as unidades'
     end
-    click_on 'Número 11'
+    click_on 'Unidade 11'
     click_on 'Emitir Certificado de Débito Negativo'
 
     expect(page).to have_content 'Certidão de quitação emitida com sucesso'
-    expect(current_path).to eq certificate_condo_nd_certificate_path(condo_id: condo.id, id: 1)
     expect(page).to have_content I18n.l(Time.zone.now)
+    expect(current_path).to eq certificate_condo_nd_certificate_path(condo_id: condo.id, id: 1)
+    expect(page).to have_content 'Condomínio: Condomínio Vila das Flores'
+    expect(page).to have_content 'Unidade: 11'
   end
 
   it 'e falha pois possui débitos pendentes' do
@@ -95,7 +99,7 @@ describe 'Admin tenta emitir certificado de debito negativo' do
     within('div#nd_certificate_section') do
       click_on 'Ver todas as unidades'
     end
-    click_on 'Número 11'
+    click_on 'Unidade 11'
     click_on 'Emitir Certificado de Débito Negativo'
 
     expect(page).to have_content 'Esta unidade possui débitos pendentes.'
