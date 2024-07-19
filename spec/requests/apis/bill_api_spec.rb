@@ -32,6 +32,7 @@ describe 'API de Faturas' do
       expect(json_response['issue_date']).to eq Time.zone.today.beginning_of_month.strftime('%Y-%m-%d')
       expect(json_response['due_date']).to eq 10.days.from_now.to_date.strftime('%Y-%m-%d')
       expect(json_response['status']).to eq 'pending'
+      expect(json_response['denied']).to eq false
       expect(json_response['unit_id']).to eq 1
       expect(json_response['bill_details'][0]['description']).to eq 'Conta de Água'
       expect(json_response['bill_details'][0]['value_cents']).to eq 30_000
