@@ -27,6 +27,8 @@
 
 ▶️ [Navegação](#navegação)
 
+▶️ [APIs](#apis)
+
 ▶️ [Criação de Contas Fictícias](#criação-de-contas-fictícias)
 
 ▶️ [Desenvolvedores](#desenvolvedores)
@@ -257,9 +259,9 @@ Caso o condomínio possua alguma taxa cadastrada: `status: 200, json:`
 
 Recebe como parâmetro o `:id` de uma taxa cadastrada e retorna **os detalhes da taxa de área comum** desejada.
 **Retorna:** <br>
-Caso não exista taxa com o id informado: `status: 404` 
+Caso não exista taxa com o id informado: `status: 404`
 ```json
-{ 
+{
   "errors":"Não encontrado"
 }
 ```
@@ -301,7 +303,7 @@ Recebe os seguintes parâmetros:
                   }
 }
 ```
-Resposta para criação com sucesso: `status: 201, body: {message: :message}` (:created) 
+Resposta para criação com sucesso: `status: 201, body: {message: :message}` (:created)
 
 Exemplo de cobrança avulsa (Multa):
 ```
@@ -316,7 +318,7 @@ Exemplo de cobrança avulsa (Multa):
                   }
 }
 ```
-Resposta para criação com sucesso: `status: 201, body: {message: :message}` (:created) 
+Resposta para criação com sucesso: `status: 201, body: {message: :message}` (:created)
 
 Exemplo de cobrança avulsa (Reserva de Área Comum):
 ```
@@ -331,7 +333,7 @@ Exemplo de cobrança avulsa (Reserva de Área Comum):
                   }
 }
 ```
-Resposta para criação com sucesso: `status: 201, body: {message: :message, single_charge_id: :id}` (:created) 
+Resposta para criação com sucesso: `status: 201, body: {message: :message, single_charge_id: :id}` (:created)
 
 ### 2.2
 
@@ -349,7 +351,7 @@ Recebemos como parâmetro um `id` de uma fatura e retornamos **todos os detalhes
 **Retorna:** <br>
 Caso não exista taxa com o id informado: `status: 404`:
 ```json
-{ 
+{
   "errors":"Não encontrado"
 }
 ```
@@ -436,7 +438,7 @@ Caso a unidade não possua nenhuma fatura cadastrada: `status: 200`:
 ```json
 {
   "bills": [
-    
+
   ]
 }
 ```

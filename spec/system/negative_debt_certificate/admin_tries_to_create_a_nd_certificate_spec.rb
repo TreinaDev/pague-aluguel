@@ -67,7 +67,7 @@ describe 'Admin tenta emitir certificado de debito negativo' do
     click_on 'Emitir Certificado de Débito Negativo'
 
     expect(page).to have_content 'Certidão de quitação emitida com sucesso'
-    expect(page).to have_content I18n.l(Time.zone.now)
+    expect(page).to have_content I18n.l(Time.zone.now.to_date)
     expect(current_path).to eq certificate_condo_nd_certificate_path(condo_id: condo.id, id: 1)
     expect(page).to have_content 'Condomínio: Condomínio Vila das Flores'
     expect(page).to have_content 'Unidade: 11'

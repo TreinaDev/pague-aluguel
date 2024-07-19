@@ -13,6 +13,6 @@
       Esta certidão é válida por 30 (trinta) dias a contar da data de sua emissão e pode ser utilizada para comprovar a regularidade financeira da unidade perante quaisquer instituições ou interessados.
     </p>
 
-    <p class="lead mt-5"><strong>Data de emissão:</strong> <%= I18n.l(@nd_certificate.issue_date) %></p>
+    <p class="lead mt-5"><strong>Data de emissão:</strong> <%= I18n.l(@nd_certificate.issue_date.to_date) %></p>
   </div>
 </div>
