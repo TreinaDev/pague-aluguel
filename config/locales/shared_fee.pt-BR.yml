@@ -1,4 +1,5 @@
 pt-BR:
+  cancel_notice_shared_fee: "%{shared_fee} cancelada com sucesso."
   success_notice_shared_fee: 'Conta Compartilhada lançada com sucesso!'
   fail_notice_shared_fee: 'Não foi possível lançar a conta compartilhada.'
   activerecord:

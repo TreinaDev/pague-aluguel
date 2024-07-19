@@ -4,6 +4,7 @@ pt-BR:
     false: Taxa fixa
   success_notice_base_fee: 'Taxa cadastrada com sucesso!'
   fail_notice_base_fee: 'Taxa não cadastrada.'
+  cancel_notice_base_fee: "%{base_fee} cancelada com sucesso."
   activerecord:
     models:
       base_fee:
