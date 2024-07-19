@@ -8,10 +8,8 @@ describe 'morador vê comprovante de pagamento' do
     endpoint_route = "http://127.0.0.1:3000/api/v1/get_tenant_residence?registration_number=#{CPF.new(cpf).formatted}"
     allow(Faraday).to receive(:get).with(endpoint_route).and_return(response)
     residence = JSON.parse(response.body)['resident']['residence']
-    resident = JSON.parse(response.body)['resident']
 
     condo_id = residence['condo_id']
-    condo_name = residence['condo_name']
     number = residence['number']
     unit_id = residence['id']
 
@@ -34,7 +32,7 @@ describe 'morador vê comprovante de pagamento' do
     original_window = page.driver.browser.window_handles.first
     click_link 'Ver comprovante'
     new_window = nil
-    sleep 1 until new_window = page.driver.browser.window_handles.find { |handle| handle != original_window }
+    sleep 1 until (new_window = page.driver.browser.window_handles.find { |handle| handle != original_window })
 
     expect(new_window).not_to be_nil
   end
@@ -63,10 +61,10 @@ describe 'administrador vê comprovante de pagamento' do
     allow(Unit).to receive(:find).with(2).and_return(units.second)
 
     bills = []
-    bills << create(:bill, condo_id: 1, unit_id: units[0].id, issue_date: Time.zone.today.beginning_of_month,
-                    due_date: 10.days.from_now, total_value_cents: 500_00)
-    bills << create(:bill, condo_id: 1, unit_id: units[1].id, issue_date: Time.zone.today.beginning_of_month,
-                    due_date: 10.days.from_now, total_value_cents: 700_00, status: :paid)
+    bills << create(:bill, condo_id: 1, unit_id: units.first.id, issue_date: Time.zone.today.beginning_of_month,
+                           due_date: 10.days.from_now, total_value_cents: 500_00)
+    bills << create(:bill, condo_id: 1, unit_id: units.last.id, issue_date: Time.zone.today.beginning_of_month,
+                           due_date: 10.days.from_now, total_value_cents: 700_00, status: :paid)
     create(:receipt, bill_id: Bill.last.id)
     login_as admin, scope: :admin
     visit condo_bills_path(condo_id: condo.id)
@@ -75,7 +73,7 @@ describe 'administrador vê comprovante de pagamento' do
     original_window = page.driver.browser.window_handles.first
     click_link 'Ver comprovante'
     new_window = nil
-    sleep 1 until new_window = page.driver.browser.window_handles.find { |handle| handle != original_window }
+    sleep 1 until (new_window = page.driver.browser.window_handles.find { |handle| handle != original_window })
 
     expect(new_window).not_to be_nil
   end
