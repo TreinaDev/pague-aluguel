@@ -1,0 +1,14 @@
+<%= turbo_frame_tag "modal" do %>
+  <div class="dean-modal modal-md" id="unit-modal">
+    <%= link_to "×", condo_nd_certificates_path(@condo.id), class: "btn btn-close btn-sm", id: 'close', aria_label: "Close" %>
+
+    <div class="text-center mt-4 mb-4">
+      <span class="fs-7 d-block mb-1"><%= @condo.name%></span>
+      <span class="fs-3 d-block"><%=I18n.t('views.index.unit')%>: <%= @unit.number %></span>
+      <span class="fs-6 d-block mt-2 mb-3"><%= @unit.description %></span>
+      <%= button_to I18n.t('nd_generate'), condo_nd_certificates_path(condo_id: @condo.id, unit_id: @unit.id), method: :post, class: "btn btn-primary" %>
+    </div>
+
+    <hr>
+  </div>
+<% end %>
