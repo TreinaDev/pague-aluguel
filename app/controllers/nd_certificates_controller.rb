@@ -15,15 +15,11 @@ class NdCertificatesController < ApplicationController
 
   def create
     @unit = Unit.find(params[:unit_id])
-    if all_bills_paid?
-      if create_and_save_certificate
-        redirect_to_success
-      else
-        redirect_to_error
-      end
-    else
-      redirect_to_pending_debts
-    end
+
+    return redirect_to_pending_debts unless all_bills_paid?
+    return redirect_to_success if create_and_save_certificate
+
+    redirect_to_error
   end
 
   private
