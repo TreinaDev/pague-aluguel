@@ -22,7 +22,10 @@ Rails.application.routes.draw do
       post 'cancel', on: :member
     end
 
-    resources :bills, only: [:show, :index]
+    resources :bills, only: [:show, :index] do
+      post 'accept_payment', on: :member
+      post 'reject_payment', on: :member
+    end
 
     resources :shared_fees, only: [:index, :show, :new, :create] do
       post 'cancel', on: :member
