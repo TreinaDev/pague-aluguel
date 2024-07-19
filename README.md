@@ -218,7 +218,7 @@ Você pode usar sites como [4Devs](https://www.4devs.com.br/) para gerar número
 
 # APIs
 
-### 1. Taxas de Áreas Comuns
+## 1. Taxas de Áreas Comuns
 
 `GET /api/v1/condos/:id/common_area_fees`
 
@@ -272,13 +272,12 @@ Caso o condomínio possua alguma taxa cadastrada: `status: 200, json:`
 }
 ```
 
-### 2. Cobranças Avulsas
+## 2. Cobranças Avulsas
 
+### 2.1 Criação de Cobranças Avulsas
 `POST /api/v1/single_charges/?params`
 
 Expõe uma API endpoint de criação de model `single_charge`, válido para criação de Multas e Reservas de Áreas Comuns.
-
-Resposta para criação com sucesso: `status: 201` (:created)
 
 Resposta para falha na criação: `status: 422` (:unprocessable_entity)
 
@@ -301,6 +300,7 @@ Recebe os seguintes parâmetros:
                   }
 }
 ```
+Resposta para criação com sucesso: `status: 201, body: {message: :message}` (:created) 
 
 Exemplo de cobrança avulsa (Multa):
 ```
@@ -315,6 +315,7 @@ Exemplo de cobrança avulsa (Multa):
                   }
 }
 ```
+Resposta para criação com sucesso: `status: 201, body: {message: :message}` (:created) 
 
 Exemplo de cobrança avulsa (Reserva de Área Comum):
 ```
@@ -329,8 +330,17 @@ Exemplo de cobrança avulsa (Reserva de Área Comum):
                   }
 }
 ```
+Resposta para criação com sucesso: `status: 201, body: {message: :message, single_charge_id: :id}` (:created) 
 
-### 3. Faturas
+### 2.2
+
+Expõe uma API endpoint de cancelamento do status do model `single_charge` para Reservas de Áreas Comuns.
+
+`PATCH /api/v1/single_charges/:id/cancel`
+
+Resposta para cancelamento com sucesso: `status: 201, body: {message: :message}` (:created)
+
+## 3. Faturas
 
 `GET api/v1/bills/:id`
 
@@ -395,7 +405,7 @@ Caso a unidade não possua nenhuma fatura cadastrada: `status: 200`:
 }
 ```
 
-### 3. Comprovante
+## 4. Comprovante
 
 URL: ` /api/v1/receipts`
 
@@ -408,7 +418,7 @@ Parâmetros do Corpo da Requisição
 - `receipt`: Arquivo anexado do comprovante. Obrigatório. ( Deve ser um arquivo em formato PDF, JPEG ou PNG )
 - `bill_id`: Id da fatura associada ao comprovante. Obrigatório.
 
-## Desenvolvedores 🧑🏽‍💻🧑🏻‍💻🧑‍💻
+# Desenvolvedores 🧑🏽‍💻🧑🏻‍💻🧑‍💻
 
 <div align="center">
   <table>
