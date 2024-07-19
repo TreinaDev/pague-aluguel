@@ -1,7 +1,7 @@
 class BaseFeesController < ApplicationController
   before_action :authenticate_admin!
   before_action :admin_authorized?
-  before_action :set_condo, only: [:new, :create, :index, :cancel]
+  before_action :set_condo, except: [:show]
 
   def index
     @base_fees = BaseFee.where(condo_id: @condo.id).order(charge_day: :desc)

@@ -1,7 +1,8 @@
 class BillsController < ApplicationController
-  before_action :set_condo, only: [:index, :show, :accept_payment, :reject_payment]
-  before_action :set_bill, only: [:show, :accept_payment, :reject_payment]
-  before_action :admin_authorized?, only: [:accept_payment, :reject_payment]
+  before_action :set_condo
+  before_action :set_bill, except: [:index]
+  before_action :admin_authorized?
+  before_action :bill_belongs_to_condo, only: [:show]
 
   def index
     @bills = Bill.where(condo_id: @condo.id)
@@ -13,16 +14,22 @@ class BillsController < ApplicationController
 
   def accept_payment
     @bill.paid!
-    redirect_to condo_bills_path(@condo), notice: I18n.t('views.index.payment_accepted')
+    redirect_to condo_bills_path(@condo.id), notice: I18n.t('views.index.payment_accepted')
   end
 
   def reject_payment
     @bill.pending!
     @bill.receipt.destroy
-    redirect_to condo_bills_path(@condo), notice: I18n.t('views.index.payment_rejected')
+    redirect_to condo_bills_path(@condo.id), notice: I18n.t('views.index.payment_rejected')
   end
 
   private
+
+  def bill_belongs_to_condo
+    return if @bill.condo_id == @condo.id
+
+    redirect_to condo_bills_path(@condo.id), notice: I18n.t('views.index.no_bills')
+  end
 
   def set_bill
     @bill = Bill.find(params[:id])
