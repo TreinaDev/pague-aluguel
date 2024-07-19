@@ -16,7 +16,6 @@ class SharedFeesController < ApplicationController
   end
 
   def create
-    @condos = Condo.all
     @shared_fee = SharedFee.new(shared_fee_params)
     @shared_fee.condo_id = @condo.id
     if @shared_fee.save
