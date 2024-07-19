@@ -52,7 +52,7 @@
       <% end %>
     </div>
 
-    <% unless @bill.pending? %>
+    <% unless @bill.pending? && @bill.receipt&.file.nil? %>
       <div class="text-center">
         <%= link_to url_for(@bill.receipt.file), target: "_blank", class: "btn hover-strong" do %>
           <%= image_tag "document-search-icon", size: "20" %>
