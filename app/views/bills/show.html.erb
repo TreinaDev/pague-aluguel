@@ -53,10 +53,12 @@
     </div>
 
     <% unless @bill.pending? %>
-      <%= button_to "", class: "d-flex align-items-center btn hover-strong mx-auto" do %>
-        <%= image_tag "document-search-icon", size: "20" %>
-        <span class="ms-1 fs-7 text-uppercase"><%= I18n.t('views.show.view_receipt') %></span>
-      <% end %>
+      <div class="text-center">
+        <%= link_to url_for(@bill.receipt.file), target: "_blank", class: "btn hover-strong" do %>
+          <%= image_tag "document-search-icon", size: "20" %>
+          <span class="ms-1 fs-7 text-uppercase"><%= I18n.t('views.show.view_receipt') %></span>
+        <% end %>
+      </div>
     <% end %>
 
     <% if @bill.awaiting? %>
