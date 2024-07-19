@@ -280,7 +280,7 @@ p "Created 3 bills for 314.787.200-93"
 p "Created 5 bills for 458.456.480-92"
 
 Receipt.create!(bill_id: 2, file: Rails.root.join('app', 'assets', 'images', 'cupom-fiscal.jpg').open)
-Receipt.create!(bill_id: 3, file: Rails.root.join('app', 'assets', 'images', 'Comprovante-pg.jpg').open)
+Receipt.create!(bill_id: 3, file: Rails.root.join('app', 'assets', 'images', 'comprovante-pg.jpg').open)
 Receipt.create!(bill_id: 5, file: Rails.root.join('app', 'assets', 'images', 'cupom-fiscal.jpg').open)
 Receipt.create!(bill_id: 6, file: Rails.root.join('app', 'assets', 'images', 'cupom-fiscal.jpg').open)
 Receipt.create!(bill_id: 7, file: Rails.root.join('app', 'assets', 'images', 'cupom-fiscal.jpg').open)
