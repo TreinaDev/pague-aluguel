@@ -1,13 +1,13 @@
 <%= turbo_frame_tag "modal" do %>
   <div class="dean-modal modal-md">
-    <%= link_to condo_bills_path(@condo.id), class: "btn btn-close btn-sm", id: 'close' %>
+    <%= link_to condo_nd_certificates_path(@condo.id), class: "btn btn-close btn-sm", id: 'close' %>
 
     <hr>
 
     <div class="d-flex justify-content-center align-items-center">
       <span class="fs-8 text-center d-block"><%= @unit.description %></span>
       <span class="fs-3 text-center d-block"><%= @unit.number %></span>
-      <%= link_to I18n.t('nd_generate')>
+      <%= button_to I18n.t('nd_generate'), condo_nd_certificates_path(condo_id: @condo.id, unit_id: @unit.id), method: :post %>
     </div>
 
     <hr>

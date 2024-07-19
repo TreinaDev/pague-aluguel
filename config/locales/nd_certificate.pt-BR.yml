@@ -1,5 +1,9 @@
 pt-BR:
+  nd_generate: Emitir Certificado de Débito Negativo
   units: Unidades
+  success_issued: Certidão de quitação emitida com sucesso.
+  fail_to_issue: Erro ao emitir certidão de quitação.
+  pending_debt: Esta unidade possui débitos pendentes.
   views:
     index:
       no_units: Nenhuma unidade encontrada.
