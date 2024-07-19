@@ -1,0 +1,7 @@
+pt-BR:
+  units: Unidades
+  views:
+    index:
+      no_units: Nenhuma unidade encontrada.
+      floor: Andar
+      number: Número

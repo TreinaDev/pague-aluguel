@@ -1,6 +1,12 @@
-<div class="card border-0 rounded-0 bg-off-white mt-4 py-3 px-3 w-49">
+<div class="card border-0 rounded-0 bg-off-white mt-4 py-3 px-3 w-49" id="nd_certificate_section">
   <div class="mb-3">
     <%= image_tag "document-ribbon-icon", size: '25' %>
     <span class="text-muted"><%= I18n.t('views.show.cnd') %></span>
+    <div class="d-flex align-items-center">
+      <%= link_to condo_nd_certificates_path(@condo.id), class: "text-decoration-none btn hover-strong" do %>
+        <%= image_tag "list-center-icon", size: "18" %>
+        <span class="text-muted fs-7 text-uppercase"><%= I18n.t('views.show.see_all_units') %></span>
+      <% end %>
+    </div>
   </div>
 </div>

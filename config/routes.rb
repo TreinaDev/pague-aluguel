@@ -24,6 +24,8 @@ Rails.application.routes.draw do
 
     resources :bills, only: [:show, :index]
 
+    resources :nd_certificates, only: [:index, :show, :new, :create]
+
     resources :shared_fees, only: [:index, :show, :new, :create] do
       post 'cancel', on: :member
     end
