@@ -107,7 +107,7 @@ describe 'Usuário acessa suas faturas' do
         click_on 'Buscar'
       end
 
-      click_on number.to_s
+      click_on 'bill_1'
       find('#back').click
 
       expect(page).not_to have_content CPF.new(cpf).formatted
@@ -178,7 +178,7 @@ describe 'Usuário acessa uma fatura' do
       click_on 'Buscar'
     end
 
-    click_on number.to_s
+    click_on 'bill_1'
 
     expect(page).to have_content CPF.new(cpf).formatted
     expect(page).to have_content resident['name']
@@ -223,7 +223,7 @@ describe 'Usuário acessa uma fatura' do
       click_on 'Buscar'
     end
 
-    click_on number.to_s
+    click_on 'bill_1'
 
     expect(page).to have_content CPF.new(cpf).formatted
     expect(page).to have_content resident['name']
@@ -268,7 +268,7 @@ describe 'Usuário acessa uma fatura' do
       click_on 'Buscar'
     end
 
-    click_on number.to_s
+    click_on 'bill_1'
 
     expect(page).to have_content CPF.new(cpf).formatted
     expect(page).to have_content resident['name']
@@ -277,8 +277,8 @@ describe 'Usuário acessa uma fatura' do
     expect(page).to have_content 10.days.from_now.strftime('%d/%m/%Y')
     expect(page).to have_content number
     expect(page).to have_content 'R$500,00'
-    expect(page).to have_content 'Taxa Condominial'.downcase
-    expect(page).to have_content 'Conta Compartilhada'.downcase
+    expect(page).to have_content 'taxa condominial'
+    expect(page).to have_content 'conta compartilhada'
     expect(page).to have_content 'PAGA'
     expect(page).to have_link 'Ver comprovante'
     expect(page).not_to have_button 'Aceitar pagamento'
