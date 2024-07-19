@@ -27,6 +27,10 @@ Rails.application.routes.draw do
       post 'reject_payment', on: :member
     end
 
+    resources :nd_certificates, only: [:index, :show, :create] do
+      get 'certificate', on: :member
+    end
+
     resources :shared_fees, only: [:index, :show, :new, :create] do
       post 'cancel', on: :member
     end
