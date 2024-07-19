@@ -4,7 +4,10 @@ describe 'Usuario acessa lista de faturas do condominio' do
   it 'sucesso - super admin' do
     admin = create(:admin, super_admin: true)
     condo = Condo.new(id: 1, name: 'Condomínio Vila das Flores', city: 'São Paulo')
+    unit = Unit.new(id: 1, area: 40, floor: 3, number: '31', unit_type_id: 1, condo_id: condo.id,
+                    condo_name: 'Condomínio Vila das Flores', tenant_id: 1, owner_id: 1, description: 'Com varanda')
     allow(Condo).to receive(:find).and_return(condo)
+    allow(Unit).to receive(:find).and_return(unit)
 
     create(:bill,
            condo_id: condo.id,
@@ -35,7 +38,10 @@ describe 'Usuario acessa lista de faturas do condominio' do
   it 'sucesso - admin associado' do
     admin = create(:admin, super_admin: false)
     condo = Condo.new(id: 1, name: 'Condomínio Vila das Flores', city: 'São Paulo')
+    unit = Unit.new(id: 1, area: 40, floor: 3, number: '31', unit_type_id: 1, condo_id: condo.id,
+                    condo_name: 'Condomínio Vila das Flores', tenant_id: 1, owner_id: 1, description: 'Com varanda')
     allow(Condo).to receive(:find).and_return(condo)
+    allow(Unit).to receive(:find).and_return(unit)
 
     create(:bill,
            condo_id: condo.id,

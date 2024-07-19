@@ -4,7 +4,6 @@ describe 'Admin cria taxa condominial' do
   it 'com sucesso' do
     admin = create(:admin, email: 'admin@email.com', password: '123456', super_admin: true)
     condo = Condo.new(id: 1, name: 'Condo Test', city: 'City Test')
-
     allow(Condo).to receive(:find).and_return(condo)
     allow(UnitType).to receive(:all).and_return([])
 
