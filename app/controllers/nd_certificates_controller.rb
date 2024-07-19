@@ -1,5 +1,6 @@
 class NdCertificatesController < ApplicationController
   before_action :authenticate_admin!, only: [:index, :show]
+  before_action :admin_authorized?, only: [:index, :show]
   before_action :set_condo, only: [:index, :show, :create]
 
   def certificate
@@ -52,5 +53,12 @@ class NdCertificatesController < ApplicationController
 
   def redirect_to_pending_debts
     redirect_to condo_nd_certificates_path(@unit.condo_id), notice: I18n.t('pending_debt')
+  end
+
+  def admin_authorized?
+    current_admin_associated = current_admin.associated_condos.map(&:condo_id).include?(params[:id].to_i)
+    return true if current_admin.super_admin? || current_admin_associated
+
+    redirect_to root_path, notice: I18n.t('errors.messages.must_be_super_admin')
   end
 end
