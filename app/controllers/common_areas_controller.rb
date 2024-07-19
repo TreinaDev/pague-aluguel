@@ -1,6 +1,6 @@
 class CommonAreasController < ApplicationController
   before_action :authenticate_admin!
-  before_action :admin_authorized?, only: [:index, :show]
+  before_action :admin_authorized?
   before_action :find_condo, only: [:index, :show]
   before_action :find_common_area, only: [:show]
 

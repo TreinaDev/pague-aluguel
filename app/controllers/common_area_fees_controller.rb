@@ -1,6 +1,6 @@
 class CommonAreaFeesController < ApplicationController
   before_action :authenticate_admin!
-  before_action :admin_authorized?, only: [:new, :create]
+  before_action :admin_authorized?
   before_action :set_common_area, only: [:new, :create]
 
   def new

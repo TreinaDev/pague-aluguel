@@ -1,5 +1,6 @@
 class BaseFeesController < ApplicationController
   before_action :authenticate_admin!
+  before_action :admin_authorized?
   before_action :set_condo, only: [:new, :create, :index, :cancel]
 
   def index

@@ -20,7 +20,7 @@ describe 'Administrador acessa formulário de Taxa de área comum' do
     expect(response.body).to include 'Taxa'
   end
 
-  it 'sucesso - admin coom acesso' do
+  it 'sucesso - admin com acesso' do
     admin = create(:admin, email: 'admin@email.com', password: '123456', super_admin: false)
     condo = Condo.new(id: 1, name: 'Condomínio Vila das Flores', city: 'São Paulo')
     allow(Condo).to receive(:find).and_return(condo)
@@ -40,7 +40,7 @@ describe 'Administrador acessa formulário de Taxa de área comum' do
     expect(response.body).to include 'Taxa'
   end
 
-  it 'falha pois nao esta associad' do
+  it 'falha pois não está associado' do
     admin = create(:admin, email: 'admin@email.com', password: '123456', super_admin: false)
     condo = Condo.new(id: 1, name: 'Condomínio Vila das Flores', city: 'São Paulo')
     allow(Condo).to receive(:find).and_return(condo)
