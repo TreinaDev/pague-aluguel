@@ -27,6 +27,8 @@ class HomeController < ApplicationController
   def find_tenant
     tenant_document_number = params[:get_tenant_bill]
     @tenant = Tenant.find(document_number: tenant_document_number)
+    @unit = Unit.new(@tenant.residence.symbolize_keys) if @tenant.residence.present?
+
     render :index, locals: { tenant: @tenant, bills: find_bills }
   end
 
