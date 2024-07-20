@@ -163,26 +163,26 @@ p "Created #{Admin.count} admins"
   p "Created #{SharedFee.count} shared fees"
 
 SingleCharge.create!(unit_id: 1, value_cents: 150_00,
-                    issue_date: 15.days.from_now, description: 'Taxa de pintura',
-                    charge_type: :fine, condo_id: 2, status: 0, skip_api_validation: true)
+                    issue_date: 15.days.from_now, description: 'Multa por Barulho',
+                    charge_type: :fine, condo_id: 1, status: 0, skip_api_validation: true)
 
 SingleCharge.create!(unit_id: 1, value_cents: 250_00,
-                    issue_date: 10.days.from_now, description: 'Reparos na área comum',
-                    charge_type: :fine, condo_id: 2, status: 5, skip_api_validation: true)
+                    issue_date: 10.days.from_now, description: 'Acordo entre Proprietário e Morador',
+                    charge_type: :other, condo_id: 1, status: 5, skip_api_validation: true)
 
 SingleCharge.create!(unit_id: 1, value_cents: 500_00,
-                    issue_date: 5.days.from_now, description: 'Reparos de elevador',
-                    charge_type: :fine, condo_id: 2, status: 0, skip_api_validation: true)
+                    issue_date: 5.days.from_now, description: 'Multa por Sujar o Lobby',
+                    charge_type: :fine, condo_id: 1, status: 0, skip_api_validation: true)
 
-SingleCharge.create!(unit_id: 1, value_cents: 300_00,
+SingleCharge.create!(unit_id: 97, value_cents: 300_00,
                     issue_date: 7.days.from_now, description: 'Taxa de limpeza',
                     charge_type: :fine, condo_id: 2, status: 0, skip_api_validation: true)
 
-SingleCharge.create!(unit_id: 1, value_cents: 100_00,
+SingleCharge.create!(unit_id: 97, value_cents: 100_00,
                     issue_date: 25.days.from_now, description: 'Reforma no jardim',
                     charge_type: :fine, condo_id: 2, status: 0, skip_api_validation: true)
 
-SingleCharge.create!(unit_id: 1, value_cents: 9750_00,
+SingleCharge.create!(unit_id: 97, value_cents: 9750_00,
                     issue_date: 30.days.from_now, description: 'Reparos elétricos',
                     charge_type: :fine, condo_id: 2, status: 0, skip_api_validation: true)
 
@@ -321,12 +321,25 @@ SingleCharge.create!(unit_id: 1, value_cents: 9750_00,
   p "Created 5 bills for 458.456.480-92"
 
   Receipt.create!(bill_id: bill1.id, file: Rails.root.join('app', 'assets', 'images', 'cupom-fiscal.jpg').open)
-  Receipt.create!(bill_id: bill2.id, file: Rails.root.join('app', 'assets', 'images', 'blurry-receipt.png').open)
+  p "Created 1 Receipt with image"
+  sleep(1)
   Receipt.create!(bill_id: bill3.id, file: Rails.root.join('app', 'assets', 'images', 'comprovante-pg.jpg').open)
+  p "Created 1 more Receipt with image"
+  sleep(1)
   Receipt.create!(bill_id: bill4.id, file: Rails.root.join('app', 'assets', 'images', 'cupom-fiscal.jpg').open)
+  p "Created 1 more Receipt with image"
+  sleep(1)
   Receipt.create!(bill_id: bill5.id, file: Rails.root.join('app', 'assets', 'images', 'cupom-fiscal.jpg').open)
+  p "Created 1 more Receipt with image"
+  sleep(1)
+  Receipt.create!(bill_id: bill2.id, file: Rails.root.join('app', 'assets', 'images', 'blurry-receipt.png').open)
+  p "Created 1 Receipt with a blurry image"
+  sleep(1)
   Receipt.create!(bill_id: bill6.id, file: Rails.root.join('app', 'assets', 'images', 'cupom-fiscal.jpg').open)
+  p "Created 1 more Receipt with image"
+  sleep(1)
   Receipt.create!(bill_id: bill7.id, file: Rails.root.join('app', 'assets', 'images', 'cupom-fiscal.jpg').open)
+  p "Created 1 more Receipt with image"
   
   p "Created #{Receipt.count} receipts"
   p "All done :)"

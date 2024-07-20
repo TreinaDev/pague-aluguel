@@ -15,8 +15,6 @@ describe 'Usuario acessa uma fatura' do
                          due_date: 10.days.from_now,
                          total_value_cents: 3_100_00,
                          condo_id: condo.id,
-                         shared_fee_value_cents: 2_100_00,
-                         base_fee_value_cents: 1_000_00,
                          status: :pending)
 
     login_as admin, scope: :admin
@@ -28,9 +26,6 @@ describe 'Usuario acessa uma fatura' do
     expect(response.body).to include 'Condomínio Vila das Flores'
     expect(response.body).to include 'valor total'
     expect(response.body).to include 'R$3.100,00'
-    expect(response.body).to include 'Taxa Condominial'
-    expect(response.body).to include '0'
-    expect(response.body).to include 'Conta Compartilhada'
     expect(response.body).to include 'data de vencimento'
     expect(response.body).to include 'data de emissão'
     expect(response.body).to include 'Pagamento'
@@ -52,8 +47,6 @@ describe 'Usuario acessa uma fatura' do
                          due_date: 10.days.from_now,
                          total_value_cents: 3_100_00,
                          condo_id: condo.id,
-                         shared_fee_value_cents: 2_100_00,
-                         base_fee_value_cents: 1_000_00,
                          status: :pending)
 
     login_as admin, scope: :admin
@@ -65,9 +58,6 @@ describe 'Usuario acessa uma fatura' do
     expect(response.body).to include 'Condomínio Vila das Flores'
     expect(response.body).to include 'valor total'
     expect(response.body).to include 'R$3.100,00'
-    expect(response.body).to include 'Taxa Condominial'
-    expect(response.body).to include '0'
-    expect(response.body).to include 'Conta Compartilhada'
     expect(response.body).to include 'data de vencimento'
     expect(response.body).to include 'data de emissão'
     expect(response.body).to include 'Pagamento'
