@@ -26,6 +26,10 @@ class SingleCharge < ApplicationRecord
     other: 5
   }
 
+  def self.skip_api_validation
+    @skip_api_validation = true
+  end
+
   private
 
   def common_area_restriction
@@ -60,9 +64,5 @@ class SingleCharge < ApplicationRecord
     return if units.any? { |unit| unit.id == unit_id }
 
     errors.add(:unit_id, 'deve pertencer ao condomínio')
-  end
-
-  def self.skip_api_validation
-    @skip_api_validation = true
   end
 end
