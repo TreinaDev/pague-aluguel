@@ -12,9 +12,11 @@ RSpec.describe 'NdCertificates', type: :request do
                                    unit_ids: [])
         units = []
         units << Unit.new(id: 1, area: 40, floor: 1, number: '11', unit_type_id: 1, condo_id: 1,
-                          condo_name: 'Condomínio Vila das Flores', tenant_id: 1, owner_id: 1, description: 'Com varanda')
+                          condo_name: 'Condomínio Vila das Flores', tenant_id: 1, owner_id: 1,
+                          description: 'Com varanda')
         units << Unit.new(id: 2, area: 40, floor: 1, number: '12', unit_type_id: 1, condo_id: 1,
-                          condo_name: 'Condomínio Vila das Flores', tenant_id: 1, owner_id: 1, description: 'Com varanda')
+                          condo_name: 'Condomínio Vila das Flores', tenant_id: 1, owner_id: 1,
+                          description: 'Com varanda')
         allow(Condo).to receive(:all).and_return(condos)
         allow(Condo).to receive(:find).and_return(condo)
         allow(CommonArea).to receive(:all).and_return([])
@@ -42,9 +44,11 @@ RSpec.describe 'NdCertificates', type: :request do
                                    unit_ids: [])
         units = []
         units << Unit.new(id: 1, area: 40, floor: 1, number: '11', unit_type_id: 1, condo_id: 1,
-                          condo_name: 'Condomínio Vila das Flores', tenant_id: 1, owner_id: 1, description: 'Com varanda')
+                          condo_name: 'Condomínio Vila das Flores', tenant_id: 1, owner_id: 1,
+                          description: 'Com varanda')
         units << Unit.new(id: 2, area: 40, floor: 1, number: '12', unit_type_id: 1, condo_id: 1,
-                          condo_name: 'Condomínio Vila das Flores', tenant_id: 1, owner_id: 1, description: 'Com varanda')
+                          condo_name: 'Condomínio Vila das Flores', tenant_id: 1, owner_id: 1,
+                          description: 'Com varanda')
         allow(Condo).to receive(:all).and_return(condos)
         allow(Condo).to receive(:find).and_return(condo)
         allow(CommonArea).to receive(:all).and_return([])
