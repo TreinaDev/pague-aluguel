@@ -11,6 +11,7 @@ pt-BR:
         other: Taxas de Aluguel
     attributes:
       value: Valor do aluguel
+      status: Status
       value_cents: Valor do aluguel
       fine: Multa por atraso
       fine_cents: Multa por atraso

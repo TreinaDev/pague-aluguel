@@ -54,9 +54,12 @@ pt-BR:
       one: Perfil
       other: Perfis
   messages:
+    owner_tenant: Você reside nesta unidade
+    has_tenant: Esta unidade está alugada
     confirm:
       cancel_item: Tem certeza que deseja desativar esse item? Essa ação não poderá ser desfeita.
       cancel_charge: Tem certeza que deseja desativar a cobrança? Essa ação não poderá ser desfeita.
+      cancel_rent: Tem certeza que deseja desativar a cobrança? Essa ação não poderá ser desfeita.
       accept_payment: Tem certeza que deseja aceitar o pagamento? Essa ação não poderá ser desfeita.
       reject_payment: Tem certeza que deseja recusar o pagamento? Essa ação não poderá ser desfeita.
     available:
@@ -86,9 +89,14 @@ pt-BR:
       rejected: Pagamento recusado!
   errors:
     not_valid: não é válido.
+    cant_be:
+      blank: não pode ficar em branco
     must_be:
       future: deve ser futura.
       after_today: deve ser a partir de hoje.
+      selected: deve ser selecionada.
+    must_have:
+      associated_condo: deve pertencer ao condomínio.
     not_found:
       common_areas: Nenhuma área comum encontrada.
       units_associated: Nenhuma unidade associada encontrada.
@@ -98,9 +106,10 @@ pt-BR:
       bills: Nenhuma fatura encontrada.
       condos: Nenhum condomínio encontrado.
       units: Nenhuma unidade encontrada.
+      document: Documento não encontrado.
       unit: Unidade não encontrada
       common_area: Área Comum não encontrada.
-      document_number: Seu CPF não foi encontrado.
+      document_number: Seu documento não foi encontrado no sistema.
       fees: Nenhuma taxa cadastrada.
       rents: Nenhum aluguel cadastrado.
       condo: Condomínio não cadastrado.
@@ -122,6 +131,7 @@ pt-BR:
     invalid:
       charge: Tipo de Cobrança inválido.
       document_number: Esse CPF não é válido.
+      document: Documento inválido.
     query:
       empty_condo: Você precisa buscar por um nome de condomínio.
       no_result: Nenhum condomínio encontrado.

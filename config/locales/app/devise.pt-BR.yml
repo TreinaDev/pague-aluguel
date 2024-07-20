@@ -75,7 +75,6 @@ pt-BR:
       timeout: A sua sessão expirou, por favor, faça login novamente para continuar.
       unauthenticated: Para continuar, faça login ou registre-se.
       unconfirmed: Antes de continuar, confirme a sua conta.
-      invalid_document_number: não encontrado no sistema
     mailer:
       confirmation_instructions:
         action: Confirmar minha conta

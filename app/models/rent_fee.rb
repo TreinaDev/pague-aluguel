@@ -26,6 +26,6 @@ class RentFee < ApplicationRecord
   def issue_date_is_future
     return if issue_date&.future?
 
-    errors.add(:issue_date, I18n.t('errors.must_be_future'))
+    errors.add(:issue_date, I18n.t('errors.must_be.future'))
   end
 end

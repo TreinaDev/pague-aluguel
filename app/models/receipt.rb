@@ -4,7 +4,7 @@ class Receipt < ApplicationRecord
 
   validates :file, attached: true,
                    content_type: { in: ['image/jpeg', 'image/png', 'application/pdf'],
-                                   message: I18n.t('file_must_be_png_jpg_or_pdf') },
+                                   message: I18n.t('receipts.errors.file_format') },
                    size: { less_than: 5.megabytes,
-                           message: I18n.t('file_too_large') }
+                           message: I18n.t('receipts.errors.file_size') }
 end

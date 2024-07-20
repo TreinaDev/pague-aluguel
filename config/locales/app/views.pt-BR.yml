@@ -1,7 +1,5 @@
 pt-BR:
   show:
-    owner_tenant: Você reside nesta unidade
-    has_tenant: Esta unidade está alugada
     fees:
       list: Taxas Condominiais
       all_active: Ver taxas ativas

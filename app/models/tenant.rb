@@ -25,9 +25,9 @@ class Tenant
     if response.success?
       instance_from_api(response.body, document_number)
     elsif response.status == 404
-      raise DocumentNumberNotFoundError, I18n.t('views.index.document_number_not_found')
+      raise DocumentNumberNotFoundError, I18n.t('errors.not_found.document')
     elsif response.status == 412
-      raise DocumentNumberNotValidError, I18n.t('views.index.document_number_not_valid')
+      raise DocumentNumberNotValidError, I18n.t('errors.invalid.document')
     end
   end
 

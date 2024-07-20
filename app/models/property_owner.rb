@@ -15,7 +15,7 @@ class PropertyOwner < ApplicationRecord
   def document_number_must_be_valid
     return if cpf_valid?(document_number)
 
-    errors.add(:document_number, :invalid, message: I18n.t('devise.failure.invalid_document_number'))
+    errors.add(:document_number, :invalid, message: I18n.t('errors.not_found.document_number'))
   end
 
   def cpf_valid?(cpf)
