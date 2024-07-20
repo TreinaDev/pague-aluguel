@@ -2,7 +2,7 @@ class SingleChargesController < ApplicationController
   before_action :authenticate_admin!
   before_action :set_condo, only: [:index, :show, :new, :create, :cancel]
   before_action :set_common_areas, only: [:new, :create]
-  before_action :admin_authorized?, except: [:index, :cancel]
+  before_action :admin_authorized?
 
   def index
     @single_charges = SingleCharge.where(condo_id: @condo.id).order(issue_date: :desc)
