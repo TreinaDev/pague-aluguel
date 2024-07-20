@@ -28,7 +28,7 @@ class BillsController < ApplicationController
   private
 
   def bill_belongs_to_condo
-    return if @bill.condo_id == @condo.id
+    return if @bill.condo_id.to_i == @condo.id.to_i
 
     redirect_to condo_bills_path(@condo.id), notice: I18n.t('views.index.no_bills')
   end
