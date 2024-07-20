@@ -4,7 +4,19 @@ class Api::V1::ReceiptsController < Api::V1::ApiController
 
   def create
     receipt = Receipt.new(bill_id: params[:bill_id])
-    receipt.file.attach(params[:receipt])
+    url = params[:receipt]
+
+    begin
+      response = Faraday.get(url)
+      if response.success?
+        receipt.file.attach(io: StringIO.new(response.body), filename: File.basename(url), content_type: response.headers['content-type'])
+        receipt.save
+      else
+        Rails.logger.error("Failed to download image from URL: #{url}, status: #{response.status}")
+      end
+    rescue Faraday::Error => e
+      Rails.logger.error("An error occurred while downloading the image: #{e.message}")
+    end
 
     if receipt.save
       render_response({ message: I18n.t('receipt_received_success') }, :ok)
