@@ -1,9 +1,11 @@
 class SingleCharge < ApplicationRecord
+  attr_accessor :skip_api_validation
+
   validates :unit_id, :issue_date, presence: true
   validate :common_area_is_mandatory
   validate :date_is_future
   validate :description_is_mandatory
-  validate :unit_belongs_to_condo
+  validate :unit_belongs_to_condo, unless: :skip_api_validation
 
   before_create :common_area_restriction
 
@@ -58,5 +60,9 @@ class SingleCharge < ApplicationRecord
     return if units.any? { |unit| unit.id == unit_id }
 
     errors.add(:unit_id, 'deve pertencer ao condomínio')
+  end
+
+  def self.skip_api_validation
+    @skip_api_validation = true
   end
 end
