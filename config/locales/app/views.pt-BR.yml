@@ -32,11 +32,25 @@ pt-BR:
   show:
     owner_tenant: Você reside nesta unidade
     has_tenant: Esta unidade está alugada
+    fees:
+      list: Taxas Condominiais
+      all_active: Ver taxas ativas
+      all_canceled: canceladas
+      active: ativas
+      future: futuras
+      past: passadas
+      all: todas as taxas
+    installments:
+      one: '%{count}x Parcela'
+      other: '%{count}x Parcelas'
+
   index:
-    rents_of_name: "Alugueis de %{name}"
-    common_areas_of_name: "Áreas comuns de %{name}"
+    rents_of_name: 'Alugueis de %{name}'
+    common_areas_of_name: 'Áreas comuns de %{name}'
   new:
-    create_single_charge: "Cadastro de Cobrança Avulsa"
-    create_shared_fee: "Cadastro de Conta Compartilhada"
+    create_single_charge: Cadastro de Cobrança Avulsa
+    create_shared_fee: Cadastro de Conta Compartilhada
+    create_fee: "Cadastro de Taxa Condominial"
   edit:
-    update_fee: "Atualizar %{fee}"
+    update_fee: 'Atualizar %{fee}'
+

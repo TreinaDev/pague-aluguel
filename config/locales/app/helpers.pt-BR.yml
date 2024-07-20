@@ -44,12 +44,12 @@ pt-BR:
       debt: Esta unidade possui débitos pendentes.
   success:
     create:
-      fee: '%{fee} cadastrada com sucesso!'
+      fee: 'Taxa cadastrada com sucesso!'
       rent: Aluguel cadastrado com sucesso!
     update:
       rent: Aluguel atualizado com sucesso!
     cancel:
-      fee: '%{resource} cancelada com sucesso!'
+      fee: '%{fee} cancelada com sucesso!'
     deactivate:
       rent: Aluguel desativado com sucesso!
     generate:
@@ -62,11 +62,14 @@ pt-BR:
     must_be:
       future: deve ser futura.
       after_today: deve ser a partir de hoje.
+    must_have:
+      limited_fee:
     not_found:
       common_areas: Nenhuma área comum encontrada.
       units_associated: Nenhuma unidade associada encontrada.
       single_charges: Nenhuma cobrança avulsa encontrada.
       shared_fees: Nenhuma conta compartilhada encontrada.
+      base_fees: Nenhuma taxa condominial encontrada.
       bills: Nenhuma fatura encontrada.
       condos: Nenhum condomínio encontrado.
       units: Nenhuma unidade encontrada.
@@ -80,6 +83,8 @@ pt-BR:
       fee: Não foi possível cadastrar a taxa.
       charge: Não foi possível cadastrar a cobrança.
       rent: Não foi possível cadastrar o aluguel.
+      not_limited_fee: não se aplica a Taxas Fixas
+      is_limited_fee: deve estar presente para Taxas Limitadas
     cant_update:
       rent: Não foi possível atualizar o aluguel.
     cant_generate:
@@ -93,7 +98,3 @@ pt-BR:
     query:
       empty_condo: Você precisa buscar por um nome de condomínio.
       no_result: Nenhum condomínio encontrado.
-
-
-
-
