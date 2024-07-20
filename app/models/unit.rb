@@ -35,8 +35,11 @@ class Unit
     build_new_unit(data)
   end
 
-  def self.find_all_by_owner(cpf)
-    response = Faraday.get("#{Rails.configuration.api['base_url']}/get_owner_properties?registration_number=#{cpf}")
+  def self.find_all_by_owner(document_number)
+    registration_number = CPF.new(document_number).formatted
+    response = Faraday.get(
+      "#{Rails.configuration.api['base_url']}/get_owner_properties?registration_number=#{registration_number}"
+    )
     return [] unless response.success?
 
     data = JSON.parse(response.body)

@@ -11,15 +11,16 @@ class PropertyOwner < ApplicationRecord
   private
 
   def document_number_must_be_valid
-    return if cpf_valid?(document_number)
+    return if document_number_valid?(document_number)
 
     errors.add(:document_number, :invalid, message: I18n.t('devise.failure.invalid_document_number'))
   end
 
-  def cpf_valid?(cpf)
-    return false if cpf.blank?
+  def document_number_valid?(document_number)
+    return false if document_number.blank?
 
-    url = "#{Rails.configuration.api['base_url']}/property?cpf=#{cpf}"
+    registration_number = CPF.new(document_number).formatted
+    url = "#{Rails.configuration.api['base_url']}/check_owner?registration_number=#{registration_number}"
     response = Faraday.get(url)
     response.success?
   end
