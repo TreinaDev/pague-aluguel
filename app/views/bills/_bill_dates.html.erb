@@ -1,0 +1,10 @@
+<div class="px-5">
+  <div class=" d-flex justify-content-between">
+    <span class="text-muted text-lowercase fs-8"><%= Bill.human_attribute_name(:due_date) %>:</span>
+    <span><%= I18n.l(@bill.due_date) %></span>
+  </div>
+  <div class=" d-flex justify-content-between">
+    <span class="text-muted text-lowercase fs-8"><%= Bill.human_attribute_name(:issue_date) %>:</span>
+    <span><%= I18n.l(@bill.issue_date) %></span>
+  </div>
+</div>

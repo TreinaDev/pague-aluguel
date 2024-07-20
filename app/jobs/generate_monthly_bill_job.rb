@@ -7,5 +7,6 @@ class GenerateMonthlyBillJob < ApplicationJob
     bill.issue_date = Time.zone.today.beginning_of_month
     bill.due_date = Time.zone.today.beginning_of_month + 9.days
     bill.save!
+    BillCalculator.generate_bill_details(bill)
   end
 end

@@ -96,6 +96,7 @@ describe 'Admin altera status fatura' do
         expect(page).to have_content 'pendente'.upcase
       end
       expect(Receipt.count).to eq 1
+      expect(Bill.find_by(id: bills[1].id).denied?).to eq true
     end
   end
 end
