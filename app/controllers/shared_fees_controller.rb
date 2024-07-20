@@ -20,9 +20,9 @@ class SharedFeesController < ApplicationController
     @shared_fee.condo_id = @condo.id
     if @shared_fee.save
       @shared_fee.calculate_fractions
-      redirect_to condo_path(@condo.id), notice: I18n.t('success_notice_shared_fee')
+      redirect_to condo_path(@condo.id), notice: I18n.t('success.create.fee')
     else
-      flash.now[:alert] = I18n.t('fail_notice_shared_fee')
+      flash.now[:alert] = I18n.t('errors.cant_create.fee')
       render :new, status: :unprocessable_entity
     end
   end
@@ -31,7 +31,7 @@ class SharedFeesController < ApplicationController
     @shared_fee = SharedFee.find(params[:id])
     @shared_fee.canceled!
     redirect_to condo_shared_fees_path(@condo.id),
-                notice: I18n.t('cancel_notice_shared_fee', shared_fee: @shared_fee.description)
+                notice: I18n.t('success.cancel.this_fee', fee: @shared_fee.description)
   end
 
   private

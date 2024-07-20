@@ -13,13 +13,13 @@ class BillsController < ApplicationController
 
   def accept_payment
     @bill.paid!
-    redirect_to condo_bills_path(@condo), notice: I18n.t('views.index.payment_accepted')
+    redirect_to condo_bills_path(@condo), notice: I18n.t('success.payment.accepted')
   end
 
   def reject_payment
     @bill.pending!
     @bill.receipt.destroy
-    redirect_to condo_bills_path(@condo), notice: I18n.t('views.index.payment_rejected')
+    redirect_to condo_bills_path(@condo), notice: I18n.t('success.payment.rejected')
   end
 
   private

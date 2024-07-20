@@ -44,21 +44,21 @@ class NdCertificatesController < ApplicationController
 
   def redirect_to_success
     redirect_to certificate_condo_nd_certificate_path(condo_id: @unit.condo_id, id: @nd_certificate.id),
-                notice: I18n.t('success_issued')
+                notice: I18n.t('success.generate.nd')
   end
 
   def redirect_to_error
-    redirect_to condo_nd_certificates_path(@unit.condo_id), alert: I18n.t('fail_to_issue')
+    redirect_to condo_nd_certificates_path(@unit.condo_id), alert: I18n.t('errors.cant_generate.nd')
   end
 
   def redirect_to_pending_debts
-    redirect_to condo_nd_certificates_path(@unit.condo_id), notice: I18n.t('pending_debt')
+    redirect_to condo_nd_certificates_path(@unit.condo_id), notice: I18n.t('messages.pending.debt')
   end
 
   def admin_authorized?
     current_admin_associated = current_admin.associated_condos.map(&:condo_id).include?(params[:id].to_i)
     return true if current_admin.super_admin? || current_admin_associated
 
-    redirect_to root_path, notice: I18n.t('errors.messages.must_be_super_admin')
+    redirect_to root_path, notice: I18n.t('errors.unauthorized.not_super_admin')
   end
 end

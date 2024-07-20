@@ -17,7 +17,7 @@ class Owners::SingleChargesController < ApplicationController
     @single_charge = SingleCharge.new(single_charge_params)
     if @single_charge.save
       @single_charge.update(condo_id: Unit.find(@single_charge.unit_id).condo_id)
-      redirect_to owners_single_charges_path, notice: I18n.t('success_notice_single_charge')
+      redirect_to owners_single_charges_path, notice: I18n.t('success.create.charge')
     else
       @units = Unit.find_all_by_owner(current_property_owner.document_number)
       render :new, status: :unprocessable_entity
@@ -32,7 +32,7 @@ class Owners::SingleChargesController < ApplicationController
     return if unit_id.blank?
     return if owner_units.any? { |unit| unit.id == unit_id.to_i }
 
-    redirect_to root_path, notice: I18n.t('not_authorized_notice_single_charge')
+    redirect_to root_path, notice: I18n.t('errors.unauthorized.create_charge')
   end
 
   def single_charge_params

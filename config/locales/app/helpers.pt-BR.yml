@@ -4,6 +4,7 @@ pt-BR:
     cancel: Cancelar
     confirm: Confirmar
     edit: Editar
+    hide: Ocultar
     my_profile: Meu perfil
     show:
       all: Ver tudo
@@ -33,8 +34,28 @@ pt-BR:
     payment:
       accept: Aceitar pagamento
       reject: Recusar pagamento
+  labels:
+    charge_status: Status da Cobrança
+    cnd: Certificado Negativo de Débito
+    status: Situação
+    use_fee: Taxa de Uso
+    rent_fee: Taxa de Aluguel
+    common_area_fee: Taxa de área comum
+    show_history: Mostrar histórico de taxas
+    rent_value: Valor do Aluguel
+    since: Desde
+    document: CPF
+    values:
+      values_price: 'Valor para %{unit_type}'
+    condo:
+      one: Condomínio
+      other: Condomínios
+    profile:
+      one: Perfil
+      other: Perfis
   messages:
     confirm:
+      cancel_item: Tem certeza que deseja desativar esse item? Essa ação não poderá ser desfeita.
       cancel_charge: Tem certeza que deseja desativar a cobrança? Essa ação não poderá ser desfeita.
       accept_payment: Tem certeza que deseja aceitar o pagamento? Essa ação não poderá ser desfeita.
       reject_payment: Tem certeza que deseja recusar o pagamento? Essa ação não poderá ser desfeita.
@@ -44,12 +65,18 @@ pt-BR:
       debt: Esta unidade possui débitos pendentes.
   success:
     create:
-      fee: 'Taxa cadastrada com sucesso!'
+      fee: Taxa cadastrada com sucesso!
       rent: Aluguel cadastrado com sucesso!
+      charge: Cobrança cadastrada com sucesso!
+      fine-charge: Cobrança de Multa criada com sucesso.
+      common_area_charge: Cobrança de Taxa de Área Comum cadastrada com sucesso!
     update:
       rent: Aluguel atualizado com sucesso!
+      condo_access: Acesso aos condomínios atualizado com sucesso!
     cancel:
-      fee: '%{fee} cancelada com sucesso!'
+      charge: 'Cobrança Avulsa cancelada com sucesso!'
+      this_fee: '%{fee} cancelada com sucesso!'
+      this_charge: '%{charge} cancelada com sucesso!'
     deactivate:
       rent: Aluguel desativado com sucesso!
     generate:
@@ -62,8 +89,6 @@ pt-BR:
     must_be:
       future: deve ser futura.
       after_today: deve ser a partir de hoje.
-    must_have:
-      limited_fee:
     not_found:
       common_areas: Nenhuma área comum encontrada.
       units_associated: Nenhuma unidade associada encontrada.
@@ -84,14 +109,16 @@ pt-BR:
       charge: Não foi possível cadastrar a cobrança.
       rent: Não foi possível cadastrar o aluguel.
       not_limited_fee: não se aplica a Taxas Fixas
-      is_limited_fee: deve estar presente para Taxas Limitadas
+      is_limited_fee: deve estar presente para Taxas Limitadas.
     cant_update:
       rent: Não foi possível atualizar o aluguel.
     cant_generate:
       nd: Erro ao emitir certidão de quitação.
     unauthorized:
-      access: Você não tem permissão para acessar essa página
-      create_single_charge: Você não pode criar uma cobrança avulsa para uma unidade que não é sua.
+      access: Você não tem permissão para acessar essa página.
+      create_charge: Você não pode criar uma cobrança para uma unidade que não é sua.
+      not_logged_in: Você precisa estar autenticado para continuar.
+      not_super_admin: Você não tem autorização para completar esta ação.
     invalid:
       charge: Tipo de Cobrança inválido.
       document_number: Esse CPF não é válido.

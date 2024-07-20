@@ -10,9 +10,9 @@ class CommonAreaFeesController < ApplicationController
   def create
     @common_area_fee = current_admin.common_area_fees.new(common_area_fee_params)
     if @common_area_fee.save
-      redirect_to common_area, notice: I18n.t('messages.registered_fee')
+      redirect_to common_area, notice: I18n.t('success.create.fee')
     else
-      flash[:alert] = I18n.t 'messages.registration_fee_error'
+      flash[:alert] = I18n.t 'errors.cant_create.fee'
       render :new, status: :unprocessable_entity
     end
   end

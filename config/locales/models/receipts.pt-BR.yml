@@ -1,8 +1,9 @@
 pt-BR:
-  success:
-    received: Comprovante recebido com sucesso!
-  errors:
-    file_size: O arquivo é muito grande. O tamanho máximo permitido é 5MB.
-    file_format: O arquivo deve ser JPG, PNG ou PDF.
-    no_file_sent: Nenhum arquivo enviado.
-    missing_bill_id: ID da fatura não informado.
+  receipts:
+    success:
+      received: Comprovante recebido com sucesso!
+    errors:
+      file_size: O arquivo é muito grande. O tamanho máximo permitido é 5MB.
+      file_format: O arquivo deve ser JPG, PNG ou PDF.
+      no_file_sent: Nenhum arquivo enviado.
+      missing_bill_id: ID da fatura não informado.

@@ -13,6 +13,6 @@ pt-BR:
         description: Descrição
         status: Situação
   shared_fee:
-    statuses:
+    status:
       active: Ativa
       canceled: Cancelada

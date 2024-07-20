@@ -1,6 +1,4 @@
 pt-BR:
-  canceled: Desativado
-  active: Ativo
   activemodel:
     models:
       rent_fee:
@@ -19,4 +17,9 @@ pt-BR:
       fine_interest: Juros por atraso ao mês (em %)
       fine_interest_cents: Juros por atraso ao mês (em %)
       issue_date: Data de Emissão
+  rent_fees:
+    status:
+      canceled: Desativado
+      active: Ativo
+
 

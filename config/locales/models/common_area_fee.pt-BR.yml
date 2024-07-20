@@ -1,9 +1,4 @@
 pt-BR:
-  activemodel:
-    models:
-      common_area:
-        one: Área Comum
-        other: Áreas Comuns
   activerecord:
     models:
       common_area:

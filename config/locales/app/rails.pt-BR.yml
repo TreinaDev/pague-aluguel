@@ -1,9 +1,4 @@
 pt-BR:
-  admin_description: para gerenciamento de condomínios e pagamentos
-  property_description: para gerenciamento de seus imóveis
-  confirm-cancel: Tem certeza que deseja cancelar esse item? Essa ação não poderá ser desfeita.
-  common-area-fee-charge-success: Cobrança de Taxa de área comum criada com sucesso.
-  fine-charge-success: Cobrança de Multa criada com sucesso.
   activerecord:
     errors:
       messages:
@@ -115,9 +110,6 @@ pt-BR:
     messages:
       not_found: 'Não encontrado!'
       invalid_currency: "deve estar no formato 0,00"
-      must_be_logged_in: "Você precisa estar autenticado para continuar."
-      must_be_super_admin: "Você não tem autorização para completar esta ação."
-      condo_acess_updated: Acesso aos condomínios atualizado com sucesso
       accepted: deve ser aceito
       blank: não pode ficar em branco
       confirmation: não é igual a %{attribute}

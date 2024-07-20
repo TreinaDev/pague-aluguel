@@ -20,6 +20,6 @@ class UnitsController < ApplicationController
     owner_units = Unit.find_all_by_owner(current_property_owner.document_number)
     return if owner_units.any? { |unit| unit.id == @unit.id }
 
-    redirect_to(root_url, alert: I18n.t('views.show.not_allowed'))
+    redirect_to(root_url, alert: I18n.t('errors.unauthorized.access'))
   end
 end

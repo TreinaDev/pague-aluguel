@@ -16,6 +16,8 @@ pt-BR:
         installments: Número de Parcelas
         recurrence: Recorrência
         limited: Taxa limitada
+        status: Status
+        counter: Contador de Parcelas
         enum_recurrence:
           monthly: Mensal
           biweekly: Quinzenal
@@ -23,7 +25,7 @@ pt-BR:
           semi_annual: Semestral
           yearly: Anual
       values:
-        price: 'Valor'
+        price: Valor
   base_fee:
     limited:
       true: Taxa limitada
