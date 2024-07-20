@@ -58,6 +58,10 @@
         </div>
       <% end %>
     <% end %>
+    <div class="text-center">
+      <%= button_to I18n.t('nd_generate'), condo_nd_certificates_path(condo_id: @unit.condo_id, unit_id: @unit.id), method: :post, class: "btn btn-primary" %>
+    </div>
+
 
     <% if @unit.unit_rent_fee.present? && !@unit.unit_has_tenant? %>
       <% rent = @unit.unit_rent_fee %>
