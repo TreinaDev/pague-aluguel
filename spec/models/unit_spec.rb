@@ -44,7 +44,7 @@ describe Unit do
 
   context '.find_all_by_owner' do
     it 'retorna todas as unidades de um proprietario' do
-      cpf = CPF.generate
+      cpf = CPF.new(CPF.generate).formatted
       data = Rails.root.join('spec/support/json/owner_units.json').read
       response = double('response', success?: true, body: data)
       allow(Faraday).to(
