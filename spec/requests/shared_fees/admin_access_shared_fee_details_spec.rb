@@ -18,7 +18,7 @@ describe 'Admin acessa detalhes de conta compartilhada' do
     expect(response.body).to include(I18n.l(10.days.from_now.to_date))
   end
 
-  it 'com sucesso - admin esta associado' do
+  it 'com sucesso - admin associado' do
     admin = create(:admin, super_admin: false)
     condo = Condo.new(id: 1, name: 'Condo Test', city: 'City Test')
     allow(Condo).to receive(:find).and_return(condo)
