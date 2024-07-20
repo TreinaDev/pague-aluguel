@@ -115,13 +115,6 @@ describe 'Admin visualiza lista de cobranças avulsas' do
     allow(Unit).to receive(:find).with(1).and_return(unit)
     allow(Unit).to receive(:find).with(2).and_return(unit2)
     allow(CommonArea).to receive(:all).and_return(common_areas)
-    create(:single_charge, unit_id: unit.id, value_cents: 150_00, issue_date: 5.days.from_now,
-                           description: 'Taxa de pintura', charge_type: 'fine', condo_id: condo.id, status: 'active')
-    create(:single_charge, unit_id: unit2.id, value_cents: 400_00, issue_date: 7.days.from_now,
-                           description: 'Taxa de pintura', charge_type: 'common_area_fee', 
-                           common_area_id: common_areas.first.id, condo_id: condo.id, status: 'active')
-    create(:single_charge, unit_id: unit.id, value_cents: 275_00, issue_date: 10.days.from_now,
-                           description: 'Taxa de pintura', charge_type: 'other', condo_id: condo.id, status: 'active')
 
     login_as admin, scope: :admin
     get condo_single_charges_path(condo.id)
