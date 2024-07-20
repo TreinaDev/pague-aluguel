@@ -1,0 +1,99 @@
+pt-BR:
+  buttons:
+    back: Voltar
+    cancel: Cancelar
+    confirm: Confirmar
+    edit: Editar
+    my_profile: Meu perfil
+    show:
+      all: Ver tudo
+      all_units: Ver todas as unidades
+      history: Ver histórico
+      receipt: Ver comprovante
+    new:
+      fee: Cadastrar Taxa
+      admin: Novo Administrador
+      nd_certificate: Emitir Certificado de Débito Negativo
+    select:
+      prompt: Por favor selecione
+    submit:
+      create: Criar
+      submit: Salvar
+      update: Atualizar
+      register: Cadastrar
+      cancel: Cancelar
+      add: Adicionar nova
+    deactivate:
+      rent: Desativar cobrança
+    activate:
+      rent: Ativar cobrança
+    manage:
+      rent: Configurar Aluguel
+      condo_access: Gerenciar Acesso aos Condomínios
+    payment:
+      accept: Aceitar pagamento
+      reject: Recusar pagamento
+  messages:
+    confirm:
+      cancel_charge: Tem certeza que deseja desativar a cobrança? Essa ação não poderá ser desfeita.
+      accept_payment: Tem certeza que deseja aceitar o pagamento? Essa ação não poderá ser desfeita.
+      reject_payment: Tem certeza que deseja recusar o pagamento? Essa ação não poderá ser desfeita.
+    available:
+      rent: Esta unidade está disponível para locação
+    pending:
+      debt: Esta unidade possui débitos pendentes.
+  success:
+    create:
+      fee: '%{fee} cadastrada com sucesso!'
+      rent: Aluguel cadastrado com sucesso!
+    update:
+      rent: Aluguel atualizado com sucesso!
+    cancel:
+      fee: '%{resource} cancelada com sucesso!'
+    deactivate:
+      rent: Aluguel desativado com sucesso!
+    generate:
+      nd: Certidão de quitação emitida com sucesso.
+    payment:
+      accepted: Pagamento efetivado!
+      rejected: Pagamento recusado!
+  errors:
+    not_valid: não é válido.
+    must_be:
+      future: deve ser futura.
+      after_today: deve ser a partir de hoje.
+    not_found:
+      common_areas: Nenhuma área comum encontrada.
+      units_associated: Nenhuma unidade associada encontrada.
+      single_charges: Nenhuma cobrança avulsa encontrada.
+      shared_fees: Nenhuma conta compartilhada encontrada.
+      bills: Nenhuma fatura encontrada.
+      condos: Nenhum condomínio encontrado.
+      units: Nenhuma unidade encontrada.
+      unit: Unidade não encontrada
+      common_area: Área Comum não encontrada.
+      document_number: Seu CPF não foi encontrado.
+      fees: Nenhuma taxa cadastrada.
+      rents: Nenhum aluguel cadastrado.
+      condo: Condomínio não cadastrado.
+    cant_create:
+      fee: Não foi possível cadastrar a taxa.
+      charge: Não foi possível cadastrar a cobrança.
+      rent: Não foi possível cadastrar o aluguel.
+    cant_update:
+      rent: Não foi possível atualizar o aluguel.
+    cant_generate:
+      nd: Erro ao emitir certidão de quitação.
+    unauthorized:
+      access: Você não tem permissão para acessar essa página
+      create_single_charge: Você não pode criar uma cobrança avulsa para uma unidade que não é sua.
+    invalid:
+      charge: Tipo de Cobrança inválido.
+      document_number: Esse CPF não é válido.
+    query:
+      empty_condo: Você precisa buscar por um nome de condomínio.
+      no_result: Nenhum condomínio encontrado.
+
+
+
+

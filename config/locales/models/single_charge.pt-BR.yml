@@ -1,10 +1,4 @@
 pt-BR:
-  cancel_notice_single_charge: "%{charge_type} cancelada com sucesso."
-  success_notice_single_charge: 'Cobrança Avulsa cadastrada com sucesso!'
-  fail_notice_single_charge: 'Não foi possível cadastrar a cobrança avulsa.'
-  not_authorized_notice_single_charge: 'Você não pode criar uma cobrança avulsa para uma unidade que não é sua.'
-  single_charge_canceled: 'Reserva cancelada com sucesso!'
-  invalid_charge: 'Tipo de Cobrança inválido.'
   activerecord:
     models:
       single_charge:
@@ -27,12 +21,3 @@ pt-BR:
     common_area_fee: Taxa de Área Comum
     fine: Multa
     other: Outros
-  views:
-    index:
-      no_single_charges: Não foram encontradas cobranças avulsas.
-      status_single_charge: Situação
-    new:
-      create_single_charge: "Cadastro de Cobrança Avulsa"
-    show:
-      single_charge: Cobrança Avulsa
-

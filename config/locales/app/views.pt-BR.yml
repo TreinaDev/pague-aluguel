@@ -1,0 +1,42 @@
+pt-BR:
+  bills: Faturas
+  charge_status: Status da Cobrança
+  condo: Condomínio
+  condos: Condomínios
+  cnd: Certificado Negativo de Débito
+  unit: Unidade
+  fee: Taxa
+  status: Situação
+  rent: Aluguel
+  single_charge: Cobrança Avulsa
+  use_fee: Taxa de Uso
+  rent_fee: Taxa de Aluguel
+  common_area_fee: Taxa de área comum
+  description: Descrição
+  capacity: Capacidade Máxima
+  rules: Regras de uso
+  show_history: Mostrar histórico de taxas
+  rent_value: Valor do Aluguel
+  issue_date: Data de Emissão
+  fine: Multa por Atraso
+  fine_interest: Juros por Atraso ao Mês
+  update_date: Data de Alteração
+  since: Desde
+  hide: Ocultar
+  document: CPF
+  values:
+    values_price: 'Valor para %{unit_type}'
+  section_title:
+    units: Unidades
+    profile: Perfil
+  show:
+    owner_tenant: Você reside nesta unidade
+    has_tenant: Esta unidade está alugada
+  index:
+    rents_of_name: "Alugueis de %{name}"
+    common_areas_of_name: "Áreas comuns de %{name}"
+  new:
+    create_single_charge: "Cadastro de Cobrança Avulsa"
+    create_shared_fee: "Cadastro de Conta Compartilhada"
+  edit:
+    update_fee: "Atualizar %{fee}"

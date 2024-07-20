@@ -2,8 +2,8 @@ pt-BR:
   activerecord:
     models:
       property_owner:
-        one: 'Proprietário'
-        other: 'Proprietários'
+        one: Proprietário
+        other: Proprietários
     attributes:
       property_owner:
         first_name: Nome

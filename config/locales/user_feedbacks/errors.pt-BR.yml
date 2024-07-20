@@ -1,7 +1,0 @@
-pt-BR:
-  errors:
-    not_valid: não é válido.
-    must_be_future: deve ser futura.
-    must_be_after_today: deve ser a partir de hoje.
-  alerts:
-  notices:

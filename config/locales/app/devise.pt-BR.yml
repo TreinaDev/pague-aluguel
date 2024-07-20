@@ -25,7 +25,6 @@ pt-BR:
         unconfirmed_email: E-mail não confirmado
         unlock_token: Token de desbloqueio
         updated_at: Atualizado em
-        photo: Insira sua foto de perfil
       user:
       property_owner:
         confirmation_sent_at: Confirmação enviada em
