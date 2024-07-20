@@ -1,0 +1,9 @@
+pt-BR:
+  unit: Unidade
+  no_units: Não possui unidades associadas
+  no_tenant: Esta unidade está disponível para locação
+  has_tenant: Esta unidade está alugada
+  owner_tenant: Você reside nesta unidade
+  section_title:
+    units: Unidades
+    profile: Perfil

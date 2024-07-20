@@ -2,7 +2,7 @@
 
   <div class="mb-3">
     <%= image_tag "user-icon", size: '25', class: 'mb-1' %>
-    <span class="text-muted"><%= I18n.t('views.show.profile_section_title') %></span>
+    <span class="text-muted"><%= I18n.t('section_title.profile') %></span>
   </div>
   <%= link_to edit_property_owner_registration_path, class: "btn mt-1 rounded-2 hover-strong position-absolute top-0 end-0", id: 'edit-profile', data: { turbo_frame: "modal" } do %>
     <%= image_tag "edit-icon", size: "18" %>

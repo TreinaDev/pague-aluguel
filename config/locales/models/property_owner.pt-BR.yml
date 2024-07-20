@@ -13,12 +13,3 @@ pt-BR:
         document_number: CPF
         password_confirmation: Confirme a senha
         photo: Foto
-  views:
-    show:
-      unit_section_title: Unidades
-      profile_section_title: Perfil
-      no_units: Não possui unidades associadas.
-      unit: Unidade
-      owner_tenant: Você reside nesta unidade
-      no_tenant: Esta unidade está disponível para locação
-      has_tenant: Esta unidade está alugada

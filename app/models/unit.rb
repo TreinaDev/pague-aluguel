@@ -51,11 +51,11 @@ class Unit
   end
 
   def set_status
-    return I18n.t('views.show.owner_tenant') if owner_id == tenant_id
+    return I18n.t('owner_tenant') if owner_id == tenant_id
 
-    return I18n.t('views.show.has_tenant') if tenant_id.present? && owner_id != tenant_id
+    return I18n.t('has_tenant') if tenant_id.present? && owner_id != tenant_id
 
-    I18n.t('views.show.no_tenant')
+    I18n.t('no_tenant')
   end
 
   def unit_has_tenant?

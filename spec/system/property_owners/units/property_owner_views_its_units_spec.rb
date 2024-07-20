@@ -62,6 +62,6 @@ describe 'Proprietário vê suas unidades' do
     visit root_path
 
     expect(page).to have_content 'Unidades'
-    expect(page).to have_content 'Não possui unidades associadas.'
+    expect(page).to have_content 'Não possui unidades associadas'
   end
 end
