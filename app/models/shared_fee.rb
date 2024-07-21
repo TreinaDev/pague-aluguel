@@ -17,21 +17,25 @@ class SharedFee < ApplicationRecord
 
   def calculate_fractions
     total_fraction = total_fraction_sum(condo_id)
-    calculated_cents = UnitType.all(condo_id).flat_map do |unit_type|
-      unit_type.unit_ids.map do |unit_id|
-        value_cents = ((unit_type.fraction / total_fraction) * total_value_cents).to_i
-        shared_fee_fractions.create!(unit_id:, value_cents:)
-        value_cents
-      end
-    end
-    adjust_remaining_value_cents(calculated_cents.sum)
+    cents = calculate_cents(total_fraction)
+    adjust_remaining_value_cents(cents.sum)
   end
 
   private
 
+  def calculate_cents(total_fraction)
+    UnitType.all(condo_id).flat_map do |unit_type|
+      unit_type.unit_ids.map do |unit_id|
+        value_cents = ((unit_type.fraction.to_f / total_fraction) * total_value_cents).to_i
+        shared_fee_fractions.create!(unit_id:, value_cents:)
+        value_cents
+      end
+    end
+  end
+
   def total_fraction_sum(condo_id)
     unit_types = UnitType.all(condo_id)
-    unit_types.sum { |unit_type| unit_type.fraction * unit_type.unit_ids.count }
+    unit_types.sum { |unit_type| unit_type.fraction.to_f * unit_type.unit_ids.count }
   end
 
   def adjust_remaining_value_cents(calculated_total)
