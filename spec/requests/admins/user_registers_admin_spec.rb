@@ -15,7 +15,7 @@ describe 'usuario tenta criar conta de administrador' do
     }
 
     expect(response).to redirect_to root_path
-    expect(flash[:notice]).to eq I18n.t('devise.registrations.signed_up')
+    expect(flash[:notice]).to eq 'Cadastro realizado com sucesso.'
   end
 
   it 'e falha por não estar autenticado' do
@@ -30,7 +30,7 @@ describe 'usuario tenta criar conta de administrador' do
     }
 
     expect(response).to redirect_to new_admin_session_path
-    expect(flash[:notice]).to eq I18n.t('errors.messages.must_be_logged_in')
+    expect(flash[:notice]).to eq 'Você precisa estar autenticado para continuar.'
   end
 
   it 'e falha por não ser super admin' do
@@ -47,7 +47,7 @@ describe 'usuario tenta criar conta de administrador' do
     }
 
     expect(response).to redirect_to root_path
-    expect(flash[:notice]).to eq I18n.t('errors.messages.must_be_super_admin')
+    expect(flash[:notice]).to eq 'Você não tem autorização para completar esta ação.'
   end
 
   it 'acessando a pagina de registro e falha' do
@@ -56,6 +56,6 @@ describe 'usuario tenta criar conta de administrador' do
     get new_admin_registration_path
 
     expect(response).to redirect_to root_path
-    expect(flash[:notice]).to eq I18n.t('errors.messages.must_be_super_admin')
+    expect(flash[:notice]).to eq 'Você não tem autorização para completar esta ação.'
   end
 end

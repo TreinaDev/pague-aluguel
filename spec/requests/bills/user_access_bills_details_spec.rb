@@ -112,6 +112,6 @@ describe 'Usuario acessa uma fatura' do
 
     expect(response).to have_http_status :found
     expect(response).to redirect_to condo_bills_path(condo2.id)
-    expect(flash[:notice]).to eq I18n.t('views.index.no_bills')
+    expect(flash[:notice]).to eq 'Nenhuma fatura encontrada.'
   end
 end

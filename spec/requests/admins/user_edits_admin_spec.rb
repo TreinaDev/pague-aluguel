@@ -16,7 +16,7 @@ describe 'usuario tenta editar conta de administrador' do
       }
 
       expect(response).to redirect_to root_path(admin.id)
-      expect(flash[:notice]).to eq I18n.t('devise.registrations.updated')
+      expect(flash[:notice]).to eq 'A sua conta foi atualizada com sucesso.'
     end
     it 'como admin' do
       admin = FactoryBot.create(:admin, first_name: 'Fulano', last_name: 'Da Costa', super_admin: false)
@@ -32,7 +32,7 @@ describe 'usuario tenta editar conta de administrador' do
       }
 
       expect(response).to redirect_to root_path(admin.id)
-      expect(flash[:notice]).to eq I18n.t('devise.registrations.updated')
+      expect(flash[:notice]).to eq 'A sua conta foi atualizada com sucesso.'
     end
   end
   it 'e falha por não estar autenticado' do
@@ -48,6 +48,6 @@ describe 'usuario tenta editar conta de administrador' do
     }
 
     expect(response.status).to eq 401
-    expect(response.body).to eq I18n.t('devise.failure.unauthenticated')
+    expect(response.body).to eq 'Para continuar, faça login ou registre-se.'
   end
 end

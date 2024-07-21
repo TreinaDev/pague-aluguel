@@ -49,7 +49,7 @@ describe 'Admin acessa detalhes de conta compartilhada' do
 
     expect(response).to have_http_status :found
     expect(response).to redirect_to root_path
-    expect(flash[:notice]).to eq I18n.t('errors.messages.must_be_super_admin')
+    expect(flash[:notice]).to eq 'Você não tem autorização para completar esta ação.'
     expect(response.body).not_to include('Conta de Luz')
     expect(response.body).not_to include('10.000,00')
     expect(response.body).not_to include(I18n.l(10.days.from_now.to_date))

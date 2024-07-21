@@ -61,7 +61,7 @@ RSpec.describe 'NdCertificates', type: :request do
         post condo_nd_certificates_path(condo_id: units.first.condo_id, unit_id: units.first.id)
 
         expect(response).to redirect_to(certificate_condo_nd_certificate_path(condo_id: units.first.condo_id, id: 1))
-        expect(flash[:notice]).to eq(I18n.t('success_issued'))
+        expect(flash[:notice]).to eq 'Certidão de quitação emitida com sucesso.'
       end
     end
 
@@ -93,7 +93,7 @@ RSpec.describe 'NdCertificates', type: :request do
         post condo_nd_certificates_path(condo_id: units.first.condo_id, unit_id: units.first.id)
 
         expect(response).to have_http_status(302)
-        expect(flash[:notice]).to eq(I18n.t('pending_debt'))
+        expect(flash[:notice]).to eq 'Esta unidade possui débitos pendentes.'
       end
     end
   end

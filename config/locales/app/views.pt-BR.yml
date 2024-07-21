@@ -1,5 +1,4 @@
 pt-BR:
-
   bills:
     status:
       pending: Pendente
@@ -41,6 +40,10 @@ pt-BR:
       floor: Andar
       capacity: capacidade máxima
       rules: regras de uso
+      total_value:
+        base_fees: total de taxas condominiais
+        shared_fees: total de contas compartilhadas
+        single_charges: total de cobranças avulsas
       values:
         values_price: 'Valor para %{unit_type}'
       condo:
@@ -55,3 +58,4 @@ pt-BR:
       lists:
         base_fees: Listagem de Taxas Condominiais
         shared_fees: Listagem de Contas Compartilhadas
+

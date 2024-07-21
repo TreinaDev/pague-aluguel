@@ -19,7 +19,7 @@
               </small>
             </div>
           </div>
-          <span class="text-muted fs-7 text-lowercase"><%= Bill.human_attribute_name(:total_value) %></span>
+          <span class="text-muted fs-7 text-lowercase"><%= I18n.t('activerecord.attributes.bill.total_value') %></span>
           <span><%= bill.total_value.format %></span>
         <% end %>
       <% end %>

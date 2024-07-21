@@ -30,21 +30,21 @@ describe 'Admin visualiza lista de cobranças avulsas' do
     get condo_single_charges_path(condo.id)
 
     expect(response).to have_http_status :ok
-    expect(response.body).to include I18n.t 'activerecord.models.single_charge.other'
-    expect(response.body).to include I18n.t 'activerecord.attributes.single_charge.unit_id'
+    expect(response.body).to include 'Cobranças Avulsas'
+    expect(response.body).to include 'Unidade'
     expect(response.body).to include unit.number
     expect(response.body).to include unit2.number
-    expect(response.body).to include I18n.t 'single_charge.fine'
-    expect(response.body).to include I18n.t 'single_charge.common_area_fee'
-    expect(response.body).to include I18n.t 'single_charge.other'
+    expect(response.body).to include 'Multa'
+    expect(response.body).to include 'Taxa de área comum'
+    expect(response.body).to include 'Outros'
     expect(response.body).to include single_charge.description
     expect(response.body).to include single_charge2.description
     expect(response.body).to include single_charge3.description
-    expect(response.body).to include I18n.t 'activerecord.attributes.single_charge.value'
+    expect(response.body).to include 'Valor Total'
     expect(response.body).to include single_charge.value.format
     expect(response.body).to include single_charge2.value.format
     expect(response.body).to include single_charge3.value.format
-    expect(response.body).to include I18n.t 'activerecord.attributes.single_charge.issue_date'
+    expect(response.body).to include 'Data de Emissão'
     expect(response.body).to include I18n.l single_charge.issue_date
     expect(response.body).to include I18n.l single_charge2.issue_date
     expect(response.body).to include I18n.l single_charge3.issue_date
@@ -80,21 +80,21 @@ describe 'Admin visualiza lista de cobranças avulsas' do
     get condo_single_charges_path(condo.id)
 
     expect(response).to have_http_status :ok
-    expect(response.body).to include I18n.t 'activerecord.models.single_charge.other'
-    expect(response.body).to include I18n.t 'activerecord.attributes.single_charge.unit_id'
+    expect(response.body).to include 'Cobranças Avulsas'
+    expect(response.body).to include 'Unidade'
     expect(response.body).to include unit.number
     expect(response.body).to include unit2.number
-    expect(response.body).to include I18n.t 'single_charge.fine'
-    expect(response.body).to include I18n.t 'single_charge.common_area_fee'
-    expect(response.body).to include I18n.t 'single_charge.other'
+    expect(response.body).to include 'Multa'
+    expect(response.body).to include 'Taxa de área comum'
+    expect(response.body).to include 'Outros'
     expect(response.body).to include single_charge.description
     expect(response.body).to include single_charge2.description
     expect(response.body).to include single_charge3.description
-    expect(response.body).to include I18n.t 'activerecord.attributes.single_charge.value'
+    expect(response.body).to include 'Valor Total'
     expect(response.body).to include single_charge.value.format
     expect(response.body).to include single_charge2.value.format
     expect(response.body).to include single_charge3.value.format
-    expect(response.body).to include I18n.t 'activerecord.attributes.single_charge.issue_date'
+    expect(response.body).to include 'Data de Emissão'
     expect(response.body).to include I18n.l single_charge.issue_date
     expect(response.body).to include I18n.l single_charge2.issue_date
     expect(response.body).to include I18n.l single_charge3.issue_date
@@ -121,6 +121,6 @@ describe 'Admin visualiza lista de cobranças avulsas' do
 
     expect(response).to have_http_status :found
     expect(response).to redirect_to root_path
-    expect(flash[:notice]).to eq I18n.t('errors.messages.must_be_super_admin')
+    expect(flash[:notice]).to eq 'Você não tem autorização para completar esta ação.'
   end
 end
