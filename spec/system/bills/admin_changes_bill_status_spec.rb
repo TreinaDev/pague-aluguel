@@ -1,6 +1,6 @@
 require 'rails_helper'
 
-describe 'Admin altera status d fatura' do
+describe 'Admin altera status da fatura' do
   context 'com sucesso' do
     it 'para paga aceitando o pagamento' do
       admin = create(:admin)
