@@ -129,7 +129,7 @@ describe 'Usuário acessa suas faturas' do
         click_on 'Buscar'
       end
 
-      expect(page).to have_content I18n.t('views.index.document_number_not_valid')
+      expect(page).to have_content 'Documento não é válido.'
     end
 
     it 'quando o cpf válido não é encontrado no sistema' do
@@ -144,7 +144,7 @@ describe 'Usuário acessa suas faturas' do
         click_on 'Buscar'
       end
 
-      expect(page).to have_content I18n.t('views.index.document_number_not_found')
+      expect(page).to have_content 'Documento não encontrado.'
     end
   end
 end

@@ -7,7 +7,7 @@
         </span>
         <div class="d-flex flex-wrap text-end">
           <small class="d-block text-body-secondary w-100">
-            <%= SharedFee.human_attribute_name(:issue_date) %>:
+            <%=  I18n.t('activerecord.attributes.shared_fee.issue_date') %>:
             <%= I18n.l(shared_fee.issue_date) %>
           </small>
           <% if shared_fee.active? %>
@@ -17,7 +17,7 @@
           <% end %>
         </div>
       </div>
-      <span class="text-muted fs-7 text-lowercase"><%= SharedFee.human_attribute_name(:total_value) %></span>
+      <span class="text-muted fs-7 text-lowercase"><%=  I18n.t('activerecord.attributes.shared_fee.total_value') %></span>
       <span class="text-uppercase fs-7"><%= shared_fee.total_value.format %></span>
     <% end %>
   <% end %>

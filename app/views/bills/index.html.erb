@@ -4,7 +4,7 @@
   <% end %>
 
   <span class="fs-4 mx-auto mt-3 text-uppercase">
-    <%= Bill.model_name.human(count: 2) %>
+    <%= I18n.t('activerecord.models.bill.other') %>
   </span>
   <span class="mx-auto text-uppercase fs-7 text-muted"><%= @condo.name %></span>
 
@@ -19,7 +19,7 @@
               </span>
               <div class="d-flex flex-wrap text-end">
                 <small class="text-body-secondary w-100">
-                  <%= Bill.human_attribute_name(:due_date) %>:
+                  <%=  I18n.t('activerecord.attributes.bill.due_date') %>:
                   <%= I18n.l(bill.due_date) %>
                 </small>
                 <% if bill.pending? %>
@@ -31,7 +31,7 @@
                 <% end %>
               </div>
             </div>
-            <span class="text-muted fs-7 text-lowercase"><%= Bill.human_attribute_name(:total_value) %></span>
+            <span class="text-muted fs-7 text-lowercase"><%= I18n.t('activerecord.attributes.bill.total_value') %></span>
             <span><%= bill.total_value.format %></span>
           <% end %>
         <% end %>

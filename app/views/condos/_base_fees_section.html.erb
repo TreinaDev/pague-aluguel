@@ -13,11 +13,11 @@
               <%= base_fee.name %>
             </span>
             <small class="d-block text-body-secondary">
-              <%= SharedFee.human_attribute_name(:issue_date) %>:
+              <%=  I18n.t('activerecord.attributes.shared_fee.issue_date') %>:
               <%= I18n.l(base_fee.charge_day.to_date)%>
             </small>
           </div>
-          <span class="text-muted fs-7 text-lowercase"><%= BaseFee.human_attribute_name(:recurrence) %></span>
+          <span class="text-muted fs-7 text-lowercase"><%=  I18n.t('activerecord.attributes.base_fee.recurrence') %></span>
           <span class="text-uppercase fs-7"><%= I18n.t("activerecord.attributes.base_fee.enum_recurrence.#{base_fee.recurrence}") %></span>
         <% end %>
       <% end %>

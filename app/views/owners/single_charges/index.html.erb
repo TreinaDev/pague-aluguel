@@ -4,7 +4,7 @@
   <% end %>
 
   <span class="fs-4 mx-auto mt-3 text-uppercase">
-    <%= SingleCharge.model_name.human(count: 2) %>
+    <%= I18n.t('activerecord.models.single_charge.other') %>
   </span>
 
   <div class="d-flex justify-content-center mt-4 mb-4">
@@ -15,7 +15,7 @@
           <div class="list-group-item p-3" id=<%= "single-charge-#{idx}"%>>
             <div class="d-flex w-100 justify-content-between">
               <span class="d-block mb-1 fs-4">
-                <%= I18n.t "single_charge.#{single_charge.charge_type}" %>
+                <%= I18n.t("single_charge.#{single_charge.charge_type}")%>
               </span>
 
               <span class="text-center position-absolute text-muted" style="left: 50%; transform: translateX(-50%);">
@@ -24,7 +24,7 @@
 
               <div class="d-flex flex-wrap text-end">
                 <small class="text-body-secondary w-100">
-                  <%= SingleCharge.human_attribute_name(:issue_date) %>:
+                  <%=  I18n.t('activerecord.attributes.single_charge.issue_date') %>:
                   <%= I18n.l(single_charge.issue_date) %>
                 </small>
                 <% if single_charge.active? %>
@@ -41,7 +41,7 @@
             <span class="d-block">
               <%= single_charge.description %>
             </span>
-            <span class="text-muted fs-7 text-lowercase"><%= SingleCharge.human_attribute_name(:value) %></span>
+            <span class="text-muted fs-7 text-lowercase"><%=  I18n.t('activerecord.attributes.single_charge.value') %></span>
             <span><%= single_charge.value.format %></span>
           </div>
         <% end %>

@@ -2,7 +2,7 @@
   <div class="dean-modal modal-md">
     <%= link_to "", :back, id: 'close', class: "btn btn-sm btn-close" %>
 
-    <span class="fs-8 text-center d-block"><%= BaseFee.model_name.human %></span>
+    <span class="fs-8 text-center d-block"><%= I18n.t('activerecord.models.base_fee.one') %></span>
     <span class="fs-3 text-center d-block"><%= @base_fee.name %></span>
     <span class="fs-8 text-center d-block"><%= @base_fee.description %></span>
     <hr>
@@ -70,7 +70,7 @@
 
     <div class=" d-flex justify-content-between">
       <span class="text-muted text-lowercase fs-8">
-        <%= SharedFee.human_attribute_name(:issue_date) %>
+        <%= I18n.t('activerecord.attributes.shared_fee.issue_date') %>
       </span>
       <span>
         <%= I18n.l(@base_fee.charge_day.to_date)%>

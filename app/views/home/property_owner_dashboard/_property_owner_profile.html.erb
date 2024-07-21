@@ -16,7 +16,7 @@
 
       <div class="overflow-x-hidden">
         <span class="fs-3"><%= capitalized_name(current_property_owner) %></span>
-        <span class="d-block fs-7 text-muted"><%= PropertyOwner.model_name.human %></span>
+        <span class="d-block fs-7 text-muted"><%= I18n.t('activerecord.models.property_owner.one') %></span>
         <span class="d-block"><%= current_property_owner.email %></span>
         <span class="d-block" data-controller="document-number"><%= current_property_owner.document_number %></span>
         <span class="d-block fs-8 text-muted"><%= I18n.t('dashboards.labels.since') %>: <%= current_property_owner.created_at.strftime("%d/%m/%Y") %></span>

@@ -18,8 +18,8 @@
     </div>
 
     <hr>
-    <span class="fs-6 text-center d-block"><%= I18n.t 'activerecord.attributes.single_charge.charge_type' %>:</span>
-    <span class="fs-4 text-center d-block"><%= I18n.t "single_charge.#{@single_charge.charge_type}" %></span>
+    <span class="fs-6 text-center d-block"><%= I18n.t('activerecord.attributes.single_charge.charge_type') %>:</span>
+    <span class="fs-4 text-center d-block"><%= I18n.t("single_charge.#{@single_charge.charge_type}") %></span>
 
     <% if @single_charge.common_area_fee? %>
       <div class=" d-flex justify-content-center align-items-center">

@@ -12,7 +12,7 @@ class CommonAreaFeesController < ApplicationController
     if @common_area_fee.save
       redirect_to common_area, notice: I18n.t('success.create.fee')
     else
-      flash[:alert] = I18n.t 'errors.cant_create.fee'
+      flash[:alert] = I18n.t('errors.cant_create.fee')
       render :new, status: :unprocessable_entity
     end
   end

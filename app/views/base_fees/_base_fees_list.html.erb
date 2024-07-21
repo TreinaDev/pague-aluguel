@@ -7,7 +7,7 @@
         </span>
         <div class="d-flex flex-wrap text-end">
           <small class="d-block text-body-secondary w-100">
-            <%= BaseFee.human_attribute_name(:issue_date) %>:
+            <%= I18n.t('activerecord.attributes.base_fee.issue_date') %>:
             <%= I18n.l(base_fee.charge_day.to_date)%>
           </small>
           <% if base_fee.active? %>
@@ -20,10 +20,11 @@
       <span class="d-block">
         <%= base_fee.description %>
       </span>
-      <span class="text-muted fs-7 text-lowercase"><%= BaseFee.human_attribute_name(:recurrence) %></span>
+      <span class="text-muted fs-7 text-lowercase"><%= I18n.t('activerecord.attributes.base_fee.recurrence') %></span>
       <span class="text-uppercase fs-7"><%= I18n.t("activerecord.attributes.base_fee.enum_recurrence.#{base_fee.recurrence}") %></span>
     <% end %>
   <% end %>
 <% else %>
   <p class="text-center"><%= I18n.t('errors.not_found.base_fees')%></p>
 <% end %>
+
