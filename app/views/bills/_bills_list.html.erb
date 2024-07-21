@@ -1,5 +1,5 @@
 <% if bills.any? %>
-  <div class="list-group w-75">
+  <div class="list-group w-75 mx-auto">
     <% bills.each do |bill| %>
       <%= link_to condo_bill_path(@condo.id, bill), class: "list-group-item p-3 list-group-item-action hover-strong", id: dom_id(bill), data: { turbo_frame: "modal" } do %>
         <div class="d-flex w-100 justify-content-between">
@@ -26,5 +26,5 @@
     <% end %>
   </div>
 <% else %>
-  <p><%= I18n.t('views.index.no_bills') %></p>
+  <p class="text-center"><%= I18n.t('views.index.no_bills') %></p>
 <% end %>

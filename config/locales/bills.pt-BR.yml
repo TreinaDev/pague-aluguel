@@ -6,9 +6,12 @@ pt-BR:
       document_number_not_valid: Esse CPF não é válido.
       payment_accepted: Pagamento efetivado!
       payment_rejected: Pagamento recusado!
-      denied_bills: 'Não Pagas'
+      denied_bills: 'Recusadas'
       accepted_bills: 'Pagas'
+      pending_bills: 'Pendentes'
+      awaiting_bills: 'Aguardando'
       all_bills: 'Todas as faturas'
+      filter_bills: 'Filtrar faturas'
     show:
       view_receipt: Ver comprovante
       accept_payment: Aceitar pagamento
