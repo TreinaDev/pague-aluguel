@@ -42,9 +42,15 @@ class Api::V1::ReceiptsController < Api::V1::ApiController
     filename = File.basename(URI.parse(@url).path)
     content_type = @response.headers['content-type']
     if @receipt.file.attach(io: StringIO.new(@response.body), filename:, content_type:) && @receipt.save
+      bill_awaiting(@receipt)
       render_response({ message: I18n.t('receipt_received_success') }, :ok)
     else
       render_response({ errors: @receipt.errors.full_messages }, :unprocessable_entity)
     end
+  end
+
+  def bill_awaiting(receipt)
+    bill = receipt.bill
+    bill.awaiting!
   end
 end

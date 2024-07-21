@@ -22,6 +22,7 @@ RSpec.describe 'Comprovantes', type: :request do
       expect(response.body).to include('Comprovante recebido com sucesso.')
       expect(Receipt.count).to eq(1)
       expect(Receipt.first.file).to be_attached
+      expect(Bill.find(bill.id).status).to eq 'awaiting'
     end
 
     it 'cria um comprovante com um arquivo jpg anexado' do
@@ -44,6 +45,7 @@ RSpec.describe 'Comprovantes', type: :request do
       expect(response.body).to include('Comprovante recebido com sucesso.')
       expect(Receipt.count).to eq(1)
       expect(Receipt.first.file).to be_attached
+      expect(Bill.find(bill.id).status).to eq 'awaiting'
     end
 
     it 'cria um comprovante com um arquivo png anexado' do
@@ -66,15 +68,17 @@ RSpec.describe 'Comprovantes', type: :request do
       expect(response.body).to include('Comprovante recebido com sucesso.')
       expect(Receipt.count).to eq(1)
       expect(Receipt.first.file).to be_attached
+      expect(Bill.find(bill.id).status).to eq 'awaiting'
     end
 
     it 'retorna erro quando nenhum arquivo é enviado' do
-      create(:bill, id: 1)
+      bill = create(:bill, id: 1)
       post '/api/v1/receipts', params: { receipt: nil, bill_id: '1' }
 
       expect(response).to have_http_status(:bad_request)
       expect(response.body).to include('Nenhum arquivo enviado.')
       expect(Receipt.count).to eq(0)
+      expect(Bill.find(bill.id).status).to eq 'pending'
     end
 
     it 'retorna erro quando arquivo enviado não é um pdf, jpg ou png' do
