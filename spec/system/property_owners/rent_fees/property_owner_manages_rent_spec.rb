@@ -27,7 +27,7 @@ describe 'Proprietário configura aluguel' do
     fill_in 'Juros por atraso ao mês (em %)', with: 10
     click_on 'Atualizar'
 
-    expect(page).to have_content 'Taxa cadastrada com sucesso!'
+    expect(page).to have_content 'Aluguel cadastrado com sucesso!'
     expect(current_path).to eq unit_path(2)
     expect(RentFee.last.owner_id).to eq 1
     within 'div#unit-modal' do
@@ -230,8 +230,7 @@ describe 'Proprietário configura aluguel' do
     expect(page).to have_content 'Aluguel desativado com sucesso!'
     within 'div#unit-modal' do
       expect(page).to have_content 'Esta unidade está disponível para locação'
-      expect(page).to have_content 'status da cobrança'
-      expect(page).to have_content 'Desativado'
+      expect(RentFee.last.status).to eq 'canceled'
       expect(page).not_to have_content 'DESATIVAR COBRANÇA'
     end
   end

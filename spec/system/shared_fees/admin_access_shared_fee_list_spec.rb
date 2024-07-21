@@ -157,7 +157,7 @@ describe 'Admin tenta acessar lista de contas compartilhadas' do
     login_as admin, scope: :admin
     visit condo_shared_fees_path(condos.first.id)
 
-    expect(page).to have_content('Não foram encontradas contas compartilhadas.')
+    expect(page).to have_content('Nenhuma conta compartilhada encontrada.')
     expect(current_path).to eq condo_shared_fees_path(condos.first.id)
   end
 

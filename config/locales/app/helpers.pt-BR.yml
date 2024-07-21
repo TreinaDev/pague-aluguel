@@ -17,13 +17,13 @@ pt-BR:
       all_bills: Todas as Faturas
       all_charges: Todas as Cobranças
     show:
-      all: Mostrar Todos
+      all: Mostrar todos
       all_units: Ver todas as unidades
       history: Ver histórico
       receipt: Ver comprovante
     new:
       fee: Cadastrar Taxa
-      admin: Novo Administrador
+      admin: novo administrador
       nd_certificate: Emitir Certificado de Débito Negativo
     select:
       prompt: Por favor selecione
@@ -35,7 +35,7 @@ pt-BR:
       cancel: Cancelar
       add: Adicionar nova
     deactivate:
-      rent: Desativar cobrança
+      rent: Desativar Cobrança
     activate:
       rent: Ativar cobrança
     manage:
@@ -61,9 +61,14 @@ pt-BR:
   success:
     create:
       fee: Taxa cadastrada com sucesso!
+      shared_fee: Conta Compartilhada lançada com sucesso!
       rent: Aluguel cadastrado com sucesso!
       charge: Cobrança cadastrada com sucesso!
-      fine-charge: Cobrança de Multa criada com sucesso.
+      this_charge:
+        fine: Multa cadastrada com sucesso!
+        common_area_fee: Taxa cadastrada com sucesso!
+        other: Cobrança cadastrada com sucesso!
+      fine-charge: Cobrança de Multa cadastrada com sucesso!
       common_area_charge: Cobrança de Taxa de Área Comum cadastrada com sucesso!
     update:
       rent: Aluguel atualizado com sucesso!
@@ -74,9 +79,9 @@ pt-BR:
       fee: Taxa cancelada com sucesso!
       this_fee: '%{fee} cancelada com sucesso!'
       this_charge:
-        fine: 'Multa cancelada com sucesso!'
-        common_area_fee: 'Taxa cancelada com sucesso!'
-        other: 'Cobrança cancelada com sucesso!'
+        fine: Multa cancelada com sucesso!
+        common_area_fee: Taxa cancelada com sucesso!
+        other: Cobrança cancelada com sucesso!
     deactivate:
       rent: Aluguel desativado com sucesso!
     generate:
@@ -88,6 +93,8 @@ pt-BR:
     not_valid: não é válido.
     messages:
       future_date: deve ser futura.
+      not_limited_fee: não se aplica a Taxas Fixas.
+      is_limited_fee: deve estar presente para Taxas Limitadas.
     cant_be:
       blank: não pode ficar em branco
     must_be:
@@ -101,22 +108,23 @@ pt-BR:
       units_associated: Nenhuma unidade associada encontrada.
       single_charges: Nenhuma cobrança avulsa encontrada.
       shared_fees: Nenhuma conta compartilhada encontrada.
-      base_fees: Nenhuma taxa condominial encontrada
+      base_fees: Nenhuma taxa condominial encontrada.
       bills: Nenhuma fatura encontrada.
       condos: Nenhum condomínio encontrado.
       units: Nenhuma unidade encontrada.
       document: Documento não encontrado.
-      unit: Unidade não encontrada
+      unit: Unidade não encontrada.
       common_area: Área Comum não encontrada.
-      document_number: Seu documento não foi encontrado no sistema.
-      fees: Nenhuma taxa cadastrada.
+      document_number: não encontrado no sistema.
+      fees: Taxa não cadastrada.
       rents: Nenhum aluguel cadastrado.
       condo: Condomínio não cadastrado.
     cant_create:
       fee: Não foi possível cadastrar a taxa.
+      shared_fee: Não foi possível lançar a conta compartilhada.
       charge: Não foi possível cadastrar a cobrança.
       rent: Não foi possível cadastrar o aluguel.
-      not_limited_fee: não se aplica a Taxas Fixas
+      not_limited_fee: não se aplica a Taxas Fixas.
       is_limited_fee: deve estar presente para Taxas Limitadas.
     cant_update:
       rent: Não foi possível atualizar o aluguel.
@@ -130,7 +138,7 @@ pt-BR:
     invalid:
       charge: Tipo de Cobrança inválido.
       document_number: Esse CPF não é válido.
-      document: Documento inválido.
+      document: Documento não é válido.
     query:
       empty_condo: Você precisa buscar por um nome de condomínio.
       no_result: Nenhum condomínio encontrado.

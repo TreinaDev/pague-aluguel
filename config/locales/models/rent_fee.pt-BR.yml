@@ -11,7 +11,7 @@ pt-BR:
       rent_fee:
         value: Valor do aluguel
         unit: Unidade
-        status: Status
+        status: status da cobrança
         value_cents: Valor do aluguel
         fine: Multa por atraso
         fine_cents: Multa por atraso

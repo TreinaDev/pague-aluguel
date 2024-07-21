@@ -89,7 +89,7 @@ describe 'API de Cobranças Avulsas' do
       post api_v1_single_charges_path, params: single_charge_params
 
       expect(response.status).to eq 201
-      expect(response.body).to include 'Cobrança de Multa criada com sucesso.'
+      expect(response.body).to include 'Cobrança de Multa cadastrada com sucesso!'
       expect(SingleCharge.count).to eq 1
       expect(SingleCharge.last.description).to eq 'Multa por barulho após as 23h'
     end

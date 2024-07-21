@@ -23,9 +23,8 @@ describe 'Proprietário vê suas unidades' do
 
     login_as property_owner, scope: :property_owner
     visit root_path
-
     within('div#units') do
-      click_on 'Mostrar todos'
+      click_on 'Ver todas'
     end
 
     within('div#all-units') do
@@ -61,7 +60,7 @@ describe 'Proprietário vê suas unidades' do
     login_as property_owner, scope: :property_owner
     visit root_path
 
-    expect(page).to have_content 'Unidades'
-    expect(page).to have_content 'Não possui unidades associadas'
+    expect(page).to have_content 'Minhas unidades'
+    expect(page).to have_content 'Nenhuma unidade encontrada.'
   end
 end

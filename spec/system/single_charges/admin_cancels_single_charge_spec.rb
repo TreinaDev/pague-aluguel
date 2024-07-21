@@ -24,12 +24,13 @@ describe 'Admin cancela uma cobrança avulsa' do
       click_on 'Ver todas'
     end
     click_on 'Multa'
-    accept_confirm 'Tem certeza que deseja cancelar esse item? Essa ação não poderá ser desfeita.' do
+
+    accept_confirm 'Tem certeza que deseja desativar a cobrança? Essa ação não poderá ser desfeita.' do
       click_button 'Cancelar'
     end
     single_charge = SingleCharge.last
 
-    expect(page).to have_content "#{single_charge.charge_type} cancelada com sucesso"
+    expect(page).to have_content 'Multa cancelada com sucesso'
     expect(single_charge.active?).to eq false
     expect(single_charge.canceled?).to eq true
     expect(current_path).to eq condo_single_charges_path(condos.first.id)
@@ -59,7 +60,8 @@ describe 'Admin cancela uma cobrança avulsa' do
       click_on 'Ver todas'
     end
     click_on 'Multa'
-    accept_confirm 'Tem certeza que deseja cancelar esse item? Essa ação não poderá ser desfeita.' do
+
+    accept_confirm 'Tem certeza que deseja desativar a cobrança? Essa ação não poderá ser desfeita.' do
       click_button 'Cancelar'
     end
     click_on 'Multa'

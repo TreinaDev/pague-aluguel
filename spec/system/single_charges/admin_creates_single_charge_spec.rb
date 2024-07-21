@@ -27,6 +27,7 @@ describe 'Administrador cria uma cobrança avulsa' do
     within '#single-charge' do
       click_on 'Adicionar nova'
     end
+
     select 'Outros', from: 'Tipo de Cobrança'
     fill_in 'Descrição', with: 'Acordo entre proprietário e morador'
     select '11', from: 'Unidade'
@@ -34,7 +35,7 @@ describe 'Administrador cria uma cobrança avulsa' do
     fill_in 'Data de Emissão', with: 5.days.from_now.to_date
     click_on 'Cadastrar'
 
-    expect(page).to have_content 'Cobrança Avulsa cadastrada com sucesso!'
+    expect(page).to have_content 'Cobrança cadastrada com sucesso!'
     expect(page).to have_content 'Outros'
     expect(page).to have_content 'Unidade 11'.downcase
     expect(page).to have_content 'Acordo entre proprietário e morador'.downcase
@@ -108,7 +109,7 @@ describe 'Administrador cria uma cobrança avulsa' do
     fill_in 'Data de Emissão', with: 5.days.from_now.to_date
     click_on 'Cadastrar'
 
-    expect(page).to have_content 'Cobrança Avulsa cadastrada com sucesso'
+    expect(page).to have_content 'Cobrança cadastrada com sucesso'
     expect(page).to have_content 'Unidade 11'.downcase
     expect(page).to have_content 'Taxa de Área Comum'
     expect(page).to have_content 'Data de Emissão'
@@ -182,7 +183,7 @@ describe 'Administrador cria uma cobrança avulsa' do
     fill_in 'Data de Emissão', with: ''
     click_on 'Cadastrar'
 
-    expect(page).to have_content 'Não foi possível cadastrar a cobrança avulsa.'
+    expect(page).to have_content 'Não foi possível cadastrar a cobrança.'
     expect(page).to have_content 'Verifique os erros abaixo:'
     expect(page).to have_content 'Unidade não pode ficar em branco'
     expect(page).to have_content 'Descrição não pode ficar em branco'
@@ -229,7 +230,7 @@ describe 'Administrador cria uma cobrança avulsa' do
     fill_in 'Data de Emissão', with: 5.days.from_now.to_date
     click_on 'Cadastrar'
 
-    expect(page).to have_content 'Não foi possível cadastrar a cobrança avulsa.'
+    expect(page).to have_content 'Não foi possível cadastrar a cobrança.'
     expect(page).to have_content 'Verifique os erros abaixo:'
     expect(page).to have_content 'Área Comum deve ser selecionada'
     expect(page).not_to have_content 'Unidade não pode ficar em branco'

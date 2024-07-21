@@ -23,14 +23,14 @@ describe 'Proprietário vê dashboard' do
     login_as property_owner, scope: :property_owner
     visit root_path
     within('div#units') do
-      click_on 'Mostrar todos'
+      click_on 'Ver todas'
     end
 
     within('div#property-owner-dashboard') do
-      expect(page).to have_content 'Perfil'
+      expect(page).to have_content 'Meu perfil'
       expect(page).to have_content 'propertyownertest@mail.com'
       expect(page).to have_content CPF.new(property_owner.document_number).formatted
-      expect(page).to have_content 'Unidades'
+      expect(page).to have_content 'Minhas unidades'
       expect(page).to have_content 'Condo Test'
       expect(page).to have_content 'Condo Test 2'
       expect(page).to have_content 'Condo Test 3'

@@ -68,6 +68,6 @@ describe 'Admin visualiza listagem de cobranças avulsas' do
       click_on 'Ver todas'
     end
 
-    expect(page).to have_content 'Não foram encontradas cobranças avulsas.'
+    expect(page).to have_content 'Nenhuma cobrança avulsa encontrada.'
   end
 end

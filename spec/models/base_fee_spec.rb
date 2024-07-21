@@ -21,7 +21,7 @@ RSpec.describe BaseFee, type: :model do
 
         expect(base_fee).not_to be_valid
         expect(base_fee.errors).to include(:charge_day)
-        expect(base_fee.errors[:charge_day]).to include('deve ser futura')
+        expect(base_fee.errors[:charge_day]).to include('deve ser futura.')
       end
     end
 
@@ -65,7 +65,7 @@ RSpec.describe BaseFee, type: :model do
 
         expect(base_fee).not_to be_valid
         expect(base_fee.errors).to include(:installments)
-        expect(base_fee.errors[:installments]).to include('não se aplica a Taxas Fixas')
+        expect(base_fee.errors[:installments]).to include('não se aplica a Taxas Fixas.')
       end
 
       it 'não pode ficar em branco para taxas limitadas' do
@@ -73,7 +73,7 @@ RSpec.describe BaseFee, type: :model do
 
         expect(base_fee).not_to be_valid
         expect(base_fee.errors).to include(:installments)
-        expect(base_fee.errors[:installments]).to include('deve estar presente para Taxas Limitadas')
+        expect(base_fee.errors[:installments]).to include('deve estar presente para Taxas Limitadas.')
       end
 
       it 'deve ser maior que 0' do

@@ -27,7 +27,7 @@ describe 'Admin cancela uma conta compartilhada' do
       click_on 'Ver todas'
     end
     click_on 'Conta de Luz'
-    accept_confirm 'Tem certeza que deseja cancelar esse item? Essa ação não poderá ser desfeita.' do
+    accept_confirm 'Tem certeza que deseja desativar a taxa? Essa ação não poderá ser desfeita.' do
       click_button 'Cancelar'
     end
 
@@ -65,7 +65,7 @@ describe 'Admin cancela uma conta compartilhada' do
       click_on 'Ver todas'
     end
     click_on 'Conta de Luz'
-    accept_confirm 'Tem certeza que deseja cancelar esse item? Essa ação não poderá ser desfeita.' do
+    accept_confirm 'Tem certeza que deseja desativar a taxa? Essa ação não poderá ser desfeita.' do
       click_button 'Cancelar'
     end
     click_on 'Conta de Luz'
@@ -104,7 +104,7 @@ describe 'Admin cancela uma conta compartilhada' do
       click_on 'Ver todas'
     end
     click_on 'Conta de Luz'
-    accept_confirm 'Tem certeza que deseja cancelar esse item? Essa ação não poderá ser desfeita.' do
+    accept_confirm 'Tem certeza que deseja desativar a taxa? Essa ação não poderá ser desfeita.' do
       click_button 'Cancelar'
     end
     electric_bill.reload

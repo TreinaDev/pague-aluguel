@@ -36,8 +36,8 @@ pt-BR:
       active: Ativa
       canceled: Cancelada
     installments:
-      one: '%{count}x Parcela'
-      other: '%{count}x Parcelas'
+      one: '%{count} x Parcela'
+      other: '%{count} x Parcelas'
     monthly: Mensal
     biweekly: Quinzenal
     bimonthly: Bimestral

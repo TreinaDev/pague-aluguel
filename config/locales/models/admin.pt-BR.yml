@@ -2,16 +2,17 @@ pt-BR:
   activerecord:
     models:
       admin:
-        one: 'Administrador'
-        other: 'Administradores'
+        one: Administrador
+        other: Administradores
     attributes:
       admin:
-        email: 'E-mail'
-        password: 'Senha'
-        first_name: 'Nome'
-        last_name: 'Sobrenome'
-        document_number: 'CPF'
-        super_admin: 'Acesso Geral'
-        password_confirmation: 'Confirme a senha'
-        photo: 'Foto'
+        email: E-mail
+        password: Senha
+        first_name: Nome
+        last_name: Sobrenome
+        document_number: CPF
+        super_admin: Acesso Geral
+        password_confirmation: Confirme a senha
+        photo: Insira sua foto de perfil
         condo_id: Condomínio
+

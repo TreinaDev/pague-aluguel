@@ -155,7 +155,7 @@ describe 'Admin cria taxa condominial' do
     fill_in 'Multa por atraso', with: ''
     click_on 'Cadastrar'
 
-    expect(page).to have_content 'Taxa não cadastrada.'
+    expect(page).to have_content 'Não foi possível cadastrar a taxa.'
     expect(page).to have_content 'Verifique os erros abaixo:'
     expect(page).to have_content 'Nome não pode ficar em branco'
     expect(page).to have_content 'Descrição não pode ficar em branco'
@@ -194,7 +194,7 @@ describe 'Admin cria taxa condominial' do
     fill_in 'Multa por atraso', with: '30,00'
     click_on 'Cadastrar'
 
-    expect(page).to have_content 'Taxa não cadastrada.'
+    expect(page).to have_content 'Não foi possível cadastrar a taxa.'
     expect(page).to have_content 'Data de Emissão deve ser futura'
     expect(page).to have_content 'Número de Parcelas deve estar presente para Taxas Limitadas'
     expect(page).to have_field 'Nome', with: 'Taxa de Condomínio'
@@ -235,7 +235,7 @@ describe 'Admin cria taxa condominial' do
     fill_in 'Multa por atraso', with: '30,00'
     click_on 'Cadastrar'
 
-    expect(page).to have_content 'Taxa não cadastrada.'
+    expect(page).to have_content 'Não foi possível cadastrar a taxa.'
     expect(page).to have_content 'Valor deve ser maior que 0', count: 2
   end
 
@@ -268,7 +268,7 @@ describe 'Admin cria taxa condominial' do
     fill_in 'Multa por atraso', with: '5.5'
     click_on 'Cadastrar'
 
-    expect(page).to have_content 'Taxa não cadastrada.'
+    expect(page).to have_content 'Não foi possível cadastrar a taxa.'
     expect(page).to have_content 'Valor deve estar no formato 0,00'
     expect(page).to have_content 'Valor não é um número', count: 2
     expect(page).to have_content 'Multa por atraso deve estar no formato 0,00'
