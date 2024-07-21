@@ -1,4 +1,4 @@
-@import url(https://fonts.googleapis.com/css?family=Lato:100,400);
+@import url('https://fonts.googleapis.com/css2?family=Roboto:ital,wght@0,100;0,300;0,400;0,500;0,700;0,900;1,100;1,300;1,400;1,500;1,700;1,900&display=swap');
 
 .box{
   width: 240px;
@@ -7,14 +7,14 @@
   top: calc(50% - 25px);
   top: -webkit-calc(32% - 25px);
   left: calc(50% - 120px);
-  left: -webkit-calc(50% - 120px);
+  left: -webkit-calc(50% - 108px);
 }
 
 .text{
   font-family: 'Lato', sans-serif;
   color: #0D2052;
   font-weight: 300;
-  font-size: 45px;
+  font-size: 32px;
   justify-self: center;
   opacity: 1;
   -webkit-animation: fade-in-out 2.5s infinite; 
