@@ -15,7 +15,7 @@
   <% end %>
 
   <span class="fs-4 mx-auto mt-3 text-uppercase">
-    <%= I18n.t('views.new.create_fee') %>
+    <%= I18n.t('new.create_fee') %>
   </span>
   <span class="mx-auto text-uppercase fs-7 text-muted"><%= @condo.name %></span>
 
@@ -41,7 +41,7 @@
       <div class="form-floating mb-3 w-50 mx-auto">
         <% unit_type = @unit_types.find { |ut| ut.id == values_form.object.unit_type_id } %>
         <%= values_form.text_field :price, class: "form-control" %>
-        <%= values_form.label :price, I18n.t('activerecord.values.values_price', unit_type: unit_type.description ) %>
+        <%= values_form.label :price, I18n.t('dashboards.labels.values.values_price', unit_type: unit_type.description ) %>
         <%= values_form.hidden_field :unit_type_id, value: values_form.object.unit_type_id %>
       </div>
     <% end %>

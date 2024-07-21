@@ -11,9 +11,9 @@
             <%= I18n.l(shared_fee.issue_date) %>
           </small>
           <% if shared_fee.active? %>
-            <span class="mt-1 ms-auto badge text-bg-success text-uppercase"><%= I18n.t("shared_fee.statuses.#{shared_fee.status}") %></span>
+            <span class="mt-1 ms-auto badge text-bg-success text-uppercase"><%= I18n.t("shared_fee.status.#{shared_fee.status}") %></span>
           <% else %>
-            <span class="mt-1 ms-auto badge text-bg-danger text-uppercase"><%= I18n.t("shared_fee.statuses.#{shared_fee.status}") %></span>
+            <span class="mt-1 ms-auto badge text-bg-danger text-uppercase"><%= I18n.t("shared_fee.status.#{shared_fee.status}") %></span>
           <% end %>
         </div>
       </div>
@@ -22,5 +22,5 @@
     <% end %>
   <% end %>
 <% else %>
-  <p class="text-center"><%= I18n.t('views.index.no_fees') %></p>
+  <p class="text-center"><%= I18n.t('errors.not_found.shared_fees') %></p>
 <% end %>

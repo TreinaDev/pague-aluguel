@@ -18,6 +18,7 @@ pt-BR:
         limited: Taxa limitada
         status: Status
         counter: Contador de Parcelas
+        issue_date: Data de Emissão
         enum_recurrence:
           monthly: Mensal
           biweekly: Quinzenal
@@ -26,6 +27,7 @@ pt-BR:
           yearly: Anual
       values:
         price: Valor
+        price_for_unit: Valor para %{unit_type}
   base_fee:
     limited:
       true: Taxa limitada
@@ -33,6 +35,9 @@ pt-BR:
     status:
       active: Ativa
       canceled: Cancelada
+    installments:
+      one: '%{count}x Parcela'
+      other: '%{count}x Parcelas'
     monthly: Mensal
     biweekly: Quinzenal
     bimonthly: Bimestral

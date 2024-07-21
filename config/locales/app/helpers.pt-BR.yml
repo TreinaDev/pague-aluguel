@@ -5,16 +5,17 @@ pt-BR:
     confirm: Confirmar
     edit: Editar
     hide: Ocultar
+    see_all: Ver todas
     my_profile: Meu perfil
     filter:
       fees:
         all: Todas as Taxas
         active: Ativas
         canceled: Canceladas
-        past: Pasadas
+        past: Passadas
         future: Futuras
     show:
-      all: Ver tudo
+      all: Mostrar Todos
       all_units: Ver todas as unidades
       history: Ver histórico
       receipt: Ver comprovante
@@ -41,31 +42,13 @@ pt-BR:
     payment:
       accept: Aceitar pagamento
       reject: Recusar pagamento
-  labels:
-    charge_status: Status da Cobrança
-    cnd: Certificado Negativo de Débito
-    status: Situação
-    use_fee: Taxa de Uso
-    rent_fee: Taxa de Aluguel
-    common_area_fee: Taxa de área comum
-    show_history: Mostrar histórico de taxas
-    rent_value: Valor do Aluguel
-    since: Desde
-    document: CPF
-    values:
-      values_price: 'Valor para %{unit_type}'
-    condo:
-      one: Condomínio
-      other: Condomínios
-    profile:
-      one: Perfil
-      other: Perfis
   messages:
     owner_tenant: Você reside nesta unidade
     has_tenant: Esta unidade está alugada
     confirm:
       cancel_item: Tem certeza que deseja desativar esse item? Essa ação não poderá ser desfeita.
       cancel_charge: Tem certeza que deseja desativar a cobrança? Essa ação não poderá ser desfeita.
+      cancel_fee: Tem certeza que deseja desativar a taxa? Essa ação não poderá ser desfeita.
       cancel_rent: Tem certeza que deseja desativar a cobrança? Essa ação não poderá ser desfeita.
       accept_payment: Tem certeza que deseja aceitar o pagamento? Essa ação não poderá ser desfeita.
       reject_payment: Tem certeza que deseja recusar o pagamento? Essa ação não poderá ser desfeita.
@@ -84,9 +67,13 @@ pt-BR:
       rent: Aluguel atualizado com sucesso!
       condo_access: Acesso aos condomínios atualizado com sucesso!
     cancel:
-      charge: 'Cobrança Avulsa cancelada com sucesso!'
+      charge: Cobrança Avulsa cancelada com sucesso!
+      fee: Taxa cancelada com sucesso!
       this_fee: '%{fee} cancelada com sucesso!'
-      this_charge: '%{charge} cancelada com sucesso!'
+      this_charge:
+        fine: 'Multa cancelada com sucesso!'
+        common_area_fee: 'Taxa cancelada com sucesso!'
+        other: 'Cobrança cancelada com sucesso!'
     deactivate:
       rent: Aluguel desativado com sucesso!
     generate:
@@ -96,6 +83,8 @@ pt-BR:
       rejected: Pagamento recusado!
   errors:
     not_valid: não é válido.
+    messages:
+      future_date: deve ser futura.
     cant_be:
       blank: não pode ficar em branco
     must_be:
@@ -109,7 +98,7 @@ pt-BR:
       units_associated: Nenhuma unidade associada encontrada.
       single_charges: Nenhuma cobrança avulsa encontrada.
       shared_fees: Nenhuma conta compartilhada encontrada.
-      base_fees: Nenhuma taxa condominial encontrada.
+      base_fees: Nenhuma taxa condominial encontrada
       bills: Nenhuma fatura encontrada.
       condos: Nenhum condomínio encontrado.
       units: Nenhuma unidade encontrada.

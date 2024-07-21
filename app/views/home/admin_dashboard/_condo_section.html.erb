@@ -21,7 +21,7 @@
         <% end %>
       <% end %>
     <% else %>
-      <span class="text-muted"><%= I18n.t('views.index.no_condos') %></span>
+      <span class="text-muted"><%= I18n.t('errors.not_found.condos') %></span>
     <% end %>
   </div>
 
@@ -30,11 +30,11 @@
       <div class="text-center">
         <%= link_to condos_path, class: 'btn text-uppercase', data: { change_button_condo_target: "allCondosBtn", turbo_frame: "expand-condos" } do %>
           <%= image_tag "arrow-down", size: "20" %>
-          <span class="fs-8"><%= I18n.t('views.show.show_all') %></span>
+          <span class="fs-8"><%= I18n.t('buttons.show.all') %></span>
         <% end %>
         <%= link_to root_path, class: 'btn text-uppercase', data: { change_button_condo_target: "hideCondosBtn", turbo_frame: "expand-condos" } do %>
           <%= image_tag "arrow-up", size: "20" %>
-          <span class="fs-8"><%= I18n.t('views.show.hide') %></span>
+          <span class="fs-8"><%= I18n.t('buttons.hide') %></span>
         <% end %>
       </div>
       <%= turbo_frame_tag 'expand-condos' %>

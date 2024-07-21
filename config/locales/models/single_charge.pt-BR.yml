@@ -21,3 +21,7 @@ pt-BR:
       canceled: Cancelada
     common_area_fee: Taxa de Área Comum
     fine: Multa
+    other: Outra
+  charge_type:
+    common_area_fee: Taxa de Área Comum
+    fine: Multa

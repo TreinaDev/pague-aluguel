@@ -1,9 +1,9 @@
 <div class="card border-0 rounded-0 bg-off-white mt-4 py-3 px-3 mb-5" id="common-areas">
   <div class="mb-3">
     <%= image_tag "common-area-icon", size: '25', class: "mb-1" %>
-    <span class="text-muted  text-capitalize"><%= I18n.t('activemodel.models.common_area.other', count: 2) %></span>
+    <span class="text-muted  text-capitalize"><%= I18n.t('activerecord.models.common_area.other') %></span>
   </div>
-  
+
   <div class="d-flex justify-content-center gap-2 flex-wrap">
     <% if @common_areas.any? %>
       <% @first_common_areas.each do |common_area| %>
@@ -17,7 +17,7 @@
         <% end %>
       <% end %>
     <% else %>
-      <span class="text-muted fs-8 py-4"><%= I18n.t('views.index.no_common_area') %></span>
+      <span class="text-muted fs-8 py-4"><%= I18n.t('errors.not_found.common_areas') %></span>
     <% end %>
   </div>
 
@@ -26,11 +26,11 @@
       <div class="text-center">
         <%= link_to condo_common_areas_path(@condo.id), class: 'btn text-uppercase', data: { change_button_target: "allAdminsBtn", turbo_frame: "expand-common-areas" } do %>
           <%= image_tag "arrow-down", size: "20" %>
-          <span class="fs-8"><%= I18n.t('views.show.show_all') %></span>
+          <span class="fs-8"><%= I18n.t('buttons.show.all') %></span>
         <% end %>
         <%= link_to condo_path(@condo.id), class: 'btn text-uppercase', data: { change_button_target: "hideAdminsBtn", turbo_frame: "expand-common-areas" } do %>
           <%= image_tag "arrow-up", size: "20" %>
-          <span class="fs-8"><%= I18n.t('views.show.hide') %></span>
+          <span class="fs-8"><%= I18n.t('buttons.hide') %></span>
         <% end %>
       </div>
       <%= turbo_frame_tag 'expand-common-areas' %>

@@ -18,9 +18,9 @@
             <%= I18n.l(single_charge.issue_date) %>
           </small>
           <% if single_charge.active? %>
-            <span class="mt-1 ms-auto badge text-bg-success text-uppercase"><%= I18n.t("single_charge.statuses.#{single_charge.status}") %></span>
+            <span class="mt-1 ms-auto badge text-bg-success text-uppercase"><%= I18n.t("single_charge.status.#{single_charge.status}") %></span>
           <% else %>
-            <span class="mt-1 ms-auto badge text-bg-danger text-uppercase"><%= I18n.t("single_charge.statuses.#{single_charge.status}") %></span>
+            <span class="mt-1 ms-auto badge text-bg-danger text-uppercase"><%= I18n.t("single_charge.status.#{single_charge.status}") %></span>
           <% end %>
         </div>
       </div>
@@ -36,5 +36,5 @@
     <% end %>
   <% end %>
 <% else %>
-  <p class="text-center"><%= I18n.t('views.index.no_single_charges') %></p>
+  <p class="text-center"><%= I18n.t('errors.not_found.single_charges') %></p>
 <% end %>

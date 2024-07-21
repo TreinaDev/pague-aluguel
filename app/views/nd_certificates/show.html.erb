@@ -4,9 +4,9 @@
 
     <div class="text-center mt-4 mb-4">
       <span class="fs-7 d-block mb-1"><%= @condo.name%></span>
-      <span class="fs-3 d-block"><%=I18n.t('views.index.unit')%>: <%= @unit.number %></span>
+      <span class="fs-3 d-block"><%=I18n.t('dashboards.labels.unit.one')%>: <%= @unit.number %></span>
       <span class="fs-6 d-block mt-2 mb-3"><%= @unit.description %></span>
-      <%= button_to I18n.t('nd_generate'), condo_nd_certificates_path(condo_id: @condo.id, unit_id: @unit.id), method: :post, class: "btn btn-primary" %>
+      <%= button_to I18n.t('buttons.new.nd_certificate'), condo_nd_certificates_path(condo_id: @condo.id, unit_id: @unit.id), method: :post, class: "btn btn-primary" %>
     </div>
 
     <hr>

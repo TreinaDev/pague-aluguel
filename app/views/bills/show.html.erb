@@ -44,11 +44,11 @@
     <p class="text-center text-muted fs-7">Pagamento</p>
     <div class="d-flex justify-content-center gap-2 mb-2">
       <% if @bill.pending? %>
-        <span class="badge text-bg-danger text-uppercase fs-7"><%= I18n.t('views.show.pending') %></span>
+        <span class="badge text-bg-danger text-uppercase fs-7"><%= I18n.t('bills.status.pending') %></span>
       <% elsif @bill.awaiting? %>
-        <span class="badge text-bg-warning text-uppercase fs-7"><%= I18n.t('views.show.awaiting') %></span>
+        <span class="badge text-bg-warning text-uppercase fs-7"><%= I18n.t('bills.status.awaiting') %></span>
       <% else %>
-        <span class="badge text-bg-success text-uppercase fs-7"><%= I18n.t('views.show.paid') %></span>
+        <span class="badge text-bg-success text-uppercase fs-7"><%= I18n.t('bills.status.paid') %></span>
       <% end %>
     </div>
 
@@ -56,20 +56,20 @@
       <div class="text-center">
         <%= link_to url_for(@bill.receipt.file), target: "_blank", class: "btn hover-strong" do %>
           <%= image_tag "document-search-icon", size: "20" %>
-          <span class="ms-1 fs-7 text-uppercase"><%= I18n.t('views.show.view_receipt') %></span>
+          <span class="ms-1 fs-7 text-uppercase"><%= I18n.t('buttons.show.receipt') %></span>
         <% end %>
       </div>
     <% end %>
 
     <% if @bill.awaiting? %>
       <div class="d-flex justify-content-center gap-2 mt-2">
-        <%= button_to accept_payment_condo_bill_path(@condo.id, @bill), class: "d-flex align-items-center btn hover-strong mx-auto", data: { turbo_confirm: I18n.t('views.show.confirm-accept') } do %>
+        <%= button_to accept_payment_condo_bill_path(@condo.id, @bill), class: "d-flex align-items-center btn hover-strong mx-auto", data: { turbo_confirm: I18n.t('messages.confirm.accept_payment') } do %>
           <%= image_tag "check-icon", size: "16" %>
-          <span class="ms-1 fs-7 text-uppercase"><%= I18n.t('views.show.accept_payment') %></span>
+          <span class="ms-1 fs-7 text-uppercase"><%= I18n.t('buttons.payment.accept') %></span>
         <% end %>
-        <%= button_to reject_payment_condo_bill_path(@condo.id, @bill), class: "d-flex align-items-center btn hover-danger mx-auto", data: { turbo_confirm: I18n.t('views.show.confirm-reject') } do %>
+        <%= button_to reject_payment_condo_bill_path(@condo.id, @bill), class: "d-flex align-items-center btn hover-danger mx-auto", data: { turbo_confirm: I18n.t('messages.confirm.reject_payment') } do %>
           <%= image_tag "block-icon", size: "14" %>
-          <span class="ms-1 fs-7 text-uppercase"><%= I18n.t('views.show.reject_payment') %></span>
+          <span class="ms-1 fs-7 text-uppercase"><%= I18n.t('buttons.payment.reject') %></span>
         <% end %>
       </div>
     <% end %>

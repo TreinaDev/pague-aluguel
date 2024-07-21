@@ -14,3 +14,4 @@ pt-BR:
         super_admin: 'Acesso Geral'
         password_confirmation: 'Confirme a senha'
         photo: 'Foto'
+        condo_id: Condomínio

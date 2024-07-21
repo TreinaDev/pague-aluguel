@@ -2,9 +2,9 @@
   <div class="dean-modal modal-md">
     <%= link_to "", :back, id: 'close', class: "btn btn-sm btn-close" %>
 
-    <span class="fs-8 text-center d-block"><%= I18n.t('activerecord.models.single_charge') %></span>
+    <span class="fs-8 text-center d-block"><%= I18n.t('activerecord.models.single_charge.one') %></span>
     <span class="fs-6 text-center d-block">
-                <%= I18n.t('activerecord.attributes.unit') %>
+                <%= I18n.t('activerecord.attributes.single_charge.unit') %>
                 <%= Unit.find(@single_charge.unit_id).number %>
      </span>
     <hr>
