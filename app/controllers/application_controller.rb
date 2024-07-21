@@ -1,5 +1,11 @@
 class ApplicationController < ActionController::Base
+  rescue_from Faraday::ConnectionFailed, with: :connection_refused
+
   protected
+
+  def connection_refused
+    redirect_to server_unreachable_path
+  end
 
   def admin_authorized?
     if admin_signed_in?
