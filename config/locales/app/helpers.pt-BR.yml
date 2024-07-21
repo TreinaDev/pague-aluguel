@@ -70,6 +70,7 @@ pt-BR:
       condo_access: Acesso aos condomínios atualizado com sucesso!
     cancel:
       charge: Cobrança Avulsa cancelada com sucesso!
+      reservation: Reserva cancelada com sucesso!
       fee: Taxa cancelada com sucesso!
       this_fee: '%{fee} cancelada com sucesso!'
       this_charge:

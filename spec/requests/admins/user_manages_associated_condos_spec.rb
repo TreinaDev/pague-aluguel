@@ -22,7 +22,7 @@ describe 'Admin gerencia associações de condomínios' do
       get condos_selection_admin_path(admin)
 
       expect(response).to redirect_to root_path
-      expect(flash[:alert]).to eq I18n.t('errors.messages.must_be_super_admin')
+      expect(flash[:alert]).to eq 'Você não tem autorização para completar esta ação.'
     end
   end
 
@@ -35,7 +35,7 @@ describe 'Admin gerencia associações de condomínios' do
       post condos_selection_post_admin_path(admin2), params: { condo_ids: [1, 2, 3] }
 
       expect(response).to redirect_to root_path
-      expect(flash[:notice]).to eq I18n.t('errors.messages.condo_acess_updated')
+      expect(flash[:notice]).to eq 'Acesso aos condomínios atualizado com sucesso!'
       expect(admin2.associated_condos.first.condo_id).to eq 1
       expect(admin2.associated_condos.second.condo_id).to eq 2
       expect(admin2.associated_condos.last.condo_id).to eq 3
@@ -48,7 +48,7 @@ describe 'Admin gerencia associações de condomínios' do
       post condos_selection_post_admin_path(admin2), params: { condo_ids: [1, 2, 3] }
 
       expect(response).to redirect_to root_path
-      expect(flash[:alert]).to eq I18n.t('errors.messages.must_be_super_admin')
+      expect(flash[:alert]).to eq 'Você não tem autorização para completar esta ação.'
       expect(admin2.associated_condos.count).to eq 0
     end
   end

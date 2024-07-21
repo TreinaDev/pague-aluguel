@@ -6,7 +6,7 @@ class Api::V1::SingleChargesController < Api::V1::ApiController
     end
 
     if single_charge.canceled!
-      render json: { message: I18n.t('success.cancel.charge') }, status: :ok
+      render json: { message: I18n.t('success.cancel.reservation') }, status: :ok
     else
       render json: { message: single_charge.errors.full_messages }, status: :unprocessable_entity
     end

@@ -34,7 +34,7 @@ describe 'Update Taxas de area comum' do
 
     expect(response).to have_http_status :found
     expect(response).to redirect_to condo_common_area_path(condo.id, common_area.id)
-    expect(flash[:notice]).to eq I18n.t('messages.registered_fee')
+    expect(flash[:notice]).to eq 'Taxa cadastrada com sucesso!'
     expect(CommonAreaFee.first.value_cents).to eq 300_00
     expect(CommonAreaFee.first.common_area_id).to eq common_area.id
   end
@@ -55,7 +55,7 @@ describe 'Update Taxas de area comum' do
 
     expect(response).to have_http_status :found
     expect(response).to redirect_to condo_common_area_path(condo.id, common_area.id)
-    expect(flash[:notice]).to eq I18n.t('messages.registered_fee')
+    expect(flash[:notice]).to eq 'Taxa cadastrada com sucesso!'
     expect(CommonAreaFee.first.value_cents).to eq 300_00
     expect(CommonAreaFee.first.common_area_id).to eq common_area.id
   end
@@ -75,6 +75,6 @@ describe 'Update Taxas de area comum' do
 
     expect(response).to have_http_status :found
     expect(response).to redirect_to root_path
-    expect(flash[:notice]).to eq I18n.t('errors.messages.must_be_super_admin')
+    expect(flash[:notice]).to eq 'Você não tem autorização para completar esta ação.'
   end
 end

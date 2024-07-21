@@ -9,7 +9,7 @@ RSpec.describe 'Comprovantes', type: :request do
       post '/api/v1/receipts', params: { receipt: file, bill_id: '1' }
 
       expect(response).to have_http_status(:ok)
-      expect(response.body).to include('Comprovante recebido com sucesso.')
+      expect(response.body).to include('Comprovante recebido com sucesso!')
       expect(Receipt.count).to eq(1)
       expect(Receipt.first.file).to be_attached
     end
@@ -21,7 +21,7 @@ RSpec.describe 'Comprovantes', type: :request do
       post '/api/v1/receipts', params: { receipt: file, bill_id: '1' }
 
       expect(response).to have_http_status(:ok)
-      expect(response.body).to include('Comprovante recebido com sucesso.')
+      expect(response.body).to include('Comprovante recebido com sucesso!')
       expect(Receipt.count).to eq(1)
       expect(Receipt.first.file).to be_attached
     end
@@ -33,7 +33,7 @@ RSpec.describe 'Comprovantes', type: :request do
       post '/api/v1/receipts', params: { receipt: file, bill_id: '1' }
 
       expect(response).to have_http_status(:ok)
-      expect(response.body).to include('Comprovante recebido com sucesso.')
+      expect(response.body).to include('Comprovante recebido com sucesso!')
       expect(Receipt.count).to eq(1)
       expect(Receipt.first.file).to be_attached
     end

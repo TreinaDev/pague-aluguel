@@ -75,6 +75,6 @@ describe 'Admin acessa a listagem de areas comuns' do
 
     expect(response).to have_http_status :found
     expect(response).to redirect_to root_path
-    expect(flash[:notice]).to eq I18n.t('errors.messages.must_be_super_admin')
+    expect(flash[:notice]).to eq 'Você não tem autorização para completar esta ação.'
   end
 end

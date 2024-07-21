@@ -33,7 +33,7 @@ describe 'API de Cobranças Avulsas' do
       data = response.parsed_body
       expect(response.status).to eq 201
       expect(data['single_charge_id']).to eq 1
-      expect(response.body).to include 'Cobrança de Taxa de área comum criada com sucesso.'
+      expect(response.body).to include 'Cobrança de Taxa de Área Comum cadastrada com sucesso!'
       expect(SingleCharge.count).to eq 1
       expect(I18n.t("single_charge.#{SingleCharge.last.charge_type}")).to eq 'Taxa de Área Comum'
     end
