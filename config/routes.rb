@@ -8,6 +8,8 @@ Rails.application.routes.draw do
   get 'find_tenant', to: 'home#find_tenant'
   get 'tenant_bill', to: 'home#tenant_bill'
 
+  get 'server/unreachable', to: 'server#unreachable'
+
   resources :admins do
     get 'condos_selection', on: :member
     post 'condos_selection_post', on: :member
