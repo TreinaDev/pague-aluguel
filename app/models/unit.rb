@@ -35,8 +35,11 @@ class Unit
     build_new_unit(data)
   end
 
-  def self.find_all_by_owner(cpf)
-    response = Faraday.get("#{Rails.configuration.api['base_url']}/get_owner_properties?registration_number=#{cpf}")
+  def self.find_all_by_owner(document_number)
+    registration_number = CPF.new(document_number).formatted
+    response = Faraday.get(
+      "#{Rails.configuration.api['base_url']}/get_owner_properties?registration_number=#{registration_number}"
+    )
     return [] unless response.success?
 
     data = JSON.parse(response.body)
@@ -44,10 +47,25 @@ class Unit
   end
 
   def calculate_values(bill)
+    base_fee, shared_fee, single_charge, rent_fee = create_bill_total_values(bill)
+    bill.total_value_cents = sum_all_values(base_fee, shared_fee, single_charge, rent_fee)
+    bill
+  end
+
+  def create_bill_total_values(bill)
     bill.base_fee_value_cents = BaseFeeCalculator.total_value(unit_type_id)
     bill.shared_fee_value_cents = BillCalculator.calculate_shared_fees(id)
-    bill.total_value_cents = BillCalculator.calculate_total_fees(self)
-    bill
+    bill.single_charge_value_cents = BillCalculator.calculate_single_charges(id)
+    bill.rent_fee_cents = BillCalculator.check_rent_fee(id)
+
+    [bill.base_fee_value_cents,
+     bill.shared_fee_value_cents,
+     bill.single_charge_value_cents,
+     bill.rent_fee_cents]
+  end
+
+  def sum_all_values(base_fee, shared_fee, single_charge, rent_fee)
+    base_fee + shared_fee + single_charge + rent_fee
   end
 
   def set_status

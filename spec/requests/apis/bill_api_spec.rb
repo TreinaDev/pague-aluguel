@@ -3,9 +3,21 @@ require 'rails_helper'
 describe 'API de Faturas' do
   context 'GET /api/v1/bills/:id/' do
     it 'sucesso' do
-      create(:bill, condo_id: 1, unit_id: 1, issue_date: Time.zone.today.beginning_of_month,
-                    due_date: 10.days.from_now, shared_fee_value_cents: 100_00, base_fee_value_cents: 300_00,
-                    total_value_cents: 400_00, status: 'pending')
+      bill = create(:bill, condo_id: 1, unit_id: 1, issue_date: Time.zone.today.beginning_of_month,
+                           due_date: 10.days.from_now, shared_fee_value_cents: 100_00, base_fee_value_cents: 300_00,
+                           single_charge_value_cents: 222_00, rent_fee_cents: 1_000_00,
+                           total_value_cents: 400_00, status: 'pending')
+      create(:bill_detail, bill_id: bill.id, description: 'Conta de Água', value_cents: 300_00, fee_type: :shared_fee)
+      create(:bill_detail, bill_id: bill.id, description: 'Conta de Luz', value_cents: 100_00, fee_type: :shared_fee)
+      create(:bill_detail, bill_id: bill.id, description: 'Taxa de Condomínio', value_cents: 100_00,
+                           fee_type: :base_fee)
+      create(:bill_detail, bill_id: bill.id, description: 'Taxa de Manutenção', value_cents: 111_00,
+                           fee_type: :base_fee)
+      create(:bill_detail, bill_id: bill.id, description: 'Multa por barulho', value_cents: 111_00, fee_type: :fine)
+      create(:bill_detail, bill_id: bill.id, description: 'Acordo entre proprietário e morador', value_cents: 333_00,
+                           fee_type: :other)
+      create(:bill_detail, bill_id: bill.id, description: 'Reserva de Salão de Festa', value_cents: 150_00,
+                           fee_type: :common_area_fee)
 
       get api_v1_bill_path(1)
 
@@ -15,10 +27,34 @@ describe 'API de Faturas' do
       expect(json_response['total_value_cents']).to eq 400_00
       expect(json_response['values']['base_fee_value_cents']).to eq 300_00
       expect(json_response['values']['shared_fee_value_cents']).to eq 100_00
+      expect(json_response['values']['single_charge_value_cents']).to eq 222_00
+      expect(json_response['values']['rent_fee_cents']).to eq 1_000_00
       expect(json_response['issue_date']).to eq Time.zone.today.beginning_of_month.strftime('%Y-%m-%d')
       expect(json_response['due_date']).to eq 10.days.from_now.to_date.strftime('%Y-%m-%d')
       expect(json_response['status']).to eq 'pending'
+      expect(json_response['denied']).to eq false
       expect(json_response['unit_id']).to eq 1
+      expect(json_response['bill_details'][0]['description']).to eq 'Conta de Água'
+      expect(json_response['bill_details'][0]['value_cents']).to eq 30_000
+      expect(json_response['bill_details'][0]['fee_type']).to eq 'shared_fee'
+      expect(json_response['bill_details'][1]['description']).to eq 'Conta de Luz'
+      expect(json_response['bill_details'][1]['value_cents']).to eq 10_000
+      expect(json_response['bill_details'][1]['fee_type']).to eq 'shared_fee'
+      expect(json_response['bill_details'][2]['description']).to eq 'Taxa de Condomínio'
+      expect(json_response['bill_details'][2]['value_cents']).to eq 10_000
+      expect(json_response['bill_details'][2]['fee_type']).to eq 'base_fee'
+      expect(json_response['bill_details'][3]['description']).to eq 'Taxa de Manutenção'
+      expect(json_response['bill_details'][3]['value_cents']).to eq 11_100
+      expect(json_response['bill_details'][3]['fee_type']).to eq 'base_fee'
+      expect(json_response['bill_details'][4]['description']).to eq 'Multa por barulho'
+      expect(json_response['bill_details'][4]['value_cents']).to eq 11_100
+      expect(json_response['bill_details'][4]['fee_type']).to eq 'fine'
+      expect(json_response['bill_details'][5]['description']).to eq 'Acordo entre proprietário e morador'
+      expect(json_response['bill_details'][5]['value_cents']).to eq 33_300
+      expect(json_response['bill_details'][5]['fee_type']).to eq 'other'
+      expect(json_response['bill_details'][6]['description']).to eq 'Reserva de Salão de Festa'
+      expect(json_response['bill_details'][6]['value_cents']).to eq 150_00
+      expect(json_response['bill_details'][6]['fee_type']).to eq 'common_area_fee'
     end
 
     it 'sucesso mesmo com valores 0' do

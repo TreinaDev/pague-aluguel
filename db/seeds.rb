@@ -75,221 +75,277 @@ Admin.create!(
 )
 p "Created #{Admin.count} admins"
 
-# taxas fixas
-base_fee1 = BaseFee.create!(name: 'Taxa de Condomínio',
-                            description: 'Manutenção regular do prédio',
-                            interest_rate: 2, late_fine: 10, limited: false,
-                            charge_day: 25.days.from_now,
-                            recurrence: :monthly, condo_id: 2)
-Value.create!(price: 200, unit_type_id: 1, base_fee: base_fee1)
-Value.create!(price: 200, unit_type_id: 2, base_fee: base_fee1)
+  # taxas fixas
+  base_fee1 = BaseFee.create!(name: 'Taxa de Condomínio',
+                              description: 'Manutenção regular do prédio',
+                              interest_rate: 2, late_fine: 10, limited: false,
+                              charge_day: 25.days.from_now,
+                              recurrence: :monthly, condo_id: 1)
+  Value.create!(price: 200, unit_type_id: 1, base_fee: base_fee1)
+  Value.create!(price: 200, unit_type_id: 2, base_fee: base_fee1)
 
-base_fee2 = BaseFee.create!(name: 'Fundo de Reserva',
-                            description: 'Destinado a cobrir despesas imprevistas',
-                            interest_rate: 1, late_fine: 5, limited: true,
-                            charge_day: 5.days.from_now, installments: 10,
-                            recurrence: :bimonthly, condo_id: 2)
-Value.create!(price: 300, unit_type_id: 1, base_fee: base_fee2)
-Value.create!(price: 300, unit_type_id: 2, base_fee: base_fee2)
+  base_fee2 = BaseFee.create!(name: 'Fundo de Reserva',
+                              description: 'Destinado a cobrir despesas imprevistas',
+                              interest_rate: 1, late_fine: 5, limited: true,
+                              charge_day: 5.days.from_now, installments: 10,
+                              recurrence: :bimonthly, condo_id: 1)
+  Value.create!(price: 300, unit_type_id: 1, base_fee: base_fee2)
+  Value.create!(price: 300, unit_type_id: 2, base_fee: base_fee2)
 
-base_fee3 = BaseFee.new(name: 'Taxa de Gás',
-                            description: 'Gás encanado do prédio',
-                            interest_rate: 2, late_fine: 10, limited: false,
-                            charge_day: 3.months.ago,
-                            recurrence: :monthly, condo_id: 2)
-                            base_fee3.save(validate: false)
-Value.create!(price: 200, unit_type_id: 1, base_fee: base_fee3)
-Value.create!(price: 200, unit_type_id: 2, base_fee: base_fee3)
+  base_fee3 = BaseFee.new(name: 'Taxa de Gás',
+                              description: 'Gás encanado do prédio',
+                              interest_rate: 2, late_fine: 10, limited: false,
+                              charge_day: 3.months.ago,
+                              recurrence: :monthly, condo_id: 2)
+                              base_fee3.save(validate: false)
+  Value.create!(price: 200, unit_type_id: 1, base_fee: base_fee3)
+  Value.create!(price: 200, unit_type_id: 2, base_fee: base_fee3)
 
-base_fee97 = BaseFee.new(name: 'Fundo de Pintura',
-                            description: 'Destinado a pintar as áreas comuns',
-                            interest_rate: 1, late_fine: 5, limited: true,
-                            charge_day: 5.months.ago, installments: 10,
-                            recurrence: :bimonthly, condo_id: 2,
-                            status: :canceled)
-                            base_fee97.save(validate: false)
-Value.create!(price: 300, unit_type_id: 1, base_fee: base_fee97)
-Value.create!(price: 300, unit_type_id: 2, base_fee: base_fee97)
+  base_fee97 = BaseFee.new(name: 'Fundo de Pintura',
+                              description: 'Destinado a pintar as áreas comuns',
+                              interest_rate: 1, late_fine: 5, limited: true,
+                              charge_day: 5.months.ago, installments: 10,
+                              recurrence: :bimonthly, condo_id: 2,
+                              status: :canceled)
+                              base_fee97.save(validate: false)
+  Value.create!(price: 300, unit_type_id: 1, base_fee: base_fee97)
+  Value.create!(price: 300, unit_type_id: 2, base_fee: base_fee97)
 
-p "Created #{BaseFee.count} base fees"
+  p "Created #{BaseFee.count} base fees"
 
-# taxas compartilhadas
-shared_fee1 = SharedFee.new(description: 'Manutenção regular do prédio',
-                  issue_date: 5.months.ago,
-                  total_value_cents: 20_000,
-                  condo_id: 2)
-                  shared_fee1.save(validate: false)
+  # taxas compartilhadas
+  shared_fee1 = SharedFee.new(description: 'Manutenção regular do prédio',
+                    issue_date: 5.months.ago,
+                    total_value_cents: 20_000,
+                    condo_id: 1)
+                    shared_fee1.save(validate: false)
 
-shared_fee2 = SharedFee.new(description: 'Fundo de Reserva para despesas imprevistas',
-                  issue_date: 20.days.ago,
-                  total_value_cents: 30_000,
-                  condo_id: 2)
-                  shared_fee2.save(validate: false)
+  shared_fee2 = SharedFee.new(description: 'Fundo de Reserva para despesas imprevistas',
+                    issue_date: 20.days.ago,
+                    total_value_cents: 30_000,
+                    condo_id: 1)
+                    shared_fee2.save(validate: false)
 
-SharedFee.create!(description: 'Taxa de Manutenção das áreas comuns',
-                  issue_date: 20.days.from_now,
-                  total_value_cents: 25_000,
-                  condo_id: 2, status: :canceled)
+  SharedFee.create!(description: 'Taxa de Manutenção das áreas comuns',
+                    issue_date: 20.days.from_now,
+                    total_value_cents: 25_000,
+                    condo_id: 1, status: :canceled)
 
-SharedFee.create!(description: 'Fundo Emergencial para reparos urgentes',
-                  issue_date: 6.days.from_now,
-                  total_value_cents: 50_000,
-                  condo_id: 2)
+  SharedFee.create!(description: 'Fundo Emergencial para reparos urgentes',
+                    issue_date: 6.days.from_now,
+                    total_value_cents: 50_000,
+                    condo_id: 1)
 
-SharedFee.create!(description: 'Taxa de Segurança do condomínio',
-                  issue_date: 10.days.from_now,
-                  total_value_cents: 15_000,
-                  condo_id: 2)
+  SharedFee.create!(description: 'Taxa de Segurança do condomínio',
+                    issue_date: 10.days.from_now,
+                    total_value_cents: 15_000,
+                    condo_id: 1)
 
-SharedFee.create!(description: 'Taxa de Limpeza das áreas comuns',
-                  issue_date: 18.days.from_now,
-                  total_value_cents: 12_000,
-                  condo_id: 2)
+  SharedFee.create!(description: 'Taxa de Limpeza das áreas comuns',
+                    issue_date: 18.days.from_now,
+                    total_value_cents: 12_000,
+                    condo_id: 1)
 
-SharedFee.create!(description: 'Taxa de Jardinagem',
-                  issue_date: 5.days.from_now,
-                  total_value_cents: 18_000,
-                  condo_id: 2)
+  SharedFee.create!(description: 'Taxa de Jardinagem',
+                    issue_date: 5.days.from_now,
+                    total_value_cents: 18_000,
+                    condo_id: 2)
 
-SharedFee.create!(description: 'Taxa de Iluminação das áreas comuns',
-                  issue_date: 1.day.from_now,
-                  total_value_cents: 22_000,
-                  condo_id: 2)
+  SharedFee.create!(description: 'Taxa de Iluminação das áreas comuns',
+                    issue_date: 1.day.from_now,
+                    total_value_cents: 22_000,
+                    condo_id: 2)
 
-SharedFee.create!(description: 'Taxa de Água',
-                  issue_date: 12.days.from_now,
-                  total_value_cents: 25_000,
-                  condo_id: 2)
+  SharedFee.create!(description: 'Taxa de Água',
+                    issue_date: 12.days.from_now,
+                    total_value_cents: 25_000,
+                    condo_id: 2)
 
-SharedFee.create!(description: 'Taxa de Gás',
-                  issue_date: 10.days.from_now,
-                  total_value_cents: 20_000,
-                  condo_id: 2)
+  SharedFee.create!(description: 'Taxa de Gás',
+                    issue_date: 10.days.from_now,
+                    total_value_cents: 20_000,
+                    condo_id: 2)
 
-p "Created #{SharedFee.count} shared fees"
+  p "Created #{SharedFee.count} shared fees"
 
-SingleCharge.create!(unit_id: 97, value_cents: 150_00,
-                    issue_date: 15.days.from_now, description: 'Taxa de pintura',
-                    charge_type: :fine, condo_id: 2, status: 0)
+SingleCharge.create!(unit_id: 1, value_cents: 150_00,
+                    issue_date: 15.days.from_now, description: 'Multa por Barulho',
+                    charge_type: :fine, condo_id: 1, status: 0, skip_api_validation: true)
 
-SingleCharge.create!(unit_id: 97, value_cents: 250_00,
-                    issue_date: 10.days.from_now, description: 'Reparos na área comum',
-                    charge_type: :fine, condo_id: 2, status: 5)
+SingleCharge.create!(unit_id: 1, value_cents: 250_00,
+                    issue_date: 10.days.from_now, description: 'Acordo entre Proprietário e Morador',
+                    charge_type: :other, condo_id: 1, status: 5, skip_api_validation: true)
 
-SingleCharge.create!(unit_id: 97, value_cents: 500_00,
-                    issue_date: 5.days.from_now, description: 'Reparos de elevador',
-                    charge_type: :fine, condo_id: 2, status: 0)
+SingleCharge.create!(unit_id: 1, value_cents: 500_00,
+                    issue_date: 5.days.from_now, description: 'Multa por Sujar o Lobby',
+                    charge_type: :fine, condo_id: 1, status: 0, skip_api_validation: true)
 
 SingleCharge.create!(unit_id: 97, value_cents: 300_00,
                     issue_date: 7.days.from_now, description: 'Taxa de limpeza',
-                    charge_type: :fine, condo_id: 2, status: 0)
+                    charge_type: :fine, condo_id: 2, status: 0, skip_api_validation: true)
 
 SingleCharge.create!(unit_id: 97, value_cents: 100_00,
                     issue_date: 25.days.from_now, description: 'Reforma no jardim',
-                    charge_type: :fine, condo_id: 2, status: 0)
+                    charge_type: :fine, condo_id: 2, status: 0, skip_api_validation: true)
 
 SingleCharge.create!(unit_id: 97, value_cents: 9750_00,
                     issue_date: 30.days.from_now, description: 'Reparos elétricos',
-                    charge_type: :fine, condo_id: 2, status: 0)
+                    charge_type: :fine, condo_id: 2, status: 0, skip_api_validation: true)
 
-p "Created #{SingleCharge.count} single charge"
+  p "Created #{SingleCharge.count} single charge"
 
-Bill.create!(
-  unit_id: 97,
-  condo_id: 2,
-  base_fee_value_cents: 1000_00,
-  shared_fee_value_cents: 2100_00,
-  total_value_cents: 3100_00,
-  issue_date: Time.zone.today.beginning_of_month,
-  due_date: 10.days.from_now,
-  status: :pending
-)
+  bill1 = Bill.create!(
+    unit_id: 97,
+    condo_id: 2,
+    base_fee_value_cents: 211_00,
+    shared_fee_value_cents: 400_00,
+    single_charge_value_cents: 444_00,
+    total_value_cents: 211_00 + 400_00 + 444_00,
+    rent_fee_cents: 1_200_00,
+    issue_date: Time.zone.today.beginning_of_month,
+    due_date: Time.zone.today.beginning_of_month + 9.days,
+    status: :pending,
+    denied: false
+  )
+  BillDetail.create!(bill_id: bill1.id, description: 'Conta de Água', value_cents: 300_00, fee_type: :shared_fee)
+  BillDetail.create!(bill_id: bill1.id, description: 'Conta de Luz', value_cents: 100_00, fee_type: :shared_fee)
+  BillDetail.create!(bill_id: bill1.id, description: 'Taxa de Condomínio', value_cents: 100_00, fee_type: :base_fee)
+  BillDetail.create!(bill_id: bill1.id, description: 'Taxa de Manutenção', value_cents: 111_00, fee_type: :base_fee)
+  BillDetail.create!(bill_id: bill1.id, description: 'Multa por barulho', value_cents: 111_00, fee_type: :fine)
+  BillDetail.create!(bill_id: bill1.id, description: 'Acordo entre proprietário e morador', value_cents: 333_00, fee_type: :other)
 
-Bill.create!(
-  unit_id: 97,
-  condo_id: 2,
-  base_fee_value_cents: 1300_00,
-  shared_fee_value_cents: 2000_00,
-  total_value_cents: 3300_00,
-  issue_date: 30.days.ago.beginning_of_month,
-  due_date: 20.days.ago,
-  status: :awaiting
-)
+  bill2 = Bill.create!(
+    unit_id: 97,
+    condo_id: 2,
+    base_fee_value_cents: 200_00,
+    shared_fee_value_cents: 600_00,
+    single_charge_value_cents: 0,
+    total_value_cents: 200_00 + 600_00,
+    rent_fee_cents: 1_200_00,
+    issue_date: 1.month.ago.beginning_of_month,
+    due_date: 1.month.ago.beginning_of_month + 9.days,
+    status: :awaiting,
+    denied: false
+  )
+  BillDetail.create!(bill_id: bill2.id, description: 'Serviço de Jardinagem', value_cents: 200_00, fee_type: :shared_fee)
+  BillDetail.create!(bill_id: bill2.id, description: 'Serviço de Segurança', value_cents: 250_00, fee_type: :shared_fee)
+  BillDetail.create!(bill_id: bill2.id, description: 'Conta de Gás', value_cents: 150_00, fee_type: :shared_fee)
+  BillDetail.create!(bill_id: bill2.id, description: 'Taxa de Elevador', value_cents: 80_00, fee_type: :base_fee)
+  BillDetail.create!(bill_id: bill2.id, description: 'Taxa de Limpeza', value_cents: 120_00, fee_type: :base_fee)
 
-Bill.create!(
-  unit_id: 97,
-  condo_id: 2,
-  base_fee_value_cents: 1000_00,
-  shared_fee_value_cents: 2000_00,
-  total_value_cents: 3000_00,
-  issue_date: 60.days.ago.beginning_of_month,
-  due_date: 50.days.ago,
-  status: :paid
-)
+  bill3 = Bill.create!(
+    unit_id: 97,
+    condo_id: 2,
+    base_fee_value_cents: 560_00,
+    shared_fee_value_cents: 570_00,
+    single_charge_value_cents: 200_00,
+    total_value_cents: 560_00 + 570_00 + 200_00,
+    rent_fee_cents: 1_200_00,
+    issue_date: 2.months.ago.beginning_of_month,
+    due_date: 2.months.ago.beginning_of_month + 9.days,
+    status: :paid,
+    denied: false
+  )
+  BillDetail.create!(bill_id: bill3.id, description: 'Multa por Estacionamento Indevido', value_cents: 90_00, fee_type: :fine)
+  BillDetail.create!(bill_id: bill3.id, description: 'Taxa de Administração', value_cents: 60_00, fee_type: :base_fee)
+  BillDetail.create!(bill_id: bill3.id, description: 'Conta de Internet', value_cents: 70_00, fee_type: :shared_fee)
+  BillDetail.create!(bill_id: bill3.id, description: 'Taxa de Reparos Estruturais', value_cents: 300_00, fee_type: :base_fee)
+  BillDetail.create!(bill_id: bill3.id, description: 'Despesas Comuns', value_cents: 500_00, fee_type: :shared_fee)
+  BillDetail.create!(bill_id: bill3.id, description: 'Acordo sobre Pagamento Atrasado', value_cents: 200_00, fee_type: :other)
 
-Bill.create!(
-  unit_id: 1,
-  condo_id: 1,
-  base_fee_value_cents: 250_00,
-  shared_fee_value_cents: 750_00,
-  total_value_cents: 1000_00,
-  issue_date: Time.zone.today.beginning_of_month,
-  due_date: 10.days.from_now,
-  status: :pending
-)
+  bill4 = Bill.create!(
+    unit_id: 1,
+    condo_id: 1,
+    base_fee_value_cents: 100_00,
+    shared_fee_value_cents: 400_00,
+    single_charge_value_cents: 0,
+    total_value_cents: 100_00 + 400_00,
+    rent_fee_cents: 1_200_00,
+    issue_date: 3.months.ago.beginning_of_month,
+    due_date: 3.months.ago.beginning_of_month + 9.days,
+    status: :pending,
+    denied: false
+  )
+  BillDetail.create!(bill_id: bill4.id, description: 'Conta de Água', value_cents: 300_00, fee_type: :shared_fee)
+  BillDetail.create!(bill_id: bill4.id, description: 'Conta de Luz', value_cents: 100_00, fee_type: :shared_fee)
+  BillDetail.create!(bill_id: bill4.id, description: 'Taxa de Condomínio', value_cents: 100_00, fee_type: :base_fee)
 
-Bill.create!(
-  unit_id: 1,
-  condo_id: 1,
-  base_fee_value_cents: 300_00,
-  shared_fee_value_cents: 1000_00,
-  total_value_cents: 1300_00,
-  issue_date: 30.days.ago.beginning_of_month,
-  due_date: 20.days.ago,
-  status: :awaiting
-)
+  bill5 = Bill.create!(
+    unit_id: 1,
+    condo_id: 1,
+    base_fee_value_cents: 100_00,
+    shared_fee_value_cents: 100_00,
+    single_charge_value_cents: 444_00,
+    total_value_cents: 100_00 + 100_00 + 444_00,
+    rent_fee_cents: 1_200_00,
+    issue_date: 4.months.ago.beginning_of_month,
+    due_date: 4.months.ago.beginning_of_month + 9.days,
+    status: :awaiting,
+    denied: false
+  )
+  BillDetail.create!(bill_id: bill5.id, description: 'Conta de Luz', value_cents: 100_00, fee_type: :shared_fee)
+  BillDetail.create!(bill_id: bill5.id, description: 'Taxa de Condomínio', value_cents: 100_00, fee_type: :base_fee)
+  BillDetail.create!(bill_id: bill5.id, description: 'Multa por barulho', value_cents: 111_00, fee_type: :fine)
+  BillDetail.create!(bill_id: bill5.id, description: 'Acordo entre proprietário e morador', value_cents: 333_00, fee_type: :other)
 
-Bill.create!(
-  unit_id: 1,
-  condo_id: 1,
-  base_fee_value_cents: 270_00,
-  shared_fee_value_cents: 1000_00,
-  total_value_cents: 1270_00,
-  issue_date: 60.days.ago.beginning_of_month,
-  due_date: 50.days.ago,
-  status: :paid
-)
+  bill6 = Bill.create!(
+    unit_id: 1,
+    condo_id: 1,
+    base_fee_value_cents: 100_00,
+    shared_fee_value_cents: 100_00,
+    single_charge_value_cents: 444_00,
+    total_value_cents: 100_00 + 100_00 + 444_00,
+    rent_fee_cents: 1_200_00,
+    issue_date: 5.months.ago.beginning_of_month,
+    due_date: 5.months.ago.beginning_of_month + 9.days,
+    status: :paid,
+    denied: false
+  )
+  BillDetail.create!(bill_id: bill6.id, description: 'Conta de Luz', value_cents: 100_00, fee_type: :shared_fee)
+  BillDetail.create!(bill_id: bill6.id, description: 'Taxa de Condomínio', value_cents: 100_00, fee_type: :base_fee)
+  BillDetail.create!(bill_id: bill6.id, description: 'Multa por barulho', value_cents: 111_00, fee_type: :fine)
+  BillDetail.create!(bill_id: bill6.id, description: 'Acordo entre proprietário e morador', value_cents: 333_00, fee_type: :other)
 
-Bill.create!(
-  unit_id: 1,
-  condo_id: 1,
-  base_fee_value_cents: 1000_00,
-  shared_fee_value_cents: 500_00,
-  total_value_cents: 1500_00,
-  issue_date: 90.days.ago.beginning_of_month,
-  due_date: 80.days.ago,
-  status: :paid
-)
+  bill7 = Bill.create!(
+    unit_id: 1,
+    condo_id: 1,
+    base_fee_value_cents: 100_00,
+    shared_fee_value_cents: 100_00,
+    single_charge_value_cents: 444_00,
+    total_value_cents: 100_00 + 100_00 + 444_00,
+    rent_fee_cents: 1_200_00,
+    issue_date: 6.months.ago.beginning_of_month,
+    due_date: 6.months.ago.beginning_of_month + 9.days,
+    status: :paid,
+    denied: false
+  )
+  BillDetail.create!(bill_id: bill7.id, description: 'Conta de Luz', value_cents: 100_00, fee_type: :shared_fee)
+  BillDetail.create!(bill_id: bill7.id, description: 'Taxa de Condomínio', value_cents: 100_00, fee_type: :base_fee)
+  BillDetail.create!(bill_id: bill7.id, description: 'Multa por barulho', value_cents: 111_00, fee_type: :fine)
 
-Bill.create!(
-  unit_id: 1,
-  condo_id: 1,
-  base_fee_value_cents: 1000_00,
-  shared_fee_value_cents: 510_00,
-  total_value_cents: 1510_00,
-  issue_date: 120.days.ago.beginning_of_month,
-  due_date: 110.days.ago,
-  status: :paid
-)
+  p "Created 3 bills for 314.787.200-93"
+  p "Created 5 bills for 458.456.480-92"
 
-p "Created 3 bills for 314.787.200-93"
-p "Created 5 bills for 458.456.480-92"
+  Receipt.create!(bill_id: bill1.id, file: Rails.root.join('app', 'assets', 'images', 'cupom-fiscal.jpg').open)
+  p "Created 1 Receipt with image"
+  sleep(1)
+  Receipt.create!(bill_id: bill3.id, file: Rails.root.join('app', 'assets', 'images', 'comprovante-pg.jpg').open)
+  p "Created 1 more Receipt with image"
+  sleep(1)
+  Receipt.create!(bill_id: bill4.id, file: Rails.root.join('app', 'assets', 'images', 'cupom-fiscal.jpg').open)
+  p "Created 1 more Receipt with image"
+  sleep(1)
+  Receipt.create!(bill_id: bill5.id, file: Rails.root.join('app', 'assets', 'images', 'cupom-fiscal.jpg').open)
+  p "Created 1 more Receipt with image"
+  sleep(1)
+  Receipt.create!(bill_id: bill2.id, file: Rails.root.join('app', 'assets', 'images', 'blurry-receipt.png').open)
+  p "Created 1 Receipt with a blurry image"
+  sleep(1)
+  Receipt.create!(bill_id: bill6.id, file: Rails.root.join('app', 'assets', 'images', 'cupom-fiscal.jpg').open)
+  p "Created 1 more Receipt with image"
+  sleep(1)
+  Receipt.create!(bill_id: bill7.id, file: Rails.root.join('app', 'assets', 'images', 'cupom-fiscal.jpg').open)
+  p "Created 1 more Receipt with image"
 
-Receipt.create!(bill_id: 2, file: Rails.root.join('app', 'assets', 'images', 'cupom-fiscal.jpg').open)
-Receipt.create!(bill_id: 3, file: Rails.root.join('app', 'assets', 'images', 'comprovante-pg.jpg').open)
-Receipt.create!(bill_id: 5, file: Rails.root.join('app', 'assets', 'images', 'cupom-fiscal.jpg').open)
-Receipt.create!(bill_id: 6, file: Rails.root.join('app', 'assets', 'images', 'cupom-fiscal.jpg').open)
-Receipt.create!(bill_id: 7, file: Rails.root.join('app', 'assets', 'images', 'cupom-fiscal.jpg').open)
-Receipt.create!(bill_id: 8, file: Rails.root.join('app', 'assets', 'images', 'cupom-fiscal.jpg').open)
-
-p "Created #{Receipt.count} receipts"
+  p "Created #{Receipt.count} receipts"
+  p "All done :)"

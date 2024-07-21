@@ -21,6 +21,7 @@ class CondosController < ApplicationController
     recent_base_fees
     recent_shared_fees
     recent_single_charges
+    recent_bills
   end
 
   def recent_base_fees
@@ -34,6 +35,10 @@ class CondosController < ApplicationController
 
   def recent_single_charges
     @recent_single_charges = SingleCharge.where(condo_id: @condo.id).order(created_at: :desc).take(2)
+  end
+
+  def recent_bills
+    @recent_bills = Bill.where(condo_id: @condo.id).order(created_at: :desc).take(2)
   end
 
   private

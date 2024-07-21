@@ -1,0 +1,56 @@
+<div class="px-5">
+  <div class="mb-3">
+    <div class=" d-flex justify-content-between">
+      <span class="text-muted text-lowercase fs-7"><%= I18n.t('views.show.all_base_fees') %>:</span>
+      <span><%= @bill.base_fee_value.format %></span>
+    </div>
+    <% @bill.bill_details.each do |detail| %>
+      <% if detail.base_fee? %>
+        <div class="d-flex justify-content-between">
+          <span class="text-muted text-lowercase fs-8"><%= detail.description %></span>
+          <span class="text-muted fs-8"><%= detail.value.format %></span>
+        </div>
+      <% end %>
+    <% end %>
+  </div>
+  <div class="mb-3">
+    <div class=" d-flex justify-content-between">
+      <span class="text-muted text-lowercase fs-7"><%= I18n.t('views.show.all_shared_fees') %>:</span>
+      <span><%= @bill.shared_fee_value.format%></span>
+    </div>
+    <% @bill.bill_details.each do |detail| %>
+      <% if detail.shared_fee? %>
+        <div class=" d-flex justify-content-between">
+          <span class="text-muted text-lowercase fs-8"><%= detail.description %></span>
+          <span class="text-muted fs-8"><%= detail.value.format %></span>
+        </div>
+      <% end %>
+    <% end %> 
+  </div>
+  <div class="mb-3">
+    <div class=" d-flex justify-content-between">
+      <span class="text-muted text-lowercase fs-7"><%= I18n.t('views.show.all_single_charges') %>:</span>
+      <span><%= @bill.single_charge_value.format %></span>
+    </div>
+    <% @bill.bill_details.each do |detail| %>
+      <% if detail.fine? || detail.other? %>
+        <div class=" d-flex justify-content-between">
+          <span class="text-muted text-lowercase fs-8"><%= detail.description %></span>
+          <span class="text-muted fs-8"><%= detail.value.format %></span>
+        </div>
+      <% end %>
+      <% if detail.common_area_fee? %>
+        <div class=" d-flex justify-content-between">
+          <span class="text-muted text-lowercase fs-8"><%= I18n.t('views.show.booking', common_area: detail.description) %></span>
+          <span class="text-muted fs-8"><%= detail.value.format %></span>
+        </div>
+      <% end %>
+    <% end %> 
+  </div>
+  <div class="mb-3">
+    <div class=" d-flex justify-content-between">
+      <span class="text-muted text-lowercase fs-7"><%= RentFee.model_name.human  %>:</span>
+      <span><%= @bill.rent_fee.format %></span>
+    </div>
+  </div>
+</div>

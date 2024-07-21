@@ -34,7 +34,7 @@ class NdCertificatesController < ApplicationController
 
   def all_bills_paid?
     @unit_bills = Bill.where(condo_id: @unit.condo_id, unit_id: @unit.id)
-    @unit_bills.all? { |bill| bill.status == 'paid' }
+    @unit_bills.none? { |bill| bill.status != 'paid' }
   end
 
   def create_and_save_certificate
@@ -48,11 +48,11 @@ class NdCertificatesController < ApplicationController
   end
 
   def redirect_to_error
-    redirect_to condo_nd_certificates_path(@unit.condo_id), alert: I18n.t('errors.cant_generate.nd')
+    redirect_to root_path, alert: I18n.t('errors.cant_generate.nd')
   end
 
   def redirect_to_pending_debts
-    redirect_to condo_nd_certificates_path(@unit.condo_id), notice: I18n.t('messages.pending.debt')
+    redirect_to root_path, notice: I18n.t('messages.pending.debt')
   end
 
   def admin_authorized?

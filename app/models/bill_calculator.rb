@@ -1,10 +1,31 @@
 class BillCalculator
-  def self.calculate_total_fees(unit)
-    base_fees = BaseFeeCalculator.total_value(unit.unit_type_id)
-    shared_fees = calculate_shared_fees(unit.id)
-    single_charges = calculate_single_charges(unit.id)
-    rent_fee = check_rent_fee(unit.id)
-    base_fees + shared_fees + single_charges + rent_fee
+  def self.generate_bill_details(bill)
+    shared_fees = get_last_month_fractions(bill.unit_id)
+    single_charges = get_last_month_single_charges(bill.unit_id)
+
+    process_fees(shared_fees, bill)
+    process_charges(single_charges, bill)
+  end
+
+  def self.process_fees(shared_fees, bill)
+    shared_fees.each do |fee|
+      BillDetail.create!(bill_id: bill.id, description: fee.shared_fee.description,
+                         value_cents: fee.value_cents, fee_type: :shared_fee)
+    end
+    BaseFeeCalculator.generate_base_fee_details(bill, Unit.find(bill.unit_id).unit_type_id)
+  end
+
+  def self.process_charges(single_charges, bill)
+    single_charges.each do |charge|
+      if charge.common_area_fee?
+        BillDetail.create!(bill_id: bill.id, description: CommonArea.find(charge.common_area_id).name,
+                           value_cents: charge.value_cents, fee_type: charge.charge_type)
+
+      else
+        BillDetail.create!(bill_id: bill.id, description: charge.description,
+                           value_cents: charge.value_cents, fee_type: charge.charge_type)
+      end
+    end
   end
 
   def self.calculate_shared_fees(unit_id)

@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema[7.1].define(version: 2024_07_19_195158) do
+ActiveRecord::Schema[7.1].define(version: 2024_07_19_195651) do
   create_table "active_storage_attachments", force: :cascade do |t|
     t.string "name", null: false
     t.string "record_type", null: false
@@ -80,6 +80,16 @@ ActiveRecord::Schema[7.1].define(version: 2024_07_19_195158) do
     t.integer "counter", default: 0
   end
 
+  create_table "bill_details", force: :cascade do |t|
+    t.string "description"
+    t.integer "value_cents"
+    t.integer "fee_type"
+    t.integer "bill_id", null: false
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.index ["bill_id"], name: "index_bill_details_on_bill_id"
+  end
+
   create_table "bills", force: :cascade do |t|
     t.integer "unit_id"
     t.date "issue_date"
@@ -91,6 +101,9 @@ ActiveRecord::Schema[7.1].define(version: 2024_07_19_195158) do
     t.integer "shared_fee_value_cents"
     t.integer "base_fee_value_cents"
     t.integer "status", default: 0, null: false
+    t.integer "single_charge_value_cents"
+    t.integer "rent_fee_cents"
+    t.boolean "denied", default: false
   end
 
   create_table "common_area_fees", force: :cascade do |t|
@@ -191,6 +204,7 @@ ActiveRecord::Schema[7.1].define(version: 2024_07_19_195158) do
   add_foreign_key "active_storage_attachments", "active_storage_blobs", column: "blob_id"
   add_foreign_key "active_storage_variant_records", "active_storage_blobs", column: "blob_id"
   add_foreign_key "associated_condos", "admins"
+  add_foreign_key "bill_details", "bills"
   add_foreign_key "common_area_fees", "admins"
   add_foreign_key "shared_fee_fractions", "shared_fees"
   add_foreign_key "values", "base_fees"

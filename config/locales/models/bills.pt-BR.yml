@@ -14,6 +14,10 @@ pt-BR:
           pending: Pendente
           awaiting: Aguardando
           paid: Paga
+        all_base_fees: total de taxas condominiais
+        all_shared_fees: total de contas compartilhadas
+        all_single_charges: total de cobranças avulsas
+        booking: Reserva de %{common_area}
 
 
 

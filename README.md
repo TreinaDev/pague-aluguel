@@ -27,6 +27,8 @@
 
 ▶️ [Navegação](#navegação)
 
+▶️ [APIs](#apis)
+
 ▶️ [Criação de Contas Fictícias](#criação-de-contas-fictícias)
 
 ▶️ [Desenvolvedores](#desenvolvedores)
@@ -61,30 +63,31 @@
 ### Registro e Gerenciamento de Cobranças Avulsas
 
 - [x] **Registro de Cobranças Avulsas:** Administradores e proprietários podem registrar cobranças avulsas com unidade, valor, data de lançamento e descrição.
-- [ ] **Integração com CondoMinions:** Reservas de áreas comuns na aplicação CondoMinions geram automaticamente cobranças avulsas.
+- [x] **Integração com CondoMinions:** Reservas de áreas comuns na aplicação CondoMinions geram automaticamente cobranças avulsas.
 
 ### Cobrança de Aluguel
 
-- [ ] **Configuração de Aluguel:** Proprietários podem configurar a cobrança de aluguel, com valor, dia de lançamento, juros e multa por atraso.
-- [ ] **Desativação de Cobrança:** Proprietários podem desativar a cobrança de aluguel automaticamente se o imóvel deixar de ser alugado.
+- [x] **Configuração de Aluguel:** Proprietários podem configurar a cobrança de aluguel, com valor, dia de lançamento, juros e multa por atraso.
+- [x] **Desativação de Cobrança:** Proprietários podem desativar a cobrança de aluguel automaticamente se o imóvel deixar de ser alugado.
 
-### Emissão de Boletos de Condomínio
+### Emissão de Faturas de Condomínio
 
-- [x] **Geração de Boletos:** Todo dia 01 de cada mês, são gerados boletos contendo todas as cobranças da unidade.
-- [ ] **Detalhamento de Boletos:** Boletos contêm itens cobrados e registram pagador e recebedor com dados do CondoMinions.
+- [x] **Geração de Faturass:** Todo dia 01 de cada mês, são geradas faturas contendo todas as cobranças da unidade.
+- [x] **Detalhamento de Faturas:** Faturas contêm itens cobrados e registram pagador e recebedor com dados do CondoMinions.
 
-### Acesso a Boletos
+### Acesso a Faturas
 
-- [ ] **Visualização de Boletos:** Inquilinos podem visualizar boletos de pagamento sem necessidade de login, informando apenas o CPF.
-- [ ] **Validação de CPF:** A aplicação valida o CPF com o CondoMinions para acesso aos boletos.
+- [x] **Visualização de Faturas:** Inquilinos podem visualizar faturas de pagamento sem necessidade de login, informando apenas o CPF.
+- [x] **Validação de CPF:** A aplicação valida o CPF com o CondoMinions para acesso as faturas.
+- [x] **API Endpoint:** Dois APIs endpoints são disponibilizados para consulta de faturas, um de listagem e um de detalhamento. Mais detalhes na seção de API.
 
 ### Registro de Pagamento
 
-- [ ] **Gestão de Pagamentos:** Administradores podem visualizar, filtrar e confirmar pagamentos de boletos, registrando data de pagamento e código da transação.
+- [x] **Gestão de Pagamentos:** Administradores podem visualizar, filtrar e confirmar pagamentos de faturas, registrando se a fatura foi paga ou não.
 
 ### Emissão de Certidão Negativa de Débitos
 
-- [ ] **Emissão de Certidão:** Administradores, proprietários e moradores (sem autenticação) podem emitir certidões negativas de débito se não houver boletos vencidos e não pagos.
+- [ ] **Emissão de Certidão:** Administradores, proprietários e moradores (sem autenticação) podem emitir certidões negativas de débito se não houver faturas vencidas e não pagas.
 - [ ] **Validação e Geração:** Certidão é gerada no momento da solicitação com data e hora da emissão.
 
 
@@ -256,9 +259,9 @@ Caso o condomínio possua alguma taxa cadastrada: `status: 200, json:`
 
 Recebe como parâmetro o `:id` de uma taxa cadastrada e retorna **os detalhes da taxa de área comum** desejada.
 **Retorna:** <br>
-Caso não exista taxa com o id informado: `status: 404` 
+Caso não exista taxa com o id informado: `status: 404`
 ```json
-{ 
+{
   "errors":"Não encontrado"
 }
 ```
@@ -300,7 +303,7 @@ Recebe os seguintes parâmetros:
                   }
 }
 ```
-Resposta para criação com sucesso: `status: 201, body: {message: :message}` (:created) 
+Resposta para criação com sucesso: `status: 201, body: {message: :message}` (:created)
 
 Exemplo de cobrança avulsa (Multa):
 ```
@@ -315,7 +318,7 @@ Exemplo de cobrança avulsa (Multa):
                   }
 }
 ```
-Resposta para criação com sucesso: `status: 201, body: {message: :message}` (:created) 
+Resposta para criação com sucesso: `status: 201, body: {message: :message}` (:created)
 
 Exemplo de cobrança avulsa (Reserva de Área Comum):
 ```
@@ -330,7 +333,7 @@ Exemplo de cobrança avulsa (Reserva de Área Comum):
                   }
 }
 ```
-Resposta para criação com sucesso: `status: 201, body: {message: :message, single_charge_id: :id}` (:created) 
+Resposta para criação com sucesso: `status: 201, body: {message: :message, single_charge_id: :id}` (:created)
 
 ### 2.2
 
@@ -348,7 +351,7 @@ Recebemos como parâmetro um `id` de uma fatura e retornamos **todos os detalhes
 **Retorna:** <br>
 Caso não exista taxa com o id informado: `status: 404`:
 ```json
-{ 
+{
   "errors":"Não encontrado"
 }
 ```
@@ -359,14 +362,49 @@ Caso exista taxa com o id informado: `status: 200`:
 {
   "unit_id": 1,
   "condo_id": 2,
-  "issue_date": "2024-06-01",
-  "due_date": "2024-06-10",
-  "total_value_cents": 2000,
+  "issue_date": "2024-07-01",
+  "due_date": "2024-07-29",
+  "total_value_cents": 105500,
   "status": "pending",
+  "denied": false,
   "values": {
-    "base_fee_value_cents": 500,
-    "shared_fee_value_cents": 1500
-  }
+    "base_fee_value_cents": 21100,
+    "shared_fee_value_cents": 40000,
+    "single_charge_value_cents": 44400,
+    "rent_fee_cents": 120000
+  },
+  "bill_details": [
+    {
+      "value_cents": 30000,
+      "description": "Conta de Água",
+      "fee_type": "shared_fee"
+    },
+    {
+      "value_cents": 10000,
+      "description": "Conta de Luz",
+      "fee_type": "shared_fee"
+    },
+    {
+      "value_cents": 10000,
+      "description": "Taxa de Condomínio",
+      "fee_type": "base_fee"
+    },
+    {
+      "value_cents": 11100,
+      "description": "Taxa de Manutenção",
+      "fee_type": "base_fee"
+    },
+    {
+      "value_cents": 11100,
+      "description": "Multa por barulho",
+      "fee_type": "fine"
+    },
+    {
+      "value_cents": 33300,
+      "description": "Acordo entre proprietário e morador",
+      "fee_type": "other"
+    }
+  ]
 }
 ```
 
@@ -400,7 +438,7 @@ Caso a unidade não possua nenhuma fatura cadastrada: `status: 200`:
 ```json
 {
   "bills": [
-    
+
   ]
 }
 ```

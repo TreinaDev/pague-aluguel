@@ -1,12 +1,15 @@
 <%= turbo_frame_tag "modal" do %>
   <div class="dean-modal modal-md">
-    <%= link_to "", condo_bills_path(@condo.id), class: "btn btn-close btn-sm", id: 'close' %>
+    <%= link_to "", :back, id: 'close', class: "btn btn-sm btn-close" %>
 
     <span class="fs-8 text-center d-block"><%= I18n.t('activerecord.models.bill.one') %></span>
     <span class="fs-3 text-center d-block"><%= unit_name(@bill) %></span>
     <span class="fs-8 text-center d-block text-muted"><%= @condo.name %></span>
     <hr>
-
+      <%= render partial: "bill_dates" %>
+    <hr>
+      <%= render partial: "bill_description" %>
+    <hr>
     <div class="d-flex justify-content-center align-items-center">
       <%= image_tag "dollar-icon", size: "20" %>
       <span class="ms-1 me-2 fs-7 text-muted">
@@ -15,7 +18,6 @@
 
       <%= @bill.total_value.format %>
     </div>
-
     <hr>
     <div class="px-5">
       <div class=" d-flex justify-content-between">
@@ -74,5 +76,6 @@
       </div>
     <% end %>
 
+    <%= render partial: "bill_status" %>
   </div>
 <% end %>
