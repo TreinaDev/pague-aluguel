@@ -298,7 +298,7 @@ Resposta para falha na criação: `status: 422` (:unprocessable_entity)
 - a `unit_id` deve pertencer ao `condo_id` (unidade deve ser do condomínio)
 
 **Recebe os seguintes parâmetros::** <br>
-```json
+```
 { single_charge: { description: string,
                    value_cents: integer,
                    charge_type: enum (:fine ou :common_area_fee),
@@ -312,7 +312,7 @@ Resposta para falha na criação: `status: 422` (:unprocessable_entity)
 Resposta para criação com sucesso:<br> `status: 201, body: {message: :message}` (:created)
 
 Exemplo de cobrança avulsa (Multa):
-```json
+```
 { single_charge: { description: 'Multa por barulho durante a madrugada',
                    value_cents: 10000,
                    charge_type: :fine,
@@ -326,7 +326,7 @@ Exemplo de cobrança avulsa (Multa):
 Resposta para criação com sucesso:<br> `status: 201, body: {message: :message}` (:created)
 
 Exemplo de cobrança avulsa (Reserva de Área Comum):
-```json
+```
 { single_charge: { description: nil,
                    value_cents: ~deve retornar do endpoint de taxas de áreas comuns~,
                    charge_type: :common_area_fee,
