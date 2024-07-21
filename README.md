@@ -4,7 +4,7 @@
 ![Static Badge](https://img.shields.io/badge/Ruby_on_Rails_7.1.3.1-CC0000?style=for-the-badge&logo=ruby-on-rails&logoColor=white)
 ![Bootstrap](https://img.shields.io/badge/bootstrap-%238511FA.svg?style=for-the-badge&logo=bootstrap&logoColor=white)
 
-![Static Badge](https://img.shields.io/badge/COBERTURA_DE_TESTES-97%25-blue)
+![Static Badge](https://img.shields.io/badge/COBERTURA_DE_TESTES-99%25-blue)
 ![Static Badge](https://img.shields.io/badge/STATUS-EM_DESENVOLVIMENTO-green)
 
 ### Tópicos
@@ -87,8 +87,8 @@
 
 ### Emissão de Certidão Negativa de Débitos
 
-- [ ] **Emissão de Certidão:** Administradores, proprietários e moradores (sem autenticação) podem emitir certidões negativas de débito se não houver faturas vencidas e não pagas.
-- [ ] **Validação e Geração:** Certidão é gerada no momento da solicitação com data e hora da emissão.
+- [x] **Emissão de Certidão:** Administradores, proprietários e moradores (sem autenticação) podem emitir certidões negativas de débito se não houver faturas vencidas e não pagas.
+- [x] **Validação e Geração:** Certidão é gerada no momento da solicitação com data e hora da emissão.
 
 
 ## Gems utilizadas
@@ -223,12 +223,17 @@ Você pode usar sites como [4Devs](https://www.4devs.com.br/) para gerar número
 
 ## 1. Taxas de Áreas Comuns
 
-`GET /api/v1/condos/:id/common_area_fees`
+### 1.1 Lista de últimas taxas de área comum cadastradas
+📍 `GET /api/v1/condos/:id/common_area_fees`
 
-Recebe como parâmetro `:id` de um condomínio, e retorna uma lista com **a última taxa cadastrada para cada área comum desse condomínio**
-Retorna: <br>
-Caso o condomínio não possua nenhuma taxa cadastrada: `status: 200, json: []` <br>
-Caso o condomínio possua alguma taxa cadastrada: `status: 200, json:`
+Recebe como parâmetro `:id` de um condomínio, e retorna uma lista com a última taxa cadastrada para cada área comum desse condomínio
+
+**Retorna:** <br>
+Caso o condomínio não possua nenhuma taxa cadastrada:<br>
+`status: 200, json: []`
+
+Caso o condomínio possua alguma taxa cadastrada: <br>
+`status: 200, json:`
 ```json
 [
   {
@@ -255,17 +260,19 @@ Caso o condomínio possua alguma taxa cadastrada: `status: 200, json:`
 ]
 ```
 
-`GET /api/v1/common_area_fees/:id`
+### 1.2 Detalhes de uma taxa de área comum
+📍 `GET /api/v1/common_area_fees/:id`
 
-Recebe como parâmetro o `:id` de uma taxa cadastrada e retorna **os detalhes da taxa de área comum** desejada.
+Recebe como parâmetro o `:id` de uma taxa cadastrada e retorna os detalhes da taxa de área comum desejada.
+
 **Retorna:** <br>
-Caso não exista taxa com o id informado: `status: 404`
+Caso não exista taxa com o id informado:<br> `status: 404, json:`
 ```json
 {
   "errors":"Não encontrado"
 }
 ```
-Caso o condomínio possua alguma taxa cadastrada: `status: 200, json:`
+Caso o condomínio possua alguma taxa cadastrada:<br> `status: 200, json:`
 ```json
 {
   "value_cents":20000,
@@ -278,7 +285,7 @@ Caso o condomínio possua alguma taxa cadastrada: `status: 200, json:`
 ## 2. Cobranças Avulsas
 
 ### 2.1 Criação de Cobranças Avulsas
-`POST /api/v1/single_charges/?params`
+📍 `POST /api/v1/single_charges/?params`
 
 Expõe uma API endpoint de criação de model `single_charge`, válido para criação de Multas e Reservas de Áreas Comuns.
 
@@ -290,74 +297,79 @@ Resposta para falha na criação: `status: 422` (:unprocessable_entity)
 - se o `charge_type == fine`, a `description` é obrigatória
 - a `unit_id` deve pertencer ao `condo_id` (unidade deve ser do condomínio)
 
-Recebe os seguintes parâmetros:
-```
-{ single_charge: {
-                    description: string,
-                    value_cents: integer,
-                    charge_type: enum (:fine ou :common_area_fee),
-                    issue_date: date,
-                    condo_id: integer,
-                    common_area_id: integer,
-                    unit_id: integer
-                  }
+**Recebe os seguintes parâmetros::** <br>
+```json
+{
+  single_charge: {
+    description: string,
+    value_cents: integer,
+    charge_type: enum (:fine ou :common_area_fee),
+    issue_date: date,
+    condo_id: integer,
+    common_area_id: integer,
+    unit_id: integer
+  }
 }
 ```
-Resposta para criação com sucesso: `status: 201, body: {message: :message}` (:created)
+Resposta para criação com sucesso:<br> `status: 201, body: {message: :message}` (:created)
 
 Exemplo de cobrança avulsa (Multa):
-```
-{ single_charge: {
-                    description: 'Multa por barulho durante a madrugada',
-                    value_cents: 10000,
-                    charge_type: :fine,
-                    issue_date: 5.days.from_now.to_date,
-                    condo_id: 1,
-                    common_area_id: nil,
-                    unit_id: 1
-                  }
+```json
+{
+  single_charge: {
+    description: 'Multa por barulho durante a madrugada',
+    value_cents: 10000,
+    charge_type: :fine,
+    issue_date: 5.days.from_now.to_date,
+    condo_id: 1,
+    common_area_id: nil,
+    unit_id: 1
+  }
 }
 ```
-Resposta para criação com sucesso: `status: 201, body: {message: :message}` (:created)
+Resposta para criação com sucesso:<br> `status: 201, body: {message: :message}` (:created)
 
 Exemplo de cobrança avulsa (Reserva de Área Comum):
-```
-{ single_charge: {
-                    description: nil,
-                    value_cents: ~deve retornar do endpoint de taxas de áreas comuns~,
-                    charge_type: :common_area_fee,
-                    issue_date: 5.days.from_now.to_date,
-                    condo_id: 1,
-                    common_area_id: 2,
-                    unit_id: 1
-                  }
+```json
+{
+  single_charge: {
+    description: nil,
+    value_cents: ~deve retornar do endpoint de taxas de áreas comuns~,
+    charge_type: :common_area_fee,
+    issue_date: 5.days.from_now.to_date,
+    condo_id: 1,
+    common_area_id: 2,
+    unit_id: 1
+  }
 }
 ```
-Resposta para criação com sucesso: `status: 201, body: {message: :message, single_charge_id: :id}` (:created)
+Resposta para criação com sucesso:<br> `status: 201, body: {message: :message, single_charge_id: :id}` (:created)
 
-### 2.2
+### 2.2 Cancelar uma reserva de área comum
 
 Expõe uma API endpoint de cancelamento do status do model `single_charge` para Reservas de Áreas Comuns.
 
-`PATCH /api/v1/single_charges/:id/cancel`
+📍 `PATCH /api/v1/single_charges/:id/cancel`
 
-Resposta para cancelamento com sucesso: `status: 201, body: {message: :message}` (:created)
+Recebe como parâmetro o `:id` de uma reserva
+Resposta para cancelamento com sucesso:<br> `status: 201, body: {message: :message}` (:created)
 
 ## 3. Faturas
+### 3.1 Detalhes de uma fatura
 
-`GET api/v1/bills/:id`
+📍 `GET api/v1/bills/:id`
 
-Recebemos como parâmetro um `id` de uma fatura e retornamos **todos os detalhes da fatura** desejada. <br>
+Recebemos como parâmetro um `:id` de uma fatura e retornamos **todos os detalhes da fatura** desejada.
+
 **Retorna:** <br>
-Caso não exista taxa com o id informado: `status: 404`:
+Caso não exista taxa com o id informado:<br> `status: 404, json:`
 ```json
 {
   "errors":"Não encontrado"
 }
 ```
 
-Caso exista taxa com o id informado: `status: 200`:
-
+Caso exista taxa com o id informado: <br> `status: 200, json:`
 ```json
 {
   "unit_id": 1,
@@ -408,12 +420,14 @@ Caso exista taxa com o id informado: `status: 200`:
 }
 ```
 
-`GET api/v1/units/:unit_id/bills`
+### 3.2 Lista de faturas por unidade
+📍 `GET api/v1/units/:unit_id/bills`
 
-Recebemos como parâmetro um `id` de uma fatura e retornamos **todos os detalhes da fatura** desejada. <br>
+Recebemos como parâmetro um `id` de uma unidade e retornamos **todas as faturas relacionadas a ela.**
+
 **Retorna:** <br>
 
-Caso a unidade possua alguma taxa cadastrada: `status: 200`:
+Caso a unidade possua alguma fatura cadastrada: `status: 200, json:`
 ```json
 {
   "bills": [
@@ -443,11 +457,9 @@ Caso a unidade não possua nenhuma fatura cadastrada: `status: 200`:
 }
 ```
 
-## 4. Comprovante
+## 4. Comprovante de Pagamento
 
-URL: ` /api/v1/receipts`
-
-Método: POST
+📍 `POST /api/v1/receipts`
 
 Expõe um endpoint da API para a criação do modelo receipt, válido para o upload de comprovantes.
 
@@ -455,6 +467,9 @@ Parâmetros do Corpo da Requisição
 
 - `receipt`: Arquivo anexado do comprovante. Obrigatório. ( Deve ser um arquivo em formato PDF, JPEG ou PNG )
 - `bill_id`: Id da fatura associada ao comprovante. Obrigatório.
+
+<br>
+<hr>
 
 # Desenvolvedores 🧑🏽‍💻🧑🏻‍💻🧑‍💻
 
