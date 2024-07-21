@@ -27,7 +27,7 @@ describe 'Usuario acessa uma fatura' do
     expect(response.body).to include 'valor total'
     expect(response.body).to include 'R$3.100,00'
     expect(response.body).to include 'data de vencimento'
-    expect(response.body).to include 'data de emissão'
+    expect(response.body).to include 'Data de Emissão'
     expect(response.body).to include 'Pagamento'
     expect(response.body).to include 'Pendente'
   end
@@ -59,7 +59,7 @@ describe 'Usuario acessa uma fatura' do
     expect(response.body).to include 'valor total'
     expect(response.body).to include 'R$3.100,00'
     expect(response.body).to include 'data de vencimento'
-    expect(response.body).to include 'data de emissão'
+    expect(response.body).to include 'Data de Emissão'
     expect(response.body).to include 'Pagamento'
     expect(response.body).to include 'Pendente'
   end
