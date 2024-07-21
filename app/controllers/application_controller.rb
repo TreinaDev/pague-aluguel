@@ -4,7 +4,7 @@ class ApplicationController < ActionController::Base
   protected
 
   def connection_refused
-    redirect_to server_out_of_air_path
+    redirect_to server_unreachable_path
   end
 
   def admin_authorized?

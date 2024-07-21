@@ -1,3 +1,3 @@
 class ServerController < ApplicationController
-  def out_of_air; end
+  def unreachable; end
 end
