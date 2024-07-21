@@ -40,6 +40,7 @@ pt-BR:
       floor: Andar
       capacity: capacidade máxima
       rules: regras de uso
+      payment: Pagamento
       total_value:
         base_fees: total de taxas condominiais
         shared_fees: total de contas compartilhadas

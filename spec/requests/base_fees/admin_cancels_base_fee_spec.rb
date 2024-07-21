@@ -14,7 +14,7 @@ describe 'Admin cancela uma taxa condominial' do
     post cancel_condo_base_fee_path(condo.id, base_fee.id)
 
     expect(response).to have_http_status :found
-    expect(flash[:notice]).to eq "#{base_fee.name} cancelada com sucesso."
+    expect(flash[:notice]).to eq "#{base_fee.name} cancelada com sucesso!"
   end
 
   it 'com sucesso - Admin associado ao condominio' do
@@ -31,7 +31,7 @@ describe 'Admin cancela uma taxa condominial' do
     post cancel_condo_base_fee_path(condo.id, base_fee.id)
 
     expect(response).to have_http_status :found
-    expect(flash[:notice]).to eq "#{base_fee.name} cancelada com sucesso."
+    expect(flash[:notice]).to eq "#{base_fee.name} cancelada com sucesso!"
   end
 
   it 'falha pois não está associado' do

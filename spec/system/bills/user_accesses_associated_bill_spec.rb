@@ -51,7 +51,7 @@ describe 'Usuário acessa suas faturas' do
         expect(page).to have_content 'Unidade 23'
         expect(page).to have_content 'valor total'
         expect(page).to have_content 'R$500,00'
-        expect(page).to have_content 'Data de Emissão'
+        expect(page).to have_content 'data de emissão'
         expect(page).to have_content formatted_issue_date1
         expect(page).to have_content 'data de vencimento'
         expect(page).to have_content formatted_due_date1
@@ -61,7 +61,7 @@ describe 'Usuário acessa suas faturas' do
         expect(page).to have_content 'Unidade 23'
         expect(page).to have_content 'valor total'
         expect(page).to have_content 'R$600,00'
-        expect(page).to have_content 'Data de Emissão'
+        expect(page).to have_content 'data de emissão'
         expect(page).to have_content formatted_issue_date2
         expect(page).to have_content 'data de vencimento'
         expect(page).to have_content formatted_due_date2
@@ -71,7 +71,7 @@ describe 'Usuário acessa suas faturas' do
         expect(page).to have_content 'Unidade 23'
         expect(page).to have_content 'valor total'
         expect(page).to have_content 'R$700,00'
-        expect(page).to have_content 'Data de Emissão'
+        expect(page).to have_content 'data de emissão'
         expect(page).to have_content formatted_issue_date3
         expect(page).to have_content 'data de vencimento'
         expect(page).to have_content formatted_due_date3

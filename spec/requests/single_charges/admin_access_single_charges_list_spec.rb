@@ -35,7 +35,7 @@ describe 'Admin visualiza lista de cobranças avulsas' do
     expect(response.body).to include unit.number
     expect(response.body).to include unit2.number
     expect(response.body).to include 'Multa'
-    expect(response.body).to include 'Taxa de área comum'
+    expect(response.body).to include 'Taxa de pintura'
     expect(response.body).to include 'Outros'
     expect(response.body).to include single_charge.description
     expect(response.body).to include single_charge2.description
@@ -66,13 +66,13 @@ describe 'Admin visualiza lista de cobranças avulsas' do
     allow(Unit).to receive(:find).with(2).and_return(unit2)
     allow(CommonArea).to receive(:all).and_return(common_areas)
     single_charge = create(:single_charge, unit_id: unit.id, value_cents: 150_00, issue_date: 5.days.from_now,
-                                           description: 'Taxa de pintura', charge_type: 'fine', condo_id: condo.id,
+                                           description: 'Taxa de manutenção', charge_type: 'fine', condo_id: condo.id,
                                            status: 'active')
     single_charge2 = create(:single_charge, unit_id: unit2.id, value_cents: 400_00, issue_date: 7.days.from_now,
-                                            description: 'Taxa de pintura', charge_type: 'common_area_fee',
+                                            description: 'Taxa de manutenção', charge_type: 'common_area_fee',
                                             common_area_id: common_areas.first.id, condo_id: condo.id, status: 'active')
     single_charge3 = create(:single_charge, unit_id: unit.id, value_cents: 275_00, issue_date: 10.days.from_now,
-                                            description: 'Taxa de pintura', charge_type: 'other', condo_id: condo.id,
+                                            description: 'Taxa de manutenção', charge_type: 'other', condo_id: condo.id,
                                             status: 'active')
     AssociatedCondo.create!(admin:, condo_id: condo.id)
 
@@ -85,7 +85,7 @@ describe 'Admin visualiza lista de cobranças avulsas' do
     expect(response.body).to include unit.number
     expect(response.body).to include unit2.number
     expect(response.body).to include 'Multa'
-    expect(response.body).to include 'Taxa de área comum'
+    expect(response.body).to include 'Taxa de manutenção'
     expect(response.body).to include 'Outros'
     expect(response.body).to include single_charge.description
     expect(response.body).to include single_charge2.description
