@@ -8,36 +8,96 @@
   </span>
   <span class="mx-auto text-uppercase fs-7 text-muted"><%= @condo.name %></span>
 
-  <div class="d-flex justify-content-center mt-4 mb-4">
-    <% if @bills.any? %>
-      <div class="list-group w-75">
-        <% @bills.each do |bill| %>
-          <%= link_to condo_bill_path(@condo.id, bill), class: "list-group-item p-3 list-group-item-action hover-strong", id: dom_id(bill), data: { turbo_frame: "modal" } do %>
-            <div class="d-flex w-100 justify-content-between">
-              <span class="d-block mb-1 fs-5">
-                <%= unit_name(bill) %>
-              </span>
-              <div class="d-flex flex-wrap text-end">
-                <small class="text-body-secondary w-100">
-                  <%= Bill.human_attribute_name(:due_date) %>:
-                  <%= I18n.l(bill.due_date) %>
-                </small>
-                <% if bill.pending? %>
-                  <span class="mt-1 ms-auto badge text-bg-danger text-uppercase"><%= I18n.t('views.show.pending') %></span>
-                <% elsif bill.awaiting? %>
-                  <span class="mt-1 ms-auto badge text-bg-warning text-uppercase"><%= I18n.t('views.show.awaiting') %></span>
-                <% else %>
-                  <span class="mt-1 ms-auto badge text-bg-success text-uppercase"><%= I18n.t('views.show.paid') %></span>
-                <% end %>
-              </div>
-            </div>
-            <span class="text-muted fs-7 text-lowercase"><%= Bill.human_attribute_name(:total_value) %></span>
-            <span><%= bill.total_value.format %></span>
-          <% end %>
-        <% end %>
+  <div class="d-flex justify-content-between mt-5 mb-2 w-75 mx-auto text-center">
+    <div class="dropdown">
+      <a class="btn text-decoration-none hover-strong dropdown-toggle" href="#" role="button" data-bs-toggle="dropdown" aria-expanded="false">
+        <%= image_tag "filter-icon.png", size: "18", class: "mb-1" %>
+        <%= I18n.t('views.index.filter_bills') %>
+      </a>
+      <ul class="dropdown-menu">
+        <li>
+          <a class="fs-8 text-decoration-none btn hover-strong d-flex" data-bs-toggle="collapse" href="#allBills" role="button" aria-expanded="false" aria-controls="allBills">
+            <%= I18n.t('views.index.all_bills').upcase %>
+          </a>
+        </li>
+        <li>
+          <a class="fs-8 text-decoration-none btn hover-strong d-flex" data-bs-toggle="collapse" href="#acceptedBill" role="button" aria-expanded="false" aria-controls="acceptedBill">
+            <%= I18n.t('views.index.accepted_bills').upcase %>
+          </a>
+        </li>
+        <li>
+          <a class="fs-8 text-decoration-none btn hover-strong d-flex" data-bs-toggle="collapse" href="#pendingBill" role="button" aria-expanded="false" aria-controls="pendingBill">
+            <%= I18n.t('views.index.pending_bills').upcase %>
+          </a>
+        </li>
+        <li>
+          <a class="fs-8 text-decoration-none btn hover-strong d-flex" data-bs-toggle="collapse" href="#awaitingBill" role="button" aria-expanded="false" aria-controls="awaitingBill">
+            <%= I18n.t('views.index.awaiting_bills').upcase %>
+          </a>
+        </li>
+        <li>
+          <a class="fs-8 text-decoration-none btn hover-strong d-flex" data-bs-toggle="collapse" href="#deniedBill" role="button" aria-expanded="false" aria-controls="deniedBill">
+            <%= I18n.t('views.index.denied_bills').upcase %>
+          </a>
+        </li>
+      </ul>
+    </div>
+  </div>
+
+  <div class="accordion mb-5 w-100 mx-auto" id="billsAccordion">
+    <div class="d-flex justify-content-center">
+      <div class="collapse multi-collapse w-100 show" id="allBills" data-bs-parent="#billsAccordion">
+         <h4 class="text-center mt-4 mb-4">
+          <%= I18n.t('views.index.all_bills').upcase %>
+        </h4>
+        <div class="list-group w-100">
+          <%= render partial: 'bills_list', locals: { bills: @bills } %>
+        </div>
       </div>
-    <% else %>
-      <p><%= I18n.t('views.index.no_bills') %></p>
-    <% end %>
+    </div>
+
+    <div class="d-flex justify-content-center">
+      <div class="collapse multi-collapse w-100" id="deniedBill" data-bs-parent="#billsAccordion">
+         <h4 class="text-center mt-4 mb-4">
+          <%= I18n.t('views.index.denied_bills').upcase %>
+        </h4>
+        <div class="list-group w-100">
+          <%= render partial: 'bills_list', locals: { bills: @bills.where(denied: true) } %>
+        </div>
+      </div>
+    </div>
+
+    <div class="d-flex justify-content-center">
+      <div class="collapse multi-collapse w-100" id="pendingBill" data-bs-parent="#billsAccordion">
+         <h4 class="text-center mt-4 mb-4">
+          <%= I18n.t('views.index.pending_bills').upcase %>
+        </h4>
+        <div class="list-group w-100">
+          <%= render partial: 'bills_list', locals: { bills: @bills.where(status: 'pending') } %>
+        </div>
+      </div>
+    </div>
+
+    <div class="d-flex justify-content-center">
+      <div class="collapse multi-collapse w-100" id="awaitingBill" data-bs-parent="#billsAccordion">
+         <h4 class="text-center mt-4 mb-4">
+          <%= I18n.t('views.index.awaiting_bills').upcase %>
+        </h4>
+        <div class="list-group w-100">
+          <%= render partial: 'bills_list', locals: { bills: @bills.where(status: 'awaiting') } %>
+        </div>
+      </div>
+    </div>
+
+    <div class="d-flex justify-content-center">
+      <div class="collapse multi-collapse w-100" id="acceptedBill" data-bs-parent="#billsAccordion">
+         <h4 class="text-center mt-4 mb-4">
+          <%= I18n.t('views.index.accepted_bills').upcase %>
+        </h4>
+        <div class="list-group w-100">
+          <%= render partial: 'bills_list', locals: { bills: @bills.where(status: 'paid') } %>
+        </div>
+      </div>
+    </div>
   </div>
 </div>
