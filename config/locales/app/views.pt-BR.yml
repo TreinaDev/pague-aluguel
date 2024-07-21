@@ -3,11 +3,11 @@ pt-BR:
     fees:
       list: Taxas Condominiais
       all_active: Ver taxas ativas
-      all_canceled: canceladas
-      active: ativas
-      future: futuras
-      past: passadas
-      all: todas as taxas
+      canceled: Taxas canceladas
+      active: Taxas ativas
+      future: Taxas futuras
+      past: Taxas passadas
+      all: Todas as taxas
     installments:
       one: '%{count}x Parcela'
       other: '%{count}x Parcelas'
@@ -23,3 +23,5 @@ pt-BR:
   dashboards:
     admin_description: para gerenciamento de condomínios e pagamentos
     property_description: para gerenciamento de seus imóveis
+    section_title:
+      condo: Condomínios

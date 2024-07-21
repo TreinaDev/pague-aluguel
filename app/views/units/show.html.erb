@@ -8,7 +8,7 @@
 
 
     <span class="fs-3 text-center d-block"><%= @unit.description %></span>
-    <span class="fs-5 text-center text-muted d-block"><%= Unit.model_name.human %> <%= @unit.number %></span>
+    <span class="fs-5 text-center text-muted d-block"><%= I18n.t('activerecord.attributes.unit') %> <%= @unit.number %></span>
     <span class="fs-7 text-center d-block"><%= @unit.condo_name %></span>
 
     <hr>
@@ -22,29 +22,29 @@
         <div class="d-flex justify-content-center align-items-center">
           <%= image_tag "dollar-icon", size: "20" %>
           <span class="ms-1 me-2 fs-7 text-muted">
-            <%= RentFee.model_name.human %>
+            <%= I18n.t('activerecord.models.rent_fee') %>
           </span>
         </div>
 
         <div class="px-5">
           <div class=" d-flex justify-content-between">
-            <span class="text-muted text-lowercase fs-8"><%= RentFee.model_attribute_name(status) %></span>
+            <span class="text-muted text-lowercase fs-8"><%= I18n.t('activerecord.attributes.rent_fee.status') %></span>
             <span><%= I18n.t( rent.status ) %></span>
           </div>
           <div class=" d-flex justify-content-between">
-            <span class="text-muted text-lowercase fs-8"><%= RentFee.model_attribute_name(rent_value)  %></span>
+            <span class="text-muted text-lowercase fs-8"><%= I18n.t('activerecord.attributes.rent_fee.value')  %></span>
             <span><%= rent.value.format %></span>
           </div>
           <div class=" d-flex justify-content-between">
-            <span class="text-muted text-lowercase fs-8"><%= RentFee.model_attribute_name(issue_date)  %></span>
+            <span class="text-muted text-lowercase fs-8"><%= I18n.t('activerecord.attributes.rent_fee.issue_date') %></span>
             <span><%= I18n.l( rent.issue_date ) %></span>
           </div>
           <div class=" d-flex justify-content-between">
-            <span class="text-muted text-lowercase fs-8"><%= RentFee.model_attribute_name(fine)  %></span>
+            <span class="text-muted text-lowercase fs-8"><%= I18n.t('activerecord.attributes.rent_fee.fine') %></span>
             <span><%= rent.fine.format %></span>
           </div>
           <div class=" d-flex justify-content-between">
-            <span class="text-muted text-lowercase fs-8"><%= RentFee.model_attribute_name(fine_interest)  %></span>
+            <span class="text-muted text-lowercase fs-8"><%= I18n.t('activerecord.attributes.rent_fee.fine_interest')  %></span>
             <span><%= rent.fine_interest.round(1) %>%</span>
           </div>
           <div class="text-center">
@@ -63,7 +63,7 @@
       <% rent = @unit.unit_rent_fee %>
       <div class=" d-flex justify-content-between px-5">
         <% styling = {"active" => "text-success", "canceled" => "text-danger"} %>
-        <span class="text-muted text-lowercase fs-8"><%= RentFee.model_attribute_name(status) %></span>
+        <span class="text-muted text-lowercase fs-8"><%= I18n.t('activerecord.attributes.rent_fee.status') %></span>
         <span class=<%= styling[rent.status] %>><%= I18n.t( rent.status ) %></span>
       </div>
       <% if rent.active? %>

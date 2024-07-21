@@ -2,9 +2,9 @@
   <%= link_to condo_path(@condo.id), class: "ms-3 mt-3" do %>
     <%= image_tag "arrow-left", size: "25", id: "arrow-left" %>
   <% end %>
-  
+
   <span class="fs-4 mx-auto mt-3 text-uppercase">
-    <%= SingleCharge.model_name.human(count: 2) %>
+    <%= I18n.t('activerecord.models.single_charge.other') %>
   </span>
 
   <span class="d-block text-uppercase fs-7 text-muted text-center"><%= @condo.name %></span>
@@ -13,23 +13,23 @@
     <div class="d-flex justify-content-center">
       <a class="fs-6 text-decoration-none btn hover-strong" data-bs-toggle="collapse" href="#allSingleCharges" role="button" aria-expanded="false" aria-controls="allSingleCharges">
         <%= image_tag "list-center-icon.png", size: "20", class: 'mb-1' %>
-        <%= I18n.t('views.index.all_fees').upcase %>
+        <%= I18n.t('buttons.filter.fees.all').upcase %>
       </a>
     </div>
 
     <div class="d-flex justify-content-end align-items-center">
       <%= image_tag "filter-two-icon.png", size: "22", class: 'me-2' %>
       <a class="fs-8 text-decoration-none btn hover-strong" data-bs-toggle="collapse" href="#activeSingleCharges" role="button" aria-expanded="false" aria-controls="activeSingleCharges">
-        <%= I18n.t('views.index.active_fees').upcase %>
+        <%= I18n.t('buttons.filter.fees.active').upcase %>
       </a>
       <a class="fs-8 text-decoration-none btn hover-strong" data-bs-toggle="collapse" href="#canceledSingleCharges" role="button" aria-expanded="false" aria-controls="canceledSingleCharges">
-        <%= I18n.t('views.index.canceled_fees').upcase %>
+        <%= I18n.t('buttons.filter.fees.canceled').upcase %>
       </a>
       <a class="fs-8 text-decoration-none btn hover-strong" data-bs-toggle="collapse" href="#futureSingleCharges" role="button" aria-expanded="false" aria-controls="futureSingleCharges">
-        <%= I18n.t('views.index.future_fees').upcase %>
+        <%= I18n.t('buttons.filter.fees.future').upcase %>
       </a>
       <a class="fs-8 text-decoration-none btn hover-strong" data-bs-toggle="collapse" href="#pastSingleCharges" role="button" aria-expanded="false" aria-controls="pastSingleCharges">
-        <%= I18n.t('views.index.past_fees').upcase %>
+        <%= I18n.t('buttons.filter.fees.past').upcase %>
       </a>
     </div>
   </div>
@@ -38,7 +38,7 @@
     <div class="d-flex justify-content-center">
       <div class="collapse multi-collapse w-100" id="activeSingleCharges" data-bs-parent="#singleChargesAccordion">
         <h4 class="text-center mt-4 mb-4">
-          <%= I18n.t('views.index.active_fees').upcase %>
+          <%= I18n.t('buttons.filter.fees.active').upcase %>
         </h4>
         <div class="list-group w-100">
           <%= render partial: "single_charges_list", locals: { single_charges: @single_charges.where(status: :active) } %>
@@ -48,7 +48,7 @@
     <div class="d-flex justify-content-center">
       <div class="collapse multi-collapse w-100" id="futureSingleCharges" data-bs-parent="#singleChargesAccordion">
         <h4 class="text-center mt-4 mb-4">
-          <%= I18n.t('views.index.future_fees').upcase %>
+          <%= I18n.t('buttons.filter.fees.future').upcase %>
         </h4>
         <div class="list-group w-100">
           <%= render partial: "single_charges_list", locals: { single_charges: @single_charges.where(issue_date: (Time.zone.tomorrow..)) } %>
@@ -58,7 +58,7 @@
     <div class="d-flex justify-content-center">
       <div class="collapse multi-collapse w-100" id="canceledSingleCharges" data-bs-parent="#singleChargesAccordion">
         <h4 class="text-center mt-4 mb-4">
-          <%= I18n.t('views.index.canceled_fees').upcase %>
+          <%= I18n.t('buttons.filter.fees.canceled').upcase %>
         </h4>
         <div class="list-group w-100">
           <%= render partial: "single_charges_list", locals: { single_charges: @single_charges.where(status: :canceled) } %>
@@ -68,7 +68,7 @@
     <div class="d-flex justify-content-center">
       <div class="collapse multi-collapse w-100" id="pastSingleCharges" data-bs-parent="#singleChargesAccordion">
         <h4 class="text-center mt-4 mb-4">
-          <%= I18n.t('views.index.past_fees').upcase %>
+          <%= I18n.t('buttons.filter.fees.past').upcase %>
         </h4>
         <div class="list-group w-100">
           <%= render partial: "single_charges_list", locals: { single_charges: @single_charges.where(issue_date: ..Time.zone.today) } %>
@@ -78,7 +78,7 @@
     <div class="d-flex justify-content-center">
       <div class="collapse multi-collapse w-100 show" id="allSingleCharges" data-bs-parent="#singleChargesAccordion">
         <h4 class="text-center mt-4 mb-4">
-          <%= I18n.t('views.index.all_fees').upcase %>
+          <%= I18n.t('buttons.filter.fees.all').upcase %>
         </h4>
         <div class="list-group w-100">
           <%= render partial: "single_charges_list", locals: { single_charges: @single_charges } %>

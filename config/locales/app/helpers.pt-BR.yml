@@ -6,6 +6,13 @@ pt-BR:
     edit: Editar
     hide: Ocultar
     my_profile: Meu perfil
+    filter:
+      fees:
+        all: Todas as Taxas
+        active: Ativas
+        canceled: Canceladas
+        past: Pasadas
+        future: Futuras
     show:
       all: Ver tudo
       all_units: Ver todas as unidades
