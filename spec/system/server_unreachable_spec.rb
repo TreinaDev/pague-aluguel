@@ -3,6 +3,7 @@ require 'rails_helper'
 describe 'Sistema fora do ar' do
   it 'quando condominions está fora do ar' do
     FactoryBot.create(:admin, first_name: 'Fulano', last_name: 'Da Costa')
+    allow(Condo).to receive(:all).and_raise(Faraday::ConnectionFailed)
 
     visit root_path
     within 'nav' do
