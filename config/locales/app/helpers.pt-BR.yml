@@ -8,12 +8,14 @@ pt-BR:
     see_all: Ver todas
     my_profile: Meu perfil
     filter:
-      fees:
-        all: Todas as Taxas
-        active: Ativas
-        canceled: Canceladas
-        past: Passadas
-        future: Futuras
+      active: Ativas
+      canceled: Canceladas
+      past: Passadas
+      future: Futuras
+      all_fees: Todas as Taxas
+      all_shared_fees: Todas as Contas
+      all_bills: Todas as Faturas
+      all_charges: Todas as Cobranças
     show:
       all: Mostrar Todos
       all_units: Ver todas as unidades

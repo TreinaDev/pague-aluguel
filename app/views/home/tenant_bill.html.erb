@@ -43,11 +43,11 @@
     <p class="text-center text-muted fs-7">Pagamento</p>
     <div class="d-flex justify-content-center gap-2 mb-2">
       <% if @bill.pending? %>
-        <span class="badge text-bg-danger text-uppercase fs-7"><%= I18n.t('views.show.pending') %></span>
+        <span class="badge text-bg-danger text-uppercase fs-7"><%= I18n.t("activerecord.attributes.bill.status.#{@bill.status}")  %></span>
       <% elsif @bill.awaiting? %>
-        <span class="badge text-bg-warning text-uppercase fs-7"><%= I18n.t('views.show.awaiting') %></span>
+        <span class="badge text-bg-warning text-uppercase fs-7"><%= I18n.t("activerecord.attributes.bill.status.#{@bill.status}")  %></span>
       <% else %>
-        <span class="badge text-bg-success text-uppercase fs-7"><%= I18n.t('views.show.paid') %></span>
+        <span class="badge text-bg-success text-uppercase fs-7"><%= I18n.t("activerecord.attributes.bill.status.#{@bill.status}")  %></span>
       <% end %>
     </div>
 
@@ -55,7 +55,7 @@
       <div class="text-center">
         <%= link_to url_for(@bill.receipt.file), target: "_blank", class: "btn hover-strong" do %>
           <%= image_tag "document-search-icon", size: "20" %>
-          <span class="ms-1 fs-7 text-uppercase"><%= I18n.t('views.show.view_receipt') %></span>
+          <span class="ms-1 fs-7 text-uppercase"><%= I18n.t('buttons.show.receipt') %></span>
         <% end %>
       </div>
     <% end %>

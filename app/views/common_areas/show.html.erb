@@ -17,7 +17,7 @@
         <%= I18n.t('dashboards.labels.common_area_fee') %>
       </span>
 
-      <%= @common_area_fee&.value.nil? ? I18n.t('errors.not_found.common_areas') : @common_area_fee.value.format %>
+      <%= @common_area_fee&.value.nil? ? I18n.t('errors.not_found.fees') : @common_area_fee.value.format %>
       <%= link_to new_condo_common_area_common_area_fee_path(@condo.id, @common_area.id), class:"btn", id: 'new-common-area', data: { turbo_frame: "modal" } do %>
         <%= image_tag "edit-icon", size: "22", class: "mb-1" %>
       <% end %>

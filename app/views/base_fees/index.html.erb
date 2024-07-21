@@ -13,23 +13,23 @@
     <div class="d-flex justify-content-center">
       <a class="fs-6 text-decoration-none btn hover-strong" data-bs-toggle="collapse" href="#allBaseFees" role="button" aria-expanded="false" aria-controls="allBaseFees">
         <%= image_tag "list-center-icon.png", size: "20", class: 'mb-1' %>
-        <%= I18n.t('buttons.filter.fees.all').upcase %>
+        <%= I18n.t('buttons.filter.all_fees').upcase %>
       </a>
     </div>
 
     <div class="d-flex justify-content-end align-items-center">
       <%= image_tag "filter-two-icon.png", size: "22", class: 'me-2' %>
       <a class="fs-8 text-decoration-none btn hover-strong" data-bs-toggle="collapse" href="#activeBaseFees" role="button" aria-expanded="false" aria-controls="activeBaseFees">
-        <%= I18n.t('buttons.filter.fees.active').upcase %>
+        <%= I18n.t('buttons.filter.active').upcase %>
       </a>
       <a class="fs-8 text-decoration-none btn hover-strong" data-bs-toggle="collapse" href="#canceledBaseFees" role="button" aria-expanded="false" aria-controls="canceledBaseFees">
-        <%= I18n.t('buttons.filter.fees.canceled').upcase %>
+        <%= I18n.t('buttons.filter.canceled').upcase %>
       </a>
       <a class="fs-8 text-decoration-none btn hover-strong" data-bs-toggle="collapse" href="#futureBaseFees" role="button" aria-expanded="false" aria-controls="futureBaseFees">
-        <%= I18n.t('buttons.filter.fees.future').upcase %>
+        <%= I18n.t('buttons.filter.future').upcase %>
       </a>
       <a class="fs-8 text-decoration-none btn hover-strong" data-bs-toggle="collapse" href="#pastBaseFees" role="button" aria-expanded="false" aria-controls="pastBaseFees">
-        <%= I18n.t('buttons.filter.fees.past').upcase %>
+        <%= I18n.t('buttons.filter.past').upcase %>
       </a>
     </div>
   </div>
@@ -38,7 +38,7 @@
     <div class="d-flex justify-content-center">
       <div class="collapse multi-collapse w-100" id="activeBaseFees" data-bs-parent="#baseFeesAccordion">
         <h4 class="text-center mt-4 mb-4">
-          <%= I18n.t('buttons.filter.fees.active').upcase %>
+          <%= I18n.t('buttons.filter.active').upcase %>
         </h4>
         <div class="list-group w-100">
           <%= render partial: "base_fees_list", locals: { base_fees: @base_fees.where(status: :active) } %>
@@ -48,7 +48,7 @@
     <div class="d-flex justify-content-center">
       <div class="collapse multi-collapse w-100" id="futureBaseFees" data-bs-parent="#baseFeesAccordion">
         <h4 class="text-center mt-4 mb-4">
-          <%= I18n.t('buttons.filter.fees.future').upcase %>
+          <%= I18n.t('buttons.filter.future').upcase %>
         </h4>
         <div class="list-group w-100">
           <%= render partial: "base_fees_list", locals: { base_fees: @base_fees.where(charge_day: (Time.zone.tomorrow..)) } %>
@@ -58,7 +58,7 @@
     <div class="d-flex justify-content-center">
       <div class="collapse multi-collapse w-100" id="canceledBaseFees" data-bs-parent="#baseFeesAccordion">
         <h4 class="text-center mt-4 mb-4">
-          <%= I18n.t('buttons.filter.fees.canceled').upcase %>
+          <%= I18n.t('buttons.filter.canceled').upcase %>
         </h4>
         <div class="list-group w-100">
           <%= render partial: "base_fees_list", locals: { base_fees: @base_fees.where(status: :canceled) } %>
@@ -68,7 +68,7 @@
     <div class="d-flex justify-content-center">
       <div class="collapse multi-collapse w-100" id="pastBaseFees" data-bs-parent="#baseFeesAccordion">
         <h4 class="text-center mt-4 mb-4">
-          <%= I18n.t('buttons.filter.fees.past').upcase %>
+          <%= I18n.t('buttons.filter.past').upcase %>
         </h4>
         <div class="list-group w-100">
           <%= render partial: "base_fees_list", locals: { base_fees: @base_fees.where(charge_day: ..Time.zone.today) } %>
@@ -78,7 +78,7 @@
     <div class="d-flex justify-content-center">
       <div class="collapse multi-collapse w-100 show" id="allBaseFees" data-bs-parent="#baseFeesAccordion">
         <h4 class="text-center mt-4 mb-4">
-          <%= I18n.t('buttons.filter.fees.all').upcase %>
+          <%= I18n.t('buttons.filter.all_fees').upcase %>
         </h4>
         <div class="list-group w-100">
           <%= render partial: "base_fees_list", locals: { base_fees: @base_fees } %>

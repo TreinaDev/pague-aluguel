@@ -54,3 +54,8 @@ pt-BR:
       lists:
         base_fees: Listagem de Taxas Condominiais
         shared_fees: Listagem de Contas Compartilhadas
+      bill_status:
+        pending:
+        awaiting:
+        paid:
+
