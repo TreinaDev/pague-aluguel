@@ -10,5 +10,6 @@ FactoryBot.define do
     total_value_cents { 0 }
     condo_id { 1 }
     status { 0 }
+    denied { false }
   end
 end

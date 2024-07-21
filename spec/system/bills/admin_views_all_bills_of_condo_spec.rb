@@ -31,6 +31,8 @@ describe 'Admin vê todos os faturas de um condomínio' do
                            total_value_cents: 500_00, status: :pending)
     bills << create(:bill, condo_id: 2, unit_id: units[1].id, due_date: 10.days.from_now,
                            total_value_cents: 700_00, status: :awaiting)
+    bills << create(:bill, condo_id: 2, unit_id: units[1].id, due_date: 10.days.from_now,
+                           total_value_cents: 600_00, status: :awaiting, denied: true)
     bills << create(:bill, condo_id: 1, unit_id: units[2].id, due_date: 10.days.from_now,
                            total_value_cents: 900_00, status: :paid)
 
@@ -60,6 +62,14 @@ describe 'Admin vê todos os faturas de um condomínio' do
       expect(page).to have_content formatted_date
       expect(page).to have_content 'AGUARDANDO'
     end
+    within('a#bill_3') do
+      expect(page).to have_content 'Unidade 12'
+      expect(page).to have_content 'valor total'
+      expect(page).to have_content 'R$600,00'
+      expect(page).to have_content 'data de vencimento'
+      expect(page).to have_content formatted_date
+      expect(page).to have_content 'AGUARDANDO'
+    end
     expect(page).not_to have_css 'a#bill_3'
   end
 
@@ -77,5 +87,59 @@ describe 'Admin vê todos os faturas de um condomínio' do
 
     expect(page).to have_content 'Nenhuma fatura encontrada'
     expect(page).not_to have_css 'a#bill_1'
+  end
+
+  it 'e visualiza divisões paga e não paga' do
+    admin = create(:admin, super_admin: true)
+    condo = Condo.new(id: 1, name: 'Condomínio Vila das Flores', city: 'São Paulo')
+    unit = Unit.new(id: 1, area: 40, floor: 3, number: '31', unit_type_id: 1, condo_id: condo.id,
+                    condo_name: 'Condomínio Vila das Flores', tenant_id: 1, owner_id: 1, description: 'Com varanda')
+    allow(Condo).to receive(:find).and_return(condo)
+    allow(Unit).to receive(:find).and_return(unit)
+
+    create(:bill,
+           condo_id: condo.id,
+           unit_id: 1,
+           issue_date: Time.zone.today.beginning_of_month,
+           due_date: 10.days.from_now,
+           total_value_cents: 500_00,
+           status: :pending,
+           denied: false)
+
+    create(:bill,
+           condo_id: condo.id,
+           unit_id: 1,
+           issue_date: Time.zone.today.beginning_of_month,
+           due_date: 10.days.from_now,
+           total_value_cents: 111_11,
+           status: :pending,
+           denied: false)
+
+    create(:bill,
+           condo_id: condo.id,
+           unit_id: 1,
+           issue_date: Time.zone.today.beginning_of_month,
+           due_date: 10.days.from_now,
+           total_value_cents: 400_00,
+           status: :pending,
+           denied: true)
+
+    create(:bill,
+           condo_id: condo.id,
+           unit_id: 1,
+           issue_date: Time.zone.today.beginning_of_month,
+           due_date: 10.days.from_now,
+           total_value_cents: 211_11,
+           status: :pending,
+           denied: true)
+
+    login_as admin, scope: :admin
+    get condo_bills_path(condo.id)
+    click_on 'Pagas'
+
+    expect(page).to have_content '400,00'
+    expect(page).to have_content '211,11'
+    expect(page).not_to have_content '500,00'
+    expect(page).not_to have_content '111,11'
   end
 end
