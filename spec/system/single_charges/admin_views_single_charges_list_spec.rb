@@ -35,7 +35,6 @@ describe 'Admin visualiza listagem de cobranças avulsas' do
       click_on 'Ver todas'
     end
 
-    expect(current_path).to eq condo_single_charges_path(condos.first.id)
     expect(page).not_to have_content 'Não foram encontradas cobranças avulsas.'
     expect(page).to have_content 'Outros'
     expect(page).to have_content 'Unidade 11'
@@ -44,6 +43,7 @@ describe 'Admin visualiza listagem de cobranças avulsas' do
     expect(page).to have_link 'Multa', href: condo_single_charge_path(condos.first.id, SingleCharge.first.id)
     expect(page).not_to have_link 'Multa', href: condo_single_charge_path(condos.last.id, SingleCharge.second.id)
     expect(page).not_to have_content 'Unidade 13'
+    expect(current_path).to eq condo_single_charges_path(condos.first.id)
   end
 
   it 'e não há cobranças' do
