@@ -1,36 +1,14 @@
 class Api::V1::ReceiptsController < Api::V1::ApiController
   before_action :validate_file_presence, only: [:create]
   before_action :validate_bill_id_presence, only: [:create]
+  before_action :check_older_receipt, only: :create
+  before_action :obtain_url_received, only: :create
+  before_action :response_after_redirects, only: :create
 
   def create
-    receipt = Receipt.new(bill_id: params[:bill_id])
-    url = params[:receipt]
+    return unless @response.success?
 
-    connection = Faraday.new do |conn|
-      conn.response :follow_redirects
-      conn.adapter Faraday.default_adapter
-    end
-
-    begin
-      response = connection.get(url)
-      if response.success?
-        filename = File.basename(URI.parse(url).path)
-        content_type = response.headers['content-type']
-
-        receipt.file.attach(io: StringIO.new(response.body), filename: filename, content_type: content_type)
-        receipt.save
-      else
-        Rails.logger.error("Failed to download image from URL: #{url}, status: #{response.status}")
-      end
-    rescue Faraday::Error => e
-      Rails.logger.error("An error occurred while downloading the image: #{e.message}")
-    end
-
-    if receipt.save
-      render_response({ message: I18n.t('receipt_received_success') }, :ok)
-    else
-      render_response({ errors: receipt.errors.full_messages }, :unprocessable_entity)
-    end
+    send_render_reponse
   end
 
   private
@@ -45,5 +23,28 @@ class Api::V1::ReceiptsController < Api::V1::ApiController
 
   def render_response(body, status)
     render json: body, status:
+  end
+
+  def obtain_url_received
+    @url = params[:receipt]
+  end
+
+  def check_older_receipt
+    @receipt = Receipt.find_by(bill_id: params[:bill_id])
+    @receipt = Receipt.new(bill_id: params[:bill_id]) if @receipt.nil?
+  end
+
+  def response_after_redirects
+    @response = Receipt.follow_redirects(@url)
+  end
+
+  def send_render_reponse
+    filename = File.basename(URI.parse(@url).path)
+    content_type = @response.headers['content-type']
+    if @receipt.file.attach(io: StringIO.new(@response.body), filename:, content_type:) && @receipt.save
+      render_response({ message: I18n.t('receipt_received_success') }, :ok)
+    else
+      render_response({ errors: @receipt.errors.full_messages }, :unprocessable_entity)
+    end
   end
 end
