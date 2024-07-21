@@ -51,6 +51,7 @@ class Api::V1::ReceiptsController < Api::V1::ApiController
 
   def bill_awaiting(receipt)
     bill = receipt.bill
+    bill.denied = false if bill.denied?
     bill.awaiting!
   end
 end

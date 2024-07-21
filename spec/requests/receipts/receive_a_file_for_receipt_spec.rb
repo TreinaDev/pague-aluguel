@@ -25,6 +25,30 @@ RSpec.describe 'Comprovantes', type: :request do
       expect(Bill.find(bill.id).status).to eq 'awaiting'
     end
 
+    it 'e fatura que estava com pagamento recusado muda o status' do
+      bill = create(:bill, id: 1, denied: true)
+      receipt = Receipt.new(bill:)
+      receipt.file.attach(io: File.open('spec/support/pdf/Comprovante-teste.pdf'),
+                          filename: 'Comprovante-teste.pdf', content_type: 'application/pdf')
+      receipt.save!
+      file_attached_blob = receipt.file.attachment.blob
+      url = Rails.application.routes.url_helpers.rails_blob_url(file_attached_blob, host: 'localhost:4000')
+      mocked_response = instance_double(Faraday::Response, success?: true,
+                                                           body: File.read('spec/support/pdf/Comprovante-teste.pdf'),
+                                                           headers: { 'content-type' => 'application/pdf' })
+      allow(Receipt).to receive(:follow_redirects).with(url).and_return(mocked_response)
+
+      receipt.destroy!
+      post '/api/v1/receipts', params: { receipt: url, bill_id: '1' }
+
+      expect(response).to have_http_status(:ok)
+      expect(response.body).to include('Comprovante recebido com sucesso.')
+      expect(Receipt.count).to eq(1)
+      expect(Receipt.first.file).to be_attached
+      expect(Bill.find(bill.id).status).to eq 'awaiting'
+      expect(Bill.find(bill.id).denied).to eq false
+    end
+
     it 'cria um comprovante com um arquivo jpg anexado' do
       bill = create(:bill, id: 1)
       receipt = Receipt.new(bill:)
