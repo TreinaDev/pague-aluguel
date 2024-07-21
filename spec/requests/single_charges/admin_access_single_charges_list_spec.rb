@@ -45,9 +45,9 @@ describe 'Admin visualiza lista de cobranças avulsas' do
     expect(response.body).to include single_charge2.value.format
     expect(response.body).to include single_charge3.value.format
     expect(response.body).to include 'Data de Emissão'
-    expect(response.body).to include I18n.l single_charge.issue_date
-    expect(response.body).to include I18n.l single_charge2.issue_date
-    expect(response.body).to include I18n.l single_charge3.issue_date
+    expect(response.body).to include I18n.l(single_charge.issue_date)
+    expect(response.body).to include I18n.l(single_charge2.issue_date)
+    expect(response.body).to include I18n.l(single_charge3.issue_date)
   end
 
   it 'com sucesso - admin associado' do
@@ -95,9 +95,9 @@ describe 'Admin visualiza lista de cobranças avulsas' do
     expect(response.body).to include single_charge2.value.format
     expect(response.body).to include single_charge3.value.format
     expect(response.body).to include 'Data de Emissão'
-    expect(response.body).to include I18n.l single_charge.issue_date
-    expect(response.body).to include I18n.l single_charge2.issue_date
-    expect(response.body).to include I18n.l single_charge3.issue_date
+    expect(response.body).to include I18n.l(single_charge.issue_date)
+    expect(response.body).to include I18n.l(single_charge2.issue_date)
+    expect(response.body).to include I18n.l(single_charge3.issue_date)
   end
 
   it 'falha por nao estar associado' do
