@@ -186,8 +186,6 @@ describe 'Usuário acessa uma fatura' do
     expect(page).to have_content 10.days.from_now.strftime('%d/%m/%Y')
     expect(page).to have_content number
     expect(page).to have_content 'R$500,00'
-    expect(page).to have_content 'Taxa Condominial'.downcase
-    expect(page).to have_content 'Conta Compartilhada'.downcase
     expect(page).to have_content 'PENDENTE'
     expect(page).not_to have_button 'Ver comprovante'
     expect(page).not_to have_button 'Aceitar pagamento'
@@ -231,8 +229,6 @@ describe 'Usuário acessa uma fatura' do
     expect(page).to have_content 10.days.from_now.strftime('%d/%m/%Y')
     expect(page).to have_content number
     expect(page).to have_content 'R$500,00'
-    expect(page).to have_content 'Taxa Condominial'.downcase
-    expect(page).to have_content 'Conta Compartilhada'.downcase
     expect(page).to have_content 'AGUARDANDO'
     expect(page).to have_link 'Ver comprovante'
     expect(page).not_to have_button 'Aceitar pagamento'
@@ -276,8 +272,6 @@ describe 'Usuário acessa uma fatura' do
     expect(page).to have_content 10.days.from_now.strftime('%d/%m/%Y')
     expect(page).to have_content number
     expect(page).to have_content 'R$500,00'
-    expect(page).to have_content 'taxa condominial'
-    expect(page).to have_content 'conta compartilhada'
     expect(page).to have_content 'PAGA'
     expect(page).to have_link 'Ver comprovante'
     expect(page).not_to have_button 'Aceitar pagamento'

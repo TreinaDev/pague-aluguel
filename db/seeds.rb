@@ -326,13 +326,13 @@ SingleCharge.create!(unit_id: 97, value_cents: 9750_00,
   p "Created 3 bills for 314.787.200-93"
   p "Created 5 bills for 458.456.480-92"
 
-  Receipt.create!(bill_id: bill1.id, file: Rails.root.join('app', 'assets', 'images', 'cupom-fiscal.jpg').open)
+  Receipt.create!(bill_id: bill3.id, file: Rails.root.join('app', 'assets', 'images', 'cupom-fiscal.jpg').open)
   p "Created 1 Receipt with image"
   sleep(1)
   Receipt.create!(bill_id: bill3.id, file: Rails.root.join('app', 'assets', 'images', 'comprovante-pg.jpg').open)
   p "Created 1 more Receipt with image"
   sleep(1)
-  Receipt.create!(bill_id: bill4.id, file: Rails.root.join('app', 'assets', 'images', 'cupom-fiscal.jpg').open)
+  Receipt.create!(bill_id: bill2.id, file: Rails.root.join('app', 'assets', 'images', 'cupom-fiscal.jpg').open)
   p "Created 1 more Receipt with image"
   sleep(1)
   Receipt.create!(bill_id: bill5.id, file: Rails.root.join('app', 'assets', 'images', 'cupom-fiscal.jpg').open)
