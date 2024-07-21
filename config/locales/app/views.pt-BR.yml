@@ -20,6 +20,7 @@ pt-BR:
     section_title:
       condo: Condomínios
       profile: Meu perfil
+      units: Minhas unidades
     section:
       associated_condos: Condomínios associados
       manage_condos_access: Gerenciar Acesso aos Condomínios
@@ -54,8 +55,3 @@ pt-BR:
       lists:
         base_fees: Listagem de Taxas Condominiais
         shared_fees: Listagem de Contas Compartilhadas
-      bill_status:
-        pending:
-        awaiting:
-        paid:
-

@@ -6,7 +6,7 @@
   <span class="fs-4 mx-auto mt-3 text-uppercase">
     <%= SingleCharge.model_name.human(count: 2) %>
   </span>
-  
+
   <div class="d-flex justify-content-center mt-4 mb-4">
     <% if @single_charges.any? %>
       <div class="list-group w-75">
@@ -18,24 +18,24 @@
                 <%= I18n.t "single_charge.#{single_charge.charge_type}" %>
               </span>
 
-              <span class="text-center position-absolute text-muted" style="left: 50%; transform: translateX(-50%);"> 
+              <span class="text-center position-absolute text-muted" style="left: 50%; transform: translateX(-50%);">
                 <%= Condo.find(single_charge.condo_id).name %>
               </span>
-              
+
               <div class="d-flex flex-wrap text-end">
                 <small class="text-body-secondary w-100">
                   <%= SingleCharge.human_attribute_name(:issue_date) %>:
                   <%= I18n.l(single_charge.issue_date) %>
                 </small>
                 <% if single_charge.active? %>
-                  <span class="mt-1 ms-auto badge text-bg-success text-uppercase"><%= I18n.t("single_charge.statuses.#{single_charge.status}") %></span>
+                  <span class="mt-1 ms-auto badge text-bg-success text-uppercase"><%= I18n.t("single_charge.status.#{single_charge.status}") %></span>
                 <% else %>
-                  <span class="mt-1 ms-auto badge text-bg-danger text-uppercase"><%= I18n.t("single_charge.statuses.#{single_charge.status}") %></span>
+                  <span class="mt-1 ms-auto badge text-bg-danger text-uppercase"><%= I18n.t("single_charge.status.#{single_charge.status}") %></span>
                 <% end %>
               </div>
             </div>
 
-            <span> 
+            <span>
               <%= humanized_unit(single_charge.unit_id) %>
             </span>
             <span class="d-block">
@@ -47,7 +47,7 @@
         <% end %>
       </div>
     <% else %>
-      <p><%= I18n.t('views.index.no_single_charges') %></p>
+      <p><%= I18n.t('errors.not_found.single_charges') %></p>
     <% end %>
   </div>
 </div>
