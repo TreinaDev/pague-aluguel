@@ -299,48 +299,42 @@ Resposta para falha na criação: `status: 422` (:unprocessable_entity)
 
 **Recebe os seguintes parâmetros::** <br>
 ```json
-{
-  single_charge: {
-    description: string,
-    value_cents: integer,
-    charge_type: enum (:fine ou :common_area_fee),
-    issue_date: date,
-    condo_id: integer,
-    common_area_id: integer,
-    unit_id: integer
-  }
+{ single_charge: { description: string,
+                   value_cents: integer,
+                   charge_type: enum (:fine ou :common_area_fee),
+                   issue_date: date,
+                   condo_id: integer,
+                   common_area_id: integer,
+                   unit_id: integer
+                 }
 }
 ```
 Resposta para criação com sucesso:<br> `status: 201, body: {message: :message}` (:created)
 
 Exemplo de cobrança avulsa (Multa):
 ```json
-{
-  single_charge: {
-    description: 'Multa por barulho durante a madrugada',
-    value_cents: 10000,
-    charge_type: :fine,
-    issue_date: 5.days.from_now.to_date,
-    condo_id: 1,
-    common_area_id: nil,
-    unit_id: 1
-  }
+{ single_charge: { description: 'Multa por barulho durante a madrugada',
+                   value_cents: 10000,
+                   charge_type: :fine,
+                   issue_date: 5.days.from_now.to_date,
+                   condo_id: 1,
+                   common_area_id: nil,
+                   unit_id: 1
+                  }
 }
 ```
 Resposta para criação com sucesso:<br> `status: 201, body: {message: :message}` (:created)
 
 Exemplo de cobrança avulsa (Reserva de Área Comum):
 ```json
-{
-  single_charge: {
-    description: nil,
-    value_cents: ~deve retornar do endpoint de taxas de áreas comuns~,
-    charge_type: :common_area_fee,
-    issue_date: 5.days.from_now.to_date,
-    condo_id: 1,
-    common_area_id: 2,
-    unit_id: 1
-  }
+{ single_charge: { description: nil,
+                   value_cents: ~deve retornar do endpoint de taxas de áreas comuns~,
+                   charge_type: :common_area_fee,
+                   issue_date: 5.days.from_now.to_date,
+                   condo_id: 1,
+                   common_area_id: 2,
+                   unit_id: 1
+                 }
 }
 ```
 Resposta para criação com sucesso:<br> `status: 201, body: {message: :message, single_charge_id: :id}` (:created)
