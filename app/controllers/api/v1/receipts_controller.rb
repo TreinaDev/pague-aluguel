@@ -1,9 +1,9 @@
 class Api::V1::ReceiptsController < Api::V1::ApiController
   before_action :validate_file_presence, only: [:create]
   before_action :validate_bill_id_presence, only: [:create]
-  before_action :check_older_receipt, only: :create
-  before_action :obtain_url_received, only: :create
-  before_action :response_after_redirects, only: :create
+  before_action :check_older_receipt, only: [:create]
+  before_action :obtain_url_received, only: [:create]
+  before_action :response_after_redirects, only: [:create]
 
   def create
     return unless @response.success?
