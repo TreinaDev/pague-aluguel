@@ -143,3 +143,7 @@ pt-BR:
     query:
       empty_condo: Você precisa buscar por um nome de condomínio.
       no_result: Nenhum condomínio encontrado.
+  connection:
+    down: Sistema fora do ar
+    working: Estamos trabalhando para reestabelecer os nossos servidores.
+    trying: CONECTANDO
