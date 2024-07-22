@@ -8,11 +8,6 @@ class Api::V1::ReceiptsController < Api::V1::ApiController
   def create
     return unless @response.success?
 
-    if receipt.save
-      render_response({ message: I18n.t('receipts.success.received') }, :ok)
-    else
-      render_response({ errors: receipt.errors.full_messages }, :unprocessable_entity)
-    end
     send_render_reponse
   end
 
@@ -50,7 +45,7 @@ class Api::V1::ReceiptsController < Api::V1::ApiController
     content_type = @response.headers['content-type']
     if @receipt.file.attach(io: StringIO.new(@response.body), filename:, content_type:) && @receipt.save
       bill_awaiting(@receipt)
-      render_response({ message: I18n.t('receipt_received_success') }, :ok)
+      render_response({ message: I18n.t('receipts.success.received') }, :ok)
     else
       render_response({ errors: @receipt.errors.full_messages }, :unprocessable_entity)
     end
