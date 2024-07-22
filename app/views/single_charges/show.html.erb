@@ -53,7 +53,7 @@
     <% if @single_charge.active? %>
     <hr>
       <%= button_to cancel_condo_single_charge_path(@condo.id, @single_charge), class: "d-flex align-items-center btn hover-danger mx-auto", data: { turbo_confirm: I18n.t('messages.confirm.cancel_charge') } do %>
-        <%= image_tag "block-icon", size: "16" %>
+        <%= image_tag "block-icon", size: "12" %>
         <span class="ms-1 fs-7 text-uppercase"><%= I18n.t('buttons.cancel') %></span>
       <% end %>
     <% end %>

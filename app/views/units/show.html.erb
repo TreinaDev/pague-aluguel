@@ -80,7 +80,7 @@
       </div>
       <% if rent.active? %>
         <%= button_to deactivate_unit_rent_fee_path(@unit.id, rent.id), class: "d-flex align-items-center btn hover-danger mx-auto", data: { turbo_confirm: I18n.t('messages.confirm.cancel_rent') } do %>
-          <%= image_tag "block-icon", alt: "Deactivate", size: "16" %>
+          <%= image_tag "block-icon", alt: "Deactivate", size: "12" %>
           <span class="ms-1 fs-7 text-uppercase"><%= I18n.t('buttons.deactivate.rent') %></span>
         <% end %>
       <% end %>
