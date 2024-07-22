@@ -25,6 +25,7 @@ pt-BR:
       associated_condos: Condomínios associados
       manage_condos_access: Gerenciar Acesso aos Condomínios
     labels:
+      tower: Torre
       email: email
       fee: taxa
       update_date: data de alteração

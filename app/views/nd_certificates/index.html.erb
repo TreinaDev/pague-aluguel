@@ -24,18 +24,14 @@
                <%=I18n.t('dashboards.labels.unit.one')%> <%= unit.number %>
             </span>
             <div class="d-flex flex-wrap text-end">
-              <small class="text-body-secondary w-100">
-                torre
-              </small>
               <%= button_to condo_nd_certificates_path(condo_id: @condo.id, unit_id: unit.id), class: "btn hover-strong" do %>
                 <%= image_tag 'document-ribbon-icon', size: '20' %>
                 <%= I18n.t('buttons.new.nd_certificate') %>
               <% end %>
             </div>
           </div>
-          <span class="text-muted fs-7 text-lowercase">
-            <%=I18n.t('dashboards.labels.floor')%>: <%= unit.floor %>
-          </span>
+          <span class="d-block text-muted fs-7 text-lowercase"><%=I18n.t('dashboards.labels.tower')%>: <%= unit.tower_name %></span>
+          <span class="text-muted fs-7 text-lowercase"><%=I18n.t('dashboards.labels.floor')%>: <%= unit.floor %></span>
         </div>
         <% end %>
       </div>
