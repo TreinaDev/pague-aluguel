@@ -21,6 +21,7 @@ pt-BR:
       profile: Meu perfil
       units: Minhas unidades
     section:
+      recents: Recentes
       associated_condos: Condomínios associados
       manage_condos_access: Gerenciar Acesso aos Condomínios
     labels:
