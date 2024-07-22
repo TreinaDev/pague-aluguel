@@ -5,7 +5,7 @@
 <%- if devise_mapping.registerable? && controller_name != 'registrations' %>
   <div class="text-center mb-1">
     <%= link_to new_registration_path(resource_name), class: "text-decoration-none btn hover-strong" do %>
-      <%= image_tag "add-admin", size: "18" %>
+      <%= image_tag "add-admin", size: "16" %>
       <span class="text-uppercase fs-7"><%= I18n.t('devise.registrations.new.sign_up') %></span>
     <% end %>
   </div>

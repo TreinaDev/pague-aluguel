@@ -26,7 +26,7 @@
             <div class="d-flex flex-wrap text-end">
               <%= button_to condo_nd_certificates_path(condo_id: @condo.id, unit_id: unit.id), class: "btn hover-strong" do %>
                 <%= image_tag 'document-ribbon-icon', size: '20' %>
-                <%= I18n.t('buttons.new.nd_certificate') %>
+                <span class="fs-7 text-uppercase"><%= I18n.t('buttons.new.nd_certificate') %></span>
               <% end %>
             </div>
           </div>

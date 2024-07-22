@@ -8,8 +8,8 @@
 
 
     <span class="fs-7 text-center d-block"><%= @unit.description %></span>
-    <span class="fs-5 text-center text-muted d-block"><%= I18n.t('activerecord.models.unit.one') %> <%= @unit.number %></span>
-    <span class="fs-7 text-center d-block"><%= @unit.condo_name %></span>
+    <span class="fs-5 text-center d-block"><%= I18n.t('activerecord.models.unit.one') %> <%= @unit.number %></span>
+    <span class="fs-7 text-center d-block text-muted"><%= @unit.condo_name %></span>
 
     <hr>
     <div class="d-block text-center">
@@ -50,7 +50,7 @@
           <div class="text-center">
             <%= link_to edit_unit_rent_fee_path(@unit.id, rent.id), class: "btn hover-strong" do %>
               <%= image_tag 'edit-icon', size: '18' %>
-              <%= I18n.t('buttons.manage.rent') %>
+              <span class="fs-7 text-uppercase"><%= I18n.t('buttons.manage.rent') %></span>
             <% end %>
           </div>
         </div>
@@ -59,7 +59,7 @@
         <div class="text-center">
           <%= link_to new_unit_rent_fee_path(@unit.id), class: "btn btn-primary mb-1 mt-2" do %>
             <%= image_tag 'edit-icon', size: '18' %>
-            <%= I18n.t('buttons.manage.rent') %>
+            <span class="fs-7 text-uppercase"><%= I18n.t('buttons.manage.rent') %></span>
           <% end %>
         </div>
       <% end %>
@@ -67,7 +67,7 @@
     <div class="text-center">
       <%= button_to condo_nd_certificates_path(condo_id: @unit.condo_id, unit_id: @unit.id), class: "btn hover-strong" do %>
         <%= image_tag 'document-ribbon-icon', size: '20' %>
-        <%= I18n.t('buttons.new.nd_certificate') %>
+        <span class="fs-7 text-uppercase"><%= I18n.t('buttons.new.nd_certificate') %></span>
       <% end %>
     </div>
 
