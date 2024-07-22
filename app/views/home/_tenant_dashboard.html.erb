@@ -51,12 +51,12 @@
           <p><%= I18n.t('errors.not_found.bills') %></p>
         <% end %>
       </div>
-      <span class="d-block fs-4 text-center">
+      <div class="d-block text-center">
         <%= button_to condo_nd_certificates_path(condo_id: @unit.condo_id, unit_id: @unit.id), class: "btn hover-strong" do %>
           <%= image_tag 'document-ribbon-icon', size: '20' %>
           <span class="fs-7 text-uppercase"><%= I18n.t('buttons.new.nd_certificate') %></span>
         <% end %>
-      </span>
+      </div>
     </div>
   <% end %>
 </div>
