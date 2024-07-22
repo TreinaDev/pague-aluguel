@@ -57,6 +57,9 @@ pt-BR:
         one: Perfil
         other: Perfis
       lists:
-        base_fees: Listagem de Taxas Condominiais
-        shared_fees: Listagem de Contas Compartilhadas
+        bills: Faturas
+        base_fees: Taxas Condominiais
+        shared_fees: Contas Compartilhadas
+        single_charges: Cobranças Avulsas
+        nd_certificates: Certificado de Débito Negativo
 

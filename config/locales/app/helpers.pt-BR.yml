@@ -25,7 +25,7 @@ pt-BR:
     new:
       fee: Cadastrar Taxa
       admin: novo administrador
-      nd_certificate: Emitir Certificado de Débito Negativo
+      nd_certificate: Emitir Certificado
     select:
       prompt: Por favor selecione
     submit:
