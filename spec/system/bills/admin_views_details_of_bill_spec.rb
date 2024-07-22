@@ -169,7 +169,7 @@ describe 'Admin vê detalhes de uma fatura' do
       shared_fee = create(:shared_fee, description: 'Conta de Água', issue_date: Time.zone.today,
                                        total_value: 3_000, condo_id: condos.first.id)
       create(:shared_fee_fraction, shared_fee:, unit_id: 1, value_cents: 300_00)
-      shared_fee2 = create(:shared_fee, description: 'Conta de Luz', issue_date: 10.days.from_now.to_date,
+      shared_fee2 = create(:shared_fee, description: 'Conta de Luz', issue_date: 9.days.from_now.to_date,
                                         total_value: 1_000, condo_id: condos.first.id)
       create(:shared_fee_fraction, shared_fee: shared_fee2, unit_id: 1, value_cents: 100_00)
       base_fee = create(:base_fee, condo_id: condos.first.id, charge_day: Time.zone.today)
