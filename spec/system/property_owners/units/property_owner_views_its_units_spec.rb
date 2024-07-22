@@ -24,7 +24,7 @@ describe 'Proprietário vê suas unidades' do
     login_as property_owner, scope: :property_owner
     visit root_path
 
-    within('div#all-units') do
+    within('div#units') do
       within("div#unit-#{units[0].id}") do
         expect(page).to have_content 'Unidade 3 | Condo Test'
         expect(page).to have_content 'Cobertura'
