@@ -2,16 +2,16 @@
   <div class="dean-modal modal-md">
     <%= link_to "", :back, id: 'close', class: "btn btn-sm btn-close" %>
 
-    <span class="fs-8 text-center d-block"><%= SharedFee.model_name.human %></span>
+    <span class="fs-8 text-center d-block"><%= I18n.t('activerecord.models.shared_fee.one') %></span>
     <span class="fs-3 text-center d-block"><%= @shared_fee.description %></span>
     <span class="fs-8 text-center d-block"><%= @condo.name%></span>
     <hr>
 
     <div class="d-flex justify-content-center align-items-center">
       <% if @shared_fee.active? %>
-        <span class="badge text-bg-success fs-4 text-uppercase ls-4"><%= I18n.t("shared_fee.statuses.#{@shared_fee.status}") %></span>
+        <span class="badge text-bg-success fs-6 text-uppercase ls-4"><%= I18n.t("shared_fee.status.#{@shared_fee.status}") %></span>
       <% else %>
-        <span class="badge text-bg-danger fs-4 text-uppercase ls-4"><%= I18n.t("shared_fee.statuses.#{@shared_fee.status}") %></span>
+        <span class="badge text-bg-danger fs-6 text-uppercase ls-4"><%= I18n.t("shared_fee.status.#{@shared_fee.status}") %></span>
       <% end %>
     </div>
 
@@ -19,20 +19,20 @@
 
     <div class="px-5">
       <div class=" d-flex justify-content-between">
-        <span class="text-muted text-lowercase fs-8"><%= SharedFee.human_attribute_name(:issue_date) %></span>
+        <span class="text-muted text-lowercase fs-8"><%=  I18n.t('activerecord.attributes.shared_fee.issue_date') %></span>
         <span><%= I18n.l(@shared_fee.issue_date) %></span>
       </div>
       <div class=" d-flex justify-content-between">
-        <span class="text-muted text-lowercase fs-8"><%= SharedFee.human_attribute_name(:total_value_cents) %></span>
+        <span class="text-muted text-lowercase fs-8"><%=  I18n.t('activerecord.attributes.shared_fee.total_value_cents') %></span>
         <span class=""><%= @shared_fee.total_value.format %></span>
       </div>
     </div>
 
     <% if @shared_fee.active? %>
-    <hr>
-      <%= button_to cancel_condo_shared_fee_path(@condo.id, @shared_fee), class: "d-flex align-items-center btn hover-danger mx-auto", data: { turbo_confirm: I18n.t('confirm-cancel') } do %>
-        <%= image_tag "block-icon", size: "16" %>
-        <span class="ms-1 fs-7 text-uppercase"><%= I18n.t('cancel-button') %></span>
+      <hr>
+      <%= button_to cancel_condo_shared_fee_path(@condo.id, @shared_fee), class: "d-flex align-items-center btn hover-danger mx-auto", data: { turbo_confirm: I18n.t('messages.confirm.cancel_fee') } do %>
+        <%= image_tag "block-icon", size: "12" %>
+        <span class="ms-1 fs-7 text-uppercase"><%= I18n.t('buttons.cancel') %></span>
       <% end %>
     <% end %>
   </div>

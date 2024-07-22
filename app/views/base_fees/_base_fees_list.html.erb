@@ -7,23 +7,24 @@
         </span>
         <div class="d-flex flex-wrap text-end">
           <small class="d-block text-body-secondary w-100">
-            <%= SharedFee.human_attribute_name(:issue_date) %>:
+            <%= I18n.t('activerecord.attributes.base_fee.issue_date') %>:
             <%= I18n.l(base_fee.charge_day.to_date)%>
           </small>
           <% if base_fee.active? %>
-            <span class="mt-1 ms-auto badge text-bg-success text-uppercase"><%= I18n.t("base_fee.statuses.#{base_fee.status}") %></span>
+            <span class="mt-1 ms-auto badge text-bg-success text-uppercase"><%= I18n.t("base_fee.status.#{base_fee.status}") %></span>
           <% else %>
-            <span class="mt-1 ms-auto badge text-bg-danger text-uppercase"><%= I18n.t("base_fee.statuses.#{base_fee.status}") %></span>
+            <span class="mt-1 ms-auto badge text-bg-danger text-uppercase"><%= I18n.t("base_fee.status.#{base_fee.status}") %></span>
           <% end %>
         </div>
       </div>
       <span class="d-block">
         <%= base_fee.description %>
       </span>
-      <span class="text-muted fs-7 text-lowercase"><%= BaseFee.human_attribute_name(:recurrence) %></span>
+      <span class="text-muted fs-7 text-lowercase"><%= I18n.t('activerecord.attributes.base_fee.recurrence') %></span>
       <span class="text-uppercase fs-7"><%= I18n.t("activerecord.attributes.base_fee.enum_recurrence.#{base_fee.recurrence}") %></span>
     <% end %>
   <% end %>
 <% else %>
-  <p><%= I18n.t('views.index.no_base_fees')%></p>
+  <p class="text-center"><%= I18n.t('errors.not_found.base_fees')%></p>
 <% end %>
+

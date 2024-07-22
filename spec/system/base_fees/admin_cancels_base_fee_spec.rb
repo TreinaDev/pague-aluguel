@@ -20,7 +20,7 @@ describe 'Admin cancela uma taxa condominial' do
       click_on 'Ver todas'
     end
     click_on 'Taxa de Condomínio'
-    accept_confirm 'Tem certeza que deseja cancelar esse item? Essa ação não poderá ser desfeita.' do
+    accept_confirm 'Tem certeza que deseja desativar a taxa? Essa ação não poderá ser desfeita.' do
       click_button 'Cancelar'
     end
     base_fee = BaseFee.last
@@ -51,7 +51,7 @@ describe 'Admin cancela uma taxa condominial' do
       click_on 'Ver todas'
     end
     click_on 'Taxa de Condomínio'
-    accept_confirm 'Tem certeza que deseja cancelar esse item? Essa ação não poderá ser desfeita.' do
+    accept_confirm 'Tem certeza que deseja desativar a taxa? Essa ação não poderá ser desfeita.' do
       click_button 'Cancelar'
     end
     click_on 'Taxa de Condomínio'

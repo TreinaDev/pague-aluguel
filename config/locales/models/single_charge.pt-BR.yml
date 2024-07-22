@@ -1,0 +1,27 @@
+pt-BR:
+  activerecord:
+    models:
+      single_charge:
+        one: Cobrança Avulsa
+        other: Cobranças Avulsas
+    attributes:
+      single_charge:
+        condo_id: Condomínio
+        issue_date: Data de Emissão
+        unit_id: Unidade
+        unit: Unidade
+        value: Valor Total
+        value_cents: Valor Total
+        description: Descrição
+        charge_type: Tipo de Cobrança
+        common_area_id: Área Comum
+  single_charge:
+    status:
+      active: Ativa
+      canceled: Cancelada
+    common_area_fee: Taxa de Área Comum
+    fine: Multa
+    other: Outros
+  charge_type:
+    common_area_fee: Taxa de Área Comum
+    fine: Multa

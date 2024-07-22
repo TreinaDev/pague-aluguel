@@ -40,6 +40,8 @@ describe 'Proprietário tenta se cadastrar' do
     click_on 'Login'
     click_on 'Proprietário'
     click_on 'criar conta'
+    fill_in 'Nome', with: 'Fulano'
+    fill_in 'Sobrenome', with: 'da Costa'
     fill_in 'E-mail', with: 'propertytest@mail.com'
     cpf.each_char { |char| find(:css, "input[id$='property_owner_document_number']").send_keys(char) }
     fill_in 'Senha', with: 'password'

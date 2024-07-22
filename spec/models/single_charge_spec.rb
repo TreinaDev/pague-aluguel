@@ -56,7 +56,7 @@ RSpec.describe SingleCharge, type: :model do
       single_charge.valid?
 
       expect(single_charge.errors.include?(:common_area_id)).to be true
-      expect(single_charge.errors.full_messages).to include 'Área Comum deve ser selecionada'
+      expect(single_charge.errors.full_messages).to include 'Área Comum deve ser selecionada.'
     end
 
     it 'date_is_future' do
@@ -74,7 +74,7 @@ RSpec.describe SingleCharge, type: :model do
       single_charge.valid?
 
       expect(single_charge.errors.include?(:issue_date)).to be true
-      expect(single_charge.errors.full_messages).to include 'Data de Emissão deve ser a partir de hoje'
+      expect(single_charge.errors.full_messages).to include 'Data de Emissão deve ser a partir de hoje.'
     end
 
     it 'description_is_mandatory' do

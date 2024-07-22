@@ -35,7 +35,7 @@ describe 'Administrador acessa página do condomínio' do
     login_as admin, scope: :admin
     visit condo_path(23)
 
-    expect(page).to have_content 'Condomínio não cadastrado'
+    expect(page).to have_content 'Nenhum condomínio encontrado.'
     expect(current_path).to eq root_path
   end
 

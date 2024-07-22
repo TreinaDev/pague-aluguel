@@ -72,6 +72,6 @@ describe 'Admin vê lista de condominios' do
     login_as admin, scope: :admin
     visit root_path
 
-    expect(page).to have_content 'Não existem condomínios registrados.'
+    expect(page).to have_content 'Nenhum condomínio encontrado.'
   end
 end

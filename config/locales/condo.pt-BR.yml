@@ -1,9 +1,0 @@
-pt-BR:
-  views:
-    show:
-      condo: Condomínio
-      no_condo: Não existem condomínios registrados.
-      see_all: Ver todas
-      see_all_units: Ver todas as unidades
-      cnd: Certificado Negativo de Débito
-      bills: Faturas

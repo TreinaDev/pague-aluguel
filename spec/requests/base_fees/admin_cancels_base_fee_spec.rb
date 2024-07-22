@@ -14,7 +14,7 @@ describe 'Admin cancela uma taxa condominial' do
     post cancel_condo_base_fee_path(condo.id, base_fee.id)
 
     expect(response).to have_http_status :found
-    expect(flash[:notice]).to eq "#{base_fee.name} cancelada com sucesso."
+    expect(flash[:notice]).to eq "#{base_fee.name} cancelada com sucesso!"
   end
 
   it 'com sucesso - Admin associado ao condominio' do
@@ -31,7 +31,7 @@ describe 'Admin cancela uma taxa condominial' do
     post cancel_condo_base_fee_path(condo.id, base_fee.id)
 
     expect(response).to have_http_status :found
-    expect(flash[:notice]).to eq "#{base_fee.name} cancelada com sucesso."
+    expect(flash[:notice]).to eq "#{base_fee.name} cancelada com sucesso!"
   end
 
   it 'falha pois não está associado' do
@@ -44,6 +44,6 @@ describe 'Admin cancela uma taxa condominial' do
 
     expect(response).to have_http_status :found
     expect(response).to redirect_to root_path
-    expect(flash[:notice]).to eq I18n.t('errors.messages.must_be_super_admin')
+    expect(flash[:notice]).to eq 'Você não tem autorização para completar esta ação.'
   end
 end

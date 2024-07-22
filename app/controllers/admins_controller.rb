@@ -21,12 +21,12 @@ class AdminsController < ApplicationController
     params[:condo_ids].each do |condo_id|
       admin.associated_condos.create(condo_id:)
     end
-    redirect_to root_path, notice: I18n.t('errors.messages.condo_acess_updated')
+    redirect_to root_path, notice: I18n.t('success.update.condo_access')
   end
 
   private
 
   def check_super_admin
-    redirect_to root_path, alert: I18n.t('errors.messages.must_be_super_admin') unless current_admin.super_admin
+    redirect_to root_path, alert: I18n.t('errors.unauthorized.not_super_admin') unless current_admin.super_admin
   end
 end

@@ -20,13 +20,13 @@ describe 'Admin visualiza formulário de cobrança avulsa' do
     get new_condo_single_charge_path(condo.id)
 
     expect(response).to have_http_status :ok
-    expect(response.body).to include "Cadastro de #{I18n.t 'activerecord.models.single_charge.one'}"
+    expect(response.body).to include 'Cadastro de Cobrança Avulsa'
     expect(response.body).to include condo.name
-    expect(response.body).to include I18n.t 'activerecord.attributes.single_charge.charge_type'
-    expect(response.body).to include I18n.t 'activerecord.attributes.single_charge.unit_id'
-    expect(response.body).to include I18n.t 'activerecord.attributes.single_charge.description'
-    expect(response.body).to include I18n.t 'activerecord.attributes.single_charge.value'
-    expect(response.body).to include I18n.t 'activerecord.attributes.single_charge.issue_date'
+    expect(response.body).to include 'Tipo de Cobrança'
+    expect(response.body).to include 'Unidade'
+    expect(response.body).to include 'Descrição'
+    expect(response.body).to include 'Valor Total'
+    expect(response.body).to include 'Data de Emissão'
   end
 
   it 'com sucesso - admin associado' do
@@ -49,13 +49,13 @@ describe 'Admin visualiza formulário de cobrança avulsa' do
     get new_condo_single_charge_path(condo.id)
 
     expect(response).to have_http_status :ok
-    expect(response.body).to include "Cadastro de #{I18n.t 'activerecord.models.single_charge.one'}"
+    expect(response.body).to include 'Cadastro de Cobrança Avulsa'
     expect(response.body).to include condo.name
-    expect(response.body).to include I18n.t 'activerecord.attributes.single_charge.charge_type'
-    expect(response.body).to include I18n.t 'activerecord.attributes.single_charge.unit_id'
-    expect(response.body).to include I18n.t 'activerecord.attributes.single_charge.description'
-    expect(response.body).to include I18n.t 'activerecord.attributes.single_charge.value'
-    expect(response.body).to include I18n.t 'activerecord.attributes.single_charge.issue_date'
+    expect(response.body).to include 'Tipo de Cobrança'
+    expect(response.body).to include 'Unidade'
+    expect(response.body).to include 'Descrição'
+    expect(response.body).to include 'Valor Total'
+    expect(response.body).to include 'Data de Emissão'
   end
 
   it 'falha por nao estar associado' do
@@ -78,6 +78,6 @@ describe 'Admin visualiza formulário de cobrança avulsa' do
 
     expect(response).to have_http_status :found
     expect(response).to redirect_to root_path
-    expect(flash[:notice]).to eq I18n.t('errors.messages.must_be_super_admin')
+    expect(flash[:notice]).to eq 'Você não tem autorização para completar esta ação.'
   end
 end

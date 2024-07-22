@@ -7,20 +7,20 @@
         </span>
         <div class="d-flex flex-wrap text-end">
           <small class="d-block text-body-secondary w-100">
-            <%= SharedFee.human_attribute_name(:issue_date) %>:
+            <%=  I18n.t('activerecord.attributes.shared_fee.issue_date') %>:
             <%= I18n.l(shared_fee.issue_date) %>
           </small>
           <% if shared_fee.active? %>
-            <span class="mt-1 ms-auto badge text-bg-success text-uppercase"><%= I18n.t("shared_fee.statuses.#{shared_fee.status}") %></span>
+            <span class="mt-1 ms-auto badge text-bg-success text-uppercase"><%= I18n.t("shared_fee.status.#{shared_fee.status}") %></span>
           <% else %>
-            <span class="mt-1 ms-auto badge text-bg-danger text-uppercase"><%= I18n.t("shared_fee.statuses.#{shared_fee.status}") %></span>
+            <span class="mt-1 ms-auto badge text-bg-danger text-uppercase"><%= I18n.t("shared_fee.status.#{shared_fee.status}") %></span>
           <% end %>
         </div>
       </div>
-      <span class="text-muted fs-7 text-lowercase"><%= SharedFee.human_attribute_name(:total_value) %></span>
+      <span class="text-muted fs-7 text-lowercase"><%=  I18n.t('activerecord.attributes.shared_fee.total_value') %></span>
       <span class="text-uppercase fs-7"><%= shared_fee.total_value.format %></span>
     <% end %>
   <% end %>
 <% else %>
-  <p><%= I18n.t('views.index.no_fees') %></p>
+  <p class="text-center"><%= I18n.t('errors.not_found.shared_fees') %></p>
 <% end %>

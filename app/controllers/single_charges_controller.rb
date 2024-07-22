@@ -25,9 +25,9 @@ class SingleChargesController < ApplicationController
     @units = Unit.all(@condo.id)
     @single_charge.condo_id = @condo.id
     if @single_charge.save
-      redirect_to condo_path(@condo.id), notice: I18n.t('success_notice_single_charge')
+      redirect_to condo_path(@condo.id), notice: I18n.t('success.create.charge')
     else
-      flash.now[:alert] = I18n.t('fail_notice_single_charge')
+      flash.now[:alert] = I18n.t('errors.cant_create.charge')
       render :new, status: :unprocessable_entity
     end
   end
@@ -35,7 +35,8 @@ class SingleChargesController < ApplicationController
   def cancel
     @single_charge = SingleCharge.find(params[:id])
     @single_charge.canceled!
-    redirect_to condo_single_charges_path(@condo.id), notice: "#{@single_charge.charge_type} cancelada com sucesso."
+    redirect_to condo_single_charges_path(@condo.id),
+                notice: I18n.t("success.cancel.this_charge.#{@single_charge.charge_type}")
   end
 
   private

@@ -85,6 +85,7 @@ RSpec.describe Admin, type: :model do
       result = admin.errors.include?(:document_number)
 
       expect(result).to be true
+      expect(admin.errors[:document_number]).to include 'não é válido.'
     end
   end
 

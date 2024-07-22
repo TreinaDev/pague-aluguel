@@ -62,7 +62,7 @@ class Admins::RegistrationsController < Devise::RegistrationsController
   end
 
   def redirect_if_not_logged_in
-    redirect_to new_admin_session_path, notice: I18n.t('errors.messages.must_be_logged_in') unless admin_signed_in?
+    redirect_to new_admin_session_path, notice: I18n.t('errors.unauthorized.not_logged_in') unless admin_signed_in?
   end
 
   def after_sign_up_path_for(*)
@@ -74,7 +74,7 @@ class Admins::RegistrationsController < Devise::RegistrationsController
   end
 
   def redirect_if_not_super_admin
-    redirect_to root_path, notice: I18n.t('errors.messages.must_be_super_admin') unless current_admin.super_admin?
+    redirect_to root_path, notice: I18n.t('errors.unauthorized.not_super_admin') unless current_admin.super_admin?
   end
 
   # The path used after sign up for inactive accounts.

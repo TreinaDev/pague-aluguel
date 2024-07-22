@@ -6,13 +6,13 @@
           <div class="card hover-strong shadow-sm" style="width: 18rem;" id=<%= "unit-#{unit.id}"%>>
             <div class="card-body">
               <span class="d-block"><%= unit.description %></span>
-              <span class="text-muted fs-8"><%= I18n.t('activemodel.models.unit.one') %> <%= unit.number%> | <%= unit.condo_name %></span>
+              <span class="text-muted fs-8"><%= I18n.t('activerecord.models.unit.one') %> <%= unit.number%> | <%= unit.condo_name %></span>
             </div>
           </div>
         <% end %>
       <% end %>
     <% else %>
-      <span class="text-muted"><%= I18n.t('views.show.no_units') %></span>
+      <span class="text-muted"><%= I18n.t('errors.not_found.units') %></span>
     <% end %>
   </div>
 <% end %>

@@ -2,11 +2,11 @@ class Api::V1::SingleChargesController < Api::V1::ApiController
   def cancel
     single_charge = SingleCharge.find(params[:id])
     if check_charge_type(single_charge)
-      return render json: { message: I18n.t('invalid_charge') }, status: :unprocessable_entity
+      return render json: { message: I18n.t('errors.invalid.charge') }, status: :unprocessable_entity
     end
 
     if single_charge.canceled!
-      render json: { message: I18n.t('single_charge_canceled') }, status: :ok
+      render json: { message: I18n.t('success.cancel.reservation') }, status: :ok
     else
       render json: { message: single_charge.errors.full_messages }, status: :unprocessable_entity
     end
@@ -18,7 +18,7 @@ class Api::V1::SingleChargesController < Api::V1::ApiController
     return create_fine(single_charge) if single_charge.fine?
     return create_common_area_fee(single_charge) if single_charge.common_area_fee?
 
-    render json: { message: I18n.t('invalid_charge') }, status: :unprocessable_entity
+    render json: { message: I18n.t('errors.invalid.charge') }, status: :unprocessable_entity
   end
 
   private
@@ -26,7 +26,7 @@ class Api::V1::SingleChargesController < Api::V1::ApiController
   def create_common_area_fee(single_charge)
     if single_charge.save
       render json: {
-        message: I18n.t('common-area-fee-charge-success'), single_charge_id: single_charge.id
+        message: I18n.t('success.create.common_area_charge'), single_charge_id: single_charge.id
       }, status: :created
     else
       render json: { message: single_charge.errors.full_messages }, status: :unprocessable_entity
@@ -35,7 +35,7 @@ class Api::V1::SingleChargesController < Api::V1::ApiController
 
   def create_fine(single_charge)
     if single_charge.save
-      render json: { message: I18n.t('fine-charge-success') }, status: :created
+      render json: { message: I18n.t('success.create.fine-charge') }, status: :created
     else
       render json: { message: single_charge.errors.full_messages }, status: :unprocessable_entity
     end

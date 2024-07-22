@@ -16,14 +16,14 @@ RSpec.describe 'Proprietário tenta emitir certificado de debito negativo' do
       units = []
       units << Unit.new(id: 2, area: 120, floor: 3, number: 22, unit_type_id: 2, owner_name: 'Jules',
                         tenant_id: 2, owner_id: 1, condo_id: 1, description: 'Apartamento 2 quartos',
-                        condo_name: 'Condo Test')
+                        condo_name: 'Condo Test', tower_name: 'Bloco 1')
       allow(Unit).to receive(:find_all_by_owner).and_return(units)
       allow(Unit).to receive(:find).and_return(units[0])
       create(:bill, unit_id: 1, condo_id: 1, status: :paid)
 
       login_as property_owner, scope: :property_owner
       visit unit_path(2)
-      click_on 'Emitir Certificado de Débito Negativo'
+      click_on 'Emitir Certificado'
 
       expect(page).to have_content 'Certidão de quitação emitida com sucesso'
       expect(page).to have_content I18n.l(Time.zone.now)
@@ -47,7 +47,7 @@ RSpec.describe 'Proprietário tenta emitir certificado de debito negativo' do
     units = []
     units << Unit.new(id: 2, area: 120, floor: 3, number: 22, unit_type_id: 2, owner_name: 'Jules',
                       tenant_id: 1, owner_id: 1, condo_id: 1, description: 'Apartamento 2 quartos',
-                      condo_name: 'Condo Test')
+                      condo_name: 'Condo Test', tower_name: 'Bloco 1')
     allow(Unit).to receive(:find_all_by_owner).and_return(units)
     allow(Unit).to receive(:find).and_return(units[0])
     allow(Unit).to receive(:all).and_return(units[0])
@@ -57,7 +57,7 @@ RSpec.describe 'Proprietário tenta emitir certificado de debito negativo' do
 
     login_as property_owner, scope: :property_owner
     visit unit_path(2)
-    click_on 'Emitir Certificado de Débito Negativo'
+    click_on 'Emitir Certificado'
 
     expect(page).to have_content 'Esta unidade possui débitos pendentes.'
   end

@@ -3,38 +3,33 @@
     <%= link_to condo_single_charge_path(@condo.id, single_charge), class: "list-group-item p-3 list-group-item-action hover-strong", data: { turbo_frame: "modal" } do %>
       <div class="d-flex w-100 justify-content-between">
         <span class="d-block mb-1 fs-4">
-          <%= I18n.t "single_charge.#{single_charge.charge_type}" %>
-        </span>
-        <span class="d-block mb-1 fs-6">
-          <%= single_charge.description %>
-        </span>
-        <span class="d-block mb-1 fs-6">
-          <%= I18n.t('activerecord.attributes.single_charge.unit_id') %>
-          <%= Unit.find(single_charge.unit_id).number %>
+          <%= I18n.t("single_charge.#{single_charge.charge_type}") %>
         </span>
         <div class="d-flex flex-wrap text-end">
           <small class="text-body-secondary w-100">
-            <%= SingleCharge.human_attribute_name(:issue_date) %>:
+            <%=  I18n.t('activerecord.attributes.single_charge.issue_date') %>:
             <%= I18n.l(single_charge.issue_date) %>
           </small>
           <% if single_charge.active? %>
-            <span class="mt-1 ms-auto badge text-bg-success text-uppercase"><%= I18n.t("single_charge.statuses.#{single_charge.status}") %></span>
+            <span class="mt-1 ms-auto badge text-bg-success text-uppercase"><%= I18n.t("single_charge.status.#{single_charge.status}") %></span>
           <% else %>
-            <span class="mt-1 ms-auto badge text-bg-danger text-uppercase"><%= I18n.t("single_charge.statuses.#{single_charge.status}") %></span>
+            <span class="mt-1 ms-auto badge text-bg-danger text-uppercase"><%= I18n.t("single_charge.status.#{single_charge.status}") %></span>
           <% end %>
         </div>
       </div>
-      <span>
+      <span class="d-block mb-1 text-muted">
         <%= I18n.t('activerecord.attributes.single_charge.unit_id') %>
-        <%= humanized_unit(single_charge.unit_id) %>
+        <%= Unit.find(single_charge.unit_id).number %>
+         - 
+        <%= Unit.find(single_charge.unit_id).tower_name %>
       </span>
       <span class="d-block">
         <%= single_charge.description %>
       </span>
-      <span class="text-muted fs-7 text-lowercase"><%= SingleCharge.human_attribute_name(:value) %></span>
+      <span class="text-muted fs-7 text-lowercase"><%=  I18n.t('activerecord.attributes.single_charge.value') %></span>
       <span><%= single_charge.value.format %></span>
     <% end %>
   <% end %>
 <% else %>
-  <p><%= I18n.t('views.index.no_single_charges') %></p>
+  <p class="text-center"><%= I18n.t('errors.not_found.single_charges') %></p>
 <% end %>

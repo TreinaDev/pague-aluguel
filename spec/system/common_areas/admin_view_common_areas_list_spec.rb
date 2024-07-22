@@ -90,10 +90,10 @@ describe 'Admin vê a lista de áreas comuns' do
     login_as admin, scope: :admin
     visit condo_path(condo.id)
 
-    expect(page).to have_content 'Nenhuma área comum cadastrada.'
+    expect(page).to have_content 'Nenhuma área comum encontrada.'
   end
 
-  it 'e vê áreas comuns sem taxa cadastradas' do
+  it 'e vê áreas comuns sem taxas cadastradas' do
     admin = create(:admin, email: 'matheus@gmail.com', password: 'admin12345')
     condos = []
     condos << Condo.new(id: 1, name: 'Condo TMNT', city: 'Salvador')

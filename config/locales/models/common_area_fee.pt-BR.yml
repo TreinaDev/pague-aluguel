@@ -1,0 +1,13 @@
+pt-BR:
+  activerecord:
+    models:
+      common_area:
+        one: Área Comum
+        other: Áreas Comuns
+      common_area_fee:
+        one: Taxa de Área Comum
+        other: Taxas de Área Comum
+    attributes:
+      common_area_fee:
+        value: Taxa
+        value_cents: Taxa

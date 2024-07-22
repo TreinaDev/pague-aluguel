@@ -1,39 +1,24 @@
-<div class="card border-0 rounded-0 bg-off-white mt-4 pt-3 px-3 w-49" id="units">
-  <div class="text-muted mb-3 fs-8">
-    <%= image_tag "buildings-icon", size: '18' %>
-    <span><%= I18n.t('views.show.unit_section_title') %></span>
+<div class="card border-0 rounded-0 bg-off-white mt-4 py-3 px-3" id="units">
+
+  <div class="mb-3">
+    <%= image_tag "buildings-icon", size: '25' %>
+    <span class="text-muted"><%= I18n.t('dashboards.section_title.units') %></span>
   </div>
 
    <div class="d-flex gap-2 flex-wrap justify-content-center">
     <% if @units.any? %>
-      <% @first_units.each do |unit| %>
+      <% @units.each do |unit| %>
        <%= link_to unit_path(unit.id), class: "text-decoration-none", data: { turbo_frame: "modal" } do %>
           <div class="card hover-strong shadow-sm" style="width: 18rem;" id=<%= "unit-#{unit.id}"%>>
             <div class="card-body">
               <span class="d-block"><%= unit.description %></span>
-              <span class="text-muted fs-8"><%= I18n.t('activemodel.models.unit.one') %> <%= unit.number%> | <%= unit.condo_name %></span>
+              <span class="text-muted fs-8"><%= I18n.t('activerecord.models.unit.one') %> <%= unit.number%> | <%= unit.condo_name %></span>
             </div>
           </div>
         <% end %>
       <% end %>
     <% else %>
-      <span class="text-muted"><%= I18n.t('views.show.no_units') %></span>
+      <span class="text-muted"><%= I18n.t('errors.not_found.units') %></span>
     <% end %>
   </div>
-
-   <% if array_length_greater_than?(@units, 2) %>
-    <div data-controller="change-button-condo" class="mt-3 mb-3">
-      <div class="text-center">
-        <%= link_to units_path, class: 'btn text-uppercase', data: { change_button_condo_target: "allCondosBtn", turbo_frame: "expand-condos" } do %>
-          <%= image_tag "arrow-down", size: "20" %>
-          <span class="fs-8"><%= I18n.t('views.show.show_all') %></span>
-        <% end %>
-        <%= link_to root_path, class: 'btn text-uppercase', data: { change_button_condo_target: "hideCondosBtn", turbo_frame: "expand-condos" } do %>
-          <%= image_tag "arrow-up", size: "20" %>
-          <span class="fs-8"><%= I18n.t('views.show.hide') %></span>
-        <% end %>
-      </div>
-      <%= turbo_frame_tag 'expand-condos' %>
-    </div>
-  <% end %>
 </div>

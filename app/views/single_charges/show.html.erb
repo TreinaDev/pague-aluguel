@@ -2,24 +2,26 @@
   <div class="dean-modal modal-md">
     <%= link_to "", :back, id: 'close', class: "btn btn-sm btn-close" %>
 
-    <span class="fs-8 text-center d-block"><%= SingleCharge.model_name.human %></span>
-    <span class="fs-6 text-center d-block">
-                <%= I18n.t('activerecord.attributes.single_charge.unit_id') %>
-                <%= Unit.find(@single_charge.unit_id).number %>
-     </span>
+    <span class="fs-8 text-center d-block"><%= I18n.t('activerecord.models.single_charge.one') %></span>
+    <span class="fs-8 text-center d-block"><%= @condo.name%></span>
+    <span class="fs-3 text-center d-block">
+      <%= I18n.t('activerecord.attributes.single_charge.unit') %>
+      <%= Unit.find(@single_charge.unit_id).number %>
+    </span>
+    <span class="fs-7 text-center d-block text-muted"><%= I18n.t('dashboards.labels.tower') %>: <%= Unit.find(@single_charge.unit_id).tower_name %></span>
     <hr>
 
     <div class="d-flex justify-content-center align-items-center">
       <% if @single_charge.active? %>
-        <span class="badge text-bg-success fs-4 text-uppercase ls-4"><%= I18n.t("single_charge.statuses.#{@single_charge.status}") %></span>
+        <span class="badge text-bg-success fs-6 text-uppercase ls-4"><%= I18n.t("single_charge.status.#{@single_charge.status}") %></span>
       <% else %>
-        <span class="badge text-bg-danger fs-4 text-uppercase ls-4"><%= I18n.t("single_charge.statuses.#{@single_charge.status}") %></span>
+        <span class="badge text-bg-danger fs-6 text-uppercase ls-4"><%= I18n.t("single_charge.status.#{@single_charge.status}") %></span>
       <% end %>
     </div>
 
     <hr>
-    <span class="fs-6 text-center d-block"><%= I18n.t 'activerecord.attributes.single_charge.charge_type' %>:</span>
-    <span class="fs-4 text-center d-block"><%= I18n.t "single_charge.#{@single_charge.charge_type}" %></span>
+    <span class="fs-6 text-center d-block"><%= I18n.t('activerecord.attributes.single_charge.charge_type') %>:</span>
+    <span class="fs-4 text-center d-block"><%= I18n.t("single_charge.#{@single_charge.charge_type}") %></span>
 
     <% if @single_charge.common_area_fee? %>
       <div class=" d-flex justify-content-center align-items-center">
@@ -52,9 +54,9 @@
 
     <% if @single_charge.active? %>
     <hr>
-      <%= button_to cancel_condo_single_charge_path(@condo.id, @single_charge), class: "d-flex align-items-center btn hover-danger mx-auto", data: { turbo_confirm: I18n.t('confirm-cancel') } do %>
-        <%= image_tag "block-icon", size: "16" %>
-        <span class="ms-1 fs-7 text-uppercase"><%= I18n.t('cancel-button') %></span>
+      <%= button_to cancel_condo_single_charge_path(@condo.id, @single_charge), class: "d-flex align-items-center btn hover-danger mx-auto", data: { turbo_confirm: I18n.t('messages.confirm.cancel_charge') } do %>
+        <%= image_tag "block-icon", size: "12" %>
+        <span class="ms-1 fs-7 text-uppercase"><%= I18n.t('buttons.cancel') %></span>
       <% end %>
     <% end %>
 

@@ -9,12 +9,12 @@ class BillsController < ApplicationController
   end
 
   def show
-    set_unit_type
+    set_unit
   end
 
   def accept_payment
     @bill.paid!
-    redirect_to condo_bills_path(@condo.id), notice: I18n.t('views.index.payment_accepted')
+    redirect_to condo_bills_path(@condo.id), notice: I18n.t('success.payment.accepted')
   end
 
   def reject_payment
@@ -22,7 +22,7 @@ class BillsController < ApplicationController
     @bill.denied = true
     @bill.save
     @bill.receipt.destroy
-    redirect_to condo_bills_path(@condo.id), notice: I18n.t('views.index.payment_rejected')
+    redirect_to condo_bills_path(@condo.id), notice: I18n.t('success.payment.rejected')
   end
 
   private
@@ -30,7 +30,7 @@ class BillsController < ApplicationController
   def bill_belongs_to_condo
     return if @bill.condo_id.to_i == @condo.id.to_i
 
-    redirect_to condo_bills_path(@condo.id), notice: I18n.t('views.index.no_bills')
+    redirect_to condo_bills_path(@condo.id), notice: I18n.t('errors.not_found.bills')
   end
 
   def set_bill
@@ -41,7 +41,7 @@ class BillsController < ApplicationController
     @condo = Condo.find(params[:condo_id])
   end
 
-  def set_unit_type
+  def set_unit
     @unit = Unit.find(@bill.unit_id)
   end
 end

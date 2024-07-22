@@ -1,10 +1,10 @@
 <div class="card border-0 rounded-0 bg-off-white mt-4 py-3 px-3 w-49" id="shared-fee">
   <div class="mb-3">
     <%= image_tag "document-link-icon", size: '25', class: "mb-1" %>
-    <span class="text-muted"><%= SharedFee.model_name.human(count: 2) %></span>
+    <span class="text-muted"><%= I18n.t('activerecord.models.shared_fee.other') %></span>
   </div>
   <% if @recent_shared_fees.any? %>
-    <span class="text-muted text-uppercase fs-7 ms-3 mb-1">recentes</span>
+    <span class="text-muted text-uppercase fs-7 ms-3 mb-1"><%= I18n.t('dashboards.section.recents') %></span>
     <div class="list-group w-75 mb-2">
       <% @recent_shared_fees.each do |shared_fee| %>
         <%= link_to condo_shared_fee_path(@condo.id, shared_fee), class: "list-group-item p-3 list-group-item-action hover-strong", data: { turbo_frame: "modal" } do %>
@@ -13,13 +13,13 @@
               <%= shared_fee.description %>
             </span>
             <div class="d-flex flex-wrap text-end">
-              <small class="text-body-secondary w-100">
-                <%= SharedFee.human_attribute_name(:issue_date) %>:
+              <small class="text-muted">
+                <%=  I18n.t('activerecord.attributes.shared_fee.issue_date') %>:
                 <%= I18n.l(shared_fee.issue_date) %>
               </small>
             </div>
           </div>
-          <span class="text-muted fs-7 text-lowercase"><%= SharedFee.human_attribute_name(:total_value) %></span>
+          <span class="text-muted fs-7 text-lowercase"><%=  I18n.t('activerecord.attributes.shared_fee.total_value') %></span>
           <span><%= shared_fee.total_value.format %></span>
         <% end %>
       <% end %>
@@ -28,13 +28,13 @@
   <div class="d-flex align-items-center">
     <%= link_to new_condo_shared_fee_path(@condo.id), class: "text-decoration-none btn hover-strong" do %>
       <%= image_tag "plus-icon", size: "18" %>
-      <span class="text-muted fs-7 text-uppercase"><%= I18n.t('helpers.submit.add') %></span>
+      <span class="text-muted fs-7 text-uppercase"><%= I18n.t('buttons.submit.add') %></span>
     <% end %>
   </div>
   <div class="d-flex align-items-center">
     <%= link_to condo_shared_fees_path(@condo.id), class: "text-decoration-none btn hover-strong" do %>
       <%= image_tag "list-center-icon", size: "18" %>
-      <span class="text-muted fs-7 text-uppercase"><%= I18n.t('views.show.see_all') %></span>
+      <span class="text-muted fs-7 text-uppercase"><%= I18n.t('buttons.see_all') %></span>
     <% end %>
   </div>
 </div>

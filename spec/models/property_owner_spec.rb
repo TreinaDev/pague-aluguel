@@ -8,6 +8,8 @@ RSpec.describe PropertyOwner, type: :model do
     it { should validate_presence_of(:email) }
     it { should validate_presence_of(:password) }
     it { should validate_presence_of(:document_number) }
+    it { should validate_presence_of(:first_name) }
+    it { should validate_presence_of(:last_name) }
     it { should validate_uniqueness_of(:document_number) }
   end
 
@@ -21,7 +23,13 @@ RSpec.describe PropertyOwner, type: :model do
       ).and_return(fake_response)
     )
 
-    owner = PropertyOwner.new(email: 'solidsnake@mgs.com', password: 'password', document_number: cpf)
+    owner = PropertyOwner.new(
+      email: 'solidsnake@mgs.com',
+      password: 'password',
+      document_number: cpf,
+      first_name: 'Fulano',
+      last_name: 'da Costa'
+    )
 
     expect(owner).to be_valid
   end
@@ -36,7 +44,13 @@ RSpec.describe PropertyOwner, type: :model do
       ).and_return(fake_response)
     )
 
-    owner = PropertyOwner.new(email: 'solidsnake@mgs.com', password: 'password', document_number: cpf)
+    owner = PropertyOwner.new(
+      email: 'solidsnake@mgs.com',
+      password: 'password',
+      document_number: cpf,
+      first_name: 'Fulano',
+      last_name: 'da Costa'
+    )
 
     expect(owner).to_not be_valid
   end

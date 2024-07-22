@@ -1,11 +1,13 @@
 class Unit
-  attr_accessor :id, :area, :floor, :number, :unit_type_id, :condo_id, :condo_name, :tenant_id, :owner_id, :description
+  attr_accessor :id, :area, :floor, :number, :unit_type_id, :condo_id, :condo_name,
+                :tenant_id, :owner_id, :description, :tower_name
 
   def initialize(attribute = {})
     @id = attribute[:id]
+    @number = attribute[:number]
     @area = attribute[:area]
     @floor = attribute[:floor]
-    @number = attribute[:number]
+    @tower_name = attribute[:tower_name]
     @unit_type_id = attribute[:unit_type_id]
     @condo_id = attribute[:condo_id]
     @condo_name = attribute[:condo_name]
@@ -69,11 +71,11 @@ class Unit
   end
 
   def set_status
-    return I18n.t('views.show.owner_tenant') if owner_id == tenant_id
+    return I18n.t('messages.owner_tenant') if owner_id == tenant_id
 
-    return I18n.t('views.show.has_tenant') if tenant_id.present? && owner_id != tenant_id
+    return I18n.t('messages.has_tenant') if tenant_id.present? && owner_id != tenant_id
 
-    I18n.t('views.show.no_tenant')
+    I18n.t('messages.available.rent')
   end
 
   def unit_has_tenant?
@@ -96,6 +98,7 @@ class Unit
   def self.build_new_unit(data)
     Unit.new(id: data['id'], area: data['area'], floor: data['floor'], number: data['number'],
              unit_type_id: data['unit_type_id'], condo_id: data['condo_id'], condo_name: data['condo_name'],
-             tenant_id: data['tenant_id'], owner_id: data['owner_id'], description: data['description'])
+             tenant_id: data['tenant_id'], owner_id: data['owner_id'],
+             description: data['description'], tower_name: data['tower_name'])
   end
 end

@@ -26,7 +26,7 @@ describe 'Proprietário vee detalhes da sua unidade' do
       expect(page).to have_content 'Unidade 4'
       expect(page).to have_content 'Condo Test'
       expect(page).to have_link 'Configurar Aluguel'
-      expect(page).to have_content 'Esta unidade está alugada'
+      expect(page).to have_content 'ALUGADA'
     end
   end
 
@@ -55,7 +55,7 @@ describe 'Proprietário vee detalhes da sua unidade' do
       expect(page).to have_content 'Unidade 4'
       expect(page).to have_content 'Condo Test'
       expect(page).not_to have_link 'Configurar Aluguel'
-      expect(page).to have_content 'Esta unidade está disponível para locação'
+      expect(page).to have_content 'Disponível'.upcase
     end
   end
 
@@ -84,7 +84,7 @@ describe 'Proprietário vee detalhes da sua unidade' do
       expect(page).to have_content 'Unidade 4'
       expect(page).to have_content 'Condo Test'
       expect(page).not_to have_link 'Configurar Aluguel'
-      expect(page).to have_content 'Você reside nesta unidade'
+      expect(page).to have_content 'Você reside nesta unidade'.upcase
     end
   end
 

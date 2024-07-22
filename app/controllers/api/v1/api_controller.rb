@@ -4,6 +4,6 @@ class Api::V1::ApiController < ActionController::API
   private
 
   def record_not_found
-    render status: :not_found, json: { errors: 'Não encontrado' }
+    render status: :not_found, json: { errors: I18n.t('errors.messages.not_found') }
   end
 end

@@ -25,10 +25,6 @@ describe 'Proprietário vê suas unidades' do
     visit root_path
 
     within('div#units') do
-      click_on 'Mostrar todos'
-    end
-
-    within('div#all-units') do
       within("div#unit-#{units[0].id}") do
         expect(page).to have_content 'Unidade 3 | Condo Test'
         expect(page).to have_content 'Cobertura'
@@ -61,7 +57,7 @@ describe 'Proprietário vê suas unidades' do
     login_as property_owner, scope: :property_owner
     visit root_path
 
-    expect(page).to have_content 'Unidades'
-    expect(page).to have_content 'Não possui unidades associadas.'
+    expect(page).to have_content 'Minhas unidades'
+    expect(page).to have_content 'Nenhuma unidade encontrada.'
   end
 end

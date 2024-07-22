@@ -1,0 +1,45 @@
+pt-BR:
+  activerecord:
+    models:
+      base_fee:
+        one: Taxa Condominial
+        other: Taxas Condominiais
+      value: Valor
+    attributes:
+      base_fee:
+        name: Nome
+        description: Descrição
+        interest_rate: Juros ao dia (%)
+        late_fine: Multa por atraso
+        late_fine_cents: Multa por atraso
+        charge_day: Data de Emissão
+        installments: Número de Parcelas
+        recurrence: Recorrência
+        limited: Taxa limitada
+        status: Status
+        counter: Contador de Parcelas
+        issue_date: Data de Emissão
+        enum_recurrence:
+          monthly: Mensal
+          biweekly: Quinzenal
+          bimonthly: Bimestral
+          semi_annual: Semestral
+          yearly: Anual
+      values:
+        price: Valor
+        price_for_unit: Valor para %{unit_type}
+  base_fee:
+    limited:
+      true: Taxa limitada
+      false: Taxa fixa
+    status:
+      active: Ativa
+      canceled: Cancelada
+    installments:
+      one: '%{count} x Parcela'
+      other: '%{count} x Parcelas'
+    monthly: Mensal
+    biweekly: Quinzenal
+    bimonthly: Bimestral
+    semi_annual: Semestral
+    yearly: Anual

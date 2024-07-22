@@ -1,22 +1,27 @@
 class Condo
-  attr_accessor :id, :name, :city
+  attr_accessor :id, :name, :city, :registration_number, :state, :public_place, :number, :neighborhood, :zip
 
-  def initialize(id:, name:, city:)
-    @id = id
-    @name = name
-    @city = city
+  def initialize(attribute = {})
+    @id = attribute[:id]
+    @name = attribute[:name]
+    @registration_number = attribute[:registration_number]
+    @city = attribute[:city]
+    @state = attribute[:state]
+    @public_place = attribute[:public_place]
+    @number = attribute[:number]
+    @neighborhood = attribute[:neighborhood]
+    @zip = attribute[:zip]
   end
 
   def self.all
     condos = []
     response = Faraday.get("#{Rails.configuration.api['base_url']}/condos")
     if response.success?
-      data = JSON.parse(response.body)
+      data = JSON.parse(response.body, symbolize_names: true)
       data.each do |condo|
-        condos << Condo.new(id: condo['id'], name: condo['name'], city: condo['city'])
+        condos << Condo.new(condo)
       end
     end
-
     condos
   end
 
@@ -24,7 +29,14 @@ class Condo
     response = Faraday.get("#{Rails.configuration.api['base_url']}/condos/#{id}")
     raise response.status unless response.success?
 
-    data = JSON.parse(response.body)
-    Condo.new(id:, name: data['name'], city: data['address']['city'])
+    instance_from_api(response.body, id)
+  end
+
+  def self.instance_from_api(response_body, id)
+    data = JSON.parse(response_body, symbolize_names: true)
+    address = data[:address]
+    Condo.new(id:, name: data[:name], registration_number: data[:registration_number],
+              city: address[:city], state: address[:state], public_place: address[:public_place],
+              number: address[:number], neighborhood: address[:neighborhood], zip: address[:zip])
   end
 end

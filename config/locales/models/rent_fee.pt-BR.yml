@@ -1,0 +1,26 @@
+pt-BR:
+  activerecord:
+    models:
+      rent:
+        one: Aluguel
+        other: Alugueis
+      rent_fee:
+        one: Taxa de Aluguel
+        other: Taxas de Aluguel
+    attributes:
+      rent_fee:
+        value: Valor do aluguel
+        unit: Unidade
+        status: status da cobrança
+        value_cents: Valor do aluguel
+        fine: Multa por atraso
+        fine_cents: Multa por atraso
+        fine_interest: Juros por atraso ao mês (em %)
+        fine_interest_cents: Juros por atraso ao mês (em %)
+        issue_date: Data de Emissão
+  rent_fee:
+    status:
+      canceled: Desativado
+      active: Ativo
+
+

@@ -14,7 +14,7 @@ describe 'Admin acessa lista de taxas condominiais' do
     get condo_base_fees_path(condo.id)
 
     expect(response).to have_http_status :ok
-    expect(response.body).to include 'Listagem de Taxas Condominiais'
+    expect(response.body).to include 'Taxas Condominiais'
     expect(response.body).to include 'Condo Test'
     expect(response.body).to include 'TODAS AS TAXAS'
     expect(response.body).to include 'Fundo de Reserva'
@@ -40,7 +40,7 @@ describe 'Admin acessa lista de taxas condominiais' do
     get condo_base_fees_path(condo.id)
 
     expect(response).to have_http_status :ok
-    expect(response.body).to include 'Listagem de Taxas Condominiais'
+    expect(response.body).to include 'Taxas Condominiais'
     expect(response.body).to include 'Condo Test'
     expect(response.body).to include 'TODAS AS TAXAS'
     expect(response.body).to include 'Fundo de Reserva'
@@ -63,6 +63,6 @@ describe 'Admin acessa lista de taxas condominiais' do
 
     expect(response).to have_http_status :found
     expect(response).to redirect_to root_path
-    expect(flash[:notice]).to eq I18n.t('errors.messages.must_be_super_admin')
+    expect(flash[:notice]).to eq 'Você não tem autorização para completar esta ação.'
   end
 end

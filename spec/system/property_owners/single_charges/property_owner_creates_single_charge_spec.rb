@@ -31,7 +31,7 @@ describe 'Proprietario cria cobrança avulsa' do
     fill_in 'Data de Emissão', with: 5.days.from_now.to_date
     click_on 'Cadastrar'
 
-    expect(page).to have_content 'Cobrança Avulsa cadastrada com sucesso!'
+    expect(page).to have_content 'Cobrança cadastrada com sucesso!'
     expect(current_path).to eq owners_single_charges_path
     expect(page).to have_content 'Outros'
     expect(page).to have_content 'Acordo entre proprietário e morador'

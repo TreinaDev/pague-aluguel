@@ -6,7 +6,7 @@ class RentFeesController < ApplicationController
 
   def deactivate
     @rent_fee.canceled!
-    redirect_to unit_path(@rent_fee.unit_id), notice: I18n.t('messages.deactivated_fee')
+    redirect_to unit_path(@rent_fee.unit_id), notice: I18n.t('success.deactivate.rent')
   end
 
   def new
@@ -18,7 +18,7 @@ class RentFeesController < ApplicationController
   def create
     @rent_fee = RentFee.new(rent_fee_params)
     if @rent_fee.save
-      redirect_to unit_path(@unit_id), notice: I18n.t('messages.registered_fee')
+      redirect_to unit_path(@unit_id), notice: I18n.t('success.create.rent')
     else
       render :new, status: :unprocessable_entity
     end
@@ -27,7 +27,7 @@ class RentFeesController < ApplicationController
   def update
     if @rent_fee.update(rent_fee_params)
       reactivate
-      redirect_to unit_path(@unit_id), notice: I18n.t('messages.updated_fee')
+      redirect_to unit_path(@unit_id), notice: I18n.t('success.update.rent')
     else
       render :edit, status: :unprocessable_entity
     end
@@ -57,6 +57,6 @@ class RentFeesController < ApplicationController
     owner_units = Unit.find_all_by_owner(current_property_owner.document_number)
     return if owner_units.any? { |unit| unit.id == @unit_id }
 
-    redirect_to root_path, alert: I18n.t('messages.not_authorized')
+    redirect_to root_path, alert: I18n.t('errors.unauthorized.access')
   end
 end

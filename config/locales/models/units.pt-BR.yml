@@ -1,0 +1,6 @@
+pt-BR:
+  activerecord:
+    models:
+      unit:
+        one: Unidade
+        other: Unidades

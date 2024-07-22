@@ -4,7 +4,9 @@ class PropertyOwner < ApplicationRecord
   devise :database_authenticatable, :registerable,
          :recoverable, :rememberable, :validatable
 
-  validates :document_number, presence: true
+  has_one_attached :photo
+
+  validates :document_number, :first_name, :last_name, presence: true
   validates :document_number, uniqueness: true
   validate :document_number_must_be_valid
 
@@ -13,7 +15,7 @@ class PropertyOwner < ApplicationRecord
   def document_number_must_be_valid
     return if document_number_valid?(document_number)
 
-    errors.add(:document_number, :invalid, message: I18n.t('devise.failure.invalid_document_number'))
+    errors.add(:document_number, :invalid, message: I18n.t('errors.not_found.document_number'))
   end
 
   def document_number_valid?(document_number)

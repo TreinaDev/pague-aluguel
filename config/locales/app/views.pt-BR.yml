@@ -1,0 +1,71 @@
+pt-BR:
+  bills:
+    status:
+      pending: Pendente
+      awaiting: Aguardando
+      paid: Paga
+  index:
+    rents_of_name: 'Alugueis de %{name}'
+    common_areas_of_name: 'Áreas comuns de %{name}'
+  new:
+    create_single_charge: Cadastro de Cobrança Avulsa
+    create_shared_fee: Cadastro de Conta Compartilhada
+    create_fee: Cadastro de Taxa Condominial
+  edit:
+    update_fee: 'Atualizar %{fee}'
+  dashboards:
+    admin_description: para gerenciamento de condomínios e pagamentos
+    property_description: para gerenciamento de seus imóveis
+    search:
+      condo: Busque um condomínio
+      unit: Busque uma unidade
+      tenant_document_number: Informe seu cpf
+    section_title:
+      condo: Condomínios
+      profile: Meu perfil
+      units: Minhas unidades
+    section:
+      recents: Recentes
+      associated_condos: Condomínios associados
+      manage_condos_access: Gerenciar Acesso aos Condomínios
+    labels:
+      tower: Torre
+      email: email
+      fee: taxa
+      update_date: data de alteração
+      charge_status: Status da Cobrança
+      cnd: Certificado Negativo de Débito
+      status: Situação
+      use_fee: Taxa de Uso
+      rent_fee: Taxa de Aluguel
+      common_area_fee: Taxa de área comum
+      show_history: Mostrar histórico de taxas
+      rent_value: Valor do Aluguel
+      since: Desde
+      document: CPF
+      floor: Andar
+      capacity: capacidade máxima
+      rules: regras de uso
+      payment: Pagamento
+      total_value:
+        base_fees: total de taxas condominiais
+        shared_fees: total de contas compartilhadas
+        single_charges: total de cobranças avulsas
+      values:
+        values_price: 'Valor para %{unit_type}'
+      condo:
+        one: Condomínio
+        other: Condomínios
+      unit:
+        one: Unidade
+        other: Unidades
+      profile:
+        one: Perfil
+        other: Perfis
+      lists:
+        bills: Faturas
+        base_fees: Taxas Condominiais
+        shared_fees: Contas Compartilhadas
+        single_charges: Cobranças Avulsas
+        nd_certificates: Certificado de Débito Negativo
+

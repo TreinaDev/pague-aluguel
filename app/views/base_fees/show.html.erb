@@ -2,16 +2,16 @@
   <div class="dean-modal modal-md">
     <%= link_to "", :back, id: 'close', class: "btn btn-sm btn-close" %>
 
-    <span class="fs-8 text-center d-block"><%= BaseFee.model_name.human %></span>
+    <span class="fs-8 text-center d-block"><%= I18n.t('activerecord.models.base_fee.one') %></span>
     <span class="fs-3 text-center d-block"><%= @base_fee.name %></span>
     <span class="fs-8 text-center d-block"><%= @base_fee.description %></span>
     <hr>
 
     <div class="d-flex justify-content-center align-items-center">
       <% if @base_fee.active? %>
-        <span class="badge text-bg-success fs-4 text-uppercase ls-4"><%= I18n.t("base_fee.statuses.#{@base_fee.status}") %></span>
+        <span class="badge text-bg-success fs-6 text-uppercase ls-4"><%= I18n.t("base_fee.status.#{@base_fee.status}") %></span>
       <% else %>
-        <span class="badge text-bg-danger fs-4 text-uppercase ls-4"><%= I18n.t("base_fee.statuses.#{@base_fee.status}") %></span>
+        <span class="badge text-bg-danger fs-6 text-uppercase ls-4"><%= I18n.t("base_fee.status.#{@base_fee.status}") %></span>
       <% end %>
     </div>
 
@@ -25,7 +25,7 @@
 
     <div class=" d-flex justify-content-center align-items-center">
       <span class="badge text-bg-info fs-6 text-uppercase ls-4">
-        <%=  I18n.t("limited.#{@base_fee.limited}") %>
+        <%=  I18n.t("base_fee.limited.#{@base_fee.limited}") %>
       </span>
     </div>
 
@@ -33,7 +33,7 @@
 
     <% if @base_fee.installments.present? %>
       <div class="d-flex justify-content-center">
-        <strong><%= I18n.t('views.show.installments', count: @base_fee.installments) %></strong>
+        <strong><%= I18n.t('base_fee.installments', count: @base_fee.installments) %></strong>
       </div>
     <% end %>
 
@@ -42,7 +42,7 @@
           <% unit_type = @unit_types.find { |ut| ut.id == value.unit_type_id } %>
           <% if unit_type.present? %>
             <span class="text-muted text-lowercase fs-8">
-              <%= I18n.t('activerecord.values.values_price', unit_type: unit_type.description ) %>
+              <%= I18n.t('dashboards.labels.values.values_price', unit_type: unit_type.description ) %>
             </span>
             <span><%= value.price.format %></span>
           <% end %>
@@ -51,7 +51,7 @@
 
     <div class=" d-flex justify-content-between">
       <span class="text-muted text-lowercase fs-8">
-        <%= I18n.t('views.show.interest_rate') %>
+        <%= I18n.t('activerecord.attributes.base_fee.interest_rate') %>
       </span>
       <span>
         <%= @base_fee.interest_rate %>%
@@ -60,17 +60,16 @@
 
     <div class=" d-flex justify-content-between">
       <span class="text-muted text-lowercase fs-8">
-        <%= I18n.t('views.show.late_fine') %>
+        <%= I18n.t('activerecord.attributes.base_fee.late_fine') %>
       </span>
       <span>
         <%= @base_fee.late_fine.format %>
       </span>
     </div>
 
-
     <div class=" d-flex justify-content-between">
       <span class="text-muted text-lowercase fs-8">
-        <%= SharedFee.human_attribute_name(:issue_date) %>
+        <%= I18n.t('activerecord.attributes.shared_fee.issue_date') %>
       </span>
       <span>
         <%= I18n.l(@base_fee.charge_day.to_date)%>
@@ -78,10 +77,10 @@
     </div>
 
     <% if @base_fee.active? %>
-    <hr>
-      <%= button_to cancel_condo_base_fee_path(@condo.id, @base_fee), class: "d-flex align-items-center btn hover-danger mx-auto", data: { turbo_confirm: I18n.t('confirm-cancel') } do %>
-        <%= image_tag "block-icon", size: "16" %>
-        <span class="ms-1 fs-7 text-uppercase"><%= I18n.t('cancel-button') %></span>
+      <hr>
+      <%= button_to cancel_condo_base_fee_path(@condo.id, @base_fee), class: "d-flex align-items-center btn hover-danger mx-auto", data: { turbo_confirm: I18n.t('messages.confirm.cancel_fee') } do %>
+        <%= image_tag "block-icon", size: "12" %>
+        <span class="ms-1 fs-7 text-uppercase"><%= I18n.t('buttons.cancel') %></span>
       <% end %>
     <% end %>
   </div>

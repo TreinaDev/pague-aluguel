@@ -12,11 +12,11 @@
               <%= I18n.l(bill.due_date) %>
             </small>
             <% if bill.pending? %>
-              <span class="mt-1 ms-auto badge text-bg-danger text-uppercase"><%= I18n.t('views.show.pending') %></span>
+              <span class="mt-1 ms-auto badge text-bg-danger text-uppercase"><%= I18n.t('bills.status.pending') %></span>
             <% elsif bill.awaiting? %>
-              <span class="mt-1 ms-auto badge text-bg-warning text-uppercase"><%= I18n.t('views.show.awaiting') %></span>
+              <span class="mt-1 ms-auto badge text-bg-warning text-uppercase"><%= I18n.t('bills.status.awaiting') %></span>
             <% else %>
-              <span class="mt-1 ms-auto badge text-bg-success text-uppercase"><%= I18n.t('views.show.paid') %></span>
+              <span class="mt-1 ms-auto badge text-bg-success text-uppercase"><%= I18n.t('bills.status.paid') %></span>
             <% end %>
           </div>
         </div>
@@ -26,5 +26,5 @@
     <% end %>
   </div>
 <% else %>
-  <p class="text-center"><%= I18n.t('views.index.no_bills') %></p>
+  <p class="text-center"><%= I18n.t('errors.not_found.bills') %></p>
 <% end %>

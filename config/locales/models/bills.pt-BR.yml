@@ -1,0 +1,21 @@
+pt-BR:
+  activerecord:
+    models:
+      bill:
+        one: Fatura
+        other: Faturas
+    attributes:
+      bill:
+        issue_date: data de emissão
+        due_date: data de vencimento
+        total_value_cents: Valor Total
+        total_value: Valor Total
+        status:
+          pending: Pendente
+          awaiting: Aguardando
+          paid: Paga
+        booking: Reserva de %{common_area}
+
+
+
+

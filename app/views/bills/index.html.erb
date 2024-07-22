@@ -4,43 +4,31 @@
   <% end %>
 
   <span class="fs-4 mx-auto mt-3 text-uppercase">
-    <%= Bill.model_name.human(count: 2) %>
+    <%= I18n.t('dashboards.labels.lists.bills') %>
   </span>
   <span class="mx-auto text-uppercase fs-7 text-muted"><%= @condo.name %></span>
 
   <div class="d-flex justify-content-between mt-5 mb-2 w-75 mx-auto text-center">
-    <div class="dropdown">
-      <a class="btn text-decoration-none hover-strong dropdown-toggle" href="#" role="button" data-bs-toggle="dropdown" aria-expanded="false">
-        <%= image_tag "filter-icon.png", size: "18", class: "mb-1" %>
-        <%= I18n.t('views.index.filter_bills') %>
+    <div class="d-flex justify-content-center">
+      <a class="fs-6 text-decoration-none btn hover-strong" data-bs-toggle="collapse" href="#allBills" role="button" aria-expanded="false" aria-controls="allBills">
+        <%= image_tag "list-center-icon.png", size: "20", class: 'mb-1' %>
+        <%= I18n.t('buttons.filter.all_fees').upcase %>
       </a>
-      <ul class="dropdown-menu">
-        <li>
-          <a class="fs-8 text-decoration-none btn hover-strong d-flex" data-bs-toggle="collapse" href="#allBills" role="button" aria-expanded="false" aria-controls="allBills">
-            <%= I18n.t('views.index.all_bills').upcase %>
-          </a>
-        </li>
-        <li>
-          <a class="fs-8 text-decoration-none btn hover-strong d-flex" data-bs-toggle="collapse" href="#acceptedBill" role="button" aria-expanded="false" aria-controls="acceptedBill">
-            <%= I18n.t('views.index.accepted_bills').upcase %>
-          </a>
-        </li>
-        <li>
-          <a class="fs-8 text-decoration-none btn hover-strong d-flex" data-bs-toggle="collapse" href="#pendingBill" role="button" aria-expanded="false" aria-controls="pendingBill">
-            <%= I18n.t('views.index.pending_bills').upcase %>
-          </a>
-        </li>
-        <li>
-          <a class="fs-8 text-decoration-none btn hover-strong d-flex" data-bs-toggle="collapse" href="#awaitingBill" role="button" aria-expanded="false" aria-controls="awaitingBill">
-            <%= I18n.t('views.index.awaiting_bills').upcase %>
-          </a>
-        </li>
-        <li>
-          <a class="fs-8 text-decoration-none btn hover-strong d-flex" data-bs-toggle="collapse" href="#deniedBill" role="button" aria-expanded="false" aria-controls="deniedBill">
-            <%= I18n.t('views.index.denied_bills').upcase %>
-          </a>
-        </li>
-      </ul>
+    </div>
+    <div class="d-flex justify-content-end align-items-center">
+      <%= image_tag "filter-two-icon.png", size: "22", class: 'me-2' %>
+      <a class="fs-8 text-decoration-none btn hover-strong" data-bs-toggle="collapse" href="#acceptedBill" role="button" aria-expanded="false" aria-controls="acceptedBill">
+        <%= I18n.t('buttons.filter.bills.accepted').upcase %>
+      </a>
+      <a class="fs-8 text-decoration-none btn hover-strong" data-bs-toggle="collapse" href="#pendingBill" role="button" aria-expanded="false" aria-controls="pendingBill">
+        <%= I18n.t('buttons.filter.bills.pending').upcase %>
+      </a>
+      <a class="fs-8 text-decoration-none btn hover-strong" data-bs-toggle="collapse" href="#awaitingBill" role="button" aria-expanded="false" aria-controls="awaitingBill">
+        <%= I18n.t('buttons.filter.bills.awaiting').upcase %>
+      </a>
+      <a class="fs-8 text-decoration-none btn hover-strong" data-bs-toggle="collapse" href="#deniedBill" role="button" aria-expanded="false" aria-controls="deniedBill">
+        <%= I18n.t('buttons.filter.bills.denied').upcase %>
+      </a>
     </div>
   </div>
 
@@ -48,7 +36,7 @@
     <div class="d-flex justify-content-center">
       <div class="collapse multi-collapse w-100 show" id="allBills" data-bs-parent="#billsAccordion">
          <h4 class="text-center mt-4 mb-4">
-          <%= I18n.t('views.index.all_bills').upcase %>
+          <%= I18n.t('buttons.filter.all_bills').upcase %>
         </h4>
         <div class="list-group w-100">
           <%= render partial: 'bills_list', locals: { bills: @bills } %>
@@ -59,7 +47,7 @@
     <div class="d-flex justify-content-center">
       <div class="collapse multi-collapse w-100" id="deniedBill" data-bs-parent="#billsAccordion">
          <h4 class="text-center mt-4 mb-4">
-          <%= I18n.t('views.index.denied_bills').upcase %>
+          <%= I18n.t('buttons.filter.bills.denied').upcase %>
         </h4>
         <div class="list-group w-100">
           <%= render partial: 'bills_list', locals: { bills: @bills.where(denied: true) } %>
@@ -70,7 +58,7 @@
     <div class="d-flex justify-content-center">
       <div class="collapse multi-collapse w-100" id="pendingBill" data-bs-parent="#billsAccordion">
          <h4 class="text-center mt-4 mb-4">
-          <%= I18n.t('views.index.pending_bills').upcase %>
+          <%= I18n.t('buttons.filter.bills.pending').upcase %>
         </h4>
         <div class="list-group w-100">
           <%= render partial: 'bills_list', locals: { bills: @bills.where(status: 'pending') } %>
@@ -81,7 +69,7 @@
     <div class="d-flex justify-content-center">
       <div class="collapse multi-collapse w-100" id="awaitingBill" data-bs-parent="#billsAccordion">
          <h4 class="text-center mt-4 mb-4">
-          <%= I18n.t('views.index.awaiting_bills').upcase %>
+          <%= I18n.t('buttons.filter.bills.awaiting').upcase %>
         </h4>
         <div class="list-group w-100">
           <%= render partial: 'bills_list', locals: { bills: @bills.where(status: 'awaiting') } %>
@@ -92,7 +80,7 @@
     <div class="d-flex justify-content-center">
       <div class="collapse multi-collapse w-100" id="acceptedBill" data-bs-parent="#billsAccordion">
          <h4 class="text-center mt-4 mb-4">
-          <%= I18n.t('views.index.accepted_bills').upcase %>
+          <%= I18n.t('buttons.filter.bills.accepted').upcase %>
         </h4>
         <div class="list-group w-100">
           <%= render partial: 'bills_list', locals: { bills: @bills.where(status: 'paid') } %>

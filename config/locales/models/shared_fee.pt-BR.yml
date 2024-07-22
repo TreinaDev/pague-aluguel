@@ -1,6 +1,4 @@
 pt-BR:
-  success_notice_shared_fee: 'Conta Compartilhada lançada com sucesso!'
-  fail_notice_shared_fee: 'Não foi possível lançar a conta compartilhada.'
   activerecord:
     models:
       shared_fee:
@@ -15,12 +13,6 @@ pt-BR:
         description: Descrição
         status: Situação
   shared_fee:
-    statuses:
+    status:
       active: Ativa
       canceled: Cancelada
-  views:
-    index:
-      no_fees: Não foram encontradas contas compartilhadas.
-      status_shared_fee: Situação
-    new:
-      create_shared_fee: "Cadastro de Conta Compartilhada"

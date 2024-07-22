@@ -51,7 +51,7 @@ describe 'Usuário acessa suas faturas' do
         expect(page).to have_content 'Unidade 23'
         expect(page).to have_content 'valor total'
         expect(page).to have_content 'R$500,00'
-        expect(page).to have_content 'Data de Emissão'
+        expect(page).to have_content 'data de emissão'
         expect(page).to have_content formatted_issue_date1
         expect(page).to have_content 'data de vencimento'
         expect(page).to have_content formatted_due_date1
@@ -61,7 +61,7 @@ describe 'Usuário acessa suas faturas' do
         expect(page).to have_content 'Unidade 23'
         expect(page).to have_content 'valor total'
         expect(page).to have_content 'R$600,00'
-        expect(page).to have_content 'Data de Emissão'
+        expect(page).to have_content 'data de emissão'
         expect(page).to have_content formatted_issue_date2
         expect(page).to have_content 'data de vencimento'
         expect(page).to have_content formatted_due_date2
@@ -71,7 +71,7 @@ describe 'Usuário acessa suas faturas' do
         expect(page).to have_content 'Unidade 23'
         expect(page).to have_content 'valor total'
         expect(page).to have_content 'R$700,00'
-        expect(page).to have_content 'Data de Emissão'
+        expect(page).to have_content 'data de emissão'
         expect(page).to have_content formatted_issue_date3
         expect(page).to have_content 'data de vencimento'
         expect(page).to have_content formatted_due_date3
@@ -129,7 +129,7 @@ describe 'Usuário acessa suas faturas' do
         click_on 'Buscar'
       end
 
-      expect(page).to have_content I18n.t('views.index.document_number_not_valid')
+      expect(page).to have_content 'Documento não é válido.'
     end
 
     it 'quando o cpf válido não é encontrado no sistema' do
@@ -144,7 +144,7 @@ describe 'Usuário acessa suas faturas' do
         click_on 'Buscar'
       end
 
-      expect(page).to have_content I18n.t('views.index.document_number_not_found')
+      expect(page).to have_content 'Documento não encontrado.'
     end
   end
 end
@@ -186,8 +186,6 @@ describe 'Usuário acessa uma fatura' do
     expect(page).to have_content 10.days.from_now.strftime('%d/%m/%Y')
     expect(page).to have_content number
     expect(page).to have_content 'R$500,00'
-    expect(page).to have_content 'Taxa Condominial'.downcase
-    expect(page).to have_content 'Conta Compartilhada'.downcase
     expect(page).to have_content 'PENDENTE'
     expect(page).not_to have_button 'Ver comprovante'
     expect(page).not_to have_button 'Aceitar pagamento'
@@ -231,8 +229,6 @@ describe 'Usuário acessa uma fatura' do
     expect(page).to have_content 10.days.from_now.strftime('%d/%m/%Y')
     expect(page).to have_content number
     expect(page).to have_content 'R$500,00'
-    expect(page).to have_content 'Taxa Condominial'.downcase
-    expect(page).to have_content 'Conta Compartilhada'.downcase
     expect(page).to have_content 'AGUARDANDO'
     expect(page).to have_link 'Ver comprovante'
     expect(page).not_to have_button 'Aceitar pagamento'
@@ -276,8 +272,6 @@ describe 'Usuário acessa uma fatura' do
     expect(page).to have_content 10.days.from_now.strftime('%d/%m/%Y')
     expect(page).to have_content number
     expect(page).to have_content 'R$500,00'
-    expect(page).to have_content 'taxa condominial'
-    expect(page).to have_content 'conta compartilhada'
     expect(page).to have_content 'PAGA'
     expect(page).to have_link 'Ver comprovante'
     expect(page).not_to have_button 'Aceitar pagamento'

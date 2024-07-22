@@ -17,8 +17,10 @@ RSpec.describe RentFee, type: :model do
       rent_fee = RentFee.new(issue_date: 1.day.ago)
 
       rent_fee.valid?
+      result = rent_fee.errors.include?(:issue_date)
 
-      expect(rent_fee.errors.include?(:issue_date)).to be_truthy
+      expect(result).to be_truthy
+      expect(rent_fee.errors[:issue_date]).to include 'deve ser futura.'
     end
   end
 end

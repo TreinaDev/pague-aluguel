@@ -1,0 +1,15 @@
+pt-BR:
+  activerecord:
+    models:
+      property_owner:
+        one: Proprietário
+        other: Proprietários
+    attributes:
+      property_owner:
+        first_name: Nome
+        last_name: Sobrenome
+        email: E-mail
+        password: Senha
+        document_number: CPF
+        password_confirmation: Confirme a senha
+        photo: Foto

@@ -2,7 +2,7 @@
 
   <div class="mb-3">
     <%= image_tag "user-icon", size: '25', class: 'mb-1' %>
-    <span class="text-muted"><%= I18n.t('views.index.profile') %></span>
+    <span class="text-muted"><%= I18n.t('dashboards.section_title.profile') %></span>
   </div>
   <%= link_to edit_admin_registration_path, class: "btn mt-1 rounded-2 hover-strong position-absolute top-0 end-0", id: 'edit-profile', data: { turbo_frame: "modal" } do %>
     <%= image_tag "edit-icon", size: "18" %>
@@ -16,9 +16,10 @@
 
       <div class="overflow-x-hidden">
         <span class="fs-3"><%= capitalized_name(current_admin) %></span>
+        <span class="d-block fs-7 text-muted"><%= I18n.t('activerecord.models.admin.one') %></span>
         <span class="d-block"><%= current_admin.email %></span>
         <span class="d-block" data-controller="document-number"><%= current_admin.document_number %></span>
-        <span class="d-block fs-8 text-muted"><%= I18n.t('views.show.since') %>: <%= current_admin.created_at.strftime("%d/%m/%Y") %></span>
+        <span class="d-block fs-8 text-muted"><%= I18n.t('dashboards.labels.since') %>: <%= current_admin.created_at.strftime("%d/%m/%Y") %></span>
       </div>
     </div>
   </div>

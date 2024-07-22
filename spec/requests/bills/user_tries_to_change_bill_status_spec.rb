@@ -32,7 +32,7 @@ describe 'usuário autenticado tenta mudar status de fatura' do
       post accept_payment_condo_bill_path(condo.id, bill)
 
       expect(response).to redirect_to condo_bills_path(condo.id)
-      expect(flash[:notice]).to eq I18n.t('views.index.payment_accepted')
+      expect(flash[:notice]).to eq 'Pagamento efetivado!'
     end
 
     it 'para pendente - recusando o pagamento' do
@@ -67,7 +67,7 @@ describe 'usuário autenticado tenta mudar status de fatura' do
       post reject_payment_condo_bill_path(condo.id, bill)
 
       expect(response).to redirect_to condo_bills_path(condo.id)
-      expect(flash[:notice]).to eq I18n.t('views.index.payment_rejected')
+      expect(flash[:notice]).to eq 'Pagamento recusado!'
     end
   end
 
@@ -104,7 +104,7 @@ describe 'usuário autenticado tenta mudar status de fatura' do
       post accept_payment_condo_bill_path(condo.id, bill)
 
       expect(response).to redirect_to condo_bills_path(condo.id)
-      expect(flash[:notice]).to eq I18n.t('views.index.payment_accepted')
+      expect(flash[:notice]).to eq 'Pagamento efetivado!'
     end
 
     it 'para pendente - recusando o pagamento' do
@@ -141,7 +141,7 @@ describe 'usuário autenticado tenta mudar status de fatura' do
       post reject_payment_condo_bill_path(condo.id, bill)
 
       expect(response).to redirect_to condo_bills_path(condo.id)
-      expect(flash[:notice]).to eq I18n.t('views.index.payment_rejected')
+      expect(flash[:notice]).to eq 'Pagamento recusado!'
     end
   end
 end
@@ -174,7 +174,7 @@ describe 'usuário não autenticado tenta mudar status de fatura' do
     post accept_payment_condo_bill_path(condo.id, bill)
 
     expect(response).to redirect_to root_path
-    expect(flash[:notice]).to eq I18n.t('errors.messages.must_be_super_admin')
+    expect(flash[:notice]).to eq 'Você não tem autorização para completar esta ação.'
   end
 
   it 'para pendente - recusando o pagamento' do
@@ -207,7 +207,7 @@ describe 'usuário não autenticado tenta mudar status de fatura' do
     post reject_payment_condo_bill_path(condo.id, bill)
 
     expect(response).to redirect_to root_path
-    expect(flash[:notice]).to eq I18n.t('errors.messages.must_be_super_admin')
+    expect(flash[:notice]).to eq 'Você não tem autorização para completar esta ação.'
   end
 end
 
@@ -243,7 +243,7 @@ describe 'administrador não associado ao condominio daquela fatura' do
       post accept_payment_condo_bill_path(condo.id, bill)
 
       expect(response).to redirect_to root_path
-      expect(flash[:notice]).to eq I18n.t('errors.messages.must_be_super_admin')
+      expect(flash[:notice]).to eq 'Você não tem autorização para completar esta ação.'
     end
 
     it 'para pendente - recusando o pagamento' do
@@ -276,7 +276,7 @@ describe 'administrador não associado ao condominio daquela fatura' do
       post reject_payment_condo_bill_path(condo.id, bill)
 
       expect(response).to redirect_to root_path
-      expect(flash[:notice]).to eq I18n.t('errors.messages.must_be_super_admin')
+      expect(flash[:notice]).to eq 'Você não tem autorização para completar esta ação.'
     end
   end
 end

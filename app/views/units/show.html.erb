@@ -6,15 +6,15 @@
       <div class="mt-3 alert alert-success text-center" role="alert"><%= notice %></div>
     <% end %>
 
-    
-    <span class="fs-3 text-center d-block"><%= @unit.description %></span>
-    <span class="fs-5 text-center text-muted d-block"><%= I18n.t('views.show.unit')%> <%= @unit.number %></span>
-    <span class="fs-7 text-center d-block"><%= @unit.condo_name %></span>
-    
+
+    <span class="fs-7 text-center d-block"><%= @unit.description %></span>
+    <span class="fs-5 text-center d-block"><%= I18n.t('activerecord.models.unit.one') %> <%= @unit.number %></span>
+    <span class="fs-7 text-center d-block text-muted"><%= @unit.condo_name %></span>
+
     <hr>
-
-    <span class="d-block text-center"><%= @unit.set_status %></span>
-
+    <div class="d-block text-center">
+      <span class="badge text-bg-primary fs-6 text-uppercase"><%= @unit.set_status %></span>
+    </div>
     <hr>
     <% if @unit.unit_has_tenant? %>
       <% if @unit.unit_rent_fee.present? %>
@@ -22,61 +22,68 @@
         <div class="d-flex justify-content-center align-items-center">
           <%= image_tag "dollar-icon", size: "20" %>
           <span class="ms-1 me-2 fs-7 text-muted">
-            <%= I18n.t('views.show.rent') %>
+            <%= I18n.t('activerecord.models.rent_fee.one') %>
           </span>
         </div>
 
         <div class="px-5">
           <div class=" d-flex justify-content-between">
-            <span class="text-muted text-lowercase fs-8"><%= I18n.t('views.show.status') %></span>
-            <span><%= I18n.t( rent.status ) %></span>
+            <span class="text-muted text-lowercase fs-8"><%= I18n.t('activerecord.attributes.rent_fee.status') %> </span>
+            <span><%= I18n.t("rent_fee.status.#{rent.status}")%></span>
           </div>
           <div class=" d-flex justify-content-between">
-            <span class="text-muted text-lowercase fs-8"><%= I18n.t('views.show.rent_value') %></span>
+            <span class="text-muted text-lowercase fs-8"><%= I18n.t('activerecord.attributes.rent_fee.value')  %></span>
             <span><%= rent.value.format %></span>
           </div>
           <div class=" d-flex justify-content-between">
-            <span class="text-muted text-lowercase fs-8"><%= I18n.t('views.show.issue_date') %></span>
+            <span class="text-muted text-lowercase fs-8"><%= I18n.t('activerecord.attributes.rent_fee.issue_date') %></span>
             <span><%= I18n.l( rent.issue_date ) %></span>
           </div>
           <div class=" d-flex justify-content-between">
-            <span class="text-muted text-lowercase fs-8"><%= I18n.t('views.show.fine') %></span>
+            <span class="text-muted text-lowercase fs-8"><%= I18n.t('activerecord.attributes.rent_fee.fine') %></span>
             <span><%= rent.fine.format %></span>
           </div>
           <div class=" d-flex justify-content-between">
-            <span class="text-muted text-lowercase fs-8"><%= I18n.t('views.show.fine_interest') %></span>
+            <span class="text-muted text-lowercase fs-8"><%= I18n.t('activerecord.attributes.rent_fee.fine_interest')  %></span>
             <span><%= rent.fine_interest.round(1) %>%</span>
           </div>
           <div class="text-center">
-            <%= link_to 'Configurar Aluguel', edit_unit_rent_fee_path(@unit.id, rent.id), class: "btn btn-primary mb-1 mt-2"%>
+            <%= link_to edit_unit_rent_fee_path(@unit.id, rent.id), class: "btn hover-strong" do %>
+              <%= image_tag 'edit-icon', size: '18' %>
+              <span class="fs-7 text-uppercase"><%= I18n.t('buttons.manage.rent') %></span>
+            <% end %>
           </div>
         </div>
 
       <% else %>
         <div class="text-center">
-          <%= link_to 'Configurar Aluguel', new_unit_rent_fee_path(@unit.id), class: "btn btn-primary mb-1 mt-2" %>
+          <%= link_to new_unit_rent_fee_path(@unit.id), class: "btn btn-primary mb-1 mt-2" do %>
+            <%= image_tag 'edit-icon', size: '18' %>
+            <span class="fs-7 text-uppercase"><%= I18n.t('buttons.manage.rent') %></span>
+          <% end %>
         </div>
       <% end %>
     <% end %>
     <div class="text-center">
-      <%= button_to I18n.t('nd_generate'), condo_nd_certificates_path(condo_id: @unit.condo_id, unit_id: @unit.id), method: :post, class: "btn btn-primary" %>
+      <%= button_to condo_nd_certificates_path(condo_id: @unit.condo_id, unit_id: @unit.id), class: "btn hover-strong" do %>
+        <%= image_tag 'document-ribbon-icon', size: '20' %>
+        <span class="fs-7 text-uppercase"><%= I18n.t('buttons.new.nd_certificate') %></span>
+      <% end %>
     </div>
-
 
     <% if @unit.unit_rent_fee.present? && !@unit.unit_has_tenant? %>
       <% rent = @unit.unit_rent_fee %>
       <div class=" d-flex justify-content-between px-5">
         <% styling = {"active" => "text-success", "canceled" => "text-danger"} %>
-        <span class="text-muted text-lowercase fs-8"><%= I18n.t('views.show.status') %></span>
-        <span class=<%= styling[rent.status] %>><%= I18n.t( rent.status ) %></span>
+        <span class="text-muted text-lowercase fs-8"><%= I18n.t('activerecord.attributes.rent_fee.status') %></span>
+        <span class=<%= styling[rent.status] %>><%= I18n.t( "rent_fee.status.#{rent.status}" ) %></span>
       </div>
       <% if rent.active? %>
-        <%= button_to deactivate_unit_rent_fee_path(@unit.id, rent.id), class: "d-flex align-items-center btn hover-danger mx-auto", data: { turbo_confirm: I18n.t('cancel-rent-confim') } do %>
-          <%= image_tag "block-icon", alt: "Deactivate", size: "16" %>
-          <span class="ms-1 fs-7 text-uppercase"><%= I18n.t('deactivate-rent-button') %></span>
+        <%= button_to deactivate_unit_rent_fee_path(@unit.id, rent.id), class: "d-flex align-items-center btn hover-danger mx-auto", data: { turbo_confirm: I18n.t('messages.confirm.cancel_rent') } do %>
+          <%= image_tag "block-icon", alt: "Deactivate", size: "12" %>
+          <span class="ms-1 fs-7 text-uppercase"><%= I18n.t('buttons.deactivate.rent') %></span>
         <% end %>
       <% end %>
     <% end %>
   </div>
 <% end %>
-

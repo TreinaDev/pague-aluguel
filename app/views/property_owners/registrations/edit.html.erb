@@ -1,43 +1,55 @@
-<h2>Edit <%= resource_name.to_s.humanize %></h2>
+<%= turbo_frame_tag "modal" do %>
+  <div class="dean-modal modal-md">
+    <div class="mb-3">
+      <%= link_to "", :back, class: "btn btn-close btn-sm" %>
+    </div>
 
-<%= form_for(resource, as: resource_name, url: registration_path(resource_name), html: { method: :put }) do |f| %>
-  <%= render "property_owners/shared/error_messages", resource: resource %>
+    <span class="d-block fs-4 mx-auto mt-3 mb-2 text-uppercase text-center">
+      <%= I18n.t('devise.registrations.edit.edit_property_owner') %>
+    </span>
 
-  <div class="field">
-    <%= f.label :email %><br />
-    <%= f.email_field :email, autofocus: true, autocomplete: "email" %>
-  </div>
+    <%= form_for(resource, as: resource_name, url: registration_path(resource_name), html: { method: :put }) do |f| %>
+      <%= render "property_owners/shared/error_messages", resource: resource %>
 
-  <% if devise_mapping.confirmable? && resource.pending_reconfirmation? %>
-    <div>Currently waiting confirmation for: <%= resource.unconfirmed_email %></div>
-  <% end %>
+      <div class="form-floating mb-3 w-75 mx-auto mt-4">
+        <%= f.text_field :first_name, autofocus: true, autocomplete: "first_name", class: "form-control" %>
+        <%= f.label :first_name %>
+      </div>
 
-  <div class="field">
-    <%= f.label :password %> <i>(leave blank if you don't want to change it)</i><br />
-    <%= f.password_field :password, autocomplete: "new-password" %>
-    <% if @minimum_password_length %>
-      <br />
-      <em><%= @minimum_password_length %> characters minimum</em>
+      <div class="form-floating mb-3 w-75 mx-auto">
+        <%= f.text_field :last_name, autocomplete: "last_name", class: "form-control" %>
+        <%= f.label :last_name %>
+      </div>
+
+      <div class="form-floating mb-3 w-75 mx-auto">
+        <%= f.email_field :email, autocomplete: "email", class: "form-control"  %>
+        <%= f.label :email %>
+      </div>
+
+      <% if @minimum_password_length %>
+        <div class="w-75 mx-auto">
+          <em class="text-muted">(Mínimo <%= @minimum_password_length %> caracteres)</em>
+        </div>
+      <% end %>
+
+      <div class="form-floating mb-3 w-75 mx-auto">
+        <%= f.password_field :password, autocomplete: "new-password", class: "form-control"  %>
+        <%= f.label :password %>
+      </div>
+
+      <div class="form-floating mb-3 w-75 mx-auto">
+        <%= f.password_field :password_confirmation, autocomplete: "new-password", class: "form-control"  %>
+        <%= f.label :password_confirmation %>
+      </div>
+
+      <div class="form-floating mb-3 w-75 mx-auto">
+        <%= f.file_field :photo, class: "form-control" %>
+        <%= f.label :photo %>
+      </div>
+
+      <div class="text-center">
+        <%= f.submit I18n.t('devise.registrations.edit.update'), class: "btn btn-primary fs-7 text-uppercase ls-3 mb-3 mt-1" %>
+      </div>
     <% end %>
   </div>
-
-  <div class="field">
-    <%= f.label :password_confirmation %><br />
-    <%= f.password_field :password_confirmation, autocomplete: "new-password" %>
-  </div>
-
-  <div class="field">
-    <%= f.label :current_password %> <i>(we need your current password to confirm your changes)</i><br />
-    <%= f.password_field :current_password, autocomplete: "current-password" %>
-  </div>
-
-  <div class="actions">
-    <%= f.submit "Update" %>
-  </div>
 <% end %>
-
-<h3>Cancel my account</h3>
-
-<div>Unhappy? <%= button_to "Cancel my account", registration_path(resource_name), data: { confirm: "Are you sure?", turbo_confirm: "Are you sure?" }, method: :delete %></div>
-
-<%= link_to "Back", :back %>

@@ -13,6 +13,6 @@ class ApplicationController < ActionController::Base
       return true if current_admin&.super_admin? || current_admin_associated
     end
 
-    redirect_to root_path, notice: I18n.t('errors.messages.must_be_super_admin')
+    redirect_to root_path, notice: I18n.t('errors.unauthorized.not_super_admin')
   end
 end

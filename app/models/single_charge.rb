@@ -39,19 +39,19 @@ class SingleCharge < ApplicationRecord
   def common_area_is_mandatory
     return unless common_area_fee? && common_area_id.blank?
 
-    errors.add(:common_area_id, 'deve ser selecionada')
+    errors.add(:common_area_id, I18n.t('errors.must_be.selected'))
   end
 
   def date_is_future
     return unless issue_date.present? && issue_date.past?
 
-    errors.add(:issue_date, 'deve ser a partir de hoje')
+    errors.add(:issue_date, I18n.t('errors.must_be.after_today'))
   end
 
   def description_is_mandatory
     return unless !common_area_fee? && description.blank?
 
-    errors.add(:description, 'não pode ficar em branco')
+    errors.add(:description, I18n.t('errors.cant_be.blank'))
   end
 
   def unit_belongs_to_condo
@@ -63,6 +63,6 @@ class SingleCharge < ApplicationRecord
 
     return if units.any? { |unit| unit.id == unit_id }
 
-    errors.add(:unit_id, 'deve pertencer ao condomínio')
+    errors.add(:unit_id, I18n.t('errors.must_have.associated_condo'))
   end
 end

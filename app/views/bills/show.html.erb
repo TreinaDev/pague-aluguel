@@ -2,9 +2,10 @@
   <div class="dean-modal modal-md">
     <%= link_to "", :back, id: 'close', class: "btn btn-sm btn-close" %>
 
-    <span class="fs-8 text-center d-block"><%= Bill.model_name.human %></span>
+    <span class="fs-8 text-center d-block"><%= I18n.t('activerecord.models.bill.one') %></span>
+    <span class="fs-8 text-center d-block"><%= @condo.name %></span>
     <span class="fs-3 text-center d-block"><%= unit_name(@bill) %></span>
-    <span class="fs-8 text-center d-block text-muted"><%= @condo.name %></span>
+    <span class="fs-7 text-center d-block text-muted"><%= I18n.t('dashboards.labels.tower') %>: <%= @unit.tower_name %></span>
     <hr>
       <%= render partial: "bill_dates" %>
     <hr>
@@ -13,7 +14,7 @@
     <div class="d-flex justify-content-center align-items-center">
       <%= image_tag "dollar-icon", size: "20" %>
       <span class="ms-1 me-2 fs-7 text-muted">
-        <%= Bill.human_attribute_name(:total_value) %>
+        <%=  I18n.t('activerecord.attributes.bill.total_value') %>
       </span>
 
       <%= @bill.total_value.format %>

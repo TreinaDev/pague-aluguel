@@ -13,14 +13,14 @@ describe 'Admin cria taxa condominial' do
     expect(response).to have_http_status :ok
     expect(response.body).to include 'Cadastro'
     expect(response.body).to include 'Condo Test'
-    expect(response.body).to include I18n.t 'activerecord.attributes.base_fee.name'
-    expect(response.body).to include I18n.t 'activerecord.attributes.base_fee.description'
-    expect(response.body).to include I18n.t 'activerecord.attributes.base_fee.interest_rate'
-    expect(response.body).to include I18n.t 'activerecord.attributes.base_fee.late_fine'
-    expect(response.body).to include I18n.t 'activerecord.attributes.base_fee.charge_day'
-    expect(response.body).to include I18n.t 'activerecord.attributes.base_fee.limited'
-    expect(response.body).to include I18n.t 'activerecord.attributes.base_fee.installments'
-    expect(response.body).to include I18n.t 'activerecord.attributes.base_fee.recurrence'
+    expect(response.body).to include 'Nome'
+    expect(response.body).to include 'Descrição'
+    expect(response.body).to include 'Juros ao dia (%)'
+    expect(response.body).to include 'Multa por atraso'
+    expect(response.body).to include 'Data de Emissão'
+    expect(response.body).to include 'Taxa limitada'
+    expect(response.body).to include 'Número de Parcelas'
+    expect(response.body).to include 'Recorrência'
   end
 
   it 'com sucesso - Admin com acesso' do
@@ -37,14 +37,14 @@ describe 'Admin cria taxa condominial' do
     expect(response).to have_http_status :ok
     expect(response.body).to include 'Cadastro'
     expect(response.body).to include 'Condo Test'
-    expect(response.body).to include I18n.t 'activerecord.attributes.base_fee.name'
-    expect(response.body).to include I18n.t 'activerecord.attributes.base_fee.description'
-    expect(response.body).to include I18n.t 'activerecord.attributes.base_fee.interest_rate'
-    expect(response.body).to include I18n.t 'activerecord.attributes.base_fee.late_fine'
-    expect(response.body).to include I18n.t 'activerecord.attributes.base_fee.charge_day'
-    expect(response.body).to include I18n.t 'activerecord.attributes.base_fee.limited'
-    expect(response.body).to include I18n.t 'activerecord.attributes.base_fee.installments'
-    expect(response.body).to include I18n.t 'activerecord.attributes.base_fee.recurrence'
+    expect(response.body).to include 'Nome'
+    expect(response.body).to include 'Descrição'
+    expect(response.body).to include 'Juros ao dia (%)'
+    expect(response.body).to include 'Multa por atraso'
+    expect(response.body).to include 'Data de Emissão'
+    expect(response.body).to include 'Taxa limitada'
+    expect(response.body).to include 'Número de Parcelas'
+    expect(response.body).to include 'Recorrência'
   end
 
   it 'falha pois não está associado' do
@@ -59,6 +59,6 @@ describe 'Admin cria taxa condominial' do
 
     expect(response).to have_http_status :found
     expect(response).to redirect_to root_path
-    expect(flash[:notice]).to eq I18n.t('errors.messages.must_be_super_admin')
+    expect(flash[:notice]).to eq 'Você não tem autorização para completar esta ação.'
   end
 end
