@@ -23,9 +23,6 @@ describe 'Proprietário vê suas unidades' do
 
     login_as property_owner, scope: :property_owner
     visit root_path
-    within('div#units') do
-      click_on 'Ver todas'
-    end
 
     within('div#all-units') do
       within("div#unit-#{units[0].id}") do
