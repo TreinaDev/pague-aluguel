@@ -1,7 +1,7 @@
 class NdCertificatesController < ApplicationController
-  before_action :authenticate_admin!, only: [:index, :show]
-  before_action :admin_authorized?, only: [:index, :show]
-  before_action :set_condo, only: [:index, :show, :create, :find_unit]
+  before_action :authenticate_admin!, only: [:index]
+  before_action :admin_authorized?, only: [:index]
+  before_action :set_condo, only: [:index, :create, :find_unit]
 
   def certificate
     @nd_certificate = NdCertificate.find(params[:id])
@@ -13,17 +13,12 @@ class NdCertificatesController < ApplicationController
     @units = Unit.all(params[:condo_id])
   end
 
-  def show
-    @unit = Unit.find(params[:id])
-  end
-
   def create
     @unit = Unit.find(params[:unit_id])
 
     return redirect_to_pending_debts unless all_bills_paid?
-    return redirect_to_success if create_and_save_certificate
 
-    redirect_to_error
+    redirect_to_success if create_and_save_certificate
   end
 
   def find_unit
@@ -55,10 +50,6 @@ class NdCertificatesController < ApplicationController
   def redirect_to_success
     redirect_to certificate_condo_nd_certificate_path(condo_id: @unit.condo_id, id: @nd_certificate.id),
                 notice: I18n.t('success.generate.nd')
-  end
-
-  def redirect_to_error
-    redirect_to root_path, alert: I18n.t('errors.cant_generate.nd')
   end
 
   def redirect_to_pending_debts
