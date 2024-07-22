@@ -2,11 +2,10 @@
   <%= link_to condo_path(@condo.id), class: "ms-3 mt-3" do %>
     <%= image_tag "arrow-left", size: "25", id: "arrow-left" %>
   <% end %>
+
   <span class="fs-4 mx-auto mt-3 text-center text-uppercase">
     <%= I18n.t('dashboards.labels.lists.shared_fees') %>
   </span>
-
-
   <span class="d-block text-uppercase fs-7 text-muted text-center"><%= @condo.name %></span>
 
   <div class="d-flex justify-content-between mt-5 mb-2 w-75 mx-auto text-center">
