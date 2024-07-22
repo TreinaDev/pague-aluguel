@@ -31,6 +31,7 @@ Rails.application.routes.draw do
 
     resources :nd_certificates, only: [:index, :show, :create] do
       get 'certificate', on: :member
+      get 'find_unit', on: :collection
     end
 
     resources :shared_fees, only: [:index, :show, :new, :create] do

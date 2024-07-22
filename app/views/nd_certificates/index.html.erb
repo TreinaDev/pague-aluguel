@@ -6,6 +6,13 @@
   <span class="fs-4 mx-auto mt-3 text-uppercase"> <%= I18n.t('dashboards.labels.unit.other') %> </span>
   <span class="mx-auto text-uppercase fs-7 text-muted"><%= @condo.name %></span>
 
+  <%= form_with url: find_unit_condo_nd_certificates_path(@condo.id), method: :get, id: "find_unit" do |f| %>
+    <div class="d-flex mt-3 w-50 mx-auto mb-3">
+      <%= f.text_field :unit_number_query, placeholder: "Busque uma unidade", class: "form-control me-2" %>
+      <%= f.submit 'Buscar', class: "btn btn-primary text-uppercase fs-7 ls-3" %>
+    </div>
+  <% end %>
+
   <div class="d-flex justify-content-center mt-4 mb-4">
     <% if @units.any? %>
       <div class="list-group w-75">

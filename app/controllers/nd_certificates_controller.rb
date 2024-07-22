@@ -1,7 +1,7 @@
 class NdCertificatesController < ApplicationController
   before_action :authenticate_admin!, only: [:index, :show]
   before_action :admin_authorized?, only: [:index, :show]
-  before_action :set_condo, only: [:index, :show, :create]
+  before_action :set_condo, only: [:index, :show, :create, :find_unit]
 
   def certificate
     @nd_certificate = NdCertificate.find(params[:id])
@@ -24,6 +24,16 @@ class NdCertificatesController < ApplicationController
     return redirect_to_success if create_and_save_certificate
 
     redirect_to_error
+  end
+
+  def find_unit
+    @query = params[:unit_number_query]
+    if @query.empty?
+      @units = Unit.all(params[:condo_id])
+    else
+      @units = Unit.all(@condo.id).select { |unit| unit.number == @query }
+    end
+    render :index
   end
 
   private
