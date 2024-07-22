@@ -114,6 +114,79 @@ describe 'Admin tenta emitir certificado de debito negativo' do
 
     expect(page).to have_content 'Esta unidade possui débitos pendentes.'
   end
+
+  it 'e encontra unidade pelo campo de busca' do
+    admin = create(:admin)
+    condos = []
+    condo = Condo.new(id: 1, name: 'Condomínio Vila das Flores', city: 'São Paulo')
+    condos << condo
+    unit_types = []
+    unit_types << UnitType.new(id: 1, description: 'Apartamento 1 quarto', metreage: 40, fraction: 0.5,
+                               unit_ids: [])
+    units = []
+    units << Unit.new(id: 1, area: 40, floor: 1, number: '11', unit_type_id: 1, condo_id: 1,
+                      condo_name: 'Condomínio Vila das Flores', tenant_id: 1, owner_id: 1,
+                      description: 'Com varanda', tower_name: 'Nard')
+    units << Unit.new(id: 2, area: 40, floor: 1, number: '12', unit_type_id: 1, condo_id: 1,
+                      condo_name: 'Condomínio Vila das Flores', tenant_id: 1, owner_id: 1,
+                      description: 'Com varanda', tower_name: 'Dog')
+    allow(Condo).to receive(:all).and_return(condos)
+    allow(Condo).to receive(:find).and_return(condo)
+    allow(CommonArea).to receive(:all).and_return([])
+    allow(UnitType).to receive(:all).and_return(unit_types)
+    allow(Unit).to receive(:all).and_return(units)
+    allow(Unit).to receive(:find).with(1).and_return(units.first)
+    allow(Unit).to receive(:find).with(2).and_return(units.second)
+
+    login_as admin, scope: :admin
+    visit condo_path(condo.id)
+    within('div#nd_certificate_section') do
+      click_on 'Ver todas as unidades'
+    end
+    within('#find_unit') do
+      fill_in 'unit_number_query', with: '11'
+      click_on 'Buscar'
+    end
+
+    expect(page).to have_content 'UNIDADES'
+    expect(page).to have_content 'Unidade 11'
+    expect(page).not_to have_content 'Unidade 12'
+  end
+  it 'e encontra todas unidades ao clicar em buscar' do
+    admin = create(:admin)
+    condos = []
+    condo = Condo.new(id: 1, name: 'Condomínio Vila das Flores', city: 'São Paulo')
+    condos << condo
+    unit_types = []
+    unit_types << UnitType.new(id: 1, description: 'Apartamento 1 quarto', metreage: 40, fraction: 0.5,
+                               unit_ids: [])
+    units = []
+    units << Unit.new(id: 1, area: 40, floor: 1, number: '11', unit_type_id: 1, condo_id: 1,
+                      condo_name: 'Condomínio Vila das Flores', tenant_id: 1, owner_id: 1,
+                      description: 'Com varanda', tower_name: 'Nard')
+    units << Unit.new(id: 2, area: 40, floor: 1, number: '12', unit_type_id: 1, condo_id: 1,
+                      condo_name: 'Condomínio Vila das Flores', tenant_id: 1, owner_id: 1,
+                      description: 'Com varanda', tower_name: 'Dog')
+    allow(Condo).to receive(:all).and_return(condos)
+    allow(Condo).to receive(:find).and_return(condo)
+    allow(CommonArea).to receive(:all).and_return([])
+    allow(UnitType).to receive(:all).and_return(unit_types)
+    allow(Unit).to receive(:all).and_return(units)
+    allow(Unit).to receive(:find).with(1).and_return(units.first)
+    allow(Unit).to receive(:find).with(2).and_return(units.second)
+
+    login_as admin, scope: :admin
+    visit condo_path(condo.id)
+    within('div#nd_certificate_section') do
+      click_on 'Ver todas as unidades'
+    end
+    within('#find_unit') do
+      click_on 'Buscar'
+    end
+
+    expect(page).to have_content 'Unidade 11'
+    expect(page).to have_content 'Unidade 12'
+  end
 end
 
 # rubocop:enable Metrics/BlockLength
