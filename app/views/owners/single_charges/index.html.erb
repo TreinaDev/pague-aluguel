@@ -36,7 +36,7 @@
             </div>
 
             <span>
-              <%= humanized_unit(single_charge.unit_id) %>
+              <%= humanized_unit(single_charge.unit_id) %> - <%= Unit.find(single_charge.unit_id).tower_name %>
             </span>
             <span class="d-block">
               <%= single_charge.description %>

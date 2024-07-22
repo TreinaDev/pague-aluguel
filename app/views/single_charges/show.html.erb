@@ -3,11 +3,12 @@
     <%= link_to "", :back, id: 'close', class: "btn btn-sm btn-close" %>
 
     <span class="fs-8 text-center d-block"><%= I18n.t('activerecord.models.single_charge.one') %></span>
+    <span class="fs-8 text-center d-block"><%= @condo.name%></span>
     <span class="fs-3 text-center d-block">
       <%= I18n.t('activerecord.attributes.single_charge.unit') %>
       <%= Unit.find(@single_charge.unit_id).number %>
     </span>
-    <span class="fs-8 text-center d-block"><%= @condo.name%></span>
+    <span class="fs-7 text-center d-block"><%= I18n.t('dashboards.labels.tower') %>: <%= Unit.find(@single_charge.unit_id).tower_name %></span>
     <hr>
 
     <div class="d-flex justify-content-center align-items-center">
