@@ -115,31 +115,39 @@
 
 🚨 [Rails v7.1.3.1](https://guides.rubyonrails.org/)
 
+🚨 [Node >= 18](https://nodejs.org/en/download/package-manager/current)
+
+🚨 [Yarn v1.22.22](https://classic.yarnpkg.com/en/docs/install)
+
 ## Como executar a aplicação
 
 - Clone este repositório
-```
-git clone git@github.com:TreinaDev/pague-aluguel.git
+```bash
+git clone https://github.com/TreinaDev/pague-aluguel.git
 ```
 
 - Abra o diretório pelo terminal
-```
+```bash
 cd pague-aluguel
 ```
 
 - Instale o Bundle pelo terminal
-```
+```bash
 bundle install
 ```
 
 - Crie e popule o banco de dados
-```
+```bash
 rails db:migrate
 rails db:seed
 ```
 
-- Execute a aplicação
+- Instalar as dependências do Yarn
+```bash
+yarn install
 ```
+- Execute a aplicação
+```bash
 bin/dev -p 4000
 ```
 
@@ -147,31 +155,36 @@ bin/dev -p 4000
 
 ## Integração com o CondoMinions
 
-Para ver a aplicação funcionando por completo com as APIs integradas, você também precisará clonar e executar o projeto CondoMinions. Siga os passos abaixo para configurar e executar o CondoMinions:
+Para ver a aplicação funcionando por completo com as APIs integradas, você também precisará clonar e executar o projeto CondoMinions. Siga os passos abaixo para configurar e executar o [CondoMinions](https://github.com/TreinaDev/condominions?tab=readme-ov-file#instalacao-e-execucao):
 
 - Clone o repositório CondoMinions
-```
-git clone git@github.com:TreinaDev/condominions.git
+```bash
+git clone https://github.com/TreinaDev/condominions.git
 ```
 
 - Abra o diretório CondoMinions pelo terminal
-```
+```bash
 cd condominions
 ```
 
 - Instale o Bundle pelo terminal
-```
+```bash
 bundle install
 ```
 
 - Crie e popule o banco de dados
-```
+```bash
 rails db:migrate
 rails db:seed
 ```
 
-- Execute a aplicação CondoMinions
+- Instalar as dependências do Yarn
+```bash
+yarn install
 ```
+
+- Execute a aplicação CondoMinions
+```bash
 bin/dev
 ```
 
@@ -183,7 +196,7 @@ bin/dev
 
 - Execute os testes:
 
-```
+```bash
 rake spec
 ```
 
@@ -192,7 +205,7 @@ Este comando irá rodar todos os testes definidos nos seus arquivos de teste RSp
 - Verifique a cobertura de testes:
 
 Após a execução dos testes, você pode verificar a cobertura de testes do projeto. O relatório detalhado pode ser visualizado executando:
-```
+```bash
 open coverage/index.html
 ```
 Este comando abrirá o relatório de cobertura no seu navegador padrão, permitindo visualizar quais linhas de código foram cobertas pelos testes.
