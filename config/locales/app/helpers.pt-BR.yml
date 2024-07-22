@@ -12,6 +12,11 @@ pt-BR:
       canceled: Canceladas
       past: Passadas
       future: Futuras
+      bills:
+        accepted: Pagas
+        pending: Pendentes
+        awaiting: Aguardando
+        denied: Recusadas
       all_fees: Todas as Taxas
       all_base_fees: Todas as Taxas Condominiais
       all_shared_fees: Todas as Contas

@@ -46,7 +46,6 @@ describe 'Admin vê todos os faturas de um condomínio' do
     formatted_date = I18n.l(10.days.from_now.to_date)
     expect(page).to have_content 'FATURAS'
     expect(page).to have_content 'Residencial Jardim Europa'.upcase
-    expect(page).to have_link 'Filtrar faturas'
     within('a#bill_1') do
       expect(page).to have_content 'Unidade 11'
       expect(page).to have_content 'valor total'
@@ -137,7 +136,6 @@ describe 'Admin vê todos os faturas de um condomínio' do
 
     login_as admin, scope: :admin
     visit condo_bills_path(condo.id)
-    click_on 'Filtrar faturas'
     click_on 'PAGAS'
 
     expect(page).to have_content '500,00'
@@ -192,7 +190,6 @@ describe 'Admin vê todos os faturas de um condomínio' do
 
     login_as admin, scope: :admin
     visit condo_bills_path(condo.id)
-    click_on 'Filtrar faturas'
     click_on 'RECUSADAS'
 
     expect(page).to have_content '500,00'
@@ -248,7 +245,6 @@ describe 'Admin vê todos os faturas de um condomínio' do
 
     login_as admin, scope: :admin
     visit condo_bills_path(condo.id)
-    click_on 'Filtrar faturas'
     click_on 'AGUARDANDO'
 
     expect(page).to have_content '400,00'
@@ -303,7 +299,6 @@ describe 'Admin vê todos os faturas de um condomínio' do
 
     login_as admin, scope: :admin
     visit condo_bills_path(condo.id)
-    click_on 'Filtrar faturas'
     click_on 'PENDENTES'
 
     expect(page).to have_content '500,00'

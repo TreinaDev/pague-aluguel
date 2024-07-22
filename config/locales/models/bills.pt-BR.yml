@@ -6,7 +6,7 @@ pt-BR:
         other: Faturas
     attributes:
       bill:
-        issue_date: Data de Emissão
+        issue_date: data de emissão
         due_date: data de vencimento
         total_value_cents: Valor Total
         total_value: Valor Total

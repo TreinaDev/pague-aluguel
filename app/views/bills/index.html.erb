@@ -12,22 +12,22 @@
     <div class="d-flex justify-content-center">
       <a class="fs-6 text-decoration-none btn hover-strong" data-bs-toggle="collapse" href="#allBills" role="button" aria-expanded="false" aria-controls="allBills">
         <%= image_tag "list-center-icon.png", size: "20", class: 'mb-1' %>
-        <%= I18n.t('views.index.all_bills').upcase %>
+        <%= I18n.t('buttons.filter.all_fees').upcase %>
       </a>
     </div>
     <div class="d-flex justify-content-end align-items-center">
       <%= image_tag "filter-two-icon.png", size: "22", class: 'me-2' %>
       <a class="fs-8 text-decoration-none btn hover-strong" data-bs-toggle="collapse" href="#acceptedBill" role="button" aria-expanded="false" aria-controls="acceptedBill">
-        <%= I18n.t('views.index.accepted_bills').upcase %>
+        <%= I18n.t('buttons.filter.bills.accepted').upcase %>
       </a>
       <a class="fs-8 text-decoration-none btn hover-strong" data-bs-toggle="collapse" href="#pendingBill" role="button" aria-expanded="false" aria-controls="pendingBill">
-        <%= I18n.t('views.index.pending_bills').upcase %>
+        <%= I18n.t('buttons.filter.bills.pending').upcase %>
       </a>
       <a class="fs-8 text-decoration-none btn hover-strong" data-bs-toggle="collapse" href="#awaitingBill" role="button" aria-expanded="false" aria-controls="awaitingBill">
-        <%= I18n.t('views.index.awaiting_bills').upcase %>
+        <%= I18n.t('buttons.filter.bills.awaiting').upcase %>
       </a>
       <a class="fs-8 text-decoration-none btn hover-strong" data-bs-toggle="collapse" href="#deniedBill" role="button" aria-expanded="false" aria-controls="deniedBill">
-        <%= I18n.t('views.index.denied_bills').upcase %>
+        <%= I18n.t('buttons.filter.bills.denied').upcase %>
       </a>
     </div>
   </div>
@@ -36,7 +36,7 @@
     <div class="d-flex justify-content-center">
       <div class="collapse multi-collapse w-100 show" id="allBills" data-bs-parent="#billsAccordion">
          <h4 class="text-center mt-4 mb-4">
-          <%= I18n.t('views.index.all_bills').upcase %>
+          <%= I18n.t('buttons.filter.all_bills').upcase %>
         </h4>
         <div class="list-group w-100">
           <%= render partial: 'bills_list', locals: { bills: @bills } %>
@@ -47,7 +47,7 @@
     <div class="d-flex justify-content-center">
       <div class="collapse multi-collapse w-100" id="deniedBill" data-bs-parent="#billsAccordion">
          <h4 class="text-center mt-4 mb-4">
-          <%= I18n.t('views.index.denied_bills').upcase %>
+          <%= I18n.t('buttons.filter.bills.denied').upcase %>
         </h4>
         <div class="list-group w-100">
           <%= render partial: 'bills_list', locals: { bills: @bills.where(denied: true) } %>
@@ -58,7 +58,7 @@
     <div class="d-flex justify-content-center">
       <div class="collapse multi-collapse w-100" id="pendingBill" data-bs-parent="#billsAccordion">
          <h4 class="text-center mt-4 mb-4">
-          <%= I18n.t('views.index.pending_bills').upcase %>
+          <%= I18n.t('buttons.filter.bills.pending').upcase %>
         </h4>
         <div class="list-group w-100">
           <%= render partial: 'bills_list', locals: { bills: @bills.where(status: 'pending') } %>
@@ -69,7 +69,7 @@
     <div class="d-flex justify-content-center">
       <div class="collapse multi-collapse w-100" id="awaitingBill" data-bs-parent="#billsAccordion">
          <h4 class="text-center mt-4 mb-4">
-          <%= I18n.t('views.index.awaiting_bills').upcase %>
+          <%= I18n.t('buttons.filter.bills.awaiting').upcase %>
         </h4>
         <div class="list-group w-100">
           <%= render partial: 'bills_list', locals: { bills: @bills.where(status: 'awaiting') } %>
@@ -80,7 +80,7 @@
     <div class="d-flex justify-content-center">
       <div class="collapse multi-collapse w-100" id="acceptedBill" data-bs-parent="#billsAccordion">
          <h4 class="text-center mt-4 mb-4">
-          <%= I18n.t('views.index.accepted_bills').upcase %>
+          <%= I18n.t('buttons.filter.bills.accepted').upcase %>
         </h4>
         <div class="list-group w-100">
           <%= render partial: 'bills_list', locals: { bills: @bills.where(status: 'paid') } %>
