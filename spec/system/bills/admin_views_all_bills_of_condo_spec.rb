@@ -31,6 +31,8 @@ describe 'Admin vê todos os faturas de um condomínio' do
                            total_value_cents: 500_00, status: :pending)
     bills << create(:bill, condo_id: 2, unit_id: units[1].id, due_date: 10.days.from_now,
                            total_value_cents: 700_00, status: :awaiting)
+    bills << create(:bill, condo_id: 2, unit_id: units[1].id, due_date: 10.days.from_now,
+                           total_value_cents: 600_00, status: :awaiting, denied: true)
     bills << create(:bill, condo_id: 1, unit_id: units[2].id, due_date: 10.days.from_now,
                            total_value_cents: 900_00, status: :paid)
 
@@ -44,6 +46,7 @@ describe 'Admin vê todos os faturas de um condomínio' do
     formatted_date = I18n.l(10.days.from_now.to_date)
     expect(page).to have_content 'FATURAS'
     expect(page).to have_content 'Residencial Jardim Europa'.upcase
+    expect(page).to have_link 'Filtrar faturas'
     within('a#bill_1') do
       expect(page).to have_content 'Unidade 11'
       expect(page).to have_content 'valor total'
@@ -60,7 +63,16 @@ describe 'Admin vê todos os faturas de um condomínio' do
       expect(page).to have_content formatted_date
       expect(page).to have_content 'AGUARDANDO'
     end
-    expect(page).not_to have_css 'a#bill_3'
+    within('a#bill_3') do
+      expect(page).to have_content 'Unidade 12'
+      expect(page).to have_content 'valor total'
+      expect(page).to have_content 'R$600,00'
+      expect(page).to have_content 'data de vencimento'
+      expect(page).to have_content formatted_date
+      expect(page).to have_content 'AGUARDANDO'
+    end
+    expect(page).not_to have_css 'a#bill_4'
+    expect(page).not_to have_content 'R$900,00'
   end
 
   it 'e não há faturas registradas' do
@@ -77,5 +89,226 @@ describe 'Admin vê todos os faturas de um condomínio' do
 
     expect(page).to have_content 'Nenhuma fatura encontrada'
     expect(page).not_to have_css 'a#bill_1'
+  end
+
+  it 'e visualiza faturas pagas' do
+    admin = create(:admin, super_admin: true)
+    condo = Condo.new(id: 1, name: 'Condomínio Vila das Flores', city: 'São Paulo')
+    unit = Unit.new(id: 1, area: 40, floor: 3, number: '31', unit_type_id: 1, condo_id: condo.id,
+                    condo_name: 'Condomínio Vila das Flores', tenant_id: 1, owner_id: 1, description: 'Com varanda')
+    allow(Condo).to receive(:find).and_return(condo)
+    allow(Unit).to receive(:find).and_return(unit)
+
+    create(:bill,
+           condo_id: condo.id,
+           unit_id: 1,
+           issue_date: Time.zone.today.beginning_of_month,
+           due_date: 10.days.from_now,
+           total_value_cents: 500_00,
+           status: :paid,
+           denied: false)
+
+    create(:bill,
+           condo_id: condo.id,
+           unit_id: 1,
+           issue_date: Time.zone.today.beginning_of_month,
+           due_date: 10.days.from_now,
+           total_value_cents: 111_11,
+           status: :paid,
+           denied: false)
+
+    create(:bill,
+           condo_id: condo.id,
+           unit_id: 1,
+           issue_date: Time.zone.today.beginning_of_month,
+           due_date: 10.days.from_now,
+           total_value_cents: 400_00,
+           status: :pending,
+           denied: true)
+
+    create(:bill,
+           condo_id: condo.id,
+           unit_id: 1,
+           issue_date: Time.zone.today.beginning_of_month,
+           due_date: 10.days.from_now,
+           total_value_cents: 211_11,
+           status: :pending,
+           denied: false)
+
+    login_as admin, scope: :admin
+    visit condo_bills_path(condo.id)
+    click_on 'Filtrar faturas'
+    click_on 'PAGAS'
+
+    expect(page).to have_content '500,00'
+    expect(page).to have_content '111,11'
+    expect(page).not_to have_content '400,00'
+    expect(page).not_to have_content '211,11'
+  end
+
+  it 'e visualiza faturas com pagamento recusado' do
+    admin = create(:admin, super_admin: true)
+    condo = Condo.new(id: 1, name: 'Condomínio Vila das Flores', city: 'São Paulo')
+    unit = Unit.new(id: 1, area: 40, floor: 3, number: '31', unit_type_id: 1, condo_id: condo.id,
+                    condo_name: 'Condomínio Vila das Flores', tenant_id: 1, owner_id: 1, description: 'Com varanda')
+    allow(Condo).to receive(:find).and_return(condo)
+    allow(Unit).to receive(:find).and_return(unit)
+
+    create(:bill,
+           condo_id: condo.id,
+           unit_id: 1,
+           issue_date: Time.zone.today.beginning_of_month,
+           due_date: 10.days.from_now,
+           total_value_cents: 500_00,
+           status: :pending,
+           denied: true)
+
+    create(:bill,
+           condo_id: condo.id,
+           unit_id: 1,
+           issue_date: Time.zone.today.beginning_of_month,
+           due_date: 10.days.from_now,
+           total_value_cents: 111_11,
+           status: :pending,
+           denied: false)
+
+    create(:bill,
+           condo_id: condo.id,
+           unit_id: 1,
+           issue_date: Time.zone.today.beginning_of_month,
+           due_date: 10.days.from_now,
+           total_value_cents: 400_00,
+           status: :awaiting,
+           denied: false)
+
+    create(:bill,
+           condo_id: condo.id,
+           unit_id: 1,
+           issue_date: Time.zone.today.beginning_of_month,
+           due_date: 10.days.from_now,
+           total_value_cents: 211_11,
+           status: :paid,
+           denied: false)
+
+    login_as admin, scope: :admin
+    visit condo_bills_path(condo.id)
+    click_on 'Filtrar faturas'
+    click_on 'RECUSADAS'
+
+    expect(page).to have_content '500,00'
+    expect(page).not_to have_content '111,11'
+    expect(page).not_to have_content '400,00'
+    expect(page).not_to have_content '211,11'
+  end
+
+  it 'e visualiza faturas aguardando confirmação do pagamento' do
+    admin = create(:admin, super_admin: true)
+    condo = Condo.new(id: 1, name: 'Condomínio Vila das Flores', city: 'São Paulo')
+    unit = Unit.new(id: 1, area: 40, floor: 3, number: '31', unit_type_id: 1, condo_id: condo.id,
+                    condo_name: 'Condomínio Vila das Flores', tenant_id: 1, owner_id: 1, description: 'Com varanda')
+    allow(Condo).to receive(:find).and_return(condo)
+    allow(Unit).to receive(:find).and_return(unit)
+
+    create(:bill,
+           condo_id: condo.id,
+           unit_id: 1,
+           issue_date: Time.zone.today.beginning_of_month,
+           due_date: 10.days.from_now,
+           total_value_cents: 500_00,
+           status: :pending,
+           denied: true)
+
+    create(:bill,
+           condo_id: condo.id,
+           unit_id: 1,
+           issue_date: Time.zone.today.beginning_of_month,
+           due_date: 10.days.from_now,
+           total_value_cents: 111_11,
+           status: :pending,
+           denied: false)
+
+    create(:bill,
+           condo_id: condo.id,
+           unit_id: 1,
+           issue_date: Time.zone.today.beginning_of_month,
+           due_date: 10.days.from_now,
+           total_value_cents: 400_00,
+           status: :awaiting,
+           denied: false)
+    create(:receipt, bill_id: Bill.third.id)
+
+    create(:bill,
+           condo_id: condo.id,
+           unit_id: 1,
+           issue_date: Time.zone.today.beginning_of_month,
+           due_date: 10.days.from_now,
+           total_value_cents: 211_11,
+           status: :paid,
+           denied: false)
+
+    login_as admin, scope: :admin
+    visit condo_bills_path(condo.id)
+    click_on 'Filtrar faturas'
+    click_on 'AGUARDANDO'
+
+    expect(page).to have_content '400,00'
+    expect(page).not_to have_content '500,00'
+    expect(page).not_to have_content '111,11'
+    expect(page).not_to have_content '211,11'
+  end
+
+  it 'e visualiza faturas pendentes de pagamento' do
+    admin = create(:admin, super_admin: true)
+    condo = Condo.new(id: 1, name: 'Condomínio Vila das Flores', city: 'São Paulo')
+    unit = Unit.new(id: 1, area: 40, floor: 3, number: '31', unit_type_id: 1, condo_id: condo.id,
+                    condo_name: 'Condomínio Vila das Flores', tenant_id: 1, owner_id: 1, description: 'Com varanda')
+    allow(Condo).to receive(:find).and_return(condo)
+    allow(Unit).to receive(:find).and_return(unit)
+
+    create(:bill,
+           condo_id: condo.id,
+           unit_id: 1,
+           issue_date: Time.zone.today.beginning_of_month,
+           due_date: 10.days.from_now,
+           total_value_cents: 500_00,
+           status: :pending,
+           denied: true)
+
+    create(:bill,
+           condo_id: condo.id,
+           unit_id: 1,
+           issue_date: Time.zone.today.beginning_of_month,
+           due_date: 10.days.from_now,
+           total_value_cents: 111_11,
+           status: :pending,
+           denied: false)
+
+    create(:bill,
+           condo_id: condo.id,
+           unit_id: 1,
+           issue_date: Time.zone.today.beginning_of_month,
+           due_date: 10.days.from_now,
+           total_value_cents: 400_00,
+           status: :awaiting,
+           denied: false)
+
+    create(:bill,
+           condo_id: condo.id,
+           unit_id: 1,
+           issue_date: Time.zone.today.beginning_of_month,
+           due_date: 10.days.from_now,
+           total_value_cents: 211_11,
+           status: :paid,
+           denied: false)
+
+    login_as admin, scope: :admin
+    visit condo_bills_path(condo.id)
+    click_on 'Filtrar faturas'
+    click_on 'PENDENTES'
+
+    expect(page).to have_content '500,00'
+    expect(page).to have_content '111,11'
+    expect(page).not_to have_content '400,00'
+    expect(page).not_to have_content '211,11'
   end
 end
