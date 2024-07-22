@@ -1,18 +1,15 @@
 class Unit
-  attr_accessor :id, :area, :floor, :number, :unit_type_id, :condo_id, :condo_name, :tenant_id, :owner_id, :description, :tower_name
+  attr_accessor :id, :area, :floor, :number, :unit_type_id, :condo_id, :condo_name,
+                :tenant_id, :owner_id, :description, :tower_name
 
   def initialize(attribute = {})
-    @id = attribute[:id]
-    @area = attribute[:area]
-    @floor = attribute[:floor]
-    @number = attribute[:number]
-    @unit_type_id = attribute[:unit_type_id]
-    @condo_id = attribute[:condo_id]
-    @condo_name = attribute[:condo_name]
-    @tenant_id = attribute[:tenant_id]
-    @owner_id = attribute[:owner_id]
-    @description = attribute[:description]
+    @id = attribute[:id], @number = attribute[:number]
+    @area = attribute[:area], @floor = attribute[:floor]
     @tower_name = attribute[:tower_name]
+    @unit_type_id = attribute[:unit_type_id]
+    @condo_id = attribute[:condo_id], @condo_name = attribute[:condo_name]
+    @tenant_id = attribute[:tenant_id], @owner_id = attribute[:owner_id]
+    @description = attribute[:description]
   end
 
   def self.all(condo_id)
@@ -97,6 +94,7 @@ class Unit
   def self.build_new_unit(data)
     Unit.new(id: data['id'], area: data['area'], floor: data['floor'], number: data['number'],
              unit_type_id: data['unit_type_id'], condo_id: data['condo_id'], condo_name: data['condo_name'],
-             tenant_id: data['tenant_id'], owner_id: data['owner_id'], description: data['description'], tower_name: data['tower_name'])
+             tenant_id: data['tenant_id'], owner_id: data['owner_id'],
+             description: data['description'], tower_name: data['tower_name'])
   end
 end
