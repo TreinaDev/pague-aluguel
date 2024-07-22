@@ -1,12 +1,12 @@
-
-
 <%= turbo_frame_tag "modal" do %>
   <div class="dean-modal modal-md">
     <%= link_to "", :back, class: "btn btn-close btn-sm", id: 'back' %>
 
     <span class="fs-8 text-center d-block"><%= I18n.t('activerecord.models.bill.one') %></span>
+    <span class="fs-8 text-center d-block"><%= @tenant.residence["condo_name"] %></span>
     <span class="fs-3 text-center d-block"><%= unit_name(@bill) %></span>
-    <span class="fs-8 text-center d-block text-muted"><%= @tenant.residence["condo_name"] %></span>
+
+    <span class="fs-7 text-center d-block text-muted"><%= I18n.t('dashboards.labels.tower') %>: <%= @tenant.residence["tower_name"] %></span>
     <hr>
       <%= render partial: "/bills/bill_dates" %>
     <hr>

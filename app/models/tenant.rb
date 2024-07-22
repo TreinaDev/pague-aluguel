@@ -1,11 +1,12 @@
 class Tenant
-  attr_accessor :name, :tenant_id, :residence, :document_number
+  attr_accessor :name, :tenant_id, :residence, :document_number, :tower_name
 
   def initialize(resident = {})
     @name = resident[:name]
     @tenant_id = resident[:tenant_id]
     @residence = resident[:residence]
     @document_number = resident[:document_number]
+    @tower_name = resident[:tower_name]
   end
 
   def self.instance_from_api(response_body, document_number)
@@ -14,6 +15,7 @@ class Tenant
       name: data['name'],
       tenant_id: data['tenant_id'],
       residence: data['residence'],
+      tower_name: data['tower_name'],
       document_number:
     )
   end

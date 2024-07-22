@@ -41,7 +41,7 @@
                     <% end %>
                   </div>
                 </div>
-                <span class="d-block">Unidade <%= @tenant.residence["number"] %></span>
+                <span class="d-block">Unidade <%= @tenant.residence["number"] %> - <%= @tenant.residence["tower_name"] %></span>
                 <span class="text-muted fs-7 text-lowercase"><%=  I18n.t('activerecord.attributes.bill.total_value') %></span>
                 <span><%= bill.total_value.format %></span>
               <% end %>
@@ -52,7 +52,10 @@
         <% end %>
       </div>
       <span class="d-block fs-4 text-center">
-        <%= button_to I18n.t('buttons.new.nd_certificate'), condo_nd_certificates_path(condo_id: @unit.condo_id, unit_id: @unit.id), method: :post, class: "btn btn-primary" %>
+        <%= button_to condo_nd_certificates_path(condo_id: @unit.condo_id, unit_id: @unit.id), class: "btn hover-strong" do %>
+          <%= image_tag 'document-ribbon-icon', size: '20' %>
+          <span class="fs-7 text-uppercase"><%= I18n.t('buttons.new.nd_certificate') %></span>
+        <% end %>
       </span>
     </div>
   <% end %>
