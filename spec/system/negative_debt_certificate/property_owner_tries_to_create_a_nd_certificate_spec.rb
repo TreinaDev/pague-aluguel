@@ -23,7 +23,7 @@ RSpec.describe 'Proprietário tenta emitir certificado de debito negativo' do
 
       login_as property_owner, scope: :property_owner
       visit unit_path(2)
-      click_on 'Emitir Certificado de Débito Negativo'
+      click_on 'Emitir Certificado'
 
       expect(page).to have_content 'Certidão de quitação emitida com sucesso'
       expect(page).to have_content I18n.l(Time.zone.now)
@@ -57,7 +57,7 @@ RSpec.describe 'Proprietário tenta emitir certificado de debito negativo' do
 
     login_as property_owner, scope: :property_owner
     visit unit_path(2)
-    click_on 'Emitir Certificado de Débito Negativo'
+    click_on 'Emitir Certificado'
 
     expect(page).to have_content 'Esta unidade possui débitos pendentes.'
   end
