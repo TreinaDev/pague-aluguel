@@ -229,7 +229,7 @@ describe 'Proprietário configura aluguel' do
 
     expect(page).to have_content 'Aluguel desativado com sucesso!'
     within 'div#unit-modal' do
-      expect(page).to have_content 'Esta unidade está disponível para locação'
+      expect(page).to have_content 'DISPONÍVEL'
       expect(RentFee.last.status).to eq 'canceled'
       expect(page).not_to have_content 'DESATIVAR COBRANÇA'
     end

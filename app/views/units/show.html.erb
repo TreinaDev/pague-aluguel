@@ -76,7 +76,7 @@
       <div class=" d-flex justify-content-between px-5">
         <% styling = {"active" => "text-success", "canceled" => "text-danger"} %>
         <span class="text-muted text-lowercase fs-8"><%= I18n.t('activerecord.attributes.rent_fee.status') %></span>
-        <span class=<%= styling[rent.status] %>><%= I18n.t( rent.status ) %></span>
+        <span class=<%= styling[rent.status] %>><%= I18n.t( "rent_fee.status.#{rent.status}" ) %></span>
       </div>
       <% if rent.active? %>
         <%= button_to deactivate_unit_rent_fee_path(@unit.id, rent.id), class: "d-flex align-items-center btn hover-danger mx-auto", data: { turbo_confirm: I18n.t('messages.confirm.cancel_rent') } do %>
