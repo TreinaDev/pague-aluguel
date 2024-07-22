@@ -230,21 +230,21 @@ SingleCharge.create!(unit_id: 97, value_cents: 9750_00,
   bill3 = Bill.create!(
     unit_id: 97,
     condo_id: 2,
-    base_fee_value_cents: 560_00,
-    shared_fee_value_cents: 570_00,
-    single_charge_value_cents: 200_00,
-    total_value_cents: 560_00 + 570_00 + 200_00,
+    base_fee_value_cents: 360_00,
+    shared_fee_value_cents: 170_00,
+    single_charge_value_cents: 290_00,
+    total_value_cents: 360_00 + 170_00 + 290_00,
     rent_fee_cents: 0,
     issue_date: 2.months.ago.beginning_of_month,
     due_date: 2.months.ago.beginning_of_month + 9.days,
     status: :paid,
     denied: false
   )
-  BillDetail.create!(bill_id: bill3.id, description: 'Multa por Estacionamento Indevido', value_cents: 90_00, fee_type: :fine)
   BillDetail.create!(bill_id: bill3.id, description: 'Taxa de Administração', value_cents: 60_00, fee_type: :base_fee)
-  BillDetail.create!(bill_id: bill3.id, description: 'Conta de Internet', value_cents: 70_00, fee_type: :shared_fee)
   BillDetail.create!(bill_id: bill3.id, description: 'Taxa de Reparos Estruturais', value_cents: 300_00, fee_type: :base_fee)
-  BillDetail.create!(bill_id: bill3.id, description: 'Despesas Comuns', value_cents: 500_00, fee_type: :shared_fee)
+  BillDetail.create!(bill_id: bill3.id, description: 'Conta de Internet', value_cents: 70_00, fee_type: :shared_fee)
+  BillDetail.create!(bill_id: bill3.id, description: 'Despesas Comuns', value_cents: 100_00, fee_type: :shared_fee)
+  BillDetail.create!(bill_id: bill3.id, description: 'Multa por Estacionamento Indevido', value_cents: 90_00, fee_type: :fine)
   BillDetail.create!(bill_id: bill3.id, description: 'Acordo sobre Pagamento Atrasado', value_cents: 200_00, fee_type: :other)
 
   bill4 = Bill.create!(
@@ -338,6 +338,6 @@ SingleCharge.create!(unit_id: 97, value_cents: 9750_00,
   sleep(1)
   Receipt.create!(bill_id: bill7.id, file: Rails.root.join('app', 'assets', 'images', 'cupom-fiscal.jpg').open)
   p "Created 1 more Receipt with image"
-  
+
   p "Created #{Receipt.count} receipts"
   p "All done :)"
