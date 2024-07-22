@@ -3,12 +3,16 @@ class Unit
                 :tenant_id, :owner_id, :description, :tower_name
 
   def initialize(attribute = {})
-    @id, @number = attribute[:id], attribute[:number]
-    @area, @floor = attribute[:area], attribute[:floor]
+    @id = attribute[:id]
+    @number = attribute[:number]
+    @area = attribute[:area]
+    @floor = attribute[:floor]
     @tower_name = attribute[:tower_name]
     @unit_type_id = attribute[:unit_type_id]
-    @condo_id, @condo_name = attribute[:condo_id], attribute[:condo_name]
-    @tenant_id, @owner_id = attribute[:tenant_id], attribute[:owner_id]
+    @condo_id = attribute[:condo_id]
+    @condo_name = attribute[:condo_name]
+    @tenant_id = attribute[:tenant_id]
+    @owner_id = attribute[:owner_id]
     @description = attribute[:description]
   end
 
