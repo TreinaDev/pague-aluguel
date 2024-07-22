@@ -12,9 +12,9 @@ describe 'Admin tenta emitir certificado de debito negativo' do
                                unit_ids: [])
     units = []
     units << Unit.new(id: 1, area: 40, floor: 1, number: '11', unit_type_id: 1, condo_id: 1,
-                      condo_name: 'Condomínio Vila das Flores', tenant_id: 1, owner_id: 1, description: 'Com varanda')
+                      condo_name: 'Condomínio Vila das Flores', tenant_id: 1, owner_id: 1, description: 'Com varanda', tower_name: 'Nard')
     units << Unit.new(id: 2, area: 40, floor: 1, number: '12', unit_type_id: 1, condo_id: 1,
-                      condo_name: 'Condomínio Vila das Flores', tenant_id: 1, owner_id: 1, description: 'Com varanda')
+                      condo_name: 'Condomínio Vila das Flores', tenant_id: 1, owner_id: 1, description: 'Com varanda', tower_name: 'Dog')
     allow(Condo).to receive(:all).and_return(condos)
     allow(Condo).to receive(:find).and_return(condo)
     allow(CommonArea).to receive(:all).and_return([])
@@ -34,8 +34,8 @@ describe 'Admin tenta emitir certificado de debito negativo' do
     expect(page).to have_content 'andar: 1'
     expect(page).to have_content 'Unidade 11'
     expect(page).to have_content 'Unidade 12'
-    expect(page).to have_content 'ID: 1'
-    expect(page).to have_content 'ID: 2'
+    expect(page).to have_content 'torre: nard'
+    expect(page).to have_content 'torre: dog'
   end
 
   it 'e gera com sucesso' do
@@ -49,9 +49,9 @@ describe 'Admin tenta emitir certificado de debito negativo' do
                                  unit_ids: [])
       units = []
       units << Unit.new(id: 1, area: 40, floor: 1, number: '11', unit_type_id: 1, condo_id: 1,
-                        condo_name: 'Condomínio Vila das Flores', tenant_id: 1, owner_id: 1, description: 'Com varanda')
+                        condo_name: 'Condomínio Vila das Flores', tenant_id: 1, owner_id: 1, description: 'Com varanda', tower_name: 'Beta')
       units << Unit.new(id: 2, area: 40, floor: 1, number: '12', unit_type_id: 1, condo_id: 1,
-                        condo_name: 'Condomínio Vila das Flores', tenant_id: 1, owner_id: 1, description: 'Com varanda')
+                        condo_name: 'Condomínio Vila das Flores', tenant_id: 1, owner_id: 1, description: 'Com varanda', tower_name: 'Alpha')
       allow(Condo).to receive(:all).and_return(condos)
       allow(Condo).to receive(:find).and_return(condo)
       allow(CommonArea).to receive(:all).and_return([])
@@ -65,8 +65,9 @@ describe 'Admin tenta emitir certificado de debito negativo' do
       within('div#nd_certificate_section') do
         click_on 'Ver todas as unidades'
       end
-      click_on 'Unidade 11'
-      click_on 'Emitir Certificado de Débito Negativo'
+      within('div#unit_1') do
+        click_on 'Emitir Certificado'
+      end
 
       expect(page).to have_content 'Certidão de quitação emitida com sucesso'
       expect(page).to have_content I18n.l(Time.zone.now)
@@ -103,8 +104,9 @@ describe 'Admin tenta emitir certificado de debito negativo' do
     within('div#nd_certificate_section') do
       click_on 'Ver todas as unidades'
     end
-    click_on 'Unidade 11'
-    click_on 'Emitir Certificado de Débito Negativo'
+    within('div#unit_1') do
+      click_on 'Emitir Certificado'
+    end
 
     expect(page).to have_content 'Esta unidade possui débitos pendentes.'
   end

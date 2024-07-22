@@ -8,5 +8,6 @@
   "condo_name": "Residencial Paineiras",
   "tenant_id": 1,
   "owner_id": 1,
-  "description": "Duplex com varanda"
+  "description": "Duplex com varanda",
+  "tower_name": "Torre 1",
 }

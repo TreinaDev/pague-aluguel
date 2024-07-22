@@ -14,7 +14,7 @@ describe 'Admin acessa lista de taxas condominiais' do
     get condo_base_fees_path(condo.id)
 
     expect(response).to have_http_status :ok
-    expect(response.body).to include 'Listagem de Taxas Condominiais'
+    expect(response.body).to include 'Taxas Condominiais'
     expect(response.body).to include 'Condo Test'
     expect(response.body).to include 'TODAS AS TAXAS'
     expect(response.body).to include 'Fundo de Reserva'
@@ -40,7 +40,7 @@ describe 'Admin acessa lista de taxas condominiais' do
     get condo_base_fees_path(condo.id)
 
     expect(response).to have_http_status :ok
-    expect(response.body).to include 'Listagem de Taxas Condominiais'
+    expect(response.body).to include 'Taxas Condominiais'
     expect(response.body).to include 'Condo Test'
     expect(response.body).to include 'TODAS AS TAXAS'
     expect(response.body).to include 'Fundo de Reserva'
