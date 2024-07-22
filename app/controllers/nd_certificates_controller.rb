@@ -28,11 +28,11 @@ class NdCertificatesController < ApplicationController
 
   def find_unit
     @query = params[:unit_number_query]
-    if @query.empty?
-      @units = Unit.all(params[:condo_id])
-    else
-      @units = Unit.all(@condo.id).select { |unit| unit.number == @query }
-    end
+    @units = if @query.empty?
+               Unit.all(params[:condo_id])
+             else
+               Unit.all(@condo.id).select { |unit| unit.number == @query }
+             end
     render :index
   end
 

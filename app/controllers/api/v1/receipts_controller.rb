@@ -7,6 +7,7 @@ class Api::V1::ReceiptsController < Api::V1::ApiController
 
   def create
     return unless @response.success?
+
     if receipt.save
       render_response({ message: I18n.t('receipts.success.received') }, :ok)
     else
