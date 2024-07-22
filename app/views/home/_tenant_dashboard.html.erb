@@ -5,7 +5,7 @@
   </div>
   <%= form_with url: find_tenant_path, method: :get, id: "get_tenant_bill" do |f| %>
     <div class="d-flex mt-3 w-50 mx-auto mb-3">
-      <%= f.text_field :get_tenant_bill, placeholder: "informe seu cpf", class: "form-control me-2", data: { controller: 'masked-document-number' } %>
+      <%= f.text_field :get_tenant_bill, placeholder: I18n.t('dashboards.search.tenant_document_number'), class: "form-control me-2", data: { controller: 'masked-document-number' } %>
       <%= f.submit 'Buscar', class: "btn btn-primary text-uppercase fs-7 ls-3" %>
     </div>
   <% end %>

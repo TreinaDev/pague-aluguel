@@ -9,9 +9,9 @@
 
     <div class="d-flex justify-content-center align-items-center">
       <% if @shared_fee.active? %>
-        <span class="badge text-bg-success fs-4 text-uppercase ls-4"><%= I18n.t("shared_fee.status.#{@shared_fee.status}") %></span>
+        <span class="badge text-bg-success fs-5 text-uppercase ls-4"><%= I18n.t("shared_fee.status.#{@shared_fee.status}") %></span>
       <% else %>
-        <span class="badge text-bg-danger fs-4 text-uppercase ls-4"><%= I18n.t("shared_fee.status.#{@shared_fee.status}") %></span>
+        <span class="badge text-bg-danger fs-5 text-uppercase ls-4"><%= I18n.t("shared_fee.status.#{@shared_fee.status}") %></span>
       <% end %>
     </div>
 
@@ -29,9 +29,9 @@
     </div>
 
     <% if @shared_fee.active? %>
-    <hr>
+      <hr>
       <%= button_to cancel_condo_shared_fee_path(@condo.id, @shared_fee), class: "d-flex align-items-center btn hover-danger mx-auto", data: { turbo_confirm: I18n.t('messages.confirm.cancel_fee') } do %>
-        <%= image_tag "block-icon", size: "16" %>
+        <%= image_tag "block-icon", size: "12" %>
         <span class="ms-1 fs-7 text-uppercase"><%= I18n.t('buttons.cancel') %></span>
       <% end %>
     <% end %>

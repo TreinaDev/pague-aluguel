@@ -16,6 +16,10 @@ pt-BR:
   dashboards:
     admin_description: para gerenciamento de condomínios e pagamentos
     property_description: para gerenciamento de seus imóveis
+    search:
+      condo: Busque um condomínio
+      unit: Busque uma unidade
+      tenant_document_number: Informe seu cpf
     section_title:
       condo: Condomínios
       profile: Meu perfil

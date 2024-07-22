@@ -3,17 +3,17 @@
     <%= link_to "", :back, id: 'close', class: "btn btn-sm btn-close" %>
 
     <span class="fs-8 text-center d-block"><%= I18n.t('activerecord.models.single_charge.one') %></span>
-    <span class="fs-6 text-center d-block">
-                <%= I18n.t('activerecord.attributes.single_charge.unit') %>
-                <%= Unit.find(@single_charge.unit_id).number %>
-     </span>
+    <span class="fs-3 text-center d-block">
+      <%= I18n.t('activerecord.attributes.single_charge.unit') %>
+      <%= Unit.find(@single_charge.unit_id).number %>
+    </span>
     <hr>
 
     <div class="d-flex justify-content-center align-items-center">
       <% if @single_charge.active? %>
-        <span class="badge text-bg-success fs-4 text-uppercase ls-4"><%= I18n.t("single_charge.status.#{@single_charge.status}") %></span>
+        <span class="badge text-bg-success fs-5 text-uppercase ls-4"><%= I18n.t("single_charge.status.#{@single_charge.status}") %></span>
       <% else %>
-        <span class="badge text-bg-danger fs-4 text-uppercase ls-4"><%= I18n.t("single_charge.status.#{@single_charge.status}") %></span>
+        <span class="badge text-bg-danger fs-5 text-uppercase ls-4"><%= I18n.t("single_charge.status.#{@single_charge.status}") %></span>
       <% end %>
     </div>
 

@@ -47,7 +47,7 @@ pt-BR:
       reject: Recusar pagamento
   messages:
     owner_tenant: Você reside nesta unidade
-    has_tenant: Esta unidade está alugada
+    has_tenant: Alugada
     confirm:
       cancel_item: Tem certeza que deseja desativar esse item? Essa ação não poderá ser desfeita.
       cancel_charge: Tem certeza que deseja desativar a cobrança? Essa ação não poderá ser desfeita.
@@ -56,7 +56,7 @@ pt-BR:
       accept_payment: Tem certeza que deseja aceitar o pagamento? Essa ação não poderá ser desfeita.
       reject_payment: Tem certeza que deseja recusar o pagamento? Essa ação não poderá ser desfeita.
     available:
-      rent: Esta unidade está disponível para locação
+      rent: Disponível
     pending:
       debt: Esta unidade possui débitos pendentes.
   success:
