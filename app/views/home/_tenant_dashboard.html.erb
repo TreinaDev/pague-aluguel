@@ -52,6 +52,7 @@
         <% end %>
       </div>
       <div class="d-block text-center">
+        <p class="text-muted"><%= I18n.t('messages.nd_certificate_condition') %></p>
         <%= button_to condo_nd_certificates_path(condo_id: @unit.condo_id, unit_id: @unit.id), class: "btn hover-strong" do %>
           <%= image_tag 'document-ribbon-icon', size: '20' %>
           <span class="fs-7 text-uppercase"><%= I18n.t('buttons.new.nd_certificate') %></span>

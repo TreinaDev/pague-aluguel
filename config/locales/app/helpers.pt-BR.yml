@@ -46,6 +46,7 @@ pt-BR:
       accept: Aceitar pagamento
       reject: Recusar pagamento
   messages:
+    nd_certificate_condition: Você só pode emitir um Certificado de Débito Negativo se todas as suas faturas estiverem pagas.
     owner_tenant: Você reside nesta unidade
     has_tenant: Alugada
     confirm:
