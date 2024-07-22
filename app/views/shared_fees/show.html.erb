@@ -9,9 +9,9 @@
 
     <div class="d-flex justify-content-center align-items-center">
       <% if @shared_fee.active? %>
-        <span class="badge text-bg-success fs-5 text-uppercase ls-4"><%= I18n.t("shared_fee.status.#{@shared_fee.status}") %></span>
+        <span class="badge text-bg-success fs-6 text-uppercase ls-4"><%= I18n.t("shared_fee.status.#{@shared_fee.status}") %></span>
       <% else %>
-        <span class="badge text-bg-danger fs-5 text-uppercase ls-4"><%= I18n.t("shared_fee.status.#{@shared_fee.status}") %></span>
+        <span class="badge text-bg-danger fs-6 text-uppercase ls-4"><%= I18n.t("shared_fee.status.#{@shared_fee.status}") %></span>
       <% end %>
     </div>
 

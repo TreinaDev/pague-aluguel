@@ -7,13 +7,14 @@
       <%= I18n.t('activerecord.attributes.single_charge.unit') %>
       <%= Unit.find(@single_charge.unit_id).number %>
     </span>
+    <span class="fs-8 text-center d-block"><%= @condo.name%></span>
     <hr>
 
     <div class="d-flex justify-content-center align-items-center">
       <% if @single_charge.active? %>
-        <span class="badge text-bg-success fs-5 text-uppercase ls-4"><%= I18n.t("single_charge.status.#{@single_charge.status}") %></span>
+        <span class="badge text-bg-success fs-6 text-uppercase ls-4"><%= I18n.t("single_charge.status.#{@single_charge.status}") %></span>
       <% else %>
-        <span class="badge text-bg-danger fs-5 text-uppercase ls-4"><%= I18n.t("single_charge.status.#{@single_charge.status}") %></span>
+        <span class="badge text-bg-danger fs-6 text-uppercase ls-4"><%= I18n.t("single_charge.status.#{@single_charge.status}") %></span>
       <% end %>
     </div>
 
